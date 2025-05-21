@@ -1,4 +1,4 @@
 ---
-title: Welcome to my blog
+標題: 歡迎來到巴菲特AI價值投資podcast節目參考資料站台
 ---
 
