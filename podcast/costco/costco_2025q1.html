@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costco (COST) 互動式投資分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Application Structure Plan: 
+        Overall Approach: A tabbed single-page application. Main navigation allows users to jump to key analysis areas: 總覽 (Overview), 財務表現 (Financials), 競爭與風險 (Competitive Landscape & Risks), and 估值與展望 (Valuation & Outlook).
+        This structure enhances clarity and navigation, allowing quick access to specific information.
+        User Flow: Select section from top navigation. Content presented with headings, concise text, and interactive charts. Tooltips for chart details. "Read More" toggles for longer text.
+        Why this structure: Chosen for its user-friendliness in navigating dense report information, breaking it into digestible thematic sections rather than a linear scroll.
+    -->
+    <!-- Visualization & Content Choices: 
+        - Overview: Text summaries.
+        - Financials: Donut/Bar charts for revenue breakdown (Net Sales vs. Membership Fees, sales by category/geography). Bar charts for YoY financial metrics. Dynamic display for key financial health ratios. Table for financial highlights. Goal: Inform, Compare. Method: Chart.js, HTML tables. Interaction: Tooltips.
+        - Competitive Landscape & Risks: Structured HTML lists for advantages and risks. Goal: Inform. Method: HTML. Interaction: Click-to-expand (conceptual, simplified for this version).
+        - Valuation & Outlook: Grouped Bar chart for P/E, P/S, P/B vs. peers/history. Line chart for historical P/E. Dynamic display for analyst ratings. Goal: Compare, Inform. Method: Chart.js, HTML. Interaction: Tooltips.
+        Justification: Visualizations chosen to best represent the data types (proportions, comparisons, trends) and enhance understanding beyond plain text. Interactions aim to provide detail on demand. All charts via Chart.js (Canvas).
+    -->
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif; /* Added Noto Sans TC for better Chinese character rendering */
+        }
+        .tab-button {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .tab-button.active {
+            border-color: #0284c7; /* sky-600 */
+            color: #0284c7;
+            font-weight: 600;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Default max-width */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        h2 {
+            font-size: 1.75rem; /* Increased heading size */
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937; /* gray-800 */
+            border-bottom: 2px solid #e5e7eb; /* gray-200 */
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #374151; /* gray-700 */
+        }
+        p, li {
+            line-height: 1.6;
+            color: #4b5563; /* gray-600 */
+        }
+        .metric-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .metric-card-title {
+            font-size: 0.875rem;
+            color: #6b7280; /* gray-500 */
+            margin-bottom: 0.25rem;
+        }
+        .metric-card-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0284c7; /* sky-600 */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        th, td {
+            border: 1px solid #e5e7eb; /* gray-200 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f9fafb; /* gray-50 */
+            font-weight: 600;
+            color: #374151; /* gray-700 */
+        }
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-neutral-800 min-h-screen">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-700">Costco Wholesale (COST) 投資分析報告</h1>
+            <p class="text-neutral-600 mt-2">互動式報告摘要，資料日期：2025年5月23日 (基於提供之分析報告)</p>
+        </header>
+
+        <nav class="mb-8 bg-white shadow-md rounded-lg p-2">
+            <ul class="flex flex-wrap justify-center space-x-2 sm:space-x-4">
+                <li><button class="tab-button py-2 px-3 sm:px-4 border-b-2 border-transparent hover:bg-stone-50 hover:text-sky-600 active" data-tab="overview">總覽</button></li>
+                <li><button class="tab-button py-2 px-3 sm:px-4 border-b-2 border-transparent hover:bg-stone-50 hover:text-sky-600" data-tab="financials">財務表現</button></li>
+                <li><button class="tab-button py-2 px-3 sm:px-4 border-b-2 border-transparent hover:bg-stone-50 hover:text-sky-600" data-tab="competition">競爭與風險</button></li>
+                <li><button class="tab-button py-2 px-3 sm:px-4 border-b-2 border-transparent hover:bg-stone-50 hover:text-sky-600" data-tab="valuation">估值與展望</button></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section active bg-white p-6 rounded-lg shadow-lg">
+                <h2>總覽</h2>
+                <p class="mb-4">本部分提供 Costco Wholesale Corporation 的執行摘要、公司概覽及其獨特的商業模式，幫助您快速建立對公司的整體認知。</p>
+                
+                <h3>執行摘要</h3>
+                <p>Costco 憑藉其獨特的會員制倉儲模式，在零售行業中佔據了強有力的競爭地位。公司的核心運營理念是為會員提供低價、高品質的商品，並通過高銷售量和快速庫存周轉實現盈利。其營收主要來源於商品銷售和會員費，其中會員費雖然佔總營收比例不高，但利潤率極高，為公司提供了穩定的現金流和利潤緩衝（2023年會員費收入約45億美元，佔淨利潤約72%）。近期財務表現穩健，但面臨宏觀經濟、行業競爭等挑戰。估值處於歷史較高水平，反映市場高度認可，但也意味著較高預期。分析師普遍持「適度買入」評級。</p>
+
+                <h3>公司概覽與商業模式</h3>
+                <p>Costco Wholesale Corporation 是一家全球領先的會員制倉儲零售商。其核心商業模式建立在會員制倉儲的基礎之上，運營理念是向其會員提供低價、精選的國內品牌和自有品牌商品。公司致力於通過高銷售量和快速的庫存周轉來實現盈利。</p>
+                <ul class="list-disc pl-5 mt-2 space-y-1">
+                    <li><strong>核心運營理念：</strong>低價、高品質商品，高銷量、快周轉。</li>
+                    <li><strong>會員制詳解：</strong>增強會員忠誠度，提供穩定高利潤會員費收入（佔總營收不到2%，但貢獻超過一半營運利潤）。截至2025財年Q2末，全球約7,840萬付費會員戶，續約率超90%。</li>
+                    <li><strong>精選商品策略：</strong>店內約4,000種SKU，簡化管理、增強議價能力。</li>
+                    <li><strong>地域分佈：</strong>截至2025年2月16日，全球運營897家賣場，美國及波多黎各617家，加拿大109家，其他國際市場171家。</li>
+                </ul>
+            </section>
+
+            <section id="financials" class="content-section bg-white p-6 rounded-lg shadow-lg">
+                <h2>財務表現</h2>
+                <p class="mb-4">本部分深入分析 Costco 的營收來源、近期財務表現（包括2025財年Q1及Q2的關鍵數據）以及整體財務健康狀況，輔以圖表展示關鍵趨勢。</p>
+
+                <h3>營收來源分析 (截至2025年Q2的12週)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">總淨銷售額</h4>
+                        <p class="metric-card-value">$625.30 億</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">會員費收入</h4>
+                        <p class="metric-card-value">$11.93 億</p>
+                        <p class="text-sm text-neutral-500">佔總營收約 1.87%</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3>淨銷售額構成 (產品類別)</h3>
+                        <div class="chart-container h-[350px] max-h-[450px]"><canvas id="salesByCategoryChart"></canvas></div>
+                        <p class="text-xs text-center mt-2 text-neutral-500">截至2025年Q2的12週數據</p>
+                    </div>
+                    <div>
+                        <h3>淨銷售額構成 (地理區域)</h3>
+                        <div class="chart-container h-[350px] max-h-[450px]"><canvas id="salesByRegionChart"></canvas></div>
+                        <p class="text-xs text-center mt-2 text-neutral-500">截至2025年Q2的12週數據</p>
+                    </div>
+                </div>
+                
+                <h3 class="mt-8">近期財務表現摘要 (Q2 2025 vs Q2 2024)</h3>
+                <div class="overflow-x-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>財務指標 (12週)</th>
+                                <th>2025年Q2</th>
+                                <th>2024年Q2</th>
+                                <th>同比變動 (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>總營收</td><td>$637.23 億</td><td>$584.42 億</td><td class="text-green-600">+9.0%</td></tr>
+                            <tr><td>淨銷售額</td><td>$625.30 億</td><td>$573.31 億</td><td class="text-green-600">+9.1%</td></tr>
+                            <tr><td>會員費</td><td>$11.93 億</td><td>$11.11 億</td><td class="text-green-600">+7.4%</td></tr>
+                            <tr><td>營業收入</td><td>$23.16 億</td><td>$20.62 億</td><td class="text-green-600">+12.3%</td></tr>
+                            <tr><td>淨收入</td><td>$17.88 億</td><td>$17.43 億</td><td class="text-green-600">+2.6%</td></tr>
+                            <tr><td>稀釋後每股收益</td><td>$4.02</td><td>$3.92</td><td class="text-green-600">+2.6%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-sm text-neutral-600">註：Q2 2025淨利潤增長溫和主要受利息收入減少和所得稅撥備增加影響，核心運營依然強勁。</p>
+                <p class="text-sm text-neutral-600 mt-2">補充資料：2025財年Q1總收入$621.51億 (同比+7.5%)，淨利潤$17.98億 (同比+13%)。</p>
+
+                <h3>財務健康狀況評估 (截至2025年Q2末)</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">現金及現金等價物</h4>
+                        <p class="metric-card-value">$123.56 億</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">流動比率</h4>
+                        <p class="metric-card-value">0.997</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">債務權益比</h4>
+                        <p class="metric-card-value">0.225</p>
+                    </div>
+                </div>
+                <p>經營活動現金流強勁（2025財年上半年 $60.08 億）。庫存管理高效，資本結構保守。補充資料顯示2025財年Q1末實質處於淨現金無負債狀態。</p>
+                <div class="chart-container mt-6"><canvas id="cashFlowChart"></canvas></div>
+                 <p class="text-xs text-center mt-2 text-neutral-500">現金流量 (24週數據)</p>
+            </section>
+
+            <section id="competition" class="content-section bg-white p-6 rounded-lg shadow-lg">
+                <h2>競爭與風險</h2>
+                <p class="mb-4">此部分探討 Costco 的核心競爭優勢，這些優勢使其在激烈的零售市場中脫穎而出。同時，也列出了投資者需要關注的主要風險因素。</p>
+
+                <h3>競爭優勢</h3>
+                <ul class="list-none space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-sky-600 mr-3 text-xl">✓</span>
+                        <div><strong>強大的會員制與顧客忠誠度：</strong>全球會員續費率超90%，提供穩定高利潤收入。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-sky-600 mr-3 text-xl">✓</span>
+                        <div><strong>規模經濟與採購力：</strong>大批量、精選SKU策略帶來強大議價能力。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-sky-600 mr-3 text-xl">✓</span>
+                        <div><strong>自有品牌 Kirkland Signature：</strong>高品質、低價格，貢獻約25%總收入。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-sky-600 mr-3 text-xl">✓</span>
+                        <div><strong>高效的供應鏈管理：</strong>「No Touch」、交叉轉運等策略降低成本。</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-sky-600 mr-3 text-xl">✓</span>
+                        <div><strong>獨特的定價策略與價值主張：</strong>商品毛利率僅約11%，「尋寶式」購物體驗增強吸引力。</div>
+                    </li>
+                    <li class="flex items-start">
+                         <span class="text-sky-600 mr-3 text-xl">✓</span>
+                        <div><strong>員工政策與生產力：</strong>優於行業的薪酬福利帶來高生產力及低流失率。</div>
+                    </li>
+                </ul>
+
+                <h3 class="mt-8">風險因素</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>宏觀經濟風險：</strong>消費者信心、可支配收入變化、匯率波動、通脹等。</li>
+                    <li><strong>行業競爭風險：</strong>來自Walmart、Amazon及其他倉儲俱樂部等的激烈競爭。</li>
+                    <li><strong>供應鏈與運營風險：</strong>供應商行為、成本上漲（員工、能源）、地緣政治等。</li>
+                    <li><strong>對會員模式的依賴：</strong>會員增長放緩或續費率下降將影響盈利。</li>
+                    <li><strong>國際運營風險：</strong>不同市場的經濟、法律法規差異。</li>
+                    <li><strong>人力與營運成本風險：</strong>工資上漲、人力短缺、物流成本。</li>
+                    <li><strong>法規與訴訟風險：</strong>食品安全、勞工法規、數據隱私等。</li>
+                    <li><strong>其他風險：</strong>數據安全、電商業務利潤率較低、員工薪酬持續上漲壓力。</li>
+                </ul>
+            </section>
+
+            <section id="valuation" class="content-section bg-white p-6 rounded-lg shadow-lg">
+                <h2>估值與展望</h2>
+                <p class="mb-4">本節評估 Costco 的股票估值水平，包括與歷史和同業的比較，並探討市場情緒以及公司未來的發展前景與挑戰。</p>
+
+                <h3>估值評估 (截至2025年5月中下旬)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">市盈率 (P/E)</h4>
+                        <p class="metric-card-value">~50-60x</p>
+                        <p class="text-sm text-neutral-500">歷史中位數約40x</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">市銷率 (P/S)</h4>
+                        <p class="metric-card-value">~1.7x</p>
+                         <p class="text-sm text-neutral-500">歷史中位數0.88x</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">市淨率 (P/B)</h4>
+                        <p class="metric-card-value">~17.3x</p>
+                        <p class="text-sm text-neutral-500">歷史中位數8.55x</p>
+                    </div>
+                </div>
+                <p>Costco 的市盈率、市銷率和市淨率均處於歷史較高水平，並顯著高於多數零售同業及行業平均。這反映市場對其高質量和持續增長能力的認可，但也意味著較高的預期已計入股價。EV/EBITDA 約35-37倍，亦高於歷史及同業。</p>
+                
+                <div class="chart-container mt-6"><canvas id="peRatioComparisonChart"></canvas></div>
+                <p class="text-xs text-center mt-2 text-neutral-500">市盈率比較 (近似值)</p>
+
+                <h3 class="mt-8">市場情緒與未來展望</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">分析師共識評級</h4>
+                        <p class="metric-card-value">適度買入</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4 class="metric-card-title">平均12個月目標價</h4>
+                        <p class="metric-card-value">~$1,063</p>
+                    </div>
+                </div>
+                <p>分析師普遍對Costco持「適度買入」評級，預期股價仍有上行空間，但部分分析師注意到短期估值偏高可能限制上行潛力。大型投行如摩根士丹利和摩根大通對其前景保持樂觀。</p>
+                <ul class="list-disc pl-5 mt-4 space-y-1">
+                    <li><strong>管理層指引：</strong>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>2025財年計劃淨新增約28家門店。</li>
+                            <li>2025財年資本支出約50億美元，用於擴張及投資信息系統等。</li>
+                        </ul>
+                    </li>
+                    <li><strong>未來增長潛力：</strong>門店擴張（尤其國際市場）、電商發展、會員滲透率提升、潛在會員費上調、Kirkland品牌優勢。</li>
+                    <li><strong>未來挑戰：</strong>成熟市場增長、激烈競爭、成本管理、宏觀經濟不確定性。</li>
+                </ul>
+
+                <h3>結論與投資觀點</h3>
+                <p>Costco 擁有卓越商業模式、強大競爭壁壘和穩健財務。會員制、自有品牌、高效供應鏈是核心優勢。財務健康，現金流強勁。風險包括宏觀經濟、競爭、高估值。長線看，核心優勢和增長路徑具吸引力。投資者需權衡其卓越商業模式、穩健財務與當前較高估值，關注未來業績能否持續消化高預期。</p>
+            </section>
+        </main>
+
+        <footer class="mt-12 pt-8 border-t border-neutral-300 text-center text-neutral-500 text-sm">
+            <p>&copy; 2025 Costco 互動式投資分析。僅供參考，不構成投資建議。</p>
+            <p>基於提供之分析報告生成。</p>
+        </footer>
+    </div>
+
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                contentSections.forEach(section => section.classList.remove('active'));
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+
+        function createChart(ctx, type, data, options) {
+            return new Chart(ctx, {
+                type: type,
+                data: data,
+                options: Object.assign({
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: "'Inter', 'Noto Sans TC', sans-serif"
+                                }
+                            }
+                        },
+                        tooltip: {
+                            titleFont: {
+                                family: "'Inter', 'Noto Sans TC', sans-serif"
+                            },
+                            bodyFont: {
+                                family: "'Inter', 'Noto Sans TC', sans-serif"
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null && type !== 'pie' && type !== 'doughnut') {
+                                        label += context.parsed.y + (context.dataset.unit || '');
+                                    }
+                                     if ((type === 'pie' || type === 'doughnut') && context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: (type === 'bar' || type === 'line') ? {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                font: { family: "'Inter', 'Noto Sans TC', sans-serif" },
+                                callback: function(value, index, values) {
+                                    if (Math.floor(value) === value) {
+                                        return value;
+                                    }
+                                }
+                            }
+                        },
+                        x: {
+                             ticks: { 
+                                font: { family: "'Inter', 'Noto Sans TC', sans-serif" },
+                                callback: function(value, index, values) {
+                                    const label = this.getLabelForValue(value);
+                                    if (label.length > 10) { // Wrap labels longer than 10 chars
+                                        return label.match(/.{1,8}/g); // Break into lines of 8 chars
+                                    }
+                                    return label;
+                                }
+                             }
+                        }
+                    } : {}
+                }, options)
+            });
+        }
+        
+        // Chart Data and Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sales by Category Chart (Donut)
+            const salesByCategoryCtx = document.getElementById('salesByCategoryChart')?.getContext('2d');
+            if (salesByCategoryCtx) {
+                createChart(salesByCategoryCtx, 'doughnut', {
+                    labels: ['食品及雜貨', '非食品產品', '生鮮食品', '倉儲附屬及其他'],
+                    datasets: [{
+                        label: '淨銷售額佔比',
+                        data: [40.2, 28.0, 14.1, 17.7], // Percentages
+                        backgroundColor: ['#38bdf8', '#67e8f9', '#a5f3fc', '#cffafe'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                }, { plugins: { legend: { position: 'right'}} });
+            }
+
+            // Sales by Region Chart (Pie)
+            const salesByRegionCtx = document.getElementById('salesByRegionChart')?.getContext('2d');
+            if (salesByRegionCtx) {
+                createChart(salesByRegionCtx, 'pie', {
+                    labels: ['美國', '加拿大', '其他國際地區'],
+                    datasets: [{
+                        label: '總營收佔比',
+                        data: [72.8, 13.0, 14.2], // Percentages
+                        backgroundColor: ['#0ea5e9', '#38bdf8', '#7dd3fc'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                }, { plugins: { legend: { position: 'right'}} });
+            }
+
+            // Cash Flow Chart (Bar) - Simplified example
+            const cashFlowCtx = document.getElementById('cashFlowChart')?.getContext('2d');
+            if (cashFlowCtx) {
+                createChart(cashFlowCtx, 'bar', {
+                    labels: ['經營活動 (2025 H1)', '投資活動 (2025 H1)', '融資活動 (2025 H1)', '經營活動 (2024 H1)', '投資活動 (2024 H1)', '融資活動 (2024 H1)'],
+                    datasets: [{
+                        label: '現金流量 (億美元)',
+                        data: [60.08, -20.07, -14.34, 53.82, -17.52, -82.50],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(75, 192, 192, 0.6)',
+                            'rgba(54, 162, 235, 0.4)', 'rgba(255, 99, 132, 0.4)', 'rgba(75, 192, 192, 0.4)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1,
+                        unit: ' 億美元'
+                    }]
+                }, { scales: { x: { ticks: { maxRotation: 45, minRotation: 30 }}}});
+            }
+            
+            // P/E Ratio Comparison Chart (Bar)
+            const peRatioCtx = document.getElementById('peRatioComparisonChart')?.getContext('2d');
+            if (peRatioCtx) {
+                createChart(peRatioCtx, 'bar', {
+                    labels: ['Costco (COST)', 'Walmart (WMT)', 'Target (TGT)', 'Amazon (AMZN)', '必需消費品行業平均'],
+                    datasets: [{
+                        label: '市盈率 (P/E)',
+                        data: [55, 39.5, 10.6, 33.2, 17], // Approximate values based on report ranges
+                        backgroundColor: ['#0ea5e9', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe'],
+                        borderColor: '#0284c7',
+                        borderWidth: 1,
+                        unit: 'x'
+                    }]
+                }, { 
+                    indexAxis: 'y', // Horizontal bar chart for better label readability
+                    scales: { 
+                        x: { 
+                            beginAtZero: true,
+                            ticks: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" } }
+                        },
+                        y: {
+                            ticks: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" } }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
