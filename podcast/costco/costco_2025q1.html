@@ -7,40 +7,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Application Structure Plan: 
-        Overall Approach: A tabbed single-page application. Main navigation allows users to jump to key analysis areas: 總覽 (Overview), 財務表現 (Financials), 競爭與風險 (Competitive Landscape & Risks), and 估值與展望 (Valuation & Outlook).
-        This structure enhances clarity and navigation, allowing quick access to specific information.
-        User Flow: Select section from top navigation. Content presented with headings, concise text, and interactive charts. Tooltips for chart details. "Read More" toggles for longer text.
-        Why this structure: Chosen for its user-friendliness in navigating dense report information, breaking it into digestible thematic sections rather than a linear scroll.
+        Overall Approach: A single, scrollable page application. Main navigation allows users to smoothly scroll to key analysis areas: 總覽 (Overview), 財務表現 (Financials), 競爭與風險 (Competitive Landscape & Risks), and 估值與展望 (Valuation & Outlook). Active section highlighting in nav. Hamburger menu for mobile.
+        This structure enhances clarity and navigation, allowing quick access to specific information within a single view.
+        User Flow: Click nav link to scroll to section, or scroll manually. Nav highlights current section. Hamburger menu on mobile for navigation.
+        Why this structure: Chosen for its user-friendliness in navigating dense report information, providing a seamless scrolling experience with clear positional feedback.
     -->
     <!-- Visualization & Content Choices: 
         - Overview: Text summaries.
         - Financials: Donut/Bar charts for revenue breakdown (Net Sales vs. Membership Fees, sales by category/geography). Bar charts for YoY financial metrics. Dynamic display for key financial health ratios. Table for financial highlights. Goal: Inform, Compare. Method: Chart.js, HTML tables. Interaction: Tooltips.
-        - Competitive Landscape & Risks: Structured HTML lists for advantages and risks. Goal: Inform. Method: HTML. Interaction: Click-to-expand (conceptual, simplified for this version).
+        - Competitive Landscape & Risks: Structured HTML lists for advantages and risks. Goal: Inform. Method: HTML.
         - Valuation & Outlook: Grouped Bar chart for P/E, P/S, P/B vs. peers/history. Line chart for historical P/E. Dynamic display for analyst ratings. Goal: Compare, Inform. Method: Chart.js, HTML. Interaction: Tooltips.
         Justification: Visualizations chosen to best represent the data types (proportions, comparisons, trends) and enhance understanding beyond plain text. Interactions aim to provide detail on demand. All charts via Chart.js (Canvas).
     -->
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: 'Inter', 'Noto Sans TC', sans-serif; /* Added Noto Sans TC for better Chinese character rendering */
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
         }
-        .tab-button {
-            transition: background-color 0.3s ease, color 0.3s ease;
+        .nav-link {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            padding: 0.5rem 1rem; /* py-2 px-4 */
+            border-bottom: 2px solid transparent;
         }
-        .tab-button.active {
+        .nav-link.active {
             border-color: #0284c7; /* sky-600 */
             color: #0284c7;
             font-weight: 600;
         }
-        .content-section {
-            display: none;
-        }
-        .content-section.active {
-            display: block;
-        }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px; /* Default max-width */
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             height: 300px; 
@@ -52,12 +51,13 @@
             }
         }
         h2 {
-            font-size: 1.75rem; /* Increased heading size */
+            font-size: 1.75rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: #1f2937; /* gray-800 */
             border-bottom: 2px solid #e5e7eb; /* gray-200 */
             padding-bottom: 0.5rem;
+            scroll-margin-top: 80px; /* Offset for fixed header */
         }
         h3 {
             font-size: 1.25rem;
@@ -102,38 +102,63 @@
             font-weight: 600;
             color: #374151; /* gray-700 */
         }
-        .tooltip {
-            position: absolute;
-            background-color: rgba(0,0,0,0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            pointer-events: none;
+        /* Hamburger Menu Styles */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        .hamburger-icon line {
+            stroke: #0284c7; /* sky-600 */
+            stroke-width: 2;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        .hamburger-icon.open .line1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger-icon.open .line2 {
             opacity: 0;
-            transition: opacity 0.2s;
-            z-index: 10;
+        }
+        .hamburger-icon.open .line3 {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
     </style>
 </head>
 <body class="bg-stone-100 text-neutral-800 min-h-screen">
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
         <header class="mb-8 text-center">
-            <h1 class="text-3xl sm:text-4xl font-bold text-sky-700">Costco Wholesale (COST) 互動式分析報告</h1>
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-700">Costco Wholesale (COST) 投資分析報告</h1>
             <p class="text-neutral-600 mt-2">互動式報告摘要，資料日期：2025年5月23日 (基於提供之分析報告)</p>
         </header>
 
-        <nav class="mb-8 bg-white shadow-md rounded-lg p-2">
-            <ul class="flex flex-wrap justify-center space-x-2 sm:space-x-4">
-                <li><button class="tab-button py-2 px-3 sm:px-4 border-b-2 border-transparent hover:bg-stone-50 hover:text-sky-600 active" data-tab="overview">總覽</button></li>
-                <li><button class="tab-button py-2 px-3 sm:px-4 border-b-2 border-transparent hover:bg-stone-50 hover:text-sky-600" data-tab="financials">財務表現</button></li>
-                <li><button class="tab-button py-2 px-3 sm:px-4 border-b-2 border-transparent hover:bg-stone-50 hover:text-sky-600" data-tab="competition">競爭與風險</button></li>
-                <li><button class="tab-button py-2 px-3 sm:px-4 border-b-2 border-transparent hover:bg-stone-50 hover:text-sky-600" data-tab="valuation">估值與展望</button></li>
-            </ul>
+        <nav id="main-nav" class="sticky top-0 z-50 mb-8 bg-white shadow-md rounded-lg p-2">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <ul class="hidden md:flex justify-center space-x-1 flex-grow">
+                        <li><a href="#overview" class="nav-link hover:bg-stone-50 hover:text-sky-600">總覽</a></li>
+                        <li><a href="#financials" class="nav-link hover:bg-stone-50 hover:text-sky-600">財務表現</a></li>
+                        <li><a href="#competition" class="nav-link hover:bg-stone-50 hover:text-sky-600">競爭與風險</a></li>
+                        <li><a href="#valuation" class="nav-link hover:bg-stone-50 hover:text-sky-600">估值與展望</a></li>
+                    </ul>
+                    <div class="md:hidden flex items-center w-full">
+                        <button id="hamburger-button" class="text-sky-600 focus:outline-none ml-auto">
+                            <svg class="hamburger-icon w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <line class="line1" x1="4" y1="6" x2="20" y2="6"/>
+                                <line class="line2" x1="4" y1="12" x2="20" y2="12"/>
+                                <line class="line3" x1="4" y1="18" x2="20" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu" class="md:hidden hidden flex-col items-center mt-2 space-y-2 bg-white py-2 absolute w-full left-0 shadow-md rounded-b-lg">
+                <a href="#overview" class="nav-link block w-full text-center hover:bg-stone-100">總覽</a>
+                <a href="#financials" class="nav-link block w-full text-center hover:bg-stone-100">財務表現</a>
+                <a href="#competition" class="nav-link block w-full text-center hover:bg-stone-100">競爭與風險</a>
+                <a href="#valuation" class="nav-link block w-full text-center hover:bg-stone-100">估值與展望</a>
+            </div>
         </nav>
 
         <main>
-            <section id="overview" class="content-section active bg-white p-6 rounded-lg shadow-lg">
+            <section id="overview" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8">
                 <h2>總覽</h2>
                 <p class="mb-4">本部分提供 Costco Wholesale Corporation 的執行摘要、公司概覽及其獨特的商業模式，幫助您快速建立對公司的整體認知。</p>
                 
@@ -150,7 +175,7 @@
                 </ul>
             </section>
 
-            <section id="financials" class="content-section bg-white p-6 rounded-lg shadow-lg">
+            <section id="financials" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8">
                 <h2>財務表現</h2>
                 <p class="mb-4">本部分深入分析 Costco 的營收來源、近期財務表現（包括2025財年Q1及Q2的關鍵數據）以及整體財務健康狀況，輔以圖表展示關鍵趨勢。</p>
 
@@ -223,7 +248,7 @@
                  <p class="text-xs text-center mt-2 text-neutral-500">現金流量 (24週數據)</p>
             </section>
 
-            <section id="competition" class="content-section bg-white p-6 rounded-lg shadow-lg">
+            <section id="competition" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8">
                 <h2>競爭與風險</h2>
                 <p class="mb-4">此部分探討 Costco 的核心競爭優勢，這些優勢使其在激烈的零售市場中脫穎而出。同時，也列出了投資者需要關注的主要風險因素。</p>
 
@@ -268,7 +293,7 @@
                 </ul>
             </section>
 
-            <section id="valuation" class="content-section bg-white p-6 rounded-lg shadow-lg">
+            <section id="valuation" class="content-section bg-white p-6 rounded-lg shadow-lg mb-8">
                 <h2>估值與展望</h2>
                 <p class="mb-4">本節評估 Costco 的股票估值水平，包括與歷史和同業的比較，並探討市場情緒以及公司未來的發展前景與挑戰。</p>
 
@@ -325,103 +350,118 @@
 
         <footer class="mt-12 pt-8 border-t border-neutral-300 text-center text-neutral-500 text-sm">
             <p>&copy; 2025Q1 Costco(COST)  互動式分析報告-巴菲特AI價值投資。僅供參考，不構成投資建議。</p>
-            <p class="text-xs mt-1">資料來源：基於網路中之Costco(COST) 公開資料 (2025年5月23日)。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中之Costco(COST)相關公開資料 (2025年5月23日)。</p>
         </footer>
     </div>
 
     <script>
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const contentSections = document.querySelectorAll('.content-section');
+        const mainNav = document.getElementById('main-nav');
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.content-section');
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                contentSections.forEach(section => section.classList.remove('active'));
-                document.getElementById(button.dataset.tab).classList.add('active');
-            });
+        // Toggle mobile menu
+        hamburgerButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            hamburgerButton.querySelector('.hamburger-icon').classList.toggle('open');
         });
 
-        function createChart(ctx, type, data, options) {
-            return new Chart(ctx, {
-                type: type,
-                data: data,
-                options: Object.assign({
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                font: {
-                                    family: "'Inter', 'Noto Sans TC', sans-serif"
-                                }
-                            }
-                        },
-                        tooltip: {
-                            titleFont: {
-                                family: "'Inter', 'Noto Sans TC', sans-serif"
-                            },
-                            bodyFont: {
-                                family: "'Inter', 'Noto Sans TC', sans-serif"
-                            },
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.y !== null && type !== 'pie' && type !== 'doughnut') {
-                                        label += context.parsed.y + (context.dataset.unit || '');
-                                    }
-                                     if ((type === 'pie' || type === 'doughnut') && context.parsed !== null) {
-                                        label += context.parsed + '%';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    },
-                    scales: (type === 'bar' || type === 'line') ? {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                font: { family: "'Inter', 'Noto Sans TC', sans-serif" },
-                                callback: function(value, index, values) {
-                                    if (Math.floor(value) === value) {
-                                        return value;
-                                    }
-                                }
-                            }
-                        },
-                        x: {
-                             ticks: { 
-                                font: { family: "'Inter', 'Noto Sans TC', sans-serif" },
-                                callback: function(value, index, values) {
-                                    const label = this.getLabelForValue(value);
-                                    if (label.length > 10) { // Wrap labels longer than 10 chars
-                                        return label.match(/.{1,8}/g); // Break into lines of 8 chars
-                                    }
-                                    return label;
-                                }
-                             }
-                        }
-                    } : {}
-                }, options)
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                hamburgerButton.querySelector('.hamburger-icon').classList.remove('open');
+            });
+        });
+        
+        // Smooth scroll for all nav links and highlight active section
+        function highlightNavLink() {
+            let currentSectionId = '';
+            const navHeight = mainNav.offsetHeight;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - navHeight - 20; // Adjusted offset
+                const sectionBottom = sectionTop + section.offsetHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+            
+            // If no section is "current" (e.g., at the very top or bottom of page), try to find the closest one
+            if (!currentSectionId && window.scrollY < sections[0].offsetTop - navHeight - 20) {
+                 currentSectionId = sections[0].getAttribute('id');
+            } else if (!currentSectionId && window.scrollY + window.innerHeight >= document.body.offsetHeight - 20) { // Near bottom
+                 currentSectionId = sections[sections.length -1].getAttribute('id');
+            }
+
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                }
             });
         }
-        
-        // Chart Data and Initialization
+
+        window.addEventListener('scroll', highlightNavLink);
+        window.addEventListener('resize', highlightNavLink); // Recalculate on resize
         document.addEventListener('DOMContentLoaded', () => {
-            // Sales by Category Chart (Donut)
+            highlightNavLink(); // Initial highlight
+            
+            // Chart generation code (unchanged from previous version)
+            function createChart(ctx, type, data, options) {
+                return new Chart(ctx, {
+                    type: type,
+                    data: data,
+                    options: Object.assign({
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" } }
+                            },
+                            tooltip: {
+                                titleFont: { family: "'Inter', 'Noto Sans TC', sans-serif" },
+                                bodyFont: { family: "'Inter', 'Noto Sans TC', sans-serif" },
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) { label += ': '; }
+                                        if (context.parsed.y !== null && type !== 'pie' && type !== 'doughnut') {
+                                            label += context.parsed.y + (context.dataset.unit || '');
+                                        }
+                                        if ((type === 'pie' || type === 'doughnut') && context.parsed !== null) {
+                                            label += context.parsed + '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: (type === 'bar' || type === 'line') ? {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" }, callback: function(value) { if (Math.floor(value) === value) { return value; } } }
+                            },
+                            x: {
+                                ticks: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" }, callback: function(value) { const label = this.getLabelForValue(value); if (label.length > 10) { return label.match(/.{1,8}/g); } return label; } }
+                            }
+                        } : {}
+                    }, options)
+                });
+            }
+
             const salesByCategoryCtx = document.getElementById('salesByCategoryChart')?.getContext('2d');
             if (salesByCategoryCtx) {
                 createChart(salesByCategoryCtx, 'doughnut', {
                     labels: ['食品及雜貨', '非食品產品', '生鮮食品', '倉儲附屬及其他'],
                     datasets: [{
                         label: '淨銷售額佔比',
-                        data: [40.2, 28.0, 14.1, 17.7], // Percentages
+                        data: [40.2, 28.0, 14.1, 17.7],
                         backgroundColor: ['#38bdf8', '#67e8f9', '#a5f3fc', '#cffafe'],
                         borderColor: '#ffffff',
                         borderWidth: 2
@@ -429,14 +469,13 @@
                 }, { plugins: { legend: { position: 'right'}} });
             }
 
-            // Sales by Region Chart (Pie)
             const salesByRegionCtx = document.getElementById('salesByRegionChart')?.getContext('2d');
             if (salesByRegionCtx) {
                 createChart(salesByRegionCtx, 'pie', {
                     labels: ['美國', '加拿大', '其他國際地區'],
                     datasets: [{
                         label: '總營收佔比',
-                        data: [72.8, 13.0, 14.2], // Percentages
+                        data: [72.8, 13.0, 14.2],
                         backgroundColor: ['#0ea5e9', '#38bdf8', '#7dd3fc'],
                         borderColor: '#ffffff',
                         borderWidth: 2
@@ -444,7 +483,6 @@
                 }, { plugins: { legend: { position: 'right'}} });
             }
 
-            // Cash Flow Chart (Bar) - Simplified example
             const cashFlowCtx = document.getElementById('cashFlowChart')?.getContext('2d');
             if (cashFlowCtx) {
                 createChart(cashFlowCtx, 'bar', {
@@ -452,43 +490,31 @@
                     datasets: [{
                         label: '現金流量 (億美元)',
                         data: [60.08, -20.07, -14.34, 53.82, -17.52, -82.50],
-                        backgroundColor: [
-                            'rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(75, 192, 192, 0.6)',
-                            'rgba(54, 162, 235, 0.4)', 'rgba(255, 99, 132, 0.4)', 'rgba(75, 192, 192, 0.4)'
-                        ],
-                        borderColor: [
-                            'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)',
-                            'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'
-                        ],
+                        backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(75, 192, 192, 0.6)', 'rgba(54, 162, 235, 0.4)', 'rgba(255, 99, 132, 0.4)', 'rgba(75, 192, 192, 0.4)'],
+                        borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
                         borderWidth: 1,
                         unit: ' 億美元'
                     }]
                 }, { scales: { x: { ticks: { maxRotation: 45, minRotation: 30 }}}});
             }
             
-            // P/E Ratio Comparison Chart (Bar)
             const peRatioCtx = document.getElementById('peRatioComparisonChart')?.getContext('2d');
             if (peRatioCtx) {
                 createChart(peRatioCtx, 'bar', {
                     labels: ['Costco (COST)', 'Walmart (WMT)', 'Target (TGT)', 'Amazon (AMZN)', '必需消費品行業平均'],
                     datasets: [{
                         label: '市盈率 (P/E)',
-                        data: [55, 39.5, 10.6, 33.2, 17], // Approximate values based on report ranges
+                        data: [55, 39.5, 10.6, 33.2, 17],
                         backgroundColor: ['#0ea5e9', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe'],
                         borderColor: '#0284c7',
                         borderWidth: 1,
                         unit: 'x'
                     }]
                 }, { 
-                    indexAxis: 'y', // Horizontal bar chart for better label readability
+                    indexAxis: 'y',
                     scales: { 
-                        x: { 
-                            beginAtZero: true,
-                            ticks: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" } }
-                        },
-                        y: {
-                            ticks: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" } }
-                        }
+                        x: { beginAtZero: true, ticks: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" } } },
+                        y: { ticks: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" } } }
                     },
                     plugins: { legend: { display: false } }
                 });
