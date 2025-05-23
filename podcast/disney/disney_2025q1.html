@@ -3,644 +3,752 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>迪士尼(DIS) 市場趨勢與研究-巴菲特AI價值投資</title>
+    <title>2025Q1 迪士尼（DIS）互動式分析報告-巴菲特AI價值投資</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Overview: HTML Stats/Lists for exec summary & sentiment. Goal: Inform.
+        - Business Insights: Donut (Segment Revenue - Chart.js), HTML/CSS Flywheel. Goal: Inform/Organize.
+        - Financials: Line/Bar charts (Revenue, Profit, Cash Flow, Debt, Quarterly YoY - Chart.js). Goal: Change/Compare.
+        - Growth: Bar/Line charts (DTC Subs, DTC OI - Chart.js), HTML Lists/Cards (Experiences, Content). Goal: Inform/Compare/Change.
+        - Market Position: Pie/Donut (Streaming Share - Chart.js), HTML Table (Peer Comparison). Goal: Compare/Inform.
+        - Risks: HTML Lists (Categorized Risks with Unicode icons). Goal: Organize/Inform.
+        - Investment Thesis: HTML Stats/Lists (Valuation, Opps/Concerns). Goal: Inform/Summarize.
+        All charts via Chart.js (Canvas). Diagrams via HTML/CSS. No SVG/Mermaid. Justification: Best fit for data type and goal, ensuring clarity and interactivity within constraints. -->
     <style>
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
-            background-color: #F8F9FA; /* 淺灰背景 */
+            background-color: #FAF8F5; /* Warm Off-White */
+            color: #4A4A4A; /* Dark Grey */
+        }
+        .section-card {
+            background-color: #FFFFFF; /* White */
+            border-radius: 0.75rem; /* 12px */
+            padding: 1.5rem; /* 24px */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem; /* 32px */
+        }
+        .section-title {
+            font-size: 1.875rem; /* 30px */
+            font-weight: 700;
+            color: #4A4A4A; /* Dark Grey */
+            margin-bottom: 1rem; /* 16px */
+            padding-bottom: 0.5rem; /* 8px */
+            border-bottom: 3px solid #778DA9; /* Muted Blue-Grey */
+        }
+        .subsection-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: #4A4A4A;
+            margin-top: 1.5rem; /* 24px */
+            margin-bottom: 0.75rem; /* 12px */
         }
         .chart-container {
             position: relative;
             width: 100%;
+            max-width: 700px; /* Max width for readability */
             margin-left: auto;
             margin-right: auto;
+            height: 320px; /* Base height */
+            max-height: 400px;
         }
-        .section-title {
-            font-size: 1.75rem; /* 28px */
-            font-weight: 700;
-            margin-bottom: 1rem; /* 16px */
-            color: #073B4C; /* 午夜藍 */
-            border-bottom: 3px solid #118AB2; /* 蔚藍 */
-            padding-bottom: 0.5rem; /* 8px */
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
         }
-        .stat-card {
-            background-color: #FFFFFF; /* 白色卡片背景 */
-            border-radius: 0.75rem; /* 12px */
-            padding: 1.5rem; /* 24px */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            margin-bottom: 1.5rem; /* 24px */
+        @media (min-width: 1024px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            padding: 0.75rem 1rem;
+            color: #FAF8F5;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #A7C957; /* Muted Olive Green */
+            color: #FFFFFF;
         }
         .stat-value {
-            font-size: 2.5rem; /* 40px */
-            font-weight: 800;
-            color: #118AB2; /* 蔚藍 */
+            font-size: 2rem;
+            font-weight: 700;
+            color: #778DA9; /* Muted Blue-Grey */
         }
         .stat-label {
-            font-size: 1rem; /* 16px */
-            color: #073B4C; /* 午夜藍 */
-            margin-top: 0.25rem; /* 4px */
-        }
-        .chart-title {
-            font-size: 1.25rem; /* 20px */
-            font-weight: 600;
-            color: #073B4C; /* 午夜藍 */
-            margin-bottom: 1rem; /* 16px */
-            text-align: center;
+            font-size: 0.875rem;
+            color: #4A4A4A;
+            margin-top: 0.25rem;
         }
         .info-text {
-            font-size: 0.95rem; /* 15px */
+            font-size: 0.95rem;
             line-height: 1.6;
-            color: #073B4C; /* 午夜藍 */
-            margin-top: 0.75rem; /* 12px */
+            color: #4A4A4A;
+            margin-top: 0.5rem;
         }
         .flywheel-item {
-            background-color: #E0F7FA; /* Light Cerulean Blue */
-            border: 2px solid #118AB2; /* Cerulean Blue */
-            color: #073B4C; /* Midnight Blue */
-            padding: 0.75rem; /* 12px */
-            border-radius: 0.5rem; /* 8px */
+            background-color: #E8EDED; /* Light Muted Blue-Grey */
+            border: 2px solid #778DA9; /* Muted Blue-Grey */
+            color: #4A4A4A;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
             text-align: center;
             font-weight: 600;
-            min-height: 60px;
+            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .flywheel-arrow {
-            font-size: 1.5rem; /* 24px */
-            color: #FF6B6B; /* Lively Coral */
+            font-size: 1.75rem;
+            color: #E0BBAA; /* Soft Terracotta */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem; /* 8px */
+            padding: 0.25rem;
         }
-        /* Chosen Color Palette: Energetic & Playful (活潑多彩)
-            - Accent 1 (Lively Coral): #FF6B6B
-            - Accent 2 (Sunny Yellow): #FFD166
-            - Accent 3 (Emerald Green): #06D6A0
-            - Accent 4 (Cerulean Blue): #118AB2
-            - Text/Dark Accents (Midnight Blue): #073B4C
-            - Page Background: #F8F9FA
-            - Card Background: #FFFFFF
-        */
-
-        /*
-        整體敘事與結構計畫：
-        1.  引人入勝的標題與執行摘要亮點。
-        2.  迪士尼概覽：公司規模、品牌力。
-        3.  核心業務剖析：深入三大部門（娛樂、體育、體驗）的營收來源與協同效應（飛輪圖）。
-        4.  財務健康狀況：關鍵財務指標趨勢（總營收、淨利潤、營運現金流、債務）。
-        5.  增長引擎詳解：DTC 串流媒體（訂閱戶、ARPU、盈利路徑）、體驗部門擴張（樂園、遊輪）、內容策略。
-        6.  市場競爭格局：與主要競爭對手 (Netflix, Comcast, WBD) 的量化比較、串流媒體市場份額。
-        7.  核心優勢與潛在風險：迪士尼的護城河（品牌、IP、生態系）與面臨的挑戰（串流媒體競爭、傳統電視下滑、宏觀經濟）。
-        8.  投資前景展望：分析師觀點、估值指標、長期投資論點總結。
-        9.  註腳與資料來源（示意）。
-        */
-
-        /*
-        視覺化選擇摘要 (確認未使用 SVG 或 Mermaid JS):
-
-        1.  執行摘要 - 總營收 (FY24):
-            * 目標: 告知 (Inform)
-            * 選擇: 單一醒目數字 (Single Big Number) - HTML/CSS
-            * 理由: 快速傳達公司整體規模。
-            * 實現: 大型文字，Tailwind CSS 樣式。無 SVG。
-
-        2.  核心業務 - 各部門營收佔比 (FY24):
-            * 目標: 比較 (Compare) 組成
-            * 選擇: 環圈圖 (Donut Chart) - Chart.js (Canvas)
-            * 理由: 清晰展示三大部門對總營收的貢獻比例。
-            * 實現: Chart.js 繪製於 Canvas。無 SVG。
-
-        3.  核心業務 - 迪士尼飛輪效應:
-            * 目標: 組織 (Organize) 流程/關係
-            * 選擇: 流程圖 (Flow Chart) - HTML/CSS
-            * 理由: 以視覺化方式解釋迪士尼各業務間的協同增效模式。
-            * 實現: 使用 div、邊框、flexbox/grid 和 Unicode 箭頭，Tailwind CSS 樣式。無 SVG，無 Mermaid JS。
-
-        4.  財務健康 - 總營收趨勢 (FY21-FY24):
-            * 目標: 變化 (Change)
-            * 選擇: 折線圖 (Line Chart) - Chart.js (Canvas)
-            * 理由: 展示營收隨時間的增長趨勢。
-            * 實現: Chart.js 繪製於 Canvas。無 SVG。
-
-        5.  財務健康 - 淨利潤趨勢 (FY21-FY24):
-            * 目標: 變化 (Change)
-            * 選擇: 長條圖 (Bar Chart) - Chart.js (Canvas)
-            * 理由: 清晰比較各年度的盈利能力。
-            * 實現: Chart.js 繪製於 Canvas。無 SVG。
-
-        6.  財務健康 - 營運現金流量趨勢 (FY21-FY24):
-            * 目標: 變化 (Change)
-            * 選擇: 折線圖 (Line Chart) - Chart.js (Canvas)
-            * 理由: 顯示公司現金產生能力的變化。
-            * 實現: Chart.js 繪製於 Canvas。無 SVG。
-
-        7.  增長引擎 - DTC 訂閱戶數 (2025財年第二季):
-            * 目標: 比較 (Compare)
-            * 選擇: 分組長條圖 (Grouped Bar Chart) - Chart.js (Canvas)
-            * 理由: 同時比較 Disney+, Hulu, ESPN+ 的訂閱規模。
-            * 實現: Chart.js 繪製於 Canvas。無 SVG。
-
-        8.  增長引擎 - DTC 營運收入趨勢 (季度):
-            * 目標: 變化 (Change)
-            * 選擇: 折線圖 (Line Chart) - Chart.js (Canvas)
-            * 理由: 展示 DTC 業務邁向盈利的進程。
-            * 實現: Chart.js 繪製於 Canvas。無 SVG。
-
-        9.  增長引擎 - 體驗部門營收年增率 (2025財年第二季):
-            * 目標: 告知 (Inform)
-            * 選擇: 單一醒目數字 (Single Big Number) - HTML/CSS
-            * 理由: 突顯體驗部門的增長動力。
-            * 實現: 大型文字，Tailwind CSS 樣式。無 SVG。
-
-        10. 市場競爭 - 美國串流媒體市場份額 (2025年第一季):
-            * 目標: 比較 (Compare) 組成
-            * 選擇: 環圈圖 (Donut Chart) - Chart.js (Canvas)
-            * 理由: 顯示迪士尼在串流市場的相對位置。
-            * 實現: Chart.js 繪製於 Canvas。無 SVG。
-
-        11. 市場競爭 - 同業比較表:
-            * 目標: 比較 (Compare) / 組織 (Organize)
-            * 選擇: 表格 (Table) - HTML/CSS
-            * 理由: 詳細對比迪士尼與競爭對手的關鍵指標。
-            * 實現: HTML `<table>` 結構，Tailwind CSS 樣式。無 SVG。
-
-        12. 核心優勢與潛在風險:
-            * 目標: 組織 (Organize)
-            * 選擇: 列表 (List) - HTML/CSS
-            * 理由: 清晰列出迪士尼的主要優勢和風險。
-            * 實現: HTML `<ul>` 結構，搭配 Unicode 圖標和 Tailwind CSS 樣式。無 SVG。
-
-        13. 投資前景 - 分析師平均目標價:
-            * 目標: 告知 (Inform)
-            * 選擇: 單一醒目數字 (Single Big Number) - HTML/CSS
-            * 理由: 簡明呈現市場對股價的預期。
-            * 實現: 大型文字，Tailwind CSS 樣式。無 SVG。
-
-        14. 投資前景 - 預期市盈率 (Forward P/E FY25):
-            * 目標: 告知 (Inform)
-            * 選擇: 單一醒目數字 (Single Big Number) - HTML/CSS
-            * 理由: 提供一個關鍵估值指標。
-            * 實現: 大型文字，Tailwind CSS 樣式。無 SVG。
-
-        確認：整個資訊圖表未使用 SVG 圖形或 Mermaid JS。所有圖表均由 Chart.js (Canvas) 或純 HTML/CSS 實現。
-        */
+        .table-header {
+            background-color: #E8EDED; /* Light Muted Blue-Grey */
+            color: #4A4A4A;
+            font-weight: 600;
+        }
+        .table-cell {
+            padding: 0.75rem;
+            border-bottom: 1px solid #D3D3D3; /* Light Grey */
+        }
+        .sticky-nav {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="antialiased">
 
-    <header class="bg-gradient-to-r from-[#118AB2] to-[#073B4C] text-white p-8 text-center rounded-b-xl shadow-lg">
-        <h1 class="text-4xl font-bold mb-2">華特迪士尼公司 (DIS)</h1>
-        <p class="text-xl">行業趨勢與市場研究資訊圖表 (基於2025年5月分析報告)</p>
-    </header>
-
-    <main class="container mx-auto p-4 md:p-8">
-
-        <section id="overview" class="mb-12">
-            <h2 class="section-title">迪士尼概覽與執行摘要亮點</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card text-center">
-                    <div class="stat-value">$913.61億</div>
-                    <div class="stat-label">2024財年總營收</div>
-                    <p class="info-text">迪士尼是一家全球多元化的娛樂領導者，擁有無與倫比的品牌資產和龐大的智慧財產權組合。</p>
+    <nav id="navbar" class="sticky-nav bg-[#778DA9] shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="text-2xl font-bold text-white">2025Q1 迪士尼（DIS）互動式分析報告</div>
+                <div class="hidden md:flex space-x-1">
+                    <a href="#overview" class="nav-link">總覽</a>
+                    <a href="#business_insights" class="nav-link">商業透視</a>
+                    <a href="#financial_dashboard" class="nav-link">財務儀表板</a>
+                    <a href="#growth_strategies" class="nav-link">成長策略</a>
+                    <a href="#market_position" class="nav-link">市場定位</a>
+                    <a href="#risk_assessment" class="nav-link">風險評估</a>
+                    <a href="#investment_thesis" class="nav-link">投資觀點</a>
                 </div>
-                <div class="stat-card">
-                    <h3 class="text-xl font-semibold text-[#073B4C] mb-2">核心投資觀點</h3>
-                    <p class="info-text">儘管面臨產業變革和競爭，迪士尼憑藉其品牌、IP及多元業務的協同效應，具備持續創造價值的潛力。DTC串流媒體業務的盈利轉型及體驗部門的強勁增長是關鍵。</p>
-                    <p class="info-text mt-2"><strong>主要挑戰：</strong>傳統電視下滑、串流媒體競爭激烈、內容成本管理。</p>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
                 </div>
             </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-[#778DA9] pb-2">
+            <a href="#overview" class="block nav-link text-center">總覽</a>
+            <a href="#business_insights" class="block nav-link text-center">商業透視</a>
+            <a href="#financial_dashboard" class="block nav-link text-center">財務儀表板</a>
+            <a href="#growth_strategies" class="block nav-link text-center">成長策略</a>
+            <a href="#market_position" class="block nav-link text-center">市場定位</a>
+            <a href="#risk_assessment" class="block nav-link text-center">風險評估</a>
+            <a href="#investment_thesis" class="block nav-link text-center">投資觀點</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 md:p-6 lg:p-8">
+
+        <section id="overview" class="section-card scroll-mt-20">
+            <h2 class="section-title">總覽：迪士尼投資前景</h2>
+            <p class="info-text mb-6">本節提供華特迪士尼公司 (DIS) 長期投資前景的執行摘要，重點介紹其核心優勢、面臨的挑戰以及近期的策略方向。迪士尼正處於關鍵轉型期，旨在平衡傳統媒體的演變與數位串流的增長機遇。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                <div class="bg-[#E8EDED] p-4 rounded-lg text-center">
+                    <div class="stat-value">~$123.54</div>
+                    <div class="stat-label">分析師平均目標價 (2025/5)</div>
+                </div>
+                <div class="bg-[#E8EDED] p-4 rounded-lg text-center">
+                    <div class="stat-value">中度買入</div>
+                    <div class="stat-label">分析師共識評級</div>
+                </div>
+                <div class="bg-[#E8EDED] p-4 rounded-lg text-center">
+                    <div class="stat-value">~20x</div>
+                    <div class="stat-label">預期市盈率 (FY25預估)</div>
+                </div>
+            </div>
+            <h3 class="subsection-title">核心觀點</h3>
+            <ul class="list-disc list-inside space-y-1 info-text">
+                <li>無與倫比的品牌資產與龐大的IP組合是基石。</li>
+                <li>DTC串流媒體業務的獲利能力是當前策略重心。</li>
+                <li>體驗部門（樂園、遊輪）持續貢獻強勁增長與利潤。</li>
+                <li>挑戰包括傳統電視下滑、串流媒體競爭及內容成本管理。</li>
+                <li>近期財務結果顯示積極勢頭，尤其在DTC改善和現金流增強方面。</li>
+            </ul>
+             <p class="info-text mt-4">迪士尼的投資案例圍繞其成功駕馭媒體格局變革，並有效利用其獨特資產組合創造長期股東價值的能力。</p>
         </section>
 
-        <section id="core-business" class="mb-12">
-            <h2 class="section-title">核心業務剖析</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card">
-                    <h3 class="chart-title">2024財年各部門營收佔比</h3>
-                    <div class="chart-container h-80 md:h-96">
+        <section id="business_insights" class="section-card scroll-mt-20">
+            <h2 class="section-title">商業透視：迪士尼的宇宙</h2>
+            <p class="info-text mb-6">迪士尼的商業模式圍繞三大核心部門構建：娛樂、體育和體驗。這些部門透過強大的智慧財產權 (IP) 產生協同效應，形成所謂的「飛輪效應」，即一個領域的成功能帶動其他領域的增長。</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div>
+                    <h3 class="subsection-title">部門營收結構 (2024財年)</h3>
+                    <p class="info-text mb-4">體驗部門是營收的主要貢獻者，其次是娛樂部門（包含DTC串流媒體）和體育部門 (ESPN)。</p>
+                    <div class="chart-container h-[300px] md:h-[350px]">
                         <canvas id="segmentRevenueChart"></canvas>
                     </div>
-                    <p class="info-text">迪士尼目前透過三大核心部門營運：娛樂、體育和體驗。體驗部門是主要的利潤貢獻者，而娛樂部門（包含DTC服務）正經歷快速轉型。</p>
                 </div>
-                <div class="stat-card">
-                    <h3 class="chart-title">迪士尼飛輪效應 (業務協同模型)</h3>
-                    <div class="space-y-4">
-                        <div class="flywheel-item mx-auto w-2/3">內容創作 (IP宇宙)</div>
-                        <div class="grid grid-cols-3 items-center">
-                            <div class="flywheel-arrow"></div>
-                            <div class="flywheel-arrow text-3xl transform rotate-90 md:rotate-0">➔</div>
-                            <div class="flywheel-arrow"></div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <h3 class="subsection-title">迪士尼飛輪效應</h3>
+                    <p class="info-text mb-4">迪士尼的IP（如電影角色）驅動樂園景點、串流內容、商品銷售，形成一個自我強化的增長循環。</p>
+                    <div class="space-y-3 p-4 border border-[#D3D3D3] rounded-lg bg-white">
+                        <div class="flywheel-item mx-auto w-4/5 md:w-3/5">核心IP創作 (電影、影集)</div>
+                        <div class="flex justify-center flywheel-arrow">↓</div>
+                        <div class="grid grid-cols-2 gap-3">
                             <div class="flywheel-item">院線發行</div>
                             <div class="flywheel-item">串流媒體 (DTC)</div>
-                            <div class="flywheel-item">傳統電視</div>
                         </div>
-                         <div class="grid grid-cols-3 items-center">
-                            <div class="flywheel-arrow text-3xl transform -rotate-45 md:rotate-0">↙</div>
-                            <div class="flywheel-arrow text-3xl transform rotate-90 md:rotate-0">⬇</div>
-                            <div class="flywheel-arrow text-3xl transform rotate-45 md:rotate-0">↘</div>
+                        <div class="flex justify-around">
+                            <div class="flywheel-arrow">↙</div>
+                            <div class="flywheel-arrow">↘</div>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-2 gap-3">
                            <div class="flywheel-item">主題樂園 & 體驗</div>
                            <div class="flywheel-item">消費性產品</div>
                         </div>
+                         <div class="flex justify-center flywheel-arrow mt-1">↺ (強化IP，創造新內容)</div>
                     </div>
-                    <p class="info-text">迪士尼的商業模式核心在於各部門間的協同關係。一個領域的成功（如電影IP）能帶動其他領域（樂園、商品、串流內容）的增長。</p>
+                </div>
+            </div>
+             <p class="info-text mt-6">最近的部門重組旨在提高透明度並與串流媒體增長等策略重點保持一致。Star India業務轉為合資企業，也反映了公司在國際市場的策略調整，旨在降低風險並集中資源。</p>
+        </section>
+
+        <section id="financial_dashboard" class="section-card scroll-mt-20">
+            <h2 class="section-title">財務儀表板：關鍵績效指標</h2>
+            <p class="info-text mb-6">本節展示迪士尼的關鍵年度和季度財務趨勢，包括總營收、淨利潤、營運現金流和債務水平。這些數據揭示了公司在疫情後的復甦軌跡以及策略轉型的財務影響。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="subsection-title">總營收趨勢 (財年)</h3>
+                    <div class="chart-container">
+                        <canvas id="annualTotalRevenueChart"></canvas>
+                    </div>
+                    <p class="info-text">營收從2021財年的674億美元增長至2024財年的914億美元。</p>
+                </div>
+                <div>
+                    <h3 class="subsection-title">淨利潤趨勢 (財年)</h3>
+                    <div class="chart-container">
+                        <canvas id="annualNetProfitChart"></canvas>
+                    </div>
+                    <p class="info-text">2024財年淨利潤達50億美元，較前幾年有顯著改善。</p>
+                </div>
+                <div>
+                    <h3 class="subsection-title">營運現金流量趨勢 (財年)</h3>
+                    <div class="chart-container">
+                        <canvas id="annualCashFlowChart"></canvas>
+                    </div>
+                    <p class="info-text">2024財年營運現金流達140億美元，預計2025財年約170億美元。</p>
+                </div>
+                <div>
+                    <h3 class="subsection-title">總借款趨勢 (財年底/季末)</h3>
+                    <div class="chart-container">
+                        <canvas id="totalDebtChart"></canvas>
+                    </div>
+                    <p class="info-text">總借款從2021財年底的544億美元降至2025年3月底的429億美元。</p>
+                </div>
+            </div>
+            <h3 class="subsection-title mt-8">近期季度表現 (2025財年第二季 vs 2024財年第二季)</h3>
+             <p class="info-text mb-4">2025財年上半年顯示DTC獲利能力持續改善，體驗部門保持穩健增長，整體營收和現金流均有提升。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="subsection-title text-base">總營收 YoY 增長</h3>
+                    <div class="chart-container h-[280px] md:h-[300px]">
+                        <canvas id="quarterlyRevenueYoYChart"></canvas>
+                    </div>
+                     <p class="info-text">2025財年第二季總營收同比增長7%。</p>
+                </div>
+                <div>
+                    <h3 class="subsection-title text-base">部門營運收入 YoY 增長</h3>
+                    <div class="chart-container h-[280px] md:h-[300px]">
+                        <canvas id="quarterlySegmentOIYoYChart"></canvas>
+                    </div>
+                    <p class="info-text">娛樂部門營運收入同比大幅增長61%，體驗部門增長9%。</p>
                 </div>
             </div>
         </section>
 
-        <section id="financials" class="mb-12">
-            <h2 class="section-title">財務健康狀況</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card">
-                    <h3 class="chart-title">總營收趨勢 (2021-2024財年)</h3>
-                    <div class="chart-container h-72 md:h-80">
-                        <canvas id="totalRevenueTrendChart"></canvas>
-                    </div>
-                    <p class="info-text">迪士尼營收在疫情後呈現明顯增長，從2021財年的674億美元增至2024財年的913億美元。</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="chart-title">淨利潤趨勢 (2021-2024財年)</h3>
-                    <div class="chart-container h-72 md:h-80">
-                        <canvas id="netProfitTrendChart"></canvas>
-                    </div>
-                    <p class="info-text">淨利潤在2024財年達到49.7億美元，較前幾年有顯著改善，反映DTC虧損減少和體驗部門的強勢。</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="chart-title">營運現金流量趨勢 (2021-2024財年)</h3>
-                    <div class="chart-container h-72 md:h-80">
-                        <canvas id="cashFlowTrendChart"></canvas>
-                    </div>
-                    <p class="info-text">營運現金流持續改善，2024財年達139.7億美元，顯示現金產生能力增強。2025財年預計約170億美元。</p>
-                </div>
-                <div class="stat-card">
-                    <h3 class="chart-title">總債務趨勢 (財年底)</h3>
-                    <div class="chart-container h-72 md:h-80">
-                        <canvas id="debtTrendChart"></canvas>
-                    </div>
-                    <p class="info-text">公司積極削減債務，從2021財年底的544億美元降至2025年3月底的約429億美元。</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="growth-engines" class="mb-12">
-            <h2 class="section-title">增長引擎</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="stat-card md:col-span-2">
-                    <h3 class="chart-title">DTC 串流媒體訂閱戶數 (2025財年第二季)</h3>
-                    <div class="chart-container h-80 md:h-96">
+        <section id="growth_strategies" class="section-card scroll-mt-20">
+            <h2 class="section-title">成長策略：開創未來</h2>
+            <p class="info-text mb-6">迪士尼的未來增長取決於四大支柱：串流媒體 (DTC) 的盈利擴張、體驗部門的持續創新與投資、ESPN 的數位化轉型，以及強大內容IP的驅動。公司正從追求訂閱戶數量轉向實現可持續的盈利增長。</p>
+            
+            <h3 class="subsection-title">串流媒體 (DTC) 進展</h3>
+            <p class="info-text mb-4">DTC業務在2025財年已實現季度盈利，關鍵在於價格調整、廣告層級擴展和內容整合 (如Hulu融入Disney+)。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h4 class="font-semibold text-center mb-2">DTC 訂閱戶數 (百萬, 2025 Q2)</h4>
+                    <div class="chart-container h-[300px] md:h-[350px]">
                         <canvas id="dtcSubscribersChart"></canvas>
                     </div>
-                    <p class="info-text">截至2025財年第二季，Disney+ 核心訂閱戶達1.26億，Hulu 總訂閱戶5470萬，ESPN+ 訂閱戶2480萬。DTC業務已實現季度盈利。</p>
                 </div>
-                 <div class="stat-card">
-                    <h3 class="chart-title">DTC 營運收入趨勢 (季度)</h3>
-                    <div class="chart-container h-80 md:h-96">
-                        <canvas id="dtcProfitTrendChart"></canvas>
+                <div>
+                    <h4 class="font-semibold text-center mb-2">DTC 營運收入趨勢 (百萬美元, 季度)</h4>
+                    <div class="chart-container h-[300px] md:h-[350px]">
+                        <canvas id="dtcOperatingIncomeChart"></canvas>
                     </div>
-                    <p class="info-text">DTC業務的營運收入已從虧損轉為盈利，2025財年第二季實現3.36億美元營運收入。</p>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                <div class="stat-card text-center">
-                    <div class="stat-value">+6%</div>
-                    <div class="stat-label">體驗部門2025財年第二季營收年增長</div>
-                    <p class="info-text">體驗部門（樂園、遊輪等）持續是高利潤的增長引擎，公司正大力投資擴展產能，如新增遊輪和樂園景點。</p>
-                </div>
-                <div class="stat-card">
-                     <h3 class="text-xl font-semibold text-[#073B4C] mb-2">內容與遊戲策略</h3>
-                    <p class="info-text">迪士尼重新聚焦於高品質內容，利用其強大IP（漫威、星際大戰、皮克斯等）推動院線、串流和體驗部門。近期投資15億美元於Epic Games，計劃在《要塞英雄》內打造迪士尼宇宙，開拓遊戲領域新機遇。</p>
-                </div>
-            </div>
+
+            <h3 class="subsection-title">體驗部門擴張</h3>
+            <p class="info-text mb-4">體驗部門是高利潤引擎，迪士尼正大力投資擴展產能，包括新增遊輪、擴建樂園景點，目標是顯著提升產能和投資回報率。</p>
+            <ul class="list-disc list-inside space-y-1 info-text bg-[#E8EDED] p-4 rounded-lg">
+                <li>遊輪業務：計劃到2026年新增兩艘船，2027-2031年再增四艘，產能預計翻倍。</li>
+                <li>主題樂園：全球多個樂園均有擴建項目，如復仇者聯盟園區，並計劃新建阿布達比樂園。</li>
+                <li>2025財年資本支出約80億美元，主要投入體驗部門。</li>
+            </ul>
+
+            <h3 class="subsection-title mt-6">ESPN 數位化與內容為王</h3>
+            <p class="info-text mb-4">ESPN 正轉型為數位優先平台，將推出旗艦DTC服務。同時，迪士尼持續利用其核心IP（漫威、星際大戰、皮克斯等）創作高品質內容，並透過與Epic Games合作探索遊戲領域新機遇。</p>
+            <p class="info-text"><strong>近期內容亮點：</strong>《海洋奇緣2》、《腦筋急轉彎2》、《死侍與金鋼狼》等備受期待。</p>
         </section>
 
-        <section id="competition" class="mb-12">
-            <h2 class="section-title">市場競爭格局</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card">
-                    <h3 class="chart-title">美國串流媒體市場份額 (2025年第一季，尼爾森數據)</h3>
-                     <div class="chart-container h-80 md:h-96">
+        <section id="market_position" class="section-card scroll-mt-20">
+            <h2 class="section-title">市場定位：競爭格局</h2>
+            <p class="info-text mb-6">迪士尼憑藉其持久的品牌、無與倫比的IP庫和整合的業務平台，在競爭激烈的媒體娛樂行業中佔據獨特地位。本節比較迪士尼與主要競爭對手的關鍵指標，並分析其在串流媒體和主題樂園市場的份額。</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div>
+                    <h3 class="subsection-title">美國串流媒體市場份額 (2025 Q1)</h3>
+                    <p class="info-text mb-4">基於尼爾森數據，Disney+ 和 Hulu 合計佔有約5%的電視觀看時長份額。市場競爭依然激烈。</p>
+                    <div class="chart-container h-[300px] md:h-[350px]">
                         <canvas id="streamingMarketShareChart"></canvas>
                     </div>
-                    <p class="info-text">串流媒體市場競爭激烈。迪士尼旗下的Hulu和Disney+合計佔有約5%的市場份額，仍需努力追趕Netflix和YouTube等領先者。</p>
                 </div>
-                <div class="stat-card">
-                    <h3 class="chart-title">同業比較簡表 (TTM數據)</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
-                                <tr>
-                                    <th scope="col" class="px-4 py-2">指標</th>
-                                    <th scope="col" class="px-4 py-2">迪士尼 (DIS)</th>
-                                    <th scope="col" class="px-4 py-2">Netflix (NFLX)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b">
-                                    <td class="px-4 py-2 font-medium">總營收</td>
-                                    <td class="px-4 py-2">$91.36B (FY24)</td>
-                                    <td class="px-4 py-2">$40.17B</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-4 py-2 font-medium">串流訂閱戶</td>
-                                    <td class="px-4 py-2">~1.8億 (D+/Hulu)</td>
-                                    <td class="px-4 py-2">~2.7-2.8億</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-4 py-2 font-medium">市值 (約)</td>
-                                    <td class="px-4 py-2">$201B</td>
-                                    <td class="px-4 py-2">$508B</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-4 py-2 font-medium">市銷率 (P/S)</td>
-                                    <td class="px-4 py-2">~2.26x</td>
-                                    <td class="px-4 py-2">~12.7x</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="info-text mt-2">相較於純串流媒體公司Netflix，迪士尼的估值更受其多元化業務（特別是龐大的實體體驗部門）影響。Comcast和WBD則面臨各自的整合與轉型挑戰。</p>
+                <div>
+                    <h3 class="subsection-title">主題樂園市場</h3>
+                    <p class="info-text mb-4">迪士尼是全球主題樂園市場的領導者，2024年美國市場規模估計為234億美元。主要競爭對手包括環球影城和六旗樂園。</p>
+                    <img src="https://placehold.co/600x350/E0BBAA/4A4A4A?text=主題樂園市場領導者示意圖" alt="主題樂園市場示意圖" class="rounded-lg shadow-md w-full max-w-md mx-auto">
                 </div>
             </div>
+
+            <h3 class="subsection-title mt-8">同業比較快照 (TTM數據)</h3>
+            <p class="info-text mb-4">下表比較了迪士尼與 Netflix、Comcast 和 Warner Bros. Discovery 的關鍵財務與營運指標。</p>
+            <div class="overflow-x-auto">
+                <table class="w-full min-w-[700px] text-sm text-left">
+                    <thead>
+                        <tr class="table-header">
+                            <th class="table-cell">指標</th>
+                            <th class="table-cell">迪士尼 (DIS)</th>
+                            <th class="table-cell">Netflix (NFLX)</th>
+                            <th class="table-cell">Comcast (CMCSA)</th>
+                            <th class="table-cell">Warner Bros. Discovery (WBD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="table-cell">總營收 (TTM)</td><td class="table-cell">$91.36B (FY24)</td><td class="table-cell">$40.17B</td><td class="table-cell">$121.9B</td><td class="table-cell">$38.32B</td></tr>
+                        <tr><td class="table-cell">串流訂閱戶</td><td class="table-cell">D+: 126M, Hulu: 54.7M</td><td class="table-cell">~270-280M</td><td class="table-cell">Peacock: 34M (FY23)</td><td class="table-cell">Max: 122.3M</td></tr>
+                        <tr><td class="table-cell">市值 (約)</td><td class="table-cell">$201B</td><td class="table-cell">$508-537B</td><td class="table-cell">$129-136B</td><td class="table-cell">$22-23B</td></tr>
+                        <tr><td class="table-cell">P/S (TTM)</td><td class="table-cell">~2.26x</td><td class="table-cell">~12.7x</td><td class="table-cell">~1.1x</td><td class="table-cell">~0.54x</td></tr>
+                        <tr><td class="table-cell">P/E (TTM)</td><td class="table-cell">~41.3x</td><td class="table-cell">~56.4x</td><td class="table-cell">~8.7x</td><td class="table-cell">負值</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="info-text mt-4">迪士尼的整合模式（IP創作、多平台發行、體驗式貨幣化）提供了相對於競爭對手更多元化的收入來源和更強的品牌協同效應。然而，其DTC盈利之路因產品組合多樣性而較Netflix更為複雜。</p>
         </section>
 
-        <section id="swot" class="mb-12">
-            <h2 class="section-title">核心優勢與潛在風險</h2>
+        <section id="risk_assessment" class="section-card scroll-mt-20">
+            <h2 class="section-title">風險評估：識別與緩解</h2>
+            <p class="info-text mb-6">迪士尼的業務運營面臨多方面風險，涵蓋宏觀經濟、行業競爭、技術變革和自身策略執行。有效的風險管理對其長期成功至關重要。</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="stat-card">
-                    <h3 class="text-xl font-semibold text-[#06D6A0] mb-3">核心優勢 💪</h3>
-                    <ul class="space-y-2 list-disc list-inside text-[#073B4C]">
-                        <li><strong>強大品牌力：</strong>全球公認且深受喜愛的品牌，跨世代忠誠度。</li>
-                        <li><strong>無與倫比的IP庫：</strong>漫威、星際大戰、皮克斯等，驅動所有業務。</li>
-                        <li><strong>整合生態系統：</strong>從內容創作到多平台變現的獨特能力（飛輪效應）。</li>
-                        <li><strong>體驗部門高利潤：</strong>樂園與遊輪業務帶來強勁現金流與利潤。</li>
-                        <li><strong>DTC轉型初見成效：</strong>串流媒體業務開始實現盈利。</li>
+                <div>
+                    <h3 class="subsection-title text-base">主要業務與行業風險</h3>
+                    <ul class="list-none space-y-2 info-text">
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">⚠️</span>經濟狀況影響消費需求 (樂園、廣告)。</li>
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">⚠️</span>串流媒體競爭激烈，內容成本高昂。</li>
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">⚠️</span>傳統電視業務持續下滑。</li>
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">⚠️</span>技術變革 (如AI) 帶來機遇與挑戰。</li>
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">⚠️</span>內容創作需持續符合大眾品味。</li>
                     </ul>
                 </div>
-                <div class="stat-card">
-                    <h3 class="text-xl font-semibold text-[#FF6B6B] mb-3">潛在風險 ⚠️</h3>
-                    <ul class="space-y-2 list-disc list-inside text-[#073B4C]">
-                        <li><strong>串流媒體競爭激烈：</strong>高昂內容成本與價格戰壓力。</li>
-                        <li><strong>傳統電視持續下滑：</strong>影響傳統廣告與聯盟費用收入。</li>
-                        <li><strong>宏觀經濟敏感性：</strong>經濟衰退可能衝擊樂園遊客量與廣告支出。</li>
-                        <li><strong>內容創作與IP管理：</strong>持續產出賣座內容並有效管理IP的挑戰。</li>
-                        <li><strong>執行風險：</strong>重大策略轉型（DTC、ESPN數位化）的複雜性。</li>
-                        <li><strong>人工智慧影響：</strong>IP侵權、內容創作方式改變等不確定性。</li>
+                <div>
+                    <h3 class="subsection-title text-base">智慧財產權與其他風險</h3>
+                    <ul class="list-none space-y-2 info-text">
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">🛡️</span>IP保護面臨盜版、AI侵權等威脅。</li>
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">🛡️</span>網路安全與數據洩露風險。</li>
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">🛡️</span>監管環境變化（國內外）。</li>
+                        <li class="flex items-start"><span class="text-xl mr-2 text-[#E0BBAA]">🛡️</span>品牌聲譽管理。</li>
                     </ul>
                 </div>
             </div>
+            <h3 class="subsection-title mt-4">緩解策略</h3>
+            <p class="info-text">迪士尼透過多元化業務、策略轉型 (如聚焦DTC盈利)、成本控制、投資新技術和內容，以及強化資訊安全等措施來應對這些風險。</p>
+            <p class="info-text mt-2">特別值得注意的是，人工智慧的發展為內容創作帶來機遇，但也對IP保護構成挑戰。此外，公司在公共議題上的立場也可能影響消費者偏好和品牌形象。</p>
         </section>
 
-        <section id="outlook" class="mb-12">
-            <h2 class="section-title">投資前景展望</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="stat-card text-center">
-                    <div class="stat-value">~$123.54</div>
-                    <div class="stat-label">分析師平均目標價 (2025年5月)</div>
+        <section id="investment_thesis" class="section-card scroll-mt-20">
+            <h2 class="section-title">投資觀點：長期價值評估</h2>
+            <p class="info-text mb-6">綜合考量迪士尼的商業模式、財務狀況、增長前景、競爭優勢及風險因素，本節提出對其長期投資價值的評估。目前市場估值反映了對其轉型成功的預期，但也計入了相關風險。</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="subsection-title">投資機遇</h3>
+                    <ul class="list-disc list-inside space-y-1 info-text bg-[#E8EDED] p-4 rounded-lg">
+                        <li>DTC業務實現持續盈利並擴大規模。</li>
+                        <li>體驗部門透過擴張和創新實現高利潤增長。</li>
+                        <li>無與倫比的IP在各平台（含遊戲）的有效貨幣化。</li>
+                        <li>ESPN成功轉型為數位體育領導者。</li>
+                        <li>成本優化和規模效應帶來的利潤率提升潛力。</li>
+                        <li>強勁自由現金流支持去槓桿、投資與股東回報。</li>
+                    </ul>
                 </div>
-                <div class="stat-card text-center">
-                    <div class="stat-value">~20x</div>
-                    <div class="stat-label">預期市盈率 (2025財年預估)</div>
-                </div>
-                <div class="stat-card text-center">
-                    <div class="stat-value">中度買入</div>
-                    <div class="stat-label">分析師普遍評級</div>
+                <div>
+                    <h3 class="subsection-title">主要擔憂</h3>
+                    <ul class="list-disc list-inside space-y-1 info-text bg-[#FFF5F5] p-4 rounded-lg">
+                        <li>串流媒體競爭持續，或需高額內容投入。</li>
+                        <li>傳統電視加速下滑的影響。</li>
+                        <li>重大策略轉型（DTC、ESPN）的執行風險。</li>
+                        <li>宏觀經濟對體驗部門的敏感性。</li>
+                        <li>持續產出優質創意內容的挑戰。</li>
+                        <li>AI對內容、IP及競爭的長期影響。</li>
+                    </ul>
                 </div>
             </div>
-            <div class="stat-card mt-6">
-                <h3 class="text-xl font-semibold text-[#073B4C] mb-2">長期投資論點總結</h3>
-                <p class="info-text">迪士尼正處於關鍵轉型期。其核心資產依然強大，近期DTC盈利和體驗部門的強勁表現顯示策略調整初見成效。對於具備長期眼光並能承受波動的投資者，目前估值水平呈現謹慎吸引力。然而，串流媒體競爭、傳統電視下滑和宏觀經濟風險仍需密切關注。</p>
-                <p class="info-text mt-2"><strong>關鍵成功因素：</strong>持續DTC盈利增長、體驗部門的韌性與擴張、IP的有效貨幣化、管理層的成功執行。</p>
-            </div>
+
+            <h3 class="subsection-title">結論性建議</h3>
+            <p class="info-text">華特迪士尼公司正處於關鍵轉型期。其核心資產依然強大，近期DTC盈利和體驗部門的強勁表現顯示策略調整初見成效。對於具備長期眼光並能承受波動的投資者，目前估值水平呈現謹慎吸引力。</p>
+            <p class="info-text mt-2"><strong>投資論點支撐因素：</strong>DTC盈利拐點已現、體驗部門的韌性與增長、IP的持久力、管理層的執行力。</p>
+            <p class="info-text mt-2"><strong>主要風險考量：</strong>DTC競爭與內容成本、ESPN轉型複雜性、宏觀經濟影響。</p>
+            <p class="info-text mt-4">最終，對迪士尼的投資是對其管理層能否成功完成公司轉型，並使其在新媒體時代走上可持續增長道路的判斷。密切關注DTC盈利進展、體驗部門的宏觀敏感性以及ESPN的數位化進程至關重要。</p>
         </section>
 
-    </main>
+    </div>
 
-    <footer class="text-center p-6 mt-8 bg-[#073B4C] text-gray-300 rounded-t-xl">
-        <p class="text-sm">&copy; 2025 迪士尼公司市場趨勢分析。僅供參考，不構成投資建議。</p>
-        <p class="text-xs mt-1">資料來源：基於提供的「華特迪士尼公司 (DIS) 投資分析」報告 (2025年5月23日)。</p>
+    <footer class="text-center p-6 mt-8 bg-[#4A4A4A] text-[#FAF8F5] rounded-t-lg">
+        <p class="text-sm">&copy; 2025Q1 迪士尼（DIS）互動式分析報告。僅供參考，不構成投資建議。</p>
+        <p class="text-xs mt-1">資料來源：基於2025年5月23日發布的「華特迪士尼公司 (DIS) 投資分析」報告。</p>
     </footer>
 
     <script>
-        const FONT_COLOR = '#073B4C'; // Midnight Blue
-        const GRID_COLOR = 'rgba(7, 59, 76, 0.1)'; // Lighter Midnight Blue for grids
+        const CHART_FONT_COLOR = '#4A4A4A';
+        const CHART_GRID_COLOR = 'rgba(74, 74, 74, 0.1)';
+        const CHART_TOOLTIP_BG_COLOR = '#FFFFFF';
+        const CHART_TOOLTIP_TITLE_COLOR = '#4A4A4A';
+        const CHART_TOOLTIP_BODY_COLOR = '#4A4A4A';
 
-        // Utility function for label wrapping
-        function wrapLabels(labels, maxWidth) {
+        // Chart.js Defaults
+        Chart.defaults.font.family = "'Inter', 'Noto Sans TC', sans-serif";
+        Chart.defaults.color = CHART_FONT_COLOR;
+        Chart.defaults.borderColor = CHART_GRID_COLOR;
+
+        function wrapChartLabels(labels, maxWidth = 16) {
             return labels.map(label => {
                 if (typeof label === 'string' && label.length > maxWidth) {
                     const words = label.split(' ');
-                    const lines = [];
                     let currentLine = '';
-                    words.forEach(word => {
-                        if ((currentLine + word).length <= maxWidth) {
+                    const lines = [];
+                    for (let i = 0; i < words.length; i++) {
+                        const word = words[i];
+                        if ((currentLine + (currentLine ? ' ' : '') + word).length <= maxWidth) {
                             currentLine += (currentLine ? ' ' : '') + word;
                         } else {
                             if (currentLine) lines.push(currentLine);
                             currentLine = word;
                         }
-                    });
+                    }
                     if (currentLine) lines.push(currentLine);
-                    return lines.length > 0 ? lines : [label]; // Return original if somehow split fails
+                    return lines.length > 0 ? lines : [label];
                 }
                 return label;
             });
         }
 
-        const CHART_JS_TOOLTIP_CONFIG = {
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { color: CHART_FONT_COLOR }
+                },
                 tooltip: {
+                    backgroundColor: CHART_TOOLTIP_BG_COLOR,
+                    titleColor: CHART_TOOLTIP_TITLE_COLOR,
+                    bodyColor: CHART_TOOLTIP_BODY_COLOR,
+                    borderColor: CHART_GRID_COLOR,
+                    borderWidth: 1,
                     callbacks: {
                         title: function(tooltipItems) {
                             const item = tooltipItems[0];
                             let label = item.chart.data.labels[item.dataIndex];
-                            if (Array.isArray(label)) {
-                              return label.join(' ');
-                            } else {
-                              return label;
-                            }
-                        }
-                    },
-                    bodyFont: {
-                        family: 'Inter, Noto Sans TC, sans-serif'
-                    },
-                    titleFont: {
-                        family: 'Inter, Noto Sans TC, sans-serif'
-                    }
-                },
-                legend: {
-                    labels: {
-                        color: FONT_COLOR,
-                        font: {
-                           family: 'Inter, Noto Sans TC, sans-serif'
+                            return Array.isArray(label) ? label.join(' ') : label;
                         }
                     }
                 }
             },
             scales: {
                 x: {
-                    ticks: { 
-                        color: FONT_COLOR,
-                        font: {
-                           family: 'Inter, Noto Sans TC, sans-serif'
-                        }
-                    },
-                    grid: { color: GRID_COLOR }
+                    ticks: { color: CHART_FONT_COLOR, maxRotation: 45, minRotation: 0 },
+                    grid: { display: false }
                 },
                 y: {
-                    ticks: { 
-                        color: FONT_COLOR,
-                        font: {
-                           family: 'Inter, Noto Sans TC, sans-serif'
-                        }
-                    },
-                    grid: { color: GRID_COLOR }
+                    ticks: { color: CHART_FONT_COLOR, callback: function(value) { return value >= 1000000000 ? (value / 1000000000) + 'B' : (value >= 1000000 ? (value / 1000000) + 'M' : value); } },
+                    grid: { color: CHART_GRID_COLOR }
                 }
-            },
-            maintainAspectRatio: false,
-            responsive: true
+            }
         };
         
-        // Chart 1: Segment Revenue FY24
+        const commonPieDonutOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right', // Better for pie/donut
+                    labels: { color: CHART_FONT_COLOR }
+                },
+                tooltip: {
+                     backgroundColor: CHART_TOOLTIP_BG_COLOR,
+                    titleColor: CHART_TOOLTIP_TITLE_COLOR,
+                    bodyColor: CHART_TOOLTIP_BODY_COLOR,
+                    borderColor: CHART_GRID_COLOR,
+                    borderWidth: 1,
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed !== null) {
+                                label += context.parsed.toLocaleString() + '%';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        // Segment Revenue Chart
         const segmentRevenueCtx = document.getElementById('segmentRevenueChart').getContext('2d');
         new Chart(segmentRevenueCtx, {
             type: 'doughnut',
             data: {
-                labels: wrapLabels(['娛樂部門', '體育部門', '體驗部門'], 10),
+                labels: wrapChartLabels(['娛樂部門', '體育部門', '體驗部門'],10),
                 datasets: [{
-                    label: '2024財年營收佔比',
-                    data: [41.186, 17.619, 34.151], // Billions USD
-                    backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0'],
-                    borderColor: '#FFFFFF',
-                    borderWidth: 2
+                    label: '2024財年營收佔比 (十億美元)',
+                    data: [41.186, 17.619, 34.151], // Actual values for tooltip
+                    backgroundColor: ['#778DA9', '#A7C957', '#E0BBAA'],
+                    borderColor: '#FAF8F5',
+                    borderWidth: 3
                 }]
             },
-            options: { ...CHART_JS_TOOLTIP_CONFIG }
+            options: { ...commonPieDonutOptions, plugins: {...commonPieDonutOptions.plugins, tooltip: {...commonPieDonutOptions.plugins.tooltip, callbacks: {
+                label: function(context) {
+                    let label = context.label || '';
+                    if (label) { label += ': '; }
+                    if (context.raw !== null) {
+                        label += '$' + context.raw.toFixed(2) + 'B';
+                    }
+                    return label;
+                }
+            }}}}
         });
 
-        // Chart 2: Total Revenue Trend
-        const totalRevenueCtx = document.getElementById('totalRevenueTrendChart').getContext('2d');
-        new Chart(totalRevenueCtx, {
+        // Annual Total Revenue Chart
+        const annualTotalRevenueCtx = document.getElementById('annualTotalRevenueChart').getContext('2d');
+        new Chart(annualTotalRevenueCtx, {
             type: 'line',
             data: {
-                labels: ['2021財年', '2022財年', '2023財年', '2024財年'],
+                labels: ['2021', '2022', '2023', '2024'],
                 datasets: [{
                     label: '總營收 (十億美元)',
-                    data: [67.42, 82.72, 88.90, 91.36],
-                    borderColor: '#118AB2',
-                    backgroundColor: 'rgba(17, 138, 178, 0.1)',
+                    data: [67.418, 82.722, 88.898, 91.361],
+                    borderColor: '#778DA9',
+                    backgroundColor: 'rgba(119, 141, 169, 0.2)',
                     fill: true,
                     tension: 0.1
                 }]
             },
-            options: { ...CHART_JS_TOOLTIP_CONFIG }
+            options: { ...commonChartOptions, scales: {...commonChartOptions.scales, y: {...commonChartOptions.scales.y, ticks: { callback: function(value) { return '$' + value + 'B'; } } } } }
         });
 
-        // Chart 3: Net Profit Trend
-        const netProfitCtx = document.getElementById('netProfitTrendChart').getContext('2d');
-        new Chart(netProfitCtx, {
+        // Annual Net Profit Chart
+        const annualNetProfitCtx = document.getElementById('annualNetProfitChart').getContext('2d');
+        new Chart(annualNetProfitCtx, {
             type: 'bar',
             data: {
-                labels: ['2021財年', '2022財年', '2023財年', '2024財年'],
+                labels: ['2021', '2022', '2023', '2024'],
                 datasets: [{
                     label: '淨利潤 (十億美元)',
-                    data: [2.00, 3.15, 2.35, 4.97],
-                    backgroundColor: '#06D6A0',
+                    data: [1.995, 3.145, 2.354, 4.972],
+                    backgroundColor: '#A7C957',
                 }]
             },
-            options: { ...CHART_JS_TOOLTIP_CONFIG }
+            options: { ...commonChartOptions, scales: {...commonChartOptions.scales, y: {...commonChartOptions.scales.y, ticks: { callback: function(value) { return '$' + value + 'B'; } } } } }
         });
 
-        // Chart 4: Cash Flow Trend
-        const cashFlowCtx = document.getElementById('cashFlowTrendChart').getContext('2d');
-        new Chart(cashFlowCtx, {
+        // Annual Cash Flow Chart
+        const annualCashFlowCtx = document.getElementById('annualCashFlowChart').getContext('2d');
+        new Chart(annualCashFlowCtx, {
             type: 'line',
             data: {
-                labels: ['2021財年', '2022財年', '2023財年', '2024財年'],
+                labels: ['2021', '2022', '2023', '2024'],
                 datasets: [{
                     label: '營運現金流量 (十億美元)',
-                    data: [5.57, 6.00, 9.87, 13.97],
-                    borderColor: '#FFD166',
-                    backgroundColor: 'rgba(255, 209, 102, 0.1)',
+                    data: [5.566, 6.002, 9.866, 13.971],
+                    borderColor: '#E0BBAA',
+                    backgroundColor: 'rgba(224, 187, 170, 0.2)',
                     fill: true,
                     tension: 0.1
                 }]
             },
-            options: { ...CHART_JS_TOOLTIP_CONFIG }
+            options: { ...commonChartOptions, scales: {...commonChartOptions.scales, y: {...commonChartOptions.scales.y, ticks: { callback: function(value) { return '$' + value + 'B'; } } } } }
         });
         
-        // Chart 5: Debt Trend
-        const debtTrendCtx = document.getElementById('debtTrendChart').getContext('2d');
-        new Chart(debtTrendCtx, {
+        // Total Debt Chart
+        const totalDebtCtx = document.getElementById('totalDebtChart').getContext('2d');
+        new Chart(totalDebtCtx, {
             type: 'line',
             data: {
-                labels: ['2021年底', '2022年底', '2023年底', '2024年底', '2025三月'],
+                labels: ['FY21E', 'FY22E', 'FY23E', 'FY24E', 'Mar 25'],
                 datasets: [{
                     label: '總借款 (十億美元)',
-                    data: [54.41, 48.37, 46.43, 45.82, 42.89],
-                    borderColor: '#FF6B6B',
-                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                    data: [54.406, 48.369, 46.431, 45.815, 42.889],
+                    borderColor: '#778DA9', // Re-using primary accent
+                    backgroundColor: 'rgba(119, 141, 169, 0.2)',
                     fill: true,
                     tension: 0.1
                 }]
             },
-            options: { ...CHART_JS_TOOLTIP_CONFIG }
+            options: { ...commonChartOptions, scales: {...commonChartOptions.scales, y: {...commonChartOptions.scales.y, ticks: { callback: function(value) { return '$' + value + 'B'; } } } } }
         });
 
-        // Chart 6: DTC Subscribers (Q2 FY25)
+        // Quarterly Revenue YoY Chart
+        const quarterlyRevenueYoYCtx = document.getElementById('quarterlyRevenueYoYChart').getContext('2d');
+        new Chart(quarterlyRevenueYoYCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1 2025', 'Q2 2025'],
+                datasets: [{
+                    label: '總營收 YoY 增長 (%)',
+                    data: [5, 7], // +5%, +7%
+                    backgroundColor: ['#A7C957', '#778DA9'],
+                }]
+            },
+            options: { ...commonChartOptions, scales: {...commonChartOptions.scales, y: {...commonChartOptions.scales.y, ticks: { callback: function(value) { return value + '%'; } } } } }
+        });
+
+        // Quarterly Segment OI YoY Chart
+        const quarterlySegmentOIYoYCtx = document.getElementById('quarterlySegmentOIYoYChart').getContext('2d');
+        new Chart(quarterlySegmentOIYoYCtx, {
+            type: 'bar',
+            data: {
+                labels: wrapChartLabels(['娛樂部門', '體育部門', '體驗部門'], 10),
+                datasets: [{
+                    label: 'Q2 2025 部門營運收入 YoY 增長 (%)',
+                    data: [61, -12, 9], // Entertainment +61%, Sports -12%, Experiences +9%
+                    backgroundColor: ['#778DA9', '#E0BBAA', '#A7C957'],
+                }]
+            },
+             options: { ...commonChartOptions, indexAxis: 'y', scales: {...commonChartOptions.scales, x: {...commonChartOptions.scales.x, ticks: { callback: function(value) { return value + '%'; } } } } }
+        });
+        
+        // DTC Subscribers Chart
         const dtcSubscribersCtx = document.getElementById('dtcSubscribersChart').getContext('2d');
         new Chart(dtcSubscribersCtx, {
             type: 'bar',
             data: {
-                labels: wrapLabels(['Disney+ 核心', 'Hulu (總)', 'ESPN+'], 10),
+                labels: wrapChartLabels(['Disney+ 核心', 'Hulu (總)', 'ESPN+'],12),
                 datasets: [{
-                    label: '訂閱戶數 (百萬)',
+                    label: '訂閱戶數 (百萬, 2025 Q2)',
                     data: [126.0, 54.7, 24.8],
-                    backgroundColor: ['#118AB2', '#06D6A0', '#FFD166'],
+                    backgroundColor: ['#778DA9', '#A7C957', '#E0BBAA'],
                 }]
             },
-            options: { ...CHART_JS_TOOLTIP_CONFIG, indexAxis: 'y' } // Horizontal bar chart might be better for readability
-        });
-        
-        // Chart 7: DTC Profit Trend (Quarterly)
-        const dtcProfitCtx = document.getElementById('dtcProfitTrendChart').getContext('2d');
-        new Chart(dtcProfitCtx, {
-            type: 'line',
-            data: {
-                labels: wrapLabels(['2024財年第二季', '2024財年第四季', '2025財年第一季', '2025財年第二季'],12),
-                datasets: [{
-                    label: 'DTC 營運收入 (百萬美元)',
-                    data: [47, -420, 293, 336], // Q4'23 was a loss, Q2'24 was actually Q4'FY23
-                    borderColor: '#06D6A0',
-                    backgroundColor: 'rgba(6, 214, 160, 0.1)',
-                    tension: 0.1,
-                    fill: true
-                }]
-            },
-            options: { ...CHART_JS_TOOLTIP_CONFIG }
+            options: { ...commonChartOptions, scales: {...commonChartOptions.scales, y: {...commonChartOptions.scales.y, ticks: { callback: function(value) { return value + 'M'; } } } } }
         });
 
-        // Chart 8: Streaming Market Share (US Q1 2025 - Nielsen)
+        // DTC Operating Income Chart
+        const dtcOperatingIncomeCtx = document.getElementById('dtcOperatingIncomeChart').getContext('2d');
+        new Chart(dtcOperatingIncomeCtx, {
+            type: 'line',
+            data: {
+                labels: ['Q2 FY24', 'Q4 FY24', 'Q1 FY25', 'Q2 FY25'],
+                datasets: [{
+                    label: 'DTC 營運收入 (百萬美元)',
+                    data: [47, -420, 293, 336],
+                    borderColor: '#A7C957',
+                    backgroundColor: 'rgba(167, 201, 87, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: { ...commonChartOptions, scales: {...commonChartOptions.scales, y: {...commonChartOptions.scales.y, ticks: { callback: function(value) { return '$' + (value/1000000) + 'M'; } } } } }
+        });
+        
+        // Streaming Market Share Chart
         const streamingMarketShareCtx = document.getElementById('streamingMarketShareChart').getContext('2d');
         new Chart(streamingMarketShareCtx, {
             type: 'pie',
             data: {
-                labels: wrapLabels(['YouTube', 'Netflix', 'Prime Video', 'Hulu', 'Disney+', '其他'],10),
+                labels: wrapChartLabels(['YouTube', 'Netflix', 'Prime Video', 'Hulu', 'Disney+', '其他'],12),
                 datasets: [{
-                    label: '美國串流媒體市場份額',
-                    data: [9.9, 8.4, 3.1, 3.0, 2.0, (100 - 9.9 - 8.4 - 3.1 - 3.0 - 2.0)], // Calculate 'Other'
-                    backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0', '#118AB2', '#758BFD', '#BDBDBD'], // Added more colors
-                    borderColor: '#FFFFFF',
+                    label: '美國串流媒體市場份額 (電視觀看時長, 2025 Q1 Nielsen)',
+                    data: [9.9, 8.4, 3.1, 3.0, 2.0, (100 - 9.9 - 8.4 - 3.1 - 3.0 - 2.0)],
+                    backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0', '#118AB2', '#778DA9', '#D3D3D3'], // Using a more vibrant palette for this specific chart for differentiation
+                    borderColor: '#FAF8F5',
                     borderWidth: 2
                 }]
             },
-            options: { ...CHART_JS_TOOLTIP_CONFIG }
+            options: { ...commonPieDonutOptions }
         });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for nav links & close mobile menu on click
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a.nav-link');
+
+        window.onscroll = () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 80) { // 80px offset for sticky nav height
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        };
+
 
     </script>
 </body>
