@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-TW" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-_8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025人形機器人產業研究報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 600;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        .table-sticky-header th {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: #f3f4f6; /* gray-100 */
+        }
+        .content-section {
+            padding-top: 4rem; /* 確保內容不被 sticky header 遮擋 */
+            margin-top: -4rem; /* 抵銷 padding-top 以便錨點正確定位 */
+        }
+        .section-title {
+            @apply text-2xl font-bold mb-6 pb-2 border-b-2 border-sky-500;
+        }
+        .card {
+            @apply bg-white p-6 rounded-lg shadow-lg mb-6;
+        }
+        .info-card-1 { @apply bg-sky-100; }
+        .info-card-2 { @apply bg-emerald-100; }
+        .info-card-3 { @apply bg-amber-100; }
+
+        /* 手機選單動畫 */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        #mobile-menu.hidden {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="text-xl font-semibold text-gray-700">
+                    <a href="#" class="text-sky-600 hover:text-sky-500">人形機器人產業</a>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="#overview" class="nav-link inactive-nav-link hover:text-sky-500 px-3 py-2 rounded-md text-sm font-medium">投資者概覽</a>
+                    <a href="#market-landscape" class="nav-link inactive-nav-link hover:text-sky-500 px-3 py-2 rounded-md text-sm font-medium">市場格局</a>
+                    <a href="#public-companies" class="nav-link inactive-nav-link hover:text-sky-500 px-3 py-2 rounded-md text-sm font-medium">重點上市公司</a>
+                    <a href="#startups" class="nav-link inactive-nav-link hover:text-sky-500 px-3 py-2 rounded-md text-sm font-medium">新創前沿</a>
+                    <a href="#interactive-table-section" class="nav-link inactive-nav-link hover:text-sky-500 px-3 py-2 rounded-md text-sm font-medium">互動表格</a>
+                    <a href="#chart-section" class="nav-link inactive-nav-link hover:text-sky-500 px-3 py-2 rounded-md text-sm font-medium">市場圖表</a>
+                    <a href="#investment-strategy" class="nav-link inactive-nav-link hover:text-sky-500 px-3 py-2 rounded-md text-sm font-medium">投資策略</a>
+                    <a href="#future-outlook" class="nav-link inactive-nav-link hover:text-sky-500 px-3 py-2 rounded-md text-sm font-medium">未來展望</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-xl p-5 z-50">
+                <button id="close-mobile-menu-button" class="absolute top-4 right-4 text-gray-500 hover:text-gray-600">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <a href="#overview" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 mobile-nav-link">投資者概覽</a>
+                <a href="#market-landscape" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 mobile-nav-link">市場格局</a>
+                <a href="#public-companies" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 mobile-nav-link">重點上市公司</a>
+                <a href="#startups" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 mobile-nav-link">新創前沿</a>
+                <a href="#interactive-table-section" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 mobile-nav-link">互動表格</a>
+                <a href="#chart-section" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 mobile-nav-link">市場圖表</a>
+                <a href="#investment-strategy" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 mobile-nav-link">投資策略</a>
+                <a href="#future-outlook" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 mobile-nav-link">未來展望</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8"><div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <section id="overview" class="content-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">I. 人形機器人的黎明：投資者概覽</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">A. 定義人形機器人：不只是人形的機器</h3>
+                <p class="text-gray-700 mb-2">人形機器人是模仿人類形態和行為的機器裝置，設計為通用型、雙足平台，旨在與人類協同工作並在人類中心環境中高效運作，僅需最少環境改造。其核心是學習和執行多種任務的能力。</p>
+                <p class="text-gray-700">「人形」特徵是核心功能性設計，使其能融入現有基礎設施，降低應用門檻，預示著在成熟後有望在多元領域實現廣泛普及。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">B. 動力室：驅動人形機器人革命的核心技術</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong>人工智能 (AI) 與機器學習 (ML)：</strong> 核心大腦，賦予感知、規劃、自主執行及學習新技能的能力。大型語言模型 (LLM) 和視覺語言模型 (VLM) 增強推理與互動。</li>
+                    <li><strong>感測器與感知系統：</strong> 包含視覺系統 (RGB相機、LiDAR等)、觸覺感測器、聽覺系統和控制感測器 (力/力矩感測器、IMU)。</li>
+                    <li><strong>致動器：</strong> 負責運動，電動致動器為主，關鍵組件包括伺服馬達、減速器、行星滾柱螺桿。</li>
+                    <li><strong>動力系統：</strong> 主要依賴可充電鋰離子電池，續航能力是挑戰。</li>
+                    <li><strong>運動控制與動態平衡：</strong> 核心概念包括零力矩點 (ZMP)、壓力中心 (CoP) 和捕獲點 (Capture Point)。</li>
+                    <li><strong>操作與靈巧性：</strong> 末端執行器 (機械手) 的多自由度設計是基礎。</li>
+                    <li><strong>人機互動 (HRI)：</strong> 涉及自然語言處理、情感識別等，實現自然協作。</li>
+                    <li><strong>機載運算與軟體：</strong> 如 Nvidia Jetson Thor 和 ROS，保障即時數據處理和自主操作。</li>
+                </ul>
+                <p class="mt-4 text-gray-700">軟硬體高度整合，AI 進步直接提升機器人功能。然而，AI 效能受硬體制約。「從模擬到現實」的鴻溝是研發挑戰，高傳真度數位孿生技術重要。</p>
+            </div>
+        </section>
+
+        <section id="market-landscape" class="content-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">II. 市場格局：機遇規模與競爭態勢</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">A. 爆發性增長在即：當前市場規模、複合年增長率及未來預測</h3>
+                <p class="text-gray-700 mb-2">人形機器人市場雖處於初期，但預計將迎來爆發性增長。各機構預測差異大，反映產業高潛力與不確定性。</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white table-auto">
+                        <thead class="bg-gray-100 table-sticky-header">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">研究機構</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">基準年數值 (美元)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">預測年數值 (美元)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">預測期間</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">預計複合年增長率 (CAGR)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Research Nester</td><td class="px-6 py-4 whitespace-nowrap">2024年: 32.2億</td><td class="px-6 py-4 whitespace-nowrap">2037年: 3719.5億</td><td class="px-6 py-4 whitespace-nowrap">2025-2037</td><td class="px-6 py-4 whitespace-nowrap">44.1%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Grand View Research</td><td class="px-6 py-4 whitespace-nowrap">2024年: 15.5億</td><td class="px-6 py-4 whitespace-nowrap">2030年: 40.4億</td><td class="px-6 py-4 whitespace-nowrap">2025-2030</td><td class="px-6 py-4 whitespace-nowrap">17.5%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Robotics Tomorrow</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">2035年: 796億</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">45.6%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">GlobeNewswire / Future Markets Inc.</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">2035年: 380億</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">N/A</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Nasdaq / HTF Market Intelligence</td><td class="px-6 py-4 whitespace-nowrap">2023年: 24億</td><td class="px-6 py-4 whitespace-nowrap">2033年: 近1140億</td><td class="px-6 py-4 whitespace-nowrap">2023-2033</td><td class="px-6 py-4 whitespace-nowrap">&gt;40%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Bain & Company</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">2035年: 380億-2000億+</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">N/A</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Morgan Stanley</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">2050年: 超過5萬億</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">N/A</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Research and Markets</td><td class="px-6 py-4 whitespace-nowrap">2024年: 36.8億</td><td class="px-6 py-4 whitespace-nowrap">2025年: 56億</td><td class="px-6 py-4 whitespace-nowrap">2024-2025</td><td class="px-6 py-4 whitespace-nowrap">52.1%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Technavio</td><td class="px-6 py-4 whitespace-nowrap">N/A</td><td class="px-6 py-4 whitespace-nowrap">2025-2029年間增長591.8億</td><td class="px-6 py-4 whitespace-nowrap">2025-2029</td><td class="px-6 py-4 whitespace-nowrap">70.4%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap">Market.us</td><td class="px-6 py-4 whitespace-nowrap">2024年: 約20億 (總體) / 11億 (硬體)</td><td class="px-6 py-4 whitespace-nowrap">2033年: 291.2億 (總體) / 2034年: 77億 (硬體)</td><td class="px-6 py-4 whitespace-nowrap">2024-2033/2034</td><td class="px-6 py-4 whitespace-nowrap">34.62% (總體) / 21.6% (硬體)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-2 text-xs text-gray-500">表格註：N/A 表示該報告未提供相應數據。</p>
+                <p class="mt-4 text-gray-700">區域市場：北美領先，亞太地區 (中日韓) 快速崛起。產品形態：雙足人形機器人預計增長更快。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">B. 關鍵催化劑：為何是人形機器人，為何是現在？</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>AI 和 ML 的飛速進步。</li>
+                    <li>全球性勞動力短缺和人口老齡化。</li>
+                    <li>各行業對自動化和生產力提升的追求。</li>
+                    <li>核心硬體組件成本下降和性能提升。</li>
+                    <li>資本市場積極投入和研發力度加大。</li>
+                    <li>在人類環境中的多功能性，部署門檻低。</li>
+                </ul>
+                 <p class="mt-4 text-gray-700">產業發展與智慧型手機普及歷程相似，可能迎來「iPhone時刻」。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">C. 應對逆風：技術、經濟、倫理與接納度的障礙</h3>
+                <p class="text-gray-700 mb-2"><strong>技術挑戰：</strong>靈巧性、能源效率、穩健性、AI通用性與安全性、感測器限制。</p>
+                <p class="text-gray-700 mb-2"><strong>經濟挑戰：</strong>高昂前期成本與ROI、規模化製造與供應鏈瓶頸。</p>
+                <p class="text-gray-700 mb-2"><strong>倫理與社會挑戰：</strong>就業替代、安全性、數據隱私、AI偏見、公眾接受度、監管障礙。</p>
+                <p class="mt-4 text-gray-700">跨越「商業可行性鴻溝」不僅需技術突破，還需證明可靠性並降本。倫理和社會接受度是「軟性」但關鍵的瓶頸。</p>
+            </div>
+        </section>
+
+        <section id="public-companies" class="content-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">III. 重點上市公司聚焦：投資深度剖析</h2>
+            <p class="text-gray-700 mb-4">大型科技公司和汽車製造商憑藉技術和資本實力積極佈局，同時專業機器人上市公司也嶄露頭角。</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">1. 特斯拉 (Tesla, TSLA)</h4>
+                    <p class="text-sm text-gray-600"><strong>項目：</strong>Optimus (擎天柱)，已至Gen 2。</p>
+                    <p class="text-sm text-gray-600"><strong>重點：</strong>利用FSD的AI專長，自主研發致動器、感測器、AI晶片。目標年產數百萬台，價格2-2.5萬美元。</p>
+                    <p class="text-sm text-gray-600"><strong>定位：</strong>真實世界AI技術、垂直整合、頂尖工程人才。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">2. 英偉達 (Nvidia, NVDA)</h4>
+                    <p class="text-sm text-gray-600"><strong>平台：</strong>Isaac 平台 (GR00T, Isaac Sim, Jetson)。</p>
+                    <p class="text-sm text-gray-600"><strong>重點：</strong>通用機器人基礎模型、合成數據生成、模擬到現實遷移、端到端AI工廠方案。</p>
+                    <p class="text-sm text-gray-600"><strong>定位：</strong>人形機器人開發者生態系統賦能者，AI晶片和平台市場領導者。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">3. 現代汽車集團 (Boston Dynamics)</h4>
+                    <p class="text-sm text-gray-600"><strong>項目：</strong>Atlas (全電動新版)。</p>
+                    <p class="text-sm text-gray-600"><strong>重點：</strong>強化學習運動控制，感知與控制結合。計劃部署於現代工廠。</p>
+                    <p class="text-sm text-gray-600"><strong>定位：</strong>Boston Dynamics動態機器人運動控制領先，現代助其規模化。</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">4. 三星電子 (Samsung Electronics)</h4>
+                    <p class="text-sm text-gray-600"><strong>項目：</strong>"Samsung Bot" (研發中)，Ballie (AI伴侶)。</p>
+                    <p class="text-sm text-gray-600"><strong>重點：</strong>掌握軟硬體技術，融合AI。戰略投資Rainbow Robotics。</p>
+                    <p class="text-sm text-gray-600"><strong>定位：</strong>憑藉AI、核心組件和消費電子優勢，目標行業領導者。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">5. LG 電子 (LG Electronics)</h4>
+                    <p class="text-sm text-gray-600"><strong>項目：</strong>Q9 AI 代理驅動的家用人形機器人 (研發中)。</p>
+                    <p class="text-sm text-gray-600"><strong>重點：</strong>研究基礎技術，利用Q9認知和關節技術。LG Innotek與Boston Dynamics合作。</p>
+                    <p class="text-sm text-gray-600"><strong>定位：</strong>依賴AI代理技術和家電市場地位，AI機器人專利全球領先。</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">6. 小米 (Xiaomi)</h4>
+                    <p class="text-sm text-gray-600"><strong>項目：</strong>CyberOne (鐵大)。</p>
+                    <p class="text-sm text-gray-600"><strong>重點：</strong>小米機器人實驗室自主研發AI和機械能力。戰略「人 × 車 × 家」全生態。</p>
+                    <p class="text-sm text-gray-600"><strong>定位：</strong>憑藉消費電子和智能設備強勢地位。</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                 <h3 class="text-xl font-semibold mb-3">專業機器人上市公司</h3>
+                 <p class="text-gray-700 mb-2">提供更直接的投資主題，但風險相對較高。</p>
+                 <ul class="list-disc list-inside text-gray-700 space-y-1">
+                    <li><strong>優必選科技 (UBTech Robotics):</strong> Walker系列，目標工業、教育、商業服務、健康護理。</li>
+                    <li><strong>Rainbow Robotics:</strong> RB-Y1, HUBO系列，目標工業自動化、科研。三星為最大股東。</li>
+                    <li><strong>川田機器人公司 (Kawada Robotics):</strong> NEXTAGE系列，目標工業製造 (人機協作)。</li>
+                 </ul>
+            </div>
+        </section>
+
+        <section id="startups" class="content-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">IV. 新創前沿：高增長潛力與風險投資洞察</h2>
+            <p class="text-gray-700 mb-4">一批極具潛力的新創企業在特定技術方向深度鑽研，獲得風險資本青睞。</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">1. Figure AI</h4>
+                    <p class="text-sm text-gray-600"><strong>機器人：</strong>Figure 01, 02, 03 (量產型)。</p>
+                    <p class="text-sm text-gray-600"><strong>技術：</strong>「AI優先」，自主研發AI模型。強調靈巧性與真實世界任務執行。</p>
+                    <p class="text-sm text-gray-600"><strong>融資：</strong>B輪6.75億美元，估值26億美元。投資方包括貝佐斯、微軟、Nvidia等。</p>
+                    <p class="text-sm text-gray-600"><strong>進程：</strong>已向客戶交付，建有BotQ生產基地。與BMW合作。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">2. Agility Robotics</h4>
+                    <p class="text-sm text-gray-600"><strong>機器人：</strong>Digit (已商業部署)。Agility Arc (雲端平台)。</p>
+                    <p class="text-sm text-gray-600"><strong>技術：</strong>AI在導航、操作、AMR集成應用。</p>
+                    <p class="text-sm text-gray-600"><strong>融資：</strong>B輪1.5億美元，亞馬遜工業創新基金參投。</p>
+                    <p class="text-sm text-gray-600"><strong>進程：</strong>首款倉庫商業部署人形機器人 (GXO, 亞馬遜測試)。RoboFab工廠目標年產萬台。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">3. Apptronik</h4>
+                    <p class="text-sm text-gray-600"><strong>機器人：</strong>Apollo (通用型)。</p>
+                    <p class="text-sm text-gray-600"><strong>技術：</strong>先進力控制架構，模組化設計。</p>
+                    <p class="text-sm text-gray-600"><strong>融資：</strong>A輪超4億美元。投資方包括B Capital, Google, Mercedes-Benz, ARK Invest等。</p>
+                    <p class="text-sm text-gray-600"><strong>進程：</strong>與Mercedes-Benz, GXO試點合作。與Jabil合作製造。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h4 class="text-lg font-semibold mb-2">4. Sanctuary AI</h4>
+                    <p class="text-sm text-gray-600"><strong>機器人：</strong>Phoenix (第六代)。</p>
+                    <p class="text-sm text-gray-600"><strong>技術：</strong>Carbon AI控制系統，行業領先觸覺機械手。</p>
+                    <p class="text-sm text-gray-600"><strong>融資：</strong>總融資超1億加元。投資方包括Bell, Verizon Ventures, Magna等。</p>
+                    <p class="text-sm text-gray-600"><strong>進程：</strong>已完成首次商業部署，專注通用物理工作。</p>
+                </div>
+            </div>
+             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">風險投資視角</h3>
+                <p class="text-gray-700 mb-2"><strong>趨勢：</strong>巨額融資湧現且集中度提升，AI賦能成核心，醫療健康受關注。</p>
+                <p class="text-gray-700 mb-2"><strong>挑戰：</strong>資本密集與長開發週期，市場接納與規模化難題，專業投資者群體有限。</p>
+                <p class="text-gray-700"><strong>機遇：</strong>解決勞動力短缺，開闢全新應用場景，賦能技術的投資機會。</p>
+            </div>
+        </section>
+
+        <section id="interactive-table-section" class="content-section">
+            <h2 class="section-title">互動資料表格：人形機器人範例</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <input type="text" id="table-filter" class="w-full p-2 border border-gray-300 rounded-md mb-4" placeholder="篩選機器人型號、公司或特點...">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-100 table-sticky-header">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">機器人型號</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">開發公司</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">主要特點</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">目標應用</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-table-body" class="divide-y divide-gray-200">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="chart-section" class="content-section">
+            <h2 class="section-title">動態圖表：人形機器人市場規模預測 (部分機構)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <canvas id="marketChart" width="400" height="200"></canvas>
+            </div>
+        </section>
+        
+        <section id="info-cards-section" class="content-section">
+            <h2 class="section-title">重點資訊卡片</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-2 text-sky-700">AI 核心驅動</h3>
+                    <p class="text-gray-700">人工智能 (AI) 與機器學習 (ML) 是人形機器人的大腦，賦予其感知、規劃、自主執行及學習新技能的能力。Nvidia的GR00T等平台致力於加速通用基礎模型的開發。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-2 text-emerald-700">市場高速增長</h3>
+                    <p class="text-gray-700">全球人形機器人市場預計將迎來爆發性增長，部分機構預測CAGR超過40%-50%，未來市場規模可達數千億甚至數萬億美元。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-2 text-amber-700">多元應用前景</h3>
+                    <p class="text-gray-700">從工業製造、物流倉儲，到醫療護理、家庭服務，人形機器人的應用場景廣闊，有望深刻改變生產和生活方式。</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="investment-strategy" class="content-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">V. 投資人形機器人產業：策略、風險與展望</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">A. 投資主題與潛在回報</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>AI 賦能與具身智能。</li>
+                    <li>勞動力自動化與效率提升。</li>
+                    <li>新型製造與服務模式。</li>
+                    <li>核心組件與供應鏈。</li>
+                </ul>
+                <p class="mt-2 text-gray-700">早期成功選中領先企業或關鍵技術平台，有望獲可觀長期回報，但高回報伴隨高風險。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">B. 主要風險因素</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong>技術成熟度風險：</strong> 核心技術瓶頸、模擬到現實差距。</li>
+                    <li><strong>市場接受度風險：</strong> 成本與ROI、公眾觀感與倫理擔憂。</li>
+                    <li><strong>監管政策風險：</strong> 法規滯後與不確定性。</li>
+                    <li><strong>供應鏈韌性風險：</strong> 核心組件依賴。</li>
+                    <li><strong>商業模式可行性風險：</strong> 從技術到產品再到商品的轉化。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="future-outlook" class="content-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">VI. 未來展望：人形機器人如何重塑我們的世界</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">A. 2030年及以後的場景：日常生活、工作與社會的變革</h3>
+                <p class="text-gray-700 mb-2">人形機器人將逐步滲透社會各角落：</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong>日常生活與家庭助理：</strong> 處理家務、提醒事務、提供情感支持。</li>
+                    <li><strong>工作場所的協同夥伴：</strong> 在製造、物流業執行重複性、高強度或危險任務。</li>
+                    <li><strong>醫療健康與養老照護：</strong> 協助日常護理、藥物配送、生命體徵監測。</li>
+                    <li><strong>教育與研究：</strong> 互動式助教，執行危險環境探索。</li>
+                    <li><strong>公共服務與商業應用：</strong> 擔任嚮導、接待員、客服。</li>
+                    <li><strong>特殊環境作業：</strong> 太空探索、深海作業、災難救援。</li>
+                </ul>
+                <p class="mt-2 text-gray-700">人機互動 (HRI) 的進化是關鍵，未來機器人將更自然融入人類社會。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold mb-3">B. 長期顛覆性技術與社會經濟影響</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>勞動力市場重塑：崗位替代與新就業機會並存。</li>
+                    <li>生產力極大提升。</li>
+                    <li>新興產業與商業模式湧現。</li>
+                    <li>對發展中國家的挑戰。</li>
+                    <li>倫理、法律與社會規範的重構。</li>
+                </ul>
+                <p class="mt-2 text-gray-700">社會需積極適應，通過教育改革、技能提升、完善保障、制定法規，發揮積極作用，減緩負面衝擊。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025人形機器人產業研究報告-巴菲特AI價值投資。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中之人形機器人相關公開資料 (2025年5月25日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 導航列 active 狀態更新
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.content-section');
+
+        const observerOptions = {
+            root: null, // 觀察整個視窗
+            rootMargin: '-50% 0px -50% 0px', // 調整觸發區域，使其在區塊中間時觸發
+            threshold: 0 // 只要區塊進入視窗就觸發 (配合 rootMargin)
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // 手機版選單
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('block'); // Or some other display class if needed
+        });
+
+        closeMobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('block');
+        });
+        
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('block');
+            });
+        });
+
+
+        // 互動資料表格
+        const productData = [
+            { name: "Optimus Gen 2", company: "Tesla", features: "AI驅動, 自主研發致動器, FSD技術應用", application: "特斯拉工廠任務, 未來更廣泛應用" },
+            { name: "Digit", company: "Agility Robotics", features: "雙足, 商業部署, Agility Arc雲平台", application: "倉庫物流 (GXO, Amazon測試)" },
+            { name: "Atlas (Electric)", company: "Boston Dynamics (Hyundai)", features: "全電動, 強化學習運動控制", application: "現代汽車工廠製造任務" },
+            { name: "Figure 01/02/03", company: "Figure AI", features: "AI優先, 自主研發模型, 靈巧性", application: "汽車製造 (BMW合作), 通用任務" },
+            { name: "Apollo", company: "Apptronik", features: "通用型, 先進力控制, 模組化", application: "物流, 製造 (Mercedes-Benz合作)" },
+            { name: "Phoenix", company: "Sanctuary AI", features: "Carbon AI控制, 觸覺機械手", application: "通用物理工作, 多行業任務" },
+            { name: "Walker S", company: "UBTech Robotics", features: "工業用人形機器人", application: "汽車製造 (吉利極氪), 物流" },
+            { name: "RB-Y1", company: "Rainbow Robotics", features: "半人形雙臂移動平台, SDK", application: "工業自動化, 科研 (三星合作)" },
+            { name: "CyberOne (鐵大)", company: "Xiaomi", features: "感知人類情緒, 視覺能力", application: "家庭助理, 老年護理, 工業" }
+        ];
+
+        const tableBody = document.getElementById('product-table-body');
+        const filterInput = document.getElementById('table-filter');
+
+        function populateTable(data) {
+            tableBody.innerHTML = ''; // 清空現有行
+            data.forEach(item => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = item.name;
+                row.insertCell().textContent = item.company;
+                row.insertCell().textContent = item.features;
+                row.insertCell().textContent = item.application;
+            });
+        }
+
+        filterInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = productData.filter(item => 
+                item.name.toLowerCase().includes(searchTerm) ||
+                item.company.toLowerCase().includes(searchTerm) ||
+                item.features.toLowerCase().includes(searchTerm) ||
+                item.application.toLowerCase().includes(searchTerm)
+            );
+            populateTable(filteredData);
+        });
+
+        // 初始載入表格數據
+        populateTable(productData);
+
+        // 動態圖表 (Chart.js)
+        const ctx = document.getElementById('marketChart').getContext('2d');
+        const marketChart = new Chart(ctx, {
+            type: 'bar', // 長條圖
+            data: {
+                labels: ['Research Nester (2037)', 'Grand View (2030)', 'Robotics Tom. (2035)', 'HTF Market (2033)', 'Morgan Stanley (2050)'],
+                datasets: [{
+                    label: '預測市場規模 (億美元)',
+                    data: [3719.5, 40.4, 796, 1140, 50000], // 數據來自報告表格，摩根史丹利為5萬億，此處簡化為50000億
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)', // sky
+                        'rgba(75, 192, 192, 0.6)', // teal
+                        'rgba(255, 206, 86, 0.6)', // yellow
+                        'rgba(153, 102, 255, 0.6)', // purple
+                        'rgba(255, 99, 132, 0.6)'  // red
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '市場規模 (億美元)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '人形機器人市場規模預測 (部分機構)'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
