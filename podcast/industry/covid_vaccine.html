@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新冠疫情再起 疫苗公司財務分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 600;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        .table-sticky-header th {
+            position: sticky;
+            top: 0;
+            background-color: #f3f4f6; /* gray-100 */
+            z-index: 10;
+        }
+        /* Ensure table container allows for horizontal scroll if content overflows */
+        .table-container {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-700">
+
+    <nav id="navbar" class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-sky-600">疫苗財務分析</a>
+                </div>
+                <div class="hidden md:block">
+                    <div id="nav-links" class="ml-10 flex items-baseline space-x-4">
+                        <a href="#executive-summary" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">執行摘要</a>
+                        <a href="#covid-landscape" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">疫情格局</a>
+                        <a href="#financial-performance" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">財務表現</a>
+                        <a href="#interactive-table-section" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">比較表格</a>
+                        <a href="#chart-analysis" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">圖表分析</a>
+                        <a href="#market-dynamics" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">市場動態</a>
+                        <a href="#outlook-recommendations" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">前景與建議</a>
+                        <a href="#conclusion" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">結論</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="bg-sky-500 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">開啟主選單</span>
+                        <svg id="menu-icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="menu-icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#executive-summary" class="nav-link inactive-nav-link hover:bg-sky-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">執行摘要</a>
+                <a href="#covid-landscape" class="nav-link inactive-nav-link hover:bg-sky-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">疫情格局</a>
+                <a href="#financial-performance" class="nav-link inactive-nav-link hover:bg-sky-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">財務表現</a>
+                <a href="#interactive-table-section" class="nav-link inactive-nav-link hover:bg-sky-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">比較表格</a>
+                <a href="#chart-analysis" class="nav-link inactive-nav-link hover:bg-sky-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">圖表分析</a>
+                <a href="#market-dynamics" class="nav-link inactive-nav-link hover:bg-sky-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">市場動態</a>
+                <a href="#outlook-recommendations" class="nav-link inactive-nav-link hover:bg-sky-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">前景與建議</a>
+                <a href="#conclusion" class="nav-link inactive-nav-link hover:bg-sky-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium">結論</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="my-8 text-center">
+            <h1 class="text-4xl font-extrabold text-sky-700 tracking-tight sm:text-5xl md:text-6xl">
+                新冠病毒近期再流行對疫苗製造公司的財務影響分析
+            </h1>
+        </header>
+
+        <section id="executive-summary" class="report-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 leading-relaxed">
+                    新冠疫苗市場正經歷向規模較小、季節性地方流行模式的重大轉型，這影響了主要mRNA疫苗製造商的收入。儘管收入低於疫情高峰期，但已趨於穩定。更新的JN.1譜系疫苗是2025年秋季策略的核心。2025年第一季的財務表現反映了這種季節性，預計2025年下半年將出現增長。合作夥伴關係、成本管理和多元化經營對製造商至關重要。所謂的「再流行」具有局部性和變異株驅動的特點，促使公共衛生部門採取針對性應對措施，而非廣泛強制接種，這反過來也影響了需求。
+                </p>
+            </div>
+        </section>
+
+        <section id="covid-landscape" class="report-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">I. 不斷演變的新冠疫情格局：再流行與變異株動態（2025年初至中期）</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-sky-600 mb-3">A. 流行病學更新：評估「再流行」情況</h3>
+                <h4 class="text-lg font-medium text-stone-700 mb-2">全球及主要區域趨勢：</h4>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    截至2025年5月初，世界衛生組織（WHO）數據顯示，全球SARS-CoV-2檢測陽性率為3.4%，各區域有所差異（例如，東地中海區域為16%，歐洲為4%）。儘管截至2025年5月4日的過去28天內，全球報告病例（23,164例）和死亡人數（1,328例）較前28天有所下降，但WHO指出，成員國在報告方面持續存在且日益擴大的差距，使得流行病學趨勢難以明確推斷。
+                </p>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    在截至2025年5月4日的28天內，全球住院和加護病房（ICU）收治人數也呈下降趨勢，儘管美洲、歐洲和西太平洋部分國家的住院人數呈上升趨勢，美洲和西太平洋的ICU收治人數也呈上升趨勢。
+                </p>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    在美國，根據美國疾病管制與預防中心（CDC）基於急診就診數據估算的Rt（隨時間變化的再生數），截至2025年5月20日，估計有4個州的COVID-19感染正在增長或可能增長，18個州正在下降或可能下降，21個州保持穩定。Rt>1表示疫情增長。這表明美國的「再流行」是有限的，而非廣泛性的。
+                </p>
+                 <p class="text-stone-600 leading-relaxed mb-2">
+                    數據顯示，當前情況並非疫情高峰期的大規模爆發，而是更接近地方性流行病病毒在演化過程中引發的區域性波動。因此，使用「再流行」一詞可能過於強調了當前的流行病學現實，後者更多地體現為由變異株驅動的波動。這種對「再流行」的細緻理解直接影響公共衛生應對策略，進而影響疫苗需求，促使疫苗策略從大規模接種轉向針對脆弱人群的季節性接種，從而影響製造商的生產和收入預期。
+                </p>
+
+                <h4 class="text-lg font-medium text-stone-700 mt-4 mb-2">新變異株（JN.1、LP.8.1、XEC）的優勢和特徵：</h4>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    截至2025年5月，WHO報告指出，當前流行的SARS-CoV-2變異株均源自JN.1。全球範圍內，監測中變異株（VUM）LP.8.1的每週佔比持續上升，而JN.1（需關注變異株，VOI）的佔比則緩慢增加（主要由LF.7及其後代譜系驅動）。其他VUM（KP.3、KP.3.1.1、XEC、LB.1）的佔比則在下降。
+                </p>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    歐洲藥品管理局（EMA）指出，在2024年底至2025年初期間，XEC變異株出現並成為優勢株（2025年2月在歐洲佔序列的50%）。然而，自2025年2月以來，LP.8.1的傳播速度開始超過其他變異株，目前在全球範圍內佔據最大比例，並已在美國等地區成為優勢株，現正向歐洲擴散。
+                </p>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    2024-2025年度的COVID-19疫苗（莫德納、輝瑞-BioNTech）已更新以針對JN.1譜系。美國食品藥物管理局（FDA）的疫苗及相關生物製品諮詢委員會（VRBPAC）隨後建議2025年秋季採用單價JN.1譜系疫苗，並優先考慮使用LP.8.1株（如果可行），以更緊密地匹配當前流行的病毒。FDA已批准並授權更新的mRNA疫苗（2024-2025配方）以針對KP.2株（JN.1譜系變異株）。WHO的COVID-19疫苗成分技術諮詢小組（TAG-CO-VAC）亦建議，單價JN.1或KP.2疫苗仍是合適的選擇，LP.8.1可作為替代方案。
+                </p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-sky-600 mb-3">B. 監管與公共衛生應對新變異株的策略</h3>
+                <h4 class="text-lg font-medium text-stone-700 mb-2">更新疫苗配方的建議（WHO、FDA、EMA）：</h4>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    WHO的TAG-CO-VAC在2025年5月建議，單價JN.1或KP.2疫苗仍是合適的選擇，而單價LP.8.1是可接受的替代方案。FDA的VRBPAC於2025年5月22日開會，一致建議美國2025-2026年秋季採用單價JN.1譜系疫苗。FDA隨後建議製造商優先使用LP.8.1株。EMA亦建議更新2025-2026年接種活動的疫苗抗原組成。
+                </p>
+                <h4 class="text-lg font-medium text-stone-700 mt-4 mb-2">2025年秋季國家疫苗接種策略：</h4>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    <strong>美國：</strong>CDC建議所有年滿6個月及以上的人群接種2024-2025年度COVID-19疫苗。FDA轉向更新的JN.1譜系疫苗（優先LP.8.1）將指導該季節的疫苗接種。FDA於2025年5月發布的一項新監管方法表明，未來的COVID疫苗可能會優先考慮高風險人群，並要求對兒童和年輕健康成年人進行額外的大型研究，這可能使1億至2億美國人無法獲得疫苗。
+                </p>
+                <p class="text-stone-600 leading-relaxed mb-2">
+                    <strong>歐盟：</strong>EMA關於更新疫苗的建議將為歐盟成員國提供參考。莫德納於2025年1月宣布獲得一份為期長達四年的歐盟招標合同，覆蓋17個參與國。預計多數歐洲國家將在2024-2025季度使用JN.1單價疫苗，重點關注高風險人群。
+                </p>
+                <p class="text-stone-600 leading-relaxed">
+                    <strong>全球：</strong>WHO建議成員國根據SAGE的建議繼續開展疫苗接種，重點關注高風險人群。
+                </p>
+            </div>
+        </section>
+
+        <section id="financial-performance" class="report-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">II. 主要疫苗製造商的財務表現與策略調整</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">1. 輝瑞 (Pfizer) / BioNTech (Comirnaty)</h3>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1">2025年第一季財務與Comirnaty表現：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm mb-2">
+                        <li>輝瑞總收入137億美元 (年降8%)，調整後稀釋每股收益0.92美元 (年增12%)。</li>
+                        <li>Comirnaty全球收入增長62% (營運)，美國增長94%，國際市場增長45%。Comirnaty貢獻5.65億美元。</li>
+                        <li>BioNTech收入1.828億歐元 (約2.07億美元)，略低於去年同期，淨虧損4.158億歐元。</li>
+                    </ul>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">市場份額與JN.1策略：</h4>
+                     <p class="text-stone-600 text-sm mb-2">輝瑞指出2025年第一季Comirnaty在美國市場份額提高。兩公司準備針對變異株調整疫苗。</p>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">庫存與成本：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm mb-2">
+                        <li>BioNTech銷售成本增加，庫存2.544億歐元。</li>
+                        <li>輝瑞提及潛在「庫存過剩或其他意外費用」。BioNTech指引假設輝瑞庫存減記影響其收入。</li>
+                        <li>輝瑞研發支出22億美元，BioNTech研發支出5.256億歐元。</li>
+                    </ul>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">2025財年展望：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm">
+                        <li>輝瑞重申指引：收入610-640億美元，調整後稀釋每股收益2.80-3.00美元。</li>
+                        <li>BioNTech確認指引：收入17-22億歐元，預計無淨收入正增長。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">2. 莫德納 (Moderna - Spikevax)</h3>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1">2025年第一季財務與Spikevax表現：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm mb-2">
+                        <li>總收入1.08億美元 (去年同期1.67億美元)，Spikevax銷售額8,400萬美元。</li>
+                        <li>淨虧損10億美元，每股虧損2.52美元。</li>
+                    </ul>
+                     <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">市場定位與歐盟招標：</h4>
+                     <p class="text-stone-600 text-sm mb-2">獲歐盟四年期招標合同，供應JN.1疫苗至17國。</p>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">庫存與成本：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm mb-2">
+                        <li>銷售成本9,000萬美元 (含庫存減記4,200萬美元，未使用產能成本2,100萬美元)。</li>
+                        <li>研發費用降至8.56億美元，SG&A費用降至2.12億美元。</li>
+                        <li>宣布成本削減計劃，目標2027年年度營運費用減少約15億美元。</li>
+                    </ul>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">2025財年展望：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm">
+                        <li>重申收入預期15-25億美元，上半年約2億美元。</li>
+                        <li>預計銷售成本約12億美元，研發費用約41億美元，SG&A費用約11億美元。</li>
+                        <li>預計年底現金餘額約60億美元。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">3. Novavax (Nuvaxovid)</h3>
+                     <h4 class="text-lg font-medium text-stone-700 mb-1">2025年第一季財務與Nuvaxovid表現：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm mb-2">
+                        <li>總收入6.67億美元 (去年同期9,400萬美元)。Nuvaxovid銷售額6.08億美元 (主要來自APA終止收入確認6.03億美元)。</li>
+                        <li>淨利潤5.19億美元 (去年同期淨虧損1.48億美元)。</li>
+                    </ul>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">賽諾菲 (Sanofi) 合作夥伴關係與市場准入：</h4>
+                     <p class="text-stone-600 text-sm mb-2">將Nuvaxovid主要商業責任移交賽諾菲。BLA審查中，批准將觸發里程碑付款。</p>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">庫存與成本：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm mb-2">
+                        <li>銷售成本1,400萬美元。</li>
+                        <li>研發費用8,900萬美元，SG&A費用4,800萬美元，均因COVID-19活動減少和成本削減而降低。</li>
+                    </ul>
+                     <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">2025財年展望：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm mb-2">
+                        <li>提高全年收入框架至9.75億-10.25億美元。</li>
+                        <li>重申研發和SG&A合併支出4.75億-5.25億美元。</li>
+                    </ul>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">JN.1疫苗開發：</h4>
+                    <p class="text-stone-600 text-sm">初步數據顯示其JN.1疫苗反應原性較低。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">4. 阿斯特捷利康 (AstraZeneca)</h3>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1">Vaxzevria現狀：</h4>
+                    <p class="text-stone-600 text-sm mb-2">因商業原因，Vaxzevria在歐盟的上市許可已於2024年3月撤銷。</p>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">新冠疫苗新研發：</h4>
+                    <p class="text-stone-600 text-sm mb-2">開發AZD6563 (mRNA疫苗樣顆粒疫苗) 及研究mAb療效替代終點。</p>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">財務表現（疫苗與免疫療法）：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm">
+                        <li>2024財年總收入540.73億美元。2024年Q4 V&I收入6.51億美元 (主要由Beyfortus推動)。</li>
+                        <li>2025財年指引預計總收入高個位數百分比增長。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">5. 嬌生 (Johnson & Johnson - J&J)</h3>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1">COVID-19疫苗現狀：</h4>
+                    <p class="text-stone-600 text-sm mb-2">2025年Q1財報未提及COVID-19疫苗銷售或更新。CDC推薦名單不含J&J疫苗。</p>
+                    <h4 class="text-lg font-medium text-stone-700 mb-1 mt-2">財務表現：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm">
+                        <li>2025年Q1銷售額增長2.4%至219億美元。創新醫藥部門銷售額增長4.2%。</li>
+                        <li>未強調COVID-19疫苗貢獻。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        </br>
+        <section id="interactive-table-section" class="report-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">主要疫苗製造商比較財務快照</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="mb-4">
+                    <input type="text" id="table-filter" class="w-full md:w-1/2 px-4 py-2 border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="篩選公司名稱...">
+                </div>
+                <div class="table-container">
+                    <table class="min-w-full divide-y divide-stone-200 border border-stone-300">
+                        <thead class="bg-stone-50 table-sticky-header">
+                            <tr>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">公司名稱</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">疫苗名稱</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025 Q1 COVID-19 疫苗收入</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025 Q1 公司總收入</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">COVID-19 疫苗收入年比變化</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">公司總收入年比變化</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025 Q1 公司淨利潤/虧損</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025財年 COVID-19 疫苗收入指引</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025財年 公司總收入指引</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025 Q1 主要成本指標</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025 Q1 COVID-19 疫苗相關顯著庫存減記/產能成本</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financial-table-body" class="bg-white divide-y divide-stone-200 text-sm">
+                            </tbody>
+                    </table>
+                </div>
+                 <p class="mt-4 text-sm text-stone-500"><strong>表格價值說明：</strong>該比較財務快照直接回應了用戶查詢中對「財務影響」的核心關切。它將來自多家公司的複雜財務數據濃縮為易於理解的格式，使讀者無需費力查閱冗長的文本即可獲取核心數據。通過將COVID-19疫苗收入與公司總收入並列，有助於將疫苗對各公司整體財務健康的重要性置於適當的背景下。同比變化突出了增長或下降趨勢，有助於理解在不斷演變的地方性流行病市場中的市場轉變和個別公司表現。納入2025財年指引（如有）則提供了對公司近期預期的洞察。強調研發或庫存減記等重要成本項目，直接解決了收入以外的財務影響。</p>
+            </div>
+        </section>
+
+        <section id="chart-analysis" class="report-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">圖表分析：2025年Q1 COVID-19疫苗收入</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <canvas id="vaccineRevenueChart" width="400" height="200"></canvas>
+                 <!--<p class="mt-4 text-sm text-stone-500">此圖表比較了主要疫苗製造商在2025年第一季度的COVID-19疫苗相關收入。請注意，Novavax的收入主要來自預購協議(APA)的終止確認，而非當期銷售。</p>-->
+            </div>
+	    <p class="mt-4 text-sm text-stone-500">此圖表比較了主要疫苗製造商在2025年第一季度的COVID-19疫苗相關收入。請注意，Novavax的收入主要來自預購協議(APA)的終止確認，而非當期銷售。</p>
+        </section>
+        </br>
+        <section id="market-dynamics" class="report-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">III. COVID-19疫苗市場動態：向地方性流行階段過渡</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-sky-600 mb-3">A. 市場規模、細分與增長預測（2025-2026年）</h3>
+                <ul class="list-disc list-inside text-stone-600 space-y-1 leading-relaxed">
+                    <li>全球COVID-19疫苗市場2023年估計為64億劑，預計2025年達42億劑。</li>
+                    <li>mRNA疫苗市場（含COVID-19及其他應用）預計從2025年的104億美元增長到2030年的182.8億美元 (CAGR 11.8%)。</li>
+                    <li>美國疫苗市場2025年規模332.9億美元，預計2034年達597.7億美元 (CAGR 6.72%)。mRNA細分市場主導。</li>
+                    <li>FDA預期COVID-19疫苗成分可能需每年評估，類似流感疫苗。</li>
+                </ul>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">B. 定價、報銷與採購趨勢</h3>
+                    <h4 class="text-lg font-medium text-stone-700 mb-2">定價：</h4>
+                    <p class="text-stone-600 leading-relaxed mb-2">2025年美國Medicare對COVID-19疫苗管理支付標準約每劑45美元，家中接種額外支付約40美元。特定疫苗配方支付限額（如Novavax 161.538美元，輝瑞Comirnaty 155.895美元，莫德納Spikevax 161.652美元）遠高於疫情期間政府合約價。</p>
+                    <h4 class="text-lg font-medium text-stone-700 mt-4 mb-2">採購：</h4>
+                    <p class="text-stone-600 leading-relaxed">政府採購從緊急預購協議轉向常規招標。美國政府角色從直接採購者轉為支付者/報銷者模式。COVAX機制持續發揮作用。</p>
+                </div>
+                <div class="bg-teal-50 rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-teal-700 mb-3">C. 競爭格局與市場份額轉變</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 leading-relaxed">
+                        <li>輝瑞/BioNTech和莫德納憑mRNA技術主導。輝瑞Q1市佔增加，莫德納目標市佔40%。</li>
+                        <li>Novavax憑蛋白質亞單位疫苗和賽諾菲合作，旨在成為主要替代選擇。</li>
+                        <li>阿斯特捷利康和嬌生基本退出主要西方市場。</li>
+                        <li>競爭可能因疫苗效力、安全性、產品呈現和定價加劇。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="outlook-recommendations" class="report-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">IV. 前景與策略建議</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-sky-600 mb-3">A. 地方性COVID-19市場中疫苗製造商的預期財務軌跡</h3>
+                <ul class="list-disc list-inside text-stone-600 space-y-1 leading-relaxed">
+                    <li><strong>收入萎縮與穩定：</strong> 與疫情高峰期相比，預計2025年收入持續同比下降，但在較低水平趨於穩定。</li>
+                    <li><strong>盈利壓力：</strong> 因產量下降、庫存減記、製造調整，毛利率面臨壓力。較高商業價格可能部分抵銷。</li>
+                    <li><strong>成本管理作為關鍵槓桿：</strong> 積極成本削減對維持盈利能力至關重要。</li>
+                    <li><strong>收入結構轉變：</strong> COVID-19疫苗收入佔比下降，但對專注型生物技術公司仍重要。</li>
+                </ul>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-indigo-50 rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-indigo-700 mb-3">B. 主要挑戰與機遇</h3>
+                    <h4 class="text-lg font-medium text-stone-700 mb-2">挑戰：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm leading-relaxed">
+                        <li>變異株逃逸與疫苗匹配。</li>
+                        <li>疫苗猶豫與疲勞。</li>
+                        <li>需求預測困難，導致庫存陳舊風險。</li>
+                        <li>競爭激烈。</li>
+                        <li>向商業市場過渡複雜。</li>
+                    </ul>
+                    <h4 class="text-lg font-medium text-stone-700 mt-4 mb-2">機遇：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm leading-relaxed">
+                        <li>年度加強針市場提供經常性收入。</li>
+                        <li>產品差異化（耐受性、保護範圍、管理方式）。</li>
+                        <li>開發聯合疫苗。</li>
+                        <li>高風險人群確保基線需求。</li>
+                        <li>利用mRNA技術推動長期增長。</li>
+                    </ul>
+                </div>
+                <div class="bg-amber-50 rounded-lg shadow-lg p-6 mb-6">
+                     <h3 class="text-xl font-semibold text-amber-700 mb-3">C. 對利益相關者的策略建議</h3>
+                    <h4 class="text-lg font-medium text-stone-700 mb-2">對疫苗製造商：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm leading-relaxed">
+                        <li>優化製造與供應鏈，實施靈活策略。</li>
+                        <li>投資下一代疫苗，具更廣泛、持久保護。</li>
+                        <li>加強商業能力，制定穩健策略。</li>
+                        <li>多元化產品組合，減少對COVID-19疫苗依賴。</li>
+                        <li>建立策略夥伴關係，分擔風險與成本。</li>
+                    </ul>
+                    <h4 class="text-lg font-medium text-stone-700 mt-4 mb-2">對投資者：</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm leading-relaxed">
+                        <li>審視表面數據以外的財務健康狀況。</li>
+                        <li>評估產品線多元化。</li>
+                        <li>監測監管環境與疫苗接種建議。</li>
+                        <li>分析公司競爭定位與適應能力。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="report-section pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 leading-relaxed mb-3">
+                    COVID-19疫苗市場正從疫情驅動的緊急狀態迅速轉向一個更為傳統的、由季節性需求和變異株演化主導的地方性流行病市場。這一轉變對疫苗製造商的財務狀況產生了深遠影響。雖然近期所謂的「再流行」更多體現為病毒在地方性流行背景下的持續演化和局部爆發，而非全球性大規模反彈，但新變異株的出現，持續推動著疫苗配方的更新和公共衛生策略的調整。
+                </p>
+                <p class="text-stone-600 leading-relaxed mb-3">
+                    主要疫苗製造商，特別是mRNA技術的領導者，其2025年第一季的財務表現顯示，與疫情高峰期相比，COVID-19疫苗的收入和銷量已顯著下降，並呈現出明顯的季節性特徵。商業市場上更高的單位定價部分緩解了銷量下降的衝擊，但盈利能力仍面臨壓力。嚴格的成本控制和營運效率提升已成為維持財務健康的關鍵。
+                </p>
+                 <p class="text-stone-600 leading-relaxed mb-3">
+                    展望未來，COVID-19疫苗市場的規模將遠小於疫情高峰期，但有望形成一個類似流感疫苗的年度常規市場。製造商面臨的挑戰包括快速應對新變異株、克服疫苗疲勞、準確預測需求及競爭。機遇則在於產品差異化、開發聯合疫苗及專注高風險人群。
+                </p>
+                <p class="text-stone-600 leading-relaxed">
+                    成功的關鍵在於策略靈活性、高效成本管理、持續研發創新及穩固的商業市場運營能力。投資者需審慎評估公司基本面、轉型能力及適應力。COVID-19疫苗市場的財務格局已發生根本性轉變，未來將由那些能夠在新常態下實現可持續發展的企業所主導。
+                </p>
+            </div>
+        </section>
+        
+        <footer class="text-center py-8 mt-12 border-t border-stone-300">
+            <p class="text-sm text-stone-500">&copy; 2025 疫苗公司財務分析報告。僅供參考。</p>
+        </footer>
+
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+
+            if (mobileMenuButton) { // Check if element exists
+                mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden');
+                    menuIconOpen.classList.toggle('hidden');
+                    menuIconClose.classList.toggle('hidden');
+                });
+            }
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) { // Check elements
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        mobileMenu.classList.add('hidden');
+                        menuIconOpen.classList.remove('hidden');
+                        menuIconClose.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // --- Active Navigation Link on Scroll ---
+            const sections = document.querySelectorAll('.report-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            if (sections.length > 0 && navLinks.length > 0) { // Check if elements exist
+                const observerOptions = {
+                    root: null, // viewport
+                    rootMargin: '0px',
+                    threshold: 0.4 // 40% of section visible
+                };
+
+                const observerCallback = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            navLinks.forEach(link => {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                                if (link.getAttribute('href') && link.getAttribute('href').substring(1) === entry.target.id) {
+                                    link.classList.add('active-nav-link');
+                                    link.classList.remove('inactive-nav-link');
+                                }
+                            });
+                        }
+                    });
+                };
+
+                const observer = new IntersectionObserver(observerCallback, observerOptions);
+                sections.forEach(section => observer.observe(section));
+            }
+
+            // --- Interactive Table Data and Filtering ---
+            const financialData = [
+                { 
+                    company: "輝瑞 (Pfizer)", vaccine: "Comirnaty", q1Revenue: "5.65億美元", totalRevenue: "137.15億美元", 
+                    revChangeVaccine: "+62% (營運)", revChangeTotal: "-8% (報告) / -6% (營運)", netIncome: "淨利潤29.67億美元", 
+                    guidanceVaccine: "未提供具體Comirnaty指引", guidanceTotal: "610億 - 640億美元", 
+                    costMetric: "研發費用22.03億美元", inventoryCost: "提及潛在「庫存過剩或其它未預期費用」風險"
+                },
+                { 
+                    company: "BioNTech", vaccine: "Comirnaty", q1Revenue: "1.828億歐元", totalRevenue: "1.828億歐元", 
+                    revChangeVaccine: "-2.6%", revChangeTotal: "-2.6%", netIncome: "淨虧損4.158億歐元", 
+                    guidanceVaccine: "總收入指引17億 - 22億歐元", guidanceTotal: "17億 - 22億歐元", 
+                    costMetric: "研發費用5.256億歐元", inventoryCost: "收入指引假設輝瑞的庫存減記將產生負面影響；庫存2.544億歐元"
+                },
+                { 
+                    company: "莫德納 (Moderna)", vaccine: "Spikevax", q1Revenue: "8,400萬美元", totalRevenue: "1.08億美元", 
+                    revChangeVaccine: "從約1.67億美元下降", revChangeTotal: "-35% (總收入)", netIncome: "淨虧損10億美元", 
+                    guidanceVaccine: "總收入指引15億 - 25億美元", guidanceTotal: "15億 - 25億美元", 
+                    costMetric: "銷售成本9,000萬美元；研發費用8.56億美元", inventoryCost: "庫存減記4,200萬美元；未使用產能/停產成本2,100萬美元"
+                },
+                { 
+                    company: "Novavax", vaccine: "Nuvaxovid", q1Revenue: "6.08億美元 (主要來自APA終止)", totalRevenue: "6.67億美元", 
+                    revChangeVaccine: "從8,200萬美元增長", revChangeTotal: "+610% (總收入)", netIncome: "淨利潤5.19億美元", 
+                    guidanceVaccine: "含Nuvaxovid銷售6.1億美元", guidanceTotal: "調整後總收入9.75億 - 10.25億美元", 
+                    costMetric: "銷售成本1,400萬美元；研發費用8,900萬美元", inventoryCost: "主要收入來自APA終止，非當期銷售庫存影響"
+                },
+                { 
+                    company: "阿斯特捷利康 (AstraZeneca)", vaccine: "Vaxzevria (已撤市) / AZD6563 (研發中)", q1Revenue: "Vaxzevria無顯著銷售", totalRevenue: "2024財年總收入540.73億美元", 
+                    revChangeVaccine: "不適用", revChangeTotal: "2024財年總收入+18% (實際匯率)", netIncome: "2024財年報告營業利潤100.03億美元", 
+                    guidanceVaccine: "不適用", guidanceTotal: "2025財年總收入預計高個位數百分比增長", 
+                    costMetric: "2024年Q4 V&I部門研發費用未單獨列出", inventoryCost: "不適用 (Vaxzevria已撤市)"
+                },
+                { 
+                    company: "嬌生 (J&J)", vaccine: "COVID-19 Vaccine (Ad26.COV2.S) (商業重要性降低)", q1Revenue: "未在其2025年Q1財報中提及", totalRevenue: "218.93億美元", 
+                    revChangeVaccine: "不適用", revChangeTotal: "+2.4% (報告) / +4.2% (營運)", netIncome: "淨利潤109.99億美元", 
+                    guidanceVaccine: "未提供", guidanceTotal: "2025財年調整後營運銷售額增長2.0%-3.0% (公司總體)", 
+                    costMetric: "創新醫藥部門營運銷售增長4.2%", inventoryCost: "未提及"
+                }
+            ];
+
+            const tableBody = document.getElementById('financial-table-body');
+            const filterInput = document.getElementById('table-filter');
+
+            function populateTable(data) {
+                if (!tableBody) return; // Check if tableBody exists
+                tableBody.innerHTML = ''; // Clear existing rows
+                data.forEach(item => {
+                    const row = tableBody.insertRow();
+                    row.className = 'hover:bg-stone-50 transition-colors duration-150';
+                    Object.values(item).forEach(text => {
+                        const cell = row.insertCell();
+                        cell.textContent = text;
+                        cell.className = 'px-3 py-3 whitespace-nowrap text-stone-600';
+                    });
+                });
+            }
+
+            if (filterInput) { // Check if filterInput exists
+                filterInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const filteredData = financialData.filter(item => 
+                        item.company.toLowerCase().includes(searchTerm)
+                    );
+                    populateTable(filteredData);
+                });
+            }
+
+            // Initial population of the table
+            populateTable(financialData);
+
+            // --- Chart.js Bar Chart ---
+            const canvasElement = document.getElementById('vaccineRevenueChart');
+            if (canvasElement && typeof Chart !== 'undefined') { // Check if canvas and Chart constructor exist
+                const chartDataConfig = { // Renamed from chartData to avoid conflict with global scope if any
+                    labels: financialData.map(item => item.company).slice(0, 4), // Pfizer, BioNTech, Moderna, Novavax
+                    datasets: [{
+                        label: '2025年Q1 COVID-19 疫苗收入 (美元)',
+                        data: [
+                            565, // Pfizer 5.65億
+                            207, // BioNTech ~2.07億 (1.828億歐元, assuming ~1.13 EUR/USD for simplicity)
+                            84,  // Moderna 8400萬
+                            608  // Novavax 6.08億 (APA)
+                        ],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)', // Pfizer - blue-500
+                            'rgba(34, 197, 94, 0.7)', // BioNTech - green-500
+                            'rgba(168, 85, 247, 0.7)',// Moderna - purple-500
+                            'rgba(239, 68, 68, 0.7)'  // Novavax - red-500
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(168, 85, 247, 1)',
+                            'rgba(239, 68, 68, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
+
+                const chartConfig = {
+                    type: 'bar',
+                    data: chartDataConfig, // Use the new variable name
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '收入 (百萬美元)'
+                                }
+                            },
+                            x: {
+                                 title: {
+                                    display: true,
+                                    text: '公司'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(context.parsed.y * 1000000);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
+                new Chart(canvasElement, chartConfig); // Use new Chart() directly
+            } else {
+                if (!canvasElement) console.error("Canvas element 'vaccineRevenueChart' not found.");
+                if (typeof Chart === 'undefined') console.error("Chart.js library is not loaded.");
+            }
+        });
+    </script>
+</body>
+</html>
