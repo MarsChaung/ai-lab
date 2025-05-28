@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-2025Q2 星巴克營運分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        .inactive-nav-link:hover {
+            color: #1f2937; /* gray-800 */
+        }
+        /* Sticky table header */
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            background-color: #f3f4f6; /* gray-100 */
+            z-index: 10;
+        }
+        /* Ensure table container allows sticky header to work within it if table itself scrolls */
+        .table-container {
+            max-height: 500px; /* Adjust as needed */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-700">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-sky-600">2025 星巴克營運分析</a>
+            
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#summary" class="nav-link inactive-nav-link">執行摘要</a>
+                <a href="#financial-performance" class="nav-link inactive-nav-link">財務表現</a>
+                <a href="#back-to-starbucks" class="nav-link inactive-nav-link">重振策略</a>
+                <a href="#regional-performance" class="nav-link inactive-nav-link">區域表現</a>
+                <a href="#future-outlook" class="nav-link inactive-nav-link">未來展望</a>
+                <a href="#data-visualization" class="nav-link inactive-nav-link">數據洞察</a>
+            </div>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-stone-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="#summary" class="block nav-link inactive-nav-link px-4 py-3 text-sm hover:bg-stone-50 border-t border-stone-200">執行摘要</a>
+            <a href="#financial-performance" class="block nav-link inactive-nav-link px-4 py-3 text-sm hover:bg-stone-50 border-t border-stone-200">財務表現</a>
+            <a href="#back-to-starbucks" class="block nav-link inactive-nav-link px-4 py-3 text-sm hover:bg-stone-50 border-t border-stone-200">重振策略</a>
+            <a href="#regional-performance" class="block nav-link inactive-nav-link px-4 py-3 text-sm hover:bg-stone-50 border-t border-stone-200">區域表現</a>
+            <a href="#future-outlook" class="block nav-link inactive-nav-link px-4 py-3 text-sm hover:bg-stone-50 border-t border-stone-200">未來展望</a>
+            <a href="#data-visualization" class="block nav-link inactive-nav-link px-4 py-3 text-sm hover:bg-stone-50 border-t border-stone-200">數據洞察</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 lg:px-8 py-8">
+
+        <section id="summary" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">星巴克公司2025財年第二季的業績顯示，公司正處於一個關鍵時刻，努力應對重大的營運逆風，並大力投資於全面的轉型策略。合併淨收入微幅增長2%，達到88億美元，但全球同店銷售額下降1%（主要由於可比交易量下降2%），為此蒙上陰影，凸顯了顧客流量的核心問題。</p>
+                <p class="mb-4">獲利能力面臨嚴重壓力，GAAP每股盈餘（EPS）暴跌50%至0.34美元，非GAAP每股盈餘下降40%至0.41美元。營業利潤率也急劇收縮。這些下降反映了流量下降導致的去槓桿化以及在勞動力和重組計劃上的大量投資。</p>
+                <p>公司面臨多重挑戰：顧客流量減弱、消費者支出謹慎的艱難環境、激烈的競爭壓力（尤其在中國）以及品牌認知問題。為此，星巴克推出了「重振星巴克」(Back to Starbucks) 策略，旨在重振業務，重點關注夥伴（員工）再投資、重塑咖啡店、提升顧客體驗以及活化行銷與菜單。</p>
+            </div>
+        </section>
+
+        <section id="financial-performance" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">近期財務表現與營運逆風</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">2025財年第二季財務摘要</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li>合併淨收入：88億美元（年增2%）</li>
+                        <li>全球同店銷售額：下降1%（交易量-2%，客單價+1%）</li>
+                        <li>GAAP 每股盈餘：0.34美元（年減50%）</li>
+                        <li>非GAAP 每股盈餘：0.41美元（年減40%）</li>
+                        <li>GAAP 營業利潤率：6.9%（年減590個基點）</li>
+                        <li>非GAAP 營業利潤率：8.2%（年減460個基點）</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">持續的營運挑戰</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li>交易量下降與顧客流量減弱：北美市場可比交易量下降4%。</li>
+                        <li>具挑戰性的消費者環境：消費者支出更趨謹慎且對價格敏感。</li>
+                        <li>勞動力成本、重組與工會化：勞動力投資增加及重組成本影響利潤率；持續的工會化運動帶來營運與聲譽風險。</li>
+                        <li>競爭壓力：全球咖啡市場競爭激烈，尤其在中國面臨本土品牌的強力競爭。</li>
+                        <li>品牌認知與聲譽：品牌力有所下滑，顧客對品牌體驗的期望與實際感受出現落差。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-12">
+             <h3 class="text-2xl font-semibold text-stone-800 mb-4 text-center">關鍵數據亮點</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-lg font-semibold text-sky-700 mb-2">全球同店銷售額</h4>
+                    <p class="text-3xl font-bold text-sky-600">-1%</p>
+                    <p class="text-sm text-stone-600">主要受交易量下滑影響</p>
+                </div>
+                <div class="bg-emerald-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-lg font-semibold text-emerald-700 mb-2">GAAP 每股盈餘</h4>
+                    <p class="text-3xl font-bold text-emerald-600">-50%</p>
+                    <p class="text-sm text-stone-600">至 $0.34</p>
+                </div>
+                <div class="bg-amber-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-lg font-semibold text-amber-700 mb-2">北美交易量</h4>
+                    <p class="text-3xl font-bold text-amber-600">-4%</p>
+                    <p class="text-sm text-stone-600">核心市場面臨挑戰</p>
+                </div>
+                <div class="bg-rose-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-lg font-semibold text-rose-700 mb-2">中國同店銷售額</h4>
+                    <p class="text-3xl font-bold text-rose-600">持平</p>
+                    <p class="text-sm text-stone-600">交易量+4%, 客單價-4%</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="back-to-starbucks" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">「重振星巴克」策略回應</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">為應對多方面挑戰，星巴克已啟動名為「重振星巴克」的全面轉型策略。該計畫旨在「扭轉業務頹勢，釋放未來機遇」。其核心目標是將品牌重新定位為社區咖啡館，並為夥伴（員工）創造無與倫比的零售工作體驗。</p>
+                <p class="font-semibold text-sky-700 mb-2">策略四大支柱：</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-sky-600 mb-2">1. 重新投資於夥伴</h4>
+                    <p class="text-sm">提升員工參與度、支持、發展與留任。例如更新排班系統、舉辦領導力會議、改善福利與晉升途徑。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-sky-600 mb-2">2. 重新構想咖啡店</h4>
+                    <p class="text-sm">恢復「第三空間」概念，優化店內氛圍與門市組合。例如提供手寫杯註記、陶瓷馬克杯、免費續杯等。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-sky-600 mb-2">3. 提升顧客體驗</h4>
+                    <p class="text-sm">提高營運效率、服務速度，整合工藝與連結，以及技術應用。例如優先投資勞動力而非部分資本密集設備、新的訂單排序演算法。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-sky-600 mb-2">4. 活化行銷與菜單</h4>
+                    <p class="text-sm">強化品牌故事、簡化菜單、推動文化相關的創新。例如新的美國品牌活動、簡化菜單品項、推出無糖抹茶等。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="regional-performance" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">當前業務狀況與區域表現分析</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">北美市場</h3>
+                    <p class="text-sm">美國同店銷售額下降2%（交易量-4%，客單價+3%）。顧客來訪量持續下降是主要問題。「重振星巴克」計畫的首要重點是振興美國業務。加拿大市場則呈現積極勢頭，已恢復同店銷售額正增長。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">國際市場</h3>
+                    <p class="text-sm">整體同店銷售額增長2%（交易量+3%，客單價-1%）。十大國際市場中有八個恢復持平或正增長。英國市場表現強勁，日本市場連續16季實現同店銷售額增長。中東地區業務夥伴的交易量恢復正增長。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">中國市場</h3>
+                    <p class="text-sm">同店銷售額持平（交易量+4%，客單價-4%）。利潤率有所擴大。面臨激烈競爭、價格敏感性增加及消費者偏好轉變等挑戰。星巴克正透過調整產品與定價、專注創新與價值、以及推行中國市場專屬的「重振星巴克」計畫來應對。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="future-outlook" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">未來展望與策略重點</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="mb-4">儘管面臨挑戰，星巴克領導層對公司成功轉型的能力表示信心。他們強調，轉型的全面成功需要時間，目前更關注夥伴參與度、顧客情緒和交易趨勢等領先營運指標。</p>
+                <p class="font-semibold text-sky-700 mb-2">未來策略重點：</p>
+                <ul class="list-disc list-inside space-y-2 text-sm">
+                    <li>成本管理：嚴格控制成本，包括評估全球門市組合、降低開店成本，並計畫於下一財年實施零基預算。</li>
+                    <li>持續創新：致力於飲料、食品及整體顧客體驗的持續創新。</li>
+                    <li>長期可持續增長與投資回報率 (ROIC)：將長期可持續增長和強勁的投資回報率作為首要目標。</li>
+                    <li>應對外部因素：適應不斷變化的消費者偏好、競爭格局、經濟環境，並積極管理關稅和咖啡價格波動等風險。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="data-visualization" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">數據洞察</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold text-sky-700 mb-4">星巴克2025財年第二季關鍵財務指標摘要</h3>
+                <input type="text" id="table-filter" class="w-full md:w-1/2 lg:w-1/3 p-2 border border-stone-300 rounded-md mb-4 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none" placeholder="篩選指標...">
+                <div class="overflow-x-auto table-container">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="sticky-header">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">指標</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025財年Q2結果</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">年同比變化 (報告)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">年同比變化 (固定匯率)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">主要驅動因素</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financial-table-body" class="bg-white divide-y divide-stone-200">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-white py-8 text-center">
+        <p class="text-sm">&copy; 巴菲特AI價值投資-2025Q2 星巴克營運分析。僅供參考，不構成投資建議。</p>
+        <p class="text-sm text-stone-400 mt-1">資料來源：基於網路中之星巴克(Starbucks)相關公開資料 (2025年5月28日)。</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Navigation Active State using Intersection Observer
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.5 // 50% of the section is visible
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const correspondingLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                const allCorrespondingLinks = document.querySelectorAll(`.nav-link[href="#${id}"]`);
+
+
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    });
+                    allCorrespondingLinks.forEach(link => {
+                        link.classList.add('active-nav-link');
+                        link.classList.remove('inactive-nav-link');
+                    });
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Interactive Table Data
+        const productData = [
+            { metric: "合併淨收入", result: "$88億", yoyReported: "+2%", yoyConstantCurrency: "+3%", drivers: "新店增長，部分被同店銷售額下降抵銷" },
+            { metric: "全球同店銷售額", result: "-1%", yoyReported: "N/A", yoyConstantCurrency: "N/A", drivers: "交易量 -2%, 客單價 +1%" },
+            { metric: "北美同店銷售額", result: "-1%", yoyReported: "N/A", yoyConstantCurrency: "N/A", drivers: "交易量 -4%, 客單價 +3%" },
+            { metric: "美國同店銷售額", result: "-2%", yoyReported: "N/A", yoyConstantCurrency: "N/A", drivers: "交易量 -4%, 客單價 +3%" },
+            { metric: "國際同店銷售額", result: "+2%", yoyReported: "N/A", yoyConstantCurrency: "N/A", drivers: "交易量 +3%, 客單價 -1%" },
+            { metric: "中國同店銷售額", result: "0%", yoyReported: "N/A", yoyConstantCurrency: "N/A", drivers: "交易量 +4%, 客單價 -4%" },
+            { metric: "GAAP 每股盈餘", result: "$0.34", yoyReported: "-50%", yoyConstantCurrency: "N/A", drivers: "營業收入降低" },
+            { metric: "非GAAP 每股盈餘", result: "$0.41", yoyReported: "-40%", yoyConstantCurrency: "-38%", drivers: "營業收入降低，不含重組及其他項目" },
+            { metric: "GAAP 營業利潤率", result: "6.9%", yoyReported: "-590 bps", yoyConstantCurrency: "N/A", drivers: "去槓桿化、額外勞動力、重組成本" },
+            { metric: "非GAAP 營業利潤率", result: "8.2%", yoyReported: "-460 bps", yoyConstantCurrency: "-450 bps", drivers: "去槓桿化、額外勞動力，不含重組及其他項目" },
+            { metric: "淨新開店數", result: "213", yoyReported: "N/A", yoyConstantCurrency: "N/A", drivers: "持續全球擴張，美國和中國佔全球組合的61%" }
+        ];
+
+        const tableBody = document.getElementById('financial-table-body');
+        const tableFilter = document.getElementById('table-filter');
+
+        function populateTable(data) {
+            tableBody.innerHTML = ''; // Clear existing rows
+            data.forEach(item => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = item.metric;
+                row.insertCell().textContent = item.result;
+                row.insertCell().textContent = item.yoyReported;
+                row.insertCell().textContent = item.yoyConstantCurrency;
+                row.insertCell().textContent = item.drivers;
+                // Add Tailwind classes for cell padding and text alignment
+                Array.from(row.cells).forEach(cell => {
+                    cell.className = 'px-6 py-4 whitespace-nowrap text-sm text-stone-700';
+                });
+            });
+        }
+
+        tableFilter.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = productData.filter(item => 
+                item.metric.toLowerCase().includes(searchTerm) ||
+                item.result.toLowerCase().includes(searchTerm) ||
+                item.drivers.toLowerCase().includes(searchTerm)
+            );
+            populateTable(filteredData);
+        });
+
+        // Initial table population
+        populateTable(productData);
+
+        
+
+    </script>
+</body>
+</html>
