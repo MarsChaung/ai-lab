@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Lemonade保險財務報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Tailwind's default sans-serif is usually fine, but explicitly setting for clarity */
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 600;
+            border-bottom-width: 2px;
+            border-color: #0ea5e9; /* sky-500 */
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9; /* sky-500 */
+        }
+        /* Custom scrollbar for better aesthetics if desired, optional */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 60vh; /* Responsive height */
+            width: 90vw;  /* Responsive width */
+            max-width: 800px; /* Max width for larger screens */
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-700">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-sky-600">LemonadeQ1財務報告</a>
+                </div>
+                <nav class="hidden md:flex space-x-4">
+                    <a href="#financial-performance" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">財務表現</a>
+                    <a href="#operating-metrics" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">營運指標</a>
+                    <a href="#business-strategy" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">業務策略</a>
+                    <a href="#investment-liquidity" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">投資與流動性</a>
+                    <a href="#risks-uncertainties" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">風險因素</a>
+                    <a href="#other-matters" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">其他事項</a>
+                    <a href="#key-data-summary" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">關鍵數據</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="#financial-performance" class="block inactive-nav-link px-4 py-2 text-sm hover:bg-stone-50">財務表現</a>
+            <a href="#operating-metrics" class="block inactive-nav-link px-4 py-2 text-sm hover:bg-stone-50">營運指標</a>
+            <a href="#business-strategy" class="block inactive-nav-link px-4 py-2 text-sm hover:bg-stone-50">業務策略</a>
+            <a href="#investment-liquidity" class="block inactive-nav-link px-4 py-2 text-sm hover:bg-stone-50">投資與流動性</a>
+            <a href="#risks-uncertainties" class="block inactive-nav-link px-4 py-2 text-sm hover:bg-stone-50">風險因素</a>
+            <a href="#other-matters" class="block inactive-nav-link px-4 py-2 text-sm hover:bg-stone-50">其他事項</a>
+            <a href="#key-data-summary" class="block inactive-nav-link px-4 py-2 text-sm hover:bg-stone-50">關鍵數據</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <section id="financial-performance" class="pt-20 -mt-16"> <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現與增長</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">總覽</h3>
+                    <p class="text-sm">Lemonade 在 2025 年第一季度展現強勁的增長勢頭，有效保費 (IFP) 和總收入均實現顯著同比增長。公司持續推進其盈利目標。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">有效保費 (IFP)</h3>
+                    <p class="text-2xl font-bold text-stone-700">$10.078 億美元</p>
+                    <p class="text-sm text-green-600">較去年同期增長 27%</p>
+                    <p class="text-xs mt-1">(截至 2025 年 3 月 31 日)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">總收入</h3>
+                    <p class="text-2xl font-bold text-stone-700">$1.512 億美元</p>
+                    <p class="text-sm text-green-600">較去年同期增長 27%</p>
+                    <p class="text-xs mt-1">(2025 年第一季度)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">毛承保保費 (GEP)</h3>
+                    <p class="text-2xl font-bold text-stone-700">$2.336 億美元</p>
+                    <p class="text-sm text-green-600">較去年同期增長 24%</p>
+                    <p class="text-xs mt-1">(2025 年第一季度)</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">淨虧損</h3>
+                    <p class="text-2xl font-bold text-stone-700">($0.624 億美元)</p>
+                    <p class="text-sm">去年同期為 ($0.473 億美元)</p>
+                    <p class="text-xs mt-1">(2025 年第一季度)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">調整後 EBITDA</h3>
+                    <p class="text-2xl font-bold text-stone-700">($0.47 億美元)</p>
+                    <p class="text-sm">去年同期為 ($0.339 億美元)</p>
+                     <p class="text-xs mt-1">此數據包含加州野火約 2200 萬美元的負面影響。(2025 年第一季度)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">毛利潤</h3>
+                    <p class="text-2xl font-bold text-stone-700">$0.386 億美元</p>
+                    <p class="text-sm text-green-600">較去年同期增長 11%</p>
+                    <p class="text-xs mt-1">(2025 年第一季度)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">調整後毛利潤</h3>
+                    <p class="text-2xl font-bold text-stone-700">$0.46 億美元</p>
+                    <p class="text-sm text-green-600">較去年同期增長 25%</p>
+                    <p class="text-xs mt-1">(2025 年第一季度)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="operating-metrics" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">總客戶數</h3>
+                    <p class="text-2xl font-bold text-stone-700">2,545,496</p>
+                    <p class="text-sm text-green-600">較去年同期增長 21%</p>
+                     <p class="text-xs mt-1">(截至 2025 年 3 月 31 日)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">每客戶平均保費</h3>
+                    <p class="text-2xl font-bold text-stone-700">$396 美元</p>
+                    <p class="text-sm text-green-600">較去年同期增長 4%</p>
+                     <p class="text-xs mt-1">(截至 2025 年 3 月 31 日)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">年度保費留存率 (ADR)</h3>
+                    <p class="text-2xl font-bold text-stone-700">84%</p>
+                    <p class="text-sm">去年同期為 88%</p>
+                     <p class="text-xs mt-1">(截至 2025 年 3 月 31 日)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">總損失率 (Gross Loss Ratio)</h3>
+                    <p class="text-2xl font-bold text-stone-700">78%</p>
+                    <p class="text-sm">TTM 總損失率為 73%</p>
+                    <p class="text-xs mt-1">Q1 總損失率包含加州野火 16 個百分點的影響。(2025 年第一季度)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">淨損失率 (Net Loss Ratio)</h3>
+                    <p class="text-2xl font-bold text-stone-700">82%</p>
+                    <p class="text-sm">去年同期為 78%</p>
+                     <p class="text-xs mt-1">(2025 年第一季度)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="business-strategy" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">核心策略</h3>
+                    <p class="text-sm">公司致力於業務增長和運營規模擴展，並依循在 2024 年投資者日提出的策略，穩步邁向盈利目標，預計在 2026 年底前實現調整後 EBITDA 轉正。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">Lemonade 汽車保險</h3>
+                    <p class="text-sm">汽車保險業務增長迅速，第一季度 IFP 環比增長首次超過其他產品線。策略重點包括：</p>
+                    <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                        <li>利用專有 AI（LTV 和車輛遠程信息處理）精準定位年輕、安全的駕駛員，提供有競爭力的價格。</li>
+                        <li>針對約 250 萬非汽車保險客戶（其汽車保險年支出超過 30 億美元）的交叉銷售機會。</li>
+                        <li>持續優化產品和地域擴張，例如最近在科羅拉多州推出服務，使覆蓋範圍超過美國汽車市場的 40%。</li>
+                        <li>通過遠程信息處理進行個性化定價，在部分州已實現約 60% 的轉換率提升。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">再保險策略</h3>
+                    <p class="text-sm">公司採用多種再保險形式管理風險敞口，旨在降低波動性。目前的再保險計劃包括與多家再保險公司簽訂的整體賬戶配額分保合約，覆蓋所有產品和地區，轉移約 55% 的保費，並設有損失率上限和可變佣金條款。</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">2025 年展望</h3>
+                    <p class="text-sm">公司重申全年 IFP 增長 28% 的指引，並預計在 2026 年達到 30% 的穩定增長速度。同時上調了 GEP 和收入預期，並維持調整後 EBITDA 指引。儘管受到第一季度加州野火的影響，仍預計 2025 年實現調整後自由現金流轉正。</p>
+                    <div class="mt-2 space-y-1 text-sm">
+                        <p><strong>Q2 2025 預期:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>IFP: $10.61 - $10.64 億美元</li>
+                            <li>GEP: $2.46 - $2.48 億美元</li>
+                            <li>收入: $1.57 - $1.59 億美元</li>
+                            <li>調整後 EBITDA 虧損: ($0.41) - ($0.44) 億美元</li>
+                        </ul>
+                        <p class="mt-2"><strong>全年 2025 預期:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>IFP: $12.03 - $12.08 億美元</li>
+                            <li>GEP: $10.28 - $10.31 億美元</li>
+                            <li>收入: $6.61 - $6.63 億美元</li>
+                            <li>調整後 EBITDA 虧損: ($1.35) - ($1.40) 億美元</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="investment-liquidity" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">現金與投資</h3>
+                    <p class="text-sm">截至 2025 年 3 月 31 日，公司擁有現金及現金等價物 3.092 億美元，投資總額為 6.761 億美元。公司相信現有現金和投資足以滿足未來至少 12 個月的營運資金、流動性和資本支出需求。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">資金來源與運用</h3>
+                    <p class="text-sm">公司的主要資金來源包括保費收入、投資收益、再保險賠款回收以及已實現投資的到期和出售收益。這些資金主要用於支付賠款、運營費用和稅款。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">客戶投資協議</h3>
+                    <p class="text-sm">公司與 General Catalyst (GC) 簽訂了客戶投資協議，GC 將為公司的銷售和營銷增長提供融資。截至 2025 年 3 月 31 日，根據修訂後的協議，公司有 1.019 億美元的未償還借款。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">監管盈餘</h3>
+                    <p class="text-sm">截至 2025 年 3 月 31 日，公司的保險子公司持有約 2.59 億美元的監管盈餘。美國和荷蘭的保險子公司在未經監管機構批准的情況下，可支付的股息金額受到限制。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="risks-uncertainties" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-sm">公司的業務運營和財務狀況面臨多種風險和不確定性。這些因素可能導致實際結果與預期存在重大差異。主要風險包括但不限於：</p>
+                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                    <li>持續虧損的歷史以及未來可能無法實現或維持盈利能力。</li>
+                    <li>市場競爭激烈，尤其是在保險行業。</li>
+                    <li>再保險的可用性和定價，以及交易對手風險。</li>
+                    <li>專有AI算法可能無法按預期運行，導致承保或定價不當。</li>
+                    <li>嚴格的保險行業法規和不斷變化的監管環境。</li>
+                    <li>惡劣天氣事件、自然災害（包括氣候變化的影響）和其他巨災事件的不可預測性。</li>
+                    <li>對以色列地區政治、經濟和軍事不穩定性的曝險，因公司在該地區有部分運營。</li>
+                    <li>通貨膨脹風險，例如美國關稅政策可能導致的汽車或汽車零部件成本上升。</li>
+                    <li>數據安全和隱私保護的挑戰。</li>
+                </ul>
+                <p class="text-sm mt-2">詳細風險因素請參閱公司向美國證券交易委員會提交的年度報告 Form 10-K 及本季度報告 Form 10-Q。</p>
+            </div>
+        </section>
+
+        <section id="other-matters" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">其他重要事項</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-sky-600 mb-2">加州野火影響</h3>
+                <p class="text-sm">2025 年 1 月的加州野火對公司第一季度財務造成了影響，詳細數據如下（百萬美元）：</p>
+                <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+                    <li>總損失與賠付調整費用 (LAE)（扣除追償前）：($44)</li>
+                    <li>追償所得：$8</li>
+                    <li>總損失與 LAE：($36)</li>
+                    <li>分出損失與 LAE：$20</li>
+                    <li>淨損失與 LAE：($16)</li>
+                    <li>分保佣金收入影響：($6)</li>
+                    <li>調整後 EBITDA 影響：($22)</li>
+                    <li>加州 FAIR Plan 攤款：($7)</li>
+                    <li>淨虧損影響：($29)</li>
+                </ul>
+                <p class="text-sm mt-2">公司利用技術（包括航空影像和 AI）簡化了受影響客戶的理賠流程。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-semibold text-sky-600 mb-2">與 Chewy 的認股權協議終止</h3>
+                <p class="text-sm">於 2025 年 4 月 4 日，公司終止了與 Chewy Insurance Services, LLC 的認股權相關協議，並取消了剩餘 3,170,834 股未歸屬的認股權股份。代理協議將繼續有效。此舉導致第一季度與取消未歸屬認股權相關的費用影響為 520 萬美元（計入銷售與市場費用中的股權激勵費用）。</p>
+            </div>
+        </section>
+
+        <section id="key-data-summary" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總 (Q1 2025 vs Q1 2024)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="chart-container">
+                    <canvas id="financialChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 py-8 text-center">
+        <p>&copy; 巴菲特AI價值投資-Lemonade保險公司分析報告。僅供參考，不構成投資建議。</p>
+        <p class="text-xs mt-1">資料來源：基於網路中之Lemonade相關公開資料 (2025年5月29日)。</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Active Navigation Link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a:not(#mobile-menu a), #mobile-menu a'); // Selects both desktop and mobile nav links
+
+        const options = {
+            root: null, // viewport
+            threshold: 0.5, // 50% of the section is visible
+            rootMargin: "-80px 0px 0px 0px" // Adjust for sticky header height if needed
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Chart.js Data
+        const ctx = document.getElementById('financialChart').getContext('2d');
+        const financialChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['有效保費 (IFP)', '毛承保保費 (GEP)', '總收入', '淨虧損', '調整後 EBITDA'],
+                datasets: [
+                    {
+                        label: '2025 Q1 (百萬美元)',
+                        data: [1007.8, 233.6, 151.2, -62.4, -47.0], // Net loss and Adj EBITDA are negative
+                        backgroundColor: 'rgba(14, 165, 233, 0.6)', // sky-500 with opacity
+                        borderColor: 'rgba(14, 165, 233, 1)',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    },
+                    {
+                        label: '2024 Q1 (百萬美元)',
+                        data: [794.2, 187.9, 119.1, -47.3, -33.9], // Net loss and Adj EBITDA are negative
+                        backgroundColor: 'rgba(100, 116, 139, 0.6)', // slate-500 with opacity
+                        borderColor: 'rgba(100, 116, 139, 1)',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false, // Allow negative values for loss/EBITDA
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value + ' M';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(200, 200, 200, 0.2)'
+                        }
+                    },
+                    x: {
+                         grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y + ' 百萬美元';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    </script>
+</body>
+</html>
