@@ -2,13 +2,108 @@
 <html>
 <head>
   <title>歡迎來到巴菲特AI價值投資podcast節目參考資料站台 - Sitemap</title>
+  <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-  <h1>網站導覽</h1>
-  <h2>Podcast Episodes</h2>
-  <ul>
-    <li><a href="podcast/google_io_2025.html">Google I/O 2025</a></li>
-    <li><a href="podcast/google_io_2025_insight.html">Google I/O 2025 Insights</a></li>
-  </ul>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <div class="container mx-auto p-4 min-h-screen">
+    <h1 class="text-3xl font-bold mb-4 text-center text-gray-700">網站導覽</h1>
+    <input type="text" id="searchInput" placeholder="搜尋網頁..." class="w-full p-2 mb-6 border rounded shadow-sm focus:ring-sky-500 focus:border-sky-500">
+    <div id="cardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+  <script>
+    const htmlFiles = ['podcast/google_io_2025.html', 'podcast/google_io_2025_insight.html'];
+
+    async function fetchPageDetails(filePath) {
+        try {
+            const response = await fetch(filePath);
+            if (!response.ok) {
+                console.error(`Failed to fetch ${filePath}: ${response.statusText}`);
+                return null;
+            }
+            const text = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'text/html');
+            const title = doc.querySelector('title');
+            return {
+                path: filePath,
+                title: title ? title.textContent.trim() : 'No Title',
+                // Placeholder for thumbnail - actual image source would need to be determined
+                thumbnail: 'https://via.placeholder.com/150/cccccc/808080?Text=Preview'
+            };
+        } catch (error) {
+            console.error(`Error fetching or parsing ${filePath}:`, error);
+            return null;
+        }
+    }
+
+    async function renderCards() {
+        const cardsContainer = document.getElementById('cardsContainer');
+        if (!cardsContainer) {
+            console.error('cardsContainer not found');
+            return;
+        }
+        // Clear existing content in case of re-render, though not strictly necessary on initial load
+        cardsContainer.innerHTML = '';
+
+        for (const filePath of htmlFiles) {
+            const details = await fetchPageDetails(filePath);
+            if (details) {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-lg p-6 flex flex-col transition-shadow duration-300 hover:shadow-xl'; // Removed mb-4, added hover effect
+
+                const thumbnailImg = document.createElement('img');
+                thumbnailImg.src = details.thumbnail;
+                thumbnailImg.alt = `Preview for ${details.title}`;
+                thumbnailImg.className = 'w-full h-40 object-cover rounded-md mb-4'; // Changed h-32 to h-40
+
+                const titleLink = document.createElement('a');
+                titleLink.href = details.path;
+                titleLink.textContent = details.title;
+                titleLink.className = 'text-xl font-semibold text-sky-600 hover:text-sky-700 mb-2'; // Added mb-2
+
+                const description = document.createElement('p');
+                description.textContent = `Link: ${details.path}`; // Simple description
+                description.className = 'text-sm text-gray-500 mt-2';
+
+
+                card.appendChild(thumbnailImg);
+                card.appendChild(titleLink);
+                card.appendChild(description);
+                cardsContainer.appendChild(card);
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCards);
+
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const cardsContainer = document.getElementById('cardsContainer');
+            const cards = cardsContainer.getElementsByTagName('div'); // Assuming direct div children are cards
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                // Ensure we are targeting the actual cards created by renderCards.
+                // A more robust way would be to add a specific class to cards, e.g., 'link-card'
+                // and then query by that class. For now, direct div children that have an anchor tag with a title should be fine.
+                const titleElement = card.querySelector('a'); // Get the link element which contains the title
+
+                if (titleElement && titleElement.textContent) {
+                    const title = titleElement.textContent.toLowerCase();
+                    if (title.includes(searchTerm)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                }
+            }
+        });
+    } else {
+        console.error('searchInput element not found');
+    }
+  </script>
 </body>
 </html>
