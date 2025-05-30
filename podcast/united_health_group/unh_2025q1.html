@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-2025Q1 聯合健康集團分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 600;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        .table-header-sticky th {
+            position: sticky;
+            top: 0;
+            background-color: #f3f4f6; /* gray-100 */
+            z-index: 10;
+        }
+        .chart-container {
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Adjusted height for better fit in cards */
+            width: 100%; /* Take full width of parent */
+            max-width: 500px; /* Max width to ensure it fits in cards */
+        }
+        /* Specific adjustments for doughnut charts if needed, or taller bar charts */
+        .doughnut-chart-container {
+             height: 280px; /* Slightly smaller for doughnut */
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+            .doughnut-chart-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-100 font-sans">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-sky-600">2025Q1聯合健康集團</a>
+            <div class="hidden md:flex space-x-4">
+                <a href="#overview" class="nav-link inactive-nav-link hover:text-sky-500 transition duration-300">公司概況與危機</a>
+                <a href="#financials" class="nav-link inactive-nav-link hover:text-sky-500 transition duration-300">財務表現</a>
+                <a href="#metrics" class="nav-link inactive-nav-link hover:text-sky-500 transition duration-300">營運指標</a>
+                <a href="#strategy" class="nav-link inactive-nav-link hover:text-sky-500 transition duration-300">業務策略</a>
+                <a href="#investment" class="nav-link inactive-nav-link hover:text-sky-500 transition duration-300">投資與流動性</a>
+                <a href="#risks" class="nav-link inactive-nav-link hover:text-sky-500 transition duration-300">風險因素</a>
+                <a href="#other" class="nav-link inactive-nav-link hover:text-sky-500 transition duration-300">其他事項</a>
+                <a href="#summary" class="nav-link inactive-nav-link hover:text-sky-500 transition duration-300">關鍵數據</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-stone-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <a href="#overview" class="block py-2 px-4 text-sm text-stone-700 hover:bg-sky-100">公司概況與危機</a>
+            <a href="#financials" class="block py-2 px-4 text-sm text-stone-700 hover:bg-sky-100">財務表現</a>
+            <a href="#metrics" class="block py-2 px-4 text-sm text-stone-700 hover:bg-sky-100">營運指標</a>
+            <a href="#strategy" class="block py-2 px-4 text-sm text-stone-700 hover:bg-sky-100">業務策略</a>
+            <a href="#investment" class="block py-2 px-4 text-sm text-stone-700 hover:bg-sky-100">投資與流動性</a>
+            <a href="#risks" class="block py-2 px-4 text-sm text-stone-700 hover:bg-sky-100">風險因素</a>
+            <a href="#other" class="block py-2 px-4 text-sm text-stone-700 hover:bg-sky-100">其他事項</a>
+            <a href="#summary" class="block py-2 px-4 text-sm text-stone-700 hover:bg-sky-100">關鍵數據</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <section id="overview" class="pt-16 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況及近期面臨的危機</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed">
+                    聯合健康集團（UnitedHealth Group, UNH）近期股價經歷顯著下跌，主要受到多重負面因素影響，包括公司下調盈利預期、日益收緊的監管審查、領導層變動，以及其核心的聯邦醫療保險優勢計劃（Medicare Advantage）業務持續面臨壓力。自今年一月以來，股價跌幅一度超過40%，觸及五年低點。
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">盈利預期下調</h3>
+                    <p class="text-stone-600 text-sm">大幅下調2025財年盈利預期，主要由於Medicare Advantage成本上升超預期及Optum Health會員概況變化，打擊投資者信心。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">監管審查加劇</h3>
+                    <p class="text-stone-600 text-sm">美國司法部（DOJ）就欺詐聯邦Medicare計劃展開刑事調查；聯邦醫療保險和醫療補助服務中心（CMS）大幅擴充Medicare Advantage計劃審計人力。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">領導層變動</h3>
+                    <p class="text-stone-600 text-sm">時任首席執行官Andrew Witty辭職，由前任首席執行官Stephen Hemsley接任，引發市場對公司內部問題及戰略連續性的猜測。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">Medicare Advantage 壓力</h3>
+                    <p class="text-stone-600 text-sm">該核心業務面臨持續的資金削減、多年費率不足的複合效應以及老年受益人醫療利用率上升，對利潤率構成嚴重擠壓。</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">市場及行業逆風</h3>
+                    <p class="text-stone-600 text-sm">更廣泛的醫療保健改革潛力也為行業帶來了不確定性，加劇了市場壓力。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="financials" class="pt-16 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節 (2025年第一季度)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    2025年第一季度，聯合健康集團總營收達1096億美元，同比增長10%。然而，醫療成本同比上漲12%至734億美元，醫療賠付率（MCR）從去年同期的84.3%上升至84.8%。淨利潤為63億美元，去年同期為淨虧損14億美元（主要受出售南美業務產生71億美元虧損影響）。
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-sky-50 rounded-lg p-4 shadow">
+                        <h4 class="text-lg font-semibold text-sky-700 mb-2 text-center">總營收 (百萬美元)</h4>
+                        <div class="chart-container mx-auto"><canvas id="revenueChart"></canvas></div>
+                    </div>
+                    <div class="bg-emerald-50 rounded-lg p-4 shadow">
+                        <h4 class="text-lg font-semibold text-emerald-700 mb-2 text-center">淨利潤 (百萬美元)</h4>
+                        <div class="chart-container mx-auto"><canvas id="netIncomeChart"></canvas></div>
+                    </div>
+                    <div class="bg-teal-50 rounded-lg p-4 shadow">
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2 text-center">醫療賠付率 (MCR)</h4>
+                         <div class="chart-container mx-auto"><canvas id="mcrChart"></canvas></div>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-stone-700 mb-3">資產負債表摘要 (截至2025年3月31日)</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li>總資產: 3098億美元 (較2024年底增加)</li>
+                        <li>現金及現金等價物: 307億美元</li>
+                        <li>商譽: 1076億美元 (佔總資產約34.7%)</li>
+                        <li>總負債: 2046億美元</li>
+                        <li>應付醫療成本: 371億美元</li>
+                        <li>總權益: 1008億美元</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-stone-700 mb-3">現金流量表摘要 (2025年第一季度)</h3>
+                     <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li>經營活動現金流量: 55億美元 (去年同期為11億美元，大幅增加)</li>
+                        <li>投資活動現金流出: 63億美元 (包括30億美元收購及22億美元對醫療服務提供者貸款)</li>
+                        <li>融資活動現金流入: 82億美元 (包括62億美元短期借款及59億美元長期債務發行)</li>
+                        <li>股票回購: 30億美元；股息支付: 19億美元</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="metrics" class="pt-16 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標 (2025年第一季度)</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    聯合健康集團的業務分為UnitedHealthcare和Optum兩大板塊。Optum進一步細分為Optum Health、Optum Insight和Optum Rx。各部門在2025年第一季度的表現有所分化。
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">UnitedHealthcare</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li>營收: 846億美元 (同比增長12%)</li>
+                        <li>營業利潤: 52億美元 (同比增長19%)</li>
+                        <li>Medicare Advantage 會員: 824.5萬人 (同比增長6%)</li>
+                        <li>醫療賠付率 (MCR): 84.8% (高於去年同期的84.3%)</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">Optum (合計，未抵銷)</h3>
+                     <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li>總營收: 639億美元 (同比增長5%)</li>
+                        <li>營業利潤: 39億美元 (同比增長10%)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-indigo-50 rounded-lg shadow p-6">
+                    <h4 class="text-lg font-semibold text-indigo-700 mb-2">Optum Health</h4>
+                    <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                        <li>營收: 253億美元 (同比下降5%)</li>
+                        <li>營業利潤: 16億美元 (同比下降15%)</li>
+                        <li>服務人數: 約9900萬人</li>
+                        <li>挑戰: Medicare Advantage資金削減、會員概況變化。</li>
+                    </ul>
+                </div>
+                <div class="bg-purple-50 rounded-lg shadow p-6">
+                    <h4 class="text-lg font-semibold text-purple-700 mb-2">Optum Insight</h4>
+                     <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                        <li>營收: 46億美元 (同比增長3%)</li>
+                        <li>營業利潤: 9.61億美元 (同比大幅增長96%，主要因去年網絡攻擊影響減弱)</li>
+                    </ul>
+                </div>
+                <div class="bg-pink-50 rounded-lg shadow p-6">
+                    <h4 class="text-lg font-semibold text-pink-700 mb-2">Optum Rx</h4>
+                    <ul class="list-disc list-inside text-stone-600 text-sm space-y-1">
+                        <li>營收: 351億美元 (同比增長14%)</li>
+                        <li>營業利潤: 13億美元 (同比增長15%)</li>
+                        <li>調整後處方量: 4.08億</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-stone-700 mb-2 text-center">Optum 各部門營收佔比 (2025 Q1)</h4>
+                    <div class="chart-container doughnut-chart-container mx-auto"><canvas id="optumSegmentRevenueChart"></canvas></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-stone-700 mb-2 text-center">Optum 各部門營業利潤佔比 (2025 Q1)</h4>
+                    <div class="chart-container doughnut-chart-container mx-auto"><canvas id="optumSegmentProfitChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="pt-16 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-3">
+                    儘管面臨短期挑戰，聯合健康集團管理層已修訂2025年業績指引（調整後每股收益26.00-26.50美元），並承諾積極應對，力求恢復至13%-16%的長期盈利增長目標。
+                </p>
+                <h3 class="text-xl font-semibold text-stone-700 mb-2">主要應對策略：</h3>
+                <ul class="list-disc list-inside text-stone-600 space-y-1 mb-4">
+                    <li>針對Medicare Advantage醫療護理活動增加：加強會員互動、更新病患健康狀況評估、改進醫生工作流程。</li>
+                    <li>針對Optum Health會員概況及報銷問題：積極調整。</li>
+                    <li>針對Medicare資金壓力：加強成本管理、調整網絡、福利、保費，選擇性參與市場。</li>
+                </ul>
+                 <h3 class="text-xl font-semibold text-stone-700 mb-2">增長動力與機遇：</h3>
+                <ul class="list-disc list-inside text-stone-600 space-y-1">
+                    <li>擴展價值醫療模式：Optum Health預計2025年新增65萬名價值醫療模式病患。</li>
+                    <li>併購：約有40億美元的待定醫療保健行業收購項目。</li>
+                    <li>長期行業利好：人口老齡化、健康關注度提高、醫療技術進步。</li>
+                    <li>出售非核心業務：計劃年內完成剩餘南美業務的出售。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="investment" class="pt-16 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-3">
+                    聯合健康集團在2025年第一季度展現了積極的資本配置策略，同時保持了較強的現金流產生能力。
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-emerald-50 rounded-lg shadow p-6">
+                        <h3 class="text-xl font-semibold text-emerald-700 mb-2">現金流量</h3>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>經營活動現金流量: 55億美元 (同比大幅增長)</li>
+                            <li>期末現金及現金等價物: 307億美元</li>
+                        </ul>
+                    </div>
+                    <div class="bg-amber-50 rounded-lg shadow p-6">
+                        <h3 class="text-xl font-semibold text-amber-700 mb-2">資本配置</h3>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>股票回購: 30億美元</li>
+                            <li>股息支付: 19億美元</li>
+                            <li>收購支出: 30億美元 (另有約40億美元待定收購)</li>
+                            <li>債務融資: 短期借款淨額62億美元，長期債務發行59億美元。</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-stone-700 leading-relaxed mt-4">
+                    公司積極的股票回購、股息支付和併購活動，表明管理層對其長期現金產生能力抱有信心，儘管當前面臨運營逆風。然而，在盈利能力承壓和債務增加的情況下，這種策略若運營挑戰持續，可能加劇財務風險。
+                </p>
+            </div>
+        </section>
+
+        <section id="risks" class="pt-16 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-red-700 mb-2">監管與法律風險</h3>
+                    <p class="text-stone-600 text-sm">司法部調查、CMS擴大審計、Medicare Advantage費率及風險調整模型變革、潛在醫療保健立法改革等，可能導致罰款、處罰或商業模式改變。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-red-700 mb-2">運營風險</h3>
+                    <p class="text-stone-600 text-sm">管理醫療成本趨勢（尤其MA老年人群）、解決Optum Health會員概況及報銷問題、整合被收購公司、網絡安全風險（如Change Healthcare事件）。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-red-700 mb-2">市場與競爭風險</h3>
+                    <p class="text-stone-600 text-sm">醫療保健市場競爭激烈，來自傳統保險公司和新興市場參與者的挑戰，宏觀經濟狀況變化影響醫療支出。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-red-700 mb-2">財務風險</h3>
+                    <p class="text-stone-600 text-sm">利率變動影響投資收益和債務成本，信用評級下調可能增加融資成本，投資組合表現波動。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-red-700 mb-2">戰略風險</h3>
+                    <p class="text-stone-600 text-sm">實現運營成本改進目標、維持與付款人及醫療服務提供者關係、成功執行非核心業務剝離、反壟斷擔憂限制美國市場併購機會。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="other" class="pt-16 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">其他重要事項</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <ul class="list-disc list-inside text-stone-700 leading-relaxed space-y-2">
+                    <li><strong>Change Healthcare 網絡攻擊事件:</strong> 2024年發生的此事件對公司2024年第一季度財務和運營造成顯著負面影響，其影響在2025年第一季度的同比數據比較中依然可見（尤其Optum Insight利潤恢復）。此事件突顯了網絡安全風險的嚴重性及對關鍵醫療基礎設施的潛在威脅，預計將導致持續的網絡安全投入增加。</li>
+                    <li><strong>南美業務剝離:</strong> 公司計劃在2025年內完成其剩餘南美業務的出售。2024年第一季度因剝離南美業務相關資產產生了71億美元的巨額虧損，嚴重影響了當期淨利潤。</li>
+                    <li><strong>待定收購:</strong> 公司目前有約40億美元的醫療保健行業收購項目正在進行中，顯示其持續通過併購尋求增長的策略。</li>
+                    <li><strong>分析師看法分歧:</strong> 市場對聯合健康集團的看法呈現分歧。部分分析師認為當前估值具有吸引力，預計2026年後盈利將強勁復甦；另一些則指出其面臨的問題可能具有行業普遍性，對短期前景持謹慎態度。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="summary" class="pt-16 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-sky-600 text-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold mb-1">2025 Q1 總營收</h3>
+                    <p class="text-3xl font-bold">$1096 億</p>
+                </div>
+                <div class="bg-emerald-600 text-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold mb-1">2025 Q1 淨利潤</h3>
+                    <p class="text-3xl font-bold">$63 億</p>
+                </div>
+                <div class="bg-amber-600 text-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold mb-1">修訂後2025 EPS指引</h3>
+                    <p class="text-3xl font-bold">$26.00 - $26.50</p>
+                </div>
+                <div class="bg-red-600 text-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold mb-1">2025 Q1 MCR</h3>
+                    <p class="text-3xl font-bold">84.8%</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-semibold text-stone-700 mb-4">財務指標快速查閱</h3>
+                <input type="text" id="metricsTableFilter" class="w-full md:w-1/2 p-2 border border-stone-300 rounded-md mb-4" placeholder="篩選指標...">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-stone-100 table-header-sticky">
+                            <tr>
+                                <th class="py-2 px-4 border-b text-left text-sm font-semibold text-stone-600">財務指標</th>
+                                <th class="py-2 px-4 border-b text-left text-sm font-semibold text-stone-600">2025年第一季度</th>
+                                <th class="py-2 px-4 border-b text-left text-sm font-semibold text-stone-600">2024年第一季度</th>
+                                <th class="py-2 px-4 border-b text-left text-sm font-semibold text-stone-600">變動</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialMetricsTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-white text-center py-6 mt-12">
+        <p>&copy; 巴菲特AI價值投資-2025Q1聯合健康集團分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中之聯合健康集團(UnitedHealth Group)相關公開資料 (2025年5月30日)。</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for active nav link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.4 // Adjust this value to change when the link becomes active
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Chart.js Implementations
+        // Chart 1: Total Revenue
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2024 Q1', '2025 Q1'],
+                datasets: [
+                    {
+                        label: '總營收 (百萬美元)',
+                        data: [99796, 109575],
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)', // sky-500
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true, // Start at zero for revenue
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value / 1000 + ' 十億';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.y) + ' 百萬';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Net Income
+        const netIncomeCtx = document.getElementById('netIncomeChart').getContext('2d');
+        new Chart(netIncomeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2024 Q1', '2025 Q1'],
+                datasets: [
+                    {
+                        label: '淨利潤 (百萬美元)',
+                        data: [-1409, 6292],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)', // emerald-500
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false, // Net income can be negative
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value / 1000 + ' 十億';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.y) + ' 百萬';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+        // Chart 3: MCR
+        const mcrCtx = document.getElementById('mcrChart').getContext('2d');
+        new Chart(mcrCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2024 Q1', '2025 Q1'],
+                datasets: [{
+                    label: '醫療賠付率 (%)',
+                    data: [84.3, 84.8],
+                    backgroundColor: 'rgba(249, 115, 22, 0.7)', // orange-500
+                    borderColor: 'rgba(249, 115, 22, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 80, 
+                        max: 90,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Optum Segment Revenue
+        const optumSegmentRevenueCtx = document.getElementById('optumSegmentRevenueChart').getContext('2d');
+        new Chart(optumSegmentRevenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Optum Health', 'Optum Insight', 'Optum Rx'],
+                datasets: [{
+                    label: '營收 (百萬美元)',
+                    data: [25309, 4630, 35132], 
+                    backgroundColor: [
+                        'rgba(139, 92, 246, 0.7)', 
+                        'rgba(168, 85, 247, 0.7)', 
+                        'rgba(236, 72, 153, 0.7)'  
+                    ],
+                    borderColor: [
+                        'rgba(139, 92, 246, 1)',
+                        'rgba(168, 85, 247, 1)',
+                        'rgba(236, 72, 153, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                     label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed) + ' 百萬';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 5: Optum Segment Operating Profit
+        const optumSegmentProfitCtx = document.getElementById('optumSegmentProfitChart').getContext('2d');
+        new Chart(optumSegmentProfitCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Optum Health', 'Optum Insight', 'Optum Rx'],
+                datasets: [{
+                    label: '營業利潤 (百萬美元)',
+                    data: [1614, 961, 1318], 
+                    backgroundColor: [
+                        'rgba(139, 92, 246, 0.6)', 
+                        'rgba(168, 85, 247, 0.6)', 
+                        'rgba(236, 72, 153, 0.6)'
+                    ],
+                     borderColor: [
+                        'rgba(139, 92, 246, 1)',
+                        'rgba(168, 85, 247, 1)',
+                        'rgba(236, 72, 153, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                     tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                     label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed) + ' 百萬';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Interactive Data Table
+        const financialMetricsData = [
+            { metric: '總營收', q1_2025: '$109,575 百萬', q1_2024: '$99,796 百萬', change: '10%' },
+            { metric: '保費收入', q1_2025: '$86,534 百萬', q1_2024: '$77,988 百萬', change: '11%' },
+            { metric: '產品收入', q1_2025: '$13,037 百萬', q1_2024: '$12,001 百萬', change: '9%' },
+            { metric: '服務收入', q1_2025: '$9,019 百萬', q1_2024: '$8,933 百萬', change: '1%' },
+            { metric: '醫療成本', q1_2025: '$73,411 百萬', q1_2024: '$65,735 百萬', change: '12%' },
+            { metric: '營業利潤', q1_2025: '$9,119 百萬', q1_2024: '$7,931 百萬', change: '15%' },
+            { metric: '歸屬股東淨利潤(虧損)', q1_2025: '$6,292 百萬', q1_2024: '$(1,409) 百萬', change: '不適用' },
+            { metric: '稀釋後每股收益(虧損)', q1_2025: '$6.85', q1_2024: '$(1.53)', change: '不適用' },
+            { metric: '經營活動現金流量', q1_2025: '$5,456 百萬', q1_2024: '$1,144 百萬', change: '377%' },
+            { metric: '總資產', q1_2025: '$309,790 百萬', q1_2024: '$284,210 百萬 (截至3/31)', change: '9%' },
+            { metric: '總負債', q1_2025: '$204,621 百萬', q1_2024: '$191,840 百萬 (截至3/31)', change: '7%' },
+            { metric: '總權益', q1_2025: '$100,811 百萬', q1_2024: '$92,370 百萬 (截至3/31)', change: '9%' },
+            { metric: '醫療賠付率 (MCR)', q1_2025: '84.8%', q1_2024: '84.3%', change: '0.5個百分點' },
+            { metric: '營業利潤率', q1_2025: '8.3%', q1_2024: '7.9%', change: '0.4個百分點' }
+        ];
+
+        const tableBody = document.getElementById('financialMetricsTableBody');
+        const filterInput = document.getElementById('metricsTableFilter');
+
+        function populateTable(data) {
+            tableBody.innerHTML = ''; 
+            data.forEach(item => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = item.metric;
+                row.insertCell().textContent = item.q1_2025;
+                row.insertCell().textContent = item.q1_2024;
+                row.insertCell().textContent = item.change;
+                 Array.from(row.cells).forEach(cell => {
+                    cell.classList.add('py-2', 'px-4', 'border-b', 'text-sm', 'text-stone-700');
+                });
+            });
+        }
+
+        filterInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = financialMetricsData.filter(item => 
+                item.metric.toLowerCase().includes(searchTerm)
+            );
+            populateTable(filteredData);
+        });
+
+        // Initial table population
+        populateTable(financialMetricsData);
+
+    </script>
+</body>
+</html>
