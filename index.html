@@ -1,14 +1,256 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-  <title>歡迎來到巴菲特AI價值投資podcast節目參考資料站台 - Sitemap</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資Podcast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 自訂字體 (可選) */
+        body {
+            font-family: 'Inter', sans-serif; /* Inter 是一個常用的 Tailwind 字體範例 */
+        }
+        /* 確保在圖片載入失敗時，文字能正確對齊 */
+        .logo-text-container {
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
-<body>
-  <h1>網站導覽</h1>
-  <h2>Podcast Episodes</h2>
-  <ul>
-    <li><a href="podcast/google_io_2025.html">Google I/O 2025</a></li>
-    <li><a href="podcast/google_io_2025_insight.html">Google I/O 2025 Insights</a></li>
-  </ul>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-gradient-to-r from-slate-900 to-slate-700 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="logo-text-container">
+                <img src="./podcast/images/Podcast-Logo.png" 
+                     alt="巴菲特AI價值投資Podcast Logo" 
+                     class="h-12 w-12 sm:h-14 sm:w-14 mr-3 sm:mr-4 rounded-md object-cover"
+                     onerror="this.src='https://placehold.co/60x60/4A5568/E2E8F0?text=Logo'; this.classList.add('p-1');">
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight">
+                    巴菲特AI價值投資Podcast
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="mb-6 sm:mb-8">
+            <input type="text" id="searchInput" 
+                   placeholder="🔍 搜尋 Podcast 主題、標題或摘要..." 
+                   class="w-full p-3 sm:p-4 text-base sm:text-lg border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow duration-200 ease-in-out"
+                   aria-label="搜尋 Podcast">
+        </div>
+
+        <div id="cardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            </div>
+
+        <div id="noResultsMessage" class="hidden text-center text-gray-500 py-10">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="mt-2 text-xl font-semibold">找不到結果</p>
+            <p class="mt-1 text-sm">請嘗試使用其他關鍵字搜尋。</p>
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 text-center p-6 mt-12">
+        <p>&copy; <span id="currentYear"></span> 巴菲特AI價值投資Podcast. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --- Static Podcast Data ---
+        // This data should ideally be fetched from a server or a JSON file in a real application.
+        // For this static HTML, we define it directly in JavaScript.
+        const podcastData = [
+            {
+                id: 'costco-2025q1',
+                title: 'Costco 2025 Q1 財報解析',
+                summary: 'Costco 最新季度財報重點分析，探討其會員制度、營收表現及未來增長潛力。AI 如何助力 Costco 優化運營？',
+                link: './podcast/costco/costco_2025q1.html',
+                category: '財報分析',
+                date: '2025-05-15',
+                tags: ['Costco', '財報', '零售', 'AI']
+            },
+            {
+                id: 'dell-2025q1',
+                title: 'Dell Technologies 2025 Q1 業績前瞻',
+                summary: 'Dell 最新財報解讀，聚焦 AI PC 市場趨勢及 Dell 的戰略佈局。企業IT支出與雲端業務展望。',
+                link: './podcast/dell/dell_2025q1.html',
+                category: '財報分析',
+                date: '2025-05-10',
+                tags: ['Dell', 'AI PC', '財報', '科技股']
+            },
+            {
+                id: 'disney-2025q1',
+                title: '迪士尼 2025 Q1 串流與樂園業務探討',
+                summary: '分析迪士尼最新財報，關注 Disney+ 訂閱戶增長、樂園復甦情況及內容製作策略。AI 對娛樂產業的影響。',
+                link: './podcast/disney/disney_2025q1.html',
+                category: '財報分析',
+                date: '2025-05-05',
+                tags: ['Disney', '串流', '樂園', '財報']
+            },
+            {
+                id: 'google-io-2025',
+                title: 'Google I/O 2025 AI 技術發佈亮點',
+                summary: '回顧 Google I/O 大會，聚焦 Gemini AI 模型進展、Android 新功能及 AI 在各產品線的應用。',
+                link: './podcast/google/google_io_2025.html',
+                category: '科技前瞻',
+                date: '2025-05-20',
+                tags: ['Google', 'AI', 'Gemini', 'Android', '科技大會']
+            },
+            {
+                id: 'covid-vaccine',
+                title: 'COVID-19 疫苗發展與未來趨勢',
+                summary: '探討新冠疫苗的技術演進、全球接種情況以及對未來公衛的影響。AI 在疫苗研發中的角色。',
+                link: './podcast/industry/covid_vaccine.html',
+                category: '產業動態',
+                date: '2025-04-25',
+                tags: ['COVID-19', '疫苗', '公衛', 'AI醫療']
+            },
+            {
+                id: 'humanoid-intro',
+                title: '人形機器人產業概覽與投資前景',
+                summary: '介紹人形機器人的發展現狀、關鍵技術挑戰與市場應用潛力。AI 如何賦能下一代機器人？',
+                link: './podcast/industry/humanoid_intro.html',
+                category: '科技前瞻',
+                date: '2025-04-18',
+                tags: ['人形機器人', 'AI', '自動化', '投資']
+            },
+            {
+                id: 'lemonade-2025q1',
+                title: 'Lemonade 2025 Q1 保險科技財報分析',
+                summary: '解析保險科技公司 Lemonade 最新財報，關注其 AI 客服、理賠效率及市場擴張策略。',
+                link: './podcast/lemonade/lemonade_2025q1.html',
+                category: '財報分析',
+                date: '2025-04-10',
+                tags: ['Lemonade', '保險科技', 'FinTech', 'AI客服']
+            },
+            {
+                id: 'starbucks-2025q2',
+                title: '星巴克 2025 Q2 營運策略與挑戰',
+                summary: '分析星巴克最新季度表現，探討其數位轉型、顧客忠誠計畫及面對的市場競爭。AI 如何優化顧客體驗？',
+                link: './podcast/starbucks/starbucks_2025Q2.html',
+                category: '財報分析',
+                date: '2025-04-30',
+                tags: ['Starbucks', '零售', '餐飲', '數位轉型']
+            },
+            {
+                id: 'unh-2025q1',
+                title: '聯合健康集團 (UNH) 2025 Q1 業績報告',
+                summary: '深入解讀美國最大健康保險公司 UNH 的財報，分析其醫療服務、Optum 業務及行業趨勢。AI 在醫療領域的應用。',
+                link: './podcast/united_health_group/unh_2025q1.html',
+                category: '財報分析',
+                date: '2025-04-15',
+                tags: ['UNH', '醫療保健', '保險', '財報', 'AI醫療']
+            }
+        ];
+
+        // --- DOM Elements ---
+        const searchInput = document.getElementById('searchInput');
+        const cardsContainer = document.getElementById('cardsContainer');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        const currentYearSpan = document.getElementById('currentYear');
+
+        // --- Category Colors ---
+        // Define background colors for different categories.
+        // Using Tailwind CSS classes for background and hover effects.
+        const categoryColors = {
+            "財報分析": "bg-sky-50 hover:bg-sky-100 border-sky-200",
+            "科技前瞻": "bg-lime-50 hover:bg-lime-100 border-lime-200",
+            "產業動態": "bg-amber-50 hover:bg-amber-100 border-amber-200",
+            "default": "bg-slate-50 hover:bg-slate-100 border-slate-200" // Fallback color
+        };
+        
+        const categoryTextColors = {
+            "財報分析": "text-sky-700",
+            "科技前瞻": "text-lime-700",
+            "產業動態": "text-amber-700",
+            "default": "text-slate-700"
+        };
+
+        // --- Functions ---
+
+        /**
+         * Renders the podcast cards to the page.
+         * @param {Array} dataToRender - Array of podcast objects to display.
+         */
+        function renderCards(dataToRender) {
+            cardsContainer.innerHTML = ''; // Clear existing cards
+
+            if (dataToRender.length === 0) {
+                noResultsMessage.classList.remove('hidden');
+                cardsContainer.classList.add('hidden'); // Hide container if no results
+            } else {
+                noResultsMessage.classList.add('hidden');
+                cardsContainer.classList.remove('hidden'); // Show container
+                dataToRender.forEach(item => {
+                    const cardColor = categoryColors[item.category] || categoryColors["default"];
+                    const textColor = categoryTextColors[item.category] || categoryTextColors["default"];
+                    
+                    const cardElement = document.createElement('div');
+                    cardElement.className = `rounded-xl shadow-lg p-5 sm:p-6 border transition-all duration-300 ease-in-out transform hover:scale-105 flex flex-col justify-between ${cardColor}`;
+                    
+                    // Truncate summary to ensure it's not too long
+                    const displaySummary = item.summary.length > 100 ? item.summary.substring(0, 97) + '...' : item.summary;
+
+                    cardElement.innerHTML = `
+                        <div>
+                            <div class="mb-3">
+                                <span class="inline-block px-3 py-1 text-xs font-semibold ${textColor} ${cardColor.replace('bg-', 'bg-opacity-50 ')} bg-opacity-50 rounded-full">${item.category}</span>
+                            </div>
+                            <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-2">${item.title}</h2>
+                            <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-3 h-20 overflow-hidden">${displaySummary}</p>
+                            ${item.tags && item.tags.length > 0 ? `
+                            <div class="mb-3 flex flex-wrap gap-1">
+                                ${item.tags.map(tag => `<span class="text-xs ${textColor} bg-opacity-20 ${cardColor.replace('bg-', 'bg-opacity-20 ')} px-2 py-0.5 rounded-full">${tag}</span>`).join('')}
+                            </div>
+                            ` : ''}
+                            <p class="text-xs text-gray-500 mb-4">發佈日期: ${item.date || 'N/A'}</p>
+                        </div>
+                        <a href="${item.link}" 
+                           target="_blank" 
+                           class="inline-block mt-auto w-full text-center ${textColor.replace('text-','bg-').replace('-700','-600')} hover:${textColor.replace('text-','bg-').replace('-700','-700')} text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 ease-in-out shadow-sm hover:shadow-md">
+                           收聽完整內容 ➔
+                        </a>
+                    `;
+                    cardsContainer.appendChild(cardElement);
+                });
+            }
+        }
+
+        /**
+         * Filters cards based on the search input value.
+         */
+        function filterCards() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            if (!searchTerm) {
+                renderCards(podcastData); // Show all if search is empty
+                return;
+            }
+
+            const filteredData = podcastData.filter(item => {
+                return item.title.toLowerCase().includes(searchTerm) || 
+                       item.summary.toLowerCase().includes(searchTerm) ||
+                       (item.tags && item.tags.some(tag => tag.toLowerCase().includes(searchTerm))) ||
+                       item.category.toLowerCase().includes(searchTerm);
+            });
+            renderCards(filteredData);
+        }
+
+        // --- Event Listeners ---
+        // Filter cards on input in the search field
+        searchInput.addEventListener('input', filterCards);
+
+        // --- Initial Setup ---
+        // Set current year in footer
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+        // Initial render of all cards
+        // Sort data by date descending before initial render
+        podcastData.sort((a, b) => new Date(b.date) - new Date(a.date));
+        renderCards(podcastData);
+
+    </script>
 </body>
 </html>
