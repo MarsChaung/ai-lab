@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-2026Q1 Salesforce 營運分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Using Inter as a default modern font */
+        }
+        .active-nav-link {
+            color: #0284c7; /* sky-600 */
+            font-weight: 600;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        .table-header-sticky th {
+            position: sticky;
+            top: 0;
+            background-color: #f3f4f6; /* gray-100 */
+            z-index: 10;
+        }
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; /* slate-300 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; /* slate-500 */
+        }
+        /* Basic styling for mobile menu */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        .menu-hidden {
+            transform: translateX(100%);
+        }
+        .menu-visible {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-700">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-sky-600">Salesforce營運分析</a>
+                </div>
+                <div class="hidden md:block">
+                    <nav class="ml-10 flex items-baseline space-x-4">
+                        <a href="#overview" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">公司營運概況</a>
+                        <a href="#financials" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">財務表現</a>
+                        <a href="#metrics" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">營運指標</a>
+                        <a href="#strategy" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">業務策略</a>
+                        <a href="#investment" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">投資與流動性</a>
+                        <a href="#risks" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">風險因素</a>
+                        <a href="#other" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">其他事項</a>
+                        <a href="#summary" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">關鍵數據</a>
+                    </nav>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-sky-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-xl p-4 menu-hidden z-40">
+            <div class="flex justify-end mb-4">
+                 <button id="mobile-menu-close-button" class="text-stone-500 hover:text-sky-600">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-2">
+                <a href="#overview" class="nav-link mobile-nav-link inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">公司營運概況</a>
+                <a href="#financials" class="nav-link mobile-nav-link inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">財務表現</a>
+                <a href="#metrics" class="nav-link mobile-nav-link inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">營運指標</a>
+                <a href="#strategy" class="nav-link mobile-nav-link inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">業務策略</a>
+                <a href="#investment" class="nav-link mobile-nav-link inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">投資與流動性</a>
+                <a href="#risks" class="nav-link mobile-nav-link inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">風險因素</a>
+                <a href="#other" class="nav-link mobile-nav-link inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">其他事項</a>
+                <a href="#summary" class="nav-link mobile-nav-link inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">關鍵數據</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <section id="overview" class="pt-20 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 leading-relaxed">
+                    Salesforce (NYSE: CRM) 在 2026 財政年度第一季再次展現其作為全球領先 AI CRM 公司的實力，各項指標均超出預期。公司營收穩健增長，AI 與 Data Cloud 業務呈現爆炸性成長，顯示其在企業 AI 領域的領導地位。透過「ADAM」框架（代理、數據、應用程式、元數據）及對 Informatica 的策略性收購協議，Salesforce 正積極打造一個全面且統一的企業級 AI 平台。
+                </p>
+                <p class="mt-4 text-stone-600 leading-relaxed">
+                    儘管前景看好，Salesforce 仍面臨多重挑戰，包括成功整合 Informatica 的複雜性、AI 貨幣化規模的挑戰、來自科技巨頭的激烈競爭，以及影響 SaaS 支出的宏觀經濟不確定性。然而，憑藉其強大的客戶基礎、創新的產品組合及不斷擴展的合作夥伴生態系統，Salesforce 有望持續引領市場。
+                </p>
+            </div>
+        </section>
+
+        <section id="financials" class="pt-20 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-700 mb-4">2026 財政年度第一季關鍵財務指標</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-600 mb-6">
+                    <li><strong>總營收：</strong>$98億美元，同比增長 8%。</li>
+                    <li><strong>訂閱與支援服務營收：</strong>$93億美元，同比增長 8%。</li>
+                    <li><strong>GAAP 營運利潤率：</strong>19.8%。</li>
+                    <li><strong>非 GAAP 營運利潤率：</strong>32.3%。</li>
+                    <li><strong>營運現金流：</strong>$65億美元，同比增長 4%。</li>
+                    <li><strong>自由現金流：</strong>$63億美元，同比增長 4%。</li>
+                    <li><strong>當期剩餘履約義務 (cRPO)：</strong>$296億美元，同比增長 12%。</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold text-stone-700 mb-4">各服務產品線表現 (訂閱與支援服務營收)</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-sky-50 p-4 rounded-lg shadow"><strong>銷售雲 (Sales):</strong> $21.31億美元 (同比增長 7%)</div>
+                    <div class="bg-sky-50 p-4 rounded-lg shadow"><strong>服務雲 (Service):</strong> $23.34億美元 (同比增長 7%)</div>
+                    <div class="bg-sky-50 p-4 rounded-lg shadow"><strong>平台及其他 (Platform and Other):</strong> $19.63億美元 (同比增長 14%)</div>
+                    <div class="bg-sky-50 p-4 rounded-lg shadow"><strong>行銷與商務雲 (Marketing and Commerce):</strong> $13.25億美元 (同比增長 3%)</div>
+                    <div class="bg-sky-50 p-4 rounded-lg shadow"><strong>整合與分析 (Integration and Analytics):</strong> $15.44億美元 (同比增長 10%)</div>
+                </div>
+                <p class="text-sm text-stone-500 mb-6">
+                    值得注意的是，「平台及其他」業務（增長 14%）的增速明顯高於傳統核心雲業務，反映出 Data Cloud 等平台級服務正成為新的增長引擎。
+                </p>
+
+                <h3 class="text-xl font-semibold text-stone-700 mb-4">各地區市場表現 (總營收)</h3>
+                 <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-teal-50 p-4 rounded-lg shadow"><strong>美洲地區:</strong> $64.69億美元 (同比增長 7%)</div>
+                    <div class="bg-teal-50 p-4 rounded-lg shadow"><strong>歐洲地區:</strong> $23.37億美元 (同比增長 9%)</div>
+                    <div class="bg-teal-50 p-4 rounded-lg shadow"><strong>亞太地區:</strong> $10.23億美元 (同比增長 10%)</div>
+                </div>
+                 <p class="text-sm text-stone-500 mb-6">
+                    亞太地區雖然基數較小，但增長率最高，顯示出巨大的增長潛力。
+                </p>
+
+                <h3 class="text-xl font-semibold text-stone-700 mb-4">財務數據對比 (2026 Q1 vs 2025 Q1)</h3>
+                <div class="overflow-x-auto rounded-lg shadow">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 table-header-sticky">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2026財年第一季</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2025財年第一季</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">年增率 (YoY)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200">
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">總營收 (Total Revenue)</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$9.83B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$9.13B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">8.00%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">訂閱與支援收入</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$9.30B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$8.59B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">8.00%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">現行剩餘履約義務（cRPO）</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$29.6B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$26.4B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">12.00%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">GAAP 營業利益率</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">19.80%</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">18.70%</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">1.1p</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">非GAAP 營業利益率</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">32.30%</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">32.10%</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">0.2p</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">GAAP 稀釋後每股盈餘</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$1.59</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$1.56</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">2.00%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">非GAAP 稀釋後每股盈餘</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$2.58</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$2.44</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">6.00%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">營運現金流</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$6.48B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$6.25B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">4.00%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">自由現金流</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$6.30B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$6.08B</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">4.00%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-stone-700 mb-4">Q1 FY26 各產品線營收佔比 (億美元)</h3>
+                    <div><canvas id="revenueChart" class="rounded-lg"></canvas></div>
+                </div>
+                <p class="mt-2 text-xs text-stone-500">*資料來源: Salesforce 2026財年第一季財報</p>
+            </div>
+        </section>
+
+        <section id="metrics" class="pt-20 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-sky-700 mb-2">Data Cloud 與 AI ARR</h3>
+                    <p class="text-3xl font-bold text-stone-800">超過 $10億美元</p>
+                    <p class="text-green-600">同比增長超過 120%</p>
+                    <p class="text-sm text-stone-500 mt-2">市場對 AI 和數據解決方案高度認可。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-sky-700 mb-2">Data Cloud 客戶採用</h3>
+                    <p class="text-3xl font-bold text-stone-800">近 60%</p>
+                    <p class="text-stone-600">的第一季百大交易中包含 Data Cloud 和 AI。</p>
+                    <p class="text-sm text-stone-500 mt-2">Data Cloud 在 Q1 處理了 22萬億條記錄 (同比增長 175%)。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-sky-700 mb-2">Agentforce 表現</h3>
+                    <p class="text-3xl font-bold text-stone-800">超過 8,000 筆交易</p>
+                    <p class="text-stone-600">(其中一半為付費交易)。</p>
+                    <p class="text-sm text-stone-500 mt-2">在 help.salesforce.com 上，Agentforce 已處理超過 75萬個請求，案件量同比下降 7%。</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
+                 <h3 class="text-xl font-semibold text-stone-700 mb-4">互動式產品線數據</h3>
+                 <input type="text" id="tableFilter" class="w-full md:w-1/3 p-2 border border-stone-300 rounded-md mb-4 focus:ring-sky-500 focus:border-sky-500" placeholder="篩選產品線名稱...">
+                 <div class="overflow-x-auto rounded-lg shadow">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 table-header-sticky">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">產品線名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Q1 FY26 營收</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">年增率 (YoY)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productDataTableBody" class="bg-white divide-y divide-stone-200">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="pt-20 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-700 mb-3">核心策略支柱</h3>
+                <p class="text-stone-600 leading-relaxed mb-4">
+                    Salesforce 的增長策略圍繞 AI 創新、數據能力強化、平台整合以及生態系統的深化發展。這些支柱共同推動公司在競爭激烈的市場中保持領先地位。
+                </p>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-lg font-semibold text-sky-600">「ADAM」框架</h4>
+                        <p class="text-stone-600">代理 (Agents)、數據 (Data)、應用程式 (Applications)、元數據 (Metadata) 框架是企業 AI 的關鍵差異化因素，旨在提供完整的企業體驗。Data Cloud 在此框架內扮演整合數據以支援 AI 的核心角色。</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-sky-600">Informatica 收購案</h4>
+                        <p class="text-stone-600">目標是整合 Salesforce 的 AI CRM 與 Informatica 的 AI 驅動主數據管理 (MDM) 和 ETL 平台，打造「業界最完整、最智能的企業級 AI 與數據平台」。此舉旨在解決 AI 信任差距、克服數據準備瓶頸，並預計在交易完成後兩年內對利潤率和每股收益產生增益效應。</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-sky-600">Customer 360 平台</h4>
+                        <p class="text-stone-600">提供跨銷售、服務、行銷、商務和 IT 的統一客戶視圖，實現個性化體驗。Data Cloud 作為智能激活層，整合 Tableau 進行可視化分析，整合 Slack 提升協作效率，並透過 MuleSoft 實現 API 主導的連接能力。</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-sky-600">合作夥伴生態系統</h4>
+                        <p class="text-stone-600">Salesforce 每賺取一美元，其合作夥伴生態系統就能產生約 $6.19 美元的收入。該生態系統預計將持續創造大量新業務收入和就業機會，並透過 ISV、SI 等合作夥伴推動創新和市場滲透。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="investment" class="pt-20 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-stone-700 mb-3">強勁現金流</h3>
+                    <p class="text-stone-600 mb-2"><strong>營運現金流 (Q1 FY26):</strong> $65億美元 (同比增長 4%)</p>
+                    <p class="text-stone-600"><strong>自由現金流 (Q1 FY26):</strong> $63億美元 (同比增長 4%)</p>
+                    <p class="text-sm text-stone-500 mt-2">持續強勁的現金流產生能力為公司的投資擴展和股東回報提供了堅實基礎。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-stone-700 mb-3">股東回報</h3>
+                    <p class="text-stone-600 mb-2"><strong>2026 財年第一季總回報:</strong> $31億美元</p>
+                    <ul class="list-disc list-inside ml-4 text-stone-600">
+                        <li>股票回購: $27億美元</li>
+                        <li>股息: $4.02億美元</li>
+                    </ul>
+                    <p class="text-sm text-stone-500 mt-2">表明公司對自身財務實力充滿信心，並致力於為股東創造價值。</p>
+                </div>
+            </div>
+             <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
+                <h3 class="text-xl font-semibold text-stone-700 mb-3">策略性投資</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-600">
+                    <li><strong>Informatica 收購案:</strong> 重大投資，旨在強化 AI 數據基礎，打造領先的企業級 AI 與數據平台。</li>
+                    <li><strong>新加坡投資:</strong> 計劃在新加坡投資 $10億美元，突顯對亞太市場的重視和擴張意圖。</li>
+                    <li><strong>AI 研發:</strong> 持續投入 AI 產品（如 Data Cloud, Einstein AI, Agentforce）的研發與推廣。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="risks" class="pt-20 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="text-stone-600 leading-relaxed mb-4">
+                    儘管 Salesforce 前景廣闊，但仍面臨多方面的風險與挑戰，這些因素可能影響其未來的增長和盈利能力。
+                </p>
+                <div class="space-y-3 text-sm text-stone-600">
+                    <p><strong>執行與整合風險:</strong> Informatica 收購案的技術複雜性、功能重疊及實現協同效應的挑戰。</p>
+                    <p><strong>AI 採用與營收規模化:</strong> Agentforce 採用速度可能慢於預期，AI 投資回報時間表存在不確定性。</p>
+                    <p><strong>宏觀經濟逆風:</strong> SaaS 市場增長放緩，企業支出謹慎，可能影響 Salesforce 增長。</p>
+                    <p><strong>競爭加劇:</strong> 來自微軟、甲骨文、SAP 等科技巨頭以及新興 AI 專業廠商的激烈競爭。</p>
+                    <p><strong>數據隱私與治理:</strong> 不斷演變的法規（如 GDPR, AI 法案）對數據處理和 AI 使用帶來合規挑戰。</p>
+                    <p><strong>行業特定障礙:</strong> 滿足金融、醫療等特定行業的嚴格法規和複雜需求。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="other" class="pt-20 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">其他重要事項</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-700 mb-4">管理層展望 (2026 財年)</h3>
+                 <p class="text-stone-600 mb-4">Salesforce 管理層對公司未來發展保持樂觀態度，並上調了部分財務指引，顯示出對 AI 產品滲透、多雲端交易及國際擴張等策略的信心。</p>
+                <div class="overflow-x-auto rounded-lg shadow mb-6">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 table-header-sticky">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">全年指引 (FY26)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200">
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">營收 (Revenue)</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$41.0B - $41.3B (年增 8%-9%)</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">訂閱與支援收入增長</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">約 9.5%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">GAAP 營業利益率</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">21.60%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">非GAAP 營業利益率</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">34.00%</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">非GAAP 稀釋後每股盈餘</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">$11.27 - $11.33</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">營運現金流成長</td><td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">約 10%-11%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-2 text-xs text-stone-500">*資料來源: Salesforce 2026財年第一季財報</p>
+
+                <h3 class="text-xl font-semibold text-stone-700 mt-6 mb-3">未來增長驅動因素</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-600">
+                    <li><strong>AI 產品滲透：</strong> Data Cloud、Einstein AI 和 Agentforce 的持續採用和貨幣化。</li>
+                    <li><strong>多雲端交易：</strong> 在 Customer 360 平台上進行交叉銷售和向上銷售。</li>
+                    <li><strong>Informatica 整合 (2026 財年後)：</strong> 長期增長和盈利驅動力。</li>
+                    <li><strong>國際擴張：</strong> 尤其在亞太地區的持續增長。</li>
+                    <li><strong>行業特定解決方案：</strong> 深化在關鍵垂直行業的滲透率。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="summary" class="pt-20 -mt-16 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-sky-600 text-white rounded-lg shadow-xl p-6 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-1">Q1 FY26 總營收</h3>
+                    <p class="text-4xl font-bold">$9.83億</p>
+                    <p class="text-sky-200">同比增長 8%</p>
+                </div>
+                <div class="bg-teal-600 text-white rounded-lg shadow-xl p-6 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-1">Q1 FY26 非GAAP營運利潤率</h3>
+                    <p class="text-4xl font-bold">32.3%</p>
+                    <p class="text-teal-200">同比提升 0.2p</p>
+                </div>
+                <div class="bg-indigo-600 text-white rounded-lg shadow-xl p-6 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-1">Data Cloud & AI ARR</h3>
+                    <p class="text-3xl font-bold">>$10億</p>
+                    <p class="text-indigo-200">同比增長 >120%</p>
+                </div>
+                <div class="bg-rose-600 text-white rounded-lg shadow-xl p-6 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-lg font-semibold mb-1">FY26 營收指引</h3>
+                    <p class="text-3xl font-bold">$410-$413億</p>
+                    <p class="text-rose-200">年增 8%-9%</p>
+                </div>
+            </div>
+            
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 py-8 text-center">
+        <p>&copy; 巴菲特AI價值投資-2026Q1 Salesforce 營運分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中之Salesforce相關公開資料 (2025年6月2日)。</p>
+    </footer>
+
+    <script>
+        // Smooth scroll and active link highlighting
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link'); // For mobile menu links
+
+            // Function to update active link
+            const updateActiveLink = () => {
+                let index = sections.length;
+
+                while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // Adjusted offset for better accuracy
+                
+                navLinks.forEach((link) => {
+                    link.classList.remove('active-nav-link');
+                    link.classList.add('inactive-nav-link');
+                });
+                 mobileNavLinks.forEach((link) => { // Also update mobile links
+                    link.classList.remove('active-nav-link');
+                    link.classList.add('inactive-nav-link');
+                });
+
+                const activeDesktopLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+                const activeMobileLink = document.querySelector(`.mobile-nav-link[href="#${sections[index].id}"]`);
+
+                if (activeDesktopLink) {
+                    activeDesktopLink.classList.add('active-nav-link');
+                    activeDesktopLink.classList.remove('inactive-nav-link');
+                }
+                if (activeMobileLink) {
+                    activeMobileLink.classList.add('active-nav-link');
+                    activeMobileLink.classList.remove('inactive-nav-link');
+                }
+            };
+
+            // Initial call and on scroll
+            updateActiveLink();
+            window.addEventListener('scroll', updateActiveLink);
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('menu-hidden');
+                mobileMenu.classList.add('menu-visible');
+            });
+
+            mobileMenuCloseButton.addEventListener('click', () => {
+                mobileMenu.classList.add('menu-hidden');
+                mobileMenu.classList.remove('menu-visible');
+            });
+            
+            // Close mobile menu when a link is clicked
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('menu-hidden');
+                    mobileMenu.classList.remove('menu-visible');
+                });
+            });
+
+
+            // Chart.js - Revenue Chart
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar', // Using bar chart as requested
+                data: {
+                    labels: ['銷售雲', '服務雲', '平台及其他', '行銷與商務雲', '整合與分析'],
+                    datasets: [{
+                        label: 'Q1 FY26 營收 (億美元)',
+                        data: [21.31, 23.34, 19.63, 13.25, 15.44],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)', // blue-500
+                            'rgba(16, 185, 129, 0.7)', // emerald-500
+                            'rgba(139, 92, 246, 0.7)', // violet-500
+                            'rgba(236, 72, 153, 0.7)', // pink-500
+                            'rgba(249, 115, 22, 0.7)'  // orange-500
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(139, 92, 246, 1)',
+                            'rgba(236, 72, 153, 1)',
+                            'rgba(249, 115, 22, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 8, // Rounded bars
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(200, 200, 200, 0.2)' // Lighter grid lines
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value + '億';
+                                }
+                            }
+                        },
+                        x: {
+                             grid: {
+                                display: false // Hide x-axis grid lines
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += '$' + context.parsed.y + '億';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Interactive Table Data and Filtering
+            const productData = [
+              { name: "銷售雲 (Sales)", revenue: "21.31億美元", growth: "7%" },
+              { name: "服務雲 (Service)", revenue: "23.34億美元", growth: "7%" },
+              { name: "平台及其他 (Platform and Other)", revenue: "19.63億美元", growth: "14%" },
+              { name: "行銷與商務雲 (Marketing and Commerce)", revenue: "13.25億美元", growth: "3%" },
+              { name: "整合與分析 (Integration and Analytics)", revenue: "15.44億美元", growth: "10%" }
+            ];
+
+            const tableBody = document.getElementById('productDataTableBody');
+            const filterInput = document.getElementById('tableFilter');
+
+            function populateTable(data) {
+                tableBody.innerHTML = ''; // Clear existing rows
+                if (data.length === 0) {
+                    const row = tableBody.insertRow();
+                    const cell = row.insertCell();
+                    cell.colSpan = 3;
+                    cell.className = 'px-6 py-4 text-center text-sm text-stone-500';
+                    cell.textContent = '沒有符合篩選條件的資料';
+                    return;
+                }
+                data.forEach(item => {
+                    const row = tableBody.insertRow();
+                    row.insertCell().textContent = item.name;
+                    row.insertCell().textContent = item.revenue;
+                    const growthCell = row.insertCell();
+                    growthCell.textContent = item.growth;
+                    growthCell.className = parseFloat(item.growth) >= 10 ? 'text-green-600 font-semibold' : (parseFloat(item.growth) < 5 ? 'text-red-600' : '');
+
+                    // Add styling to table cells
+                    Array.from(row.cells).forEach(cell => {
+                         cell.className += ' px-6 py-4 whitespace-nowrap text-sm text-stone-700';
+                    });
+                });
+            }
+
+            filterInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+                populateTable(filteredData);
+            });
+
+            // Initial population of the table
+            populateTable(productData);
+
+            // Set current year in footer
+            //document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
