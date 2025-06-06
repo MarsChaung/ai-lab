@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股特別股投資簡介</title>
+    <!-- 導入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 導入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 導入 Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 自定義樣式 */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        /* 導航列 Active 狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        /* 導航列 Inactive 狀態樣式 */
+        .inactive-nav-link {
+            color: #475569; /* slate-600 */
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9; /* sky-500 */
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo/Title -->
+                <a href="#" class="text-2xl font-bold text-sky-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v4h-2zm0 6h2v2h-2z"/></svg>
+                    <span>美股特別股投資簡介</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#introduction" class="nav-link inactive-nav-link py-2">摘要與介紹</a>
+                    <a href="#comparison" class="nav-link inactive-nav-link py-2">比較分析</a>
+                    <a href="#risks" class="nav-link inactive-nav-link py-2">風險與圖表</a>
+                    <a href="#interactive-data" class="nav-link inactive-nav-link py-2">互動數據</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <a href="#introduction" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">摘要與介紹</a>
+            <a href="#comparison" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">比較分析</a>
+            <a href="#risks" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">風險與圖表</a>
+            <a href="#interactive-data" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">互動數據</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 md:py-12">
+
+        <!-- Section: Introduction -->
+        <section id="introduction" class="scroll-mt-20 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要與介紹</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">美國特別股（Preferred Stock）為一種兼具股票與債券特性的混合型證券，主要吸引力在於其通常提供較普通股穩定且固定的股息收益。相較於普通股，特別股股東在股息分配及公司清算時享有優先權，但通常不具備投票權。與債券相比，其求償順位較低，股息發放並非如債券利息般為發行公司的法律義務。</p>
+                <p>本報告旨在深入剖析美國特別股的定義、特色、種類，比較其與普通股及債券的差異，詳述交易方式與稅務細節，並提供風險管理及策略性考量，以期為台灣投資者提供清晰且實用的指引。</p>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-stone-700 mb-4">台灣投資者關鍵考量</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6">
+                    <h4 class="font-bold text-lg text-sky-800 mb-2">交易途徑</h4>
+                    <p class="text-sm text-sky-700">可透過國內券商「複委託」或直接在國際網路券商開戶交易，兩者在手續費、便利性方面各有優劣。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-teal-100 rounded-lg shadow-lg p-6">
+                    <h4 class="font-bold text-lg text-teal-800 mb-2">稅務影響</h4>
+                    <p class="text-sm text-teal-700">美國對非居民外國人（NRA）的來源股息通常預扣30%稅款。此為影響實際報酬的關鍵因素。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-amber-100 rounded-lg shadow-lg p-6">
+                    <h4 class="font-bold text-lg text-amber-800 mb-2">ETD 的稅務優勢</h4>
+                    <p class="text-sm text-amber-700">交易所交易債券 (ETD) 的配息屬「利息」，台灣投資者通常可豁免30%預扣稅，具稅務效益。</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-rose-100 rounded-lg shadow-lg p-6">
+                    <h4 class="font-bold text-lg text-rose-800 mb-2">風險考量</h4>
+                    <p class="text-sm text-rose-700">需注意利率風險、信用風險、流動性風險、提前贖回風險及市場波動風險等。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Comparison -->
+        <section id="comparison" class="scroll-mt-20 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">比較分析</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Comparison Table 1: Preferred vs Common Stock -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-700 mb-4">特別股 vs. 普通股</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="p-3">特性</th>
+                                    <th class="p-3 font-semibold text-sky-700">特別股</th>
+                                    <th class="p-3">普通股</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-3 font-medium">投票權</td><td class="p-3">通常無</td><td class="p-3">通常有</td></tr>
+                                <tr class="border-b bg-slate-50"><td class="p-3 font-medium">股息優先權</td><td class="p-3">優先</td><td class="p-3">次後</td></tr>
+                                <tr class="border-b"><td class="p-3 font-medium">股息性質</td><td class="p-3">通常固定</td><td class="p-3">不固定</td></tr>
+                                <tr class="border-b bg-slate-50"><td class="p-3 font-medium">清算優先權</td><td class="p-3">優先</td><td class="p-3">次後</td></tr>
+                                <tr class="border-b"><td class="p-3 font-medium">資本增值潛力</td><td class="p-3">有限</td><td class="p-3">較大</td></tr>
+                                <tr class="bg-slate-50"><td class="p-3 font-medium">風險波動</td><td class="p-3">較低</td><td class="p-3">較高</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Comparison Table 2: Preferred Stock vs Bonds -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-700 mb-4">特別股 vs. 債券</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="p-3">特性</th>
+                                    <th class="p-3 font-semibold text-sky-700">特別股</th>
+                                    <th class="p-3">債券</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-3 font-medium">法律性質</td><td class="p-3">股權</td><td class="p-3">債權</td></tr>
+                                <tr class="border-b bg-slate-50"><td class="p-3 font-medium">求償順位</td><td class="p-3">次於債權人</td><td class="p-3">優先於股東</td></tr>
+                                <tr class="border-b"><td class="p-3 font-medium">收益名稱</td><td class="p-3">股息</td><td class="p-3">利息</td></tr>
+                                <tr class="border-b bg-slate-50"><td class="p-3 font-medium">支付義務</td><td class="p-3">非強制法律義務</td><td class="p-3">法律契約義務</td></tr>
+                                <tr class="border-b"><td class="p-3 font-medium">到期日</td><td class="p-3">多為永續型</td><td class="p-3">有明確到期日</td></tr>
+                                <tr class="bg-slate-50"><td class="p-3 font-medium">風險</td><td class="p-3">較高信用風險</td><td class="p-3">較低信用風險</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Risks & Chart -->
+        <section id="risks" class="scroll-mt-20 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">主要風險與稅務影響圖表</h2>
+            <div class="grid lg:grid-cols-5 gap-8">
+                <!-- Risks -->
+                <div class="lg:col-span-2">
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h4 class="font-bold text-red-600">利率風險</h4>
+                            <p class="text-sm">市場利率上升時，固定股息的特別股吸引力下降，價格可能下跌。</p>
+                        </div>
+                         <div class="bg-white p-4 rounded-lg shadow">
+                            <h4 class="font-bold text-red-600">信用風險</h4>
+                            <p class="text-sm">發行公司可能因財務惡化，無法按時支付股息或償付本金。</p>
+                        </div>
+                         <div class="bg-white p-4 rounded-lg shadow">
+                            <h4 class="font-bold text-red-600">提前贖回風險</h4>
+                            <p class="text-sm">若利率下降，公司可能贖回舊股，投資者面臨再投資風險。</p>
+                        </div>
+                         <div class="bg-white p-4 rounded-lg shadow">
+                            <h4 class="font-bold text-red-600">流動性風險</h4>
+                            <p class="text-sm">部分特別股成交量低，可能難以迅速或以理想價格成交。</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chart -->
+                <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-700 mb-4 text-center">稅務影響比較：特別股 vs. ETD</h3>
+                    <p class="text-center text-sm text-slate-500 mb-4">假設票面利率皆為 6%</p>
+                    <div><canvas id="taxImpactChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Data Table -->
+        <section id="interactive-data" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">互動式數據表格</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex justify-between items-center mb-4 flex-wrap gap-4">
+                    <h3 class="font-bold text-xl text-stone-700">代表性投資標的 (範例)</h3>
+                    <div class="relative">
+                         <input type="text" id="searchInput" placeholder="搜尋名稱、代號、類型..." class="pl-10 pr-4 py-2 border border-slate-300 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500 transition w-64">
+                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-100 text-slate-600">
+                             <tr class="sticky top-0">
+                                <th class="p-3">代號</th>
+                                <th class="p-3">名稱</th>
+                                <th class="p-3">類型</th>
+                                <th class="p-3">票面利率 (%)</th>
+                                <th class="p-3">信用評級</th>
+                                <th class="p-3">稅務狀態 (NRA)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="investmentTableBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                 <p id="noResults" class="text-center text-slate-500 py-8 hidden">找不到符合條件的資料。</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-300 mt-16">
+        <div class="container mx-auto px-4 py-6 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-美股特別股投資簡介。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中之美股特別股相關公開資料 (2025年6月6日)。</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Active Navigation Link on Scroll ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.4 // 40% of the section must be visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Chart.js: Tax Impact Chart ---
+        const ctx = document.getElementById('taxImpactChart').getContext('2d');
+        const taxImpactChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['美國特別股', '美國ETD (嬰兒債券)'],
+                datasets: [{
+                    label: '稅前收益率 (%)',
+                    data: [6.0, 6.0],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)', // Blue
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }, {
+                    label: '稅後收益率 (%) (NRA 30%預扣稅)',
+                    data: [4.2, 6.0], // 6 * (1 - 0.3) = 4.2 for preferred stock
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)', // Red
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y.toFixed(2) + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '年化收益率 (%)'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // --- Interactive Table Data and Filtering ---
+        // 範例資料，用以展示互動表格功能
+        const investmentData = [
+            { ticker: 'BAC-PL', name: 'Bank of America, Ser L', type: '特別股', coupon: 7.25, rating: 'BB+', tax: '預扣30%' },
+            { ticker: 'JPM-PC', name: 'JPMorgan Chase, Ser C', type: '特別股', coupon: 6.00, rating: 'A-', tax: '預扣30%' },
+            { ticker: 'TBC', name: 'AT&T, 5.625% Global Notes', type: 'ETD', coupon: 5.625, rating: 'BBB', tax: '免預扣' },
+            { ticker: 'SOJC', name: 'Southern Company, Ser 2020A', type: 'ETD', coupon: 4.95, rating: 'BBB+', tax: '免預扣' },
+            { ticker: 'WFC-PL', name: 'Wells Fargo, Ser L', type: '特別股', coupon: 7.50, rating: 'BBB-', tax: '預扣30%' },
+            { ticker: 'C-PN', name: 'Citigroup, Ser N', type: '特別股', coupon: 5.95, rating: 'BBB', tax: '預扣30%' },
+            { ticker: 'DLR-PJ', name: 'Digital Realty, Ser J', type: '特別股', coupon: 5.25, rating: 'BBB', tax: '預扣30%' },
+            { ticker: 'GCV', name: 'Gabelli Convertible', type: 'ETD', coupon: 5.00, rating: 'A', tax: '免預扣' }
+        ];
+
+        const tableBody = document.getElementById('investmentTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'border-b hover:bg-slate-50 transition-colors';
+                row.innerHTML = `
+                    <td class="p-3 font-mono text-sky-600 font-semibold">${item.ticker}</td>
+                    <td class="p-3">${item.name}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-1 text-xs rounded-full ${item.type === 'ETD' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
+                            ${item.type}
+                        </span>
+                    </td>
+                    <td class="p-3">${item.coupon.toFixed(3)}</td>
+                    <td class="p-3">${item.rating}</td>
+                    <td class="p-3 font-semibold ${item.tax === '免預扣' ? 'text-green-600' : 'text-red-600'}">${item.tax}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        searchInput.addEventListener('keyup', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredData = investmentData.filter(item => 
+                item.ticker.toLowerCase().includes(searchTerm) ||
+                item.name.toLowerCase().includes(searchTerm) ||
+                item.type.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filteredData);
+        });
+
+        // Initial table render
+        renderTable(investmentData);
+    });
+    </script>
+
+</body>
+</html>
