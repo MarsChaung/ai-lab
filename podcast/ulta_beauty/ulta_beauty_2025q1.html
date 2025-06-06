@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Ulta Beauty 2025Q1 營運分析報告</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles for typography and active navigation links */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        /* Style for the active navigation link */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        
+        /* Style for inactive navigation links */
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+
+        /* Table header sticky style */
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            background-color: #f1f5f9; /* slate-100 */
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-stone-700">
+
+    <!-- Sticky Header & Navigation -->
+    <header id="header" class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-sky-600">Ulta Beauty 2025Q1</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:block">
+                    <ul class="ml-10 flex items-baseline space-x-4">
+                        <li><a href="#overview" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">營運概況</a></li>
+                        <li><a href="#finance-details" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">財務表現</a></li>
+                        <li><a href="#metrics" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">營運指標</a></li>
+                        <li><a href="#strategy" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">業務策略</a></li>
+                        <li><a href="#investment" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">投資與流動性</a></li>
+                        <li><a href="#risks" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">風險分析</a></li>
+                        <li><a href="#guidance" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">財務指引</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-600 hover:text-sky-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Hamburger Icon -->
+                        <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Close Icon (hidden by default) -->
+                        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <li><a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-slate-100">營運概況</a></li>
+                <li><a href="#finance-details" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-slate-100">財務表現</a></li>
+                <li><a href="#metrics" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-slate-100">營運指標</a></li>
+                <li><a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-slate-100">業務策略</a></li>
+                <li><a href="#investment" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-slate-100">投資與流動性</a></li>
+                <li><a href="#risks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-slate-100">風險分析</a></li>
+                <li><a href="#guidance" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-slate-100">財務指引</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- 公司營運概況 Section -->
+        <section id="overview" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">商業模式</h3>
+                    <p class="text-sm">Ulta Beauty 作為美國最大的專業美容零售商，其核心價值主張是「All Things Beauty, All in One Place®」。此模式將大眾化、高端及專業美容產品與沙龍服務整合，提供一站式購物體驗，滿足廣泛客群的需求。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">產品策略</h3>
+                    <p class="text-sm">提供超過25,000種產品，涵蓋600多個品牌。近年來，公司策略性地側重於增長快速的護膚、健康及香水品類，同時透過「Sparked」和「Muse Accelerator」計畫積極發掘和培育新興品牌。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">目標客戶</h3>
+                    <p class="text-sm">目標客戶為對美容感興趣的各年齡段女性，尤其以Z世代和千禧一代為重點。公司透過「Conscious Beauty」計畫及全通路策略，回應年輕消費者對價值、永續性及便利性的重視。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 財務表現細節 Section -->
+        <section id="finance-details" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節 (2025財年Q1)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">各品類銷售佔比趨勢</h3>
+                <p class="text-sm mb-4">圖表顯示，2025財年第一季消費者支出持續向護膚/健康和香水品類轉移，而傳統的化妝品品類佔比雖仍為最大，但相對下降。這反映了公司在這些高增長領域的戰略投資正在取得成效。</p>
+                <div class="relative h-96">
+                    <canvas id="salesByCategoryChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 營運指標 Section -->
+        <section id="metrics" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">各品類淨銷售額佔比 (互動表格)</h3>
+                <input type="text" id="table-filter" placeholder="依品類名稱篩選..." class="w-full md:w-1/2 p-2 border border-stone-300 rounded-md mb-4 focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-slate-100 sticky-header">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-600 uppercase tracking-wider">主要品類</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-600 uppercase tracking-wider">2025 Q1 佔比</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-600 uppercase tracking-wider">2024 Q1 佔比</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-600 uppercase tracking-wider">趨勢</th>
+                            </tr>
+                        </thead>
+                        <tbody id="category-table-body" class="bg-white divide-y divide-stone-200">
+                            <!-- Rows will be injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 業務策略和發展 Section -->
+        <section id="strategy" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展: Ulta Beauty Unleashed</h2>
+             <p class="mb-6 text-sm">此計畫為公司全面的增長藍圖，圍繞三大優先事項展開，旨在提升現有業務、開闢新收入來源並提高營運效率。</p>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">第一支柱：推動核心業務增長</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li>強化品牌組合，引入獨家和新興品牌。</li>
+                        <li>利用AI技術為4500萬會員提供個性化服務。</li>
+                        <li>升級數位平台，加速電子商務發展。</li>
+                        <li>改善門市體驗與執行力。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">第二支柱：拓展新的增值業務</h3>
+                     <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li>於2025年秋季推出精心策劃的線上市場平台。</li>
+                        <li>透過「輕資產」模式進軍墨西哥與中東市場。</li>
+                        <li>發展UB Media零售媒體網絡，創造新收入。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">第三支柱：調整未來發展基礎</h3>
+                     <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li>目標到2027年實現2億至2.5億美元的成本節約。</li>
+                        <li>對ERP、供應鏈和數據基礎設施進行系統升級。</li>
+                        <li>調整組織架構，使領導層與長期戰略保持一致。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 投資和流動性 Section -->
+        <section id="investment" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                 <p class="text-sm mb-4">截至2025財年Q1末，公司資產負債表穩健，為持續投資和應對經濟不確定性提供了強大的財務彈性。關鍵數據包括：</p>
+                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <div class="bg-sky-100 p-4 rounded-lg">
+                        <p class="text-sm text-sky-800 font-medium">現金及等價物</p>
+                        <p class="text-2xl font-bold text-sky-900">$4.55億</p>
+                    </div>
+                    <div class="bg-emerald-100 p-4 rounded-lg">
+                        <p class="text-sm text-emerald-800 font-medium">商品庫存淨額</p>
+                        <p class="text-2xl font-bold text-emerald-900">$21.2億</p>
+                        <p class="text-xs text-emerald-700">(年增 11.3%)</p>
+                    </div>
+                     <div class="bg-amber-100 p-4 rounded-lg">
+                        <p class="text-sm text-amber-800 font-medium">Q1股票回購</p>
+                        <p class="text-2xl font-bold text-amber-900">$3.59億</p>
+                    </div>
+                    <div class="bg-rose-100 p-4 rounded-lg">
+                        <p class="text-sm text-rose-800 font-medium">剩餘回購額度</p>
+                        <p class="text-2xl font-bold text-rose-900">$23億</p>
+                    </div>
+                 </div>
+                 <p class="text-xs mt-4 text-stone-500">註：庫存增加主要用於支持新品牌上市和關鍵品類的戰略投資。</p>
+            </div>
+        </section>
+
+        <!-- 風險和不確定性 Section -->
+        <section id="risks" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <svg class="flex-shrink-0 h-6 w-6 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        <div>
+                            <h4 class="font-semibold">宏觀經濟與消費者支出波動</h4>
+                            <p class="text-sm">通膨、利率及經濟波動可能影響非必需品的消費意願，對業績構成持續風險。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="flex-shrink-0 h-6 w-6 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        <div>
+                            <h4 class="font-semibold">市場競爭加劇</h4>
+                            <p class="text-sm">面臨來自Sephora、亞馬遜、DTC品牌等多方面的激烈競爭，可能導致市佔率流失。</p>
+                        </div>
+                    </li>
+                     <li class="flex items-start">
+                        <svg class="flex-shrink-0 h-6 w-6 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        <div>
+                            <h4 class="font-semibold">戰略計畫執行風險</h4>
+                            <p class="text-sm">線上市場、國際擴張及成本優化等新計畫的執行充滿不確定性與挑戰。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- 其他重要事項 Section - Placeholder -->
+        <section id="other-matters" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">其他重要事項</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                 <p class="text-sm">公司正積極管理其與Target的合作計畫，專注於優化現有約610家店中店的營運效率，而非追求數量擴張。同時，公司持續投資於「Conscious Beauty」等永續發展計畫，以符合消費者對環保與道德實踐日益增長的需求，目標到2025年底，50%的包裝實現可回收、可再填充或由環保材料製成。</p>
+            </div>
+        </section>
+
+        <!-- 關鍵數據匯總及財務指引 Section -->
+        <section id="guidance" class="pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及2025財年指引</h2>
+             <p class="mb-6 text-sm">基於第一季度優於預期的表現，公司上調了2025全財年的部分業績指引，展現對其戰略方向的信心。</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-blue-100/60 border border-blue-200 rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">淨銷售額 (Net Sales)</h3>
+                    <p class="text-3xl font-bold text-blue-900">$115億 - $117億</p>
+                    <p class="text-sm text-blue-700 mt-1">(原為 $115億 - $116億)</p>
+                </div>
+                <div class="bg-green-100/60 border border-green-200 rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-green-800 mb-2">可比銷售額增長 (Comp Sales)</h3>
+                    <p class="text-3xl font-bold text-green-900">0% - 1.5%</p>
+                    <p class="text-sm text-green-700 mt-1">(原為 0% - 1%)</p>
+                </div>
+                <div class="bg-purple-100/60 border border-purple-200 rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-2">稀釋後每股收益 (Diluted EPS)</h3>
+                    <p class="text-3xl font-bold text-purple-900">$22.65 - $23.20</p>
+                    <p class="text-sm text-purple-700 mt-1">(原為 $22.50 - $22.90)</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-stone-800 text-white mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-Ulta Beauty 2025Q1 營運分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中之Synopsys相關公開資料 (2025年6月3日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when a link is clicked
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                });
+            });
+
+            // --- Active Navigation Link on Scroll (Intersection Observer) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // Section is 40% visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Interactive Table Data and Filtering ---
+            const categoryData = [
+                { category: '化妝品 (Cosmetics)', q1_2025: 40, q1_2024: 42 },
+                { category: '護膚與健康 (Skincare and wellness)', q1_2025: 25, q1_2024: 23 },
+                { category: '護髮 (Haircare)', q1_2025: 18, q1_2024: 19 },
+                { category: '香水 (Fragrance)', q1_2025: 11, q1_2024: 10 },
+                { category: '服務 (Services)', q1_2025: 4, q1_2024: 4 },
+                { category: '其他 (Other)', q1_2025: 2, q1_2024: 2 },
+            ];
+
+            const tableBody = document.getElementById('category-table-body');
+            const filterInput = document.getElementById('table-filter');
+
+            const renderTable = (data) => {
+                tableBody.innerHTML = ''; // Clear existing rows
+                if (data.length === 0) {
+                     tableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-stone-500">找不到相符的資料</td></tr>';
+                     return;
+                }
+                data.forEach(item => {
+                    const trend = item.q1_2025 - item.q1_2024;
+                    let trendIcon = '';
+                    if (trend > 0) {
+                        trendIcon = `<span class="text-green-500 inline-flex items-center">&uarr; ${trend}%</span>`;
+                    } else if (trend < 0) {
+                        trendIcon = `<span class="text-red-500 inline-flex items-center">&darr; ${Math.abs(trend)}%</span>`;
+                    } else {
+                        trendIcon = `<span class="text-stone-500 inline-flex items-center">&ndash;</span>`;
+                    }
+
+                    const row = `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.category}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${item.q1_2025}%</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${item.q1_2024}%</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold">${trendIcon}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            };
+
+            filterInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = categoryData.filter(item => 
+                    item.category.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // Initial render
+            renderTable(categoryData);
+
+
+            // --- Chart.js: Sales by Category Chart ---
+            const ctx = document.getElementById('salesByCategoryChart').getContext('2d');
+            const salesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categoryData.map(d => d.category.split(' ')[0]), // Use shorter labels for chart
+                    datasets: [
+                        {
+                            label: '2025 Q1 銷售佔比 (%)',
+                            data: categoryData.map(d => d.q1_2025),
+                            backgroundColor: 'rgba(14, 165, 233, 0.6)', // sky-500
+                            borderColor: 'rgba(14, 165, 233, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '2024 Q1 銷售佔比 (%)',
+                            data: categoryData.map(d => d.q1_2024),
+                            backgroundColor: 'rgba(203, 213, 225, 0.6)', // slate-300
+                            borderColor: 'rgba(100, 116, 139, 1)', // slate-500
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '2025 vs 2024 財年第一季各品類銷售佔比比較',
+                            font: {
+                                size: 16,
+                                family: "'Inter', 'Noto Sans TC', sans-serif"
+                            },
+                            color: '#1f2937' // gray-800
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '淨銷售額佔比 (%)'
+                            }
+                        },
+                         x: {
+                            title: {
+                                display: true,
+                                text: '產品品類'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
