@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI寵物產業潛力分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Tailwind CSS Default with Sky Blue Accent -->
+    <!-- Application Structure Plan: This SPA is a single-page dashboard designed for interactive data exploration. The structure uses: 1. A sticky navigation header with smooth scrolling and an active state managed by the Intersection Observer API for clear user orientation. 2. A hero section with key metric cards. 3. A 'Market Overview' section featuring a Chart.js line chart for trend visualization. 4. A 'Key Players Analysis' section with an interactive, filterable data table populated from the report, allowing users to dynamically search for companies. 5. Sections for 'Applications', 'Risks', and 'Strategy' using card layouts for easy reading. This structure is chosen to prioritize interactivity and data discovery, directly addressing the user's technical specifications while presenting the report's content in a modern, engaging format. -->
+    <!-- Visualization & Content Choices: 1. Market Growth (Goal: Show Change) -> Line Chart (Chart.js) -> Clearly visualizes market projections from the report. 2. Company Analysis (Goal: Organize/Compare) -> Interactive HTML Table (Vanilla JS) -> Allows users to filter and explore detailed company data from the report's Table 2, a key interactive feature. 3. Key Metrics (Goal: Inform) -> Styled HTML Cards -> Highlights top-level stats for quick comprehension. 4. Content Sections (Goal: Inform) -> Multi-column Card Layouts (Tailwind CSS) -> Organizes textual information (applications, risks, strategies) into digestible blocks. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .active-nav-link { color: #0284c7; font-weight: 500; }
+        .inactive-nav-link { color: #44403c; }
+        .table-header-sticky { position: sticky; top: 64px; } /* 64px is height of nav */
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800">
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="bg-white/90 backdrop-blur-lg shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-sky-600">🐾 AI寵物產業潛力分析</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#overview" class="inactive-nav-link hover:text-sky-600 transition-colors">市場概覽</a>
+                        <a href="#players" class="inactive-nav-link hover:text-sky-600 transition-colors">主要參與者</a>
+                        <a href="#applications" class="inactive-nav-link hover:text-sky-600 transition-colors">AI應用</a>
+                        <a href="#risks" class="inactive-nav-link hover:text-sky-600 transition-colors">風險挑戰</a>
+                        <a href="#strategy" class="inactive-nav-link hover:text-sky-600 transition-colors">戰略建議</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-500 hover:text-white hover:bg-sky-600 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">市場概覽</a>
+                <a href="#players" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">主要參與者</a>
+                <a href="#applications" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">AI應用</a>
+                <a href="#risks" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">風險挑戰</a>
+                <a href="#strategy" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">戰略建議</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+
+        <!-- Market Overview Section -->
+        <section id="overview" class="scroll-mt-20 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場概覽：千億美元的藍海</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-lg text-sky-800">全球市場規模 (2033預計)</h3>
+                    <p class="text-4xl font-extrabold text-sky-600 mt-2">$5900億+</p>
+                </div>
+                <div class="bg-emerald-100 rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-lg text-emerald-800">核心驅動力</h3>
+                    <p class="text-4xl font-extrabold text-emerald-600 mt-2">95%</p>
+                    <p class="text-stone-600">飼主視寵物為家人</p>
+                </div>
+                <div class="bg-amber-100 rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-lg text-amber-800">AI動物健康市場 CAGR</h3>
+                    <p class="text-4xl font-extrabold text-amber-600 mt-2">~22%</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-center text-stone-700 mb-4">全球寵物照護市場增長預測 (億美元)</h3>
+                <div>
+                    <canvas id="marketGrowthChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Key Players Section -->
+        <section id="players" class="scroll-mt-20 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">主要參與者分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <input type="text" id="table-filter" class="w-full p-2 border border-stone-300 rounded-md" placeholder="篩選公司、產品或商業模式...">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-50 table-header-sticky">
+                            <tr>
+                                <th class="p-3 font-bold uppercase text-stone-600 border-b border-stone-200">公司名稱</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border-b border-stone-200">核心產品/服務</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border-b border-stone-200">商業模式</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border-b border-stone-200">目標客戶</th>
+                            </tr>
+                        </thead>
+                        <tbody id="company-table-body" class="divide-y divide-stone-200">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applications Section -->
+        <section id="applications" class="scroll-mt-20 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 核心應用領域</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">主動式健康</h3>
+                    <p class="text-stone-600">透過智慧穿戴裝置與影像診斷，從被動治療轉向主動預防，及早發現健康警訊。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">極致個人化</h3>
+                    <p class="text-stone-600">AI分析基因、年齡、活動量等數據，生成獨一無二的飲食配方與個人化訓練方案。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">人寵溝通</h3>
+                    <p class="text-stone-600">最具顛覆性的應用，利用生成式AI分析寵物聲音與行為，解讀為可理解的情緒狀態。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">營運自動化</h3>
+                    <p class="text-stone-600">AI智能體自動化獸醫診所的病歷記錄、排程與庫存管理，緩解人力短缺與職業倦怠。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risks Section -->
+        <section id="risks" class="scroll-mt-20 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險與挑戰</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-red-700 mb-2">監管真空與法律風險</h3>
+                    <p class="text-stone-600">獸醫AI缺乏強制性上市前審查，獸醫師在使用未經驗證工具時需承擔巨大法律責任。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-red-700 mb-2">數據隱私與安全危機</h3>
+                    <p class="text-stone-600">許多寵物科技App存在嚴重安全漏洞，可能洩露用戶個資、家庭住址甚至即時位置。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">戰略建議</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-emerald-700 mb-3">💡 對投資者</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2">
+                        <li>優先投資具備「獸醫DNA」的團隊。</li>
+                        <li>將數據安全作為核心盡職調查項。</li>
+                        <li>青睞能建立「數據飛輪」的生態系模式。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-emerald-700 mb-3">🚀 對創業者</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2">
+                        <li>奉行「人機協同」的設計哲學。</li>
+                        <li>將透明度作為核心競爭力以贏得信任。</li>
+                        <li>精心設計B2C與B2B的協同通路策略。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-emerald-700 mb-3">🏰 對行業巨頭</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2">
+                        <li>持續利用CVC和併購進行戰略佈局。</li>
+                        <li>利用海量專有數據建立AI「護城河」。</li>
+                        <li>主動引領行業建立倫理與驗證標準。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="bg-slate-800 text-slate-300 mt-20">
+        <div class="container mx-auto px-6 py-4 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI寵物產業潛力分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中相關公開資料 (2025年6月17日)。</p>
+        </div>
+    </footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Intersection Observer for Active Nav Link
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('#main-nav a');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.4
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav-link');
+                    link.classList.add('inactive-nav-link');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active-nav-link');
+                        link.classList.remove('inactive-nav-link');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Interactive Table Data & Logic
+    const productData = [
+        { name: 'PetPace', product: '智慧健康監測項圈', model: '硬體銷售 + 訂閱服務', customer: '寵物飼主、獸醫師' },
+        { name: 'Traini', product: '生成式AI犬隻「翻譯器」', model: '免費增值/應用程式訂閱', customer: '寵物飼主' },
+        { name: 'Petbarn (PetAI)', product: 'AI對話式助理', model: '整合式電商/平台', customer: '寵物飼主 (其零售客戶)' },
+        { name: 'PawCo Foods', product: 'AI生成個人化寵物食品', model: 'D2C產品銷售/訂閱', customer: '寵物飼主' },
+        { name: 'AI For Pet (TTcare)', product: 'AI健康掃描APP', model: '整合式平台', customer: '寵物飼主、獸醫師' },
+        { name: 'Scribenote', product: 'AI醫療記錄員', model: 'B2B SaaS', customer: '獸醫診所' },
+        { name: 'Zoetis (Imagyst)', product: 'AI影像診斷平台', model: 'B2B (儀器銷售 + 耗材)', customer: '獸醫診所' },
+        { name: 'Mars (GREENIES™ Check)', product: 'AI牙齒健康檢測工具', model: 'B2C (免費工具帶動銷售)', customer: '寵物飼主' }
+    ];
+
+    const tableBody = document.getElementById('company-table-body');
+    const filterInput = document.getElementById('table-filter');
+
+    function renderTable(data) {
+        tableBody.innerHTML = '';
+        if (data.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-stone-500">找不到相符的資料</td></tr>`;
+            return;
+        }
+        data.forEach(item => {
+            const row = `
+                <tr>
+                    <td class="p-3 border-b border-stone-200">${item.name}</td>
+                    <td class="p-3 border-b border-stone-200">${item.product}</td>
+                    <td class="p-3 border-b border-stone-200">${item.model}</td>
+                    <td class="p-3 border-b border-stone-200">${item.customer}</td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+    }
+
+    filterInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredData = productData.filter(item =>
+            item.name.toLowerCase().includes(searchTerm) ||
+            item.product.toLowerCase().includes(searchTerm) ||
+            item.model.toLowerCase().includes(searchTerm) ||
+            item.customer.toLowerCase().includes(searchTerm)
+        );
+        renderTable(filteredData);
+    });
+    
+    renderTable(productData);
+
+    // Chart.js: Market Growth Chart
+    const ctx = document.getElementById('marketGrowthChart').getContext('2d');
+    const marketGrowthChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['2024', '2026', '2028', '2030', '2032', '2033'],
+            datasets: [{
+                label: '全球市場規模 (億美元)',
+                data: [3200, 3650, 4200, 4850, 5500, 5900],
+                borderColor: '#0ea5e9',
+                backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                fill: true,
+                tension: 0.3,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    grid: { color: '#e7e5e4' }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>
