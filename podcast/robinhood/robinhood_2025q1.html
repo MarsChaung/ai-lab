@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Robinhood 2025Q1財報分析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        /* 自定義導航列 active 狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #475569; /* Tailwind slate-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        /* 表格 sticky aheader 樣式 */
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            background-color: #f1f5f9; /* slate-100 */
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414-.336.75-.75.75h-.75a.75.75 0 01-.75-.75v-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a.75.75 0 00.75-.75V7.5h-1.5M13.5 7.5h.75a.75.75 0 00.75-.75V4.5h-1.5m-3 0h.75a.75.75 0 00.75-.75V4.5h-1.5m-3 0h.75a.75.75 0 00.75-.75V4.5h-1.5" />
+                    </svg>
+                    <a href="#" class="text-2xl font-bold text-slate-800">Robinhood 2025Q1</a>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#overview" class="nav-link inactive-nav-link py-2 transition-colors duration-300">營運概況</a>
+                    <a href="#financials" class="nav-link inactive-nav-link py-2 transition-colors duration-300">財務表現</a>
+                    <a href="#metrics" class="nav-link inactive-nav-link py-2 transition-colors duration-300">營運指標</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-2 transition-colors duration-300">業務策略</a>
+                    <a href="#risks" class="nav-link inactive-nav-link py-2 transition-colors duration-300">風險摘要</a>
+                    <a href="#summary" class="nav-link inactive-nav-link py-2 transition-colors duration-300">數據匯總</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-slate-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#overview" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">公司營運概況</a>
+                <a href="#financials" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">財務表現細節</a>
+                <a href="#metrics" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">營運指標</a>
+                <a href="#strategy" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">業務策略和發展</a>
+                <a href="#investment" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">投資和流動性</a>
+                <a href="#competition" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">產業競爭分析</a>
+                <a href="#risks" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">風險和不確定性</a>
+                <a href="#other" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">其他重要事項</a>
+                <a href="#summary" class="block py-2 px-4 text-sm text-slate-600 hover:bg-sky-100 rounded">關鍵數據匯總及財務指引</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        
+        <!-- Section: 公司營運概況 -->
+        <section id="overview" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">公司營運概況</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="section-card bg-sky-50 text-sky-900">
+                    <h3 class="text-lg font-semibold mb-2">總淨收入 (YoY)</h3>
+                    <p class="text-4xl font-extrabold">$927M</p>
+                    <p class="text-xl font-medium text-green-600 mt-2">+50%</p>
+                </div>
+                <div class="section-card bg-emerald-50 text-emerald-900">
+                    <h3 class="text-lg font-semibold mb-2">淨利 (YoY)</h3>
+                    <p class="text-4xl font-extrabold">$336M</p>
+                    <p class="text-xl font-medium text-green-600 mt-2">+114%</p>
+                </div>
+                <div class="section-card bg-amber-50 text-amber-900">
+                    <h3 class="text-lg font-semibold mb-2">淨存款</h3>
+                    <p class="text-4xl font-extrabold">$18.0B</p>
+                    <p class="text-sm text-slate-500 mt-2">創歷史新高</p>
+                </div>
+                <div class="section-card bg-violet-50 text-violet-900">
+                    <h3 class="text-lg font-semibold mb-2">Gold 訂閱用戶 (YoY)</h3>
+                    <p class="text-4xl font-extrabold">3.2M</p>
+                    <p class="text-xl font-medium text-green-600 mt-2">+90%</p>
+                </div>
+            </div>
+            <div class="mt-8 section-card">
+                <p class="text-lg text-slate-700 leading-relaxed">
+                    Robinhood 在 2025 年第一季度表現強勁，產品創新顯著加速，推出了 Robinhood Strategies、Banking 和 Cortex 等新服務。客戶反應熱烈，淨存款、Gold 訂閱數和期權交易量均創下歷史新高，所有資產類別的交易量均實現了穩健的同比增長。公司營運費用控制得宜，並透過收購 TradePMR 擴大市佔率，展現了強勁的財務實力與未來增長潛力。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section: 財務表現細節 -->
+        <section id="financials" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">財務表現細節</h2>
+            <div class="grid lg:grid-cols-5 gap-8">
+                <div class="lg:col-span-3 section-card">
+                    <h3 class="text-xl font-bold mb-4 text-center">Q1 2025 收入來源分佈 (百萬美元)</h3>
+                    <div class="h-96">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="section-card">
+                        <h4 class="font-bold text-lg mb-2">交易基礎收入</h4>
+                        <p class="text-3xl font-bold text-slate-700">$583M <span class="text-base font-medium text-green-600">(+77% YoY)</span></p>
+                        <ul class="mt-3 text-sm text-slate-500 list-disc list-inside space-y-1">
+                            <li>加密貨幣: $252M (+100%)</li>
+                            <li>期權: $240M (+56%)</li>
+                            <li>股票: $56M (+44%)</li>
+                        </ul>
+                    </div>
+                    <div class="section-card">
+                        <h4 class="font-bold text-lg mb-2">淨利息收入</h4>
+                        <p class="text-3xl font-bold text-slate-700">$290M <span class="text-base font-medium text-green-600">(+14% YoY)</span></p>
+                         <p class="mt-3 text-sm text-slate-500">主要由生息資產和證券借貸活動增長所驅動。</p>
+                    </div>
+                    <div class="section-card">
+                        <h4 class="font-bold text-lg mb-2">稀釋後每股盈餘 (EPS)</h4>
+                        <p class="text-3xl font-bold text-slate-700">$0.37 <span class="text-base font-medium text-green-600">(+106% YoY)</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 營運指標 -->
+        <section id="metrics" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">營運指標</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div class="section-card text-center">
+                    <h3 class="text-lg font-semibold mb-2">總平台資產</h3>
+                    <p class="text-4xl font-extrabold text-sky-600">$221B</p>
+                    <p class="text-lg font-medium text-green-600 mt-2">+70% YoY</p>
+                </div>
+                <div class="section-card text-center">
+                    <h3 class="text-lg font-semibold mb-2">有資金客戶數</h3>
+                    <p class="text-4xl font-extrabold text-sky-600">25.8M</p>
+                    <p class="text-lg font-medium text-green-600 mt-2">+8% YoY</p>
+                </div>
+                <div class="section-card text-center">
+                    <h3 class="text-lg font-semibold mb-2">投資帳戶數</h3>
+                    <p class="text-4xl font-extrabold text-sky-600">27.0M</p>
+                    <p class="text-lg font-medium text-green-600 mt-2">+11% YoY</p>
+                </div>
+                <div class="section-card text-center">
+                    <h3 class="text-lg font-semibold mb-2">每用戶平均收入 (ARPU)</h3>
+                    <p class="text-4xl font-extrabold text-sky-600">$145</p>
+                    <p class="text-lg font-medium text-green-600 mt-2">+39% YoY</p>
+                </div>
+            </div>
+             <div class="section-card">
+                    <h3 class="text-xl font-bold mb-4 text-center">其他關鍵營運數據 (十億美元)</h3>
+                    <div class="h-80">
+                        <canvas id="additionalMetricsChart"></canvas>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Section: 業務策略和發展 -->
+        <section id="strategy" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">業務策略和發展</h2>
+            <div class="space-y-6">
+                <div class="section-card">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">為活躍交易者增強產品</h3>
+                    <p class="text-slate-600 leading-relaxed">持續為活躍交易者推出高級功能和工具，使交易更快、更清晰、更直觀。桌面交易平台 Robinhood Legend 提升了速度，增加了對指數期權和加密貨幣的支持，並引入了新的指標和圖表。此外，還擴展了預測市場產品。</p>
+                </div>
+                <div class="section-card">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">擴大客戶錢包份額</h3>
+                    <p class="text-slate-600 leading-relaxed">在三月的 Gold 主題活動中，推出了新的顧問、銀行和 AI 產品：Robinhood Strategies、Robinhood Banking 和 Robinhood Cortex。並於二月完成對 RIA 託管平台 TradePMR 的收購，截至三月底其管理的資產約為 410 億美元。</p>
+                </div>
+                <div class="section-card">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">建立全球金融生態系統</h3>
+                    <p class="text-slate-600 leading-relaxed">在國際市場上持續取得進展，在英國和歐盟擁有超過 15 萬名客戶。對全球規模的加密貨幣交易所 Bitstamp Ltd. 的收購預計將在今年年中完成。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 投資和流動性 -->
+        <section id="investment" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">投資和流動性</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="section-card">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">股票回購計畫</h3>
+                    <p class="text-slate-600 leading-relaxed">董事會授權額外增加 5 億美元的股票回購，使計畫總額達到 15 億美元。截至 2025 年 4 月 25 日，已回購 2000 萬股 A 類普通股，總計 6.67 億美元。剩餘授權約 8.33 億美元，預計在未來約兩年內執行。</p>
+                </div>
+                <div class="section-card">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">現金狀況</h3>
+                    <p class="text-slate-600 leading-relaxed">截至 2025 年 3 月 31 日，現金及現金等價物總額為 44 億美元，顯示公司擁有充裕的流動性以支持營運和未來增長計畫。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 產業競爭分析 -->
+        <section id="competition" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">產業競爭分析</h2>
+            <div class="section-card">
+                <p class="text-slate-600 leading-relaxed">
+                    此份財報文件並未詳細分析具體的競爭對手，但其在「風險和不確定性」部分將「競爭」列為一個重要因素。公司的策略重點體現在以下幾個方面以應對競爭：
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2 text-slate-600">
+                    <li><strong>產品創新：</strong> 快速推出新產品和服務（如 Robinhood Strategies, Banking, Cortex），以吸引和留住客戶並加深其參與度。</li>
+                    <li><strong>擴展市場：</strong> 積極進行地域擴張（英國、歐盟）和業務收購（TradePMR, Bitstamp），以擴大市場份額和服務範圍。</li>
+                    <li><strong>提升用戶體驗：</strong> 專為新一代投資者設計產品，並持續增強交易平台的功能與速度，以提供卓越的用戶體驗。</li>
+                </ul>
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    總體而言，Robinhood 的競爭策略是透過技術創新、擴大產品線和全球佈局，來建立差異化優勢並鞏固其市場地位。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section: 風險和不確定性 -->
+        <section id="risks" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">風險和不確定性</h2>
+            <div class="section-card">
+                <p class="text-slate-600 leading-relaxed">財報中的前瞻性聲明指出了多項可能影響未來業績的風險和不確定性，主要包括：</p>
+                <ul class="list-decimal list-inside mt-4 space-y-3 text-slate-600">
+                    <li><strong>業務擴張風險：</strong> 快速持續擴張（新產品、新地區）帶來的管理挑戰。</li>
+                    <li><strong>財務波動性：</strong> 季度財務結果和關鍵指標的波動。</li>
+                    <li><strong>收入依賴性：</strong> 對交易基礎收入（尤其是 PFOF）的依賴，以及相關的監管風險。</li>
+                    <li><strong>利率環境：</strong> 利率波動對業務的影響。</li>
+                    <li><strong>監管複雜性：</strong> 遵守廣泛、複雜且不斷變化的監管環境的困難。</li>
+                    <li><strong>市場與經濟狀況：</strong> 全球金融市場的商業、經濟或政治狀況變化可能損害業務。</li>
+                    <li><strong>競爭壓力：</strong> 來自現有和新進競爭對手的壓力。</li>
+                    <li><strong>技術與安全：</strong> 對第三方供應商的依賴、網路安全事件、數據洩露等風險。</li>
+                    <li><strong>加密貨幣波動：</strong> 加密貨幣價格和交易量的波動性。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: 其他重要事項 -->
+        <section id="other" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">其他重要事項</h2>
+             <div class="section-card">
+                <h3 class="text-xl font-bold text-sky-700 mb-3">收購案進展</h3>
+                <ul class="list-disc list-inside space-y-2 text-slate-600">
+                    <li><strong>TradePMR：</strong> 已於 2025 年第一季度完成對 RIA (註冊投資顧問) 託管平台 TradePMR 的收購。此次收購為 Robinhood 增加了約 410 億美元由 RIA 管理的資產。</li>
+                    <li><strong>Bitstamp Ltd.：</strong> 對全球規模的加密貨幣交易所 Bitstamp 的收購案正在進行中，預計在符合慣例成交條件下，於 2025 年年中完成。</li>
+                </ul>
+                <p class="mt-4 text-slate-600">這些收購案是 Robinhood 擴大服務範圍、增加資產管理規模及佈局全球市場戰略的關鍵部分。</p>
+            </div>
+        </section>
+        
+        <!-- Section: 關鍵數據匯總及財務指引 -->
+        <section id="summary" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b-4 border-sky-500 pb-3">關鍵數據匯總及財務指引</h2>
+            <div class="section-card">
+                <h3 class="text-xl font-bold text-slate-700 mb-4">綜合損益表 (百萬美元)</h3>
+                <div class="mb-4">
+                    <input type="text" id="tableFilter" class="w-full md:w-1/3 p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="篩選項目 (例如: Net income)...">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-slate-500">
+                        <thead class="text-xs text-slate-700 uppercase bg-slate-100 sticky-header">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 rounded-l-lg">項目</th>
+                                <th scope="col" class="px-6 py-3 text-right">Q1 2025</th>
+                                <th scope="col" class="px-6 py-3 text-right">Q1 2024</th>
+                                <th scope="col" class="px-6 py-3 text-right">Q4 2024</th>
+                                <th scope="col" class="px-6 py-3 text-right rounded-r-lg">YoY 變化</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialsTableBody">
+                            <!-- Data will be inserted by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-8 section-card">
+                <h3 class="text-xl font-bold text-slate-700 mb-4">2025年財務指引</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    公司更新了 2025 年全年的費用展望。調整後的營運費用和股權激勵 (SBC) 合併預算更新為 <strong>20.85 億至 21.85 億美元</strong>。此更新包含了因收購 TradePMR 而產生的 8500 萬美元預期成本。此費用展望不包括信貸損失準備金、與 Bitstamp 收購案相關的成本，以及潛在的重大監管事項等費用。
+                </p>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-slate-800 text-slate-300 mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-Robinhood 2025Q1財報分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Robinhood相關公開資料 (2025年6月22日)。</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Intersection Observer for Active Nav Link ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.4
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Chart.js: Revenue Chart ---
+        const revenueCtx = document.getElementById('revenueChart');
+        if (revenueCtx) {
+            new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['交易基礎收入', '淨利息收入', '其他收入'],
+                    datasets: [{
+                        label: 'Q1 2025 收入 (百萬美元)',
+                        data: [583, 290, 54],
+                        backgroundColor: [
+                            'rgba(56, 189, 248, 0.6)', // sky-400
+                            'rgba(16, 185, 129, 0.6)', // emerald-500
+                            'rgba(245, 158, 11, 0.6)'  // amber-500
+                        ],
+                        borderColor: [
+                            'rgba(14, 165, 233, 1)',
+                            'rgba(5, 150, 105, 1)',
+                            'rgba(217, 119, 6, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(203, 213, 225, 0.2)'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: $${context.raw}M`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // --- Chart.js: Additional Operating Metrics Chart ---
+        const additionalMetricsCtx = document.getElementById('additionalMetricsChart');
+        if (additionalMetricsCtx) {
+            new Chart(additionalMetricsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['退休金帳戶 AUC', '現金餘額自動轉存 (Cash Sweep)', '保證金帳戶餘額 (Margin Book)'],
+                    datasets: [{
+                        label: '數據 (十億美元)',
+                        data: [14.4, 28.2, 8.8],
+                        backgroundColor: [
+                            'rgba(139, 92, 246, 0.6)',  // violet-500
+                            'rgba(34, 197, 94, 0.6)',   // green-500
+                            'rgba(239, 68, 68, 0.6)'    // red-500
+                        ],
+                        borderColor: [
+                            'rgba(124, 58, 237, 1)',
+                            'rgba(22, 163, 74, 1)',
+                            'rgba(220, 38, 38, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                             title: {
+                                display: true,
+                                text: '十億美元 (Billion USD)'
+                            },
+                             grid: {
+                                color: 'rgba(203, 213, 225, 0.2)'
+                            }
+                        },
+                        x: {
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: $${context.raw}B`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+
+        // --- Interactive Table Data and Filtering ---
+        const financialsData = [
+            { item: 'Transaction-based revenues', q1_2025: 583, q1_2024: 329, q4_2024: 672, yoy: '+77%' },
+            { item: 'Net interest revenues', q1_2025: 290, q1_2024: 254, q4_2024: 296, yoy: '+14%' },
+            { item: 'Other revenues', q1_2025: 54, q1_2024: 35, q4_2024: 46, yoy: '+54%' },
+            { item: '<strong>Total net revenues</strong>', q1_2025: 927, q1_2024: 618, q4_2024: 1014, yoy: '+50%' },
+            { item: 'Brokerage and transaction', q1_2025: 50, q1_2024: 35, q4_2024: 50, yoy: '+43%' },
+            { item: 'Technology and development', q1_2025: 214, q1_2024: 196, q4_2024: 208, yoy: '+9%' },
+            { item: 'Operations', q1_2025: 31, q1_2024: 28, q4_2024: 29, yoy: '+11%' },
+            { item: 'Marketing', q1_2025: 105, q1_2024: 67, q4_2024: 82, yoy: '+57%' },
+            { item: 'General and administrative', q1_2025: 133, q1_2024: 118, q4_2024: 70, yoy: '+13%' },
+            { item: '<strong>Total operating expenses</strong>', q1_2025: 557, q1_2024: 460, q4_2024: 458, yoy: '+21%' },
+            { item: 'Income before income taxes', q1_2025: 371, q1_2024: 162, q4_2024: 558, yoy: '+129%' },
+            { item: '<strong>Net income</strong>', q1_2025: 336, q1_2024: 157, q4_2024: 916, yoy: '+114%' },
+        ];
+        
+        const tableBody = document.getElementById('financialsTableBody');
+        const filterInput = document.getElementById('tableFilter');
+
+        const populateTable = (data) => {
+            tableBody.innerHTML = '';
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = `bg-white ${index === data.length - 1 ? '' : 'border-b'} hover:bg-slate-50`;
+                tr.innerHTML = `
+                    <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">${row.item}</th>
+                    <td class="px-6 py-4 text-right">${row.q1_2025.toLocaleString()}</td>
+                    <td class="px-6 py-4 text-right">${row.q1_2024.toLocaleString()}</td>
+                    <td class="px-6 py-4 text-right">${row.q4_2024.toLocaleString()}</td>
+                    <td class="px-6 py-4 text-right font-medium ${row.yoy.startsWith('+') ? 'text-green-600' : 'text-red-600'}">${row.yoy}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        };
+
+        filterInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = financialsData.filter(row => 
+                row.item.toLowerCase().includes(searchTerm)
+            );
+            populateTable(filteredData);
+        });
+
+        // Initial population of the table
+        populateTable(financialsData);
+
+    });
+    </script>
+</body>
+</html>
