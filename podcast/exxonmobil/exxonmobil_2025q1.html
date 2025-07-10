@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-ExxonMobil 2025Q1財務分析報告</title>
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 引入 Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 自定義樣式 */
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+        }
+        
+        /* 導航列 Active 狀態的樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+            border-bottom: 2px solid transparent;
+        }
+        
+        /* 卡片懸停效果 */
+        .metric-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header 和 Navigation -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-sky-600">ExxonMobil 2025Q1</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:block">
+                    <ul class="ml-10 flex items-baseline space-x-4">
+                        <li><a href="#section-1" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">營運概況</a></li>
+                        <li><a href="#section-2" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">財務表現</a></li>
+                        <li><a href="#section-3" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">營運指標</a></li>
+                        <li><a href="#section-4" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">業務策略</a></li>
+                        <li><a href="#section-5" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">投資與流動性</a></li>
+                        <li><a href="#section-6" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">競爭分析</a></li>
+                        <li><a href="#section-7" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">風險</a></li>
+                        <li><a href="#section-8" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">關鍵數據</a></li>
+                        <li><a href="#section-9" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">綜合分析</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Hamburger Icon -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Close Icon -->
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <li><a href="#section-1" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">營運概況</a></li>
+                <li><a href="#section-2" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">財務表現</a></li>
+                <li><a href="#section-3" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">營運指標</a></li>
+                <li><a href="#section-4" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">業務策略</a></li>
+                <li><a href="#section-5" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">投資與流動性</a></li>
+                <li><a href="#section-6" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">競爭分析</a></li>
+                <li><a href="#section-7" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">風險</a></li>
+                <li><a href="#section-8" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">關鍵數據</a></li>
+                <li><a href="#section-9" class="nav-link-mobile text-gray-600 hover:bg-sky-100 block px-3 py-2 rounded-md text-base font-medium">綜合分析</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- Section 1: 公司營運概況 -->
+        <section id="section-1" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">ExxonMobil 在2025年第一季度的營運表現，展現了其業務韌性和差異化價值戰略。由優勢資產驅動的上游業務表現強勁，其巨大的盈利能力在很大程度上掩蓋了下游能源產品和化學產品部門所面臨的顯著週期性疲軟。</p>
+                <p>公司的核心業務建立在四大支柱之上：上游業務（原油和天然氣勘探與生產）、能源產品（煉油和燃料營銷）、化學產品（石化產品製造）和特殊產品（高性能潤滑油）。此外，新興的低碳解決方案（LCS）部門正被定位為一個長期的增長引擎。</p>
+            </div>
+        </section>
+
+        <!-- Section 2: 財務表現細節 -->
+        <section id="section-2" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="metric-card bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-gray-500">季度盈利 (1Q25)</h3>
+                    <p class="text-4xl font-bold text-sky-600 mt-2">$77.13億</p>
+                    <p class="text-sm text-red-500 mt-2">較去年同期 $82.20億 下降</p>
+                </div>
+                <div class="metric-card bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-gray-500">營運現金流 (1Q25)</h3>
+                    <p class="text-4xl font-bold text-green-600 mt-2">$129.53億</p>
+                    <p class="text-sm text-gray-500 mt-2">展現強勁的現金產生能力</p>
+                </div>
+                <div class="metric-card bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-gray-500">股東分配 (1Q25)</h3>
+                    <p class="text-4xl font-bold text-indigo-600 mt-2">$91億</p>
+                    <p class="text-sm text-gray-500 mt-2">包括 $43億 股息及 $48億 股票回購</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 營運指標 -->
+        <section id="section-3" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-700 mb-4">各部門盈利表現 (1Q25)</h3>
+                <p class="mb-4">2025年第一季度各業務部門的表現呈現明顯分化，凸顯了一體化模式的價值。上游業務成為明星部門，而下游業務則面臨市場逆風。</p>
+                <div class="relative h-96 w-full">
+                    <canvas id="earningsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 業務策略和發展 -->
+        <section id="section-4" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                 <ul class="list-disc list-inside space-y-3">
+                    <li><strong class="text-sky-700">優勢上游資產：</strong> 專注於二疊紀盆地和蓋亞那等低成本、高利潤產區。收購Pioneer預計將帶來超過30億美元的年度協同效應。</li>
+                    <li><strong class="text-sky-700">項目管道：</strong> 2025年將啟動10個優勢項目，預計到2026年將額外創造超過30億美元的盈利。</li>
+                    <li><strong class="text-sky-700">結構性成本削減：</strong> 自2019年以來已累計節省127億美元，目標是到2030年實現180億美元的累計節省。</li>
+                    <li><strong class="text-sky-700">高價值產品轉型：</strong> 目標到2030年，高價值產品產量增長80%，佔產品解決方案總盈利的40%以上。</li>
+                </ul>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-700 mb-4">2025年關鍵優勢項目 (可篩選)</h3>
+                <input type="text" id="project-filter" placeholder="篩選項目名稱、部門或戰略意義..." class="w-full p-2 border border-gray-300 rounded-md mb-4 focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-100 sticky top-0">
+                            <tr>
+                                <th class="py-2 px-4 border-b text-left">項目名稱/類型</th>
+                                <th class="py-2 px-4 border-b text-left">所屬業務部門</th>
+                                <th class="py-2 px-4 border-b text-left">戰略意義</th>
+                            </tr>
+                        </thead>
+                        <tbody id="project-table-body">
+                            <!-- 資料將由 JavaScript 動態填入 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: 投資和流動性 -->
+        <section id="section-5" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="metric-card bg-sky-50 rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-sky-800">資本支出 (Capex)</h3>
+                    <p class="text-2xl font-bold text-sky-600 mt-2">全年指導目標 $270 - $290億</p>
+                    <p class="text-sm text-gray-600 mt-2">第一季度支出 $59億，與目標一致。</p>
+                </div>
+                <div class="metric-card bg-green-50 rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-green-800">資產負債表</h3>
+                    <p class="text-2xl font-bold text-green-600 mt-2">淨資本負債率 7%</p>
+                    <p class="text-sm text-gray-600 mt-2">維持業界領先的低負債水平，提供戰略靈活性。</p>
+                </div>
+                <div class="metric-card bg-indigo-50 rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-indigo-800">股票回購</h3>
+                    <p class="text-2xl font-bold text-indigo-600 mt-2">每年 $200億</p>
+                    <p class="text-sm text-gray-600 mt-2">穩步推進至2026年的回購計劃。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: 產業競爭分析 -->
+        <section id="section-6" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-700 mb-4">可持續的競爭優勢</h3>
+                <p class="mb-4">ExxonMobil的競爭力源於一體化規模、技術領先、低供應成本、財務實力和卓越的項目執行力。這些優勢使其在多項關鍵指標上領先於同行。</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b text-left">指標</th>
+                                <th class="py-3 px-4 border-b text-center">ExxonMobil</th>
+                                <th class="py-3 px-4 border-b text-center">IOC 同行平均值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">3年股東總回報年均複合增長率 (TSR CAGR)</td>
+                                <td class="py-3 px-4 border-b text-center font-bold text-green-600">17%</td>
+                                <td class="py-3 px-4 border-b text-center">低於17%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">自由現金流佔市值比例 (過去3年)</td>
+                                <td class="py-3 px-4 border-b text-center font-bold text-green-600">超過25%</td>
+                                <td class="py-3 px-4 border-b text-center">不到10%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">淨資本負債率</td>
+                                <td class="py-3 px-4 border-b text-center font-bold text-green-600">7%</td>
+                                <td class="py-3 px-4 border-b text-center">高於7%</td>
+                            </tr>
+                             <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">累計結構性成本節約 (自2019年)</td>
+                                <td class="py-3 px-4 border-b text-center font-bold text-green-600">$127億</td>
+                                <td class="py-3 px-4 border-b text-center">遠低於此數值</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: 風險和不確定性 -->
+        <section id="section-7" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-red-700 mb-2">市場與大宗商品風險</h3>
+                    <p>公司面臨石油、天然氣價格波動和週期性的煉油/化工利潤風險。其策略是建立一個在低價環境下仍具韌性的業務模式，目標是到2030年將綜合盈虧平衡點降至每桶30美元。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-red-700 mb-2">地緣政治與監管挑戰</h3>
+                    <p>風險包括法律、稅收和法規的變化。公司近年來展現出更為主動和強硬的姿態來應對外部壓力，例如對股東行動主義者和歐盟的利潤稅提起法律訴訟。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-2">
+                    <h3 class="font-bold text-red-700 mb-2">長期的能源轉型挑戰</h3>
+                    <p>全球向可再生能源的轉型是根本性長期風險。公司的應對策略是「『和』方程式」，即在滿足世界能源需求的同時致力於減排，將自身定位為能源與技術公司，而非單純的石油公司。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: 關鍵數據匯總及財務指引 -->
+        <section id="section-8" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                 <p class="mb-4">以下是基於2025年第一季度報告的關鍵財務數據匯總和公司的前瞻性指引。</p>
+                 <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b text-left">項目</th>
+                                <th class="py-3 px-4 border-b text-left">數值 / 指引</th>
+                                <th class="py-3 px-4 border-b text-left">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b font-semibold">每股盈利 (1Q25)</td>
+                                <td class="py-3 px-4 border-b">$1.76</td>
+                                <td class="py-3 px-4 border-b">U.S. GAAP</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b font-semibold">淨產量 (1Q25)</td>
+                                <td class="py-3 px-4 border-b">每日460萬桶油當量</td>
+                                <td class="py-3 px-4 border-b">同比飆升20%，主要由蓋亞那及Pioneer收購案驅動</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b font-semibold">全年資本支出指引 (2025)</td>
+                                <td class="py-3 px-4 border-b">$270 - $290億美元</td>
+                                <td class="py-3 px-4 border-b">堅持有利可圖的增長投資</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b font-semibold">股票回購計劃</td>
+                                <td class="py-3 px-4 border-b">至2026年，每年$200億美元</td>
+                                <td class="py-3 px-4 border-b">持續為股東創造價值</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b font-semibold">結構性成本節約目標</td>
+                                <td class="py-3 px-4 border-b">到2030年累計節省$180億美元</td>
+                                <td class="py-3 px-4 border-b">目前已完成$127億美元</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: 綜合分析 -->
+        <section id="section-9" class="report-section pt-20 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">綜合來看，ExxonMobil已成功執行了一項長達數年的轉型，打造了一個更具韌性、盈利能力更強、效率更高的企業。公司的戰略清晰且執行一致，利用其一體化優勢，在整個商業週期中投資於低成本、高回報的項目，並由強大的上游引擎和堅如磐石的資產負債表提供資金支持。</p>
+                <p class="mb-4">儘管面臨下游逆風和能源轉型的長期挑戰，但公司的「長期賽局」思維、對結構性成本優勢的專注，以及對新技術領域紀律嚴明而又靈活的投資，使其處於有利地位，有望在2030年前產生可觀的現金流並持續增長股東價值。</p>
+                <p class="font-semibold text-yellow-700 bg-yellow-100 p-4 rounded-md">投資者應注意，本分析非財務建議。在做出任何投資決策前，應考慮大宗商品市場的內在波動性、日益增長的監管壓力，以及能源轉型的長期不確定性。公司的強硬姿態雖能穩定營運，但也可能引發新的對抗性風險。</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-white mt-12">
+        <div class="container mx-auto py-4 px-5 text-center">
+            <p>&copy; 巴菲特AI價值投資-ExxonMobil 2025Q1財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Hershey相關公開資料 (2025年7月10日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- 行動版選單功能 ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = mobileMenuButton.querySelector('svg:first-child');
+            const closeIcon = mobileMenuButton.querySelector('svg:last-child');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+
+            // 點擊行動版選單連結後自動關閉選單
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                });
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('.report-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null, // 相對於 viewport
+                rootMargin: '0px 0px -50% 0px', // 當區塊進入 viewport 上半部時觸發
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Chart.js: 部門盈利圖表 ---
+            const ctx = document.getElementById('earningsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['上游業務 (Upstream)', '能源產品 (Energy Products)', '化學產品 (Chemical Products)'],
+                    datasets: [{
+                        label: '2025年第一季度盈利 (十億美元)',
+                        data: [6.8, 0.827, 0.273],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)', // blue-500
+                            'rgba(16, 185, 129, 0.7)', // green-500
+                            'rgba(239, 68, 68, 0.7)'   // red-500
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(239, 68, 68, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '各業務部門盈利對比 (1Q25)',
+                            font: { size: 18 }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '盈利 (十億美元)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- 互動式表格資料與功能 ---
+            const projectData = [
+                { name: '中國化工綜合體', department: '化學產品', significance: '供應龐大的中國市場，規避關稅影響' },
+                { name: 'Baytown先進回收裝置#2', department: '低碳解決方案', significance: '採用專有回收技術，滿足對循環聚合物日益增長的需求' },
+                { name: '蓋亞那 FPSO', department: '上游業務', significance: '新增深水產能，擴大低成本、高利潤原油產量' },
+                { name: '巴西 FPSO', department: '上游業務', significance: '新增深水產能，實現全球上游資產組合多元化' },
+                { name: 'Golden Pass LNG', department: '上游業務', significance: '液化天然氣出口設施，抓住全球天然氣需求的長期增長機遇' }
+            ];
+
+            const projectFilterInput = document.getElementById('project-filter');
+            const projectTableBody = document.getElementById('project-table-body');
+
+            function renderTable(data) {
+                projectTableBody.innerHTML = ''; // 清空現有內容
+                if(data.length === 0) {
+                    projectTableBody.innerHTML = '<tr><td colspan="3" class="text-center py-4">無符合條件的資料</td></tr>';
+                    return;
+                }
+                data.forEach(project => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-gray-50';
+                    row.innerHTML = `
+                        <td class="py-2 px-4 border-b">${project.name}</td>
+                        <td class="py-2 px-4 border-b">${project.department}</td>
+                        <td class="py-2 px-4 border-b">${project.significance}</td>
+                    `;
+                    projectTableBody.appendChild(row);
+                });
+            }
+
+            projectFilterInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = projectData.filter(project => 
+                    project.name.toLowerCase().includes(searchTerm) ||
+                    project.department.toLowerCase().includes(searchTerm) ||
+                    project.significance.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // 初始渲染表格
+            renderTable(projectData);
+        });
+    </script>
+</body>
+</html>
