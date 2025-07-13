@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Coca-Cola 2025Q1財務分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 自定義樣式 */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        /* 導航列 Active 狀態 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #475569; /* slate-600 */
+            border-bottom: 2px solid transparent;
+        }
+        /* 確保 canvas 在 div 內響應式調整大小 */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header / Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-xl font-bold text-red-600">
+                    <a href="#">Coca-Cola 2025Q1</a>
+                </div>
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#overview" class="nav-link inactive-nav-link pb-1 transition-colors duration-300 hover:text-sky-500">公司營運</a>
+                    <a href="#financials" class="nav-link inactive-nav-link pb-1 transition-colors duration-300 hover:text-sky-500">財務表現</a>
+                    <a href="#metrics" class="nav-link inactive-nav-link pb-1 transition-colors duration-300 hover:text-sky-500">營運指標</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link pb-1 transition-colors duration-300 hover:text-sky-500">業務策略</a>
+                    <a href="#competition" class="nav-link inactive-nav-link pb-1 transition-colors duration-300 hover:text-sky-500">產業競爭</a>
+                    <a href="#risks" class="nav-link inactive-nav-link pb-1 transition-colors duration-300 hover:text-sky-500">風險分析</a>
+                    <a href="#summary" class="nav-link inactive-nav-link pb-1 transition-colors duration-300 hover:text-sky-500">數據匯總</a>
+                    <a href="#recommendation" class="nav-link inactive-nav-link pb-1 transition-colors duration-300 hover:text-sky-500">綜合評估</a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-700 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+            <nav class="flex flex-col items-center space-y-4 py-4">
+                <a href="#overview" class="nav-link-mobile w-full text-center py-2 hover:bg-slate-100">公司營運</a>
+                <a href="#financials" class="nav-link-mobile w-full text-center py-2 hover:bg-slate-100">財務表現</a>
+                <a href="#metrics" class="nav-link-mobile w-full text-center py-2 hover:bg-slate-100">營運指標</a>
+                <a href="#strategy" class="nav-link-mobile w-full text-center py-2 hover:bg-slate-100">業務策略</a>
+                <a href="#competition" class="nav-link-mobile w-full text-center py-2 hover:bg-slate-100">產業競爭</a>
+                <a href="#risks" class="nav-link-mobile w-full text-center py-2 hover:bg-slate-100">風險分析</a>
+                <a href="#summary" class="nav-link-mobile w-full text-center py-2 hover:bg-slate-100">數據匯總</a>
+                <a href="#recommendation" class="nav-link-mobile w-full text-center py-2 hover:bg-slate-100">綜合評估</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 md:py-12">
+
+        <!-- 1. 公司營運概況 -->
+        <section id="overview" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">濃縮液模式：盈利引擎</h3>
+                    <p class="text-slate-600">核心業務是製造並銷售飲料濃縮液給全球裝瓶夥伴，這是一種輕資產、高利潤的商業模式，帶來了極高的毛利率和營業利潤率。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">可口可樂系統：全球網絡</h3>
+                    <p class="text-slate-600">與全球超過200家裝瓶合作夥伴共同構建了「可口可樂系統」。公司正透過再授權策略，剝離資本密集型資產，以提升利潤率和資本回報率。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">全品類飲料公司</h3>
+                    <p class="text-slate-600">已成功轉型，產品組合橫跨汽水、果汁、水、運動飲料、咖啡和茶等多個品類，在全球擁有超過500個品牌，降低對單一品類的依賴。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 財務表現細節 -->
+        <section id="financials" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節 (2025 Q1)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-bold text-stone-700 mb-4">損益表亮點</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <div class="bg-green-100 text-green-800 p-4 rounded-lg">
+                        <div class="text-4xl font-bold">+6%</div>
+                        <div class="mt-1">有機營收增長</div>
+                    </div>
+                    <div class="bg-sky-100 text-sky-800 p-4 rounded-lg">
+                        <div class="text-4xl font-bold">+71%</div>
+                        <div class="mt-1">營業利潤增長</div>
+                    </div>
+                     <div class="bg-slate-100 text-slate-800 p-4 rounded-lg">
+                        <div class="text-4xl font-bold">33.8%</div>
+                        <div class="mt-1">可比營業利潤率</div>
+                    </div>
+                    <div class="bg-red-100 text-red-800 p-4 rounded-lg">
+                        <div class="text-4xl font-bold">-2%</div>
+                        <div class="mt-1">報告淨營收</div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-500 mt-4">* 營業利潤大幅增長主要因去年同期有大額減損費用。報告淨營收下降受匯率及再授權影響，核心業務依然強勁。</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-700 mb-3">資產負債表審視</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>總資產約 <span class="font-bold">1017億美元</span>，其中商標和商譽等無形資產佔比高。</li>
+                        <li>長期債務為 <span class="font-bold">435億美元</span>，但公司持有 <span class="font-bold">138億美元</span> 現金及等價物，流動性強。</li>
+                        <li>股東權益為 <span class="font-bold">262億美元</span>，高市價淨值比反映了品牌價值。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-700 mb-3">現金流量分析</h3>
+                    <p class="text-slate-600">2025年Q1營運現金流為負數，主因是一筆高達 <span class="font-bold text-red-600">61億美元</span> 的一次性fairlife收購相關付款。若剔除此項，公司的自由現金流為正 <span class="font-bold text-green-600">5.58億美元</span>，顯示其潛在現金生成能力依然穩固。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 營運指標 -->
+        <section id="metrics" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">互動式產品組合</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <input type="text" id="product-filter" class="w-full p-2 border border-slate-300 rounded-md mb-4" placeholder="在此輸入品牌或類別進行篩選...">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-3 font-bold uppercase text-slate-600 border border-slate-200">品牌名稱</th>
+                                <th class="p-3 font-bold uppercase text-slate-600 border border-slate-200">產品類別</th>
+                                <th class="p-3 font-bold uppercase text-slate-600 border border-slate-200">簡要說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-table-body">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 業務策略和發展 -->
+        <section id="strategy" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">在健康意識世界中取勝</h3>
+                    <p class="text-slate-600">可口可樂零糖 (Coca-Cola Zero Sugar) 是明星產品，全球銷量激增14%，成功應對消費者對低糖/無糖產品的需求。公司致力於在全產品組合中降低糖含量。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">創新與產品組合擴張</h3>
+                    <p class="text-slate-600">採用「測試-學習-擴展」模式，收購fairlife、BodyArmor等潛力品牌並利用全球網絡將其規模化。同時內部創新，推出鹼性水、低糖果汁等新品。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">新興市場與數位轉型</h3>
+                    <p class="text-slate-600">增長主要由印度、中國和巴西等新興市場引領。同時，積極利用生成式AI進行營銷創新和研發優化，將技術深度融入業務運營。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 投資和流動性 is merged into 財務表現細節 as per the report structure -->
+
+        <!-- 5. 產業競爭分析 -->
+        <section id="competition" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析：可口可樂 vs. 百事可樂</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-slate-600 mb-4">可口可樂是純粹的飲料巨頭，而百事公司收入大部分來自食品和零食業務。這導致可口可樂營收規模較小，但利潤率顯著更高，構建了強大的品牌和分銷護城河。</p>
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-center text-stone-700 mb-4">營收對比 (TTM)</h3>
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-center text-stone-700 mb-4">利潤率對比 (%)</h3>
+                        <div class="chart-container">
+                            <canvas id="marginChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 風險和不確定性 -->
+        <section id="risks" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-3">美國國稅局稅務爭議</h3>
+                    <p>這是最大風險。潛在的額外稅款和利息負債總額可能高達 <span class="font-extrabold text-2xl">120億美元</span>，將嚴重影響現金流、股息增長和未來盈利能力。</p>
+                </div>
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-3">監管與消費趨勢挑戰</h3>
+                    <p>全球糖稅的實施、塑膠包裝的環保壓力，以及消費者對健康產品的偏好和減肥藥物的潛在影響，都對公司構成長期逆風。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 7. 關鍵數據匯總及財務指引 -->
+        <section id="summary" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-slate-500 text-sm">市盈率 (P/E)</div>
+                    <div class="text-4xl font-bold text-sky-600">~28x</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-slate-500 text-sm">股價淨值比 (P/B)</div>
+                    <div class="text-4xl font-bold text-sky-600">~11.5x</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-slate-500 text-sm">股息率</div>
+                    <div class="text-4xl font-bold text-green-600">~2.9%</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-slate-500 text-sm">股息支付率</div>
+                    <div class="text-4xl font-bold text-red-600">~78%</div>
+                </div>
+            </div>
+             <p class="text-sm text-slate-500 mt-4 text-center">* 估值高於競爭對手，高股息支付率可能限制未來增長靈活性。</p>
+        </section>
+
+        <!-- 8. 綜合評估 -->
+        <section id="recommendation" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-center text-stone-700 mb-4">高品質企業，但非高價值股票</h3>
+                <p class="text-slate-600 mb-6 text-lg text-center max-w-3xl mx-auto">可口可樂擁有無與倫比的品牌、全球網絡和高利潤率，是一家優質公司。然而，當前的溢價估值和懸而未決的巨額稅務風險，使其不符合傳統價值投資的安全邊際要求。</p>
+                <div class="grid md:grid-cols-2 gap-6 text-center">
+                    <div class="border border-red-300 bg-red-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-red-800 text-xl mb-2">對於經典價值投資者</h4>
+                        <p class="text-red-700">不建議。鑑於偏高估值和巨大的IRS訴訟風險，目前缺乏足夠的安全邊際。</p>
+                    </div>
+                    <div class="border border-green-300 bg-green-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-green-800 text-xl mb-2">對於「以合理價格買入優質公司」的投資者</h4>
+                        <p class="text-green-700">可考慮。可作為核心長期持有標的，但前提是願意接受當前估值，並相信公司能應對法律挑戰。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-6 text-center text-slate-400">
+            <p>&copy; 2025 財務分析報告。本報告僅供參考，不構成任何投資建議。</p>
+            <p>&copy; 巴菲特AI價值投資-Coca-Cola 2025Q1財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Coca-Cola相關公開資料 (2025年7月13日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Close mobile menu on link click
+            document.querySelectorAll('.nav-link-mobile').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // 40% of the section must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // --- Interactive Product Table ---
+            const productData = [
+                { name: 'Coca-Cola Zero Sugar', category: '汽水飲料', description: '公司的明星產品，全球銷量增長14%，應對健康趨勢的關鍵策略。' },
+                { name: 'Sprite', category: '汽水飲料', description: '全球領先的檸檬味汽水品牌。' },
+                { name: 'Fanta', category: '汽水飲料', description: '多種口味的果味碳酸飲料，深受年輕人喜愛。' },
+                { name: 'smartwater', category: '水/運動飲料', description: '蒸餾水並添加電解質，定位高端市場。' },
+                { name: 'Dasani', category: '水/運動飲料', description: '北美市場主要的瓶裝水品牌。' },
+                { name: 'BodyArmor', category: '水/運動飲料', description: '收購的運動飲料品牌，與Gatorade競爭。' },
+                { name: 'vitaminwater', category: '水/運動飲料', description: '富含維生素和礦物質的增強型水飲。' },
+                { name: 'Minute Maid (美粒果)', category: '果汁/乳製品', description: '全球知名的果汁品牌，提供多種果汁產品。' },
+                { name: 'fairlife', category: '果汁/乳製品', description: '高蛋白、無乳糖的超濾牛奶，進軍加值乳品市場。' },
+                { name: 'Costa Coffee', category: '咖啡/茶', description: '收購的全球連鎖咖啡品牌，佈局即飲和線下咖啡市場。' },
+                { name: 'Gold Peak Tea', category: '咖啡/茶', description: '高品質的即飲茶品牌，在北美市場表現出色。' }
+            ];
+
+            const productTableBody = document.getElementById('product-table-body');
+            const productFilter = document.getElementById('product-filter');
+
+            function renderTable(data) {
+                productTableBody.innerHTML = '';
+                if (data.length === 0) {
+                    productTableBody.innerHTML = '<tr><td colspan="3" class="text-center p-4 text-slate-500">找不到符合條件的產品。</td></tr>';
+                    return;
+                }
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-slate-50';
+                    row.innerHTML = `
+                        <td class="p-3 border border-slate-200">${item.name}</td>
+                        <td class="p-3 border border-slate-200">${item.category}</td>
+                        <td class="p-3 border border-slate-200">${item.description}</td>
+                    `;
+                    productTableBody.appendChild(row);
+                });
+            }
+
+            productFilter.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) || 
+                    item.category.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            renderTable(productData); // Initial render
+
+            // --- Chart.js Visualizations ---
+            // Chart 1: Revenue Comparison
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['可口可樂 (KO)', '百事可樂 (PEP)'],
+                    datasets: [{
+                        label: '年營收 (TTM, 單位：十億美元)',
+                        data: [46.9, 91.5],
+                        backgroundColor: [
+                            'rgba(220, 38, 38, 0.6)', // Red for Coke
+                            'rgba(59, 130, 246, 0.6)'  // Blue for Pepsi
+                        ],
+                        borderColor: [
+                            'rgba(220, 38, 38, 1)',
+                            'rgba(59, 130, 246, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: $${context.raw}B`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                             title: {
+                                display: true,
+                                text: '十億美元'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Margin Comparison
+            const marginCtx = document.getElementById('marginChart').getContext('2d');
+            new Chart(marginCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['毛利率', '營業利潤率'],
+                    datasets: [
+                        {
+                            label: '可口可樂 (KO)',
+                            data: [61.1, 30.5],
+                            backgroundColor: 'rgba(220, 38, 38, 0.6)',
+                            borderColor: 'rgba(220, 38, 38, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '百事可樂 (PEP)',
+                            data: [55.0, 15.4],
+                            backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                             title: {
+                                display: true,
+                                text: '百分比 (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
