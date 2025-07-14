@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-P&G 2025Q3財務分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        /* 自定義導航列 active 狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #475569; /* slate-600 */
+            transition: color 0.3s ease;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7; /* sky-600 */
+        }
+        /* 表格標頭黏著效果 */
+        .sticky-header th {
+            position: sticky;
+            top: 64px; /* 配合導航列高度 */
+            background-color: #f1f5f9; /* slate-100 */
+            z-index: 10;
+        }
+        /* 區塊標題動畫 */
+        .section-title-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-title-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                     <svg class="h-8 w-8 text-sky-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-1.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                    </svg>
+                    <span class="text-xl font-bold text-slate-800">P&G 2025財年Q3</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#overview" class="nav-link inactive-nav-link pb-1">公司概況</a>
+                    <a href="#financials" class="nav-link inactive-nav-link pb-1">財務表現</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link pb-1">業務策略</a>
+                    <a href="#competition" class="nav-link inactive-nav-link pb-1">競爭分析</a>
+                    <a href="#risks" class="nav-link inactive-nav-link pb-1">風險因素</a>
+                    <a href="#recommendation" class="nav-link inactive-nav-link pb-1">綜合評估</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+            <a href="#overview" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">公司營運概況</a>
+            <a href="#financials" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">財務表現細節</a>
+            <a href="#metrics" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">營運指標</a>
+            <a href="#strategy" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">業務策略和發展</a>
+            <a href="#liquidity" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">投資和流動性</a>
+            <a href="#competition" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">產業競爭分析</a>
+            <a href="#risks" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">風險和不確定性</a>
+            <a href="#summary" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">關鍵數據匯總及財務指引</a>
+            <a href="#recommendation" class="block py-3 px-4 text-sm text-slate-600 hover:bg-sky-50 nav-link">綜合評估</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 md:py-12">
+
+        <!-- Section: 公司營運概況 -->
+        <section id="overview" class="mb-16 scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4 leading-relaxed">寶僑公司 (Procter & Gamble) 的營運架構基於五個以產業為基礎的事業單位 (Sector Business Units, SBUs)，每個單位都擁有全球知名的領導品牌，構建了其強大的市場護城河。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Beauty -->
+                    <div class="bg-sky-50 rounded-lg p-4 shadow-sm">
+                        <h3 class="font-bold text-sky-800 text-lg mb-2">美容 (Beauty)</h3>
+                        <p class="text-sm text-slate-600">旗下品牌包括 Olay (歐蕾)、SK-II、Head & Shoulders (海倫仙度絲) 等，專注於護膚及護髮產品。</p>
+                    </div>
+                    <!-- Grooming -->
+                    <div class="bg-indigo-50 rounded-lg p-4 shadow-sm">
+                        <h3 class="font-bold text-indigo-800 text-lg mb-2">理容 (Grooming)</h3>
+                        <p class="text-sm text-slate-600">以 Gillette (吉列) 和 Braun (百靈) 為核心，主導男性及女性刮鬍、除毛市場。</p>
+                    </div>
+                    <!-- Health Care -->
+                    <div class="bg-emerald-50 rounded-lg p-4 shadow-sm">
+                        <h3 class="font-bold text-emerald-800 text-lg mb-2">健康護理 (Health Care)</h3>
+                        <p class="text-sm text-slate-600">涵蓋口腔護理的 Crest (佳潔士)、Oral-B，以及個人保健品牌 Vicks。</p>
+                    </div>
+                    <!-- Fabric & Home Care -->
+                    <div class="bg-amber-50 rounded-lg p-4 shadow-sm">
+                        <h3 class="font-bold text-amber-800 text-lg mb-2">織物與家庭護理</h3>
+                        <p class="text-sm text-slate-600">擁有 Tide (汰漬)、Ariel 等洗衣領導品牌，以及 Febreze 等家居護理產品。</p>
+                    </div>
+                    <!-- Baby, Feminine & Family Care -->
+                    <div class="bg-rose-50 rounded-lg p-4 shadow-sm">
+                        <h3 class="font-bold text-rose-800 text-lg mb-2">嬰兒、女性與家庭護理</h3>
+                        <p class="text-sm text-slate-600">包含 Pampers (幫寶適)、Always/Whisper，以及 Charmin 等市場領導品牌。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 財務表現細節 -->
+        <section id="financials" class="mb-16 scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節 (2025財年第三季)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-slate-500 mb-2">淨銷售額</h3>
+                    <p class="text-4xl font-bold text-red-600">-2%</p>
+                    <p class="text-sm text-slate-500 mt-2">至 198 億美元</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-slate-500 mb-2">有機銷售額</h3>
+                    <p class="text-4xl font-bold text-green-600">+1%</p>
+                    <p class="text-sm text-slate-500 mt-2">由價格上漲驅動</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-slate-500 mb-2">核心每股盈餘 (Core EPS)</h3>
+                    <p class="text-4xl font-bold text-green-600">+1%</p>
+                    <p class="text-sm text-slate-500 mt-2">至 1.54 美元</p>
+                </div>
+            </div>
+             <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">各業務部門有機銷售額增長</h3>
+                <div class="h-80 md:h-96 w-full">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: 營運指標 -->
+        <section id="metrics" class="mb-16 scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 border-l-4 border-sky-500 p-4 rounded-r-lg">
+                        <h4 class="font-bold text-slate-800">調整後自由現金流生產力</h4>
+                        <p class="text-3xl font-bold text-sky-600 mt-1">75%</p>
+                        <p class="text-sm text-slate-500 mt-1">衡量將淨利潤轉換為現金的能力。</p>
+                    </div>
+                    <div class="bg-slate-50 border-l-4 border-emerald-500 p-4 rounded-r-lg">
+                        <h4 class="font-bold text-slate-800">季度現金返還</h4>
+                        <p class="text-3xl font-bold text-emerald-600 mt-1">$38億</p>
+                        <p class="text-sm text-slate-500 mt-1">$24億股息 + $14億股票回購。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 業務策略和發展 -->
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">三大核心增長支柱</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center p-4">
+                        <div class="bg-sky-100 text-sky-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        </div>
+                        <h4 class="font-bold text-lg">優越性 (Superiority)</h4>
+                        <p class="text-sm text-slate-600 mt-1">在產品、包裝、品牌傳播、零售執行和消費者價值上追求卓越。</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="bg-emerald-100 text-emerald-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h4 class="font-bold text-lg">生產力 (Productivity)</h4>
+                        <p class="text-sm text-slate-600 mt-1">在整個價值鏈中追求成本效率，為創新和利潤擴張提供資金。</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="bg-amber-100 text-amber-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7.014A8.003 8.003 0 0117.657 18.657z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 16.121A3 3 0 1014.12 11.88l-4.242 4.242z" /></svg>
+                        </div>
+                        <h4 class="font-bold text-lg">建設性顛覆</h4>
+                        <p class="text-sm text-slate-600 mt-1">引領產業變革，而非被動應對，保持領先地位。</p>
+                    </div>
+                </div>
+            </div>
+             <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">新戰略加速計畫 (自2026財年起)</h3>
+                 <p class="mb-4">為應對銷量增長停滯和市場挑戰，管理層啟動了一項重大的生產力提升與組織重組計畫。</p>
+                <ul class="list-disc list-inside space-y-2 text-slate-700">
+                    <li><span class="font-semibold">投資組合精簡：</span>退出阿根廷、奈及利亞等表現不佳的市場，專注核心業務。</li>
+                    <li><span class="font-semibold">供應鏈優化：</span>調整生產規模和地點，提高效率，降低成本，增強供應鏈韌性。</li>
+                    <li><span class="font-semibold">組織設計重組：</span>計畫在兩年內減少多達7,000個非製造業職位，打造更精簡、敏捷的組織。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: 投資和流動性 -->
+        <section id="liquidity" class="mb-16 scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">股東回報的基石：「股息王」</h3>
+                <p class="mb-4">寶僑以其穩定且持續增長的股東回報而聞名，是尋求收益的投資者的核心持股之一。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-blue-800 text-lg mb-2">股息支付</h4>
+                        <p class="text-slate-600">連續 <span class="text-2xl font-bold text-blue-600">69</span> 年增加股息，連續 <span class="text-2xl font-bold text-blue-600">135</span> 年支付股息，展現了無與倫比的穩定性。</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-green-800 text-lg mb-2">2025財年資本回報計畫</h4>
+                        <p class="text-slate-600">計畫向股東返還約 <span class="text-2xl font-bold text-green-600">160億至170億</span> 美元，包括約100億美元的股息和60-70億美元的股票回購。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 產業競爭分析 -->
+        <section id="competition" class="mb-16 scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <label for="table-filter" class="font-semibold text-slate-700">依公司名稱篩選：</label>
+                    <input type="text" id="table-filter" class="mt-1 block w-full md:w-1/3 rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500" placeholder="例如：聯合利華">
+                
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-500">
+                            <!--<thead class="text-xs text-slate-700 uppercase bg-slate-100 sticky-header">-->
+                            <thead class="bg-slate-100"></thead>
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">公司</th>
+                                    <th scope="col" class="px-6 py-3">市值 (約)</th>
+                                    <th scope="col" class="px-6 py-3">年營收 (LTM)</th>
+                                    <th scope="col" class="px-6 py-3">本益比 (P/E)</th>
+                                    <th scope="col" class="px-6 py-3">股息殖利率</th>
+                                </tr>
+                            </thead>
+                            <tbody id="competition-table-body">
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-400 mt-4">*LTM: Last Twelve Months (過去十二個月)。數據為約略值，僅供參考。</p>
+            </div>
+        </section>
+
+        <!-- Section: 風險和不確定性 -->
+        <section id="risks" class="mb-16 scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-red-100 text-red-600 rounded-full p-2 mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" /></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-800">宏觀經濟壓力</h3>
+                    </div>
+                    <p class="text-slate-600">持續面臨不利的外匯波動和商品成本上漲的風險，地緣政治不穩定也可能擾亂全球供應鏈。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-red-100 text-red-600 rounded-full p-2 mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01" /></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-800">銷量-價格擠壓</h3>
+                    </div>
+                    <p class="text-slate-600">持續提價以應對通膨可能導致銷量進一步下滑，形成「停滯性通膨」的困境，壓縮利潤空間。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-red-100 text-red-600 rounded-full p-2 mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-800">創新者的兩難</h3>
+                    </div>
+                    <p class="text-slate-600">龐大的組織規模和風險規避文化可能阻礙顛覆性創新，使其在面對靈活的小型競爭者和自有品牌時處於劣勢。</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-red-100 text-red-600 rounded-full p-2 mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-800">戰略執行風險</h3>
+                    </div>
+                    <p class="text-slate-600">大規模的組織重組和裁員計畫在執行過程中可能面臨營運中斷、員工士氣低落等問題，影響預期效益。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 關鍵數據匯總及財務指引 -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引 (2025財年)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-500">總銷售額增長</h4>
+                        <p class="text-2xl font-bold text-slate-800 mt-1">約 0%</p>
+                        <p class="text-xs text-slate-500">(與去年持平)</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-500">有機銷售額增長</h4>
+                        <p class="text-2xl font-bold text-slate-800 mt-1">約 2%</p>
+                        <p class="text-xs text-slate-500">(低於先前預期)</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-slate-500">核心每股盈餘增長</h4>
+                        <p class="text-2xl font-bold text-slate-800 mt-1">+2% to +4%</p>
+                        <p class="text-xs text-slate-500">(指引下調)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 綜合評估 -->
+        <section id="recommendation" class="scroll-mt-20">
+            <h2 class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="prose max-w-none">
+                    <p class="lead text-lg text-slate-600">綜合分析，寶僑並非傳統意義上的深度價值股，而更符合「以合理價格投資優質企業」(Quality at a Reasonable Price) 的典範。其估值處於合理區間，反映了當前較低的增長前景。</p>
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="border border-green-200 bg-green-50 rounded-lg p-4">
+                            <h4 class="font-bold text-green-800">買入 (Buy)</h4>
+                            <p class="text-sm text-green-700 mt-1">適合尋求資本保值和可靠、持續增長收入的<strong class="font-semibold">長期保守型投資者</strong>。可將其視為提供穩定股息的「類債券」資產。</p>
+                        </div>
+                        <div class="border border-amber-200 bg-amber-50 rounded-lg p-4">
+                            <h4 class="font-bold text-amber-800">持有 (Hold)</h4>
+                            <p class="text-sm text-amber-700 mt-1">對於<strong class="font-semibold">已持有該股的投資者</strong>，其優質特性和現金回報提供了足夠的安全邊際，建議繼續持有以獲取股息收益。</p>
+                        </div>
+                        <div class="border border-slate-200 bg-slate-50 rounded-lg p-4">
+                            <h4 class="font-bold text-slate-800">觀望 (Watch)</h4>
+                            <p class="text-sm text-slate-700 mt-1">對於尋求深度折價或<strong class="font-semibold">中期高資本增值的投資者</strong>，建議觀望。其主要風險是長期停滯，回報可能僅限於股息。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400 mt-16">
+        <div class="container mx-auto px-4 py-6 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-P&G 2025Q3財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中P&G相關公開資料 (2025年7月14日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Close mobile menu on link click ---
+            const mobileNavLinks = mobileMenu.querySelectorAll('a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('header nav a.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px', // Trigger when section is in the middle of the viewport
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // --- Intersection Observer for Section Title Animations ---
+            const animatedTitles = document.querySelectorAll('.section-title');
+            const titleObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedTitles.forEach(title => {
+                titleObserver.observe(title);
+            });
+
+            // --- Chart.js: Revenue Chart ---
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            if(ctx) {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['美容', '理容', '健康護理', '織物與家庭護理', '嬰兒/女性/家庭護理'],
+                        datasets: [{
+                            label: '有機銷售額增長 (%)',
+                            data: [2, 3, 4, 0, -1],
+                            backgroundColor: [
+                                'rgba(56, 189, 248, 0.6)', // sky-400
+                                'rgba(129, 140, 248, 0.6)', // indigo-400
+                                'rgba(52, 211, 153, 0.6)', // emerald-400
+                                'rgba(251, 191, 36, 0.6)', // amber-400
+                                'rgba(244, 63, 94, 0.6)'    // rose-500
+                            ],
+                            borderColor: [
+                                'rgba(14, 165, 233, 1)',
+                                'rgba(99, 102, 241, 1)',
+                                'rgba(16, 185, 129, 1)',
+                                'rgba(245, 158, 11, 1)',
+                                'rgba(225, 29, 72, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: '#e2e8f0' // slate-200
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%'
+                                    },
+                                    color: '#64748b' // slate-500
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#64748b' // slate-500
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y + '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Interactive Competition Table ---
+            const competitionData = [
+                { company: '寶僑 (PG)', marketCap: '3,716億美元', revenue: '839億美元', pe: '24.3x', yield: '2.7%' },
+                { company: '聯合利華 (UL)', marketCap: '1,509億美元', revenue: '658億美元', pe: '18.9x', yield: '3.4%' },
+                { company: '高露潔-棕欖 (CL)', marketCap: '734億美元', revenue: '200億美元', pe: '25.4x', yield: '2.3%' },
+                { company: '金百利克拉克 (KMB)', marketCap: '438億美元', revenue: '198億美元', pe: '17.6x', yield: '3.9%' }
+            ];
+
+            const tableBody = document.getElementById('competition-table-body');
+            const filterInput = document.getElementById('table-filter');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4">無符合條件的資料</td></tr>`;
+                    return;
+                }
+                data.forEach(item => {
+                    const row = `
+                        <tr class="bg-white border-b hover:bg-slate-50">
+                            <th scope="row" class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">${item.company}</th>
+                            <td class="px-6 py-4">${item.marketCap}</td>
+                            <td class="px-6 py-4">${item.revenue}</td>
+                            <td class="px-6 py-4">${item.pe}</td>
+                            <td class="px-6 py-4 font-semibold ${parseFloat(item.yield) > 3.0 ? 'text-green-600' : 'text-slate-600'}">${item.yield}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            filterInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = competitionData.filter(item => 
+                    item.company.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // Initial render
+            renderTable(competitionData);
+
+        });
+    </script>
+</body>
+</html>
