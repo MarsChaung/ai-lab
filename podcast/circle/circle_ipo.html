@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Circle (CRCL) 財務分析報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles for the page */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+        }
+
+        /* Style for the active navigation link */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+
+        /* Style for inactive navigation links */
+        .inactive-nav-link {
+            color: #475569; /* slate-600 */
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .inactive-nav-link:hover {
+            color: #0284c7; /* sky-600 */
+        }
+
+        /* Custom card shadow for a subtle lift */
+        .custom-shadow {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/90 backdrop-blur-sm sticky top-0 z-50 shadow-md transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Site Title -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-sky-600">
+                        Circle財務分析
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex md:space-x-4 lg:space-x-6">
+                    <a href="#intro" data-nav="intro" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium">美元穩定幣介紹</a>
+                    <a href="#overview" data-nav="overview" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium">公司營運概況</a>
+                    <a href="#financials" data-nav="financials" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium">財務表現</a>
+                    <a href="#strategy" data-nav="strategy" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium">業務策略</a>
+                    <a href="#competition" data-nav="competition" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium">產業競爭</a>
+                    <a href="#risks" data-nav="risks" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium">風險分析</a>
+                    <a href="#summary" data-nav="summary" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium">數據匯總</a>
+                    <a href="#recommendation" data-nav="recommendation" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium">綜合評估</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Hamburger Icon -->
+                        <svg class="h-6 w-6" id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                        <!-- Close Icon (hidden by default) -->
+                        <svg class="h-6 w-6 hidden" id="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#intro" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-100">美元穩定幣介紹</a>
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-100">公司營運概況</a>
+                <a href="#financials" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-100">財務表現</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-100">業務策略</a>
+                <a href="#competition" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-100">產業競爭</a>
+                <a href="#risks" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-100">風險分析</a>
+                <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-100">數據匯總</a>
+                <a href="#recommendation" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-sky-100">綜合評估</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <!-- Section: 美元穩定幣介紹 -->
+        <section id="intro" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">美元穩定幣介紹</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 custom-shadow">
+                <p class="text-lg leading-relaxed mb-4">穩定幣是一種旨在維持穩定價值的特殊加密貨幣，通常透過與美元等法定貨幣 1:1 掛鉤來實現。它結合了區塊鏈技術的效率與傳統貨幣的穩定性，成為連接數位資產與傳統金融世界的關鍵橋樑。</p>
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-sky-50 border border-sky-200 rounded-lg p-4">
+                        <h3 class="font-bold text-sky-800 text-xl mb-2">核心產品：USDC</h3>
+                        <p>Circle 的旗艦產品 USDC 是全球市值第二大的法幣抵押型穩定幣。每發行一枚 USDC，Circle 都會在由貝萊德等機構管理的儲備基金中存入等值的美元現金或短期美國國債，確保其價值穩定。</p>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                        <h3 class="font-bold text-emerald-800 text-xl mb-2">全球應用</h3>
+                        <p>穩定幣不僅用於加密貨幣交易，更被廣泛應用於跨境支付、國際匯款和價值儲存。它為全球用戶提供了比傳統銀行系統更快、更便宜的美元資產獲取和轉移渠道。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 公司營運概況 -->
+        <section id="overview" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 custom-shadow">
+                    <h3 class="text-xl font-bold text-stone-700 mb-3">公司使命</h3>
+                    <p>Circle 創立於 2013 年，其使命是「透過無摩擦的價值交換來提升全球經濟繁榮」。公司將自身定位為新型數位經濟的基礎設施建設者，專注於推廣「可編程美元」的概念。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 custom-shadow">
+                    <h3 class="text-xl font-bold text-stone-700 mb-3">監管優先策略</h3>
+                    <p>自成立以來，Circle 始終採取「監管優先」的策略，積極與全球監管機構合作並獲取牌照。這種合規導向的姿態，使其在與主要競爭對手 Tether 的競爭中建立了基於信任的護城河。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 custom-shadow">
+                    <h3 class="text-xl font-bold text-stone-700 mb-3">成功 IPO</h3>
+                    <p>在經歷 2022 年 SPAC 上市失敗後，Circle 於 2025 年 6 月成功在紐約證券交易所 (NYSE) 完成傳統 IPO，股票代碼為 CRCL。此舉進一步鞏固了其在市場中的透明度和可信度。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 財務表現細節 -->
+        <section id="financials" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 custom-shadow">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-stone-700 mb-4">收入與利潤核心矛盾</h3>
+                        <p class="mb-4">Circle 的收入在過去幾年實現了爆炸式增長，從 2022 年的 7.72 億美元增至 2024 年的 17 億美元。然而，其獲利能力卻面臨巨大挑戰，淨利潤從 2023 年的高點下滑。</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong class="text-sky-700">核心收入來源：</strong>超過 99% 的收入來自 USDC 儲備資產（主要為美國國債）所產生的利息，使其財務表現與聯準會的利率政策高度掛鉤。</li>
+                            <li><strong class="text-red-700">獲利能力困境：</strong>與 Coinbase 的分潤協議嚴重制約了其淨利率。2024 年，Circle 支付給 Coinbase 的分銷成本高達 9.08 億美元，吞噬了超過一半的總收入。</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="bg-slate-50 p-4 rounded-lg border">
+                             <h4 class="text-lg font-semibold text-center text-stone-600 mb-2">營運指標亮點 (2024年底)</h4>
+                            <div class="grid grid-cols-2 gap-4 text-center">
+                                <div>
+                                    <p class="text-3xl font-bold text-sky-600">$1.7B</p>
+                                    <p class="text-sm text-slate-500">總收入</p>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-bold text-emerald-600">$156M</p>
+                                    <p class="text-sm text-slate-500">淨利潤</p>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-bold text-sky-600">$44B</p>
+                                    <p class="text-sm text-slate-500">USDC 流通量</p>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-bold text-emerald-600">$345M</p>
+                                    <p class="text-sm text-slate-500">營運現金流</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 業務策略和發展 -->
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <p class="text-lg mb-6">Circle 的未來價值取決於其能否成功執行多元化增長戰略，擺脫對單一利率依賴的商業模式。</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 custom-shadow transform hover:-translate-y-1 transition-transform duration-300">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">擴大 USDC 流通量</h3>
+                    <p>最直接的增長方式是擴大 USDC 的市場份額和總流通量，抓住穩定幣市場從 2,500 億美元向數兆美元規模擴張的機遇。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 custom-shadow transform hover:-translate-y-1 transition-transform duration-300">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">收入多元化</h3>
+                    <p>打造「數位美元世界的 Stripe」，提供基於 API 的增值服務，如可編程支付、錢包即服務 (WaaS)，創造不依賴利率的高利潤軟體收入。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 custom-shadow transform hover:-translate-y-1 transition-transform duration-300">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">捕捉機構機遇</h3>
+                    <p>憑藉合規優勢，吸引傳統金融機構採用 USDC 進行真實世界資產 (RWA) 代幣化、資產結算等業務，解鎖巨大的機構市場。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 產業競爭分析 -->
+        <section id="competition" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 custom-shadow">
+                <h3 class="text-2xl font-bold text-stone-700 mb-4">雙頭壟斷與新興威脅</h3>
+                <p class="mb-6">穩定幣市場目前由 Tether (USDT) 和 Circle (USDC) 雙頭壟斷，合計佔據近 90% 的市場份額。然而，新的競爭者正帶來嚴峻挑戰。</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- USDC vs USDT -->
+                    <div>
+                        <h4 class="text-xl font-semibold text-stone-600 mb-3">正面交鋒：USDC vs. USDT</h4>
+                        <div class="border-l-4 border-sky-500 pl-4 mb-4">
+                            <h5 class="font-bold text-sky-800">Circle (USDC)</h5>
+                            <p class="text-sm">以透明度和合規為核心賣點。儲備金由現金和美國國債構成，每月由四大會計師事務所審計，是機構資金的首選。</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h5 class="font-bold text-red-800">Tether (USDT)</h5>
+                            <p class="text-sm">市值最大，但儲備構成和透明度備受質疑。採取離岸註冊和監管套利策略，在流動性方面佔優，但面臨較高的監管風險。</p>
+                        </div>
+                    </div>
+                    <!-- New Competitors -->
+                    <div>
+                        <h4 class="text-xl font-semibold text-stone-600 mb-3">新興競爭威脅</h4>
+                        <div class="border-l-4 border-yellow-500 pl-4">
+                             <h5 class="font-bold text-yellow-800">PayPal (PYUSD) & 傳統銀行</h5>
+                            <p class="text-sm">監管的明確化將為 PayPal 和傳統銀行等巨頭進入市場鋪平道路。它們擁有龐大的用戶基礎、分銷網絡和品牌信譽，可能引發激烈的市場份額和利潤率競爭。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 風險和不確定性 -->
+        <section id="risks" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h3 class="font-bold text-red-800 text-lg mb-2">宏觀經濟風險</h3>
+                    <p class="text-sm">對聯準會利率高度敏感。降息將直接衝擊其主要收入來源，顯著壓縮利潤。</p>
+                </div>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h3 class="font-bold text-red-800 text-lg mb-2">市場與系統性風險</h3>
+                    <p class="text-sm">脫鉤事件（如 SVB 危機期間）和潛在的「銀行擠兌」場景可能摧毀市場信心。</p>
+                </div>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h3 class="font-bold text-red-800 text-lg mb-2">競爭與利潤風險</h3>
+                    <p class="text-sm">對 Coinbase 的高額分潤限制了利潤上限。新巨頭的進入可能引發價格戰。</p>
+                </div>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h3 class="font-bold text-red-800 text-lg mb-2">監管與法律風險</h3>
+                    <p class="text-sm">不友好的法規可能增加合規成本或限制業務。存在被歸類為銀行的風險。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 關鍵數據匯總及財務指引 -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 custom-shadow">
+                <h3 class="text-xl font-bold text-center text-stone-700 mb-4">年度財務表現 (2022-2024)</h3>
+                <div class="w-full h-96">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <p class="text-xs text-center text-slate-500 mt-2">數據來源：公司 S-1 文件及財報。單位：百萬美元。</p>
+            </div>
+        </section>
+
+        <!-- Section: 綜合評估 -->
+        <section id="recommendation" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8 custom-shadow">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-red-100 border-l-4 border-red-500 p-6 rounded-r-lg">
+                        <h3 class="text-2xl font-bold text-red-800 mb-3">是否適合一般投資者？</h3>
+                        <p class="font-bold text-xl text-red-700">結論：不適合。</p>
+                        <p class="mt-2 text-red-900">對於風險承受能力中等、投資期限較短的普通投資者，應對 CRCL 抱持極大謹慎。其高昂的估值、對複雜宏觀因素的高度敏感性、以及充滿不確定性的競爭和監管環境，使其成為一項高風險、高波動性的資產。</p>
+                    </div>
+                    <div class="bg-emerald-100 border-l-4 border-emerald-500 p-6 rounded-r-lg">
+                        <h3 class="text-2xl font-bold text-emerald-800 mb-3">理想的投資者畫像</h3>
+                        <p class="mt-2 text-emerald-900">更適合具備高風險承受能力、以「風險投資」心態參與的長期投資者。這類投資者對金融基礎設施的未來抱有堅定信念，擁有五年以上的投資視野，並能承受巨大的資本波動風險。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-Circle (CRCL) 財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Circle相關公開資料 (2025年7月17日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when a link is clicked
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                }
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a.nav-link');
+
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.4 // 40% of the section must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('data-nav') === id) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+
+            // --- Chart.js Implementation ---
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            // Data from the report (in millions of USD)
+            const labels = ['2022', '2023', '2024'];
+            const revenueData = [772.1, 145, 1700]; // 1.7B = 1700M
+            const netIncomeData = [-768.8, 267.6, 155.7];
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '總收入 (百萬美元)',
+                            data: revenueData,
+                            backgroundColor: 'rgba(14, 165, 233, 0.6)', // sky-500
+                            borderColor: 'rgba(14, 165, 233, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '淨利潤/虧損 (百萬美元)',
+                            data: netIncomeData,
+                            backgroundColor: 'rgba(16, 185, 129, 0.6)', // emerald-500
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false, // Allow negative values for net loss
+                            ticks: {
+                                // Include a dollar sign in the ticks
+                                callback: function(value, index, ticks) {
+                                    return '$' + value + 'M';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y) + 'M';
+                                    }
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
