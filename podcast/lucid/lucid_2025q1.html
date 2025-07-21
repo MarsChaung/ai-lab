@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Lucid 財務分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+        }
+        /* Active state for navigation links */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #475569; /* slate-600 */
+            border-bottom: 2px solid transparent;
+        }
+        /* Sticky table header for horizontal scroll */
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-sky-600">Lucid 2025Q1</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#overview" class="nav-link inactive-nav-link transition duration-300 pb-1">公司概況</a>
+                <a href="#financials" class="nav-link inactive-nav-link transition duration-300 pb-1">財務表現</a>
+                <a href="#operations" class="nav-link inactive-nav-link transition duration-300 pb-1">營運指標</a>
+                <a href="#strategy" class="nav-link inactive-nav-link transition duration-300 pb-1">業務策略</a>
+                <a href="#liquidity" class="nav-link inactive-nav-link transition duration-300 pb-1">投資與流動性</a>
+                <a href="#competition" class="nav-link inactive-nav-link transition duration-300 pb-1">產業競爭</a>
+                <a href="#risks" class="nav-link inactive-nav-link transition duration-300 pb-1">風險因素</a>
+                <a href="#summary" class="nav-link inactive-nav-link transition duration-300 pb-1">數據匯總</a>
+                <a href="#recommendation" class="nav-link inactive-nav-link transition duration-300 pb-1">綜合評估</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-stone-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <a href="#overview" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">公司概況</a>
+            <a href="#financials" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">財務表現</a>
+            <a href="#operations" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">營運指標</a>
+            <a href="#strategy" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">業務策略</a>
+            <a href="#liquidity" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">投資與流動性</a>
+            <a href="#competition" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">產業競爭</a>
+            <a href="#risks" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">風險因素</a>
+            <a href="#summary" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">數據匯總</a>
+            <a href="#recommendation" class="block py-3 px-6 text-stone-700 hover:bg-sky-50 nav-link-mobile">綜合評估</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- 1. 公司營運概況 -->
+        <section id="overview" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">核心定位</h3>
+                    <p>將自身定位為技術領導者，其次才是汽車製造商。其使命是透過創造引人入勝的電動車來推動可持續能源的普及。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">雙軌業務模式</h3>
+                    <p><strong>整車製造：</strong> 設計、研發並製造豪華電動車 (Lucid Air, Gravity)。<br><strong>技術授權：</strong> 將專有的動力總成和電池系統貨幣化，提供給其他製造商。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">全球製造佈局</h3>
+                    <p><strong>AMP-1 (美國)：</strong> 主要製造基地，高度垂直整合。<br><strong>AMP-2 (沙烏地阿拉伯)：</strong> 國際工廠，滿足中東及全球出口需求。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 財務表現細節 -->
+        <section id="financials" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節 (2025 Q1)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">季度財務概覽 (百萬美元)</h3>
+                <div class="h-96 w-full">
+                    <canvas id="financialsChart"></canvas>
+                </div>
+                <p class="text-sm text-stone-500 mt-4 text-center">資料來源: Lucid Group, Inc. Q1 2025 Form 10-Q</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow p-6 text-center">
+                    <h4 class="text-lg font-semibold text-sky-800">營收</h4>
+                    <p class="text-4xl font-bold text-sky-900 mt-2">$235M</p>
+                    <p class="text-green-600 font-semibold">▲ 36% (YoY)</p>
+                </div>
+                <div class="bg-red-100 rounded-lg shadow p-6 text-center">
+                    <h4 class="text-lg font-semibold text-red-800">毛損</h4>
+                    <p class="text-4xl font-bold text-red-900 mt-2">-$229M</p>
+                    <p class="text-red-600 font-semibold">毛利率 (97.2)%</p>
+                </div>
+                <div class="bg-amber-100 rounded-lg shadow p-6 text-center">
+                    <h4 class="text-lg font-semibold text-amber-800">淨虧損</h4>
+                    <p class="text-4xl font-bold text-amber-900 mt-2">-$366M</p>
+                    <p class="text-green-600 font-semibold">較去年同期虧損收窄</p>
+                </div>
+                <div class="bg-indigo-100 rounded-lg shadow p-6 text-center">
+                    <h4 class="text-lg font-semibold text-indigo-800">每股淨虧損</h4>
+                    <p class="text-4xl font-bold text-indigo-900 mt-2">-$0.24</p>
+                    <p class="text-green-600 font-semibold">優於去年同期的 -$0.30</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 營運指標 -->
+        <section id="operations" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">2025 Q1 生產量</h3>
+                    <p class="text-5xl font-extrabold text-stone-800">2,212</p>
+                    <p class="text-stone-600">輛 (AMP-1)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">2025 Q1 交付量</h3>
+                    <p class="text-5xl font-extrabold text-stone-800">3,109</p>
+                    <p class="text-stone-600">輛 (全球)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">2025 全年生產指引</h3>
+                    <p class="text-5xl font-extrabold text-stone-800">~20,000</p>
+                    <p class="text-stone-600">輛</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-3">分析</h3>
+                <p>2025年第一季交付量顯著超過產量，顯示公司正成功去化庫存，需求訊號浮現。然而，要達成全年2萬輛的生產指引，產能爬坡仍是當前最主要的挑戰和風險。</p>
+            </div>
+        </section>
+
+        <!-- 4. 業務策略和發展 -->
+        <section id="strategy" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">中型車平台：爭奪大眾市場</h3>
+                    <p>計劃於2026年底推出，目標起售價低於5萬美元。這款車型（可能命名為 "Earth"）是 Lucid 實現規模化和盈利的關鍵，將與 Tesla Model Y 等高銷量車型直接競爭。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">技術授權：高利潤收入來源</h3>
+                    <p>與阿斯頓·馬丁簽訂價值超過4.5億美元的協議，供應其動力總成和電池技術。此舉驗證了 Lucid 將其核心技術轉化為輕資產、高利潤業務的可行性。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">自動駕駛移動市場：與 Uber/Nuro 合作</h3>
+                    <p>Uber 將在六年內部署超過2萬輛配備 Nuro L4 自動駕駛系統的 Lucid Gravity SUV。此合作不僅提供了龐大的車隊訂單，也驗證了 Lucid 平台在自動駕駛領域的適用性，開闢了進入數萬億美元自動駕駛計程車市場的道路。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. 投資和流動性 -->
+        <section id="liquidity" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+             <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">總流動性</h3>
+                    <p class="text-4xl font-bold text-stone-800">$57.6 億美元</p>
+                    <p class="text-stone-600 mt-2">(截至 2025 Q1 末) 管理層表示，這足以支持公司營運至2026年下半年。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">沙烏地阿拉伯的戰略生命線 (PIF)</h3>
+                    <p class="text-stone-600 mt-2">沙烏地阿拉伯公共投資基金 (PIF) 是 Lucid 的控股股東 (持股 >60%)，已提供數十億美元的關鍵資金。此外，沙國政府簽訂的10萬輛汽車採購協議，為公司未來提供了基礎需求保障。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 產業競爭分析 -->
+        <section id="competition" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 md:mb-0">豪華電動轎車競爭矩陣</h3>
+                    <input type="text" id="table-filter" placeholder="依車型篩選..." class="w-full md:w-1/3 p-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky-header">
+                            <tr>
+                                <th class="p-3 font-semibold text-stone-700">指標</th>
+                                <th class="p-3 font-semibold text-stone-700">Lucid Air (GT)</th>
+                                <th class="p-3 font-semibold text-stone-700">Tesla Model S</th>
+                                <th class="p-3 font-semibold text-stone-700">Porsche Taycan 4S</th>
+                                <th class="p-3 font-semibold text-stone-700">Mercedes EQS 580</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competitor-table-body">
+                            <!-- Rows will be inserted by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                 <p class="text-sm text-stone-500 mt-4 text-center">資料為約略值，僅供參考。</p>
+            </div>
+        </section>
+
+        <!-- 7. 風險和不確定性 -->
+        <section id="risks" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow">
+                    <h3 class="text-xl font-bold text-red-800 mb-3">財務可行性</h3>
+                    <p>商業模式尚未實現可持續性，每賣一輛車都在虧損。公司生存幾乎完全依賴沙烏地阿拉伯 PIF 的持續財務支持。</p>
+                </div>
+                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow">
+                    <h3 class="text-xl font-bold text-red-800 mb-3">執行與規模化</h3>
+                    <p>大規模製造經驗有限，在實現產量目標方面面臨巨大挑戰。供應鏈脆弱，服務網絡建設成本高昂。</p>
+                </div>
+                <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow">
+                    <h3 class="text-xl font-bold text-red-800 mb-3">競爭與宏觀經濟</h3>
+                    <p>豪華電動車市場競爭激烈，特斯拉等對手發起的價格戰可能擠壓利潤。奢侈品對經濟衰退高度敏感。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 關鍵數據匯總及財務指引 -->
+        <section id="summary" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div>
+                        <p class="text-lg font-semibold text-stone-600">2025年生產指引</p>
+                        <p class="text-3xl font-bold text-sky-600">~20,000 輛</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-stone-600">流動性支持至</p>
+                        <p class="text-3xl font-bold text-sky-600">2026 H2</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-stone-600">中型車平台推出</p>
+                        <p class="text-3xl font-bold text-sky-600">2026 年底</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-stone-600">沙烏地阿拉伯訂單</p>
+                        <p class="text-3xl font-bold text-sky-600">100,000 輛</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 9. 綜合評估 -->
+        <section id="recommendation" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">不適合普通投資者</h3>
+                    <p class="text-lg">Lucid 代表了一個高風險、高回報的投資標的。通往盈利的道路漫長、不確定，且充滿了進一步股東稀釋和營運失誤的可能性。現階段的風險遠超過潛在回報。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4">適合的投資者類型</h3>
+                    <ul class="list-disc list-inside space-y-2 text-lg">
+                        <li><span class="font-bold">極高風險承受能力：</span>能接受損失全部投資。</li>
+                        <li><span class="font-bold">長期投資視野：</span>願意持有5-7年以上，承受極端波動。</li>
+                        <li><span class="font-bold">技術信仰者：</span>相信其技術護城河最終能轉化為盈利。</li>
+                        <li><span class="font-bold">投機性倉位：</span>僅作為多元化投資組合中的一小部分。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Lucid 財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Lucid相關公開資料 (2025年7月21日)。</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.nav-link-mobile');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- Intersection Observer for Active Nav Link ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.4 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Chart.js Financials Chart ---
+        const ctx = document.getElementById('financialsChart').getContext('2d');
+        const financialsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2024 Q1', '2025 Q1'],
+                datasets: [
+                    {
+                        label: '營收 (Revenue)',
+                        data: [172.7, 235.0],
+                        backgroundColor: 'rgba(14, 165, 233, 0.6)', // sky-500
+                        borderColor: 'rgba(14, 165, 233, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '營收成本 (Cost of Revenue)',
+                        data: [404.8, 463.6],
+                        backgroundColor: 'rgba(249, 115, 22, 0.6)', // orange-500
+                        borderColor: 'rgba(249, 115, 22, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '淨虧損 (Net Loss)',
+                        data: [-680.9, -366.2],
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)', // red-500
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return '$' + value + 'M';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '金額 (百萬美元)'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '季度財務表現對比',
+                        font: { size: 18 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += '$' + context.parsed.y.toFixed(1) + 'M';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- Interactive Competitor Table ---
+        const competitorData = [
+            { metric: '起售價 (約)', lucid: '$112,400', tesla: '$74,990', porsche: '$101,395', mercedes: '$125,950' },
+            { metric: 'EPA 續航里程 (英里)', lucid: '512', tesla: '405', porsche: '208', mercedes: '352' },
+            { metric: '0-60 mph (秒)', lucid: '3.0', tesla: '3.1', porsche: '3.8', mercedes: '4.3' },
+            { metric: '最大充電功率 (kW)', lucid: '350', tesla: '250', porsche: '270', mercedes: '200' },
+            { metric: '貨物空間 (立方英尺)', lucid: '22 (後) + 10 (前)', tesla: '25 (後) + 3.1 (前)', porsche: '14.3 (後) + 2.9 (前)', mercedes: '22 (後)' },
+            { metric: '核心優勢', lucid: '續航、效率、空間', tesla: '充電網絡、軟體、品牌', porsche: '操控、駕駛體驗', mercedes: '傳統豪華、舒適性' },
+            { metric: '核心劣勢', lucid: '品牌認知度、價格', tesla: '內飾品質、豪華感不足', porsche: '續航里程短、空間小', mercedes: '效率、價格、設計爭議' }
+        ];
+        
+        const tableFilterInput = document.getElementById('table-filter');
+        const tableBody = document.getElementById('competitor-table-body');
+
+        function renderTable(data) {
+            tableBody.innerHTML = ''; // Clear existing rows
+            data.forEach(row => {
+                 const isAdvantage = row.metric === '核心優勢';
+                 const isDisadvantage = row.metric === '核心劣勢';
+                 
+                 let lucidClass = '', teslaClass = '', porscheClass = '', mercedesClass = '';
+                 
+                 if (isAdvantage) {
+                     lucidClass = 'bg-green-50 font-semibold';
+                     teslaClass = 'bg-green-50 font-semibold';
+                     porscheClass = 'bg-green-50 font-semibold';
+                     mercedesClass = 'bg-green-50 font-semibold';
+                 } else if (isDisadvantage) {
+                     lucidClass = 'bg-red-50 font-semibold';
+                     teslaClass = 'bg-red-50 font-semibold';
+                     porscheClass = 'bg-red-50 font-semibold';
+                     mercedesClass = 'bg-red-50 font-semibold';
+                 }
+
+                tableBody.innerHTML += `
+                    <tr class="border-b border-stone-200 hover:bg-stone-50">
+                        <td class="p-3 font-semibold text-stone-600">${row.metric}</td>
+                        <td class="p-3 ${lucidClass}">${row.lucid}</td>
+                        <td class="p-3 ${teslaClass}">${row.tesla}</td>
+                        <td class="p-3 ${porscheClass}">${row.porsche}</td>
+                        <td class="p-3 ${mercedesClass}">${row.mercedes}</td>
+                    </tr>
+                `;
+            });
+        }
+        
+        // This is a simplified filter that checks if any value in the row contains the filter text.
+        // A more complex filter could be implemented if needed.
+        tableFilterInput.addEventListener('input', (e) => {
+            const filterText = e.target.value.toLowerCase();
+            const filteredData = competitorData.filter(row => {
+                return Object.values(row).some(value => 
+                    String(value).toLowerCase().includes(filterText)
+                );
+            });
+            renderTable(filteredData);
+        });
+
+        // Initial render
+        renderTable(competitorData);
+    });
+    </script>
+</body>
+</html>
