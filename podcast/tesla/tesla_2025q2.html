@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Tesla 2025Q2 財務分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind's sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* Tailwind's gray-600 */
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7; /* Tailwind's sky-600 */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; /* gray-100 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* gray-400 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* gray-500 */
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold text-stone-800">Tesla 2025Q2</h1>
+                </div>
+                <div class="hidden md:block">
+                    <nav id="desktop-nav" class="ml-10 flex items-baseline space-x-4">
+                        <a href="#overview" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">公司營運概況</a>
+                        <a href="#financials" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">財務表現</a>
+                        <a href="#metrics" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">營運指標</a>
+                        <a href="#strategy" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">業務策略</a>
+                        <a href="#liquidity" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">投資與流動性</a>
+                        <a href="#competition" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">產業競爭</a>
+                        <a href="#risks" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">風險分析</a>
+                        <a href="#summary" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">數據匯總</a>
+                        <a href="#advice" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium">綜合評估</a>
+                    </nav>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">公司營運概況</a>
+                <a href="#financials" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">財務表現</a>
+                <a href="#metrics" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">營運指標</a>
+                <a href="#strategy" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">業務策略</a>
+                <a href="#liquidity" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">投資與流動性</a>
+                <a href="#competition" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">產業競爭</a>
+                <a href="#risks" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">風險分析</a>
+                <a href="#summary" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">數據匯總</a>
+                <a href="#advice" class="text-gray-600 hover:bg-sky-100 hover:text-sky-700 block px-3 py-2 rounded-md text-base font-medium">綜合評估</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- 1. 公司營運概況 -->
+        <section id="overview" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">特斯拉2025年Q2財報揭示了一個充滿挑戰的經營現實與一個亟待驗證的宏大未來願景。公司面臨十年來最嚴峻的營收衰退，連續第二季營收下滑，核心汽車業務基本面持續惡化。</p>
+                <p class="mb-4">財報公布後市場反應負面，股價盤後重挫。執行長馬斯克坦言未來可能面臨「幾個艱難的季度」，撲滅了市場對下半年迅速復甦的期望。</p>
+                <p class="font-semibold text-sky-700">當前的核心矛盾在於：公司萬億美元的估值高度依賴AI、FSD和機器人等未來敘事，但絕大部分營收和利潤仍來自面臨全球需求放緩、利潤壓縮的傳統汽車業務。管理層正試圖將市場焦點從汽車製造轉移至Robotaxi的長期潛力上。</p>
+            </div>
+        </section>
+
+        <!-- 2. 財務表現細節 -->
+        <section id="financials" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Info Cards -->
+                <div class="bg-red-100 rounded-lg shadow p-6 text-center">
+                    <h3 class="text-lg font-semibold text-red-800">總營收</h3>
+                    <p class="text-3xl font-bold text-red-600">$225.0億</p>
+                    <p class="text-red-500">同比下降 12%</p>
+                </div>
+                <div class="bg-red-100 rounded-lg shadow p-6 text-center">
+                    <h3 class="text-lg font-semibold text-red-800">GAAP淨利潤</h3>
+                    <p class="text-3xl font-bold text-red-600">$11.7億</p>
+                    <p class="text-red-500">同比下降 16%</p>
+                </div>
+                <div class="bg-orange-100 rounded-lg shadow p-6 text-center">
+                    <h3 class="text-lg font-semibold text-orange-800">營業利潤率</h3>
+                    <p class="text-3xl font-bold text-orange-600">4.1%</p>
+                    <p class="text-orange-500">去年同期為 6.3%</p>
+                </div>
+                <div class="bg-blue-100 rounded-lg shadow p-6 text-center">
+                    <h3 class="text-lg font-semibold text-blue-800">能源業務毛利</h3>
+                    <p class="text-3xl font-bold text-blue-600">$8.46億</p>
+                    <p class="text-blue-500">創歷史新高</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">Q2 財務指標同比 (YoY) 比較</h3>
+                <div class="h-96"><canvas id="financialChart"></canvas></div>
+            </div>
+        </section>
+
+        <!-- 3. 營運指標 -->
+        <section id="metrics" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">汽車業務的「三重壓力」</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-semibold">交付量下滑 (-13%):</span> 全球主要市場需求放緩，總交付量從 44.4萬輛降至 38.4萬輛。</li>
+                        <li><span class="font-semibold">平均售價 (ASP) 降低:</span> 產品組合變化及全球範圍的促銷活動侵蝕了單車售價與利潤。</li>
+                        <li><span class="font-semibold">監管信貸收入銳減 (-51%):</span> 高利潤的碳權收入從 8.9億美元降至 4.39億美元，對營業利潤造成巨大衝擊。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">利潤率壓縮</h3>
+                    <p class="mb-4">GAAP 營業利潤率從 6.3% 急劇下降至 4.1%，主要歸因於研發費用增加、單位固定成本上升和關稅壓力。</p>
+                    <div class="h-72"><canvas id="marginChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 業務策略和發展 -->
+        <section id="strategy" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">長期催化劑與增長潛力</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <h4 class="font-bold text-lg text-sky-700">Robotaxi & FSD</h4>
+                        <p>已在奧斯汀啟動試點，目標2025年底覆蓋美國半數人口。這是支撐高估值的核心敘事，但面臨技術、成本和監管三大挑戰。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-sky-700">下一代平價車型</h4>
+                        <p>計劃於2025下半年量產，是重振銷量增長、應對低價競爭的關鍵武器。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-sky-700">能源與機器人</h4>
+                        <p>能源業務盈利能力已獲證明。Optimus人形機器人被視為未來的重要增長支柱，預計明年開始規模化生產。</p>
+                    </div>
+                </div>
+            </div>
+             <!-- Interactive Product Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">產品線與開發時程</h3>
+                <input type="text" id="productFilter" placeholder="篩選產品..." class="w-full md:w-1/3 p-2 border border-gray-300 rounded-md mb-4 focus:ring-sky-500 focus:border-sky-500">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">產品</th>
+                                <th scope="col" class="px-6 py-3">類別</th>
+                                <th scope="col" class="px-6 py-3">狀態/時程</th>
+                                <th scope="col" class="px-6 py-3">摘要</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 投資和流動性 -->
+        <section id="liquidity" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                 <h3 class="text-2xl font-bold text-red-700 mb-4">自由現金流 (FCF) 斷崖式下跌</h3>
+                 <div class="flex items-center space-x-6">
+                     <div class="text-center">
+                         <p class="text-4xl font-extrabold text-red-600">$0.146億</p>
+                         <p class="text-lg text-red-800 font-semibold">Q2 2025 FCF</p>
+                     </div>
+                     <div class="text-2xl text-gray-400">&rarr;</div>
+                     <div class="text-center">
+                          <p class="text-2xl font-bold text-gray-500">$13.4億</p>
+                          <p class="text-md text-gray-600">Q2 2024 FCF</p>
+                     </div>
+                 </div>
+                 <p class="mt-4">本季 FCF 僅錄得 1.46億美元，較去年同期暴跌 89%。主因是資本支出 (CapEx) 維持在 23.9億美元高位，用於AI、擴建等長期投資，但經營現金流卻未能同步增長。這挑戰了特斯拉「自我造血」能力的核心論述，若持續惡化可能限制公司戰略靈活性。</p>
+             </div>
+        </section>
+
+        <!-- 6. 產業競爭分析 -->
+        <section id="competition" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                 <p class="mb-4">市場競爭正變得空前激烈，特斯拉面臨來自兩方面的夾擊：</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-red-500 pl-4">
+                        <h4 class="font-bold text-lg text-red-700">大眾市場的價格戰</h4>
+                        <p>來自中國的競爭對手，特別是比亞迪 (BYD)，以其極具成本效益的產品組合，在價格敏感的大眾市場給特斯拉帶來了巨大的定價壓力。</p>
+                    </div>
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <h4 class="font-bold text-lg text-blue-700">高端市場的追趕</h4>
+                        <p>傳統豪華汽車品牌，如通用、福特、賓士、寶馬等，正在加速其電動化轉型，推出了越來越多有競爭力的產品，搶食高端電動車市場份額。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 風險和不確定性 -->
+        <section id="risks" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-700 mb-2">政策風險：聯邦EV稅收抵免的終結</h3>
+                    <p>美國價值 $7,500 的聯邦電動汽車稅收抵免政策預計在9月底終止，這將大幅提升消費者購車成本或進一步擠壓特斯拉的利潤空間。公司在Q3的激進促銷活動可能透支未來需求。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-700 mb-2">宏觀經濟與競爭壓力</h3>
+                    <p>全球性的經濟放緩、高利率環境抑制消費意願。同時，中國對手的低價競爭與傳統車廠的電動化轉型加劇了市場競爭。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-700 mb-2">執行風險：新產品的進度延遲</h3>
+                    <p>平價車型 (2025下半年)、Cybercab 和 Semi (2026年) 的量產時程若有任何延遲，都可能錯失市場窗口，並推後公司收入和利潤的復甦時間表。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 關鍵數據匯總及財務指引 -->
+        <section id="summary" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">Q2 2025 關鍵財務指標</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3">指標</th>
+                                <th class="px-6 py-3">Q2 2025 實際</th>
+                                <th class="px-6 py-3">Q2 2024 實際</th>
+                                <th class="px-6 py-3">同比變化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-medium">總營收</td><td class="px-6 py-4">$22.50B</td><td class="px-6 py-4">$25.50B</td><td class="px-6 py-4 text-red-600">-12%</td></tr>
+                            <tr class="bg-gray-50 border-b"><td class="px-6 py-4 font-medium">GAAP總毛利率</td><td class="px-6 py-4">17.2%</td><td class="px-6 py-4">18.0%</td><td class="px-6 py-4 text-red-600">-71 bp</td></tr>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-medium">GAAP營業利潤率</td><td class="px-6 py-4">4.1%</td><td class="px-6 py-4">6.3%</td><td class="px-6 py-4 text-red-600">-219 bp</td></tr>
+                            <tr class="bg-gray-50 border-b"><td class="px-6 py-4 font-medium">GAAP淨利潤</td><td class="px-6 py-4">$1.17B</td><td class="px-6 py-4">$1.40B</td><td class="px-6 py-4 text-red-600">-16%</td></tr>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-medium">總交付量</td><td class="px-6 py-4">384,122</td><td class="px-6 py-4">443,956</td><td class="px-6 py-4 text-red-600">-13%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <div class="mt-6 border-t pt-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">財務指引</h3>
+                    <p class="italic bg-amber-100 p-4 rounded-lg">"We may have a few rough quarters ahead of us." - Elon Musk</p>
+                    <p class="mt-2">執行長馬斯克的此番言論直接撲滅了市場對於下半年業績能夠迅速復甦的期望，預示著短期內經營挑戰將持續存在。</p>
+                 </div>
+            </div>
+        </section>
+
+        <!-- 9. 綜合評估 -->
+        <section id="advice" class="py-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-teal-500">
+                    <h3 class="text-xl font-bold text-teal-800 mb-4">對長期增長型投資者 (高風險偏好)</h3>
+                    <p class="mb-3">將特斯拉視為一家AI公司，利用短期汽車業務問題引發的股價回調，作為戰略性分批建倉的機會。</p>
+                    <p class="font-semibold">核心策略：</p>
+                    <ul class="list-disc list-inside space-y-1 mt-2">
+                        <li>緊盯FSD技術突破和Robotaxi擴張數據等核心催化劑。</li>
+                        <li>秉持長期持有心態，穿越短期業績低谷。</li>
+                        <li>關注股價是否跌至關鍵技術支撐位 (如 $280-$300)。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-500">
+                    <h3 class="text-xl font-bold text-rose-800 mb-4">對價值導向/風險規避型投資者 (低風險偏好)</h3>
+                    <p class="mb-3">認為當前估值過高，風險大於回報。在基本面出現明確、可持續的改善信號前，應保持觀望。</p>
+                     <p class="font-semibold">核心策略：</p>
+                    <ul class="list-disc list-inside space-y-1 mt-2">
+                        <li>等待汽車業務利潤率出現連續數季回升趨勢。</li>
+                        <li>尋求更安全的邊際，等待估值回落至更合理區間。</li>
+                        <li>考慮投資產業鏈其他公司或相關ETF以分散風險。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-stone-800 text-white mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-Tesla 2025Q2 財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Tesla相關公開資料 (2025年7月24日)。</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu on link click
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Intersection Observer for Active Nav Link
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#desktop-nav a');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // --- Chart.js Implementations ---
+
+            // 1. Financial Chart (Revenue & Net Income)
+            const financialCtx = document.getElementById('financialChart').getContext('2d');
+            new Chart(financialCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['總營收 (十億美元)', 'GAAP淨利潤 (十億美元)', '總交付量 (萬輛)'],
+                    datasets: [{
+                        label: 'Q2 2024',
+                        data: [25.50, 1.40, 44.3956],
+                        backgroundColor: 'rgba(156, 163, 175, 0.6)', // gray-400
+                        borderColor: 'rgba(107, 114, 128, 1)', // gray-500
+                        borderWidth: 1
+                    }, {
+                        label: 'Q2 2025',
+                        data: [22.50, 1.17, 38.4122],
+                        backgroundColor: 'rgba(56, 189, 248, 0.6)', // sky-400
+                        borderColor: 'rgba(14, 165, 233, 1)', // sky-500
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Q2 2025 vs Q2 2024 關鍵指標'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        if (context.label.includes('美元')) {
+                                            label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y) + 'B';
+                                        } else {
+                                             label += context.parsed.y.toFixed(3).replace('.',',') + 'K 輛';
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 2. Margin Chart
+            const marginCtx = document.getElementById('marginChart').getContext('2d');
+            new Chart(marginCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['GAAP總毛利率', 'GAAP營業利潤率'],
+                    datasets: [{
+                        label: 'Q2 2024',
+                        data: [18.0, 6.3],
+                        backgroundColor: 'rgba(156, 163, 175, 0.6)',
+                        borderColor: 'rgba(107, 114, 128, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Q2 2025',
+                        data: [17.2, 4.1],
+                        backgroundColor: 'rgba(251, 146, 60, 0.6)', // orange-400
+                        borderColor: 'rgba(249, 115, 22, 1)', // orange-500
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '利潤率變化 (%)'
+                        },
+                         tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Interactive Product Table ---
+            const productData = [
+                { name: 'Model 3 / Y', category: '消費型電動車', timeline: '量產中', summary: '核心銷量來源，但面臨需求放緩和競爭加劇的挑戰。' },
+                { name: 'Model S / X', category: '高階電動車', timeline: '量產中', summary: '高價位車型，本季交付佔比下降，影響平均售價。' },
+                { name: 'Cybertruck', category: '電動皮卡', timeline: '初期量產', summary: '產能爬坡中，對短期營收貢獻有限。' },
+                { name: '平價車型 (Next-gen)', category: '入門級電動車', timeline: '2025 H2 量產', summary: '重振銷量增長的關鍵，備受市場期待。' },
+                { name: 'Semi', category: '電動卡車', timeline: '2026年規模化量產', summary: '商業運輸領域的長期佈局，量產時程延後。' },
+                { name: 'Cybercab', category: '自動駕駛計程車', timeline: '2026年規模化量產', summary: 'Robotaxi網絡的專用車型，是AI敘事的核心之一。' },
+                { name: 'Optimus', category: '人形機器人', timeline: '2025年開始生產', summary: '潛在的巨大新市場，被馬斯克視為長期最重要的產品。' },
+            ];
+
+            const productFilterInput = document.getElementById('productFilter');
+            const productTableBody = document.getElementById('productTableBody');
+
+            const renderTable = (data) => {
+                productTableBody.innerHTML = '';
+                if (data.length === 0) {
+                    productTableBody.innerHTML = `<tr><td colspan="4" class="text-center py-4">無符合條件的產品</td></tr>`;
+                    return;
+                }
+                data.forEach(product => {
+                    const row = document.createElement('tr');
+                    row.className = 'bg-white border-b hover:bg-gray-50';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${product.name}</td>
+                        <td class="px-6 py-4">${product.category}</td>
+                        <td class="px-6 py-4">${product.timeline}</td>
+                        <td class="px-6 py-4">${product.summary}</td>
+                    `;
+                    productTableBody.appendChild(row);
+                });
+            };
+
+            productFilterInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    product.category.toLowerCase().includes(searchTerm) ||
+                    product.summary.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // Initial render
+            renderTable(productData);
+
+        });
+    </script>
+
+</body>
+</html>
