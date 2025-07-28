@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Intel 2025Q2 財務分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        /* Custom styles for active/inactive navigation links */
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom-color: #0ea5e9;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #475569; /* Tailwind slate-600 */
+            border-bottom-color: transparent;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo / Title -->
+                <div class="text-2xl font-bold text-sky-600">
+                    <a href="#">Intel 2025Q2</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-1">
+                    <a href="#company-overview" data-nav="company-overview" class="inactive-nav-link px-4 py-2 border-b-2 transition-all duration-300 hover:text-sky-500">營運概況</a>
+                    <a href="#financials" data-nav="financials" class="inactive-nav-link px-4 py-2 border-b-2 transition-all duration-300 hover:text-sky-500">財務表現</a>
+                    <a href="#strategy" data-nav="strategy" class="inactive-nav-link px-4 py-2 border-b-2 transition-all duration-300 hover:text-sky-500">業務策略</a>
+                    <a href="#competition" data-nav="competition" class="inactive-nav-link px-4 py-2 border-b-2 transition-all duration-300 hover:text-sky-500">競爭分析</a>
+                    <a href="#risks" data-nav="risks" class="inactive-nav-link px-4 py-2 border-b-2 transition-all duration-300 hover:text-sky-500">風險</a>
+                    <a href="#investment" data-nav="investment" class="inactive-nav-link px-4 py-2 border-b-2 transition-all duration-300 hover:text-sky-500">綜合評估</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-200">
+            <a href="#company-overview" data-nav-mobile="company-overview" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">公司營運概況</a>
+            <a href="#financials" data-nav-mobile="financials" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">財務表現細節</a>
+            <a href="#metrics" data-nav-mobile="metrics" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">營運指標</a>
+            <a href="#strategy" data-nav-mobile="strategy" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">業務策略和發展</a>
+            <a href="#liquidity" data-nav-mobile="liquidity" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">投資和流動性</a>
+            <a href="#competition" data-nav-mobile="competition" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">產業競爭分析</a>
+            <a href="#risks" data-nav-mobile="risks" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">風險和不確定性</a>
+            <a href="#guidance" data-nav-mobile="guidance" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">關鍵數據匯總及財務指引</a>
+            <a href="#investment" data-nav-mobile="investment" class="block py-3 px-4 text-slate-600 hover:bg-sky-50 hover:text-sky-600">綜合評估</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Section: Company Operations Overview -->
+        <section id="company-overview" class="pt-24 -mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">英特爾作為半導體行業的標誌性企業，長期以其整合元件製造（IDM）模式著稱。然而，近年來公司面臨嚴峻挑戰，並在 2025 年進行了組織架構調整以提高營運透明度。目前主要業務部門如下：</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- CCG Card -->
+                    <div class="bg-slate-50 rounded-lg p-6 border border-slate-200">
+                        <h3 class="font-bold text-xl text-sky-700 mb-2">客戶運算事業群 (CCG)</h3>
+                        <p class="text-sm text-slate-600">英特爾最大的營收來源，專注於PC處理器。正全力投入由AI PC引領的換機潮，但營收面臨市場成熟和競爭壓力，呈現微幅下滑。</p>
+                        <div class="mt-4 text-center">
+                            <p class="text-slate-500 text-sm">2025 Q2 營收</p>
+                            <p class="text-2xl font-bold text-slate-800">$79 億美元</p>
+                            <p class="text-red-500 font-semibold">同比下降 3%</p>
+                        </div>
+                    </div>
+                    <!-- DCAI Card -->
+                    <div class="bg-slate-50 rounded-lg p-6 border border-slate-200">
+                        <h3 class="font-bold text-xl text-sky-700 mb-2">資料中心與AI事業群 (DCAI)</h3>
+                        <p class="text-sm text-slate-600">關鍵的戰略戰場，包含傳統伺服器CPU與AI加速器。儘管全球AI市場爆炸性增長，該部門增長乏力，顯示其在AI領域面臨極大競爭壓力。</p>
+                        <div class="mt-4 text-center">
+                             <p class="text-slate-500 text-sm">2025 Q2 營收</p>
+                            <p class="text-2xl font-bold text-slate-800">$39 億美元</p>
+                            <p class="text-green-600 font-semibold">同比增長 4%</p>
+                        </div>
+                    </div>
+                    <!-- Foundry Card -->
+                    <div class="bg-slate-50 rounded-lg p-6 border border-slate-200">
+                        <h3 class="font-bold text-xl text-sky-700 mb-2">英特爾晶圓代工 (Intel Foundry)</h3>
+                        <p class="text-sm text-slate-600">公司未來的雄心所在，但目前營收幾乎完全來自內部採購，外部客戶營收微乎其微，與台積電、三星等巨頭差距懸殊。</p>
+                        <div class="mt-4 text-center">
+                           <p class="text-slate-500 text-sm">2025 Q2 營收</p>
+                            <p class="text-2xl font-bold text-slate-800">$44 億美元</p>
+                            <p class="text-green-600 font-semibold">同比增長 3%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8">
+                     <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">2025年Q2各部門營收佔比 (十億美元)</h3>
+                    <div class="chart-container">
+                        <canvas id="segmentRevenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Financial Performance Details -->
+        <section id="financials" class="pt-24 -mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-6">英特爾 2025 年第二季度的財務報告反映了公司轉型所付出的高昂代價。儘管營收停滯，但因重組和資產減記產生了巨額虧損，導致盈利能力崩潰。</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="bg-sky-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-slate-600">總營收</h4>
+                        <p class="text-3xl font-extrabold text-sky-800 mt-2">$129 億</p>
+                        <p class="text-slate-500">同比持平</p>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-slate-600">淨虧損 (GAAP)</h4>
+                        <p class="text-3xl font-extrabold text-red-700 mt-2">($29 億)</p>
+                        <p class="text-slate-500">每股虧損 $0.67</p>
+                    </div>
+                     <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-slate-600">毛利率 (GAAP)</h4>
+                        <p class="text-3xl font-extrabold text-red-700 mt-2">27.5%</p>
+                        <p class="text-slate-500">去年同期為 35.4%</p>
+                    </div>
+                     <div class="bg-orange-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-slate-600">重組與減損費用</h4>
+                        <p class="text-3xl font-extrabold text-orange-700 mt-2">$27 億</p>
+                        <p class="text-slate-500">裁員及設備過剩</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Operating Metrics -->
+        <section id="metrics" class="pt-24 -mt-20">
+             <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-6">下表詳細比較了通用會計準則（GAAP）與非通用會計準則（Non-GAAP）的關鍵營運指標。Non-GAAP數據剔除了重組、股權激勵等一次性費用，但兩項指標均顯示盈利能力顯著下滑。</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b text-left font-semibold">財務指標</th>
+                                <th class="py-3 px-4 border-b text-left font-semibold">GAAP</th>
+                                <th class="py-3 px-4 border-b text-left font-semibold">Non-GAAP</th>
+                                <th class="py-3 px-4 border-b text-left font-semibold">去年同期 (GAAP)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">毛利率</td>
+                                <td class="py-3 px-4 border-b text-red-600 font-medium">27.5%</td>
+                                <td class="py-3 px-4 border-b text-red-600 font-medium">29.7%</td>
+                                <td class="py-3 px-4 border-b">35.4%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">營業利潤率</td>
+                                <td class="py-3 px-4 border-b text-red-600 font-medium">(24.7)%</td>
+                                <td class="py-3 px-4 border-b text-red-600 font-medium">(3.9)%</td>
+                                <td class="py-3 px-4 border-b">(15.3)%</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">淨利潤/虧損</td>
+                                <td class="py-3 px-4 border-b text-red-600 font-medium">($29 億)</td>
+                                <td class="py-3 px-4 border-b text-red-600 font-medium">($4 億)</td>
+                                <td class="py-3 px-4 border-b">($16 億)</td>
+                            </tr>
+                             <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">每股盈餘/虧損 (EPS)</td>
+                                <td class="py-3 px-4 border-b text-red-600 font-medium">($0.67)</td>
+                                <td class="py-3 px-4 border-b text-red-600 font-medium">($0.10)</td>
+                                <td class="py-3 px-4 border-b">($0.38)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Business Strategy and Development -->
+        <section id="strategy" class="pt-24 -mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">2025年3月，新任CEO陳立武（Lip-Bu Tan）的上任標誌著公司戰略的根本性轉變，從技術優先轉向以財務紀律、成本控制和股東價值為核心的務實主義路線。</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 rounded-lg p-6">
+                        <h3 class="font-bold text-xl text-sky-700 mb-2">新CEO的核心策略</h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                            <li><b>成本削減：</b>啟動大規模裁員，目標是建立一個更扁平、敏捷的組織。</li>
+                            <li><b>資本效率：</b>取消或放緩部分晶圓廠擴建計畫，使資本支出與市場需求掛鉤。</li>
+                            <li><b>親自審查：</b>親自審查所有晶片設計和投資項目，展現嚴格的財務紀律。</li>
+                            <li><b>文化轉型：</b>致力於減少官僚作風，並在內部建立類似「無廠半導體公司」的問責制度。</li>
+                        </ul>
+                    </div>
+                     <div class="bg-slate-50 rounded-lg p-6">
+                        <h3 class="font-bold text-xl text-sky-700 mb-2">18A製程的命運</h3>
+                        <p class="text-slate-600 mb-2">被寄予厚望的18A製程節點是英特爾技術復興的關鍵，但正面臨一場信心危機。</p>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                             <li><b>技術領先：</b>包含RibbonFET和PowerVia等行業領先技術。</li>
+                             <li class="text-red-600"><b>信心危機：</b>因缺乏重量級外部客戶訂單，新管理層可能停止向外推廣18A，甚至放棄後續製程開發。</li>
+                             <li><b>戰略核心：</b>18A的成敗直接關係到IDM 2.0戰略的存亡，是公司未來最大的不確定性。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: Investment and Liquidity -->
+        <section id="liquidity" class="pt-24 -mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-6">儘管損益表表現慘淡，但英特爾的現金流量表透露出新管理層推行財務紀律的初步成效，顯示出一定的財務韌性。</p>
+                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-slate-600">營運現金流 (2025上半年)</h4>
+                        <p class="text-4xl font-extrabold text-green-800 mt-2">$28.6 億</p>
+                        <p class="text-slate-500 mt-1">遠高於去年同期的 $10.7 億，顯示核心業務產出現金能力改善。</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-slate-600">現金及短期投資</h4>
+                        <p class="text-4xl font-extrabold text-yellow-800 mt-2">$210+ 億</p>
+                        <p class="text-slate-500 mt-1">提供了充足的流動性緩衝以應對轉型期的挑戰。</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-slate-600">資本支出 (2025年目標)</h4>
+                        <p class="text-4xl font-extrabold text-blue-800 mt-2">$180 億</p>
+                        <p class="text-slate-500 mt-1">大幅縮減開支，取消或放緩部分工廠建設，提高資本效率。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Industry Competition Analysis -->
+        <section id="competition" class="pt-24 -mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-6">英特爾正陷入一場艱難的三線作戰，其在一個領域的弱點會被放大並傳導至其他領域，形成惡性循環。</p>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">x86伺服器CPU營收份額預測 (2025年)</h3>
+                        <div class="chart-container">
+                            <canvas id="serverCpuChart"></canvas>
+                        </div>
+                        <p class="text-sm text-center text-slate-500 mt-2">AMD憑藉EPYC處理器持續侵蝕英特爾利潤豐厚的資料中心市場。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">全球晶圓代工市場份額 (2025年Q1)</h3>
+                        <div class="chart-container">
+                            <canvas id="foundryMarketChart"></canvas>
+                        </div>
+                        <p class="text-sm text-center text-slate-500 mt-2">台積電與三星雙頭壟斷，英特爾外部市佔率幾乎為零。</p>
+                    </div>
+                </div>
+                 <div class="mt-12">
+                     <h3 class="text-xl font-bold text-stone-700 mb-2">競爭對手估值比較</h3>
+                     <p class="text-slate-600 mb-4">英特爾的估值遠低於競爭對手，但這反映了市場對其盈利能力的高度不確定性。下方表格可透過公司名稱進行篩選。</p>
+                     <input type="text" id="competitor-search" class="w-full md:w-1/3 p-2 border border-slate-300 rounded-lg mb-4" placeholder="篩選公司名稱 (如: AMD)...">
+                     <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="py-3 px-4 border-b text-left font-semibold">公司</th>
+                                    <th class="py-3 px-4 border-b text-left font-semibold">本益比(P/E)</th>
+                                    <th class="py-3 px-4 border-b text-left font-semibold">股價營收比(P/S)</th>
+                                    <th class="py-3 px-4 border-b text-left font-semibold">股價淨值比(P/B)</th>
+                                    <th class="py-3 px-4 border-b text-left font-semibold">股東權益報酬率(ROE)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="competitor-table-body">
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Section: Risks and Uncertainties -->
+        <section id="risks" class="pt-24 -mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                        <h3 class="font-bold text-xl text-red-800 mb-2">執行風險</h3>
+                        <p>公司過去在產品延期和製造失誤方面有不良記錄，轉型計畫建立在完美執行的基礎上，挑戰巨大。</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                        <h3 class="font-bold text-xl text-red-800 mb-2">地緣政治風險</h3>
+                        <p>在以色列的大量研發與製造使其易受中東局勢影響，同時也身處中美科技競爭的風口浪尖。</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                        <h3 class="font-bold text-xl text-red-800 mb-2">競爭風險</h3>
+                        <p>來自AMD、NVIDIA和台積電的創新步伐是無情的，任何技術世代的落後都可能帶來災難性後果。</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                        <h3 class="font-bold text-xl text-red-800 mb-2">宏觀經濟風險</h3>
+                        <p>PC和伺服器市場是典型的週期性行業，對全球經濟放緩非常敏感，任何逆風都可能使復甦計畫脫軌。</p>
+                    </div>
+                 </div>
+            </div>
+        </section>
+        
+        <!-- Section: Key Data Summary & Financial Guidance -->
+        <section id="guidance" class="pt-24 -mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-6">英特爾對 2025 年第三季度的預測顯示，短期內的財務壓力將持續存在，盈利前景依然嚴峻。</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                    <div class="bg-slate-100 p-6 rounded-lg">
+                        <h4 class="font-bold text-slate-600">Q3 營收預測</h4>
+                        <p class="text-3xl font-extrabold text-slate-800 mt-2">$126 - $136 億</p>
+                    </div>
+                     <div class="bg-slate-100 p-6 rounded-lg">
+                        <h4 class="font-bold text-slate-600">Q3 毛利率預測 (GAAP)</h4>
+                        <p class="text-3xl font-extrabold text-slate-800 mt-2">~34.1%</p>
+                    </div>
+                    <div class="bg-slate-100 p-6 rounded-lg">
+                        <h4 class="font-bold text-slate-600">Q3 每股盈餘預測 (Non-GAAP)</h4>
+                        <p class="text-3xl font-extrabold text-slate-800 mt-2">$0.00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Investment Recommendation -->
+        <section id="investment" class="pt-24 -mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="font-bold text-2xl text-red-700 mb-4">價值股還是價值陷阱？</h3>
+                        <p class="mb-4">英特爾目前並非傳統意義上的價值股，而是一個高風險、深度困擾、需要極大耐心和風險承受能力的「逆向投資」標的。其看似「便宜」的估值，反映的是市場對其未來盈利能力和戰略執行的高度不確定性。</p>
+                        <p>股價淨值比低於1.0提供了看似的「安全邊際」，但前提是資產能在未來產生利潤。如果公司處於結構性衰退，資產價值將持續下降，形成「價值陷阱」。</p>
+                    </div>
+                    <div class="bg-sky-50 border-l-4 border-sky-500 p-6 rounded-r-lg">
+                        <h4 class="font-bold text-xl text-sky-800 mb-2">目標投資者畫像</h4>
+                        <p class="mb-3"><b class="text-green-700">適合購買者：</b>具備超長投資期限（五年以上）、對半導體行業有深刻理解，並篤信新任CEO能夠力挽狂瀾的特定逆向投資者。</p>
+                        <p><b class="text-red-700">應當避免者：</b>任何風險規避型、以收益為目標，或持有中短期視角的投資者。前方的道路充滿不確定性，股價進一步下跌的可能性顯著存在。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-300 mt-12">
+        <div class="container mx-auto p-6 text-center">
+            <p>&copy; 巴菲特AI價值投資-Intel 2025Q2 財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Intel相關公開資料 (2025年7月28日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Smooth Scroll & Active Nav Link on scroll (Intersection Observer) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('header nav a');
+            const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // 40% of the section should be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // Desktop nav
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active-nav-link', link.getAttribute('href') === `#${id}`);
+                            link.classList.toggle('inactive-nav-link', link.getAttribute('href') !== `#${id}`);
+                        });
+                        // Mobile nav (for highlighting, not full class swap)
+                        mobileNavLinks.forEach(link => {
+                            link.classList.toggle('bg-sky-100', link.getAttribute('href') === `#${id}`);
+                            link.classList.toggle('font-bold', link.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Close mobile menu on link click
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                     mobileMenu.classList.add('hidden');
+                });
+            });
+
+
+            // --- Chart.js Initializations ---
+            
+            // 1. Segment Revenue Chart
+            const segmentCtx = document.getElementById('segmentRevenueChart').getContext('2d');
+            new Chart(segmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['客戶運算 (CCG)', '資料中心與AI (DCAI)', '晶圓代工 (Foundry)'],
+                    datasets: [{
+                        label: '營收 (十億美元)',
+                        data: [7.9, 3.9, 4.4],
+                        backgroundColor: [
+                            'rgba(56, 189, 248, 0.6)', // sky-400
+                            'rgba(16, 185, 129, 0.6)', // emerald-500
+                            'rgba(249, 115, 22, 0.6)'  // orange-500
+                        ],
+                        borderColor: [
+                            'rgba(14, 165, 233, 1)',
+                            'rgba(5, 150, 105, 1)',
+                            'rgba(234, 88, 12, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: $${context.raw} B`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                             title: {
+                                display: true,
+                                text: '營收 (十億美元)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 2. Server CPU Market Share Chart
+            const serverCpuCtx = document.getElementById('serverCpuChart').getContext('2d');
+            new Chart(serverCpuCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['英特爾 (Intel)', '超微 (AMD)', 'Arm 架構'],
+                    datasets: [{
+                        label: '營收份額',
+                        data: [55, 36, 9],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)',  // sky-500
+                            'rgba(239, 68, 68, 0.7)',   // red-500
+                            'rgba(245, 158, 11, 0.7)'   // amber-500
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                       legend: { position: 'bottom' },
+                       tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 3. Foundry Market Share Chart
+            const foundryCtx = document.getElementById('foundryMarketChart').getContext('2d');
+            new Chart(foundryCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['台積電 (TSMC)', '三星 (Samsung)', '中芯 (SMIC)', '其他', '英特爾 (Intel)'],
+                    datasets: [{
+                        label: '市場份額',
+                        data: [67.6, 7.7, 6.0, 18.2, 0.5], // Intel < 1%, represented as 0.5 for visibility
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.7)',   // emerald-500
+                            'rgba(37, 99, 235, 0.7)',    // blue-600
+                            'rgba(220, 38, 38, 0.7)',    // red-600
+                            'rgba(107, 114, 128, 0.7)',  // gray-500
+                            'rgba(14, 165, 233, 0.7)',   // sky-500
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                       legend: { position: 'bottom' },
+                       tooltip: {
+                            callbacks: {
+                                label:function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Interactive Competitor Table ---
+            const competitorData = [
+                { company: '英特爾 (Intel)', pe: 'N/A (虧損)', ps: '~1.7', pb: '~0.93', roe: '-10.86%' },
+                { company: '超微 (AMD)', pe: '~121.5', ps: '~9.8', pb: '~4.7', roe: '10.47%' },
+                { company: '輝達 (NVIDIA)', pe: '~55.3', ps: '~28.9', pb: '~50.5', roe: '117.32%' }
+            ];
+
+            const tableBody = document.getElementById('competitor-table-body');
+            const searchInput = document.getElementById('competitor-search');
+            
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                data.forEach(item => {
+                    const row = `
+                        <tr class="hover:bg-gray-50 competitor-row">
+                            <td class="py-3 px-4 border-b font-semibold">${item.company}</td>
+                            <td class="py-3 px-4 border-b">${item.pe}</td>
+                            <td class="py-3 px-4 border-b">${item.ps}</td>
+                            <td class="py-3 px-4 border-b">${item.pb}</td>
+                            <td class="py-3 px-4 border-b ${item.roe.startsWith('-') ? 'text-red-600' : 'text-green-600'}">${item.roe}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = competitorData.filter(item => 
+                    item.company.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // Initial render
+            renderTable(competitorData);
+        });
+    </script>
+</body>
+</html>
