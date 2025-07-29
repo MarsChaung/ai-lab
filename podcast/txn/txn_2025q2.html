@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-德州儀器(TI) 2025Q2 財務分析報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles for active/inactive nav links and other small tweaks */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .scroll-mt-24 {
+            scroll-margin-top: 6rem; /* 96px, adjust based on header height */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-md shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-sky-600">德州儀器(TI) 分析報告</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex md:space-x-4 lg:space-x-8">
+                    <a href="#company-overview" class="nav-link inactive-nav-link py-2 px-1 text-sm font-medium transition-colors duration-300">營運概況</a>
+                    <a href="#financial-performance" class="nav-link inactive-nav-link py-2 px-1 text-sm font-medium transition-colors duration-300">財務表現</a>
+                    <a href="#strategy-development" class="nav-link inactive-nav-link py-2 px-1 text-sm font-medium transition-colors duration-300">業務策略</a>
+                    <a href="#competitive-analysis" class="nav-link inactive-nav-link py-2 px-1 text-sm font-medium transition-colors duration-300">競爭分析</a>
+                    <a href="#risks-uncertainties" class="nav-link inactive-nav-link py-2 px-1 text-sm font-medium transition-colors duration-300">風險因素</a>
+                    <a href="#conclusion-recommendation" class="nav-link inactive-nav-link py-2 px-1 text-sm font-medium transition-colors duration-300">綜合評估</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Hamburger Icon -->
+                        <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Close Icon -->
+                        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                 <a href="#company-overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-100">營運概況</a>
+                 <a href="#financial-performance" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-100">財務表現</a>
+                 <a href="#strategy-development" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-100">業務策略</a>
+                 <a href="#competitive-analysis" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-100">競爭分析</a>
+                 <a href="#risks-uncertainties" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-100">風險因素</a>
+                 <a href="#conclusion-recommendation" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-100">綜合評估</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-24 px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- 公司營運概況 -->
+        <section id="company-overview" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <p class="text-lg leading-relaxed">德州儀器 (TI)，股票代號：TXN，是一家全球性的半導體設計、製造和銷售公司，其核心業務專注於類比 (Analog) 與嵌入式處理 (Embedded Processing) 兩大領域。公司為工業、汽車、個人電子、通訊設備和企業系統等多樣化的終端市場提供基礎技術，其龐大且長生命週期的產品組合是其商業模式韌性的關鍵支柱。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-sky-700 mb-3">類比 (Analog)</h3>
+                        <p>此為TI規模最大、利潤最豐厚的部門。類比晶片負責將現實世界的物理信號 (如聲音、溫度) 轉換為數位信號，並管理設備電源，是幾乎所有電子設備中不可或缺的元件。該部門是公司主要的獲利引擎。</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-teal-700 mb-3">嵌入式處理 (Embedded Processing)</h3>
+                        <p>此部門提供電子系統的「大腦」，產品包括微控制器 (MCU) 和處理器，負責運行軟體和管理設備功能。其應用範圍廣泛，從簡單的家電到複雜的工業機器人皆有涵蓋，與類比業務形成強大的協同效應。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 財務表現細節 -->
+        <section id="financial-performance" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節 (2025 Q2)</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">根據2025年第二季度財報，德州儀器展現了強勁的復甦勢頭。營收同比增長16%達到44.5億美元，營業利潤更是大幅增長25%，顯示在營收復甦的同時，公司的盈利能力也在改善。</p>
+                 <div class="w-full h-96">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+             </div>
+        </section>
+        
+        <!-- 營運指標 -->
+        <section id="operating-metrics" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標：終端市場表現</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-green-50 border-l-4 border-green-500 rounded-lg shadow p-6">
+                    <h3 class="text-xl font-bold text-green-800 mb-2">工業市場</h3>
+                    <p>表現最為搶眼，同比增長達「高雙位數」，復甦遍及所有子行業，被管理層形容為「非常火熱」。</p>
+                </div>
+                <div class="bg-orange-50 border-l-4 border-orange-500 rounded-lg shadow p-6">
+                    <h3 class="text-xl font-bold text-orange-800 mb-2">汽車市場</h3>
+                    <p>表現疲軟，同比僅「中個位數」增長，環比下滑。管理層認為其復甦進程落後於其他市場。</p>
+                </div>
+                <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg shadow p-6">
+                    <h3 class="text-xl font-bold text-blue-800 mb-2">其他市場</h3>
+                    <p>個人電子、企業系統、通訊設備均表現出強勁的同比和環比增長，週期性復甦廣泛。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 業務策略和發展 -->
+        <section id="strategy-development" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-sky-700 mb-4">300mm 本土製造戰略：數百億美元的豪賭</h3>
+                <p class="mb-4">TI的長期獲利能力建立在其核心競爭優勢之上，尤其是其雄心勃勃的製造業轉型戰略。公司正處於一個高強度的資本支出週期，計畫投入數百億美元將絕大部分先進製造產能集中在美國本土的300mm晶圓廠。</p>
+                <ul class="list-disc list-inside space-y-2 text-stone-600">
+                    <li><strong class="text-stone-800">成本優勢：</strong>更大的300mm晶圓尺寸能顯著降低每顆晶片的生產成本，從而獲得結構性的成本優勢。</li>
+                    <li><strong class="text-stone-800">供應鏈安全：</strong>在全球供應鏈日益脆弱的背景下，建立一個「地緣政治上可靠」的供應鏈，成為一項關鍵的新興競爭力。</li>
+                    <li><strong class="text-stone-800">政府支持：</strong>此戰略得到美國《晶片法案》的大力支持，包括直接資金補助與高額的投資稅收抵免，顯著降低了財務風險。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 投資和流動性 -->
+        <section id="investment-liquidity" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">資本支出</h3>
+                    <p class="text-4xl font-extrabold text-sky-600 mb-2">~$49億</p>
+                    <p class="text-stone-600">過去12個月的資本支出，反映了公司正處於重度投資階段，以犧牲短期自由現金流換取長期製造優勢。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-teal-700 mb-3">股東回報</h3>
+                    <p class="text-4xl font-extrabold text-teal-600 mb-2">~$67億</p>
+                    <p class="text-stone-600">過去12個月透過股息和股票回購返還給股東的現金總額。公司已連續21年提高股息，並承諾將所有自由現金流返還股東。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 產業競爭分析 -->
+        <section id="competitive-analysis" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <label for="competitor-search" class="block text-sm font-medium text-stone-700 mb-1">篩選競爭對手:</label>
+                    <input type="text" id="competitor-search" class="shadow-sm focus:ring-sky-500 focus:border-sky-500 block w-full sm:text-sm border-stone-300 rounded-md p-2" placeholder="輸入公司名稱或代碼...">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <!--<thead class="bg-stone-100 sticky top-20">-->
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">公司 (代碼)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">市值 (B USD)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">本益比 (TTM)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">股價淨值比</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">毛利率 (%)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">股息殖利率 (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competitor-table-body" class="bg-white divide-y divide-stone-200">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                 <p class="text-xs text-stone-500 mt-2">*註：數據截至2025年7月，部分數據可能基於不同會計準則，僅供參考。</p>
+            </div>
+        </section>
+        
+        <!-- 風險和不確定性 -->
+        <section id="risks-uncertainties" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 space-y-4">
+                <div>
+                    <h3 class="font-bold text-red-700">宏觀經濟與週期性風險</h3>
+                    <p>半導體產業具有強烈的週期性，市場需求波動直接影響公司營收和工廠產能利用率，進而對利潤率構成壓力。</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-red-700">地緣政治與供應鏈風險</h3>
+                    <p>全球貿易政策，特別是中美關稅壁壘，能迅速擾亂供應鏈和客戶採購行為。本土化製造雖能緩解此風險，但也帶來地域集中風險。</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-red-700">執行與財務風險</h3>
+                    <p>龐大的資本支出計畫存在執行風險（延誤、超支），同時高昂的折舊費用和增加的債務將在未來數年對利潤率和自由現金流構成持續壓力。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 關鍵數據匯總及財務指引 -->
+        <section id="key-data-guidance" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">Q2 2025 關鍵數據</h3>
+                    <ul class="space-y-2">
+                        <li><span class="font-semibold">營收:</span> $44.48 億 (+16% YoY)</li>
+                        <li><span class="font-semibold">毛利率:</span> 57.9%</li>
+                        <li><span class="font-semibold">營業利潤率:</span> 35.1%</li>
+                        <li><span class="font-semibold">每股盈餘 (EPS):</span> $1.41 (+16% YoY)</li>
+                    </ul>
+                </div>
+                <div class="bg-sky-50 border-l-4 border-sky-500 rounded-lg shadow p-6">
+                     <h3 class="text-xl font-bold text-sky-800 mb-3">Q3 2025 財務指引 (展望)</h3>
+                    <p class="mb-2">管理層對第三季度的指引相對保守，反映了地緣政治和終端市場復甦不均所帶來的不確定性。</p>
+                    <ul class="space-y-2">
+                        <li><span class="font-semibold">預期營收:</span> $44.5 億 - $48.0 億</li>
+                        <li><span class="font-semibold">預期每股盈餘 (EPS):</span> $1.36 - $1.60</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 綜合評估 -->
+        <section id="conclusion-recommendation" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="mb-4">德州儀器正有意識地犧牲短期財務指標，來進行一場旨在確立其未來數十年製造業主導地位的長期變革性賭注。基於傳統價值指標 (如低本益比)，TI當前並非「深度價值股」，其估值溢價反映了市場對其宏偉未來的預期。</p>
+                <p class="mb-4">對TI的投資，本質上是對管理層執行其複雜本土化製造戰略能力的信任投票。如果成功，預計將在2026年後為股東帶來顯著的每股自由現金流增長和持續的資本回報。</p>
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg text-green-800 mb-2">適合的投資者類型</h4>
+                        <ul class="list-disc list-inside text-green-700 space-y-1">
+                            <li>長期、耐心的資本家 (5-10年視野)</li>
+                            <li>尋求穩定股息增長的投資者</li>
+                            <li>認同公司本土化製造戰略的投資者</li>
+                        </ul>
+                    </div>
+                     <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg text-red-800 mb-2">不適合的投資者類型</h4>
+                        <ul class="list-disc list-inside text-red-700 space-y-1">
+                            <li>短期交易者</li>
+                            <li>傳統的深度價值投資者</li>
+                            <li>尋求爆發式增長的投資者</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 py-6">
+        <div class="container mx-auto text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-德州儀器(TI) 2025Q2 財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中德州儀器(TI)相關公開資料 (2025年7月29日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                });
+            });
+
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav .nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-96px 0px -50% 0px', // Adjust top margin based on header height
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${targetId}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Chart.js: Financial Performance Chart ---
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2024 Q2', '2025 Q2'],
+                    datasets: [
+                        {
+                            label: '營收 (億美元)',
+                            data: [38.22, 44.48],
+                            backgroundColor: 'rgba(56, 189, 248, 0.6)', // sky-400
+                            borderColor: 'rgba(14, 165, 233, 1)', // sky-500
+                            borderWidth: 1
+                        },
+                        {
+                            label: '淨利 (億美元)',
+                            data: [11.27, 12.95],
+                            backgroundColor: 'rgba(45, 212, 191, 0.6)', // teal-400
+                            borderColor: 'rgba(20, 184, 166, 1)', // teal-500
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '德州儀器 季度財務表現比較',
+                            font: { size: 18, weight: 'bold' },
+                            color: '#44403c' // stone-700
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y) + ' 億';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '金額 (億美元)',
+                                font: { size: 14 }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Interactive Table for Competitors ---
+            const competitorData = [
+                { name: 'Texas Instruments', ticker: 'TXN', mktCap: '~168', pe: '~35', pb: '~10.5', grossMargin: '~58%', dividend: '~2.9%' },
+                { name: 'Analog Devices', ticker: 'ADI', mktCap: '~113', pe: '~62', pb: '~3.2', grossMargin: '~61%', dividend: '~1.7%' },
+                { name: 'NXP Semiconductors', ticker: 'NXPI', mktCap: '~56', pe: '~26', pb: '~6.0', grossMargin: '~56%', dividend: '~1.8%' },
+                { name: 'Infineon', ticker: 'IFNNY', mktCap: '~53', pe: '~24-29', pb: '~3.1', grossMargin: '~41%', dividend: '~0.9%' },
+                { name: 'STMicroelectronics', ticker: 'STM', mktCap: '~24', pe: '~37', pb: '~1.4', grossMargin: '~34%', dividend: '~1.4%' },
+            ];
+
+            const searchInput = document.getElementById('competitor-search');
+            const tableBody = document.getElementById('competitor-table-body');
+
+            function renderTable(data) {
+                tableBody.innerHTML = ''; // Clear existing rows
+                if (data.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-stone-500">找不到符合條件的資料</td></tr>`;
+                    return;
+                }
+                data.forEach(company => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-stone-50 transition-colors duration-200';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${company.name} (${company.ticker})</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${company.mktCap}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${company.pe}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${company.pb}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${company.grossMargin}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${company.dividend}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = competitorData.filter(company => 
+                    company.name.toLowerCase().includes(searchTerm) || 
+                    company.ticker.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // Initial render
+            renderTable(competitorData);
+        });
+    </script>
+</body>
+</html>
