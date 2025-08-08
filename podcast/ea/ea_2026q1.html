@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美商藝電 26財年Q1 財務分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* Tailwind gray-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .chart-container {
+            position: relative;
+            height: 40vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-4 lg:px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-sky-600">
+                    <span class="text-stone-800">EA 26財年Q1</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#overview" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">公司概況</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">業務策略</a>
+                    <a href="#metrics" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">營運指標</a>
+                    <a href="#financials" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">財務表現</a>
+                    <a href="#liquidity" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">投資流動性</a>
+                    <a href="#competition" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">競爭分析</a>
+                    <a href="#risks" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">風險因素</a>
+                    <a href="#summary" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">數據匯總</a>
+                    <a href="#assessment" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition-colors pb-1">綜合評估</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#overview" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">公司營運概況</a>
+            <a href="#strategy" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">業務策略和發展</a>
+            <a href="#metrics" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">營運指標</a>
+            <a href="#financials" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">財務表現細節</a>
+            <a href="#liquidity" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">投資和流動性</a>
+            <a href="#competition" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">產業競爭分析</a>
+            <a href="#risks" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">風險和不確定性</a>
+            <a href="#summary" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">關鍵數據匯總及財務指引</a>
+            <a href="#assessment" class="block py-2 px-4 text-sm hover:bg-sky-100 mobile-nav-link">綜合評估</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 lg:px-6 py-8">
+
+        <!-- 1. 公司營運概況 -->
+        <section id="overview" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="section-card">
+                <p class="leading-relaxed">美商藝電 (Electronic Arts Inc., NASDAQ: EA) 是全球互動娛樂的領導者，其業務模式已成功從傳統的遊戲銷售轉型為以「即時服務」(Live Services) 為核心的持續性收入模式。此模式不僅帶來了穩定的現金流，也顯著提升了盈利的可預測性。</p>
+                <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-sky-50 p-6 rounded-lg shadow">
+                        <h3 class="font-bold text-lg text-sky-800">核心業務</h3>
+                        <p class="mt-2">專注於開發、行銷、發行和分銷在遊戲主機、PC 和行動裝置上運行的遊戲軟體及內容。</p>
+                    </div>
+                    <div class="bg-teal-50 p-6 rounded-lg shadow">
+                        <h3 class="font-bold text-lg text-teal-800">戰略轉型</h3>
+                        <p class="mt-2">即時服務收入佔比已超過 80%，代表公司成功轉型為服務型企業，降低了對季節性大作的依賴。</p>
+                    </div>
+                    <div class="bg-amber-50 p-6 rounded-lg shadow">
+                        <h3 class="font-bold text-lg text-amber-800">關鍵 IP</h3>
+                        <p class="mt-2">擁有《EA SPORTS FC》、《Madden NFL》、《Apex 英雄》、《戰地風雲》和《The Sims》等強大 IP 生態系。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 業務策略和發展 -->
+        <section id="strategy" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="section-card">
+                <p class="leading-relaxed mb-6">EA 的策略核心是建立和發展圍繞其核心 IP 的大規模線上社群，透過提供全年無休的內容和服務來深化玩家參與度，並利用網路效應構建難以撼動的經濟護城河。</p>
+                <div class="space-y-4">
+                    <div class="p-4 border-l-4 border-sky-500 bg-sky-50 rounded-r-lg">
+                        <h4 class="font-bold text-xl">雙引擎增長</h4>
+                        <p>以穩定的「即時服務」為基礎，輔以高潛力的「完整版遊戲」大作發行，形成互補的增長動力。</p>
+                    </div>
+                    <div class="p-4 border-l-4 border-teal-500 bg-teal-50 rounded-r-lg">
+                        <h4 class="font-bold text-xl">IP 生態系統</h4>
+                        <p>將單一遊戲體驗擴展為跨平台、全年連結的生態系統，如《FC》和《Madden》系列，以產生乘數效應。</p>
+                    </div>
+                    <div class="p-4 border-l-4 border-amber-500 bg-amber-50 rounded-r-lg">
+                        <h4 class="font-bold text-xl">擁抱創作者經濟</h4>
+                        <p>積極佈局用戶生成內容 (UGC)，如即將推出的《skate.》將作為一個由創作者驅動的平台，延長遊戲生命週期並開拓新變現模式。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 營運指標 -->
+        <section id="metrics" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="section-card">
+                <p class="leading-relaxed mb-6">EA 的營運指標清晰地展示了其向即時服務轉型的成功。淨預訂額 (Net Bookings) 的結構變化是衡量此一轉型的關鍵。</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-xl text-center mb-4">淨預訂額結構 (TTM FY26 Q1)</h3>
+                        <div class="chart-container">
+                            <canvas id="netBookingsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="bg-white p-6 rounded-lg shadow-inner border border-gray-200">
+                            <h4 class="font-bold text-lg mb-2">FY26 Q1 業績亮點</h4>
+                            <ul class="list-disc list-inside space-y-2 text-stone-600">
+                                <li><strong>淨預訂額：</strong> 12.98 億美元，年增 3%，超出預期。</li>
+                                <li><strong>GAAP 淨利潤：</strong> 2.01 億美元。</li>
+                                <li><strong>稀釋後每股盈餘 (EPS)：</strong> $0.79 美元。</li>
+                                <li><strong>驅動因素：</strong> EA SPORTS 產品組合、《Apex 英雄》及舊作目錄表現強勁。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 財務表現細節 -->
+        <section id="financials" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            <div class="section-card">
+                <p class="leading-relaxed mb-6">EA 擁有強健的財務狀況，體現在穩定的盈利能力、強大的現金流產生能力和健康的資產負債表上。</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">財務指標 (TTM)</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">金額 (美元)</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">分析</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 border border-stone-200">營運現金流</td>
+                                <td class="p-3 border border-stone-200 font-mono">19.76 億</td>
+                                <td class="p-3 border border-stone-200">強大的現金產生能力，為投資和股東回報提供基礎。</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 border border-stone-200">自由現金流</td>
+                                <td class="p-3 border border-stone-200 font-mono">17.50 億</td>
+                                <td class="p-3 border border-stone-200">扣除資本支出後仍有充沛現金，顯示業務高效率。</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 border border-stone-200">現金及短期投資</td>
+                                <td class="p-3 border border-stone-200 font-mono">16.30 億</td>
+                                <td class="p-3 border border-stone-200">資產負債表穩健，流動性充足。</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 border border-stone-200">總債務</td>
+                                <td class="p-3 border border-stone-200 font-mono">18.84 億</td>
+                                <td class="p-3 border border-stone-200">債務水平健康，處於淨現金或接近淨現金狀態。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 投資和流動性 -->
+        <section id="liquidity" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+             <div class="section-card">
+                <p class="leading-relaxed mb-6">EA 採取積極且對股東友好的資本配置策略，這也是其作為優質價值投資標的的核心支柱之一。</p>
+                 <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg text-green-800 mb-2">股票回購</h3>
+                        <p class="text-3xl font-bold text-green-600">$25 億</p>
+                        <p class="text-stone-600 mt-1">過去十二個月回購 1780 萬股，傳遞管理層對公司價值的信心。</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">股息支付</h3>
+                        <p class="text-3xl font-bold text-blue-600">$0.19 / 股</p>
+                        <p class="text-stone-600 mt-1">維持季度股息，為股東提供直接現金回報。</p>
+                    </div>
+                </div>
+                <div class="mt-6 p-6 bg-stone-100 rounded-lg">
+                    <h3 class="font-bold text-xl text-stone-800">未來承諾</h3>
+                    <p class="mt-2 text-stone-700">管理層承諾，在 2027 財年結束前，將至少 <span class="font-bold text-sky-600">80%</span> 的自由現金流透過回購和股息返還給股東，展現了對股東回報的高度重視。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 產業競爭分析 -->
+        <section id="competition" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+             <div class="section-card">
+                <p class="leading-relaxed mb-6">EA 在成熟但龐大的全球遊戲市場中，與微軟 (動視) 和 Take-Two Interactive 形成三足鼎立的局面。EA 的獨特優勢在於其基於獨家授權的體育遊戲組合。</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">公司</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">核心優勢</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">主要風險</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 border border-stone-200 font-bold">美商藝電 (EA)</td>
+                                <td class="p-3 border border-stone-200">無可匹敵的體育遊戲授權、穩定的即時服務生態系。</td>
+                                <td class="p-3 border border-stone-200">對體育授權的依賴、關鍵產品 (如《戰地風雲》) 的執行風險。</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 border border-stone-200 font-bold">微軟 (動視)</td>
+                                <td class="p-3 border border-stone-200">Game Pass 訂閱服務整合、多元化的超級 IP 陣容 (如《決勝時刻》)。</td>
+                                <td class="p-3 border border-stone-200">整合動視的文化與營運、反壟斷監管壓力。</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 border border-stone-200 font-bold">Take-Two (TTWO)</td>
+                                <td class="p-3 border border-stone-200">現象級大作 (如《俠盜獵車手》) 驅動的高利潤模式。</td>
+                                <td class="p-3 border border-stone-200">對少數超級 IP 的高度依賴、大作開發週期的不確定性。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 風險和不確定性 -->
+        <section id="risks" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="section-card">
+                <p class="leading-relaxed mb-6">儘管前景樂觀，投資 EA 仍需關注其面臨的關鍵風險，特別是《戰地風雲》系列的成敗，這將是近期的最大變數。</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="border border-red-200 bg-red-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-red-800">執行風險</h3>
+                        <p class="mt-2">《戰地風雲 6》的上市表現至關重要。前作《2042》的失敗對品牌造成了傷害，新作必須完美執行以修復玩家信任，任何失誤都可能造成嚴重後果。</p>
+                    </div>
+                    <div class="border border-orange-200 bg-orange-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-orange-800">監管風險</h3>
+                        <p class="mt-2">Ultimate Team 模式的「戰利品箱」機制在全球持續面臨監管審查。任何將其歸類為賭博的立法都可能嚴重衝擊利潤最高的業務。</p>
+                    </div>
+                    <div class="border border-yellow-200 bg-yellow-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-yellow-800">平台依賴性</h3>
+                        <p class="mt-2">高度依賴索尼、微軟和蘋果等平台持有者。平台政策的任何不利變動 (如分成比例) 都可能對利潤率構成威脅。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 關鍵數據匯總及財務指引 -->
+        <section id="summary" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="section-card">
+                <p class="leading-relaxed mb-6">管理層對未來充滿信心，重申了全年度的財務指引，顯示其對業務發展軌跡有著穩固的掌握。</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-xl mb-4">關鍵估值指標 (約)</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-stone-100 p-3 rounded">
+                                <span class="font-medium">本益比 (P/E Ratio, TTM)</span>
+                                <span class="font-bold text-lg text-sky-600">~39-41x</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-stone-100 p-3 rounded">
+                                <span class="font-medium">市銷率 (P/S Ratio, TTM)</span>
+                                <span class="font-bold text-lg text-sky-600">~5.6x</span>
+                            </div>
+                             <div class="flex justify-between items-center bg-stone-100 p-3 rounded">
+                                <span class="font-medium">股息殖利率</span>
+                                <span class="font-bold text-lg text-sky-600">~0.5%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-4">2026 財年全年指引</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-green-100 p-3 rounded">
+                                <span class="font-medium">淨預訂額</span>
+                                <span class="font-bold text-lg text-green-700">$76 - $80 億</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-green-100 p-3 rounded">
+                                <span class="font-medium">GAAP 淨收入</span>
+                                <span class="font-bold text-lg text-green-700">$71.5 - $75.5 億</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-green-100 p-3 rounded">
+                                <span class="font-medium">GAAP 稀釋後 EPS</span>
+                                <span class="font-bold text-lg text-green-700">$3.55 - $4.05</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 綜合評估 -->
+        <section id="assessment" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="section-card">
+                <p class="leading-relaxed mb-6">綜合來看，美商藝電並非傳統意義上的「深度價值股」，但對於追求長期業務品質、持久競爭優勢和可預測現金流的「優質價值」投資者而言，它代表了一個極具吸引力的投資機會。</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                        <h3 class="font-bold text-lg text-red-800 mb-2">不適合的投資者</h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>深度價值投資者：</strong>尋找統計上極度便宜的股票。</li>
+                            <li><strong>短期交易者：</strong>試圖從短期市場波動中獲利。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
+                        <h3 class="font-bold text-lg text-green-800 mb-2">適合的投資者</h3>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>長期、專注品質的投資者：</strong>願意為卓越企業支付公平價格。</li>
+                            <li><strong>GARP 投資者：</strong>看重其穩定增長路徑。</li>
+                            <li><strong>股息增長型投資者：</strong>看重未來提高股息的潛力。</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6 p-6 bg-sky-100 rounded-lg text-center">
+                    <h3 class="font-bold text-xl text-sky-800">最終結論</h3>
+                    <p class="mt-2 text-sky-700 leading-relaxed">EA 的投資論述核心在於，市場可能尚未完全消化其即時服務生態系統所帶來的穩定性。對於具備耐心、以所有者心態進行長期投資的人來說，EA 值得納入其投資組合的核心部分。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-12">
+        <div class="container mx-auto px-6 py-4 text-center text-stone-400 text-sm">
+            <p>&copy; 巴菲特AI價值投資-美商藝電 26財年Q1 財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美商藝電相關公開資料 (2025年8月8日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when a link is clicked
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Intersection Observer for Active Nav Link
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // 40% of the section must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Chart.js: Net Bookings Chart
+            const ctx = document.getElementById('netBookingsChart').getContext('2d');
+            const netBookingsChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['即時服務 (Live Services)', '完整版遊戲 (Full Game)'],
+                    datasets: [{
+                        label: '淨預訂額結構 (TTM FY26 Q1)',
+                        data: [5433, 2041], // Data in millions from the report
+                        backgroundColor: [
+                            'rgba(56, 189, 248, 0.7)', // sky-400
+                            'rgba(34, 197, 94, 0.7)'  // green-500
+                        ],
+                        borderColor: [
+                            'rgba(14, 165, 233, 1)', // sky-500
+                            'rgba(22, 163, 74, 1)'   // green-600
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        // Format as $X.XX B
+                                        label += '$' + (context.raw / 1000).toFixed(2) + 'B';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
