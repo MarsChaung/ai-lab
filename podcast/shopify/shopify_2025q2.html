@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify 2025Q2 財務分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+        }
+        /* Style for active navigation link */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #475569; /* slate-600 */
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7; /* sky-600 */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0; /* slate-200 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #64748b; /* slate-500 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; /* slate-600 */
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="text-2xl font-bold text-sky-600 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M19.902,9.333H4.098c-1.184,0-2.143,0.959-2.143,2.143v0.053c0,1.184,0.959,2.143,2.143,2.143h15.804 c1.184,0,2.143-0.959,2.143-2.143v-0.053C22.045,10.292,21.086,9.333,19.902,9.333z M4.098,15.714c-1.184,0-2.143-0.959-2.143-2.143 v-0.053h18.048v0.053c0,1.184-0.959,2.143-2.143,2.143H4.098z M19.902,7.292H4.098C2.914,7.292,1.955,6.333,1.955,5.148V5.095 c0-1.184,0.959-2.143,2.143-2.143h15.804c1.184,0,2.143,0.959,2.143,2.143v0.053C22.045,6.333,21.086,7.292,19.902,7.292z"/></svg>
+                    Shopify 2025Q2
+                </a>
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex space-x-6">
+                    <a href="#overview" class="nav-link inactive-nav-link py-2">公司營運概況</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-2">業務策略</a>
+                    <a href="#metrics" class="nav-link inactive-nav-link py-2">營運指標</a>
+                    <a href="#financials" class="nav-link inactive-nav-link py-2">財務表現</a>
+                    <a href="#competition" class="nav-link inactive-nav-link py-2">競爭分析</a>
+                    <a href="#risks" class="nav-link inactive-nav-link py-2">風險因素</a>
+                    <a href="#summary" class="nav-link inactive-nav-link py-2">綜合評估</a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden text-stone-600 hover:text-sky-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-stone-200">
+            <nav class="flex flex-col p-4 space-y-2">
+                <a href="#overview" class="nav-link inactive-nav-link block py-2 text-center">公司營運概況</a>
+                <a href="#strategy" class="nav-link inactive-nav-link block py-2 text-center">業務策略</a>
+                <a href="#metrics" class="nav-link inactive-nav-link block py-2 text-center">營運指標</a>
+                <a href="#financials" class="nav-link inactive-nav-link block py-2 text-center">財務表現</a>
+                <a href="#competition" class="nav-link inactive-nav-link block py-2 text-center">競爭分析</a>
+                <a href="#risks" class="nav-link inactive-nav-link block py-2 text-center">風險因素</a>
+                <a href="#summary" class="nav-link inactive-nav-link block py-2 text-center">綜合評估</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <!-- Section: 公司營運概況 -->
+        <section id="overview" class="pt-20 -mt-20 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg leading-relaxed">Shopify Inc. 是全球領先的電子商務平台，為各種規模的商家提供從建立線上商店、處理支付、管理庫存到市場行銷的全方位工具與服務。其核心使命是「讓商業更美好，為每個人服務」，致力於降低創業門檻，賦能獨立品牌在全球市場與大型企業競爭。</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow p-6 text-center">
+                    <h3 class="text-xl font-bold text-sky-800">總營收 (2025 H1)</h3>
+                    <p class="text-4xl font-bold text-sky-600 mt-2">$50.4億</p>
+                    <p class="text-sky-700 mt-1">同比增長 29%</p>
+                </div>
+                <div class="bg-emerald-100 rounded-lg shadow p-6 text-center">
+                    <h3 class="text-xl font-bold text-emerald-800">商品交易總額 (2025 Q2)</h3>
+                    <p class="text-4xl font-bold text-emerald-600 mt-2">$878億</p>
+                    <p class="text-emerald-700 mt-1">同比增長 31%</p>
+                </div>
+                <div class="bg-amber-100 rounded-lg shadow p-6 text-center">
+                    <h3 class="text-xl font-bold text-amber-800">營業利潤 (2025 H1)</h3>
+                    <p class="text-4xl font-bold text-amber-600 mt-2">$4.94億</p>
+                    <p class="text-amber-700 mt-1">核心業務盈利穩健</p>
+                </div>
+                <div class="bg-violet-100 rounded-lg shadow p-6 text-center">
+                    <h3 class="text-xl font-bold text-violet-800">每月經常性收入 (MRR)</h3>
+                    <p class="text-4xl font-bold text-violet-600 mt-2">$1.85億</p>
+                    <p class="text-violet-700 mt-1">截至 2025 Q2</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 業務策略和發展 -->
+        <section id="strategy" class="pt-20 -mt-20 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-3">雙軌收入引擎</h3>
+                    <p class="mb-2"><strong class="text-sky-600">訂閱解決方案:</strong> 提供穩定、可預測的經常性收入，包括平台訂閱、主題和應用銷售。佔 2025 上半年總收入的 25%。</p>
+                    <p><strong class="text-emerald-600">商家解決方案:</strong> 增長最快的部分，與商家成功直接掛鉤，包括 Shopify Payments 支付處理費、Shopify Capital 融資服務等。佔總收入的 75%。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-3">從 SaaS 到金融科技平台</h3>
+                    <p>Shopify 正從純軟體公司轉型為一個以金融科技為核心的綜合商業平台。透過深度整合支付 (Payments) 和融資 (Capital) 服務，極大增加了商家的平台黏性，並開闢了更廣闊的潛在市場。這是一項用短期毛利率換取長期生態系統護城河的深思熟慮的戰略。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-3">未來增長催化劑</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>向上游市場進軍:</strong> 透過 Shopify Plus 吸引大型企業客戶。</li>
+                        <li><strong>全球市場擴張:</strong> 在北美以外的地區（如歐洲、亞太）尋求增長。</li>
+                        <li><strong>AI 驅動創新:</strong> 利用 AI 改善搜索、推薦和商家營運效率。</li>
+                        <li><strong>擴展金融生態:</strong> 透過戰略投資（如 Affirm, Flexport）深化價值鏈佈局。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-3">產品生態系統</h3>
+                    <p>Shopify 的核心競爭力在於其整合的生態系統，涵蓋從建站、支付、物流到融資的商家全生命週期需求。這個「商業操作系統」創造了巨大的轉換成本，形成了難以複製的競爭護城河。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 營運指標 -->
+        <section id="metrics" class="pt-20 -mt-20 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-center text-stone-800 mb-4">關鍵財務指標趨勢 (季度)</h3>
+                <div class="relative h-96">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <p class="text-sm text-center text-stone-500 mt-4">數據來源：Shopify 2025 Q2 10-Q 財報。圖表展示了商家解決方案收入的強勁增長勢頭，已成為公司主要的增長引擎。</p>
+            </div>
+        </section>
+
+        <!-- Section: 財務表現細節 (Placeholder) -->
+        <section id="financials" class="pt-20 -mt-20 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-stone-800 mb-4">財務狀況概覽 (截至 2025/06/30)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">項目</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">2025 H1</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">2024 H1</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">營業利潤</td>
+                                <td class="p-3 border border-stone-200">$4.94 億</td>
+                                <td class="p-3 border border-stone-200">$3.27 億</td>
+                                <td class="p-3 border border-stone-200">核心業務盈利能力強勁增長。</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">淨利潤</td>
+                                <td class="p-3 border border-stone-200">$2.24 億</td>
+                                <td class="p-3 border border-stone-200">-</td>
+                                <td class="p-3 border border-stone-200">受股權投資市值波動影響巨大。</td>
+                            </tr>
+                             <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">營運現金流</td>
+                                <td class="p-3 border border-stone-200">$7.95 億</td>
+                                <td class="p-3 border border-stone-200">$5.78 億</td>
+                                <td class="p-3 border border-stone-200">業務自身「造血」能力持續增強。</td>
+                            </tr>
+                             <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">毛利率</td>
+                                <td class="p-3 border border-stone-200">49%</td>
+                                <td class="p-3 border border-stone-200">51%</td>
+                                <td class="p-3 border border-stone-200">因低毛利的商家解決方案佔比提升而略有下降。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-4 text-stone-600"><strong>分析重點：</strong>投資者應更關注能反映核心業務健康的<strong>營業利潤</strong>和<strong>營運現金流</strong>，而非受市場波動影響的 GAAP 淨利潤。</p>
+            </div>
+        </section>
+
+        <!-- Section: 產業競爭分析 -->
+        <section id="competition" class="pt-20 -mt-20 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="mb-4">Shopify 在一個龐大且競爭激烈的市場中運營，其主要競爭對手包括 BigCommerce、WooCommerce 等。Shopify 的核心競爭優勢在於其無與倫比的易用性、龐大的應用生態系統以及賦能商家建立獨立品牌的 DTC (Direct-to-Consumer) 模式。</p>
+                <div class="mb-4">
+                    <input type="text" id="table-filter" class="w-full md:w-1/3 p-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="篩選平台或特性...">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">特性</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">Shopify</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">BigCommerce</th>
+                                <th class="p-3 font-bold uppercase text-stone-600 border border-stone-200">WooCommerce</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competition-table-body">
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">目標受眾</td>
+                                <td class="p-3 border border-stone-200">從初創到大型企業，尋求易用性</td>
+                                <td class="p-3 border border-stone-200">尋求原生功能的中小企業</td>
+                                <td class="p-3 border border-stone-200">具備技術能力，尋求完全控制權的用戶</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">易用性</td>
+                                <td class="p-3 border border-stone-200">非常高，界面直觀</td>
+                                <td class="p-3 border border-stone-200">中等，學習曲線較陡</td>
+                                <td class="p-3 border border-stone-200">較低，需要技術知識</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">交易費用</td>
+                                <td class="p-3 border border-stone-200">使用 Shopify Payments 則無</td>
+                                <td class="p-3 border border-stone-200">所有方案均無</td>
+                                <td class="p-3 border border-stone-200">取決於支付網關</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">應用生態</td>
+                                <td class="p-3 border border-stone-200">極其龐大 (超過 8,000)</td>
+                                <td class="p-3 border border-stone-200">較小，仍在增長</td>
+                                <td class="p-3 border border-stone-200">非常龐大 (WordPress 生態)</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-3 font-semibold border border-stone-200">客戶支持</td>
+                                <td class="p-3 border border-stone-200">卓越 (24/7 全渠道)</td>
+                                <td class="p-3 border border-stone-200">良好 (24/7)</td>
+                                <td class="p-3 border border-stone-200">有限 (主要依賴社群)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 風險和不確定性 -->
+        <section id="risks" class="pt-20 -mt-20 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <h3 class="text-xl font-bold text-red-700 mb-2">宏觀經濟敏感性</h3>
+                    <p>作為促進非必需品消費的平台，Shopify 的業績對通貨膨脹和經濟衰退高度敏感，可能影響消費者購買力和商家穩定性。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-orange-500">
+                    <h3 class="text-xl font-bold text-orange-700 mb-2">日益激烈的競爭</h3>
+                    <p>電子商務平台領域競爭激烈，來自現有對手和潛在新進者的價格戰或功能競賽可能對利潤率構成壓力。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-yellow-500">
+                    <h3 class="text-xl font-bold text-yellow-700 mb-2">監管與法律審查</h3>
+                    <p>隨著金融服務業務的擴大，公司在支付、貸款、數據隱私和反壟斷等方面面臨的監管風險和合規成本日益增加。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
+                    <h3 class="text-xl font-bold text-blue-700 mb-2">財務與營運風險</h3>
+                    <p>龐大的股權投資組合給淨利潤帶來巨大波動性；同時，網絡安全威脅和收入結構轉變帶來的利潤率壓力也是潛在挑戰。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 綜合評估 -->
+        <section id="summary" class="pt-20 -mt-20 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-stone-800 mb-4">投資屬性：典型的成長型股票 (Growth Stock)</h3>
+                <p class="mb-4">Shopify 的戰略重心明確放在擴大市場份額和長期增長上，而非短期利潤最大化。其持續的高營收增長率、對業務的大規模再投資，都清晰地表明其成長股的屬性。</p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <h4 class="font-bold text-lg text-green-800 mb-2">投資亮點</h4>
+                        <ul class="list-disc list-inside space-y-1 text-green-700">
+                            <li>不斷拓寬的生態系統護城河</li>
+                            <li>在龐大且增長的電商市場中處於領先地位</li>
+                            <li>向高利潤的企業級和金融服務市場擴張</li>
+                            <li>強勁的營運現金流和健康的資產負債表</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <h4 class="font-bold text-lg text-red-800 mb-2">適合的投資者畫像</h4>
+                         <ul class="list-disc list-inside space-y-1 text-red-700">
+                            <li>擁有<strong>長期投資視野</strong>（5年以上）</li>
+                            <li>對股價波動有<strong>較高的容忍度</strong></li>
+                            <li>專注於投資<strong>高增長的科技股</strong></li>
+                            <li>相信 DTC 和獨立品牌運動的長期潛力</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-sky-50 border-t-4 border-sky-500 rounded-b text-sky-900 px-4 py-3 shadow-md" role="alert">
+                    <div class="flex">
+                        <div class="py-1"><svg class="fill-current h-6 w-6 text-sky-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                        <div>
+                            <p class="font-bold">綜合評估：長期買入</p>
+                            <p class="text-sm">Shopify 被視為投資全球化、去中心化電子商務這一持久趨勢的核心持股。建議投資者關注 EV/Sales、Price/Gross Profit 等更能反映其成長性的估值指標，而非傳統的 P/E 比率。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-12">
+        <div class="container mx-auto p-6 text-center text-stone-400">
+            <p>&copy; 巴菲特AI價值投資-Shopify 2025Q2 財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Shopify相關公開資料 (2025年8月9日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Interactive Table Filter ---
+            const tableFilter = document.getElementById('table-filter');
+            const tableBody = document.getElementById('competition-table-body');
+            const tableRows = tableBody.getElementsByTagName('tr');
+
+            tableFilter.addEventListener('keyup', () => {
+                const filterText = tableFilter.value.toLowerCase();
+                for (let i = 0; i < tableRows.length; i++) {
+                    const row = tableRows[i];
+                    const rowText = row.textContent.toLowerCase();
+                    if (rowText.includes(filterText)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+
+            // --- Chart.js Revenue Chart ---
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2024 Q1', '2024 Q2', '2024 Q3', '2024 Q4', '2025 Q1', '2025 Q2'],
+                    datasets: [{
+                        label: '訂閱解決方案營收 (百萬美元)',
+                        data: [511, 563, 610, 666, 620, 656],
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)', // blue-500
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: '商家解決方案營收 (百萬美元)',
+                        data: [1350, 1482, 1552, 2146, 1740, 2024],
+                        backgroundColor: 'rgba(16, 185, 129, 0.6)', // emerald-500
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '營收 (百萬美元)'
+                            }
+                        },
+                        x: {
+                           title: {
+                                display: true,
+                                text: '季度'
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
