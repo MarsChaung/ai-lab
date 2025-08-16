@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American Tower 2025Q2 財務分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #475569; /* slate-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .section-container {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-sky-600">American Tower 2025Q2</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:block">
+                    <ul class="flex items-center space-x-6 text-base font-medium">
+                        <li><a href="#overview" class="nav-link inactive-nav-link pb-2 transition-colors duration-300 hover:text-sky-500">公司概況</a></li>
+                        <li><a href="#strategy" class="nav-link inactive-nav-link pb-2 transition-colors duration-300 hover:text-sky-500">業務策略</a></li>
+                        <li><a href="#metrics" class="nav-link inactive-nav-link pb-2 transition-colors duration-300 hover:text-sky-500">營運指標</a></li>
+                        <li><a href="#financials" class="nav-link inactive-nav-link pb-2 transition-colors duration-300 hover:text-sky-500">財務表現</a></li>
+                        <li><a href="#competition" class="nav-link inactive-nav-link pb-2 transition-colors duration-300 hover:text-sky-500">競爭分析</a></li>
+                        <li><a href="#risks" class="nav-link inactive-nav-link pb-2 transition-colors duration-300 hover:text-sky-500">風險因素</a></li>
+                        <li><a href="#recommendation" class="nav-link inactive-nav-link pb-2 transition-colors duration-300 hover:text-sky-500">綜合評估</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-stone-200">
+            <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <li><a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-100">公司概況</a></li>
+                <li><a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-100">業務策略</a></li>
+                <li><a href="#metrics" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-100">營運指標</a></li>
+                <li><a href="#financials" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-100">財務表現</a></li>
+                <li><a href="#competition" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-100">競爭分析</a></li>
+                <li><a href="#risks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-100">風險因素</a></li>
+                <li><a href="#recommendation" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-100">綜合評估</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- 1. 公司營運概況 -->
+        <section id="overview" class="section-container mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg leading-relaxed">
+                    American Tower Corporation (AMT) 是一家領先的通訊基礎設施不動產投資信託基金（REIT），在全球擁有並營運近15萬個無線通訊站點。其核心商業模式是將多租戶電信塔（以及屋頂和分散式天線系統等其他站點）的空間租賃給無線營運商、廣播公司和其他服務提供商。租戶在AMT的塔上安裝其天線設備，而AMT則提供塔結構和房地產（通常包括電力和光纖回程接入）。租賃協議通常為5-10年以上，具有長期、不可取消的條款和內建的租金自動上調機制，這提供了可預測的、經常性的收入增長。
+                </p>
+                <p class="mt-4 text-lg leading-relaxed">
+                    AMT的營運部門按地理位置和資產類型組織。截至2025年第二季度，其在美國和加拿大擁有超過42,000個站點，在國際市場（拉丁美洲、非洲/亞太地區和歐洲）擁有超過107,000個站點。絕大部分（超過96%）的收入來自向租戶租賃這些塔式站點。此外，公司於2021年底收購CoreSite，擴展至數據中心業務，形成一個獨立的數據中心部門，約佔2025年第二季度物業收入的10%。
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. 業務策略和發展 -->
+        <section id="strategy" class="section-container mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">在通訊與AI計算基礎設施生態系統中的角色</h3>
+                    <p class="leading-relaxed">AMT作為無線塔房地產的主導者，是支撐現代行動網路的通訊基礎設施不可或缺的一部分。其鐵塔是蜂巢式覆蓋的骨幹。在5G時代，營運商為滿足激增的行動數據需求，正在透過在塔上增加更多天線（特別是中頻5G設備）來加密其網路。此外，透過其數據中心部門，AMT日益成為「AI計算」基礎設施生態系統的參與者。CoreSite的數據中心提供支援雲端計算和AI工作負載的互聯樞紐和伺服器託管，直接受益於生成式AI和機器學習採用的激增趨勢。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">未來盈利能力的關鍵驅動因素</h3>
+                    <p class="leading-relaxed">AMT未來的盈利能力將由多種因素共同驅動：全球行動數據使用量的持續增長和5G網路的加密、CoreSite數據中心的擴展和AI需求的增長、選擇性的新建和併購機會，以及租賃合約中的租金自動上調機制。公司透過專注於高增長資產（數據中心、選擇性新塔）並剝離低回報資產（如印度業務），為未來提高投資資本回報率奠定了基礎。這些驅動因素共同構成了一個強大的增長引擎，有望在未來幾年持續推動公司的AFFO和股息增長。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 營運指標 -->
+        <section id="metrics" class="section-container mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標 (2025 Q2)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-4xl font-bold text-sky-800">~$150,000</h3>
+                    <p class="mt-2 text-stone-600 font-semibold">全球通訊站點</p>
+                </div>
+                <div class="bg-teal-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-4xl font-bold text-teal-800">$25.27億</h3>
+                    <p class="mt-2 text-stone-600 font-semibold">總物業收入</p>
+                </div>
+                <div class="bg-indigo-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-4xl font-bold text-indigo-800">$17.52億</h3>
+                    <p class="mt-2 text-stone-600 font-semibold">調整後EBITDA</p>
+                </div>
+                <div class="bg-rose-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-4xl font-bold text-rose-800">$2.60</h3>
+                    <p class="mt-2 text-stone-600 font-semibold">每股AFFO</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 財務表現細節 -->
+        <section id="financials" class="section-container mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-sky-700 mb-4">2025年第二季度亮點</h3>
+                <p class="leading-relaxed mb-4">
+                    AMT在2025年第二季度展現了穩健的營運表現。總物業收入為25.27億美元，同比增長1.2%。調整後EBITDA為17.52億美元，同比增長1.8%。儘管受會計調整和去年同期一次性收益的影響，歸屬於普通股股東的調整後營運資金（AFFO）報告為12.18億美元（每股2.60美元），同比下降約6.7%，但剔除這些項目後，核心AFFO實際上實現了增長。數據中心部門表現出色，收入同比增長約13%，反映了雲端/AI客戶的強勁租賃需求。基於第二季度的穩健表現，管理層上調了2025年全年關鍵指標的指引。
+                </p>
+                <div class="w-full max-w-3xl mx-auto mt-8">
+                    <h4 class="text-lg font-semibold text-center text-stone-700 mb-4">物業收入比較 (百萬美元)</h4>
+                    <div class="relative h-96">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. 投資和流動性 -->
+        <section id="investment" class="section-container mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資和流動性</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg leading-relaxed">
+                    American Tower 保持著較高的槓桿率，這在鐵塔REITs中很常見。公司已採取措施加強資產負債表，利用出售印度業務所得的約21億美元現金在2024年底償還債務。截至2025年第二季度，計入印度業務收益後，淨債務/EBITDA比率處於5倍區間的高位。公司的加權平均債務期限為5.6年，且大部分為固定利率，使其免受即時利率上升的影響。第二季度，AMT產生了9.69億美元的自由現金流，並支付了每股1.70美元的股息（約佔AFFO的65%）。
+                </p>
+            </div>
+        </section>
+
+        <!-- 6. 產業競爭分析 -->
+        <section id="competition" class="section-container mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="leading-relaxed mb-6">
+                    AMT是全球最大的電信塔獨立所有者，這使其在規模和租戶關係方面具有顯著的競爭優勢。其主要競爭對手包括美國的Crown Castle (CCI) 和 SBA Communications (SBAC)，三者構成了鐵塔REIT的寡頭壟斷。AMT的全球佈局和對數據中心的多元化投資使其與專注於美國市場的競爭對手區分開來。
+                </p>
+                <div class="mb-4">
+                    <input type="text" id="table-filter" class="w-full md:w-1/3 p-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="篩選公司名稱或關鍵字...">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="p-4 font-semibold text-stone-700 border-b-2 border-stone-200">公司</th>
+                                <th class="p-4 font-semibold text-stone-700 border-b-2 border-stone-200">投資組合規模</th>
+                                <th class="p-4 font-semibold text-stone-700 border-b-2 border-stone-200">競爭焦點</th>
+                                <th class="p-4 font-semibold text-stone-700 border-b-2 border-stone-200">市場地位</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competitor-table-body">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 風險和不確定性 -->
+        <section id="risks" class="section-container mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                 <ul class="list-disc list-inside space-y-3 text-lg leading-relaxed">
+                    <li><strong>利率風險：</strong> 作為REIT，其股價與債券收益率呈負相關。利率上升可能對估值倍數構成壓力並增加債務成本。</li>
+                    <li><strong>外匯與新興市場風險：</strong> 約三分之一的利潤來自具有貨幣和政治風險的市場（如巴西、非洲），這可能增加波動性。</li>
+                    <li><strong>客戶集中風險：</strong> 大部分收入來自少數幾家大型營運商。任何重大的行業整合或意外的合約取消都可能造成損害。</li>
+                    <li><strong>技術變革風險：</strong> 未來技術若大幅減少對鐵塔的需求（如衛星互聯網普及），可能影響其商業模式。然而，目前這些技術更可能是補充而非替代。</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- 8. 關鍵數據匯總及財務指引 -->
+        <section id="guidance" class="section-container mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-sky-700 mb-4">2025財年展望更新</h3>
+                <p class="text-lg leading-relaxed">
+                    基於第二季度的穩健表現，管理層上調了2025年全年的關鍵指標指引。物業收入的中位數預測上調1.65億美元至約102.1億美元（同比增長約3%）。調整後EBITDA指引也上調至約69.2億美元，AFFO指引也相應提高。在調整印度業務退出影響後，AMT現在預計2025年每股AFFO將實現增長，扭轉了早前可能下降的預期。這反映了管理層對2025年下半年的積極看法。
+                </p>
+            </div>
+        </section>
+
+
+        <!-- 9. 綜合評估 -->
+        <section id="recommendation" class="section-container">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="leading-relaxed mb-4">
+                    AMT作為一家領先的基礎設施REIT，結合了房地產資產的穩定性和數位革命的增長潛力。其核心鐵塔租賃業務享有高進入門檻、長期合約和持續的有機增長。向數據中心的戰略擴張增加了與雲端和AI趨勢相關的另一個增長點，使其在同業中脫穎而出。
+                </p>
+                <p class="leading-relaxed mb-4">
+                    對於尋求收入和增長相結合的投資者而言，AMT提供了一個具有吸引力的選擇。它適合那些尋求在5G/科技領域獲得增長股息的股息增長型投資者，或希望在不對單一科技公司進行投機的情況下參與科技基礎設施發展的普通投資者。
+                </p>
+                <div class="bg-sky-50 border-l-4 border-sky-500 text-sky-800 p-4 rounded-r-lg mt-6">
+                    <p class="font-bold">市場分析師綜合評估：買入 (Buy)</p>
+                    <p class="mt-1">基於其穩健的商業模式、競爭地位、近期表現和增長驅動力，我們給予AMT「買入」評級，適合長期投資者。其目前的估值合理，持續增長的前景（預計到2026-2027年AFFO將實現高個位數增長）支持其上行潛力。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
+            <p>&copy; 巴菲特AI價值投資-American Tower 2025Q2 財務分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中特斯拉相關公開資料 (2025年8月15日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when a link is clicked
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Chart.js Revenue Chart ---
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            // Q2 2025: $2.527 billion, up 1.2% from Q2 2024.
+            // Q2 2024 revenue = 2527 / 1.012 = 2497
+            const revenueData = {
+                labels: ['2024 Q2', '2025 Q2'],
+                datasets: [{
+                    label: '物業收入 (百萬美元)',
+                    data: [2497, 2527],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)', // Blue
+                        'rgba(255, 99, 132, 0.6)'  // Red
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            new Chart(ctx, {
+                type: 'bar',
+                data: revenueData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '金額 (百萬美元)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(context.parsed.y) + 'M';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Interactive Table Data & Filtering ---
+            const competitorData = [
+                {
+                    company: 'American Tower (AMT)',
+                    portfolio: '全球約15萬個通訊站點，遍佈約25個國家。包括鐵塔、屋頂、DAS及約30個數據中心。',
+                    focus: '透過數據中心和邊緣計算整合進行創新。租戶遍佈全球主要營運商。',
+                    position: '全球第一的無線通訊塔獨立所有者。唯一擁有重要數據中心資產的鐵塔公司。'
+                },
+                {
+                    company: 'Crown Castle (CCI)',
+                    portfolio: '約4萬座蜂巢式基地台（100%位於美國），以及9萬英里的光纖，支援約11.5萬個小型蜂巢式節點。',
+                    focus: '專注於美國市場，提供鐵塔+光纖的整合解決方案。與美國三大營運商關係深厚。',
+                    position: '美國第一的鐵塔所有者和領先的小型蜂巢式網路提供商。在城市市場實力雄厚。'
+                },
+                {
+                    company: 'SBA Communications (SBAC)',
+                    portfolio: '在13個國家（美國、中南美洲、南非）擁有約39,700個站點。主要為宏基站。',
+                    focus: '純粹的鐵塔所有者，專注於最大化鐵塔現金流和股票回購。運營效率高。',
+                    position: '美國第三大鐵塔REIT。在每座塔的租戶租用率上常居同業之冠，利潤率高。'
+                }
+            ];
+
+            const tableBody = document.getElementById('competitor-table-body');
+            competitorData.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-stone-200 hover:bg-stone-50';
+                row.innerHTML = `
+                    <td class="p-4 font-medium text-stone-900">${item.company}</td>
+                    <td class="p-4">${item.portfolio}</td>
+                    <td class="p-4">${item.focus}</td>
+                    <td class="p-4">${item.position}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            const filterInput = document.getElementById('table-filter');
+            const tableRows = tableBody.getElementsByTagName('tr');
+
+            filterInput.addEventListener('keyup', function() {
+                const filterText = this.value.toLowerCase();
+                for (let i = 0; i < tableRows.length; i++) {
+                    const row = tableRows[i];
+                    const rowText = row.textContent.toLowerCase();
+                    if (rowText.includes(filterText)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
