@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-特斯拉Master Plan分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義樣式 */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* stone-50 */
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom-color: #0ea5e9;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+            border-bottom-color: transparent;
+        }
+        .table-header-sticky th {
+            position: sticky;
+            top: 64px; /* header height */
+            background-color: #f3f4f6; /* gray-100 */
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-stone-800">
+                <a href="#hero">特斯拉 Master Plan</a>
+            </h1>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#plan1-2" class="nav-link inactive-nav-link border-b-2 pb-1 transition-colors duration-300">計畫 I & II</a>
+                <a href="#plan3" class="nav-link inactive-nav-link border-b-2 pb-1 transition-colors duration-300">計畫 III</a>
+                <a href="#plan4" class="nav-link inactive-nav-link border-b-2 pb-1 transition-colors duration-300">計畫 IV</a>
+                <a href="#analysis" class="nav-link inactive-nav-link border-b-2 pb-1 transition-colors duration-300">未來評估</a>
+                <a href="#conclusion" class="nav-link inactive-nav-link border-b-2 pb-1 transition-colors duration-300">結論</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-stone-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 16h12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <a href="#plan1-2" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">計畫 I & II</a>
+            <a href="#plan3" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">計畫 III</a>
+            <a href="#plan4" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">計畫 IV</a>
+            <a href="#analysis" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">未來評估</a>
+            <a href="#conclusion" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">結論</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">從永續能源到永續豐盛</h2>
+            <p class="text-lg md:text-xl text-stone-600 max-w-3xl mx-auto">
+                深入解析特斯拉四部宏圖計畫的演進、執行力與未來價值，探討其如何從一家電動車公司，轉變為重塑全球經濟的科技願景家。
+            </p>
+        </section>
+
+        <!-- Master Plan I & II Section -->
+        <section id="plan1-2" class="mb-16">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏圖計畫 I & II：奠基之路</h3>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <p class="text-stone-600 leading-relaxed">
+                    前兩部曲為特斯拉奠定了堅實的基礎。第一部曲透過「三步走」策略，成功將電動車從高端小眾市場推向大眾，證明了其商業模式的可行性。第二部曲則將視野擴展至整合的能源生態系，涵蓋了太陽能、儲能及多樣化的電動運輸工具，並首次提出了自動駕駛與車輛共享的宏大願景。
+                </p>
+            </div>
+            
+            <h4 class="text-2xl font-semibold text-stone-800 mb-4">計畫執行評分卡</h4>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                 <div class="mb-4">
+                    <input type="text" id="table-filter" class="w-full md:w-1/2 p-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="篩選計畫目標...">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="p-3 font-semibold text-sm text-stone-600 uppercase border-b-2 border-stone-200">計畫目標</th>
+                                <th class="p-3 font-semibold text-sm text-stone-600 uppercase border-b-2 border-stone-200">執行狀態</th>
+                                <th class="p-3 font-semibold text-sm text-stone-600 uppercase border-b-2 border-stone-200">關鍵評註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-table-body">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Master Plan III Section -->
+        <section id="plan3" class="mb-16">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏圖計畫 III：地球永續藍圖</h3>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <p class="text-stone-600 leading-relaxed">
+                    第三部曲的格局從企業戰略躍升至全球工業藍圖，旨在為地球提供一個完全由永續能源驅動的轉型路徑。它不僅證明了技術上的可行性，更從經濟角度論證了轉型比維持現狀更具效益，並為特斯拉的能源業務描繪了近乎無限的市場空間。
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Key Goal Cards -->
+                <div class="bg-sky-100 rounded-lg shadow p-6">
+                    <h4 class="font-bold text-sky-800 text-lg mb-2">核心目標</h4>
+                    <p class="text-sky-700">徹底消除化石燃料，引導全球走向完全電氣化的未來。</p>
+                </div>
+                 <div class="bg-teal-100 rounded-lg shadow p-6">
+                    <h4 class="font-bold text-teal-800 text-lg mb-2">投資估算</h4>
+                    <p class="text-teal-700">建立永續經濟需投資10萬億美元，低於維持化石燃料的14萬億美元。</p>
+                </div>
+                <div class="bg-indigo-100 rounded-lg shadow p-6">
+                    <h4 class="font-bold text-indigo-800 text-lg mb-2">資源需求</h4>
+                    <p class="text-indigo-700">全球需240 TWh電池儲存、30 TW可再生能源發電能力。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Master Plan IV Section -->
+        <section id="plan4" class="mb-16">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏圖計畫 IV：AI 新紀元</h3>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <p class="text-stone-600 leading-relaxed">
+                    第四部曲是理念的深刻昇華，核心願景從「永續能源」提升至「永續豐盛」，旨在透過AI與機器人技術消除物質稀缺性。公司的自我定位從硬體製造商轉變為以AI為核心的科技平台，Optimus人形機器人與Robotaxi網絡成為實現這一宏圖的關鍵支柱。
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-2xl font-semibold text-stone-800 mb-3">核心願景演進</h4>
+                    <p class="text-stone-600">指導原則轉變為「增長是無限的」、「創新消除限制」，強調AI技術將造福全人類，創造物質豐盛的未來。全球資本市場正掀起一場圍繞人工智能的投資狂潮，擁有可信AI故事的公司被賦予了極高的估值溢價。第四部曲的發布，正是特斯拉順應這一趨勢，主動進行的一次「價值重估敘事」（Re-Valuation Narrative）。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-2xl font-semibold text-stone-800 mb-3">戰略核心重塑</h4>
+                    <p class="text-stone-600">特斯拉將自身定位為「將AI帶入物理世界」的公司。Optimus旨在革命化勞動力，Robotaxi旨在解決全球移動出行。<br>人形機器人市場同樣被預測將經歷爆炸性增長。Future Market Insights預計，該市場規模將從2025年的約78億美元增長到2035年的1820億美元。高盛（Goldman Sachs）的預測相對保守，但也認為到2035年市場規模將達到380億美元。<br>全球Robotaxi市場預計將迎來爆發式增長。根據Grand View Research的預測，到2030年市場規模將達到約440億美元；而Fortune Business Insights的預測更為樂觀，認為到2031年將達到1190億美元，複合年增長率（CAGR）高達70-80%。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Analysis Section -->
+        <section id="analysis" class="mb-16">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">未來價值評估與展望</h3>
+            <p class="text-stone-600 mb-8 max-w-4xl">
+                第四章從根本上改變了特斯拉的估值邏輯，焦點從汽車業務轉向潛力巨大但充滿不確定性的AI業務。分析師的估值模型顯示，未來的股價高度依賴Robotaxi和Optimus的成功。這使得對特斯拉的投資，本質上成為一場關於AI未來的高風險、高回報的「二元賭局」。
+            </p>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h4 class="text-xl font-semibold text-stone-800 mb-4 text-center">分析師目標股價對比 (2029-2030年展望)</h4>
+                <div class="relative h-96 w-full">
+                    <canvas id="valuationChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section id="conclusion" class="mb-16">
+             <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論：特斯拉的終極賭局</h3>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 leading-relaxed mb-4">
+                    特斯拉的宏圖計畫展示了一條從產品製造商到未來科技願景家的演進路徑。然而，其歷史上在開創性項目上的延遲記錄是評估未來的關鍵風險。第四章將公司的命運與AI的潛力深度捆綁。
+                </p>
+                <p class="text-stone-600 leading-relaxed">
+                    若成功，特斯拉可能成為定義21世紀經濟的基礎設施級公司；若失敗，其估值則可能回歸至一家優秀的硬體製造商。這場賭局的結果，將是未來十年全球科技領域最值得關注的焦點。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 巴菲特AI價值投資-特斯拉Master Plan分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中特斯拉Master Plan相關公開資料 (2025年9月2日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Data ---
+            const productData = [
+                { plan: '第一部曲：打造跑車 (Roadster)', status: '✅ 已完成', comment: '約2,450輛銷量 (2008-2012)。成功樹立品牌形象並為下一階段提供資金。' },
+                { plan: '第一部曲：打造平價車 (Model S/X)', status: '✅ 已完成', comment: '確立在豪華電動車市場的領導地位。' },
+                { plan: '第一部曲：打造更平價的車 (Model 3/Y)', status: '✅ 已完成', comment: 'Model Y成為全球最暢銷車型。實現了大規模市場化和盈利。' },
+                { plan: '第二部曲：整合能源 (太陽能屋頂)', status: '❌ 具挑戰', comment: '生產嚴重延遲；部署數量遠低於目標；特斯拉已不再公布相關指標。' },
+                { plan: '第二部曲：整合能源 (儲能)', status: '✅ 超出預期', comment: '指數級增長；2025年Q2部署9.6 GWh；已成為利潤最高的業務部門。' },
+                { plan: '第二部曲：擴展交通 (Semi卡車)', status: '⏳ 延遲中', comment: '2017年發布，2022年底首批交付。規模化生產推遲至2026年。' },
+                { plan: '第二部曲：擴展交通 (Cybertruck)', status: '🔄 進行中', comment: '2019年發布，2023年底首批交付。產能爬坡緩慢，市場定位較為小眾。' },
+                { plan: '第二部曲：開發安全10倍的自動駕駛 (FSD)', status: '🔄 進行中', comment: '安全數據顯示優於人類駕駛，但尚未實現真正的Level 4/5級別自動駕駛。' },
+                { plan: '第二部曲：實現車輛共享 (Robotaxi)', status: '⏳ 延遲中', comment: '2025年在奧斯汀啟動有限試點項目。廣泛的商業網絡仍遙遠。' }
+            ];
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Close mobile menu when a link is clicked
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+
+            // --- Interactive Table ---
+            const tableBody = document.getElementById('product-table-body');
+            const filterInput = document.getElementById('table-filter');
+
+            function populateTable(data) {
+                tableBody.innerHTML = '';
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-stone-200 hover:bg-stone-50';
+                    row.innerHTML = `
+                        <td class="p-3 text-stone-800 font-medium">${item.plan}</td>
+                        <td class="p-3 text-stone-600">${item.status}</td>
+                        <td class="p-3 text-stone-600">${item.comment}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            filterInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => 
+                    item.plan.toLowerCase().includes(searchTerm) ||
+                    item.status.toLowerCase().includes(searchTerm) ||
+                    item.comment.toLowerCase().includes(searchTerm)
+                );
+                populateTable(filteredData);
+            });
+
+            populateTable(productData); // Initial population
+
+            // --- Chart.js Valuation Chart ---
+            const ctx = document.getElementById('valuationChart').getContext('2d');
+            const valuationChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['方舟投資 (ARK Invest, 2029)', '摩根士丹利 (Morgan Stanley)'],
+                    datasets: [
+                        {
+                            label: '基礎情景目標價 ($)',
+                            data: [2600, 430],
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)', // blue-500
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '牛市情景目標價 ($)',
+                            data: [3100, 800],
+                            backgroundColor: 'rgba(16, 185, 129, 0.7)', // emerald-500
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '熊市情景目標價 ($)',
+                            data: [2000, 200],
+                            backgroundColor: 'rgba(239, 68, 68, 0.7)', // red-500
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const header = document.getElementById('header');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: `-${header.offsetHeight}px 0px 0px 0px`,
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
