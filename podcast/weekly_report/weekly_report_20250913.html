@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義樣式 for active nav link */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800 font-sans">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-sky-600">市場週報</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#company-news" class="py-2 inactive-nav-link transition duration-300 ease-in-out">指標公司</a>
+                <a href="#policy-updates" class="py-2 inactive-nav-link transition duration-300 ease-in-out">政策動向</a>
+                <a href="#fed-watch" class="py-2 inactive-nav-link transition duration-300 ease-in-out">聯準會動態</a>
+                <a href="#economic-data" class="py-2 inactive-nav-link transition duration-300 ease-in-out">經濟數據</a>
+                <a href="#market-sentiment" class="py-2 inactive-nav-link transition duration-300 ease-in-out">市場情緒</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-stone-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white">
+            <a href="#company-news" class="block py-3 px-6 text-sm hover:bg-sky-50">指標公司</a>
+            <a href="#policy-updates" class="block py-3 px-6 text-sm hover:bg-sky-50">政策動向</a>
+            <a href="#fed-watch" class="block py-3 px-6 text-sm hover:bg-sky-50">聯準會動態</a>
+            <a href="#economic-data" class="block py-3 px-6 text-sm hover:bg-sky-50">經濟數據</a>
+            <a href="#market-sentiment" class="block py-3 px-6 text-sm hover:bg-sky-50">市場情緒</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">美股市場週報</h1>
+            <p class="text-xl text-stone-600">發布日期：2025年9月13日</p>
+        </div>
+
+        <!-- Section 1: Company News -->
+        <section id="company-news" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">指標性美股上市公司的重大新聞</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Apple Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">蘋果 (Apple)</h3>
+                    <p class="text-stone-600 text-sm">發表新一代 iPhone 17 及超薄 iPhone Air。新品維持前代價格策略，搭載 A19 晶片強化 AI 功能。投資者反應正面，股價當週上漲約 3.8%。</p>
+                </div>
+                <!-- Microsoft Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">微軟 (Microsoft)</h3>
+                    <p class="text-stone-600 text-sm">與 OpenAI 簽署 MOU 調整合作關係，傳考慮採用 Anthropic 技術以分散 AI 供應商。在歐盟，同意解除 Teams 與 Office 的捆綁銷售。</p>
+                </div>
+                <!-- Alphabet Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">Alphabet (Google)</h3>
+                    <p class="text-stone-600 text-sm">反壟斷案迎來重大利好，法院裁決不需拆分公司。消息激勵股價單日飆漲超過 9%，市值增加約 2,100 億美元。但仍面臨廣告業務的監管調查。</p>
+                </div>
+                <!-- Amazon Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">亞馬遜 (Amazon)</h3>
+                    <p class="text-stone-600 text-sm">廣告業務面臨 FTC 調查，Prime 會員增長放緩。正開發自有品牌 AR 眼鏡，並收購印度金融公司 Axio 擴展海外市場。</p>
+                </div>
+                <!-- Meta Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">Meta (Facebook)</h3>
+                    <p class="text-stone-600 text-sm">面臨 VR 業務安全指控及 FTC 對其 AI 聊天機器人的調查。在歐盟，成功撤銷對其徵收的「大型科技監管費」。旗下團隊正開發下一代大型 AI 模型。</p>
+                </div>
+                <!-- NVIDIA Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">輝達 (NVIDIA)</h3>
+                    <p class="text-stone-600 text-sm">公開反對《GAIN AI法案》對晶片出口的限制，並傳聞正研發全新中國專用 AI 晶片。與 OpenAI 計劃在英國投資建設資料中心。</p>
+                </div>
+                 <!-- Tesla Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 col-span-1 md:col-span-2 lg:col-span-3">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">特斯拉 (Tesla)</h3>
+                    <p class="text-stone-600 text-sm">董事會提議價值高達 1 兆美元的馬斯克十年期薪酬方案，激勵股價上漲約 3%。然而，數據顯示其在美國電動車市場的市占率首次跌破 40%，核心汽車業務面臨競爭加劇與產品線老化問題。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chart Section -->
+        <section class="mb-16">
+             <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週重點科技股股價表現</h2>
+             <div class="bg-white rounded-lg shadow-lg p-6">
+                 <p class="text-center text-stone-500 mb-4">部分指標性公司當週股價變動百分比</p>
+                 <div class="relative h-96">
+                     <canvas id="stockChart"></canvas>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Section 2: Policy Updates -->
+        <section id="policy-updates" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">美國政府政策動向</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-sky-700">貿易與對中政策</h3>
+                    <p class="text-stone-600 text-sm">川普政府延續強硬路線，計畫限制中國製無人機與車輛進口。財政部更呼籲盟友對中、印商品施加「有感關稅」，以迫使其減少購買俄羅斯石油。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-sky-700">能源與產業政策</h3>
+                    <p class="text-stone-600 text-sm">啟動「空中計程車」加速試點計畫，並透過稅收法案激勵製造業資本開支。值得注意的是，7,500 美元的聯邦電動車購車補貼將於 9 月底部分到期。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-sky-700">科技與AI監管</h3>
+                    <p class="text-stone-600 text-sm">監管機構如 FTC 已開始對生成式 AI 產品進行正式調查，審視其對消費者隱私和資料安全的影響。AI 已上升為國安戰略議題，政府試圖建立「美國優先、限敵發展」的新規範。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Fed Watch -->
+        <section id="fed-watch" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">聯準會與貨幣政策動態</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600">市場普遍預期聯準會將在 9 月 16-17 日的會議上啟動今年首次降息。聯邦利率期貨隱含 9 月降息機率接近 100%。儘管 8 月 CPI 數據略高於預期，但勞動市場（如初請失業金人數創近四年新高）的明顯轉弱，使決策者具備寬鬆空間。主席鮑威爾與理事瓦勒爾皆已暗示傾向放鬆政策。同時，總統川普持續公開向 Fed 施壓，要求更大幅度降息。在多重因素交織下，聯準會正迎來轉折性的政策會議。</p>
+            </div>
+        </section>
+
+        <!-- Section 4: Economic Data -->
+        <section id="economic-data" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週重要經濟數據</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <!-- Interactive Table -->
+                <div class="mb-4">
+                    <input type="text" id="searchInput" class="w-full p-2 border border-gray-300 rounded-md" placeholder="篩選經濟指標、日期或解讀內容...">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">發布日期</th>
+                                <th scope="col" class="px-6 py-3">經濟指標</th>
+                                <th scope="col" class="px-6 py-3">結果</th>
+                                <th scope="col" class="px-6 py-3">市場解讀</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody">
+                            <!-- Data will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Market Sentiment -->
+        <section id="market-sentiment" class="pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">影響市場整體情緒的其他事件</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-rose-700">地緣政治與外交</h3>
+                    <p class="text-stone-600 text-sm">烏俄戰爭升溫引發對能源供應的擔憂。美中關係方面，雖有國會代表團計畫訪中，但雙方在經貿與軍事上仍持續互相提防與言詞交鋒。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-indigo-700">債市與匯市</h3>
+                    <p class="text-stone-600 text-sm">因降息預期濃厚，10 年期美國國債殖利率顯著下滑，美元走弱。投資人預期短端利率將快速下行，但對長期增長前景仍存疑。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-2 text-emerald-700">股市與總體情緒</h3>
+                    <p class="text-stone-600 text-sm">美股呈現「壞消息是好消息」的格局，經濟數據走弱反而強化降息預期，利好股市。標普500和那斯達克指數雙雙創下歷史新高。但市場仍需留意 10 月聯邦政府關門、汽車工人罷工等潛在風險。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中相關公開資料 (2025年9月12日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Interactive Table Logic ---
+            const economicData = [
+                { date: '9月5日', indicator: '非農就業（8月）', result: '+2.2萬，就業趨緩；失業率4.3%', interpretation: '就業明顯轉弱，強化降息必要' },
+                { date: '9月5日', indicator: '製造業PMI（ISM，8月）', result: '48.7（連6月<50）', interpretation: '關稅拖累製造業不振，企業悲觀' },
+                { date: '9月7日', indicator: '服務業PMI（ISM，8月）', result: '52.0（回升），就業分項46.5', interpretation: '服務業持續擴張，但就業與通脹有隱憂' },
+                { date: '9月10日', indicator: 'PPI（月、年率，8月）', result: '-0.1%；2.6%', interpretation: '生產端無通脹壓力，關稅效應有限；川普據此促Fed降息' },
+                { date: '9月11日', indicator: 'CPI（月、年率，8月）', result: '+0.4%；2.9%', interpretation: '通脹高於預期但仍溫和， 降息預期不變' },
+                { date: '9月11日', indicator: '初請失業金（截至9/6週）', result: '26.3萬人，創2021年來新高', interpretation: '就業趨勢轉差，Fed降息信心增加' },
+                { date: '9月12日', indicator: '密大消費者信心（9月初值）', result: '指數55.4，低於預期', interpretation: '信心轉弱關稅成痛點，或預示消費放緩' }
+            ];
+
+            const searchInput = document.getElementById('searchInput');
+            const tableBody = document.getElementById('dataTableBody');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="4" class="text-center p-4">找不到相符的資料</td></tr>';
+                    return;
+                }
+                data.forEach(item => {
+                    const row = `
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4">${item.date}</td>
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${item.indicator}</th>
+                            <td class="px-6 py-4">${item.result}</td>
+                            <td class="px-6 py-4">${item.interpretation}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = economicData.filter(item => 
+                    item.date.toLowerCase().includes(searchTerm) ||
+                    item.indicator.toLowerCase().includes(searchTerm) ||
+                    item.result.toLowerCase().includes(searchTerm) ||
+                    item.interpretation.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // Initial render
+            renderTable(economicData);
+
+
+            // --- Chart.js Logic ---
+            const ctx = document.getElementById('stockChart').getContext('2d');
+            const stockChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Alphabet (Google)', '蘋果 (Apple)', '特斯拉 (Tesla)'],
+                    datasets: [{
+                        label: '本週股價變動 (%)',
+                        data: [9.0, 3.8, 3.0],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)', // blue-500
+                            'rgba(107, 114, 128, 0.6)', // gray-500
+                            'rgba(239, 68, 68, 0.6)',  // red-500
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(107, 114, 128, 1)',
+                            'rgba(239, 68, 68, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // When 40% of the section is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
