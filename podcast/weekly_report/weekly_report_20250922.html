@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義 active 狀態的導航連結樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom-color: #0ea5e9; /* sky-500 */
+            border-bottom-width: 2px;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom-color: transparent;
+            border-bottom-width: 2px;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800 font-sans">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-sky-600">美股市場週報</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#summary" data-section="summary" class="nav-link inactive-nav-link font-semibold transition-colors duration-300 hover:text-sky-500 pb-1">市場摘要</a>
+                <a href="#macro-economy" data-section="macro-economy" class="nav-link inactive-nav-link font-semibold transition-colors duration-300 hover:text-sky-500 pb-1">宏觀經濟</a>
+                <a href="#company-news" data-section="company-news" class="nav-link inactive-nav-link font-semibold transition-colors duration-300 hover:text-sky-500 pb-1">焦點企業</a>
+                <a href="#outlook" data-section="outlook" class="nav-link inactive-nav-link font-semibold transition-colors duration-300 hover:text-sky-500 pb-1">投資展望</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-stone-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-stone-200">
+            <a href="#summary" data-section="summary" class="block py-2 px-6 text-sm text-stone-700 hover:bg-sky-50">市場摘要</a>
+            <a href="#macro-economy" data-section="macro-economy" class="block py-2 px-6 text-sm text-stone-700 hover:bg-sky-50">宏觀經濟</a>
+            <a href="#company-news" data-section="company-news" class="block py-2 px-6 text-sm text-stone-700 hover:bg-sky-50">焦點企業</a>
+            <a href="#outlook" data-section="outlook" class="block py-2 px-6 text-sm text-stone-700 hover:bg-sky-50">投資展望</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">美股市場週報</h1>
+            <p class="text-lg text-stone-600">資訊區間：2025年9月15-19日</p>
+        </section>
+
+        <!-- Section 1: 市場回顧與投資人摘要 -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-8 border-b-2 border-sky-500 pb-2">市場回顧與投資人摘要</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold text-sky-700 mb-3">執行摘要</h3>
+                <p class="text-stone-600 leading-relaxed">
+                    上週（2025年9月14日至19日），美國股市在聯準會啟動降息週期的刺激下表現強勁，所有主要股指均創下歷史新高。此輪漲勢由科技股領銜，特別是NVIDIA對Intel的50億美元戰略投資，極大提振了半導體行業。然而，市場樂觀情緒背後潛藏著多重風險：宏觀經濟數據矛盾（消費強勁 vs. 房地產疲軟）、債券市場對聯準會鴿派立場的懷疑（降息後長期公債殖利率不降反升），以及中美圍繞半導體行業的地緣政治緊張局勢升級（中國對NVIDIA發起反壟斷調查）。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 指數表現 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-4">主要市場指數表現</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-stone-600">
+                            <thead class="text-xs text-stone-700 uppercase bg-stone-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">指數名稱</th>
+                                    <th scope="col" class="px-6 py-3 text-right">週漲跌 (%)</th>
+                                    <th scope="col" class="px-6 py-3 text-right">年初至今 (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b">
+                                    <td class="px-6 py-4 font-medium text-stone-900">標準普爾500</td>
+                                    <td class="px-6 py-4 text-right text-green-600 font-semibold">+1.2%</td>
+                                    <td class="px-6 py-4 text-right text-green-600 font-semibold">+13.3%</td>
+                                </tr>
+                                <tr class="bg-stone-50 border-b">
+                                    <td class="px-6 py-4 font-medium text-stone-900">道瓊工業</td>
+                                    <td class="px-6 py-4 text-right text-green-600 font-semibold">+1.0%</td>
+                                    <td class="px-6 py-4 text-right text-green-600 font-semibold">+8.9%</td>
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <td class="px-6 py-4 font-medium text-stone-900">納斯達克</td>
+                                    <td class="px-6 py-4 text-right text-green-600 font-semibold">+2.2%</td>
+                                    <td class="px-6 py-4 text-right text-green-600 font-semibold">+17.2%</td>
+                                </tr>
+                                 <tr class="bg-stone-50">
+                                    <td class="px-6 py-4 font-medium text-stone-900">羅素2000</td>
+                                    <td class="px-6 py-4 text-right text-green-600 font-semibold">+2.2%</td>
+                                    <td class="px-6 py-4 text-right text-green-600 font-semibold">+9.8%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-stone-400 mt-2">資料來源: The Associated Press, Morningstar</p>
+                </div>
+
+                <!-- 板塊表現圖表 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-4">上週板塊表現分析</h3>
+                    <p class="text-sm text-stone-600 mb-4">上週市場呈現明顯的「風險開啟」模式，科技股領漲，而傳統防禦性及利率敏感性行業則普遍落後。</p>
+                    <div class="w-full h-64">
+                        <canvas id="sectorPerformanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 宏觀經濟與聯準會政策 -->
+        <section id="macro-economy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-8 border-b-2 border-sky-500 pb-2">宏觀經濟與聯準會政策</h2>
+            <div class="space-y-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">聯準會2024年底以來首次降息</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        9月17日，聯邦公開市場委員會(FOMC)宣布將聯邦基金利率下調25個基點至4.00%-4.25%。主席鮑爾表示，此舉是為了在「通膨風險偏向上行，而就業風險偏向下行」的兩難中尋找平衡。點陣圖暗示年底前可能還有兩次降息，但債券市場反應謹慎，將其解讀為「鷹式降息」，導致長期公債殖利率不降反升，揭示了股債市場對未來政策路徑的深刻分歧。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">關鍵經濟數據：矛盾的經濟圖景</h3>
+                     <p class="text-stone-600 leading-relaxed mb-4">
+                        上週數據描繪了一幅複雜的經濟圖景：消費者支出展現驚人韌性，但房地產市場持續疲軟，製造業則呈現明顯的區域分化，凸顯了聯準會決策的挑戰性。
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="bg-green-100 text-green-800 p-4 rounded-lg">
+                            <p class="text-sm font-semibold">零售銷售 (月增)</p>
+                            <p class="text-2xl font-bold">+0.6%</p>
+                            <p class="text-xs">(預期 +0.2%)</p>
+                        </div>
+                        <div class="bg-red-100 text-red-800 p-4 rounded-lg">
+                            <p class="text-sm font-semibold">新屋開工 (年化)</p>
+                            <p class="text-2xl font-bold">130.7萬</p>
+                             <p class="text-xs">(預期 137.0萬)</p>
+                        </div>
+                         <div class="bg-green-100 text-green-800 p-4 rounded-lg">
+                            <p class="text-sm font-semibold">費城聯儲製造業</p>
+                            <p class="text-2xl font-bold">23.2</p>
+                            <p class="text-xs">(預期 2.3)</p>
+                        </div>
+                        <div class="bg-red-100 text-red-800 p-4 rounded-lg">
+                            <p class="text-sm font-semibold">帝國州製造業</p>
+                            <p class="text-2xl font-bold">-8.7</p>
+                             <p class="text-xs">(預期 6.3)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 焦點企業新聞 -->
+        <section id="company-news" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-8 border-b-2 border-sky-500 pb-2">焦點企業新聞</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- NVIDIA 投資 Intel -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">世紀合作：NVIDIA 投資 Intel</h3>
+                    <p class="text-stone-600 leading-relaxed flex-grow">NVIDIA宣布向長期競爭對手Intel投資50億美元，並進行深度技術合作，共同開發AI資料中心CPU及PC晶片。此舉被視為對Intel轉型戰略的重大肯定，推動Intel股價創下1987年以來最大單日漲幅（+22.8%）。然而，華爾街對此合作的長期影響看法嚴重分歧。</p>
+                </div>
+                <!-- 中國對 NVIDIA 的反壟斷調查 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">地緣政治：中國對 NVIDIA 的反壟斷調查</h3>
+                    <p class="text-stone-600 leading-relaxed flex-grow">中國市場監管總局宣布認定NVIDIA在2020年收購Mellanox的交易中違反反壟斷法，可能未履行對中國市場的供應承諾。此舉被廣泛解讀為在中美科技戰中，北京利用監管工具施壓美國的策略性舉動，為NVIDIA在華業務帶來巨大不確定性。</p>
+                </div>
+                <!-- 聯邦快遞財報 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">全球經濟風向標：聯邦快遞 (FDX) 財報</h3>
+                    <p class="text-stone-600 leading-relaxed flex-grow">聯邦快遞公布了超預期的季度財報，營收與每股盈餘均高於市場預期，並發布了穩健的全年財測。然而，公司坦誠警告，持續的全球「貿易不確定性」預計將對本財年業績造成高達10億美元的負面衝擊，為市場的樂觀情緒注入一絲現實的冷靜。</p>
+                </div>
+            </div>
+
+            <!-- 互動資料表格：主要贏家與輸家 -->
+            <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-sky-700 mb-4">上週主要贏家與輸家</h3>
+                <div class="mb-4">
+                    <input type="text" id="searchInput" class="w-full md:w-1/3 p-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="篩選公司名稱或代碼...">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-stone-600">
+                        <thead class="text-xs text-stone-700 uppercase bg-stone-50">
+                            <tr>
+                                <th class="px-6 py-3">公司名稱</th>
+                                <th class="px-6 py-3">代碼</th>
+                                <th class="px-6 py-3">類型</th>
+                                <th class="px-6 py-3 text-right">週漲跌幅 (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stocksTableBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 分析師展望與投資策略 -->
+        <section id="outlook" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-8 border-b-2 border-sky-500 pb-2">分析師展望與投資策略</h2>
+            <div class="space-y-8">
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">綜合展望：在樂觀與風險中航行</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        當前投資環境呈現顯著的二元性：一方面是聯準會鴿派轉向和科技業利好驅動的強烈樂觀情緒，另一方面則是債市的謹慎態度、經濟數據分歧、中美地緣政治緊張等多重潛在風險。未來的市場路徑很可能不是單邊上漲，而是在樂觀預期與殘酷現實之間的反覆博弈。
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-sky-700 mb-3">未來應關注的催化劑</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-600">
+                            <li><strong>PCE 通膨數據：</strong>將直接影響聯準會後續降息路徑的預期。</li>
+                            <li><strong>中美關係發展：</strong>對NVIDIA的調查及貿易談判結果將是關鍵變量。</li>
+                            <li><strong>第三季度財報季初步指引：</strong>提供企業利潤受宏觀因素影響的最直接證據。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-sky-700 mb-3">投資策略思考</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-600">
+                           <li><strong>重新評估利率敏感性：</strong>傳統防禦性板塊在當前環境下可能不再是可靠避風港。</li>
+                           <li><strong>關注供應鏈韌性：</strong>優先考慮擁有地域多元化供應鏈或核心自主技術的公司。</li>
+                           <li><strong>警惕估值泡沫：</strong>避免追高，注重基本面驗證，耐心等待公司盈利能力改善的確鑿證據。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-stone-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中聯準會相關公開資料 (2025年9月21日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Navigation Active State via Intersection Observer ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // 40% of the section must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.dataset.section === sectionId) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Chart.js: Sector Performance Chart ---
+            const ctx = document.getElementById('sectorPerformanceChart').getContext('2d');
+            const sectorPerformanceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['資訊科技', '通訊服務', '公用事業', '必需消費品', '房地產'],
+                    datasets: [{
+                        label: '上週漲跌幅 (%)',
+                        data: [2.42, 2.38, -0.6, -1.49, -1.53],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)', // blue-500
+                            'rgba(14, 165, 233, 0.6)', // sky-500
+                            'rgba(239, 68, 68, 0.6)',  // red-500
+                            'rgba(239, 68, 68, 0.6)',  // red-500
+                            'rgba(239, 68, 68, 0.6)'   // red-500
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(14, 165, 233, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(239, 68, 68, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Interactive Table: Stocks Winners & Losers ---
+            const stocksData = [
+                { name: 'Plug Power', ticker: 'PLUG', type: '贏家', change: 43.09 },
+                { name: 'Intellia Therapeutics', ticker: 'NTLA', type: '贏家', change: 36.51 },
+                { name: 'FactSet', ticker: 'FDS', type: '輸家', change: -20.09 },
+                { name: 'Darden Restaurants', ticker: 'DRI', type: '輸家', change: -13.11 }
+            ];
+
+            const searchInput = document.getElementById('searchInput');
+            const tableBody = document.getElementById('stocksTableBody');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if(data.length === 0){
+                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-stone-500">找不到符合條件的資料</td></tr>`;
+                    return;
+                }
+                data.forEach((stock, index) => {
+                    const isWinner = stock.change > 0;
+                    const rowClass = index % 2 === 0 ? 'bg-white' : 'bg-stone-50';
+                    const changeClass = isWinner ? 'text-green-600' : 'text-red-600';
+                    const typeClass = isWinner ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+
+                    const row = `
+                        <tr class="${rowClass} border-b">
+                            <td class="px-6 py-4 font-medium text-stone-900">${stock.name}</td>
+                            <td class="px-6 py-4">${stock.ticker}</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-xs font-medium rounded-full ${typeClass}">${stock.type}</span>
+                            </td>
+                            <td class="px-6 py-4 text-right font-semibold ${changeClass}">${stock.change}%</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = stocksData.filter(stock => 
+                    stock.name.toLowerCase().includes(searchTerm) || 
+                    stock.ticker.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // Initial render
+            renderTable(stocksData);
+        });
+    </script>
+
+</body>
+</html>
