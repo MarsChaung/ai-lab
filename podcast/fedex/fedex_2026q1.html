@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-FedEx財報分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+        }
+        .active-nav-link {
+            color: #0ea5e9 !important; /* sky-500 */
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #374151; /* gray-700 */
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9; /* sky-500 */
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-sky-600">
+                FedEx財報分析
+            </div>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 items-center" id="nav-menu">
+                <a href="#overview" class="inactive-nav-link transition-colors duration-300">總體業績</a>
+                <a href="#tariff-impact" class="inactive-nav-link transition-colors duration-300">關稅衝擊</a>
+                <a href="#economic-indicator" class="inactive-nav-link transition-colors duration-300">經濟指標</a>
+                <a href="#investment-insights" class="inactive-nav-link transition-colors duration-300">投資啟示</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-stone-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <a href="#overview" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">總體業績</a>
+            <a href="#tariff-impact" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">關稅衝擊</a>
+            <a href="#economic-indicator" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">經濟指標</a>
+            <a href="#investment-insights" class="block py-3 px-6 text-stone-700 hover:bg-sky-50">投資啟示</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Section 1: Overview -->
+        <section id="overview" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總體業績剖析 — 數字背後的故事</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <p class="text-lg leading-relaxed">聯邦快遞2026財年第一季度財報表面穩健，合併營收達222億美元（年增3%），調整後EPS為3.83美元（年增6%）。然而，這份成績單背後隱藏著巨大的內部張力：業績增長主要依賴強勁的美國本土業務，來抵銷國際業務及工業領域的巨大壓力，揭示了美國消費與全球工業的雙重敘事。</p>
+            </div>
+
+            <!-- Key Metrics Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-sky-100 rounded-lg shadow-md p-6 text-center">
+                    <h3 class="text-lg font-semibold text-sky-800">總營收</h3>
+                    <p class="text-4xl font-bold text-sky-600 mt-2">$222億</p>
+                    <span class="text-sm text-green-600 font-medium">▲ 3% (YoY)</span>
+                </div>
+                <div class="bg-emerald-100 rounded-lg shadow-md p-6 text-center">
+                    <h3 class="text-lg font-semibold text-emerald-800">調整後營業利潤</h3>
+                    <p class="text-4xl font-bold text-emerald-600 mt-2">$13.0億</p>
+                    <span class="text-sm text-green-600 font-medium">▲ 7% (YoY)</span>
+                </div>
+                <div class="bg-amber-100 rounded-lg shadow-md p-6 text-center">
+                    <h3 class="text-lg font-semibold text-amber-800">調整後稀釋EPS</h3>
+                    <p class="text-4xl font-bold text-amber-600 mt-2">$3.83</p>
+                    <span class="text-sm text-green-600 font-medium">▲ 6% (YoY)</span>
+                </div>
+            </div>
+            
+            <!-- Department Performance Chart -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-bold text-stone-800 mb-4">部門業績分化：營收表現比較 (2026財年Q1)</h3>
+                <div class="relative h-96">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Interactive Table -->
+             <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-stone-800 mb-4">關鍵財務指標</h3>
+                 <input type="text" id="tableFilter" class="w-full md:w-1/3 p-2 border border-stone-300 rounded-md mb-4 focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="篩選指標...">
+                 <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th class="p-3 font-semibold text-sm text-stone-600 uppercase border-b border-stone-200">指標</th>
+                                <th class="p-3 font-semibold text-sm text-stone-600 uppercase border-b border-stone-200 text-right">2026財年Q1</th>
+                                <th class="p-3 font-semibold text-sm text-stone-600 uppercase border-b border-stone-200 text-right">2025財年Q1</th>
+                                <th class="p-3 font-semibold text-sm text-stone-600 uppercase border-b border-stone-200 text-right">同比變化 (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialsTableBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Tariff Impact -->
+        <section id="tariff-impact" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關稅風暴的核心 — 「最低減讓條款」衝擊</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="mb-4">美國針對《1930年關稅法》第321條款（最低減讓條款）的修訂，實質上取消了源自中國（含香港）的低於800美元包裹的免稅待遇。這一重大政策轉變直接打擊了中美跨境電商的物流模式。</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-rose-100 border-l-4 border-rose-500 p-6 rounded-r-lg">
+                        <h4 class="text-xl font-bold text-rose-800 mb-2">10億美元的全球貿易逆風</h4>
+                        <p class="text-rose-700">聯邦快遞預計，此政策變更將在2026財年對其調整後營業利潤造成高達 <strong class="font-extrabold">10億美元</strong> 的負面影響，其中Q1已產生 <strong class="font-extrabold">1.5億美元</strong> 的衝擊。</p>
+                    </div>
+                    <div class="bg-sky-100 border-l-4 border-sky-500 p-6 rounded-r-lg">
+                        <h4 class="text-xl font-bold text-sky-800 mb-2">戰略應對</h4>
+                        <p class="text-sky-700">公司已將跨太平洋貨機運力削減25%，並將資源轉移至其他航線。同時利用清關專業知識，為客戶提供高附加值服務，試圖將挑戰轉化為機遇。</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-sm text-stone-600 italic">洞察：地緣政治風險已從抽象概念轉變為具體的財務數字，投資者必須將貿易政策納入核心評估變量。</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Economic Indicator -->
+        <section id="economic-indicator" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">經濟的雙重敘事 — FedEx 作為美國經濟領頭羊</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="mb-6">聯邦快遞長期被視為全球經濟的「金絲雀」。本季財報分化的業務數據，提供了一個精細的美國經濟「儀表板」，實時監測其內部雙軌發展。</p>
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-stone-800">驗證消費者健康</h4>
+                            <p>美國國內日均包裹量 <strong class="text-green-600">增長5%</strong>，與美國零售銷售額 <strong class="text-green-600">增長5.0%</strong> 的官方數據完美呼應，證明美國消費市場依然強勁。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 bg-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-stone-800">驗證工業疲軟</h4>
+                            <p>聯邦貨運日均貨運量 <strong class="text-red-600">下降2%</strong>，與工業生產指數擴張乏力的宏觀數據相互佐證，共同指向美國工業部門面臨的挑戰。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Investment Insights -->
+        <section id="investment-insights" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">未來展望與投資啟示</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">啟示一：識別「經濟分歧」</h3>
+                    <p>投資者應審視投資組合，評估其風險敞口。可適度超配直接受益於消費支出的行業（如電商、零售），並對工業周期性強的公司採取更謹慎的態度。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">啟示二：量化地緣政治風險</h3>
+                    <p>將貿易政策視為可量化的財務變量。擁有多元化供應鏈或業務集中在國內市場的公司，應在估值上享有一定的「安全溢價」。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">啟示三：尋找「自我驅動」企業</h3>
+                    <p>在宏觀逆風中，優先選擇擁有清晰成本節約計劃和卓越執行力的企業。FedEx自身的轉型成本節約是其穩定盈利指引的關鍵。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-stone-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-FedEx財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中FedEx相關公開資料 (2025年9月19日)。</p>
+        </div>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Interactive Table Data ---
+        const financialData = [
+            { indicator: '總營收', q1_2026: 22244, q1_2025: 21579, change: 3 },
+            { indicator: '總調整後營業利潤', q1_2026: 1298, q1_2025: 1208, change: 7 },
+            { indicator: '總調整後稀釋每股盈餘 ($)', q1_2026: 3.83, q1_2025: 3.60, change: 6 },
+            { indicator: '聯邦快遞部門營收', q1_2026: 19116, q1_2025: 18305, change: 4 },
+            { indicator: '聯邦快遞部門調整後營業利潤', q1_2026: 1164, q1_2025: 996, change: 17 },
+            { indicator: '聯邦貨運部門營收', q1_2026: 2257, q1_2025: 2329, change: -3 },
+            { indicator: '聯邦貨運部門營業利潤', q1_2026: 360, q1_2025: 439, change: -18 }
+        ];
+
+        const tableBody = document.getElementById('financialsTableBody');
+        
+        function populateTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const isEPS = item.indicator.includes('($)');
+                const formatNumber = (num) => isEPS ? num.toFixed(2) : new Intl.NumberFormat().format(num);
+                const changeColor = item.change >= 0 ? 'text-green-600' : 'text-red-600';
+                const sign = item.change >= 0 ? '+' : '';
+
+                const row = `
+                    <tr class="hover:bg-stone-50">
+                        <td class="p-3 text-stone-800 font-medium border-b border-stone-200">${item.indicator.replace(' ($)','')}</td>
+                        <td class="p-3 text-right border-b border-stone-200">${isEPS ? '$' : ''}${formatNumber(item.q1_2026)}${isEPS ? '' : 'M'}</td>
+                        <td class="p-3 text-right border-b border-stone-200">${isEPS ? '$' : ''}${formatNumber(item.q1_2025)}${isEPS ? '' : 'M'}</td>
+                        <td class="p-3 text-right border-b border-stone-200 font-bold ${changeColor}">${sign}${item.change}%</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        populateTable(financialData);
+
+        // --- Table Filter ---
+        const tableFilter = document.getElementById('tableFilter');
+        tableFilter.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = financialData.filter(item => 
+                item.indicator.toLowerCase().includes(searchTerm)
+            );
+            populateTable(filteredData);
+        });
+
+        // --- Chart.js Revenue Chart ---
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['聯邦快遞部門 (Express)', '聯邦貨運部門 (Freight)'],
+                datasets: [
+                    {
+                        label: '2025財年Q1營收 (百萬美元)',
+                        data: [18305, 2329],
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '2026財年Q1營收 (百萬美元)',
+                        data: [19116, 2257],
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return '$' + value / 1000 + 'B';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '營收 (單位: 十億美元)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact' }).format(context.parsed.y * 1000000);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- Active Nav Link on Scroll ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('#nav-menu a');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-30% 0px -70% 0px' }); // Adjust rootMargin to trigger when section is more centered
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
+
+</body>
+</html>
