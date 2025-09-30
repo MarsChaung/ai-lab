@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-EA TikTok併購案投資分析報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom-width: 2px;
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+        }
+        .inactive-nav-link {
+            color: #6b7280; /* Tailwind gray-500 */
+            border-bottom-width: 2px;
+            border-color: transparent;
+        }
+        /* Sticky thead for table */
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="text-stone-700">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-sky-600">EA與TikTok併購案投資分析</h1>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#summary" class="nav-link inactive-nav-link hover:text-sky-500 pb-1 transition-colors duration-300">執行摘要</a>
+                <a href="#ea-analysis" class="nav-link inactive-nav-link hover:text-sky-500 pb-1 transition-colors duration-300">EA私有化</a>
+                <a href="#tiktok-analysis" class="nav-link inactive-nav-link hover:text-sky-500 pb-1 transition-colors duration-300">TikTok收購案</a>
+                <a href="#comparison" class="nav-link inactive-nav-link hover:text-sky-500 pb-1 transition-colors duration-300">同業比較</a>
+                <a href="#strategy" class="nav-link inactive-nav-link hover:text-sky-500 pb-1 transition-colors duration-300">投資策略</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-stone-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h10"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#summary" class="block text-center py-3 px-6 text-stone-600 hover:bg-sky-50">執行摘要</a>
+            <a href="#ea-analysis" class="block text-center py-3 px-6 text-stone-600 hover:bg-sky-50">EA私有化</a>
+            <a href="#tiktok-analysis" class="block text-center py-3 px-6 text-stone-600 hover:bg-sky-50">TikTok收購案</a>
+            <a href="#comparison" class="block text-center py-3 px-6 text-stone-600 hover:bg-sky-50">同業比較</a>
+            <a href="#strategy" class="block text-center py-3 px-6 text-stone-600 hover:bg-sky-50">投資策略</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <!-- Section: Executive Summary -->
+        <section id="summary" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- EA Summary Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-lg text-sky-700 mb-2">EA被PIF收購</h3>
+                    <p class="text-sm">一宗典型的槓桿收購(LBO)，旨在為面臨增長停滯的EA提供轉型機會，同時也是沙烏地「2030願景」的關鍵佈局。股東獲得確定性溢價，但交易面臨CFIUS嚴格審查。</p>
+                </div>
+                <!-- TikTok Summary Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-lg text-sky-700 mb-2">Oracle收購TikTok美國業務</h3>
+                    <p class="text-sm">由地緣政治與國安考量強制推動的資產剝離。Oracle藉此轉型雲端與消費者數據市場，但低估值反映了算法僅獲授權，且面臨巨大的企業文化整合風險。</p>
+                </div>
+                <!-- Investor Advice Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 md:col-span-2 lg:col-span-1">
+                    <h3 class="font-bold text-lg text-sky-700 mb-2">核心投資建議</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li><strong>EA股東:</strong> 接受$210現金要約是穩妥選擇。</li>
+                        <li><strong>行業觀察者:</strong> 關注Take-Two(TTWO)的稀缺價值。</li>
+                        <li><strong>對Oracle(ORCL):</strong> 長期潛力大但執行風險極高，建議保持謹慎。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: EA Analysis -->
+        <section id="ea-analysis" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">王國與遊戲機：解析Electronic Arts私有化交易</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- EA's Situation -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">十字路口的EA：為私有化而生</h3>
+                    <p class="mb-4">EA完美符合LBO目標特徵：擁有強大現金流IP（如《Madden NFL》、《The Sims》），但營收增長陷入停滯，使其在公開市場估值受壓。</p>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="bg-slate-100 p-3 rounded-md">
+                            <p class="text-xs text-slate-500">2023營收</p>
+                            <p class="font-bold text-lg text-slate-800">$74.3億</p>
+                        </div>
+                        <div class="bg-slate-100 p-3 rounded-md">
+                            <p class="text-xs text-slate-500">2024營收</p>
+                            <p class="font-bold text-lg text-slate-800">$75.6億</p>
+                        </div>
+                         <div class="bg-red-100 p-3 rounded-md">
+                            <p class="text-xs text-red-500">TTM增長率</p>
+                            <p class="font-bold text-lg text-red-800">-1.31%</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-3">私有化使其能擺脫季度財報壓力，進行長期戰略轉型。</p>
+                </div>
+                
+                <!-- PIF's Strategy -->
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">收購方宏圖：沙烏地「2030願景」</h3>
+                    <p class="mb-4">此交易是沙烏地為擺脫石油依賴的國家級戰略。透過收購EA，沙烏地能快速建立其在全球遊戲產業的核心地位，是實現「2030願景」的強力加速器。</p>
+                    <div class="bg-sky-50 border-l-4 border-sky-400 p-4 rounded-r-lg">
+                        <h4 class="font-semibold text-sky-800">國家遊戲與電競戰略目標 (至2030年)</h4>
+                        <ul class="list-disc list-inside text-sm text-sky-700 mt-2">
+                            <li>貢獻GDP <strong>133億美元</strong></li>
+                            <li>創造 <strong>39,000+</strong> 就業機會</li>
+                            <li>製作 <strong>30+</strong> 款全球性遊戲</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: TikTok Analysis -->
+        <section id="tiktok-analysis" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">雲端巨頭與時鐘應用：Oracle對TikTok的轉型豪賭</h2>
+             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Geopolitical Driver Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-2">
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">被迫出手：地緣政治驅動力</h3>
+                    <p class="text-sm">此交易並非源於商業邏輯，而是由美國《保護美國人免受外國對手控制應用程式侵害法案》強制推動的資產剝離。核心目標是解決中國可能存取美國用戶數據及操控內容算法的國家安全隱憂，為「數位脫鉤」開創了新先例。</p>
+                </div>
+                <!-- Oracle's Bet Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">甲骨文的戰略轉向</h3>
+                    <p class="text-sm">旨在將其雲端基礎設施(OCI)打造成處理大規模消費者應用的可信賴平台，並藉此切入高增長的數位廣告與消費者數據市場，對抗AWS、Azure等巨頭。</p>
+                </div>
+                <!-- Valuation Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                     <h3 class="font-bold text-xl text-stone-800 mb-3">140億美元的疑問</h3>
+                    <p class="text-sm mb-4">估值顯著偏低，隱含市銷率(P/S)僅約<strong>1.4倍</strong>，遠低於同行。這主要反映了交易的強制性，以及收購方僅獲核心算法「授權」而非「所有權」的重大折讓。</p>
+                </div>
+                <!-- Cultural Risk Card -->
+                <div class="bg-red-50 border border-red-200 rounded-lg shadow-lg p-6 lg:col-span-2">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">文化與運營風險：巨頭的碰撞</h3>
+                    <p class="text-sm text-red-700">交易最大風險在於甲骨文傳統、官僚的B2B企業文化，與TikTok快速、靈活、以創作者為中心的消費者文化存在巨大鴻溝。歷史上微軟收購諾基亞等失敗案例為此敲響了警鐘，整合失敗風險極高。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Peer Comparison -->
+        <section id="comparison" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">行業數據與同業比較</h2>
+            <div class="grid lg:grid-cols-5 gap-8">
+                <!-- Interactive Table -->
+                <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-800 mb-4">互動式數據篩選</h3>
+                    <input type="text" id="table-filter" placeholder="篩選公司名稱..." class="w-full p-2 border border-stone-300 rounded-md mb-4 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                    <div class="table-container">
+                        <table class="w-full text-sm text-left text-stone-500">
+                            <thead class="text-xs text-stone-700 uppercase bg-stone-100">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">公司</th>
+                                    <th scope="col" class="px-6 py-3">市值/估值</th>
+                                    <th scope="col" class="px-6 py-3">市銷率 (P/S)</th>
+                                    <th scope="col" class="px-6 py-3">市盈率 (P/E)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparison-table-body">
+                                <!-- Data rows will be inserted by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Chart.js Visualization -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-800 mb-4">社交媒體市銷率(P/S)比較</h3>
+                    <div class="relative h-64 md:h-80">
+                        <canvas id="psRatioChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-500 mt-2">圖表顯示TikTok美國業務的隱含估值倍數與市場同行存在巨大差距。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Investor Strategy -->
+        <section id="strategy" class="scroll-mt-24">
+             <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一般投資者的應對策略</h2>
+             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- For EA Shareholders -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-green-400">
+                    <h3 class="font-bold text-lg text-green-800 mb-2">對EA股東：鎖定利潤</h3>
+                    <p class="text-sm">接受每股$210的全現金要約是審慎的選擇。該報價提供了確定的25%溢價，而更高競價可能性低，交易失敗的下行風險（股價可能跌回約$168）則相當顯著。</p>
+                </div>
+                <!-- Opportunities Beyond -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-400">
+                    <h3 class="font-bold text-lg text-sky-800 mb-2">交易之外：尋找機會</h3>
+                    <p class="text-sm"><strong>Take-Two (TTWO):</strong> EA私有化後，TTWO成為AAA級遊戲領域最後的獨立巨頭，「稀缺價值」顯著提升，可能成為下一個併購目標。<br><strong>Oracle (ORCL):</strong> 長期投資者應在看到整合成功的切實證據後，再考慮投入大量資本。</p>
+                </div>
+                <!-- New Framework -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-400">
+                    <h3 class="font-bold text-lg text-amber-800 mb-2">新的分析框架</h3>
+                    <p class="text-sm">這兩宗交易標誌著地緣政治已成為科技併購的核心變數。投資者未來必須建立超越傳統財務指標的分析框架，將國家戰略、監管風險和文化整合等因素置於同等重要的位置。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm text-stone-400">
+            <p>&copy; 巴菲特AI價值投資-EA TikTok併購案投資分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Jabil相關公開資料 (2025年9月30日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Close mobile menu on link click
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- Interactive Table ---
+            const comparisonData = [
+                { company: 'Electronic Arts (EA)', valuation: '~550億美元 (收購價)', ps: '7.04', pe: '32.44' },
+                { company: 'Take-Two (TTWO)', valuation: '~259億美元', ps: '7.94', pe: '73.30' },
+                { company: 'TikTok 美國 (隱含)', valuation: '140億美元', ps: '1.4', pe: 'N/A' },
+                { company: 'Meta Platforms (META)', valuation: '>1兆美元', ps: '10.8', pe: '30.5' },
+                { company: 'Snap Inc. (SNAP)', valuation: '~250億美元', ps: '2.5', pe: 'N/A (虧損)' }
+            ];
+
+            const tableBody = document.getElementById('comparison-table-body');
+            const filterInput = document.getElementById('table-filter');
+
+            function populateTable(data) {
+                tableBody.innerHTML = '';
+                data.forEach(item => {
+                    const row = `
+                        <tr class="bg-white border-b hover:bg-stone-50">
+                            <th scope="row" class="px-6 py-4 font-medium text-stone-900 whitespace-nowrap">${item.company}</th>
+                            <td class="px-6 py-4">${item.valuation}</td>
+                            <td class="px-6 py-4">${item.ps}</td>
+                            <td class="px-6 py-4">${item.pe}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            filterInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = comparisonData.filter(item => 
+                    item.company.toLowerCase().includes(searchTerm)
+                );
+                populateTable(filteredData);
+            });
+            
+            // Initial population
+            populateTable(comparisonData);
+
+            // --- Chart.js P/S Ratio Chart ---
+            const ctx = document.getElementById('psRatioChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['TikTok 美國 (隱含)', 'Snap Inc.', 'Meta Platforms'],
+                    datasets: [{
+                        label: '市銷率 (P/S Ratio)',
+                        data: [1.4, 2.5, 10.8],
+                        backgroundColor: [
+                            'rgba(251, 146, 60, 0.6)', // orange-400
+                            'rgba(250, 204, 21, 0.6)', // yellow-400
+                            'rgba(59, 130, 246, 0.6)' // blue-500
+                        ],
+                        borderColor: [
+                            'rgba(251, 146, 60, 1)',
+                            'rgba(250, 204, 21, 1)',
+                            'rgba(59, 130, 246, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '倍數 (x)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}x`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // Section needs to be 40% visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
