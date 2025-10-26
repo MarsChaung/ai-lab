@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2025/10/20~10/25)</title>
+    <!-- 導入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 導入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 自訂樣式 -->
+    <style>
+        /* 啟用平滑滾動 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        
+        /* 區塊滾動時的偏移量 (避免被 sticky header 擋住) */
+        section {
+            scroll-margin-top: 64px; /* 根據 header 高度調整 */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans antialiased text-stone-900">
+
+    <!-- 
+      Header / Navigation 
+      使用 sticky, top-0, z-50 實現固定頂部導航
+    -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / 報告標題 -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-sky-600">美股市場週報</a>
+                </div>
+                
+                <!-- 桌面版導航 -->
+                <div class="hidden md:flex md:space-x-8">
+                    <a href="#overview" data-navlink="overview" class="inactive-nav-link py-5 px-1 text-sm font-medium">市場總覽</a>
+                    <a href="#earnings-summary" data-navlink="earnings-summary" class="inactive-nav-link py-5 px-1 text-sm font-medium">Q3 財報戰況</a>
+                    <a href="#aws-outage" data-navlink="aws-outage" class="inactive-nav-link py-5 px-1 text-sm font-medium">AWS 斷線</a>
+                    <a href="#zions-case" data-navlink="zions-case" class="inactive-nav-link py-5 px-1 text-sm font-medium">Zions 詐欺案</a>
+                    <a href="#analysis" data-navlink="analysis" class="inactive-nav-link py-5 px-1 text-sm font-medium">焦點財報</a>
+                    <a href="#summary" data-navlink="summary" class="inactive-nav-link py-5 px-1 text-sm font-medium">總結展望</a>
+                </div>
+                
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Icon (Hamburger) -->
+                        <svg id="hamburger-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Icon (Close) -->
+                        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden shadow-lg border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" data-navlink="overview" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">市場總覽</a>
+                <a href="#earnings-summary" data-navlink="earnings-summary" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">Q3 財報戰況</a>
+                <a href="#aws-outage" data-navlink="aws-outage" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">AWS 斷線</a>
+                <a href="#zions-case" data-navlink="zions-case" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">Zions 詐欺案</a>
+                <a href="#analysis" data-navlink="analysis" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">焦點財報</a>
+                <a href="#summary" data-navlink="summary" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium">總結展望</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 頁面主體內容 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- 報告標題 -->
+        <h1 class="text-4xl font-extrabold text-stone-800 text-center mb-4">美股財報與經營消息週報</h1>
+        <p class="text-xl text-stone-600 text-center mb-12">2025年10月20-25日：數據真空下的歷史新高，財報季的「敘事之戰」</p>
+
+        <!-- Section 1: 市場總覽 -->
+        <section id="overview" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                第一部分：市場總覽 — 「數據真空」下的歷史新高
+            </h2>
+            <p class="text-lg text-stone-700 mb-8">
+                在2025年10月的第四週，美國股市展現了強大的韌性，主要指數在多重利多因素的推動下創下歷史新高。然而，這種上漲是在政府關門導致關鍵經濟數據缺失的「數據真空」背景下發生的。
+            </p>
+            <!-- 使用 Grid 進行響應式卡片佈局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 卡片式設計 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-2">大盤表現強勁</h3>
+                    <p class="text-stone-600">S&P 500 全週上漲約 <strong>1.96%</strong>，Nasdaq 漲幅達 <strong>2%</strong>，兩大指數均收於歷史高位。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-2">驅動因素 (一)：降息預期</h3>
+                    <p class="text-stone-600">低於預期的通膨報告強化了市場對聯準會 (Fed) 將在年底前降息的信念，推動資本流入風險資產。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-2">驅動因素 (二)：政治緩和</h3>
+                    <p class="text-stone-600">美中貿易緊張局勢出現緩和跡象，總統的和解立場緩解了投資者對貿易戰升級的擔憂。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 bg-amber-50 border border-amber-200">
+                    <h3 class="font-bold text-xl text-amber-800 mb-2">隱藏風險：數據真空</h3>
+                    <p class="text-stone-600">政府關門導致 CPI、零售銷售等關鍵數據延遲發布。市場上漲並非基於新數據，而是基於「希望」。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Q3 財報季總體戰況 -->
+        <section id="earnings-summary" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                第二部分：Q3 財報季總體戰況
+            </h2>
+            <p class="text-lg text-stone-700 mb-8">
+                在宏觀數據缺席的背景下，企業財報成為支撐市場的唯一基本面支柱。數據顯示，美國企業的實際表現遠超華爾街的悲觀預期。
+            </p>
+            <!-- 資訊卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-sky-100 text-sky-900 rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-5xl font-extrabold">87%</div>
+                    <div class="text-lg font-medium mt-2">盈餘驚喜 (EPS Surprise)</div>
+                    <p class="text-sm mt-1">(遠高於 67% 的長期平均)</p>
+                </div>
+                <div class="bg-emerald-100 text-emerald-900 rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-5xl font-extrabold">83%</div>
+                    <div class="text-lg font-medium mt-2">營收驚喜 (Revenue Surprise)</div>
+                </div>
+                <div class="bg-indigo-100 text-indigo-900 rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-5xl font-extrabold">9.2%</div>
+                    <div class="text-lg font-medium mt-2">混合盈餘年增長率</div>
+                    <p class="text-sm mt-1">(有望連續第九季增長)</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-8">
+                <h3 class="font-bold text-xl text-stone-800 mb-2">分析師洞察：企業韌性 (Corporate Resilience)</h3>
+                <p class="text-stone-700">87% 的 EPS 驚喜率揭示了本週的核心主題：儘管面臨政府關門、通膨和關稅不確定性等挑戰，企業的實際獲利能力和營收能力仍然異常強勁，遠超分析師的悲觀預期。</p>
+            </div>
+        </section>
+
+        <!-- Section 3: AWS 斷線 -->
+        <section id="aws-outage" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                第三部分：重磅新聞（一）：AWS 斷線
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="font-bold text-xl text-red-700 mb-3">事件還原：10月20日的數位癱瘓</h3>
+                <p class="text-stone-700 mb-4">
+                    亞馬遜 (Amazon, AMZN) 旗下的 AWS 在上週一遭遇全球性服務中斷，持續數小時，部分服務長達 15 小時。
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-stone-600">
+                    <li><strong>故障根源：</strong> 北維吉尼亞州 <strong>US-EAST-1</strong> 數據中心。</li>
+                    <li><strong>技術原因：</strong> 自動化 DNS 管理系統中的「潛在缺陷」導致內部 DNS 解析失敗。</li>
+                    <li><strong>影響範圍：</strong> US-EAST-1 承載全球高達 70% 網路流量，導致災難性連鎖反應。</li>
+                    <li><strong>受害服務：</strong> Snapchat, X, Reddit, Zoom, Roblox, Venmo, Coinbase 乃至政府和物聯網設備。</li>
+                </ul>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="font-bold text-xl text-stone-800 mb-3">投資啟示：集中化的系統性風險</h3>
+                <p class="text-stone-700">
+                    此次事件暴露了現代網路基礎設施的「阿基里斯之踵」：<strong>極度的集中化</strong>。AWS 佔全球雲端市場 30% 以上，而 US-EAST-1 區域實質上已成為全球網路的「單點故障」(single point of failure)。許多企業的「多區域」備援架構也因此失效。這無疑為即將公布的亞馬遜財報蒙上陰影。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: Zions 詐欺案 -->
+        <section id="zions-case" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                第四部分：重磅新聞（二）：Zions 詐欺案的餘震
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="font-bold text-xl text-red-700 mb-3">「蟑螂」恐慌的爆發</h3>
+                    <p class="text-stone-700 mb-4">
+                        地區性銀行 Zions Bancorp (ZION) 披露其子公司發現兩筆商業貸款存在「明顯的失實陳述和合同違約」。
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-600">
+                        <li>提列 <strong>6000 萬美元</strong> 貸款損失準備金。</li>
+                        <li>沖銷 <strong>5000 萬美元</strong>。</li>
+                        <li>另一家銀行 Western Alliance (WAL) 亦對同位借款人有曝險。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">市場的連鎖反應</h3>
+                    <p class="text-stone-700 mb-4">
+                        引發「蟑螂理論」恐慌，投資者擔心這是信貸品質系統性惡化的開始。
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-600">
+                        <li>Zions (ZION) 股價 <strong>暴跌 13.1%</strong>。</li>
+                        <li>Western Alliance (WAL) 股價下跌 <strong>10% - 11%</strong>。</li>
+                        <li>拖累 KBW 地區銀行指數重挫 <strong>6%</strong>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 焦點財報深度解析 -->
+        <section id="analysis" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                第五部分：焦點財報深度解析 — 冰與火的交鋒
+            </h2>
+            <p class="text-lg text-stone-700 mb-8">
+                上週市場的獎懲標準非常微妙：投資者往往更關注財報數字背後的「敘事」，而不是數字本身。
+            </p>
+
+            <!-- 互動式資料表格 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-12">
+                <h3 class="font-bold text-xl text-stone-800 mb-4">焦點財報速覽與篩選</h3>
+                <div class="mb-4">
+                    <label for="filterInput" class="sr-only">篩選財報</label>
+                    <input type="text" id="filterInput" placeholder="輸入公司名稱或代號 (例如: Intel 或 F)..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                
+                <!-- 表格容器，用於響應式水平滾動 -->
+                <div>
+                    <table class="w-full min-w-max divide-y divide-gray-200">
+                        <thead class="bg-gray-100 sticky top-0 md:top-16">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">公司 (代號)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">預期 EPS</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">實際 EPS</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">預期營收</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">實際營收</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">股價反應</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">關鍵詞</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportsTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- 資料將由 JavaScript 動態填入 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 動態圖表 (Chart.js) -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-12">
+                <h3 class="font-bold text-xl text-stone-800 mb-4 text-center">EPS 表現：預期 vs. 實際</h3>
+                <!-- Chart.js Canvas 必須包在一個 div 內 -->
+                <div class="relative h-96 w-full">
+                    <canvas id="epsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 財報敘事分析 -->
+            <h3 class="font-bold text-2xl text-stone-800 mb-6 text-center">財報敘事分析</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- 贏家 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-green-500">
+                    <h4 class="font-bold text-xl text-green-700 mb-3">「火」：市場的寵兒 (The Winners)</h4>
+                    <ul class="list-disc list-inside space-y-4 text-stone-700">
+                        <li>
+                            <strong>Intel (INTC) - 巨人的回歸？</strong><br>
+                            EPS 碾壓預期 (0.23 vs 0.02)，成功扭虧為盈。市場選擇相信新 CEO 的「AI PC」轉型敘事，而暫時忽視了利潤主要來自《晶片法案》補助等一次性收益，且核心代工業務仍在虧損的事實。
+                        </li>
+                        <li>
+                            <strong>Ford (F) - 壞消息成了好消息</strong><br>
+                            核心業務 (EPS/營收) 強勁，但因供應商火災 (暫時性衝擊) 而下調財測。市場完全忽視此「可解釋的」壞消息，轉而全力獎勵其核心業務的「結構性」強勁。
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 輸家 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <h4 class="font-bold text-xl text-red-700 mb-3">「冰」：巨頭的困境 (The Losers)</h4>
+                    <ul class="list-disc list-inside space-y-4 text-stone-700">
+                        <li>
+                            <strong>Netflix (NFLX) - 巴西的「稅務炸彈」</strong><br>
+                            營收僅「符合預期」，但因支付 6 億美元的巴西一次性稅款導致 EPS 遠低於預期。市場懲罰其利潤率的脆弱性，因其核心營收缺乏足夠驚喜來緩衝此內部壞消息。
+                        </li>
+                        <li>
+                            <strong>Tesla (TSLA) - 增收不增利的困境</strong><br>
+                            營收創歷史新高，但 EPS 未達標，營運利潤率被壓縮至 5.8%。CEO 試圖將敘事轉向「AI 公司」(機器人)，但市場暫時拒絕，仍用「利潤率」這個殘酷現實來評估它。
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- X 因子 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-purple-500 lg:col-span-2">
+                    <h4 class="font-bold text-xl text-purple-700 mb-3">「X 因子」：不按牌理出牌的贏家 (The Wildcards)</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <p class="text-stone-700">
+                            <strong>Zions (ZION) - 利空出盡的反彈</strong><br>
+                            在股價已提前暴跌 13% 後，財報正式確認 5000 萬欺詐損失 (已消化)，但同時顯示核心業務 (NII) 極為強勁。管理層保證此為「獨立事件」，引發「緩解性反彈」。
+                        </p>
+                        <p class="text-stone-700">
+                            <strong>Cleveland-Cliffs (CLF) - 「稀土」的魔力</strong><br>
+                            營收未達標、公司仍在虧損，財報數字極為平庸。但股價飆漲 17%，唯一原因是 CEO 在會議上提到將「重新關注」稀土機會。市場瞬間將其從「虧損鋼鐵股」重估為「稀土概念股」。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: 總結與展望 -->
+        <section id="summary" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                第六部分：總結與展望
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="font-bold text-xl text-stone-800 mb-3">分析師核心總結：上週的三大啟示</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <strong class="text-sky-700">1. 宏觀信心強於數據</strong>
+                        <p class="text-stone-600">在「數據真空」中，市場選擇相信「降息」和「貿易緩和」的樂觀劇本，推動指數創下新高。</p>
+                    </div>
+                    <div>
+                        <strong class="text-sky-700">2. 企業基本面強於預期</strong>
+                        <p class="text-stone-600">87% 的 EPS 驚喜率證明了美國企業的強大韌性，遠超華爾街的悲觀預期。</p>
+                    </div>
+                    <div>
+                        <strong class="text-sky-700">3. 「敘事」的勝利</strong>
+                        <p class="text-stone-600">市場的獎懲更多是關於「故事」而非「數字」。(例如 Ford vs. Netflix, C-Cliffs vs. Tesla)。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 bg-amber-50 border border-amber-200">
+                <h3 class="font-bold text-xl text-amber-800 mb-3">風險與展望</h3>
+                <p class="text-stone-700">
+                    市場的樂觀情緒即將迎來考驗。首先，AWS 斷線和銀行欺詐案暴露了基礎設施的風險。其次，「數據真空」不會永遠持續，CPI 數據釋放時將檢驗市場預期。最後，本週亞馬遜 (AMZN) 和蘋果 (AAPL) 等巨頭的財報將決定反彈的命運。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2025年10月26日)。</p>
+        </div>
+    </footer>
+
+    <!-- 
+      原生 JavaScript 
+      實現:
+      1. 手機版選單切換
+      2. 互動式表格資料與篩選
+      3. Chart.js 圖表繪製
+      4. Intersection Observer 導航列 active 狀態
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- 1. 手機版選單 (Mobile Menu) ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                // 切換選單的顯示/隱藏
+                mobileMenu.classList.toggle('hidden');
+                // 切換漢堡/關閉圖示
+                hamburgerIcon.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('block');
+                closeIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('block');
+            });
+
+            // 點擊手機選單連結後自動關閉選單
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('hidden');
+                    hamburgerIcon.classList.add('block');
+                    closeIcon.classList.add('hidden');
+                    closeIcon.classList.remove('block');
+                });
+            });
+
+
+            // --- 2. 互動式資料表格 (Interactive Table) ---
+            
+            // 根據文件第五部分表格建立的真實資料
+            const productData = [
+                { 
+                    company: "Intel (INTC)", 
+                    date: "10/23", 
+                    eps_exp: "$0.01 - $0.02", 
+                    eps_act: "$0.23", 
+                    rev_exp: "$13.14 B", 
+                    rev_act: "$13.7 B", 
+                    reaction: "大漲 7-8%", 
+                    keyword: "扭虧為盈" 
+                },
+                { 
+                    company: "Ford (F)", 
+                    date: "10/23", 
+                    eps_exp: "$0.35 - $0.38", 
+                    eps_act: "$0.45", 
+                    rev_exp: "$43.7 B - $46.9 B", 
+                    rev_act: "$47.2 B - $50.5 B", 
+                    reaction: "大漲 10-13%", 
+                    keyword: "忽略壞消息" 
+                },
+                { 
+                    company: "Netflix (NFLX)", 
+                    date: "10/21", 
+                    eps_exp: "$7.00", 
+                    eps_act: "$5.87", 
+                    rev_exp: "$11.5 B", 
+                    rev_act: "$11.51 B", 
+                    reaction: "下跌 5-10%", 
+                    keyword: "一次性稅款" 
+                },
+                { 
+                    company: "Tesla (TSLA)", 
+                    date: "10/22", 
+                    eps_exp: "$0.53 - $0.56", 
+                    eps_act: "$0.50", 
+                    rev_exp: "$26.4 B", 
+                    rev_act: "$28.1 B", 
+                    reaction: "下跌 3.5%", 
+                    keyword: "利潤率壓縮" 
+                },
+                { 
+                    company: "Zions (ZION)", 
+                    date: "10/20", 
+                    eps_exp: "N/A", 
+                    eps_act: "$1.48", 
+                    rev_exp: "N/A", 
+                    rev_act: "N/A", 
+                    reaction: "上漲 2.5-4.3%", 
+                    keyword: "利空出盡" 
+                },
+                { 
+                    company: "Cleveland-Cliffs (CLF)", 
+                    date: "10/20", 
+                    eps_exp: "-$0.48 (虧損)", 
+                    eps_act: "-$0.45 (虧損)", 
+                    rev_exp: "$4.95 B", 
+                    rev_act: "$4.73 B", 
+                    reaction: "飆漲 17%", 
+                    keyword: "稀土敘事" 
+                }
+            ];
+
+            const tableBody = document.getElementById('reportsTableBody');
+            const filterInput = document.getElementById('filterInput');
+
+            // 填充表格內容
+            function populateTable(data) {
+                tableBody.innerHTML = ''; // 清空現有內容
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="7" class="text-center px-6 py-4 text-gray-500">找不到符合條件的資料</td></tr>';
+                    return;
+                }
+                
+                data.forEach(item => {
+                    // 根據 EPS 實際 vs 預期 來決定顏色
+                    let epsClass = 'text-stone-900';
+                    // 簡易比較 (僅適用於此數據集)
+                    if (item.keyword === "扭虧為盈" || item.keyword === "忽略壞消息" || item.keyword === "利空出盡" || item.keyword === "稀土敘事") {
+                        epsClass = 'text-green-600 font-medium';
+                    } else if (item.keyword === "一次性稅款" || item.keyword === "利潤率壓縮") {
+                        epsClass = 'text-red-600 font-medium';
+                    }
+
+                    const row = `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.company}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.eps_exp}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${epsClass}">${item.eps_act}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.rev_exp}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">${item.rev_act}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${item.reaction.includes('漲') ? 'text-green-600' : 'text-red-600'}">${item.reaction}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                    ${item.keyword}
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            // 篩選表格
+            function filterTable() {
+                const filterText = filterInput.value.toLowerCase();
+                const filteredData = productData.filter(item => 
+                    item.company.toLowerCase().includes(filterText) ||
+                    item.keyword.toLowerCase().includes(filterText)
+                );
+                populateTable(filteredData);
+            }
+
+            // 綁定篩選事件
+            filterInput.addEventListener('keyup', filterTable);
+
+            // 初始載入表格
+            populateTable(productData);
+
+
+            // --- 3. 動態圖表 (Chart.js) ---
+            
+            // 從 productData 準備圖表資料
+            const chartLabels = productData.map(item => item.company);
+            
+            // 處理 EPS 數據 (簡化處理，取範圍中間值或單一值)
+            const parseEps = (epsStr) => {
+                if (epsStr === "N/A") return null;
+                if (epsStr.includes('虧損')) {
+                    return parseFloat(epsStr.match(/-?\$?([\d\.]+)/)[1]) * -1;
+                }
+                const numbers = epsStr.match(/(\$?[\d\.]+)/g);
+                if (!numbers) return null;
+                const values = numbers.map(n => parseFloat(n.replace('$', '')));
+                // 返回平均值
+                return values.reduce((a, b) => a + b, 0) / values.length;
+            };
+
+            const epsExpectedData = productData.map(item => parseEps(item.eps_exp));
+            const epsActualData = productData.map(item => parseEps(item.eps_act));
+            
+            const ctx = document.getElementById('epsChart');
+            if(ctx) {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: chartLabels,
+                        datasets: [
+                            {
+                                label: '預期 EPS ($)',
+                                data: epsExpectedData,
+                                backgroundColor: 'rgba(107, 114, 128, 0.5)', // Gray-500
+                                borderColor: 'rgba(107, 114, 128, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: '實際 EPS ($)',
+                                data: epsActualData,
+                                backgroundColor: 'rgba(14, 165, 233, 0.7)', // Sky-500
+                                borderColor: 'rgba(14, 165, 233, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value;
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += '$' + context.parsed.y.toFixed(2);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+
+            // --- 4. Intersection Observer (導航列 Active 狀態) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a[data-navlink]');
+            
+            const observerOptions = {
+                root: null, // 相對於 viewport
+                rootMargin: '0px',
+                threshold: 0.4 // 區塊進入畫面 40% 時觸發
+            };
+
+            const observerCallback = (entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target.id;
+                    const correspondingLink = document.querySelector(`nav a[data-navlink="${id}"]`);
+                    
+                    if (entry.isIntersecting) {
+                        // 先移除所有的 active 狀態
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        // 再加上當前的 active 狀態
+                        if (correspondingLink) {
+                            correspondingLink.classList.add('active-nav-link');
+                            correspondingLink.classList.remove('inactive-nav-link');
+                        }
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
