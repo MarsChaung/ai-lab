@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Celestica 2025Q3財報分析報告</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義 Inter 字體 (Tailwind 預設) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        /* 導航列 Active 狀態樣式 */
+        .active-nav-link {
+            border-bottom: 2px solid #0ea5e9; /* sky-500 */
+            color: #0369a1; /* sky-700 */
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            border-bottom: 2px solid transparent;
+            color: #4b5563; /* gray-600 */
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800">
+
+    <!-- 
+      導航列 (Header)
+      - Sticky Header: sticky top-0 z-50
+      - Mobile Menu Toggle
+    -->
+    <header class="bg-white/95 shadow-md sticky top-0 z-50 backdrop-blur-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold text-sky-700">Celestica 2025Q3</span>
+                </div>
+
+                <!-- 桌面版導航 (Desktop Navigation) -->
+                <div class="hidden md:block">
+                    <div id="nav-links" class="ml-10 flex items-baseline space-x-2 xl:space-x-4">
+                        <a href="#section-1" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 transition duration-150">營運概況</a>
+                        <a href="#section-2" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 transition duration-150">業務策略</a>
+                        <a href="#section-3" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 transition duration-150">營運指標</a>
+                        <a href="#section-4" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 transition duration-150">財務表現</a>
+                        <a href="#section-5" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 transition duration-150">競爭分析</a>
+                        <a href="#section-6" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 transition duration-150">風險</a>
+                        <a href="#section-7" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 transition duration-150">財務指引</a>
+                        <a href="#section-8" class="inactive-nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-sky-600 transition duration-150">投資建議</a>
+                    </div>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 (Mobile Menu Button) -->
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-stone-500 hover:text-stone-800 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-expanded="false">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Heroicon: menu -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Heroicon: x (for close) -->
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 手機版選單 (Mobile Menu) -->
+        <div id="mobile-menu" class="hidden md:hidden shadow-lg border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#section-1" class="text-stone-700 hover:bg-stone-50 hover:text-sky-600 block px-3 py-2 rounded-md text-base font-medium">營運概況</a>
+                <a href="#section-2" class="text-stone-700 hover:bg-stone-50 hover:text-sky-600 block px-3 py-2 rounded-md text-base font-medium">業務策略</a>
+                <a href="#section-3" class="text-stone-700 hover:bg-stone-50 hover:text-sky-600 block px-3 py-2 rounded-md text-base font-medium">營運指標</a>
+                <a href="#section-4" class="text-stone-700 hover:bg-stone-50 hover:text-sky-600 block px-3 py-2 rounded-md text-base font-medium">財務表現</a>
+                <a href="#section-5" class="text-stone-700 hover:bg-stone-50 hover:text-sky-600 block px-3 py-2 rounded-md text-base font-medium">競爭分析</a>
+                <a href="#section-6" class="text-stone-700 hover:bg-stone-50 hover:text-sky-600 block px-3 py-2 rounded-md text-base font-medium">風險</a>
+                <a href="#section-7" class="text-stone-700 hover:bg-stone-50 hover:text-sky-600 block px-3 py-2 rounded-md text-base font-medium">財務指引</a>
+                <a href="#section-8" class="text-stone-700 hover:bg-stone-50 hover:text-sky-600 block px-3 py-2 rounded-md text-base font-medium">投資建議</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 
+      主要內容 (Main Content)
+    -->
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8 mt-8">
+
+        <!-- 
+          區塊 1: 公司營運概況 
+        -->
+        <section id="section-1" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                公司營運概況
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg leading-relaxed text-stone-700">
+                    Celestica Inc. (NYSE/TSX: CLS) 已從傳統電子製造服務 (EMS) 供應商，成功轉型為人工智慧 (AI) 數據中心基礎設施的關鍵「設計與製造」夥伴。公司繼承自 IBM 的工程 DNA，使其具備深厚的設計、工程與複雜供應鏈管理能力。Celestica 目前營運兩大獨立業務板塊：先進技術解決方案 (ATS) 和互連與雲端解決方案 (CCS)。
+                </p>
+            </div>
+            
+            <!-- 卡片式設計 (Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- ATS Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-semibold text-blue-800 mb-3">先進技術解決方案 (ATS)</h3>
+                    <p class="text-stone-600 mb-4">
+                        作為公司的**穩定基石**，專注於高門檻、長週期、高可靠性的市場，包括航太國防、醫療科技、工業及半導體資本設備。
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 text-stone-700">
+                        <li>Q3 2025 營收: $7.8 億美元 (年減 4%)</li>
+                        <li>部門利潤率: <span class="font-bold text-green-600">5.5% (自 4.9% 提升)</span></li>
+                        <li>策略: 優化產品組合，專注高利潤專案，作為穩定現金牛。</li>
+                    </ul>
+                </div>
+                <!-- CCS Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                    <h3 class="text-2xl font-semibold text-emerald-800 mb-3">互連與雲端解決方案 (CCS)</h3>
+                    <p class="text-stone-600 mb-4">
+                        公司的**增長超級引擎**，AI 浪潮的直接受益者，服務於通訊及企業 (伺服器/儲存) 市場。
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 text-stone-700">
+                        <li>Q3 2025 營收: $24.1 億美元 (<span class="font-bold text-green-600">年增 43%</span>)</li>
+                        <li>部門利潤率: <span class="font-bold text-green-600">8.3% (自 7.6% 提升)</span></li>
+                        <li>核心驅動: 硬體平台解決方案 (HPS) 營收年增 79%。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          區塊 2: 業務策略和發展 
+        -->
+        <section id="section-2" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                業務策略和發展
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-3">AI 浪潮的關鍵賦能者：HPS 策略</h3>
+                <p class="text-stone-700 leading-relaxed">
+                    Celestica 的核心價值在於其「硬體平台解決方案」(HPS) 業務，代表了從 EMS (代工) 向 JDM (聯合設計) 及 ODM (原創設計) 的根本轉變。公司不再被動接單，而是提供掌握智慧財產權 (IP) 的平台解決方案，從而享有更高利潤率。
+                </p>
+                <p class="text-stone-700 leading-relaxed mt-2">
+                    公司的技術護城河建立在 AI 網路的「咽喉」之地。AI 訓練極度依賴高頻寬、低延遲的「後端網路」，而 Celestica 已被 Dell'Oro Group 評為 2024 年「AI 乙太網路交換器」及「高速網路 (≥ 800G)」的市場份額領導者。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-semibold text-sky-700 mb-2">800G 交換器領導地位</h4>
+                    <p class="text-stone-600">僅 2025 年 Q1，Celestica 就出貨了超過 160 萬個 800G 埠，證明了其在當前 AI 數據中心建設中的主導地位。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-semibold text-sky-700 mb-2">鎖定 1.6T 交換器未來</h4>
+                    <p class="text-stone-600">率先發布基於 Broadcom Tomahawk 6 晶片的 1.6TbE 交換器 (DS6000/DS6001)，鎖定 2026-2027 年下一代 AI 網路升級訂單。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-semibold text-sky-700 mb-2">關鍵 HPS 產品組合</h4>
+                    <ul class="list-disc list-inside space-y-1 text-stone-600">
+                        <li>AI 網路交換器 (800G/1.6T)</li>
+                        <li>儲存控制器 (SC4200)</li>
+                        <li>高密度儲存平台 (SD6200)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          區塊 3: 營運指標 
+        -->
+        <section id="section-3" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                關鍵營運指標 (Q3 2025 vs Q3 2024)
+            </h2>
+            <!-- 資訊卡片 (Information Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-sky-600 text-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center">
+                    <span class="text-5xl font-extrabold">+51.9%</span>
+                    <span class="mt-2 text-xl font-semibold">調整後 EPS 增長</span>
+                    <span class="text-base text-sky-100">(從 $1.04 增至 $1.58)</span>
+                </div>
+                <div class="bg-emerald-600 text-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center">
+                    <span class="text-5xl font-extrabold">+79.0%</span>
+                    <span class="mt-2 text-xl font-semibold">HPS 營收增長</span>
+                    <span class="text-base text-emerald-100">(AI 基礎設施驅動)</span>
+                </div>
+                <div class="bg-stone-700 text-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center">
+                    <span class="text-5xl font-extrabold">7.6%</span>
+                    <span class="mt-2 text-xl font-semibold">調整後營運利潤率</span>
+                    <span class="text-base text-stone-200">(創公司歷史新高)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          區塊 4: 財務表現細節 
+        -->
+        <section id="section-4" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                財務表現細節 (Q3 2025)
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-3">「全面超越」的季度表現</h3>
+                <p class="text-stone-700 leading-relaxed">
+                    Celestica 於 2025 年 10 月 27 日發布的第三季財報，是其轉型成功的有力證明。業績全面超越了公司自身的指引和華爾街的預期。EPS 52% 的增長速度遠快於營收 28% 的增長，顯示高利潤 HPS 業務帶來的強大「營運槓桿」效應。
+                </p>
+            </div>
+            
+            <!-- 靜態財務表格 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 overflow-hidden">
+                <h4 class="text-xl font-semibold text-stone-800 mb-4">Q3 2025 財務摘要</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">財務指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Q3 2025 (實際)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Q3 2024 (實際)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">年增長率 (YoY)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">總營收</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">$3,194.0 M</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">$2,499.5 M</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">+27.8%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">調整後營運利潤率</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">7.6%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">6.8%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">+80 bps</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">調整後 EPS</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">$1.58</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">$1.04</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">+51.9%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">CCS 部門營收</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">$2,413.0 M</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">$1,684.5 M</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">+43.2%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">HPS 營收</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">~$1,400.0 M</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">~$782.0 M</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-green-600">+79.0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          區塊 5: 產業競爭分析 
+        -->
+        <section id="section-5" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                產業競爭分析
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-3">競爭優勢 (The Moat)</h3>
+                <p class="text-stone-700 leading-relaxed">
+                    Celestica 憑藉其在 AI 網路硬體 (800G/1.6T) 上的 ODM/JDM 設計能力、與超大規模客戶 (Hyperscalers) 的深度綁定、以及一站式機架整合服務，建立了強大的技術和服務壁壘，使其從 Jabil (JBL)、Flex (FLEX) 等傳統 EMS 廠商中脫穎而出。Celestica 在「AI 網路」此一特定高增長領域展現了壓倒性的市場份額。
+                </p>
+            </div>
+
+            <!-- 互動式資料表格 (Interactive Table) -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">同業關鍵指標比較 (可篩選)</h3>
+                <div class="mb-4">
+                    <input type="text" id="filterInput" class="w-full md:w-1/2 lg:w-1/3 px-4 py-2 border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="依公司名稱或代號篩選 (例如: CLS, Jabil)...">
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">公司 (代號)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2026 財年預期 EPS</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">2026 EPS 增長 (YoY)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Beta (5Y)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">關鍵 AI 市場地位</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competitorTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- 內容將由 JavaScript 動態填入 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          區塊 6: 風險和不確定性 
+        -->
+        <section id="section-6" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                風險和不確定性
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 核心風險 1 -->
+                <div class="bg-red-50 rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <h3 class="text-2xl font-semibold text-red-800 mb-3">核心風險 (1)：客戶高度集中</h3>
+                    <p class="text-stone-700 leading-relaxed">
+                        此為**最大且最嚴重的隱憂**。Celestica 三家最大的 CCS 客戶佔總營收的 59% (分別為 30%, 15%, 14%)。
+                    </p>
+                    <p class="text-stone-700 leading-relaxed mt-2">
+                        公司的命運與 AI 巨頭的資本支出週期 (Capex) 完全綁定。任何一家大客戶暫停支出、或引入第二家供應商，都可能對 CLS 造成災難性衝擊。
+                    </p>
+                </div>
+                <!-- 核心風險 2 -->
+                <div class="bg-orange-50 rounded-lg shadow-lg p-6 border-l-4 border-orange-500">
+                    <h3 class="text-2xl font-semibold text-orange-800 mb-3">核心風險 (2)：估值風險</h3>
+                    <p class="text-stone-700 leading-relaxed">
+                        股價在過去一年中上漲超過 300%，TTM 本益比已高達 60 倍以上。目前的估值已完全反映 2025 年、並大量計入 2026 年的強勁增長。
+                    </p>
+                    <p class="text-stone-700 leading-relaxed mt-2">
+                        這意味著 CLS 必須在未來 6-8 個季度交出「完美」成績單，任何未達預期的雜音都可能引發股價劇烈回調。
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-3">其他重要風險</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-700">
+                    <li><strong>地緣政治風險:</strong> 對中國製造和設計的依賴，面臨中美貿易緊張局勢的長期威脅。</li>
+                    <li><strong>供應鏈風險:</strong> AI 硬體 (GPU, ASIC, 光學元件) 的關鍵零組件供應鏈極為脆弱且集中。</li>
+                    <li><strong>利潤率壓力:</strong> 超大規模客戶以其巨大的議價能力聞名，未來可能要求降價。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 
+          區塊 7: 關鍵數據匯總及財務指引 
+        -->
+        <section id="section-7" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                關鍵數據匯總及財務指引
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- 左側：指引數據 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold text-stone-800 mb-4">管理層 2026 年「震撼彈」指引</h3>
+                    <p class="text-stone-600 mb-4">
+                        管理層史無前例地提供 2026 年全年展望，其力度遠超華爾街預期，顯示公司對 AI 訂單（來自 Google, OpenAI 等）的可見度極高。
+                    </p>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-sky-50 rounded-lg border border-sky-200">
+                            <span class="block text-sm font-medium text-sky-700">2026 預期營收</span>
+                            <span class="block text-3xl font-bold text-sky-900">$160 億美元</span>
+                            <span class_("text-sky-800">(vs 華爾街預期 $141 億)</span>
+                        </div>
+                        <div class="p-4 bg-emerald-50 rounded-lg border border-emerald-200">
+                            <span class="block text-sm font-medium text-emerald-700">2026 預期調整後 EPS</span>
+                            <span class="block text-3xl font-bold text-emerald-900">$8.20 美元</span>
+                            <span class="text-emerald-800">(vs 華爾街預期 $7.22)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右側：動態圖表 (Chart.js) -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold text-stone-800 mb-4">營收與 EPS 增長指引</h3>
+                    <!-- 
+                      Chart.js Canvas
+                      - 必須包一層 <div> 來控制高度 
+                    -->
+                    <div class="relative w-full" style="height: 350px;">
+                        <canvas id="guidanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          區塊 8: 綜合評估及投資建議 
+        -->
+        <section id="section-8" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                綜合評估及投資建議
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-blue-50 rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-semibold text-blue-800 mb-3">投資風格：純粹成長型</h3>
+                    <p class="text-stone-700">
+                        Celestica 完美符合「成長型股票」定義 (Zacks 評為 B 級)。其 2026 年 EPS 增長預期高達 39%。
+                    </p>
+                    <p class="text-stone-700 mt-2">
+                        它**不是**價值股。其 TTM 本益比超 60 倍，Morningstar 認為其「高估 46%」。價值型投資者應**完全避開**。
+                    </p>
+                </div>
+                <div class="bg-red-50 rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <h3 class="text-2xl font-semibold text-red-800 mb-3">波動性警告：高 Beta</h3>
+                    <p class="text-stone-700">
+                        5 年 Beta 值高達 **1.85**，意味著其股價波動性預計比 S&P 500 高出 85%。
+                    </p>
+                    <p class="text-stone-700 mt-2">
+                        近 20 天歷史波動率 (HV) 高達 82%，證實其股價極端不穩定。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-3">對「一般投資人」的最終建議</h3>
+                <p class="text-lg font-semibold text-red-700 mb-3">答案：不適合。</p>
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    「一般投資人」通常風險承受能力中等。Celestica 的高 Beta (1.85) 和極端的客戶集中度 (59% 營收來自三家客戶) 構成了「高風險」特徵。一般投資人可能無法承受其潛在的 20% 至 40% 的股價劇烈回調。
+                </p>
+                <h4 class="text-xl font-semibold text-stone-800 mb-2">這檔股票適合誰？</h4>
+                <p class="text-stone-700 leading-relaxed">
+                    適合能夠承受巨大股價波動、對 AI 基礎設施有深入理解、並願意承擔高度客戶集中風險，以換取未來 1-3 年潛在爆發性資本利得的**「積極型」或「投機型」成長投資者**。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 
+      頁腳 (Footer)
+    -->
+    <footer class="bg-stone-800 text-stone-400 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-Celestica 2025Q3財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Celestica 相關公開資料 (2025年10月28日)。</p>
+        </div>
+    </footer>
+
+    <!-- 
+      JavaScript 腳本 
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+
+            // --- 1. 手機版選單切換 (Mobile Menu Toggle) ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcons = mobileMenuBtn.querySelectorAll('svg');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+                menuIcons[0].classList.toggle('hidden'); // Menu icon
+                menuIcons[1].classList.toggle('hidden'); // Close icon
+                
+                // 點擊手機選單連結後自動關閉選單
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        mobileMenu.classList.add('hidden');
+                        menuIcons[0].classList.remove('hidden');
+                        menuIcons[1].classList.add('hidden');
+                    });
+                });
+            });
+
+            // --- 2. 導航列 Active 狀態 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#nav-links a');
+            const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // 調整此處以決定 "active" 的觸發區域
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                let visibleSectionId = null;
+
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        visibleSectionId = entry.target.id;
+                    }
+                });
+                
+                if (visibleSectionId) {
+                    // 更新桌面版導航
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${visibleSectionId}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                    
+                    // 更新手機版導航 (簡單的背景和文字顏色)
+                    mobileNavLinks.forEach(link => {
+                         link.classList.remove('bg-sky-50', 'text-sky-700', 'font-semibold');
+                         link.classList.add('text-stone-700');
+                         if (link.getAttribute('href') === `#${visibleSectionId}`) {
+                             link.classList.add('bg-sky-50', 'text-sky-700', 'font-semibold');
+                             link.classList.remove('text-stone-700');
+                         }
+                    });
+                }
+
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- 3. 互動式表格 (Interactive Table) ---
+            const competitorData = [
+                { 
+                    company: 'Celestica', 
+                    symbol: 'CLS', 
+                    eps: '$8.20 (指引)', 
+                    growth: '+39.0%', 
+                    beta: '1.85', 
+                    position: 'AI 網路 (800G/1.6T) 領導者' 
+                },
+                { 
+                    company: 'Jabil', 
+                    symbol: 'JBL', 
+                    eps: '$10.11 - $11.05', 
+                    growth: '+13.3% - +18.4%', 
+                    beta: '~1.3-1.4', 
+                    position: '數據中心基礎設施 (多元化)' 
+                },
+                { 
+                    company: 'Sanmina', 
+                    symbol: 'SANM', 
+                    eps: '~$6.97', 
+                    growth: '+16.8% - +17.3%', 
+                    beta: '~1.1-1.2', 
+                    position: '工業、醫療 (AI 曝險較低)' 
+                },
+                { 
+                    company: 'Flex', 
+                    symbol: 'FLEX', 
+                    eps: 'N/A', 
+                    growth: '~9.4% (2025E)', 
+                    beta: '~1.2-1.3', 
+                    position: '消費性電子、汽車 (AI 曝險較低)' 
+                }
+            ];
+
+            const tableBody = document.getElementById('competitorTableBody');
+            const filterInput = document.getElementById('filterInput');
+
+            function populateTable(data) {
+                tableBody.innerHTML = ''; // 清空表格
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-stone-500">無符合條件的資料</td></tr>';
+                    return;
+                }
+                
+                data.forEach(item => {
+                    const row = `
+                        <tr class="hover:bg-stone-50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">
+                                ${item.company} <span class="text-xs text-stone-500">(${item.symbol})</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.eps}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${item.growth.startsWith('+39') ? 'font-bold text-green-700' : 'text-stone-600'}">${item.growth}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${item.beta > 1.8 ? 'font-bold text-red-600' : 'text-stone-600'}">${item.beta}</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-stone-600">${item.position}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            // 篩選監聽
+            filterInput.addEventListener('keyup', () => {
+                const filterText = filterInput.value.toLowerCase();
+                const filteredData = competitorData.filter(item => 
+                    item.company.toLowerCase().includes(filterText) ||
+                    item.symbol.toLowerCase().includes(filterText)
+                );
+                populateTable(filteredData);
+            });
+
+            // 初始載入表格
+            populateTable(competitorData);
+
+            // --- 4. 動態圖表 (Chart.js) ---
+            const ctx = document.getElementById('guidanceChart');
+            if (ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['2025 預期', '2026 指引'],
+                        datasets: [
+                            {
+                                label: '營收 (Billion USD)',
+                                data: [12.2, 16.0],
+                                backgroundColor: 'rgba(59, 130, 246, 0.7)', // sky-500
+                                borderColor: 'rgba(59, 130, 246, 1)',
+                                borderWidth: 1,
+                                yAxisID: 'y'
+                            },
+                            {
+                                label: '調整後 EPS (USD)',
+                                data: [5.90, 8.20],
+                                backgroundColor: 'rgba(16, 185, 129, 0.7)', // emerald-500
+                                borderColor: 'rgba(16, 185, 129, 1)',
+                                borderWidth: 1,
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            if (context.dataset.label.includes('EPS')) {
+                                                label += '$' + context.parsed.y.toFixed(2);
+                                            } else {
+                                                label += '$' + context.parsed.y.toFixed(1) + 'B';
+                                            }
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: '營收 (Billion USD)',
+                                    color: '#4b5563'
+                                },
+                                grid: {
+                                    drawOnChartArea: false // 只顯示 Y 軸
+                                },
+                                ticks: {
+                                    color: '#4b5563'
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: {
+                                    display: true,
+                                    text: '調整後 EPS (USD)',
+                                    color: '#4b5563'
+                                },
+                                grid: {
+                                    drawOnChartArea: false
+                                },
+                                ticks: {
+                                    color: '#4b5563'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#1f2937',
+                                    font: {
+                                        weight: '600'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+
+</body>
+</html>
