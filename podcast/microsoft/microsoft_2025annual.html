@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Microsoft AI策略與2025財年分析報告</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義 Inter 字體 (Tailwind 預設字體) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* 導航列 Active 狀態樣式 */
+        .active-nav-link {
+            color: #0284c7; /* text-sky-600 */
+            font-weight: 600; /* font-semibold */
+            border-bottom: 2px solid #0284c7;
+            padding-bottom: 4px;
+        }
+
+        .inactive-nav-link {
+            color: #44403c; /* text-stone-700 */
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .inactive-nav-link:hover {
+            color: #0ea5e9; /* text-sky-500 */
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-900 leading-relaxed">
+
+    <!-- 
+      Header / Navigation 
+      使用 sticky top-0 z-50 實現黏著效果
+    -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto p-4 flex justify-between items-center">
+            <!-- Logo/Title -->
+            <h1 class="text-xl font-bold text-sky-700">微軟AI策略與2025財年分析</h1>
+
+            <!-- 
+              Desktop Navigation 
+              使用 hidden md:flex 在中等螢幕以上顯示
+            -->
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#section-1" class="nav-link inactive-nav-link">OpenAI重組</a></li>
+                <li><a href="#section-2" class="nav-link inactive-nav-link">營運概況</a></li>
+                <li><a href="#section-3" class="nav-link inactive-nav-link">業務策略</a></li>
+                <li><a href="#section-4" class="nav-link inactive-nav-link">營運指標</a></li>
+                <li><a href="#section-5" class="nav-link inactive-nav-link">財務表現</a></li>
+                <li><a href="#section-6" class="nav-link inactive-nav-link">競爭分析</a></li>
+                <li><a href="#section-7" class="nav-link inactive-nav-link">風險</a></li>
+                <li><a href="#section-9" class="nav-link inactive-nav-link">綜合評估</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- 
+          Mobile Navigation Menu 
+          預設 hidden，透過 JS 切換
+        -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-40 border-t border-stone-200">
+            <ul class="flex flex-col p-4 space-y-2">
+                <li><a href="#section-1" class="nav-link-mobile block w-full text-left p-2 rounded-md hover:bg-sky-100">OpenAI重組</a></li>
+                <li><a href="#section-2" class="nav-link-mobile block w-full text-left p-2 rounded-md hover:bg-sky-100">營運概況</a></li>
+                <li><a href="#section-3" class="nav-link-mobile block w-full text-left p-2 rounded-md hover:bg-sky-100">業務策略</a></li>
+                <li><a href="#section-4" class="nav-link-mobile block w-full text-left p-2 rounded-md hover:bg-sky-100">營運指標</a></li>
+                <li><a href="#section-5" class="nav-link-mobile block w-full text-left p-2 rounded-md hover:bg-sky-100">財務表現</a></li>
+                <li><a href="#section-6" class="nav-link-mobile block w-full text-left p-2 rounded-md hover:bg-sky-100">競爭分析</a></li>
+                <li><a href="#section-7" class="nav-link-mobile block w-full text-left p-2 rounded-md hover:bg-sky-100">風險</a></li>
+                <li><a href="#section-9" class="nav-link-mobile block w-full text-left p-2 rounded-md hover:bg-sky-100">綜合評估</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 pt-8 max-w-7xl">
+
+        <!-- Section 1: OpenAI 資產重組分析 -->
+        <section id="section-1" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">OpenAI 資產重組分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg text-stone-700 leading-relaxed">
+                    OpenAI 近期宣布完成重大資產重組，將其營利部門轉型為「公益公司」（Public Benefit Corporation, PBC），估值高達 <strong>5000 億美元</strong>。此舉旨在平衡其「確保 AGI 惠及全人類」的非營利使命與龐大的商業營運需求。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card: 微軟持股 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">微軟持股 27%</h3>
+                    <p class="text-stone-700">在此新架構下，微軟確認持有營利公司 <strong>27%</strong> 的股份，為最大單一外部股東，目前價值約 <strong>1350 億美元</strong>。相較其累計投資的 138 億美元，帳面回報已近 10 倍。</p>
+                </div>
+                
+                <!-- Card: 股權結構 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-3">新股權結構</h3>
+                    <ul class="list-disc list-inside text-stone-700 space-y-2">
+                        <li><strong>微軟:</strong> 27%</li>
+                        <li><strong>OpenAI 基金會 (非營利母公司):</strong> 26%</li>
+                        <li><strong>員工與早期投資者:</strong> 47%</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-stone-600">關鍵點：非營利的基金會董事會，擁有對營利公司董事會的任命和罷免權。</p>
+                </div>
+
+                <!-- Card: 新協議條款 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-3">與微軟的新協議條款</h3>
+                    <ul class="list-disc list-inside text-stone-700 space-y-2">
+                        <li>IP 授權延長至 2032 年。</li>
+                        <li>承諾向微軟額外採購 <strong>2500 億美元</strong> 的 Azure 服務。</li>
+                        <li>微軟失去「優先承購權」，OpenAI 可用其他雲端服務。</li>
+                        <li>微軟權利不包含 OpenAI 未來的「消費性硬體」。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 公司營運概況 (Microsoft) -->
+        <section id="section-2" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況 (Microsoft)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-sky-700 mb-4">核心觀點：AI 平台轉移的唯一全棧執行者</h3>
+                <p class="text-lg text-stone-700 leading-relaxed mb-4">
+                    Microsoft 正處於 CEO Satya Nadella 所稱的「AI 平台轉移」的「世代性時刻」。微軟是全球唯一一家在 AI 轉型的每一層技術堆疊——從基礎設施（Azure）、平台（AI Foundry）、模型（OpenAI 合作）、到殺手級應用（M365 Copilot）——都已建立主導地位的公司。
+                </p>
+                <p class="text-stone-700">
+                    截至 2025 財年（FY2025），公司營收、營業利潤和淨利潤均創下歷史新高，且這是在關鍵 AI 產品（如 M365 Copilot）尚未進入全面貨幣化階段時實現的，顯示未來巨大的增長空間。
+                </p>
+            </div>
+            
+            <!-- Key Metrics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-sm font-semibold text-sky-800 uppercase mb-2">2025 財年總營收</h4>
+                    <p class="text-4xl font-bold text-sky-900">$2,817 億</p>
+                    <span class="text-lg text-emerald-600 font-semibold">(年增 15%)</span>
+                </div>
+                <div class="bg-emerald-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-sm font-semibold text-emerald-800 uppercase mb-2">2025 財年淨利潤</h4>
+                    <p class="text-4xl font-bold text-emerald-900">$1,018 億</p>
+                    <span class="text-lg text-emerald-600 font-semibold">(年增 16%)</span>
+                </div>
+                <div class="bg-amber-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-sm font-semibold text-amber-800 uppercase mb-2">Azure 營收增長 (FY2025)</h4>
+                    <p class="text-4xl font-bold text-amber-900">+34%</p>
+                    <span class="text-lg text-stone-600">(AI 服務強勁驅動)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 業務策略和發展 (Microsoft) -->
+        <section id="section-3" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <p class="text-lg text-stone-700 mb-6">CEO Satya Nadella 明確指出公司的三大核心優先事項，旨在重塑「每一層技術堆疊」。</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card: AI 創新 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold text-sky-700 mb-3">1. AI 創新 (AI Innovation)</h3>
+                    <p class="text-stone-700 mb-4">引領 AI 基礎設施浪潮，雙管齊下構建基礎設施和應用程式。</p>
+                    <ul class="list-disc list-inside text-stone-700 space-y-2">
+                        <li><strong>全球擴張:</strong> 營運超過 400 個資料中心。</li>
+                        <li><strong>平台化:</strong> 推出 Azure AI Foundry，提供 11,000+ 模型。</li>
+                        <li><strong>自研晶片:</strong> 推出首款基礎模型 MAI-1。</li>
+                        <li><strong>Copilots:</strong> 月活躍用戶 (MAU) 突破 1 億。</li>
+                    </ul>
+                </div>
+                
+                <!-- Card: 安全 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold text-stone-800 mb-3">2. 安全 (Security)</h3>
+                    <p class="text-stone-700 mb-4">提升至「不可妥協」的戰略高度，啟動「安全未來倡議 (SFI)」。</p>
+                    <p class="text-stone-700">AI 革命的基石是「信任」。SFI 不僅是彌補漏洞，更是將「安全」轉化為 AI 平台的關鍵護城河，以應對 Storm-0558 等重大網路安全事件。</p>
+                </div>
+
+                <!-- Card: 品質 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold text-stone-800 mb-3">3. 品質 (Quality)</h3>
+                    <p class="text-stone-700 mb-4">透過「品質卓越倡議 (QEI)」，專注於提高變更管理、事件管理和平台彈性。</p>
+                    <p class="text-stone-700">確保其全球規模的服務具有持久的穩定性和高品質。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 營運指標 (Microsoft) -->
+        <section id="section-4" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標</h2>
+            
+            <!-- Key Metrics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-sky-800 mb-2">Copilot 月活躍用戶 (MAU)</h4>
+                    <p class="text-4xl font-bold text-sky-900">1 億+</p>
+                    <span class="text-stone-600">跨商業和消費者</span>
+                </div>
+                <div class="bg-emerald-100 rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-emerald-800 mb-2">Azure AI Foundry 使用率</h4>
+                    <p class="text-4xl font-bold text-emerald-900">80%</p>
+                    <span class="text-stone-600">的財富 500 強企業</span>
+                </div>
+                <div class="bg-amber-100 rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-semibold text-amber-800 mb-2">GitHub Copilot 用戶</h4>
+                    <p class="text-4xl font-bold text-amber-900">2000 萬+</p>
+                    <span class="text-stone-600">開發者用戶</span>
+                </div>
+            </div>
+
+
+        <!-- Section 5: 財務表現細節 (Microsoft) -->
+        <section id="section-5" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+
+            <!-- Chart.js Bar Chart -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-4">三大業務部門營收 (2023-2025 財年)</h3>
+                <p class="text-stone-600 mb-4">單位：百萬美元</p>
+                <!-- Chart.js Canvas 必須包在 <div> 中 -->
+                <div class="relative h-[400px] w-full">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Static Financials Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-4">MSFT 2023-2025 財年關鍵財務數據</h3>
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="w-full min-w-max">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th class="p-3 text-left text-sm font-semibold text-stone-700">財務指標 (百萬美元)</th>
+                                <th class="p-3 text-right text-sm font-semibold text-stone-700">2025 財年</th>
+                                <th class="p-3 text-right text-sm font-semibold text-stone-700">2024 財年</th>
+                                <th class="p-3 text-right text-sm font-semibold text-stone-700">2023 財年</th>
+                                <th class="p-3 text-right text-sm font-semibold text-stone-700">2025 vs 2024 增長率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-stone-200">
+                                <td class="p-3">總營收 (Total Revenue)</td>
+                                <td class="p-3 text-right">$281,724</td>
+                                <td class="p-3 text-right">$245,122</td>
+                                <td class="p-3 text-right">$211,915</td>
+                                <td class="p-3 text-right text-emerald-600 font-semibold">15%</td>
+                            </tr>
+                            <tr class="border-b border-stone-200 bg-stone-50">
+                                <td class="p-3">營業利潤 (Operating Income)</td>
+                                <td class="p-3 text-right">$128,528</td>
+                                <td class="p-3 text-right">$109,433</td>
+                                <td class="p-3 text-right">$88,523</td>
+                                <td class="p-3 text-right text-emerald-600 font-semibold">17%</td>
+                            </tr>
+                            <tr class="border-b border-stone-200">
+                                <td class="p-3">淨利潤 (Net Income)</td>
+                                <td class="p-3 text-right">$101,832</td>
+                                <td class="p-3 text-right">$88,136</td>
+                                <td class="p-3 text-right">$72,361</td>
+                                <td class="p-3 text-right text-emerald-600 font-semibold">16%</td>
+                            </tr>
+                            <tr class="border-b border-stone-200 bg-stone-50">
+                                <td class="p-3">稀釋後 EPS (Diluted EPS)</td>
+                                <td class="p-3 text-right">$13.64</td>
+                                <td class="p-3 text-right">$11.80</td>
+                                <td class="p-3 text-right">$9.68</td>
+                                <td class="p-3 text-right text-emerald-600 font-semibold">16%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">Microsoft Cloud 營收</td>
+                                <td class="p-3 text-right">$168,900</td>
+                                <td class="p-3 text-right">$137,700</td>
+                                <td class="p-3 text-right">$111,600</td>
+                                <td class="p-3 text-right text-emerald-600 font-semibold">23%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: 產業競爭分析 (Microsoft) -->
+        <section id="section-6" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-4">核心競爭優勢 (護城河)</h3>
+                <p class="text-stone-700 leading-relaxed">微軟的護城河在 AI 時代正變得前所未有的寬闊，主要體現在三個層面：</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-semibold text-sky-700 mb-2">1. 平台與生態系統的絕對鎖定</h4>
+                    <p class="text-stone-700">全球企業深度依賴其技術棧（Azure, M365, Teams）。Copilot 作為 AI 層無縫嵌入，創造了極高的轉換成本。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-semibold text-sky-700 mb-2">2. 全棧 AI 能力</h4>
+                    <p class="text-stone-700">唯一實現從晶片 (MAI-1)、基礎設施 (Azure)、平台 (Foundry)、獨家夥伴 (OpenAI) 到殺手應用 (Copilot) 的垂直整合。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-semibold text-sky-700 mb-2">3. 規模化的資本與研發</h4>
+                    <p class="text-stone-700">2025 財年 <strong>$646 億美元</strong>的資本支出和 <strong>$325 億美元</strong>的研發費用，構建了物理上的算力護城河。</p>
+                </div>
+            </div>
+
+            <!-- Competitor Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-4">主要競爭對手市佔率 (2024-2025)</h3>
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="w-full min-w-max">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th class="p-3 text-left text-sm font-semibold text-stone-700">领域</th>
+                                <th class="p-3 text-left text-sm font-semibold text-stone-700">領導者 (市佔率)</th>
+                                <th class="p-3 text-left text-sm font-semibold text-stone-700">Microsoft (市佔率)</th>
+                                <th class="p-3 text-left text-sm font-semibold text-stone-700">追趕者 (市佔率)</th>
+                                <th class="p-3 text-left text-sm font-semibold text-stone-700">關鍵趨勢</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-stone-200">
+                                <td class="p-3">雲端 IaaS/PaaS (2025 Q2)</td>
+                                <td class="p-3">AWS (30%)</td>
+                                <td class="p-3 font-semibold">Azure (20%)</td>
+                                <td class="p-3">Google Cloud (13%)</td>
+                                <td class="p-3">Azure 增速最快，AI 需求強勁。</td>
+                            </tr>
+                            <tr class="border-b border-stone-200 bg-stone-50">
+                                <td class="p-3">生產力軟體 (用戶數)</td>
+                                <td class="p-3">Google Apps (50.3%)</td>
+                                <td class="p-3 font-semibold">M365 (45.5%)</td>
+                                <td class="p-3">-</td>
+                                <td class="p-3">M365 在「企業營收」上絕對領先。</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">遊戲主機 (2025)</td>
+                                <td class="p-3">Sony PlayStation (45%)</td>
+                                <td class="p-3 font-semibold">Xbox (23%)</td>
+                                <td class="p-3">Nintendo (27%)</td>
+                                <td class="p-3">MSFT 策略轉向內容與訂閱。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: 風險和不確定性 (Microsoft) -->
+        <section id="section-7" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Risk Card: IRS -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <h3 class="text-xl font-semibold text-red-700 mb-3">【重大】美國國稅局 (IRS) 稅務爭議</h3>
+                    <p class="text-stone-700">IRS 認為微軟在 2004-2013 財年期間的轉讓定價存在問題，正尋求追繳 <strong>$289 億美元</strong>的額外稅款（不含罰款和利息）。</p>
+                    <p class="text-stone-700 mt-2">微軟表示「強烈反對」並將「積極抗辯」。這是一項重大的、未解決的潛在財務負債。</p>
+                </div>
+
+                <!-- Risk Card: Capacity -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-semibold text-amber-700 mb-3">【中】AI 執行風險：產能瓶頸</h3>
+                    <p class="text-stone-700">AI 服務（特別是 GPU 密集型任務）的需求增長速度，已超過其資料中心的建設速度。「產能限制」是影響 Azure 增長的短期首要問題。</p>
+                    <p class="text-stone-700 mt-2">這解釋了 FY2025 $646 億的巨額資本支出，投資者需關注 CapEx 是否能及時轉化為營收。</p>
+                </div>
+
+                <!-- Risk Card: Cybersecurity -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-semibold text-amber-700 mb-3">【中】網路安全威脅</h3>
+                    <p class="text-stone-700">微軟的產品是全球關鍵基礎設施的中樞，使其成為首要攻擊目標。任何重大的安全疏漏都可能動搖客戶對其 AI 平台的信任。</p>
+                    <p class="text-stone-700 mt-2">公司已啟動「安全未來倡議 (SFI)」作為最高優先級響應。</p>
+                </div>
+
+                <!-- Risk Card: EU (Resolved) -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                    <h3 class="text-xl font-semibold text-green-700 mb-3">【已緩解】歐盟反壟斷 (Teams)</h3>
+                    <p class="text-stone-700">歐盟曾指控微軟將 Teams 與 Office 365 進行非法捆綁。截至 2025 年 9 月，微軟已同意在歐洲將 Teams 分拆銷售，成功避免了罰款，消除了一項重大的短期不確定性。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: 關鍵數據匯總及財務指引 (Microsoft) -->
+        <section id="section-8" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <p class="text-lg text-stone-700 mb-6">關鍵財務指標反映了市場對其 AI 領導地位的高估值。 (截至 2025 年 10 月)</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-sm font-semibold text-sky-800 uppercase mb-2">2025 財年總營收</h4>
+                    <p class="text-3xl font-bold text-sky-900">$2,817 億</p>
+                </div>
+                <div class="bg-emerald-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-sm font-semibold text-emerald-800 uppercase mb-2">2025 財年淨利潤</h4>
+                    <p class="text-3xl font-bold text-emerald-900">$1,018 億</p>
+                </div>
+                <div class="bg-amber-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-sm font-semibold text-amber-800 uppercase mb-2">TTM 本益比 (P/E)</h4>
+                    <p class="text-3xl font-bold text-amber-900">~39.7x</p>
+                </div>
+                <div class="bg-purple-100 rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-sm font-semibold text-purple-800 uppercase mb-2">遠期本益比 (FY2026E)</h4>
+                    <p class="text-3xl font-bold text-purple-900">~34.5x</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: 綜合评估 (Microsoft) -->
+        <section id="section-9" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合评估</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card: 投資評級 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold text-stone-800 mb-3">投資評級：買入 (Buy) (長期持有)</h3>
+                    <ul class="list-none space-y-4 text-stone-700">
+                        <li class="flex items-start">
+                            <span class="text-sky-600 font-bold mr-2">評級:</span>
+                            <span>買入 (Buy) (長期持有)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-600 font-bold mr-2">定位:</span>
+                            <span><strong>成長型 (Growth) 股票</strong>，而非價值型 (Value)。其高本益比反映了市場對 AI 潛力的定價。</span>
+                        </li>
+                         <li class="flex items-start">
+                            <span class="text-sky-600 font-bold mr-2">角色:</span>
+                            <span>任何以科技為重點的投資組合中的 <strong>核心基石 (Core Holding)</strong>。</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Card: 投資策略 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold text-stone-800 mb-3">對一般投資人的建議</h3>
+                    <p class="text-stone-700 mb-4">鑑於其高估值，短期股價對宏觀經濟和利率波動高度敏感。投資 MSFT 不應以追求短期價差為目的。</p>
+                    <ul class="list-disc list-inside text-stone-700 space-y-2">
+                        <li><strong>價值型投資者應迴避：</strong>不符合低估值或高股息的標準（殖利率約 0.62%）。</li>
+                        <li><strong>成長型投資者應買入並持有：</strong>投資 MSFT 是投資未來十年的 AI 基礎設施和數位生產力標準。</li>
+                        <li><strong>最佳策略：</strong>採用 <strong>長期持有 (Buy and Hold)</strong> 或 <strong>定期定額 (Dollar-Cost Averaging, DCA)</strong> 策略，以平滑高估值帶來的短期波動風險。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-400 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-Microsoft AI策略與財年分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Celestica 相關公開資料 (2025年10月30日)。</p>
+        </div>
+    </footer>
+
+    <!-- 
+      =================================
+      JavaScript 區域
+      =================================
+    -->
+    <script>
+        // 等待 DOM 內容載入完成後執行
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. 行動版選單 (Mobile Menu) ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // 切換漢堡圖示狀態 (可選)
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>`;
+                } else {
+                    mobileMenuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>`;
+                }
+            });
+
+            // 點擊行動版選單連結後，自動關閉選單
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>`;
+                });
+            });
+
+
+            // --- 2. 導航列 Active 狀態 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#section-"]');
+
+            const observerOptions = {
+                root: null, // 以 viewport 為觀察區域
+                rootMargin: '-30% 0px -70% 0px', // 調整觀察區域，當區塊進入畫面上方 30% 時觸發
+                threshold: 0
+            };
+
+            const observerCallback = (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+                        
+                        // 重置所有連結樣式
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        
+                        // 設置當前連結為 active
+                        if (activeLink) {
+                            activeLink.classList.add('active-nav-link');
+                            activeLink.classList.remove('inactive-nav-link');
+                        }
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            sections.forEach(section => observer.observe(section));
+
+
+            // --- 3. 互動資料表格 (Interactive Table) ---
+            // 資料來源: "微軟股票分析" 文件 (關鍵表格 2)
+            const productData = [
+                { segment: '生產力與業務流程', fy: 2025, revenue: 120810, growth: 13, profit: 69773, margin: 57.8 },
+                { segment: '生產力與業務流程', fy: 2024, revenue: 106820, growth: 13, profit: 59661, margin: 55.8 },
+                { segment: '生產力與業務流程', fy: 2023, revenue: 94151, growth: null, profit: 50074, margin: 53.2 },
+                { segment: '智慧雲端', fy: 2025, revenue: 106265, growth: 21, profit: 44589, margin: 41.9 },
+                { segment: '智慧雲端', fy: 2024, revenue: 87464, growth: 20, profit: 37813, margin: 43.2 },
+                { segment: '智慧雲端', fy: 2023, revenue: 72944, growth: null, profit: 28411, margin: 39.0 },
+                { segment: '更多個人運算', fy: 2025, revenue: 54649, growth: 7, profit: 14166, margin: 25.9 },
+                { segment: '更多個人運算', fy: 2024, revenue: 50838, growth: 13, profit: 11959, margin: 23.5 },
+                { segment: '更多個人運算', fy: 2023, revenue: 44820, growth: null, profit: 10038, margin: 22.4 }
+            ];
+
+            const filterInput = document.getElementById('filter-input');
+            const tableBody = document.getElementById('table-body');
+
+            // 渲染表格函式
+            const renderTable = (data) => {
+                if (!tableBody) return; // 防呆
+                tableBody.innerHTML = ''; // 清空表格
+                
+                if (data.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-stone-500">找不到符合條件的資料。</td></tr>`;
+                    return;
+                }
+
+                data.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.className = index % 2 === 0 ? 'bg-white' : 'bg-stone-50';
+                    row.innerHTML = `
+                        <td class="p-3 text-sm text-stone-800 font-medium">${item.segment}</td>
+                        <td class="p-3 text-sm text-stone-700">${item.fy}</td>
+                        <td class="p-3 text-right text-sm text-stone-700">$${item.revenue.toLocaleString()}</td>
+                        <td class="p-3 text-right text-sm ${item.growth ? (item.growth > 15 ? 'text-emerald-600 font-semibold' : 'text-stone-700') : 'text-stone-500'}">
+                            ${item.growth ? item.growth + '%' : 'N/A'}
+                        </td>
+                        <td class="p-3 text-right text-sm text-stone-700">$${item.profit.toLocaleString()}</td>
+                        <td class="p-3 text-right text-sm text-stone-700">${item.margin}%</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            };
+
+            // 篩選輸入框事件監聽
+            if (filterInput) {
+                filterInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const filteredData = productData.filter(item => 
+                        item.segment.toLowerCase().includes(searchTerm) || 
+                        item.fy.toString().includes(searchTerm)
+                    );
+                    renderTable(filteredData);
+                });
+            }
+
+            // 初始渲染表格
+            renderTable(productData);
+
+
+            // --- 4. 動態圖表 (Chart.js Bar Chart) ---
+            const ctx = document.getElementById('revenueChart');
+            if (ctx) {
+                // 從 productData 中提取圖表所需資料
+                const labels = ['生產力與業務流程', '智慧雲端', '更多個人運算'];
+                const data2023 = labels.map(label => productData.find(d => d.segment === label && d.fy === 2023).revenue);
+                const data2024 = labels.map(label => productData.find(d => d.segment === label && d.fy === 2024).revenue);
+                const data2025 = labels.map(label => productData.find(d => d.segment === label && d.fy === 2025).revenue);
+
+                new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '2023 財年營收',
+                                data: data2023,
+                                backgroundColor: 'rgba(156, 163, 175, 0.6)', // stone-400
+                                borderColor: 'rgba(156, 163, 175, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: '2024 財年營收',
+                                data: data2024,
+                                backgroundColor: 'rgba(59, 130, 246, 0.6)', // blue-500
+                                borderColor: 'rgba(59, 130, 246, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: '2025 財年營收',
+                                data: data2025,
+                                backgroundColor: 'rgba(2, 132, 199, 0.6)', // sky-600
+                                borderColor: 'rgba(2, 132, 199, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '營收 (百萬美元)'
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + (value / 1000) + 'K';
+                                    }
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: '業務部門'
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += '$' + context.parsed.y.toLocaleString() + ' 百萬';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+        }); // DOMContentLoaded 結束
+    </script>
+</body>
+</html>
