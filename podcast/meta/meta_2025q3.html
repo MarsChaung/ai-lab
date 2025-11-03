@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Meta 2025Q3財報分析報告</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自訂字體與基本樣式 */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        /* 導航列 Active 狀態 */
+        .active-nav-link {
+            @apply text-sky-500 border-sky-500;
+        }
+
+        /* 導航列 Inactive 狀態 */
+        .inactive-nav-link {
+            @apply text-stone-600 border-transparent hover:text-stone-900 hover:border-stone-300;
+        }
+
+        /* 為了黏著式導航列的錨點偏移 */
+        section {
+            padding-top: 6rem; /* 標題高度 + 一些間距 */
+            margin-top: -4.5rem; /* 標題高度 */
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-900">
+
+    <!-- 
+      導航列 (Header)
+      - 實現 Sticky Header
+      - 包含 Logo、桌面版選單、手機版漢堡按鈕
+    -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-sky-600">META</span>
+                    <span class="ml-2 text-lg font-semibold text-stone-700 hidden sm:block">2025Q3財報分析</span>
+                </div>
+
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
+                    <a href="#section-why-drop" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">為何大跌</a>
+                    <a href="#section-ops" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">營運概況</a>
+                    <a href="#section-strategy" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">業務策略</a>
+                    <a href="#section-metrics" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">營運指標</a>
+                    <a href="#section-financials" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">財務表現</a>
+                    <a href="#section-competition" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">競爭分析</a>
+                    <a href="#section-risks" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">風險</a>
+                    <a href="#section-guidance" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">關鍵數據</a>
+                    <a href="#section-recommendation" class="font-medium border-b-2 px-1 pt-1 inactive-nav-link">綜合評估</a>
+                </div>
+
+                <!-- 手機版漢堡按鈕 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-500 hover:text-stone-800 hover:bg-stone-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Icon (Hamburger) -->
+                        <svg id="icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                        <!-- Icon (Close) -->
+                        <svg id="icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 手機版選單 (Mobile Menu) -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#section-why-drop" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">為何大跌</a>
+                <a href="#section-ops" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">營運概況</a>
+                <a href="#section-strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">業務策略</a>
+                <a href="#section-metrics" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">營運指標</a>
+                <a href="#section-financials" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">財務表現</a>
+                <a href="#section-competition" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">競爭分析</a>
+                <a href="#section-risks" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">風險</a>
+                <a href="#section-guidance" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">關鍵數據</a>
+                <a href="#section-recommendation" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-200">綜合評估</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區域 -->
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 mt-4">
+
+        <!-- 1. 解析為何股價大跌？ -->
+        <section id="section-why-drop">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">解析為何股價大跌？</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg text-stone-700 mb-6">
+                    Meta 於 2025 年 10 月 29 日公布 Q3 財報後，股價在盤後交易中重挫 7-11%。市場的恐慌性拋售主要源於對財報的兩個層面的解讀：一個是<span class="font-bold text-red-600">對 GAAP 獲利的表層誤讀</span>，另一個則是對 <span class="font-bold text-blue-600">2026 年 AI 資本支出</span>的深度恐懼。
+                </p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- 震撼一 -->
+                    <div class="bg-rose-50 border border-rose-200 rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-rose-800 mb-3">震撼一：「$1.05 獲利陷阱」 (表層誤讀)</h3>
+                        <p class="text-stone-700">
+                            市場第一反應是恐慌，因為 Meta 報告的 GAAP EPS 僅為 $1.05，相較去年同期的 $6.03 衰退 83%。
+                        </p>
+                        <p class="text-stone-700 mt-2">
+                            <span class="font-bold">主因：</span>這並非營運不善，而是源於一筆高達 <span class="font-bold text-red-700">$159.3 億美元</span> 的「一次性、非現金」所得稅費用。這是因應美國新稅法所做的會計調整，<span class="font-bold">並非現金支出</span>。
+                        </p>
+                    </div>
+                    <!-- 震撼二 -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-blue-800 mb-3">震撼二：「2026 空白支票」 (深度擔憂)</h3>
+                        <p class="text-stone-700">
+                            市場恐慌的真正根源，是 CFO 預警 2026 年的成本將「顯著加快」(significantly faster)，資本支出 (Capex) 增長將「顯著大於」(notably larger) 2025 年。
+                        </p>
+                        <p class="text-stone-700 mt-2">
+                            <span class="font-bold">擔憂：</span>投資人擔心這是 2021-2022 年「元宇宙」豪賭的重演，害怕 Meta 再次陷入「投機性燒錢」，導致「資本紀律」的失信。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 公司營運概況 -->
+        <section id="section-ops">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg text-stone-700 mb-6">
+                    Meta 的核心業務——應用程式家族 (FoA)，包括 Facebook, Instagram, Messenger, WhatsApp, Threads——仍然是全球最具統治力的數位平台，並且是 Meta 一切 AI 雄心的基石。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-sky-50 border border-sky-200 rounded-lg p-4 text-center">
+                        <div class="text-4xl font-bold text-sky-600">35.4 億</div>
+                        <div class="text-sm font-semibold text-stone-600 mt-1">家族日活躍用戶 (DAP)</div>
+                        <div class="text-xs text-stone-500">(年增 8%)</div>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 text-center">
+                        <div class="text-4xl font-bold text-emerald-600">49.2%</div>
+                        <div class="text-sm font-semibold text-stone-600 mt-1">FoA 營運利潤率</div>
+                        <div class="text-xs text-stone-500">(核心業務印鈔機)</div>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-center">
+                        <div class="text-4xl font-bold text-amber-600">1.5 億+</div>
+                        <div class="text-sm font-semibold text-stone-600 mt-1">Threads 日活躍用戶 (DAU)</div>
+                        <div class="text-xs text-stone-500">(已開始全球廣告變現)</div>
+                    </div>
+                </div>
+                <p class="text-stone-700 mt-6">
+                    FoA 部門在 Q3 貢獻了 $249.7 億美元的營運利潤，這台超級印鈔機是 Meta 進行長期 AI 投資的底氣。
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. 業務策略和發展 -->
+        <section id="section-strategy">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">業務策略和發展</h2>
+            <p class="text-lg text-stone-700 mb-6">
+                Zuckerberg 正在利用 FoA 產生的巨額現金流，同時進行兩場豪賭：AI 基礎設施 (MSL) 和 AI 穿戴裝置 (RL)。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 策略一 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">AI 廣告引擎 (核心)</h3>
+                    <p class="text-stone-700">
+                        AI 並非遙遠的未來，而是<span class="font-bold">當下的核心驅動力</span>。AI 驅動的 Advantage+ 廣告套件已創造 $600 億美元的年化收入。2026 年的 Capex 支出，本質上是為了支持 FoA 核心廣告業務的「必要擴產」，而非投機。
+                    </p>
+                </div>
+                <!-- 策略二 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">Meta 超級智能實驗室 (MSL)</h3>
+                    <p class="text-stone-700">
+                        Zuckerberg 的「超級智能」願景，採用「<span class="font-bold">積極提前佈署算力</span>」戰略。目標是建立業界最高的人才密度，但也面臨高薪挖角和人才流失的執行風險。
+                    </p>
+                </div>
+                <!-- 策略三 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">現實實驗室 (RL) 轉向</h3>
+                    <p class="text-stone-700">
+                        RL 部門（Q3 虧損 $44.3 億）已悄悄將敘事核心從「元宇宙」轉向「<span class="font-bold">AI 穿戴裝置</span>」。新推出的 Ray-Ban AI 眼鏡銷售良好，Meta 試圖將其包裝為 AI 敘事的一部分。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 營運指標 -->
+        <section id="section-metrics">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運指標 (AI 變現成果)</h2>
+            <p class="text-lg text-stone-700 mb-6">
+                Meta 的 AI 投資回報 (ROI) 已經在當前的財報中清晰可見，證明了 AI 對核心廣告引擎的巨大推動力。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-sm font-semibold text-sky-600 mb-1">Reels (短影音)</div>
+                    <div class="text-3xl font-bold text-stone-800">$500 億美元</div>
+                    <div class="text-stone-600 mt-1">年化收入。已成功從防禦型產品轉變為核心增長支柱。</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-sm font-semibold text-sky-600 mb-1">Advantage+ (AI 廣告)</div>
+                    <div class="text-3xl font-bold text-stone-800">$600 億美元</div>
+                    <div class="text-stone-600 mt-1">年化收入。AI 自動化廣告解決方案，是 AI 變現的關鍵證據。</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-sm font-semibold text-sky-600 mb-1">AI 模型 (Lattice)</div>
+                    <div class="text-3xl font-bold text-stone-800">+3%</div>
+                    <div class="text-stone-600 mt-1">廣告轉換率提升。證明更多算力 (Capex) 能直接提升廣告效率。</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-sm font-semibold text-sky-600 mb-1">WhatsApp 商業廣告</div>
+                    <div class="text-3xl font-bold text-stone-800">+60%</div>
+                    <div class="text-stone-600 mt-1">「點擊至 WhatsApp」廣告收入年增率，商業訊息變現潛力巨大。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 財務表現細節 -->
+        <section id="section-financials">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">Q3 財報：表象 vs. 實質</h3>
+                <p class="text-lg text-stone-700 mb-6">
+                    如果我們穿透 $159.3 億美元的非現金稅務迷霧，會發現 Meta 的核心營運狀況極其強勁。調整後的淨利潤應為 <span class="font-bold text-emerald-600">$186.4 億美元</span>，稀釋後 EPS 應為 <span class="font-bold text-emerald-600">$7.25</span>，遠非 $1.05 的表象。
+                </p>
+                <!-- Chart.js 圖表容器 -->
+                <div class="h-96 w-full">
+                    <canvas id="financialsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 產業競爭分析 -->
+        <section id="section-competition">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">vs. TikTok (廣告)</h3>
+                    <p class="text-stone-700">
+                        儘管 TikTok 在全球用戶數上構成威脅，但在高價值西方市場（如美國），Instagram 仍佔主導地位。更重要的是，Meta 的 AI 驅動廣告引擎 (Advantage+) 提供了更清晰的 ROI，Reels 的 $500 億年化收入也證明其變現能力強勁。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">vs. Apple Vision Pro (硬體)</h3>
+                    <p class="text-stone-700">
+                        Meta 以平價 Quest 3S ($499) 主導了 84% 的 VR 市場份額，但仍在巨額虧損 (Q3 虧 $44.3 億)。諷刺的是，Apple Vision Pro ($3,499) 雖然銷量小，但估算已實現硬體盈利。Meta 採用的是「搶佔市場份額」的燒錢策略。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">vs. OpenAI/Google (AI 人才)</h3>
+                    <p class="text-stone-700">
+                        Meta 正在 MSL 進行一場殘酷的 AI 人才戰爭，提供數百萬美元薪酬方案從競爭對手挖角。然而，這也帶來了極高的成本和人才流失風險，部分高調挖來的研究人員又迅速流失回 OpenAI。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 風險和不確定性 -->
+        <section id="section-risks">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <p class="text-lg text-stone-700 mb-6">
+                投資人必須正視 Meta 面臨的三大嚴峻風險，尤其是 2026 年可能形成的「完美風暴」。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 風險一 -->
+                <div class="bg-rose-50 border border-rose-300 rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-rose-800 mb-3">風險一：AI 執行與支出風險</h3>
+                    <p class="text-stone-700">
+                        市場最大的擔憂：這是否是 2022 年「元宇宙災難」的重演？Zuckerberg 再次要求投資人為一個「未知的收入機會」（超級智能）支付「確定的巨額成本」，執行風險極高。
+                    </p>
+                </div>
+                <!-- 風險二 -->
+                <div class="bg-rose-50 border border-rose-300 rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-rose-800 mb-3">風險二：歐盟監管的「即時」威脅</h3>
+                    <p class="text-stone-700">
+                        CFO 罕見預警，歐盟委員會<span class="font-bold">「最早在本季」</span>就可能對其歐洲營收產生「重大負面影響」。這是迫在眉睫的營收威脅，主要爭議點在於其「低度個人化廣告」(LPA) 產品是否違反 DMA。
+                    </p>
+                </div>
+                <!-- 風險三 -->
+                <div class="bg-rose-50 border border-rose-300 rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-rose-800 mb-3">風險三：美國 2026 年「青少年訴訟」</h3>
+                    <p class="text-stone-700">
+                        來自美國 41 個州以上的集體訴訟將於 2026 年集中審判，指控 Meta <span class="font-bold">故意將平台設計得讓青少年上癮</span>。Meta 預警這「可能導致重大損失」，不僅是罰款，更可能是強制改變產品設計。
+                    </p>
+                </div>
+            </div>
+            <div class="bg-red-800 text-white rounded-lg shadow-lg p-6 mt-6">
+                <h3 class="text-2xl font-bold mb-2">2026 年的「完美風暴」</h3>
+                <p>
+                    Meta 將在 2026 年面臨一場「鉗形攻勢」：
+                    <span class="block mt-2">1. 內部壓力：成本 (Capex/OpEx) 飆升。</span>
+                    <span class="block">2. 外部壓力：美國訴訟的「重大損失」。</span>
+                    <span class="block">3. 收入壓力：歐盟監管侵蝕歐洲收入。</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 8. 關鍵數據匯總及財務指引 -->
+        <section id="section-guidance">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            
+            <!-- 財務指引 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-stone-700 mb-2">2025 年成本指引 (上調)</h3>
+                    <p class="text-2xl font-bold text-stone-800">$1160 - $1180 億美元</p>
+                    <p class="text-sm text-stone-600">總費用 (OpEx)</p>
+                    <p class="text-2xl font-bold text-stone-800 mt-4">$700 - $720 億美元</p>
+                    <p class="text-sm text-stone-600">資本支出 (CapEx)</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-300 rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-amber-800 mb-2">2026 年成本指引 (市場擔憂)</h3>
+                    <p class="text-2xl font-bold text-amber-900">總費用 (OpEx)：</p>
+                    <p class="text-lg text-amber-700">增長率「顯著加快」</p>
+                    <p class="text-2xl font-bold text-amber-900 mt-4">資本支出 (CapEx)：</D>
+                    <p class="text-lg text-amber-700">美元增長「顯著大於」2025 年</p>
+                </div>
+            </div>
+
+            <!-- 表格一 -->
+            <h3 class="text-2xl font-bold text-stone-800 mb-4">2025 年 Q3 財務摘要 (GAAP vs. Non-GAAP)</h3>
+            <div class="bg-white rounded-lg shadow-lg overflow-x-auto mb-8">
+                <table class="w-full min-w-max text-left">
+                    <thead class="bg-stone-50 border-b border-stone-200">
+                        <tr>
+                            <th class="p-4 font-semibold text-stone-600">指標 (百萬美元)</th>
+                            <th class="p-4 font-semibold text-stone-600 text-right">2025 Q3 (GAAP 報告)</th>
+                            <th class="p-4 font-semibold text-stone-600 text-right">2024 Q3 (同期)</th>
+                            <th class="p-4 font-semibold text-stone-600 text-right">年增率 (YoY)</th>
+                            <th class="p-4 font-semibold text-stone-600 text-right bg-emerald-50">2025 Q3 (經調整) *</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-200">
+                        <tr>
+                            <td class="p-4">總營收 (Revenue)</td>
+                            <td class="p-4 text-right">$51,242</td>
+                            <td class="p-4 text-right">$40,589</td>
+                            <td class="p-4 text-right text-emerald-600">+26%</td>
+                            <td class="p-4 text-right bg-emerald-50">$51,242</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4">營運利潤 (Income from Ops)</td>
+                            <td class="p-4 text-right">$20,535</td>
+                            <td class="p-4 text-right">$17,350</td>
+                            <td class="p-4 text-right text-emerald-600">+18%</td>
+                            <td class="p-4 text-right bg-emerald-50">$20,535</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4">所得稅費用</td>
+                            <td class="p-4 text-right text-red-600 font-bold">$18,954</td>
+                            <td class="p-4 text-right">$2,134</td>
+                            <td class="p-4 text-right text-red-600">+788%</td>
+                            <td class="p-4 text-right bg-emerald-50 font-bold">$3,024</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold">淨利潤 (Net Income)</td>
+                            <td class="p-4 text-right text-red-600 font-bold">$2,709</td>
+                            <td class="p-4 text-right">$15,688</td>
+                            <td class="p-4 text-right text-red-600 font-bold">-83%</td>
+                            <td class="p-4 text-right bg-emerald-100 font-bold text-emerald-800">$18,639</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold">稀釋後 EPS</td>
+                            <td class="p-4 text-right text-red-600 font-bold">$1.05</td>
+                            <td class="p-4 text-right">$6.03</td>
+                            <td class="p-4 text-right text-red-600 font-bold">-83%</td>
+                            <td class="p-4 text-right bg-emerald-100 font-bold text-emerald-800">$7.25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 表格二 -->
+            <h3 class="text-2xl font-bold text-stone-800 mb-4">2025 年 Q3 部門營運 (FoA vs. RL)</h3>
+            <div class="bg-white rounded-lg shadow-lg overflow-x-auto">
+                <table class="w-full min-w-max text-left">
+                    <thead class="bg-stone-50 border-b border-stone-200">
+                        <tr>
+                            <th class="p-4 font-semibold text-stone-600">指標 (百萬美元)</th>
+                            <th class="p-4 font-semibold text-stone-600 text-right">營收 (Revenue)</th>
+                            <th class="p-4 font-semibold text-stone-600 text-right">營運利潤 / (虧損)</th>
+                            <th class="p-4 font-semibold text-stone-600 text-right">營運利潤率</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-200">
+                        <tr class="bg-green-50">
+                            <td class="p-4 font-bold text-green-800">應用程式家族 (FoA)</td>
+                            <td class="p-4 text-right font-medium">$50,772</td>
+                            <td class="p-4 text-right font-bold text-green-700">$24,967</td>
+                            <td class="p-4 text-right font-bold text-green-700">49.2%</td>
+                        </tr>
+                        <tr class="bg-red-50">
+                            <td class="p-4 font-bold text-red-800">現實實驗室 (RL)</td>
+                            <td class="p-4 text-right font-medium">$470</td>
+                            <td class="p-4 text-right font-bold text-red-700">$(4,432)</td>
+                            <td class="p-4 text-right font-bold text-red-700">-942.9%</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-bold">總計</td>
+                            <td class="p-4 text-right font-bold">$51,242</td>
+                            <td class="p-4 text-right font-bold">$20,535</td>
+                            <td class="p-4 text-right font-bold">40.0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 9. 綜合評估 -->
+        <section id="section-recommendation">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            
+            <!-- 評級卡片 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                    <div>
+                        <div class="text-sm font-semibold text-stone-600">投資評級 (長期觀點)</div>
+                        <div class="text-4xl font-bold text-sky-600">買入 (Buy)</div>
+                        <div class="text-xs text-red-500 font-medium">(伴隨「高波動性」預警)</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-semibold text-stone-600">12 個月目標價 (分析師共識)</div>
+                        <div class="text-4xl font-bold text-sky-600">$860</div>
+                        <div class="text-xs text-stone-500">(已考量成本擔憂)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 投資策略 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">對於「已持有股票」的投資人</h3>
+                    <p class="text-2xl font-bold text-stone-800 mb-2">建議：持有 (Hold)</p>
+                    <p class="text-stone-700">
+                        您的核心持股理由 (FoA 廣告業務) 不僅未被削弱，反而因 AI 而空前強大。拋售意味著在 Meta 投入巨資擴大其「護城河」的前夕離開。必須承認 2026 年的波動性極高，但清倉將是戰略錯誤。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">對於「尚未持有股票」的投資人</h3>
+                    <p class="text-2xl font-bold text-stone-800 mb-2">建議：分批買入 (DCA)</p>
+                    <p class="text-stone-700">
+                        此次由「未來成本恐懼」引發的股價回調，提供了極佳的長期買入窗口。
+                        <span class="font-bold block mt-2">絕對不要在今天「All-in」。</span>
+                        2026 年可預見的監管利空，將在未來 12 個月內提供數個「更便宜」的買入點。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-400 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-Meta 2025Q3財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Meta 相關公開資料 (2025年11月3日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 手機版選單 (Mobile Menu) 切換 ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('icon-open');
+            const iconClose = document.getElementById('icon-close');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                iconOpen.classList.toggle('hidden', !isHidden);
+                iconClose.classList.toggle('hidden', isHidden);
+                mobileMenuButton.setAttribute('aria-expanded', !isHidden);
+            });
+
+            // 點擊手機選單連結時自動關閉選單
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // --- 導航列 Active 狀態 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]'); // 選擇所有 nav 中 href 以 # 開頭的 a 標籤
+            
+            const observerOptions = {
+                root: null, // 相對於 viewport
+                rootMargin: '0px',
+                threshold: 0.4  // 40% 的區塊進入視窗時觸發
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+                        
+                        // 重置所有連結狀態
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+
+                        // 設置當前連結為 active
+                        if (activeLink) {
+                            activeLink.classList.add('active-nav-link');
+                            activeLink.classList.remove('inactive-nav-link');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // 觀察所有 section
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Chart.js 圖表初始化 ---
+            const ctx = document.getElementById('financialsChart');
+            if (ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'bar', // 基礎類型
+                    data: {
+                        labels: ['Q3 2024 (同期)', 'Q3 2025 (GAAP 報告)', 'Q3 2025 (經調整)'],
+                        datasets: [
+                            {
+                                type: 'line', // 覆蓋為折線圖
+                                label: '總營收 (百萬美元)',
+                                data: [40589, 51242, 51242],
+                                borderColor: 'rgb(59, 130, 246)', // blue-500
+                                backgroundColor: 'rgb(59, 130, 246, 0.1)',
+                                tension: 0.1,
+                                fill: true,
+                                yAxisID: 'yRevenue',
+                            },
+                            {
+                                type: 'bar', // 長條圖
+                                label: '淨利潤 (百萬美元)',
+                                data: [15688, 2709, 18639],
+                                backgroundColor: [
+                                    'rgb(156, 163, 175)', // stone-400
+                                    'rgb(220, 38, 38)',  // red-600
+                                    'rgb(16, 185, 129)'  // emerald-500
+                                ],
+                                yAxisID: 'yNetIncome',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Q3 財務：營收 vs. 淨利潤 (GAAP vs. 經調整)',
+                                font: {
+                                    size: 18
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                stacked: true,
+                            },
+                            yRevenue: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: '營收 (百萬美元)'
+                                },
+                                grid: {
+                                    drawOnChartArea: false, // 只顯示營收的網格線
+                                }
+                            },
+                            yNetIncome: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: {
+                                    display: true,
+                                    text: '淨利潤 (百萬美元)'
+                                },
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
