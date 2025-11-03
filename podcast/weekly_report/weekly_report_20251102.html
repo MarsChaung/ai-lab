@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2025/10/27~11/1)</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義 active 導航連結樣式 */
+        .active-nav-link {
+            @apply text-sky-500 border-b-2 border-sky-500;
+        }
+        /* 自定義 inactive 導航連結樣式 */
+        .inactive-nav-link {
+            @apply text-gray-600 hover:text-sky-500;
+        }
+        /* Chart.js 容器的響應式高度 */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 font-sans leading-relaxed text-stone-800">
+
+    <!-- 
+      導航欄 (Sticky Header)
+      使用 sticky top-0 z-50 實現黏著效果
+    -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo/標題 -->
+            <div class="text-2xl font-bold text-sky-600">
+                美股投資週報
+            </div>
+
+            <!-- 
+              桌面版導航 (Desktop Menu)
+              使用 Intersection Observer 偵測 active 狀態
+            -->
+            <div class="hidden md:flex space-x-6" id="desktop-nav">
+                <a href="#home" class="font-medium py-1 inactive-nav-link">本週頭條</a>
+                <a href="#macro" class="font-medium py-1 inactive-nav-link">宏觀掃描</a>
+                <a href="#mag7" class="font-medium py-1 inactive-nav-link">七巨頭財報</a>
+                <a href="#strategy" class="font-medium py-1 inactive-nav-link">AI 陣營轉移</a>
+                <a href="#news" class="font-medium py-1 inactive-nav-link">重大消息</a>
+                <a href="#other" class="font-medium py-1 inactive-nav-link">焦點動態</a>
+                <a href="#conclusion" class="font-medium py-1 inactive-nav-link">結論</a>
+            </div>
+
+            <!-- 手機版選單按鈕 (Mobile Menu Button) -->
+            <div class="md:hidden">
+                <button id="menu-button" class="text-gray-600 hover:text-sky-500 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- 
+          手機版下拉選單 (Mobile Menu)
+          使用 JavaScript 切換 'hidden' class
+        -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg absolute top-full left-0 w-full">
+            <a href="#home" class="block px-4 py-3 text-gray-600 hover:bg-sky-50">本週頭條</a>
+            <a href="#macro" class="block px-4 py-3 text-gray-600 hover:bg-sky-50">宏觀掃描</a>
+            <a href="#mag7" class="block px-4 py-3 text-gray-600 hover:bg-sky-50">七巨頭財報</a>
+            <a href="#strategy" class="block px-4 py-3 text-gray-600 hover:bg-sky-50">AI 陣營轉移</a>
+            <a href="#news" class="block px-4 py-3 text-gray-600 hover:bg-sky-50">重大消息</a>
+            <a href="#other" class="block px-4 py-3 text-gray-600 hover:bg-sky-50">焦點動態</a>
+            <a href="#conclusion" class="block px-4 py-3 text-gray-600 hover:bg-sky-50">結論</a>
+        </div>
+    </header>
+
+    <!-- 主要內容區域 -->
+    <main class="container mx-auto px-4 py-12">
+
+        <!-- 
+          區塊一：本週頭條 (Home)
+          使用卡片式設計
+        -->
+        <section id="home" class="mb-16 pt-16 -mt-16"> <!-- pt-16 -mt-16 用於抵銷 sticky header 的高度 -->
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週頭條 (2025/10/27 - 11/01)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+                <h3 class="text-4xl font-bold text-sky-700 mb-4">AI的雙重刃：科技七巨頭財報週解讀</h3>
+                <p class="text-lg text-gray-700 mb-4">
+                    三大指數（S&P 500, 道瓊, 那斯達克）同步創下歷史新高，主要受惠於聯準會降息及通膨數據低於預期。
+                </p>
+                <p class="text-lg text-gray-700">
+                    然而，指數之下暗流湧動。本週是財報季最關鍵的一週，S&P 500 中有 174 家公司公布財報，包括五家科技巨頭。它們的表現揭示了市場對 AI 成本與獲利的「巨大分歧」。
+                </p>
+            </div>
+        </section>
+
+        <!-- 
+          區塊二：宏觀掃描 (Macro)
+          使用 Grid 和響應式卡片設計
+        -->
+        <section id="macro" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏觀掃描：高壓力的財報季</h2>
+            <p class="text-lg text-gray-700 mb-6">
+                這是一個「高線效應」的財報季。在 S&P 500 遠期本益比高達 22.9 倍（遠高於10年均值18.6倍）的昂貴估值下，「符合預期」等於「失敗」。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 卡片 1: EPS 超預期 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-2xl font-bold text-sky-600 mb-2">83%</h4>
+                    <p class="text-gray-600">EPS 超越預期</p>
+                    <p class="text-sm text-gray-500 mt-2">已公布的 64% S&P 500 公司中</p>
+                </div>
+                <!-- 卡片 2: 營收超預期 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-2xl font-bold text-sky-600 mb-2">79%</h4>
+                    <p class="text-gray-600">營收超越預期</p>
+                     <p class="text-sm text-gray-500 mt-2">整體混合盈餘增長率達 10.7%</p>
+                </div>
+                <!-- 卡片 3: 估值 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <h4 class="text-2xl font-bold text-red-600 mb-2">22.9 倍</h4>
+                    <p class="text-gray-600">遠期12個月本益比 (P/E)</p>
+                    <p class="text-sm text-gray-500 mt-2">高於10年均值 18.6 倍</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          區塊三：科技七巨頭 (Mag7)
+          使用互動式資料表格
+        -->
+        <section id="mag7" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">深度分析：科技七巨頭 (Mag 7) 財報解讀</h2>
+            <p class="text-lg text-gray-700 mb-6">
+                五大巨頭的表現分化為三大陣營：(A) 明確的勝利者 (GOOGL, AMZN)，(B) 複雜的警訊 (META, MSFT)，(C) 穩健的巨人 (AAPL)。
+            </p>
+
+            <!-- 互動式表格篩選器 -->
+            <div class="mb-4">
+                <input type="text" id="table-filter"
+                       class="w-full md:w-1/2 lg:w-1/3 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                       placeholder="篩選公司、數據或關鍵評論 (例如: AWS, 成本, +10%)">
+            </div>
+
+            <!-- 
+              資料表格
+              使用 overflow-x-auto 處理小螢幕的滾動
+            -->
+            <div class="bg-white rounded-lg shadow-lg overflow-x-auto">
+                <table class="w-full min-w-max">
+                    <!-- 表頭 (Sticky Header) -->
+                    <thead class="bg-gray-100 sticky top-0">
+                        <tr>
+                            <th class="p-4 text-left font-bold text-gray-700">公司 (代號)</th>
+                            <th class="p-4 text-left font-bold text-gray-700">每股盈餘 (EPS) (實際 vs 預期)</th>
+                            <th class="p-4 text-left font-bold text-gray-700">營收 (實際 vs 預期)</th>
+                            <th class="p-4 text-left font-bold text-gray-700">財報後股價反應</th>
+                            <th class="p-4 text-left font-bold text-gray-700">關鍵驅動 / 分析師評論</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mag7-table-body">
+                        <!-- 
+                          JavaScript 將會動態填入 mag7Data 
+                          (因 HTML 檔案大小限制，此處僅為範例結構)
+                        -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- 
+          區塊四：AI 陣營轉移 (Strategy)
+          使用 Chart.js 動態圖表
+        -->
+        <section id="strategy" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 陣營轉移：財報後股價反應</h2>
+            <p class="text-lg text-gray-700 mb-6">
+                市場正式進入 AI「算帳階段」，資金明顯從「AI 應用消費者」（士兵）轉向「AI 基礎設施提供商」（軍火商）。圖表顯示了五大巨頭財報發布後的股價平均變動。
+            </p>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <!-- Chart.js Canvas 容器 -->
+                <div class="chart-container">
+                    <canvas id="stockReactionChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+          區塊五：重大經營消息 (News)
+          使用 Grid 和卡片設計
+        -->
+        <section id="news" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">重大經營消息：AI 戰爭擴展至「電信業」</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 卡片 1: 事件 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-bold text-sky-700 mb-2">Nvidia 戰略投資 Nokia</h4>
+                    <p class="text-2xl font-bold text-gray-800">$10 億美元</p>
+                    <p class="text-gray-600">取得 Nokia (NOK) 約 2.9% 股份</p>
+                </div>
+                <!-- 卡片 2: 戰略意圖 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-bold text-sky-700 mb-2">Nvidia 的「邊緣戰爭」</h4>
+                    <p class="text-lg font-semibold text-gray-800">共同開發 AI-RAN</p>
+                    <p class="text-gray-600">將 AI 戰場從「雲端」擴展到「邊緣運算」，佈局 6G 網路架構。</p>
+                </div>
+                <!-- 卡片 3: 市場反應 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-bold text-sky-700 mb-2">市場反應 (10/28)</h4>
+                    <p class="text-lg font-semibold text-gray-800"><span class="text-green-600">NVDA: +5%</span> (創歷史新高)</p>
+                    <p class="text-lg font-semibold text-gray-800"><span class="text-green-600">NOK: +20% 至 25%</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊六：其他 S&P 500 焦點動態 (Other) -->
+        <section id="other" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">其他 S&P 500 焦點動態</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 卡片 1: SPGI 財報 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-bold text-sky-700 mb-2">S&P Global (SPGI)</h4>
+                    <p class="text-lg font-semibold text-green-600">Q3 財報超預期</p>
+                    <p class="text-gray-600">EPS $4.73 (vs $4.38)，上調全年指引。股價上漲 3.8%。</p>
+                </div>
+                <!-- 卡片 2: 指數納入 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-bold text-sky-700 mb-2">S&P 500 指數納入</h4>
+                    <p class="text-lg font-semibold text-gray-800">Solstice Advance (SOLS)</p>
+                    <p class="text-lg font-semibold text-gray-800">Qnity Electronics (Q)</p>
+                    <p class="text-gray-600">反映「半導體價值鏈」的新經濟趨勢。</p>
+                </div>
+                <!-- 卡片 3: 指數剔除 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-bold text-sky-700 mb-2">S&P 500 指數剔除</h4>
+                    <p class="text-lg font-semibold text-gray-800">CarMax (KMX)</p>
+                    <p class="text-lg font-semibold text-gray-800">Eastman Chemical (EMN)</p>
+                    <p class="text-gray-600">反映「舊經濟」（二手車、基礎化工）的代謝。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊七：結論與下週展望 (Conclusion) -->
+        <section id="conclusion" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論與下週展望</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-sky-700 mb-4">總結上週：AI 的「算帳之週」</h3>
+                <ul class="list-disc list-inside space-y-2 text-gray-700 text-lg">
+                    <li>市場進入「AI 算帳階段」，投資者不再為「夢想」買單，而是檢視「獲利」。</li>
+                    <li>AI 玩家被清晰分為兩派：賣鏟子的「基礎設施提供商」(GOOGL, AMZN) 大獲全勝；而「應用程式消費者」(META, MSFT) 因巨大成本和產能限制而面臨壓力。</li>
+                    <li>Nvidia 對 Nokia 的投資，標誌著 AI 戰爭正從「雲端」轉向「邊緣網路」。</li>
+                </ul>
+                <h3 class="text-2xl font-bold text-sky-700 mt-8 mb-4">下週展望：在高空鋼索上行走</h3>
+                <p class="text-lg text-gray-700">
+                    市場處於歷史高點且估值昂貴。財報季仍在繼續 (AMD, PFE, UBER 等)，市場將用最嚴苛的眼光審視其 AI 成本與獲利能力。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-400 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2025年11月2日)。</p>
+        </div>
+    </footer>
+
+    <!-- 
+      =================================
+      JavaScript 腳本
+      =================================
+    -->
+    <script>
+        // 確保 DOM 載入完成後再執行
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 科技七巨頭表格資料 (來自報告) ---
+            const mag7Data = [
+                {
+                    company: 'Alphabet (GOOGL)',
+                    eps: '$2.87 vs $2.26 (大幅超越)',
+                    revenue: '$102.3B vs $99.9B (超越)',
+                    reaction: '<span class="font-bold text-green-600">大漲 6-7%</span>',
+                    summary: '史上首次單季破千億營收。雲端(Cloud)增長34%，積壓訂單$1550億。'
+                },
+                {
+                    company: 'Amazon (AMZN)',
+                    eps: '$1.95 vs $1.56 (大幅超越)',
+                    revenue: '$180.2B vs $177.8B (超越)',
+                    reaction: '<span class="font-bold text-green-600">大漲 10-13%</span>',
+                    summary: 'AWS 增長「重回 20%」，粉碎放緩擔憂。廣告業務強勁。'
+                },
+                {
+                    company: 'Meta (META)',
+                    eps: '$1.05 vs $6.70 (嚴重失誤)*',
+                    revenue: '$51.24B vs $49.5B (超越)',
+                    reaction: '<span class="font-bold text-red-600">暴跌 11.3%</span>',
+                    summary: '*調整後 EPS $7.25 實則超越。但市場因「AI 成本加速」及「元宇宙鉅虧」陷入恐慌。'
+                },
+                {
+                    company: 'Microsoft (MSFT)',
+                    eps: '$3.72 vs $3.66 (超越)',
+                    revenue: '$77.67B vs $75.5B (超越)',
+                    reaction: '<span class="font-bold text-red-600">下跌 4%</span>',
+                    summary: '財報強勁。但因 OpenAI 相關損失及 AI「產能限制」警告引發賣壓。'
+                },
+                {
+                    company: 'Apple (AAPL)',
+                    eps: '$1.85 vs $1.77 (超越)',
+                    revenue: '$102.5B vs $101.6B (超越)',
+                    reaction: '<span class="font-bold text-green-600">上漲</span>',
+                    summary: 'iPhone 17 銷售創同期紀錄；「服務」營收創歷史新高。穩健的生態系玩家。'
+                }
+            ];
+
+            // --- 1. 動態填入 Mag 7 表格 ---
+            const tableBody = document.getElementById('mag7-table-body');
+            if (tableBody) {
+                mag7Data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-gray-200 hover:bg-gray-50';
+                    row.innerHTML = `
+                        <td class="p-4 align-top">${item.company}</td>
+                        <td class="p-4 align-top">${item.eps}</td>
+                        <td class="p-4 align-top">${item.revenue}</td>
+                        <td class="p-4 align-top">${item.reaction}</td>
+                        <td class="p-4 align-top">${item.summary}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // --- 2. 互動式表格篩選 ---
+            const filterInput = document.getElementById('table-filter');
+            const tableRows = tableBody ? tableBody.getElementsByTagName('tr') : [];
+            
+            if (filterInput) {
+                filterInput.addEventListener('keyup', () => {
+                    const filterValue = filterInput.value.toLowerCase();
+                    
+                    for (let row of tableRows) {
+                        const rowText = row.textContent.toLowerCase();
+                        if (rowText.includes(filterValue)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                });
+            }
+
+            // --- 3. 手機版選單切換 ---
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // 點擊手機選單連結後自動關閉選單
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            // --- 4. 導航列 Active 狀態 (Intersection Observer) ---
+            const sections = document.querySelectorAll('main section[id]');
+            const navLinks = document.querySelectorAll('#desktop-nav a');
+
+            const observerOptions = {
+                root: null, // 觀察視窗
+                rootMargin: '0px',
+                threshold: 0.4 // 40% 內容進入視窗時觸發
+            };
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- 5. 動態圖表 (Chart.js) ---
+            const ctx = document.getElementById('stockReactionChart');
+            if (ctx && typeof Chart !== 'undefined') {
+                const chartData = {
+                    labels: ['Amazon (AMZN)', 'Alphabet (GOOGL)', 'Apple (AAPL)', 'Microsoft (MSFT)', 'Meta (META)'],
+                    datasets: [{
+                        label: '財報後股價平均反應 (%)',
+                        data: [11.5, 6.5, 2.0, -4.0, -11.3], // 來自報告中的數據 (AMZN 10-13% 取 11.5, GOOGL 6-7% 取 6.5, AAPL "上漲" 估 2.0)
+                        // 動態設定顏色
+                        backgroundColor: (context) => {
+                            const value = context.raw;
+                            return value >= 0 ? 'rgba(22, 163, 74, 0.7)' : 'rgba(220, 38, 38, 0.7)'; // Green or Red
+                        },
+                        borderColor: (context) => {
+                            const value = context.raw;
+                            return value >= 0 ? 'rgba(22, 163, 74, 1)' : 'rgba(220, 38, 38, 1)';
+                        },
+                        borderWidth: 1
+                    }]
+                };
+
+                new Chart(ctx, {
+                    type: 'bar', // 長條圖
+                    data: chartData,
+                    options: {
+                        indexAxis: 'y', // 轉為水平長條圖
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false // 隱藏圖例
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `${context.raw}%`
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: '股價變動 (%)'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+
+</body>
+</html>
