@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Alphabet(GOOG) 2025Q3財報分析報告</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* * 導航列連結狀態
+         * active-nav-link: 用於標識當前活躍的導航項目 (天空藍)
+         * inactive-nav-link: 用於標識非活躍的導航項目 (石頭灰)
+        */
+        .active-nav-link {
+            color: #0ea5e9; /* text-sky-500 */
+            font-weight: 600;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        
+        .inactive-nav-link {
+            color: #57534e; /* text-stone-600 */
+            transition: color 0.3s ease;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9; /* text-sky-500 */
+        }
+
+        /* 手機版選單的簡單過渡效果 */
+        #mobile-menu {
+            transition: all 0.3s ease-out;
+        }
+
+        /* 確保 sticky header 下的錨點連結(anchor link)定位準確 */
+        section[id] {
+            /* * pt-20 (5rem) 提供 padding，防止內容被 sticky header 遮擋
+             * -mt-20 (-5rem) 則將區塊的「可見」頂部拉回原位，
+             * 這樣 Intersection Observer 和錨點跳轉才能準確對應。
+            */
+            padding-top: 5rem; 
+            margin-top: -5rem;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-800">
+
+    <!-- 
+      導航列 (Sticky Header)
+      使用 Tailwind CSS (sticky top-0 z-50) 實現黏著效果
+    -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo / 標題 -->
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold text-sky-600">Alphabet (GOOG) 2025Q3</span>
+                </div>
+                
+                <!-- 桌面版導航 -->
+                <div class="hidden md:flex md:space-x-4 lg:space-x-6">
+                    <a href="#overview" class="py-2 px-3 text-sm font-medium inactive-nav-link">營運概況</a>
+                    <a href="#core-business" class="py-2 px-3 text-sm font-medium inactive-nav-link">核心業務</a>
+                    <a href="#metrics" class="py-2 px-3 text-sm font-medium inactive-nav-link">營運指標</a>
+                    <a href="#financials" class="py-2 px-3 text-sm font-medium inactive-nav-link">財務表現</a>
+                    <a href="#competition" class="py-2 px-3 text-sm font-medium inactive-nav-link">產業競爭</a>
+                    <a href="#risks" class="py-2 px-3 text-sm font-medium inactive-nav-link">風險分析</a>
+                    <a href="#guidance" class="py-2 px-3 text-sm font-medium inactive-nav-link">關鍵數據</a>
+                    <a href="#recommendation" class="py-2 px-3 text-sm font-medium inactive-nav-link">綜合評估</a>
+                </div>
+                
+                <!-- 手機版選單按鈕 (漢堡按鈕) -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-expanded="false">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Icon (bars) -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full z-40">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block py-2 px-3 text-base font-medium inactive-nav-link">營運概況</a>
+                <a href="#core-business" class="block py-2 px-3 text-base font-medium inactive-nav-link">核心業務</a>
+                <a href="#metrics" class="block py-2 px-3 text-base font-medium inactive-nav-link">營運指標</a>
+                <a href="#financials" class="block py-2 px-3 text-base font-medium inactive-nav-link">財務表現</a>
+                <a href="#competition" class="block py-2 px-3 text-base font-medium inactive-nav-link">產業競爭</a>
+                <a href="#risks" class="block py-2 px-3 text-base font-medium inactive-nav-link">風險分析</a>
+                <a href="#guidance" class="block py-2 px-3 text-base font-medium inactive-nav-link">關鍵數據</a>
+                <a href="#recommendation" class="block py-2 px-3 text-base font-medium inactive-nav-link">綜合評估</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 
+      主要內容區
+      使用 max-w-7xl mx-auto 進行水平居中與寬度限制
+    -->
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- ============================================= -->
+        <!-- 區塊 1: 公司營運概況 -->
+        <!-- ============================================= -->
+        <section id="overview" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <p class="text-lg text-stone-700 mb-6">
+                Alphabet 2025 年 Q3 業績是對其 AI 戰略的全面驗證，首次實現單季營收突破 1000 億美元，標誌著由 AI 驅動的新增長時代的開始。AI 已從「護城河威脅」轉變為「增長擴張器」。
+            </p>
+            <!-- 卡片式設計 (Cards) + 響應式佈局 (Responsive) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-2">千億美元季度</h3>
+                    <p class="text-stone-600">總營收 $1023.46 億美元，年增 16%，創下歷史新高。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-2">AI 變現驗證</h3>
+                    <p class="text-stone-600">AI Overviews 正在推動查詢量增長，而非侵蝕，變現率與傳統搜索持平。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-2">Cloud 業務爆發</h3>
+                    <p class="text-stone-600">Google Cloud 營收增長 34%，積壓訂單 (Backlog) 猛增至 $1550 億美元。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-2">監管風險緩解</h3>
+                    <p class="text-stone-600">美國司法部 (DOJ) 搜索壟斷案判決優於預期，關鍵的蘋果默認搜索協議得以保留。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- 區塊 2: 核心業務剖析 -->
+        <!-- ============================================= -->
+        <section id="core-business" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心業務剖析</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Search 卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-2xl font-semibold text-stone-700 mb-3">Google Search (搜索)</h3>
+                    <p class="text-stone-600 mb-4">營收 $566 億 (年增 15%)。AI Overviews 和 AI Mode 成功推動了「有意義的查詢增長」，反駁了 AI 侵蝕論。用戶開始詢問更複雜的問題，Google 稱之為「搜索的擴張時刻」。</p>
+                    <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">AI 驅動增長</span>
+                </div>
+                <!-- YouTube 卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-2xl font-semibold text-stone-700 mb-3">YouTube (廣告)</h3>
+                    <p class="text-stone-600 mb-4">營收 $103 億 (年增 15%)。關鍵里程碑：在美國，Shorts (短影音) 每觀看小時的收入已 *高於* 傳統 in-stream 影片，成功解決變現難題。</p>
+                    <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Shorts 變現成功</span>
+                </div>
+                <!-- Cloud 卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-2xl font-semibold text-stone-700 mb-3">Google Cloud (雲端)</h3>
+                    <p class="text-stone-600 mb-4">營收 $152 億 (年增 34%)。積壓訂單 (Backlog) 達 $1550 億美元，單季淨增 $490 億。全端 AI 產品 (TPU + Gemini) 正在贏得大量企業合約。</p>
+                    <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">積壓訂單 $1550 億</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- 區塊 3: 營運指標 -->
+        <!-- ============================================= -->
+        <section id="metrics" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵營運指標 (Q3 2025)</h2>
+            <!-- 資訊卡片 (Information Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-sky-800 mb-2">Cloud 營收增長</h3>
+                    <p class="text-4xl font-bold text-sky-900">+34%</p>
+                    <p class="text-sky-700">(YoY)</p>
+                </div>
+                <div class="bg-green-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-green-800 mb-2">Cloud 積壓訂單</h3>
+                    <p class="text-4xl font-bold text-green-900">$1550 億</p>
+                    <p class="text-green-700">(單季猛增 46%)</p>
+                </div>
+                <div class="bg-purple-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-purple-800 mb-2">付費訂閱用戶</h3>
+                    <p class="text-4xl font-bold text-purple-900">3 億+</p>
+                    <p class="text-purple-700">(Google One, YouTube Premium)</p>
+                </div>
+                <div class="bg-orange-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-lg font-semibold text-orange-800 mb-2">核心廣告增長</h3>
+                    <p class="text-4xl font-bold text-orange-900">+15%</p>
+                    <p class="text-orange-700">(Search & YouTube)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- 區塊 4: 財務表現細節 -->
+        <!-- ============================================= -->
+        <section id="financials" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節 (Q3 2025)</h2>
+            
+            <!-- 動態圖表 (Chart.js) -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold text-stone-700 mb-4 text-center">Q3 2025 部門營收 (單位：十億美元)</h3>
+                <!-- Chart.js Canvas 必須包在一個 div 內以控制大小 -->
+                <div class="relative h-64 md:h-96">
+                    <canvas id="segmentRevenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 互動資料表格 (Interactive Table) -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-semibold text-stone-700 mb-4">部門營收與利潤明細</h3>
+                <!-- 篩選輸入框 -->
+                <div class="mb-4">
+                    <input type="text" id="tableFilter" placeholder="篩選業務部門 (例如: Cloud)" 
+                           class="w-full md:w-1/2 p-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                </div>
+                
+                <!-- 表格 -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">業務部門</th>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Q3 2025 營收 (百萬)</th>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Q3 2024 營收 (百萬)</th>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">營收年增率</th>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Q3 2025 營業利潤 (百萬)</th>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">營業利潤率</th>
+                            </tr>
+                        </thead>
+                        <tbody id="segmentTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- 資料將由 JavaScript 動態載入 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- 區塊 5: 產業競爭分析 -->
+        <!-- ============================================= -->
+        <section id="competition" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-2xl font-semibold text-stone-700 mb-3">雲端戰爭 (Cloud War)</h3>
+                    <p class="text-stone-600 mb-4">GenAI 革命正重新加速雲端市場，GCP 和 Azure 成為最大贏家，AWS 增長相對落後。</p>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li><span class="font-semibold text-green-700">Google Cloud: +34%</span></li>
+                        <li><span class="font-semibold text-blue-700">Microsoft Azure: +33%</span></li>
+                        <li><span class="font-semibold text-orange-700">Amazon AWS: +20.2%</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-2xl font-semibold text-stone-700 mb-3">廣告戰爭 (Ad War)</h3>
+                    <p class="text-stone-600 mb-4">Meta 和 Amazon 廣告增長強勁，但 Google 基於「搜索意圖」的護城河依然最穩固。</p>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li><span class="font-semibold text-blue-800">Meta (Facebook): +26%</span></li>
+                        <li><span class="font-semibold text-orange-800">Amazon Ads: +22-24%</span></li>
+                        <li><span class="font-semibold text-red-700">Google (Search+YT): +15%</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-2xl font-semibold text-stone-700 mb-3">AI 模型戰爭 (Model War)</h3>
+                    <p class="text-stone-600 mb-4">頂級模型 (Gemini, GPT-4o, Claude 4.5) 性能差距縮小。決勝關鍵在於「生態系統」。</p>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li><span class="font-semibold">Google: 專有硬體 (TPU) + 全球分發 (Search, Android)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- 區塊 6: 風險和不確定性 -->
+        <!-- ============================================= -->
+        <section id="risks" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 風險 1: CapEx -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-red-500">
+                    <h3 class="text-2xl font-semibold text-red-700 mb-3">風險 1：資本支出 (CapEx) 與利潤壓力</h3>
+                    <p class="text-stone-600 mb-4">
+                        公司預計 2026 年 CapEx 將「大幅增加」，AI 軍備競賽是一場巨大的資本消耗戰。
+                    </p>
+                    <h4 class="font-semibold text-green-700 mb-2">緩解因素：卓越的資本效率</h4>
+                    <p class="text-stone-600">
+                        Alphabet 的 CapEx 僅佔其營運現金流 (OCF) 的 <strong>49%</strong>，遠低於 Meta (64.6%) 和 Microsoft (77.5%)。顯示其「造血」能力極強，最具可持續性。
+                    </p>
+                </div>
+                <!-- 風險 2: 監管 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-yellow-500">
+                    <h3 class="text-2xl font-semibold text-yellow-700 mb-3">風險 2：監管威脅</h3>
+                    <h4 class="font-semibold text-green-700 mb-2">已緩解 (利好)：DOJ 搜索壟斷案</h4>
+                    <p class="text-stone-600 mb-4">
+                        法院判決保留了與蘋果的 $200 億默認搜索協議，移除了最大的估值不確定性。
+                    </p>
+                    <h4 class="font-semibold text-red-700 mb-2">持續威脅 (利空)：DOJ 廣告技術 (Ad-Tech) 案</h4>
+                    <p class="text-stone-600">
+                        法院裁定 Google 在廣告技術市場非法壟斷，DOJ 要求強制剝離業務，此案尚待判決，是目前最大的監管威脅。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- 區塊 7: 關鍵數據匯總及財務指引 -->
+        <!-- ============================================= -->
+        <section id="guidance" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-stone-700 mb-3">關鍵數據匯總</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2">
+                        <li><strong>Q3 總營收:</strong> $1023.5 億 (年增 16%)</li>
+                        <li><strong>Q3 EPS:</strong> $2.87 (年增 35%，遠超預期)</li>
+                        <li><strong>Non-GAAP 營業利潤率:</strong> 33.9% (排除 $35 億歐盟罰款)</li>
+                        <li><strong>Cloud 積壓訂單:</strong> $1550 億 (年化營收的 2.5 倍)</li>
+                        <li><strong>付費訂閱用戶:</strong> 3 億+</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-stone-700 mb-3">財務指引 (CapEx)</h3>
+                    <p class="text-stone-600 mb-4">為支持 AI 基礎設施和 Cloud 需求，資本支出將持續擴大。</p>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2">
+                        <li><strong>2025 年 CapEx 指引:</strong> 上調至 $910 - $930 億美元</li>
+                        <li><strong>2026 年 CapEx 指引:</strong> 預計將「大幅增加」(Significant Increase)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- 區塊 8: 綜合評估 -->
+        <!-- ============================================= -->
+        <section id="recommendation" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <p class="text-lg text-stone-700 mb-6">
+                Q3 財報是 Alphabet 投資故事的關鍵轉折點。AI 正在推動所有核心業務加速增長，Cloud 利潤爆發，最大監管風險解除。公司正轉變為 AI 時代的「核心基礎設施」資產。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-green-50 rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                    <h3 class="text-2xl font-semibold text-green-800 mb-3">對於已持有股票的投資人</h3>
+                    <p class="text-4xl font-bold text-green-700 mb-2">增持 (Add / Overweight)</p>
+                    <p class="text-stone-600">
+                        不必擔心 2026 年的 CapEx 增長，這是贏得 AI 戰爭的必要「彈藥費」。Alphabet 的高資本效率 (49% OCF) 證明它完全負擔得起。Q3 財報鞏固了繼續持有並加碼的理由。
+                    </p>
+                </div>
+                <div class="bg-sky-50 rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <h3 class="text-2xl font-semibold text-sky-800 mb-3">對於尚未持有股票的投資人</h3>
+                    <p class="text-4xl font-bold text-sky-700 mb-2">逢低買入 (Buy on Dips)</p>
+                    <p class="text-stone-600">
+                        股價雖創新高，但基本面支撐更強勁。Cloud 的 34% 增長和 $1550 億積壓訂單提供了清晰的未來增長路徑。考慮到其質量與已降低的風險，Alphabet 應成為 AI 領域的核心配置。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-400 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>&copy; 巴菲特AI價值投資-Alphabet(GOOG) 2025Q3財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Alphabet(GOOG) 相關公開資料 (2025年11月3日)。</p>
+        </div>
+    </footer>
+
+    <!-- 
+      原生 JavaScript 區域
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. 手機版選單 (Mobile Menu) ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+
+            // 點擊漢堡按鈕時開關選單
+            menuButton.addEventListener('click', () => {
+                const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+                menuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機版選單中的任一連結時，自動關閉選單
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+
+            // --- 2. 導航列 active 狀態 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+            const observerOptions = {
+                root: null, // 觀察 viewport
+                rootMargin: '-20% 0px -80% 0px', // 調整觸發邊界，當區塊進入畫面中間 60% 時觸發
+                threshold: 0
+            };
+
+            const observerCallback = (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        // 更新所有連結的狀態
+                        navLinks.forEach(link => {
+                            link.classList.add('inactive-nav-link');
+                            link.classList.remove('active-nav-link');
+                            
+                            // 檢查 href 是否包含 #id
+                            if (link.getAttribute('href').includes(id)) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+
+            // --- 3. 動態圖表 (Chart.js) ---
+            // 數據來自報告: Services ($87.05B), Cloud ($15.16B), Other Bets ($0.34B)
+            const ctx = document.getElementById('segmentRevenueChart');
+            if (ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Google Services', 'Google Cloud', 'Other Bets'],
+                        datasets: [{
+                            label: 'Q3 2025 營收 (十億美元)',
+                            data: [87.05, 15.16, 0.34],
+                            backgroundColor: [
+                                'rgba(59, 130, 246, 0.6)', // blue-500
+                                'rgba(34, 197, 94, 0.6)',  // green-500
+                                'rgba(168, 85, 247, 0.6)' // purple-500
+                            ],
+                            borderColor: [
+                                'rgba(59, 130, 246, 1)',
+                                'rgba(34, 197, 94, 1)',
+                                'rgba(168, 85, 247, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // 允許圖表填滿容器高度
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '營收 (十億美元)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false // 只有一個 dataset，隱藏圖例
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- 4. 互動資料表格 (Interactive Table) ---
+            // 數據來自報告: 核心數據表 (2)
+            const segmentData = [
+                { 
+                    name: 'Google Services', 
+                    r25: '$87,052 M', 
+                    r24: '$76,510 M', 
+                    growth: '+14%', 
+                    p25: '$33,527 M (含 $35 億罰款)', 
+                    margin: '38.5%' 
+                },
+                { 
+                    name: 'Google Cloud', 
+                    r25: '$15,157 M', 
+                    r24: '$11,353 M', 
+                    growth: '+34%', 
+                    p25: '$3,594 M', 
+                    margin: '23.7%' 
+                },
+                { 
+                    name: 'Other Bets', 
+                    r25: '$344 M', 
+                    r24: '$388 M', 
+                    growth: '-11%', 
+                    p25: '$(1,426) M', 
+                    margin: 'N/A' 
+                }
+            ];
+
+            const tableBody = document.getElementById('segmentTableBody');
+            const filterInput = document.getElementById('tableFilter');
+
+            // 填充表格的函式
+            function populateTable(data) {
+                if (!tableBody) return;
+                tableBody.innerHTML = ''; // 清空現有內容
+
+                if (data.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-stone-500 py-4">未找到符合條件的資料</td></tr>`;
+                    return;
+                }
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-stone-50';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.r25}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.r24}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm ${item.growth.startsWith('+') ? 'text-green-600' : 'text-red-600'}">${item.growth}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.p25}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.margin}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // 監聽篩選框的輸入事件 (使用 'input' 事件以獲得即時響應)
+            if (filterInput) {
+                filterInput.addEventListener('input', () => {
+                    const filterValue = filterInput.value.toLowerCase();
+                    const filteredData = segmentData.filter(item => 
+                        item.name.toLowerCase().includes(filterValue)
+                    );
+                    populateTable(filteredData);
+                });
+            }
+
+            // 初始載入表格
+            populateTable(segmentData);
+
+        });
+    </script>
+
+</body>
+</html>
