@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Apple 2025年度財報分析報告</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 嵌入自訂樣式 -->
+    <style>
+        /* 導航列連結的 Active 狀態 */
+        .active-nav-link {
+            color: #0284c7; /* text-sky-600 */
+            font-weight: 600; /* font-semibold */
+            border-bottom-width: 2px;
+            border-color: #0284c7; /* border-sky-600 */
+        }
+        
+        /* 導航列連結的 Inactive 狀態 */
+        .inactive-nav-link {
+            color: #44403c; /* text-stone-700 */
+            border-bottom-width: 2px;
+            border-color: transparent;
+        }
+        
+        /* Chart.js 容器的高度限制 */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        
+        /* 確保 sticky header 下方的內容從正確位置開始 */
+        section {
+            scroll-margin-top: 80px; /* 根據 header 高度調整 */
+        }
+    </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-700 antialiased">
+
+    <!-- ===== 導航列 (Header) ===== -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo/標題 -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-stone-800">Apple 2025年度</span>
+                </div>
+                
+                <!-- 漢堡選單按鈕 (Mobile) -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-700 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 導航連結 (Desktop) -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#overview" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">營運概況</a>
+                        <a href="#core-business" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">核心業務</a>
+                        <a href="#metrics" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">營運指標</a>
+                        <a href="#financials" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">財務表現</a>
+                        <a href="#competition" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">競爭分析</a>
+                        <a href="#risks" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">風險</a>
+                        <a href="#guidance" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">財務指引</a>
+                        <a href="#investment" class="nav-link inactive-nav-link px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">綜合評估</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 行動版選單 (Mobile Menu) -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="nav-link-mobile text-stone-700 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium">營運概況</a>
+                <a href="#core-business" class="nav-link-mobile text-stone-700 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium">核心業務</a>
+                <a href="#metrics" class="nav-link-mobile text-stone-700 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium">營運指標</a>
+                <a href="#financials" class="nav-link-mobile text-stone-700 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium">財務表現</a>
+                <a href="#competition" class="nav-link-mobile text-stone-700 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium">競爭分析</a>
+                <a href="#risks" class="nav-link-mobile text-stone-700 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium">風險</a>
+                <a href="#guidance" class="nav-link-mobile text-stone-700 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium">財務指引</a>
+                <a href="#investment" class="nav-link-mobile text-stone-700 hover:bg-stone-100 block px-3 py-2 rounded-md text-base font-medium">綜合評估</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== 主要內容 (Main Content) ===== -->
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- ===== 1. 公司營運概況 ===== -->
+        <section id="overview" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 卡片 1: 總營收 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-sm font-medium text-stone-500">Q4 總營收</h3>
+                    <p class="mt-1 text-3xl font-semibold text-stone-900">$1,025 億</p>
+                    <p class="mt-2 text-sm text-green-600">+8% (YoY)</p>
+                </div>
+                <!-- 卡片 2: 每股盈餘 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-sm font-medium text-stone-500">Q4 稀釋後 EPS</h3>
+                    <p class="mt-1 text-3xl font-semibold text-stone-900">$1.85</p>
+                    <p class="mt-2 text-sm text-stone-600">優於預期 ($1.77)</p>
+                </div>
+                <!-- 卡片 3: 服務營收 -->
+                <div class="bg-green-50 rounded-lg shadow-lg p-6 border border-green-200">
+                    <h3 class="text-sm font-medium text-green-700">Q4 服務營收 (亮點)</h3>
+                    <p class="mt-1 text-3xl font-semibold text-green-900">$287.5 億</p>
+                    <p class="mt-2 text-sm text-green-600">+15.1% (YoY) - 創歷史新高</p>
+                </div>
+                <!-- 卡片 4: 大中華區 -->
+                <div class="bg-red-50 rounded-lg shadow-lg p-6 border border-red-200">
+                    <h3 class="text-sm font-medium text-red-700">Q4 大中華區營收 (隱憂)</h3>
+                    <p class="mt-1 text-3xl font-semibold text-red-900">$145 億</p>
+                    <p class="mt-2 text-sm text-red-600">-3.6% (YoY) - 低於預期</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 2. 核心業務剖析 ===== -->
+        <section id="core-business" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心業務剖析</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- 產品 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-1">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-4">產品 (Products)</h3>
+                    <ul class="space-y-2 list-disc list-inside text-stone-600">
+                        <li><strong>iPhone:</strong> 營收核心 (iPhone 17 Pro/Air)</li>
+                        <li><strong>Mac:</strong> MacBook Air/Pro, iMac 等</li>
+                        <li><strong>iPad:</strong> iPad Pro/Air/mini</li>
+                        <li><strong>穿戴/家用/配件:</strong> Apple Watch, AirPods, Vision Pro</li>
+                    </ul>
+                </div>
+                <!-- 服務 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-1">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-4">服務 (Services)</h3>
+                    <ul class="space-y-2 list-disc list-inside text-stone-600">
+                        <li><strong>廣告:</strong> App Store 搜尋廣告, Google 授權費</li>
+                        <li><strong>AppleCare:</strong> 延長保固與支援</li>
+                        <li><strong>雲端服務:</strong> iCloud 儲存訂閱</li>
+                        <li><strong>數位內容:</strong> App Store 佣金, Music, TV+</li>
+                        <li><strong>支付服務:</strong> Apple Pay, Apple Card</li>
+                    </ul>
+                </div>
+                <!-- 策略 -->
+                <div class="bg-sky-50 rounded-lg shadow-lg p-6 lg:col-span-1 border border-sky-200">
+                    <h3 class="text-xl font-semibold text-sky-800 mb-4">策略核心：引擎置換</h3>
+                    <p class="text-stone-700">
+                        Apple 的投資故事正從依賴「硬體週期」轉向依賴「服務平台」。服務業務正以高達 75.4% 的毛利率，取代毛利率僅 36.8% 的硬體業務，成為公司獲利增長的核心引擎。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 3. 營運指標 ===== -->
+        <section id="metrics" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵營運指標</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 卡片 1: 活躍裝置 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-sm font-medium text-stone-500">全球活躍裝置基礎</h3>
+                    <p class="mt-1 text-3xl font-semibold text-stone-900">23.5 億</p>
+                    <p class="mt-2 text-sm text-stone-600">服務業務的龐大護城河</p>
+                </div>
+                <!-- 卡片 2: 總毛利率 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-sm font-medium text-stone-500">FY2025 總毛利率</h3>
+                    <p class="mt-1 text-3xl font-semibold text-stone-900">46.9%</p>
+                    <p class="mt-2 text-sm text-green-600">較去年 46.2% 提升 70bps</p>
+                </div>
+                <!-- 卡片 3: 服務毛利率 -->
+                <div class="bg-sky-50 rounded-lg shadow-lg p-6 border border-sky-200">
+                    <h3 class="text-sm font-medium text-sky-700">服務毛利率</h3>
+                    <p class="mt-1 text-3xl font-semibold text-sky-900">75.4%</p>
+                    <p class="mt-2 text-sm text-sky-600">獲利能力的真正引擎</p>
+                </div>
+                <!-- 卡片 4: 產品毛利率 -->
+                <div class="bg-orange-50 rounded-lg shadow-lg p-6 border border-orange-200">
+                    <h3 class="text-sm font-medium text-orange-700">產品毛利率</h3>
+                    <p class="mt-1 text-3xl font-semibold text-orange-900">36.8%</p>
+                    <p class="mt-2 text-sm text-orange-600">較去年 37.2% 下降</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 4. 財務表現細節 ===== -->
+        <section id="financials" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節</h2>
+            
+            <!-- 圖表 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">總營收 vs 服務營收 (2024 vs 2025財年)</h3>
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 互動式表格 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">核心業務篩選</h3>
+                <input type="text" id="filterInput" class="w-full md:w-1/2 p-2 border border-stone-300 rounded-lg mb-4" placeholder="篩選業務類別、項目或備註 (例如: iPhone, 服務, AI)">
+                
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">業務類別</th>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">項目</th>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">主要內容/型號</th>
+                                <th scope="col" class="sticky top-0 px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 5. 產業競爭分析 ===== -->
+        <section id="competition" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">市場</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">數據源</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Apple 市佔率</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">排名</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">主要競爭對手 (市佔率)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">趨勢</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">全球智慧型手機</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">IDC</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">18.2%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">#2</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">Samsung (19.0%)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">穩定增長</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">中國智慧型手機</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">IDC</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">15.8%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">#2</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">Vivo (17.3%), Huawei (15.2%)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600">嚴重承壓</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">全球 PC</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">IDC</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">9.0%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">#4</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">HP (19.8%), Dell (13.3%)</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600">穩定</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 6. 風險和不確定性 ===== -->
+        <section id="risks" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 風險 1: 宏觀/供應鏈 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-orange-700 mb-4">宏觀經濟與供應鏈</h3>
+                    <ul class="space-y-2 list-disc list-inside text-stone-600">
+                        <li><strong>經濟敏感性:</strong> 業績依賴全球經濟狀況，高利率可能壓抑消費。</li>
+                        <li><strong>關稅風險:</strong> 2025 Q2 起的新關稅，預計 Q1 2026 造成 $14 億美元的逆風。</li>
+                        <li><strong>供應鏈集中:</strong> 依賴中國、越南、台灣等地的單一或有限來源。</li>
+                    </ul>
+                </div>
+                <!-- 風險 2: 競爭/地緣政治 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-orange-700 mb-4">地緣政治與競爭 (大中華區)</h3>
+                    <ul class="space-y-2 list-disc list-inside text-stone-600">
+                        <li><strong>華為復甦:</strong> Mate 系列強力回歸，直接侵蝕 iPhone 在中國的高端市場份額。</li>
+                        <li><strong>iPhone 17 Air:</strong> 在中國市場因定價與 eSIM 問題需求疲軟。</li>
+                        <li><strong>營收下滑:</strong> Q4 2025 大中華區營收已年減 3.6%。</li>
+                    </ul>
+                </div>
+                <!-- 風險 3: 監管 -->
+                <div class="bg-red-50 rounded-lg shadow-lg p-6 border border-red-300">
+                    <h3 class="text-xl font-semibold text-red-700 mb-4">法律與監管 (最大威脅)</h3>
+                    <ul class="space-y-2 list-disc list-inside text-stone-600">
+                        <li><strong>美國司法部 (DOJ):</strong> 控告 Apple 壟斷，威脅生態系統護城河。</li>
+                        <li><strong>歐盟 (DMA):</strong> 已開罰 €5 億歐元，並正調查新收費結構，威脅 App Store (EU) 收入。</li>
+                        <li><strong>Epic Games 訴訟:</strong> 法院禁止 Apple 對外部支付抽佣，若上訴失敗，將重創 App Store (US) 收入。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 7. 關鍵數據匯總及財務指引 ===== -->
+        <section id="guidance" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <p class="text-lg text-stone-600 mb-6">管理層提供了極為強勁的 Q1 2026 (假期季度) 財測，遠超市場預期，表明對 iPhone 17 Pro 產品週期極具信心。</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 指引 1: 總營收 -->
+                <div class="bg-green-50 rounded-lg shadow-lg p-6 border border-green-200">
+                    <h3 class="text-sm font-medium text-green-700">Q1 2026 總營收指引</h3>
+                    <p class="mt-1 text-3xl font-semibold text-green-900">+10% 至 +12%</p>
+                    <p class="mt-2 text-sm text-green-600">遠超市場共識的 6.6%</p>
+                </div>
+                <!-- 指引 2: iPhone -->
+                <div class="bg-green-50 rounded-lg shadow-lg p-6 border border-green-200">
+                    <h3 class="text-sm font-medium text-green-700">Q1 2026 iPhone 營收指引</h3>
+                    <p class="mt-1 text-3xl font-semibold text-green-900">雙位數增長</p>
+                    <p class="mt-2 text-sm text-green-600">顯示 iPhone 17 Pro 需求強勁</p>
+                </div>
+                <!-- 指引 3: 服務 -->
+                <div class="bg-green-50 rounded-lg shadow-lg p-6 border border-green-200">
+                    <h3 class="text-sm font-medium text-green-700">Q1 2026 服務營收指引</h3>
+                    <p class="mt-1 text-3xl font-semibold text-green-900">保持強勁</p>
+                    <p class="mt-2 text-sm text-green-600">維持約 13.5% 的年增長率</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 8. 綜合評估 ===== -->
+        <section id="investment" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 建議 1: 已持有者 -->
+                <div class="bg-sky-50 rounded-lg shadow-lg p-6 border border-sky-200 lg:col-span-1">
+                    <h3 class="text-xl font-semibold text-sky-800 mb-4">對於已持有股票的投資人</h3>
+                    <p class="text-2xl font-bold text-sky-900 mb-3">增持 (ACCUMULATE)</p>
+                    <ul class="space-y-2 list-disc list-inside text-stone-600">
+                        <li>服務轉型論點獲驗證 (75.4% 毛利)。</li>
+                        <li>Q1 強勁財測消除短期疑慮。</li>
+                        <li>巨額股票回購提供下檔支撐。</li>
+                        <li>AI 升級週期提供長期期權。</li>
+                    </ul>
+                </div>
+                <!-- 建議 2: 尚未持有者 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-1">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-4">對於尚未持有股票的投資人</h3>
+                    <p class="text-2xl font-bold text-stone-900 mb-3">逢低買入 (BUY ON DIPS)</p>
+                    <ul class="space-y-2 list-disc list-inside text-stone-600">
+                        <li>目前估值偏高 (33.5x Fwd P/E)。</li>
+                        <li>監管與中國風險真實存在，將製造波動。</li>
+                        <li>不建議在目前價位追高。</li>
+                        <li>利用監管負面新聞引發的回檔分批建倉。</li>
+                    </ul>
+                </div>
+                <!-- 估值 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 md:col-span-2 lg:col-span-1">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-4">估值分析</h3>
+                    <p class="text-stone-600 mb-4">目前股價已反映服務轉型和 AI 潛力的溢價。</p>
+                    <div class="flex items-baseline">
+                        <p class="text-4xl font-bold text-stone-900">33.5x</p>
+                        <span class="ml-2 text-stone-600">遠期本益比 (Fwd P/E)</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200">
+                        <p class="text-sm text-stone-500">十年平均本益比</p>
+                        <p class="text-lg font-semibold text-stone-700">21.7x</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== 頁腳 (Footer) ===== -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Apple 2025年度財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Apple 相關公開資料 (2025年11月5日)。</p>
+        </div>
+    </footer>
+
+
+    <!-- ===== JavaScript 程式碼 ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ===== 1. 行動版選單切換 (Mobile Menu Toggle) =====
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 點擊行動版選單連結後自動關閉選單
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // ===== 2. 導航列 Active 狀態 (Intersection Observer) =====
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null, // 觀察視窗
+                rootMargin: '-80px 0px -50% 0px', // 觸發範圍 (80px 為 sticky header 高度)
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // ===== 3. 互動式表格資料與篩選 =====
+            const productData = [
+                { category: '產品', item: 'iPhone', model: 'iPhone 17 Pro, iPhone Air, iPhone 17', note: '營收核心，佔比最大，關注 AI 升級週期' },
+                { category: '產品', item: 'Mac', model: 'MacBook Air/Pro, iMac, Mac Studio', note: '市佔率 9.0%，M系列晶片' },
+                { category: '產品', item: 'iPad', model: 'iPad Pro, iPad Air, iPad mini', note: '多功能平板電腦' },
+                { category: '產品', item: '穿戴/家用/配件', model: 'Apple Watch, AirPods', note: '穿戴裝置市場領先' },
+                { category: '產品', item: 'Apple Vision Pro', model: '空間運算設備', note: '長期平台賭注，短期需求疲軟' },
+                { category: '服務', item: '廣告', model: 'App Store 搜尋廣告, Google 授權費', note: '高利潤，Google 每年支付約 $200 億' },
+                { category: '服務', item: 'AppleCare', model: '延長保固、竊盜與遺失保險', note: '穩定現金流' },
+                { category: '服務', item: '雲端服務', model: 'iCloud 儲存訂閱', note: '高黏著度訂閱收入' },
+                { category: '服務', item: '數位內容', model: 'App Store 佣金, Music, TV+, Arcade', note: '服務毛利率 75.4% 的主要驅動者，面臨監管風險' },
+                { category: '服務', item: '支付服務', model: 'Apple Pay, Apple Card', note: '金融生態系，面臨 DOJ 訴訟' },
+                { category: '策略', item: 'Apple Intelligence', model: '裝置端 AI + 雲端 AI 整合', note: 'AI 戰略，推動硬體「超級升級週期」' }
+            ];
+
+            const filterInput = document.getElementById('filterInput');
+            const tableBody = document.getElementById('productTableBody');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-stone-500">未找到符合條件的項目</td></tr>';
+                    return;
+                }
+                data.forEach(item => {
+                    const row = `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ${item.category === '服務' ? 'text-sky-700' : 'text-stone-900'}">${item.category}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-800 font-semibold">${item.item}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.model}</td>
+                            <td class="px-6 py-4 text-sm text-stone-600">${item.note}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            filterInput.addEventListener('keyup', () => {
+                const searchTerm = filterInput.value.toLowerCase();
+                const filteredData = productData.filter(item => 
+                    item.category.toLowerCase().includes(searchTerm) ||
+                    item.item.toLowerCase().includes(searchTerm) ||
+                    item.model.toLowerCase().includes(searchTerm) ||
+                    item.note.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            // 初始載入表格
+            renderTable(productData);
+
+            // ===== 4. Chart.js 圖表 =====
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            // 漸層色
+            const gradientBg1 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientBg1.addColorStop(0, 'rgba(56, 189, 248, 0.6)'); // sky-400
+            gradientBg1.addColorStop(1, 'rgba(56, 189, 248, 0.1)');
+
+            const borderCol1 = 'rgba(14, 165, 233, 1)'; // sky-500
+
+            const gradientBg2 = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientBg2.addColorStop(0, 'rgba(113, 113, 122, 0.6)'); // stone-500
+            gradientBg2.addColorStop(1, 'rgba(113, 113, 122, 0.1)');
+            
+            const borderCol2 = 'rgba(82, 82, 91, 1)'; // stone-600
+
+
+            const revenueChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2024 財年', '2025 財年'],
+                    datasets: [
+                        {
+                            label: '總營收 (億美元)',
+                            data: [3910.35, 4161.61], // 單位: 億美元
+                            backgroundColor: gradientBg2,
+                            borderColor: borderCol2,
+                            borderWidth: 2,
+                            borderRadius: 4
+                        },
+                        {
+                            label: '服務營收 (億美元)',
+                            data: [961.69, 1091.58], // 單位: 億美元
+                            backgroundColor: gradientBg1,
+                            borderColor: borderCol1,
+                            borderWidth: 2,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '營收增長趨勢 (單位：億美元)',
+                            font: {
+                                size: 16,
+                                family: 'inherit'
+                            },
+                            color: '#44403c'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += `$${context.parsed.y.toFixed(2)} 億`;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '營收 (億美元)'
+                            },
+                            ticks: {
+                                callback: function(value, index, ticks) {
+                                    return '$' + value;
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
