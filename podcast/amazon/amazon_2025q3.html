@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Amazon 2025Q3財報分析報告</title>
+    <!-- 1. 導入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 2. 導入 Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 增加基礎字體設定，使其更易讀 */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 3. 導航列 Active 狀態的 CSS (Intersection Observer 將會切換這些 class) */
+        /* 桌機版導航連結樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* text-sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 600; /* semibold */
+        }
+        .inactive-nav-link {
+            color: #57534e; /* text-stone-600 */
+            border-bottom: 2px solid transparent;
+        }
+
+        /* 手機版導航連結樣式 */
+        .active-nav-link-mobile {
+            background-color: #0ea5e9; /* bg-sky-500 */
+            color: white;
+        }
+        .inactive-nav-link-mobile {
+            color: #3f3f46; /* text-zinc-700 */
+        }
+    </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-900">
+
+    <!-- =================================================== -->
+    <!-- 1. 導航列 (Sticky Header & Mobile Menu)             -->
+    <!-- =================================================== -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold text-sky-600">Amazon 2025Q3</span>
+                </div>
+
+                <!-- 桌機版選單 (Desktop Menu) -->
+                <div class="hidden md:flex md:items-center md:space-x-6 lg:space-x-8">
+                    <a href="#overview" data-nav-target="overview" class="py-2 text-sm inactive-nav-link transition-colors duration-300 hover:text-sky-500">公司概況</a>
+                    <a href="#core-business" data-nav-target="core-business" class="py-2 text-sm inactive-nav-link transition-colors duration-300 hover:text-sky-500">核心業務</a>
+                    <a href="#metrics" data-nav-target="metrics" class="py-2 text-sm inactive-nav-link transition-colors duration-300 hover:text-sky-500">營運指標</a>
+                    <a href="#competition" data-nav-target="competition" class="py-2 text-sm inactive-nav-link transition-colors duration-300 hover:text-sky-500">競爭分析</a>
+                    <a href="#risks" data-nav-target="risks" class="py-2 text-sm inactive-nav-link transition-colors duration-300 hover:text-sky-500">風險剖析</a>
+                    <a href="#investment" data-nav-target="investment" class="py-2 text-sm inactive-nav-link transition-colors duration-300 hover:text-sky-500">綜合評估</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 (Mobile Menu Button) -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Icon: Menu -->
+                        <svg id="menu-icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Icon: Close -->
+                        <svg id="menu-icon-close" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 手機版彈出選單 (Mobile Menu Panel) -->
+            <div id="mobile-menu" class="hidden md:hidden border-t border-stone-200">
+                <div class="pt-2 pb-3 space-y-1">
+                    <a href="#overview" data-nav-target-mobile="overview" class="block py-2 px-3 rounded-md text-base font-medium inactive-nav-link-mobile">公司概況</a>
+                    <a href="#core-business" data-nav-target-mobile="core-business" class="block py-2 px-3 rounded-md text-base font-medium inactive-nav-link-mobile">核心業務</a>
+                    <a href="#metrics" data-nav-target-mobile="metrics" class="block py-2 px-3 rounded-md text-base font-medium inactive-nav-link-mobile">營運指標</a>
+                    <a href="#competition" data-nav-target-mobile="competition" class="block py-2 px-3 rounded-md text-base font-medium inactive-nav-link-mobile">競爭分析</a>
+                    <a href="#risks" data-nav-target-mobile="risks" class="block py-2 px-3 rounded-md text-base font-medium inactive-nav-link-mobile">風險剖析</a>
+                    <a href="#investment" data-nav-target-mobile="investment" class="block py-2 px-3 rounded-md text-base font-medium inactive-nav-link-mobile">綜合評估</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =================================================== -->
+    <!-- 2. 頁面主要內容                                      -->
+    <!-- =================================================== -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- 區塊 1: 公司營運概況 -->
+        <section id="overview" class="mb-12 pt-4">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                公司營運概況
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 卡片 1: 核心投資論點 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">核心投資論點</h3>
+                    <p class="text-stone-700">
+                        亞馬遜已結束成本優化階段，進入由「生成式 AI」驅動的侵略性資本支出 (Capex) 週期。公司正犧牲短期財務數據，以換取在 AI 時代未來十年的基礎設施絕對護城河。
+                    </p>
+                </div>
+                <!-- 卡片 2: Q3 業績亮點 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">Q3 業績亮點</h3>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li><span class="font-semibold">AWS 再加速：</span> 年增長 20.2%，ARR 逼近 $1320 億美元。</li>
+                        <li><span class="font-semibold">廣告業務強勁：</span> 年增 24%，成為高利潤增長的第三支柱。</li>
+                        <li><span class="font-semibold">核心利潤穩健：</span> 排除一次性費用後，調整後營業利潤達 $217 億美元，遠超預期。</li>
+                    </ul>
+                </div>
+                <!-- 卡片 3: 關鍵催化劑 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">關鍵催化劑</h3>
+                    <p class="text-stone-700">
+                        財報發布後，亞馬遜宣布與 OpenAI 達成價值 <span class="font-bold text-sky-600">$380 億美元</span>的七年期戰略合作。此交易打破了 Microsoft Azure 的排他性，並為亞馬遜 $1250 億美元的 Capex 計劃提供了最強烈的市場需求驗證。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 2: 核心業務剖析 -->
+        <section id="core-business" class="mb-12 pt-4">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心業務剖析
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 卡片 1: AWS -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-3">1. AWS (雲端業務)</h3>
+                    <p class="text-sm text-sky-600 font-medium mb-3">AI 基礎設施的絕對王者</p>
+                    <p class="text-stone-700 mb-4">
+                        AWS 營收再加速至 20.2%，ARR 達 $1320 億。自研晶片 Trainium 2 業務季增 150%，為 AI 推理任務提供 30-40% 的性價比優勢。
+                    </p>
+                    <span class="inline-block bg-sky-100 text-sky-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#Trainium</span>
+                    <span class="inline-block bg-sky-100 text-sky-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#Bedrock</span>
+                </div>
+                <!-- 卡片 2: 電商 (Stores) -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-3">2. 電商 (Stores)</h3>
+                    <p class="text-sm text-green-600 font-medium mb-3">AI 與效率的雙重奏</p>
+                    <p class="text-stone-700 mb-4">
+                        AI 購物助手 Rufus 已有 2.5 億活躍客戶使用，使用 Rufus 的顧客購買可能性高出 60%，預計帶來 $100 億美元的增量銷售。
+                    </p>
+                    <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#Rufus</span>
+                    <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#Logistics</span>
+                </div>
+                <!-- 卡片 3: 廣告 (Ads) -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-3">3. 廣告 (Ads)</h3>
+                    <p class="text-sm text-indigo-600 font-medium mb-3">挑戰雙頭壟斷的第三支柱</p>
+                    <p class="text-stone-700 mb-4">
+                        營收年增 24%，增速超越 AWS 和電商。Amazon DSP 平台已與 Netflix, Spotify, Roku 合作，打造具「閉環歸因」能力的廣告巨頭。
+                    </p>
+                    <span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#DSP</span>
+                    <span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">#CTV</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 3: 營運指標 & 關鍵數據 (含 Chart.js) -->
+        <section id="metrics" class="mb-12 pt-4">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                營運指標與關鍵數據
+            </h2>
+            
+            <!-- 資訊卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-sky-600 text-white rounded-lg shadow-lg p-5">
+                    <div class="text-sm font-medium opacity-80">Q3 總營收</div>
+                    <div class="text-3xl font-bold">$1802 億</div>
+                    <div class="text-sm opacity-90">年增 13%</div>
+                </div>
+                <div class="bg-green-600 text-white rounded-lg shadow-lg p-5">
+                    <div class="text-sm font-medium opacity-80">Q3 調整後營業利潤</div>
+                    <div class="text-3xl font-bold">$217 億</div>
+                    <div class="text-sm opacity-90">排除 $43 億一次性費用</div>
+                </div>
+                <div class="bg-amber-600 text-white rounded-lg shadow-lg p-5">
+                    <div class="text-sm font-medium opacity-80">TTM 自由現金流</div>
+                    <div class="text-3xl font-bold">$148 億</div>
+                    <div class="text-sm opacity-90">因 AI Capex 投資而下降 69%</div>
+                </div>
+                <div class="bg-indigo-600 text-white rounded-lg shadow-lg p-5">
+                    <div class="text-sm font-medium opacity-80">AWS 積壓訂單 (Backlog)</div>
+                    <div class="text-3xl font-bold">$2000 億</div>
+                    <div class="text-sm opacity-90">提供未來營收高度確定性</div>
+                </div>
+            </div>
+
+            <!-- Chart.js 圖表 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">關鍵業務營收增長 (Q3 2024 vs Q3 2025)</h3>
+                <p class="text-sm text-stone-600 mb-4">單位：十億美元</p>
+                <!-- Chart.js Canvas 必須包在一個指定高度的 div 內才能正確響應 -->
+                <div class="relative h-72 md:h-96">
+                    <canvas id="revenueGrowthChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 4: 財務表現細節 -->
+        <section id="financials" class="mb-12 pt-4">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                財務表現細節：撥開迷霧
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">GAAP vs. 調整後核心利潤 (Q3 2025)</h3>
+                <p class="text-stone-700 mb-6">
+                    本季財報充滿「雜訊」。投資者必須剝離一次性項目，才能看清核心盈利能力。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 營業利潤 -->
+                    <div>
+                        <h4 class="text-lg font-semibold text-sky-700 mb-3">營業利潤 (Operating Income)</h4>
+                        <ul class="space-y-2 text-stone-700">
+                            <li class="flex justify-between"><span>GAAP 營業利潤</span> <span>$174 億</span></li>
+                            <li class="flex justify-between text-red-600"><span>+ FTC 法律和解</span> <span>$25 億</span></li>
+                            <li class="flex justify-between text-red-600"><span>+ 遣散費用</span> <span>$18 億</span></li>
+                            <li class="flex justify-between border-t border-stone-300 pt-2 mt-2 font-bold">
+                                <span>調整後核心利潤</span>
+                                <span class="text-green-700 text-xl">$217 億</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 淨利潤 -->
+                    <div>
+                        <h4 class="text-lg font-semibold text-sky-700 mb-3">淨利潤 (Net Income)</h4>
+                        <ul class="space-y-2 text-stone-700">
+                            <li class="flex justify-between"><span>GAAP 淨利潤 (EPS $1.95)</span> <span>$212 億</span></li>
+                            <li class="flex justify-between text-green-600"><span>- Anthropic 投資收益</span> <span>$95 億</span></li>
+                            <li class="flex justify-between opacity-0"><span>(佔位)</span> <span></span></li>
+                            <li class="flex justify-between border-t border-stone-300 pt-2 mt-2 font-bold">
+                                <span>調整後核心利潤</span>
+                                <span class="text-green-700 text-xl">$117 億</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 5: 產業競爭分析 -->
+        <section id="competition" class="mb-12 pt-4">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                產業競爭分析
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-3">雲端戰場 (IaaS)</h3>
+                    <p class="text-stone-700">
+                        AWS 仍是無可爭議的領導者，全球市佔 <span class="font-bold text-sky-600 text-xl">29%</span>。
+                        Microsoft Azure (20%) 和 Google Cloud (13%) 雖百分比增長更快，但 AWS 在 $1320 億 ARR 基礎上實現的「絕對增量」仍然巨大。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-3">電商戰場</h3>
+                    <p class="text-stone-700">
+                        在美國電商市場的主導地位無可撼動，市佔高達 <span class="font-bold text-sky-600 text-xl">37.6% - 40.4%</span>。
+                        最接近的對手 Walmart 線上份額僅 6.4%，亞馬遜的物流護城河極深。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-stone-800 mb-3">廣告戰場</h3>
+                    <p class="text-stone-700">
+                        全球第三大數位廣告商，<span class="font-bold text-sky-600 text-xl">增速 24%</span>，持續高於 Google (13%) 並與 Meta (26%) 旗鼓相當，正憑藉 RMN 和 CTV 聯盟侵蝕雙頭壟斷。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 6: 風險和不確定性 -->
+        <section id="risks" class="mb-12 pt-4">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                風險和不確定性
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 風險卡片 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-red-500">
+                    <h3 class="text-xl font-semibold text-red-700 mb-3">1. 監管風險 (FTC 核心壟斷案)</h3>
+                    <p class="text-stone-700">
+                        這是目前<span class="font-bold">最大且最嚴峻的單一風險</span>。FTC 指控亞馬遜實施「反折扣政策」並強迫賣家使用 FBA 物流。此案將於 2026 年開庭，FTC 尋求「結構性補救」，最壞情況可能導致 AWS 與零售業務被分拆。
+                    </p>
+                </div>
+                <!-- 風險卡片 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-semibold text-amber-700 mb-3">2. 資本支出 (Capex) 與 AI 泡沫風險</h3>
+                    <p class="text-stone-700">
+                        亞馬遜 2025 年 Capex 指引高達 $1250 億，並預計 2026 年更高。如果 AI 需求被證明是泡沫，或投資回報率 (ROIC) 不如預期，未來巨額的折舊費用將嚴重侵蝕利潤率。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 7: 綜合評估 (含互動表格) -->
+        <section id="investment" class="mb-12 pt-4">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                綜合評估
+            </h2>
+            
+            <!-- 建議卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-green-700 mb-3">給已持有股票的投資人</h3>
+                    <p class="text-2xl font-bold text-stone-800 mb-2">策略：堅定持有 (HOLD)</p>
+                    <p class="text-stone-700">
+                        您的長期投資論點已獲強力驗證。AI 雙重獲利飛輪正在全速運轉。不應被短期 FCF 下降或 FTC 法律新聞所干擾。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">給尚未持有股票的投資人</h3>
+                    <p class="text-2xl font-bold text-stone-800 mb-2">策略：逢低買入 (BUY ON DIPS)</p>
+                    <p class="text-stone-700">
+                        基本面處於最強水平，但股價已達新高。應避免追高，耐心等待 $240-$245 區間的技術性回調，作為建立長期倉位的機會。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 互動式表格 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-stone-800 mb-4">華爾街分析師目標價 (Q3 2025 財報後)</h3>
+                <!-- 篩選輸入框 -->
+                <div class="mb-4">
+                    <input type="text" id="analyst-filter" class="w-full md:w-1/3 px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="篩選投行名稱...">
+                </div>
+
+                <!-- 表格容器，用於響應式溢出 -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="w-full min-w-[600px]" id="analyst-table">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th class="text-left px-4 py-3 text-sm font-semibold text-stone-600 uppercase tracking-wider">投行 (Firm)</th>
+                                <th class="text-left px-4 py-3 text-sm font-semibold text-stone-600 uppercase tracking-wider">評級 (Rating)</th>
+                                <th class="text-left px-4 py-3 text-sm font-semibold text-stone-600 uppercase tracking-wider">原目標價</th>
+                                <th class="text-left px-4 py-3 text-sm font-semibold text-stone-600 uppercase tracking-wider">新目標價</th>
+                            </tr>
+                        </thead>
+                        <tbody id="analyst-table-body" class="bg-white divide-y divide-stone-200">
+                            <!-- JavaScript 將在此處動態插入資料 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================== -->
+    <!-- 3. 頁腳                                          -->
+    <!-- =================================================== -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Amazon 2025Q3財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Amazon 相關公開資料 (2025年11月6日)。</p>
+        </div>
+    </footer>
+
+    <!-- =================================================== -->
+    <!-- 4. JavaScript 腳本                               -->
+    <!-- =================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 功能 1: 手機版選單切換 (Mobile Menu Toggle) ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            menuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                menuIconOpen.classList.toggle('hidden', !isHidden);
+                menuIconClose.classList.toggle('hidden', isHidden);
+                menuButton.setAttribute('aria-expanded', !isHidden);
+            });
+
+            // 點擊手機選單連結後，自動關閉選單
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIconOpen.classList.remove('hidden');
+                    menuIconClose.classList.add('hidden');
+                    menuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // --- 功能 2: 導航列滾動偵測 (Intersection Observer for Nav State) ---
+            const sections = document.querySelectorAll('main section[id]');
+            const desktopNavLinks = document.querySelectorAll('header nav a[data-nav-target]');
+            const mobileNavLinks = document.querySelectorAll('#mobile-menu a[data-nav-target-mobile]');
+
+            const observerOptions = {
+                root: null, // 相對於 viewport
+                rootMargin: '0px',
+                threshold: 0.4 // 區塊 40% 進入視窗時觸發
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+
+                        // 更新桌機版連結
+                        desktopNavLinks.forEach(link => {
+                            link.classList.toggle('active-nav-link', link.dataset.navTarget === id);
+                            link.classList.toggle('inactive-nav-link', link.dataset.navTarget !== id);
+                        });
+                        
+                        // 更新手機版連結
+                        mobileNavLinks.forEach(link => {
+                            link.classList.toggle('active-nav-link-mobile', link.dataset.navTargetMobile === id);
+                            link.classList.toggle('inactive-nav-link-mobile', link.dataset.navTargetMobile !== id);
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- 功能 3: Chart.js 營收增長圖表 ---
+            const ctx = document.getElementById('revenueGrowthChart');
+            if (ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['AWS (雲端)', '廣告 (Ads)', '北美電商', '國際電商'],
+                        datasets: [
+                            {
+                                label: 'Q3 2024 營收 (十億美元)',
+                                data: [27.45, 14.27, 95.77, 35.88], // 根據報告 Q3'25 數據和 YoY 增長率回算
+                                backgroundColor: 'rgba(156, 163, 175, 0.6)', // stone-400
+                                borderColor: 'rgba(156, 163, 175, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Q3 2025 營收 (十億美元)',
+                                data: [33.0, 17.7, 106.3, 40.9], // 來自報告
+                                backgroundColor: 'rgba(14, 165, 233, 0.6)', // sky-500
+                                borderColor: 'rgba(14, 165, 233, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value + 'B';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += '$' + context.parsed.y.toFixed(2) + ' 十億';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- 功能 4: 互動式表格篩選 (Analyst Table Filter) ---
+            const analystData = [
+                { firm: 'Morgan Stanley', rating: 'Overweight', oldPrice: '$300', newPrice: '$315' },
+                { firm: 'Evercore ISI', rating: 'Outperform', oldPrice: '$310', newPrice: '$330' },
+                { firm: 'Wedbush', rating: 'Outperform', oldPrice: '$315', newPrice: '$335' },
+                { firm: 'HSBC', rating: 'Buy', oldPrice: '$285', newPrice: '$300' },
+                { firm: 'Canaccord Genuity', rating: 'Buy', oldPrice: '$280', newPrice: '$300' },
+                { firm: 'Citizens JMP', rating: 'Market Outperform', oldPrice: '$285', newPrice: '$300' },
+                { firm: 'Morningstar', rating: 'Fairly Valued', oldPrice: '$245', newPrice: '$260' }
+            ];
+
+            const filterInput = document.getElementById('analyst-filter');
+            const tableBody = document.getElementById('analyst-table-body');
+
+            function renderTable(data) {
+                if (!tableBody) return;
+                tableBody.innerHTML = ''; // 清空表格
+                
+                if (data.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center px-4 py-4 text-stone-500">未找到符合條件的資料</td></tr>`;
+                    return;
+                }
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-stone-50 transition-colors';
+                    row.innerHTML = `
+                        <td class="px-4 py-3 text-sm font-medium text-stone-800">${item.firm}</td>
+                        <td class="px-4 py-3 text-sm text-stone-600">${item.rating}</td>
+                        <td class="px-4 py-3 text-sm text-stone-500 line-through">${item.oldPrice}</td>
+                        <td class="px-4 py-3 text-sm font-bold text-green-700">${item.newPrice}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            if (filterInput) {
+                filterInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    const filteredData = analystData.filter(item => 
+                        item.firm.toLowerCase().includes(query)
+                    );
+                    renderTable(filteredData);
+                });
+            }
+
+            // 初始載入表格
+            renderTable(analystData);
+
+        });
+    </script>
+</body>
+</html>
