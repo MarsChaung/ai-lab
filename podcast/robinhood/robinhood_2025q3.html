@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Robinhood 2025Q3財報分析報告</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 基礎字體設定 */
+        body {
+            font-family: "Inter", "Noto Sans TC", sans-serif;
+        }
+
+        /* 導航列 Active 狀態 */
+        .active-nav-link {
+            @apply text-sky-500 border-sky-500;
+        }
+
+        /* 導航列 Inactive 狀態 */
+        .inactive-nav-link {
+            @apply text-gray-500 border-transparent hover:text-gray-900;
+        }
+
+        /* Chart.js 容器的響應式處理 */
+        .chart-container {
+            position: relative;
+            height: 400px; /* 您可以根據需要調整高度 */
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-900 antialiased">
+
+    <!-- 頂部導航列 (Header) -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-sky-600">Robinhood 2025Q3</span>
+                </div>
+                
+                <!-- 電腦版選單 (Desktop Menu) -->
+                <div class="hidden md:flex md:items-center md:space-x-4">
+                    <a href="#overview" class="inactive-nav-link border-b-2 px-3 py-2 text-sm font-medium" data-target="overview">營運概況</a>
+                    <a href="#core-business" class="inactive-nav-link border-b-2 px-3 py-2 text-sm font-medium" data-target="core-business">核心業務</a>
+                    <a href="#strategy" class="inactive-nav-link border-b-2 px-3 py-2 text-sm font-medium" data-target="strategy">營運策略</a>
+                    <a href="#financials" class="inactive-nav-link border-b-2 px-3 py-2 text-sm font-medium" data-target="financials">財務表現</a>
+                    <a href="#competition" class="inactive-nav-link border-b-2 px-3 py-2 text-sm font-medium" data-target="competition">競爭分析</a>
+                    <a href="#risks" class="inactive-nav-link border-b-2 px-3 py-2 text-sm font-medium" data-target="risks">風險因素</a>
+                    <a href="#investment" class="inactive-nav-link border-b-2 px-3 py-2 text-sm font-medium" data-target="investment">綜合評估</a>
+                </div>
+                
+                <!-- 手機版選單按鈕 (Mobile Menu Button) -->
+                <div class="md:hidden flex items-center">
+                    <button id="menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Icon (Hamburger) -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Icon (Close) -->
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 手機版選單 (Mobile Menu) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="overview">營運概況</a>
+                <a href="#core-business" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="core-business">核心業務</a>
+                <a href="#strategy" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="strategy">營運策略</a>
+                <a href="#financials" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="financials">財務表現</a>
+                <a href="#competition" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="competition">競爭分析</a>
+                <a href="#risks" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="risks">風險因素</a>
+                <a href="#investment" class="inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="investment">綜合評估</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區塊 -->
+    <main class="max-w-7xl mx-auto p-4 md:p-8 mt-4">
+
+        <!-- 區塊 1: 公司營運概況 -->
+        <section id="overview" class="mb-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <p class="text-lg text-stone-700 mb-6">
+                Robinhood (HOOD) 在 2025 年 Q3 展現了創紀錄的強勁增長，營收和每股盈餘 (EPS) 均實現三位數的年增長。儘管財報亮眼，但由於 CFO 退休及費用指引上調引發市場擔憂，股價出現非理性下跌。本報告認為，市場忽視了其強勁的基本面、全球擴張潛力以及最大的監管威脅已解除（SEC 調查結束）的重大利好。
+            </p>
+            <!-- 重點數據卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-sky-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-xl font-semibold text-sky-800">總淨營收</h3>
+                    <p class="text-4xl font-bold text-sky-600 my-2">$12.7 億</p>
+                    <p class="text-lg font-medium text-sky-700">+100% (YoY)</p>
+                </div>
+                <div class="bg-green-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-xl font-semibold text-green-800">稀釋後 EPS</h3>
+                    <p class="text-4xl font-bold text-green-600 my-2">$0.61</p>
+                    <p class="text-lg font-medium text-green-700">+259% (YoY)</p>
+                </div>
+                <div class="bg-yellow-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-xl font-semibold text-yellow-800">Gold 訂閱數</h3>
+                    <p class="text-4xl font-bold text-yellow-600 my-2">390 萬</p>
+                    <p class="text-lg font-medium text-yellow-700">+77% (YoY)</p>
+                </div>
+                <div class="bg-purple-100 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-xl font-semibold text-purple-800">平台總資產 (TPA)</h3>
+                    <p class="text-4xl font-bold text-purple-600 my-2">$3330 億</p>
+                    <p class="text-lg font-medium text-purple-700">+119% (YoY)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 2: 核心業務剖析 -->
+        <section id="core-business" class="mb-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心業務剖析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-sky-700 mb-3">1. 捆綁個人金融服務</h3>
+                    <p class="text-stone-700 mb-4">
+                        Robinhood 的核心戰略是將經紀、銀行、借貸、退休和財富管理整合到一個統一的生態系中。
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li><strong>Robinhood Gold:</strong> 生態系的核心，如同金融界的 "Amazon Prime"。Q3 訂閱數年增 77%，成功將免費用戶轉化為高價值付費用戶。</li>
+                        <li><strong>財富管理:</strong> Robinhood Strategies (主動管理) AUM 已超 10 億美元；退休金帳戶 AUC 年增 144%，達 242 億美元，顯示用戶信任其為長期儲蓄平台。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-sky-700 mb-3">2. 收入多元化 (11 條業務線)</h3>
+                    <p class="text-stone-700 mb-4">
+                        公司宣布現擁有 11 條獨立業務線，每條均能產生 1 億美元以上的年化收入。
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li><strong>新成員:</strong> 「預測市場」和「Bitstamp」是 Q3 最新加入的業務線。</li>
+                        <li><strong>風險多元化:</strong> 成功降低了對 PFOF 和市場波動的依賴。Bitstamp 帶來機構與國際收入；「預測市場」的收入與股市波動完全不相關；Gold 則提供了穩定的經常性收入。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 3: 營運策略分析 -->
+        <section id="strategy" class="mb-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運策略分析 (四大催化劑)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 催化劑 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">1. Bitstamp 與全球化</h3>
+                    <p class="text-stone-700 flex-grow">收購 Bitstamp 使 HOOD 立即獲得全球足跡、50+ 監管牌照和成熟的機構客戶群。這是對美國監管不確定性的「戰略對沖」，將增長重心轉移到監管更清晰的歐洲和亞洲。</p>
+                </div>
+                <!-- 催化劑 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">2. 預測市場 (爆發性)</h3>
+                    <p class="text-stone-700 flex-grow">Q3 交易量翻倍，10 月單月交易量已超 Q3 總和。此業務與股市無關，提供非相關性收入來源，是公司不惜上調費用指引也要加碼投資的領域。</p>
+                </div>
+                <!-- 催化劑 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">3. Robinhood Banking</h3>
+                    <p class="text-stone-700 flex-grow">已開始推出。這是打造「金融超級應用」的關鍵閉環，旨在將用戶的薪資存款帳戶納入生態系，極大提升客戶終身價值 (LTV)。</p>
+                </div>
+                <!-- 催化劑 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">4. Robinhood Ventures</h3>
+                    <p class="text-stone-700 flex-grow">即將推出，允許散戶投資私募公司。這回歸了「金融民主化」的初心，並開闢了一個全新的、高利潤潛力的新資產類別。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 4: 財務表現細節 (Chart.js) -->
+        <section id="financials" class="mb-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現細節 (Q3 2025 vs Q3 2024)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 5: 產業競爭分析 (Interactive Table) -->
+        <section id="competition" class="mb-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業競爭分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="text-stone-700 mb-4">Robinhood 位於一個獨特的十字路口，它同時在四個象限作戰。其核心護城河是掌握了「Z 世代」和「千禧一代」的人口統計學優勢，成為「偉大財富轉移」浪潮的守門人。</p>
+                
+                <!-- 表格篩選器 -->
+                <div class="mb-4">
+                    <label for="table-filter" class="block text-sm font-medium text-stone-700 mb-1">篩選比較維度:</label>
+                    <input type="text" id="table-filter" class="w-full md:w-1/2 p-2 border border-stone-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500" placeholder="輸入關鍵字 (例如: 客群、加密)">
+                </div>
+
+                <!-- 互動表格容器 -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">比較維度</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Robinhood</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">傳統券商 (Fidelity/Schwab)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">專業平台 (IBKR)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">加密交易所 (Coinbase)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competition-table-body" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態載入 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 6: 風險和不確定性 -->
+        <section id="risks" class="mb-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險和不確定性</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <h3 class="text-xl font-bold text-red-700 mb-3">PFOF 監管風險</h3>
+                    <p class="text-stone-700">訂單流支付 (PFOF) 模式仍是監管機構關注的焦點。儘管 SEC 加密調查已結束，但 PFOF 的任何禁令都將對其營收模式產生重大打擊。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-yellow-500">
+                    <h3 class="text-xl font-bold text-yellow-700 mb-3">市場波動依賴</h3>
+                    <p class="text-stone-700">儘管正努力多元化，但期權和加密貨幣交易收入仍高度依賴散戶的交易熱情和市場波動。平靜的熊市將嚴重打擊其核心收入。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-orange-500">
+                    <h3 class="text-xl font-bold text-orange-700 mb-3">多線作戰執行風險</h3>
+                    <p class="text-stone-700">公司正試圖同時進行多項高難度任務：CFO 交接、整合 Bitstamp、推出 Banking 和 Ventures。任何環節的執行失敗都可能導致增長停滯。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 區塊 7: 關鍵數據匯總及財務指引 -->
+        <section id="guidance" class="mb-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據匯總及財務指引</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-sky-700 mb-3">費用指引上調 (市場為何拋售?)</h3>
+                    <p class="text-stone-700 mb-4">
+                        市場將費用指引上調解讀為「成本失控」。然而，深入分析財報會議後發現，這是「戰略性加碼」而非「被動膨脹」。
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li><strong>甜蜜負擔:</strong> 業績遠超目標，導致員工獎金撥備增加。</li>
+                        <li><strong>一次性支出:</strong> CEO 績效 RSU 歸屬產生的非預期薪資稅。</li>
+                        <li><strong>主動投資:</strong> 決定「趁熱打鐵」，加大對「預測市場」和「Ventures」這兩個高增長領域的投資。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-green-700 mb-3">重大利好：SEC 結束加密調查</h3>
+                    <p class="text-stone-700 mb-4">
+                        市場似乎忽視了 2025 年初的重大利好：SEC *正式結束* 對 Robinhood Crypto (RHC) 的調查，且 *不採取任何執法行動*。
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li><strong>最大威脅解除:</strong> 2024 年的 Wells Notice 曾是公司最大的生存威脅之一（加密業務佔 Q3 收入 21%）。</li>
+                        <li><strong>合規策略勝利:</strong> SEC 的「不行動」決定，完全驗證了 Robinhood *合規優先* 策略的正確性（主動不上架 SEC 可能視為證券的資產）。</li>
+                        <li><strong>結論:</strong> HOOD 最大的監管風險已顯著降低。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 8: 綜合評估 -->
+        <section id="investment" class="mb-12 scroll-mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <p class="text-lg text-stone-700 mb-6">
+                Q3 財報在營運層面無可挑剔。股價下跌是短視的情緒反應，市場懲罰 HOOD 投資未來，卻忽視其核心增長和已解除的監管威脅。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-500">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-3">對於已持有股票的投資人</h3>
+                    <p class="text-stone-700 mb-4">
+                        觸發拋售的「魔鬼細節」並未改變您的長期投資論點。CFO 交接是有序的，費用上調是主動的增長投資。Q3 的井噴數據和 Bitstamp 戰略應增強您的信心。
+                    </p>
+                    <p class="text-3xl font-bold text-blue-600 text-center mt-4">持有 (Hold)<br>或在非理性下跌時加碼</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-green-500">
+                    <h3 class="text-2xl font-bold text-green-700 mb-3">對於尚未持有股票的投資人</h3>
+                    <p class="text-stone-700 mb-4">
+                        市場提供了一個罕見的禮物：一家營收增長 100%、EPS 增長 259%、剛擺脫最大監管威脅的公司，其股價卻因短期情緒而打折。
+                    </p>
+                    <p class="text-3xl font-bold text-green-600 text-center mt-4">買入 (Buy)<br>利用市場非理性建立倉位</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁腳 (Footer) -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Robinhood 2025Q3財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Robinhood 相關公開資料 (2025年11月11日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 區塊 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. 手機版選單 (Mobile Menu) ---
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icons = menuButton.querySelectorAll('svg');
+            
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                icons[0].classList.toggle('hidden'); // Hamburger
+                icons[1].classList.toggle('hidden'); // Close
+            });
+
+            // 點擊手機選單連結後自動關閉選單
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    icons[0].classList.remove('hidden');
+                    icons[1].classList.add('hidden');
+                });
+            });
+
+            // --- 2. 導航列 Active 狀態 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[data-target]');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 // 40% 的區塊可見時觸發
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active-nav-link', link.dataset.target === id);
+                            link.classList.toggle('inactive-nav-link', link.dataset.target !== id);
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- 3. 財務表現圖表 (Chart.js) ---
+            const ctx = document.getElementById('revenueChart');
+            if (ctx) {
+                const revenueChart = new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Q3 2024', 'Q3 2025'],
+                        datasets: [
+                            {
+                                label: '總淨營收 (百萬美元)',
+                                data: [637, 1274],
+                                backgroundColor: 'rgba(59, 130, 246, 0.7)', // sky-600
+                                borderColor: 'rgba(59, 130, 246, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: '淨利潤 (百萬美元)',
+                                data: [150, 556],
+                                backgroundColor: 'rgba(34, 197, 94, 0.7)', // green-500
+                                borderColor: 'rgba(34, 197, 94, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: '交易收入 (百萬美元)',
+                                data: [319, 730],
+                                backgroundColor: 'rgba(245, 158, 11, 0.7)', // yellow-500
+                                borderColor: 'rgba(245, 158, 11, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Robinhood 關鍵財務指標 (單位: 百萬美元)',
+                                font: { size: 18 }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += '$' + context.parsed.y + ' M';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value + ' M';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- 4. 產業競爭分析互動表格 (Interactive Table) ---
+            const competitionData = [
+                {
+                    dimension: "核心客群",
+                    robinhood: "新手、Z 世代、行動優先的投資者",
+                    fidelity: "尋求全方位服務的投資者、退休人員",
+                    ibkr: "專業交易員、機構、高頻交易者",
+                    coinbase: "加密貨幣純粹主義者、加密新手"
+                },
+                {
+                    dimension: "產品廣度",
+                    robinhood: "良好 (股票、期權、加密、IRA)",
+                    fidelity: "極廣 (包括 401k, 529, 年金, 信託)",
+                    ibkr: "極廣 (全球市場、期貨、外匯、債券)",
+                    coinbase: "窄 (僅限加密貨幣相關產品)"
+                },
+                {
+                    dimension: "專業工具",
+                    robinhood: "基礎 (90+ 指標, 無模擬交易)",
+                    fidelity: "強大 (豐富的第三方研究、篩選器)",
+                    ibkr: "頂級 (155+ 指標, 桌面平台, API)",
+                    coinbase: "基礎 (Coinbase Advanced 提供較多工具)"
+                },
+                {
+                    dimension: "加密服務",
+                    robinhood: "一站式 (幣種精選 15+, 無質押)",
+                    fidelity: "有限或無 (Fidelity 提供少量)",
+                    ibkr: "提供，但非核心",
+                    coinbase: "深度 (幣種極多 260+, 提供質押)"
+                },
+                {
+                    dimension: "核心優勢",
+                    robinhood: "用戶體驗 (UX)、零碎股、年輕客群",
+                    fidelity: "信任、資產廣度、客戶服務",
+                    ibkr: "功能強大、低保證金利率",
+                    coinbody: "加密專注、幣種選擇多"
+                }
+            ];
+
+            const tableBody = document.getElementById('competition-table-body');
+            const filterInput = document.getElementById('table-filter');
+
+            // 渲染表格
+            const renderTable = (data) => {
+                if (!tableBody) return;
+                tableBody.innerHTML = ''; // 清空表格
+                
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-stone-500">找不到符合條件的資料</td></tr>';
+                    return;
+                }
+
+                data.forEach(item => {
+                    const row = `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.dimension}</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-stone-700">${item.robinhood}</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-stone-700">${item.fidelity}</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-stone-700">${item.ibkr}</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-stone-700">${item.coinbase}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            };
+
+            // 篩選表格
+            const filterTable = () => {
+                const query = filterInput.value.toLowerCase();
+                const filteredData = competitionData.filter(item => {
+                    return Object.values(item).some(value => 
+                        value.toLowerCase().includes(query)
+                    );
+                });
+                renderTable(filteredData);
+            };
+
+            // 初始渲染
+            renderTable(competitionData);
+
+            // 監聽篩選器輸入
+            if (filterInput) {
+                filterInput.addEventListener('input', filterTable);
+            }
+
+        });
+    </script>
+</body>
+</html>
