@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-ETF 投資策略報告</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義樣式 */
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        
+        /* 導航列 Active 狀態 */
+        .active-nav-link {
+            color: #0284c7; /* sky-600 */
+            border-bottom: 2px solid #0284c7; /* sky-600 */
+        }
+        
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+
+        /* Chart.js 容器，確保響應式 */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+
+        /* 手機版選單過渡效果 */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800">
+
+    <!-- 
+      ==================================================
+      Header / Navigation
+      ==================================================
+    -->
+    <header class="bg-white shadow-md sticky top-0 z-50 w-full">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <h1 class="text-2xl font-bold text-sky-600">ETF 投資策略報告</h1>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex md:space-x-8">
+                    <a href="#section1" class="inactive-nav-link font-medium py-4 px-2 hover:text-sky-600 transition duration-150 ease-in-out">核心分野</a>
+                    <a href="#section2" class="inactive-nav-link font-medium py-4 px-2 hover:text-sky-600 transition duration-150 ease-in-out">市場轉變</a>
+                    <a href="#section3" class="inactive-nav-link font-medium py-4 px-2 hover:text-sky-600 transition duration-150 ease-in-out">專業篩選</a>
+                    <a href="#section4" class="inactive-nav-link font-medium py-4 px-2 hover:text-sky-600 transition duration-150 ease-in-out">生命週期</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-700 hover:text-sky-600 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Icon (Hamburger) -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Icon (Close) - 預設隱藏 -->
+                        <!-- <svg class="hidden h-6 w-6" ... > -->
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Dropdown) -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg absolute w-full z-40">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#section1" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">核心分野</a>
+                <a href="#section2" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">市場轉變</a>
+                <a href="#section3" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">專業篩選</a>
+                <a href="#section4" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">生命週期</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 
+      ==================================================
+      Main Content Area
+      ==================================================
+    -->
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- 
+          ==================================================
+          Section 1: 核心分野：被動型 vs. 主動型
+          ==================================================
+        -->
+        <section id="section1" class="my-12 scroll-mt-20">
+            <!-- Section Title -->
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                I. 核心分野：被動型ETF vs. 主動型ETF
+            </h2>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Card 1: 策略哲學 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">策略哲學</h3>
+                    <p class="text-stone-600"><strong class="text-stone-900">被動型：</strong> 複製市場 (Beta)。自動追蹤指數，獲取市場平均回報。</p>
+                    <hr class="my-3">
+                    <p class="text-stone-600"><strong class="text-stone-900">主動型：</strong> 戰勝市場 (Alpha)。經理人主動選股，試圖創造超額回報。</p>
+                </div>
+                <!-- Card 2: 成本結構 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">成本結構 (費用率)</h3>
+                    <p class="text-stone-600"><strong class="text-stone-900">被動型：</strong> 極低。自動化管理，成本低。 (例: VOO 0.03%)</p>
+                    <hr class="my-3">
+                    <p class="text-stone-600"><strong class="text-stone-900">主動型：</strong> 較高。需支付經理與研究團隊費用。 (例: ARKK 0.75%+)</p>
+                </div>
+                <!-- Card 3: 透明度 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">透明度</h3>
+                    <p class="text-stone-600"><strong class="text-stone-900">被動型：</strong> 極高。通常每日揭露完整持股，所見即所得。</p>
+                    <hr class="my-3">
+                    <p class="text-stone-600"><strong class="text-stone-900">主動型：</strong> 較低。為保護策略，可採「半透明」模式，資訊不對稱。</p>
+                </div>
+                <!-- Card 4: 稅務效率 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">稅務效率</h3>
+                    <p class="text-stone-600"><strong class="text-stone-900">被動型：</strong> 高。低週轉率，且有實物贖回機制，不易觸發資本利得稅。</p>
+                    <hr class="my-3">
+                    <p class="text-stone-600"><strong class="text-stone-900">主動型：</strong> 低。高週轉率易實現利得，稅負可能轉嫁給所有持有人。</p>
+                </div>
+            </div>
+
+            <!-- Chart.js - 費用率比較 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-4 text-center">被動型 vs. 主動型 ETF 費用率比較</h3>
+                <div class="chart-container">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          ==================================================
+          Section 2: 市場的轉變：ETF日益普及
+          ==================================================
+        -->
+        <section id="section2" class="my-12 scroll-mt-20">
+            <!-- Section Title -->
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                II. 市場的轉變：ETF日益普及的結構性優勢
+            </h2>
+            <p class="text-lg text-stone-700 mb-6">投資者轉向ETF，是因為它相較於傳統共同基金，擁有壓倒性的結構優勢，尤其在成本與稅務上。</p>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <!-- Card 1: 交易靈活性 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">交易靈活性 (vs. 共同基金)</h3>
+                    <p class="text-stone-600"><strong class="text-stone-900">ETF：</strong> 像股票，盤中隨時可交易，可使用限價單、止損單。</p>
+                    <hr class="my-3">
+                    <p class="text-stone-600"><strong class="text-stone-900">共同基金：</strong> 每天僅在收盤後以淨值 (NAV) 結算一次。</p>
+                </div>
+                <!-- Card 2: 成本結構 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-sky-700 mb-3">成本結構</h3>
+                    <p class="text-stone-600"><strong class="text-stone-900">ETF：</strong> 費用率通常遠低於主動管理的共同基金 (尤其被動型)。</p>
+                    <hr class="my-3">
+                    <p class="text-stone-600"><strong class="text-stone-900">共同基金：</strong> 較高的管理費和營運成本。</p>
+                </div>
+                <!-- Card 3: 稅務效率 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 bg-sky-50 border border-sky-200">
+                    <h3 class="font-bold text-xl text-sky-800 mb-3">關鍵優勢：稅務效率</h3>
+                    <p class="text-stone-700"><strong class="text-sky-900">ETF：</strong> 透過「實物申購/贖回」機制，基金內部交易不觸發資本利得。投資者*自己賣出*時才需繳稅，實現最大稅收延遞。</p>
+                    <hr class="my-3 border-sky-200">
+                    <p class="text-stone-700"><strong class="text-sky-900">共同基金：</strong> 其他投資者贖回時，基金經理賣股變現，可能將資本利得稅*轉嫁*給*所有*持有人。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          ==================================================
+          Section 3: 美國被動型ETF的專業篩選
+          ==================================================
+        -->
+        <section id="section3" class="my-12 scroll-mt-20">
+            <!-- Section Title -->
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                III. 美國被動型ETF的專業篩選框架
+            </h2>
+            
+            <!-- 3-Step Process Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <span class="text-4xl font-bold text-sky-600 opacity-50">01</span>
+                    <h3 class="font-bold text-xl text-stone-800 mt-2 mb-3">確立投資焦點</h3>
+                    <p class="text-stone-600">首先決定資產類別（股票/債券）、地理區域（美國/全球）和策略目標（整體市場/特定行業）。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <span class="text-4xl font-bold text-sky-600 opacity-50">02</span>
+                    <h3 class="font-bold text-xl text-stone-800 mt-2 mb-3">選擇正確的「指數」</h3>
+                    <p class="text-stone-600">這是最重要的一步。理解指數的編制方法（如 S&P 500 vs. Nasdaq-100），因為指數決定了回報特徵。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <span class="text-4xl font-bold text-sky-600 opacity-50">03</span>
+                    <h3 class="font-bold text-xl text-stone-800 mt-2 mb-3">評估ETF客觀標準</h3>
+                    <p class="text-stone-600">在追蹤同一指數的ETF中，比較：費用率 (越低越好)、流動性 (AUM/交易量)、追蹤誤差。</p>
+                </div>
+            </div>
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-4">美國核心指數ETF 互動比較</h3>
+                <p class="text-stone-600 mb-4">使用下方的搜尋框，即時篩選ETF代碼、名稱、指數或適合投資者類型。</p>
+                
+                <!-- Filter Input -->
+                <div class="mb-4">
+                    <input type="text" id="filterInput" placeholder="在此輸入關鍵字 (如 VOO, S&P 500, 長期...) " class="w-full p-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+
+                <!-- Table Container -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-16 md:top-0">
+                            <tr>
+                                <th class="p-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">代碼</th>
+                                <th class="p-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">名稱</th>
+                                <th class="p-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">追蹤指數</th>
+                                <th class="p-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">費用率</th>
+                                <th class="p-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">AUM</th>
+                                <th class="p-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">最大回撤 (5Y)</th>
+                                <th class="p-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">適合投資者</th>
+                            </tr>
+                        </thead>
+                        <tbody id="etfTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- Data will be populated by JavaScript -->
+                            <tr><td colspan="7" class="p-4 text-center text-stone-500">載入資料中...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          ==================================================
+          Section 4: 生命週期投資法
+          ==================================================
+        -->
+        <section id="section4" class="my-12 scroll-mt-20">
+            <!-- Section Title -->
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                IV. 生命週期投資法：30、40、50歲的ETF資產配置
+            </h2>
+            <p class="text-lg text-stone-700 mb-6">資產配置是影響長期回報的最重要決策。隨著壽命延長，現代法則建議使用「110 減去年齡」作為股票配置的參考基準。</p>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Card 1: 30s -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-400">
+                    <h3 class="font-bold text-2xl text-emerald-700 mb-3">30歲階段 (積極增長期)</h3>
+                    <p class="text-stone-600 mb-4">投資期限極長 (30+ 年)，首要目標是「最大化複利增長」，可承受較高短期風險。</p>
+                    <h4 class="font-semibold text-lg text-stone-800">建議配置 (110 - 30):</h4>
+                    <p class="text-3xl font-bold text-stone-900">80% 股票 / 20% 債券</p>
+                </div>
+                <!-- Card 2: 40s -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-400">
+                    <h3 class="font-bold text-2xl text-sky-700 mb-3">40歲階段 (穩健增長期)</h3>
+                    <p class="text-stone-600 mb-4">投資期限仍長 (20+ 年)，處於收入巔峰期，目標轉向「平衡增長與風險管理」。</p>
+                    <h4 class="font-semibold text-lg text-stone-800">建議配置 (110 - 40):</h4>
+                    <p class="text-3xl font-bold text-stone-900">70% 股票 / 30% 債券</p>
+                </div>
+                <!-- Card 3: 50s -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-400">
+                    <h3 class="font-bold text-2xl text-amber-700 mb-3">50歲階段 (退休準備期)</h3>
+                    <p class="text-stone-600 mb-4">接近退休 (5-15 年)，目標明確轉向「資本保值」與「規劃穩定現金流」。</p>
+                    <h4 class="font-semibold text-lg text-stone-800">建議配置 (110 - 50):</h4>
+                    <p class="text-3xl font-bold text-stone-900">60% 股票 / 40% 債券</p>
+                </div>
+            </div>
+
+            <!-- Chart.js - 資產配置 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-2xl font-semibold text-stone-800 mb-4 text-center">生命週期資產配置 (依 110-年齡 法則)</h3>
+                <div class="chart-container">
+                    <canvas id="allocationChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- 
+      ==================================================
+      Footer
+      ==================================================
+    -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-ETF 投資策略報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 ETF 相關公開資料 (2025年11月18日)。</p>
+        </div>
+    </footer>
+
+
+    <!-- 
+      ==================================================
+      JavaScript Logic
+      ==================================================
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 點擊選單連結時自動關閉選單
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 點擊頁面其他地方關閉選單
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && e.target !== mobileMenuButton && !mobileMenuButton.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+            // --- Intersection Observer for Active Nav Link ---
+            const sections = document.querySelectorAll('main section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            const activeClass = 'active-nav-link';
+            const inactiveClass = 'inactive-nav-link';
+
+            // 初始狀態設定
+            navLinks.forEach(link => link.classList.add(inactiveClass));
+            if (navLinks.length > 0) {
+                navLinks[0].classList.add(activeClass);
+                navLinks[0].classList.remove(inactiveClass);
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        navLinks.forEach(link => {
+                            link.classList.remove(activeClass);
+                            link.classList.add(inactiveClass);
+                            
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add(activeClass);
+                                link.classList.remove(inactiveClass);
+                            }
+                        });
+                    }
+                });
+            }, { 
+                rootMargin: '-20% 0px -70% 0px', // 調整觸發區域，在視窗中央時觸發
+                threshold: 0.1 
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+
+            // --- Interactive Table Logic ---
+            const etfData = [
+                // 數據來自報告 [表3]
+                { code: "VOO", name: "Vanguard S&P 500", index: "S&P 500", expense: "0.03%", aum: "$1.41T", drawdown: "-24.53%", fit: "長期核心持股" },
+                { code: "SPY", name: "SPDR S&P 500", index: "S&P 500", expense: "0.09%", aum: "$553.7B", drawdown: "-33.72%", fit: "高頻交易者、機構" },
+                { code: "QQQ", name: "Invesco QQQ Trust", index: "Nasdaq-100", expense: "0.20%", aum: "$385.7B", drawdown: "-35.12%", fit: "積極型、衛星配置" },
+                { code: "VTI", name: "Vanguard Total Stock Market", index: "CRSP US Total Market", expense: "0.03%", aum: "$1.4T", drawdown: "-35.00%", fit: "長期核心持股、極致多元化" }
+            ];
+
+            const filterInput = document.getElementById('filterInput');
+            const etfTableBody = document.getElementById('etfTableBody');
+
+            function renderTable(data) {
+                etfTableBody.innerHTML = ''; // 清空表格
+                if (data.length === 0) {
+                    etfTableBody.innerHTML = '<tr><td colspan="7" class="text-center p-4 text-stone-500">未找到符合條件的資料</td></tr>';
+                    return;
+                }
+                
+                data.forEach(etf => {
+                    const row = `
+                        <tr class="border-b border-stone-200 hover:bg-stone-50 transition duration-150">
+                            <td class="p-3 font-medium text-sky-700">${etf.code}</td>
+                            <td class="p-3 text-stone-800">${etf.name}</td>
+                            <td class="p-3 text-stone-600">${etf.index}</td>
+                            <td class="p-3 text-stone-700 text-right">${etf.expense}</td>
+                            <td class="p-3 text-stone-700 text-right">${etf.aum}</td>
+                            <td class="p-3 text-red-600 text-right">${etf.drawdown}</td>
+                            <td class="p-3 text-stone-700">${etf.fit}</td>
+                        </tr>
+                    `;
+                    etfTableBody.innerHTML += row;
+                });
+            }
+
+            filterInput.addEventListener('keyup', () => {
+                const searchTerm = filterInput.value.toLowerCase();
+                const filteredData = etfData.filter(etf => 
+                    etf.code.toLowerCase().includes(searchTerm) ||
+                    etf.name.toLowerCase().includes(searchTerm) ||
+                    etf.index.toLowerCase().includes(searchTerm) ||
+                    etf.fit.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+            renderTable(etfData); // 初始載入完整表格
+
+
+            // --- Chart.js Logic ---
+            try {
+                // Chart 1: 費用率比較 (來自 Section I-B)
+                const ctxExpense = document.getElementById('expenseChart').getContext('2d');
+                new Chart(ctxExpense, {
+                    type: 'bar',
+                    data: {
+                        labels: ['VOO (被動型)', 'BDJ (主動型)', 'ARKK (主動型)'],
+                        datasets: [{
+                            label: '費用率 (Expense Ratio %)',
+                            data: [0.03, 0.88, 0.75], // 數據來自報告
+                            backgroundColor: [
+                                'rgba(52, 211, 153, 0.7)', // emerald-400
+                                'rgba(248, 113, 113, 0.7)', // red-400
+                                'rgba(251, 146, 60, 0.7)'  // orange-400
+                            ],
+                            borderColor: [
+                                'rgba(16, 185, 129, 1)', // emerald-600
+                                'rgba(239, 68, 68, 1)', // red-600
+                                'rgba(249, 115, 22, 1)' // orange-600
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { 
+                                beginAtZero: true, 
+                                ticks: { 
+                                    callback: (value) => value + '%',
+                                    font: { size: 12 }
+                                } 
+                            },
+                            x: {
+                                ticks: { font: { size: 14 } }
+                            }
+                        },
+                        plugins: {
+                            title: { 
+                                display: true, 
+                                text: '被動型 vs. 主動型 ETF 費用率比較 (範例)', 
+                                font: { size: 18, weight: '600' },
+                                padding: { top: 10, bottom: 20 }
+                            },
+                            legend: { display: false }
+                        }
+                    }
+                });
+
+                // Chart 2: 資產配置 (來自 Section IV / 表4)
+                const ctxAllocation = document.getElementById('allocationChart').getContext('2d');
+                new Chart(ctxAllocation, {
+                    type: 'bar',
+                    data: {
+                        labels: ['30歲 (積極增長)', '40歲 (穩健增長)', '50歲 (退休準備)'],
+                        datasets: [
+                            {
+                                label: '股票 (%)',
+                                data: [80, 70, 60],
+                                backgroundColor: 'rgba(56, 189, 248, 0.8)', // sky-400
+                                borderColor: 'rgba(14, 165, 233, 1)', // sky-500
+                                borderWidth: 1
+                            },
+                            {
+                                label: '債券 (%)',
+                                data: [20, 30, 40],
+                                backgroundColor: 'rgba(168, 162, 158, 0.8)', // stone-400
+                                borderColor: 'rgba(120, 113, 108, 1)', // stone-500
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { 
+                                stacked: true,
+                                ticks: { font: { size: 14 } }
+                            },
+                            y: { 
+                                stacked: true, 
+                                max: 100, 
+                                ticks: { 
+                                    callback: (value) => value + '%',
+                                    font: { size: 12 }
+                                } 
+                            }
+                        },
+                        plugins: {
+                            title: { 
+                                display: true, 
+                                text: '生命週期資產配置 (依 110-年齡 法則)', 
+                                font: { size: 18, weight: '600' },
+                                padding: { top: 10, bottom: 20 }
+                            },
+                            tooltip: { 
+                                mode: 'index',
+                                intersect: false
+                            },
+                            legend: {
+                                position: 'bottom',
+                                labels: { font: { size: 14 } }
+                            }
+                        }
+                    }
+                });
+            
+            } catch (e) {
+                console.error("Chart.js 初始化失敗: ", e);
+            }
+
+        });
+    </script>
+
+</body>
+</html>
