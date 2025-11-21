@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI泡沫化風險研究報告</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Config for Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sky: {
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        },
+                        stone: {
+                            800: '#292524',
+                            50: '#fafaf9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for Active Navigation */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: bold;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        
+        /* Table Scrollbar Customization */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-gray-700 leading-relaxed">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-stone-800 tracking-tight">
+                        <span class="text-sky-500">AI</span> AI泡沫化風險研究報告
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#executive-summary" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">執行摘要</a>
+                    <a href="#market-sentiment" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">市場氛圍</a>
+                    <a href="#market-sentiment" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">估值數據</a>
+                    <a href="#company-matrix" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">企業監控</a>
+                    <a href="#investment-strategy" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-stone-800 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#executive-summary" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-500 hover:bg-gray-50">執行摘要</a>
+                <a href="#market-sentiment" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-500 hover:bg-gray-50">市場氛圍</a>
+                <a href="#market-sentiment" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-500 hover:bg-gray-50">估值數據</a>
+                <a href="#company-matrix" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-500 hover:bg-gray-50">企業監控</a>
+                <a href="#investment-strategy" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-500 hover:bg-gray-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-800 mb-4">2025年第四季全球權益策略特別報告</h1>
+            <p class="text-xl text-gray-500">人工智慧市場泡沫化風險之多維度深度剖析與2026年投資戰略部署</p>
+            <div class="mt-4 text-sm text-gray-400 font-mono">報告日期：2025年11月21日</div>
+        </header>
+
+        <!-- Section 1: Executive Summary & Probabilities -->
+        <section id="executive-summary" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">1. 執行摘要與風險矩陣</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Key Stats Cards -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Shiller P/E</h3>
+                    <p class="text-4xl font-bold text-stone-800 mt-2">40x</p>
+                    <p class="text-sm text-red-500 mt-1">↑ 歷史警戒區 (Avg 17x)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                    <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">NVIDIA Q3 FY26 YoY</h3>
+                    <p class="text-4xl font-bold text-stone-800 mt-2">+62%</p>
+                    <p class="text-sm text-emerald-600 mt-1">營收 570 億美元</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Hyperscaler Capex 2025</h3>
+                    <p class="text-4xl font-bold text-stone-800 mt-2">$400B+</p>
+                    <p class="text-sm text-gray-500 mt-1">Microsoft, Google, Meta, Amazon</p>
+                </div>
+
+                <!-- Text Content -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">市場現況：優質泡沫 (Quality Bubble)</h3>
+                    <p class="mb-4">
+                        截至2025年11月，AI市場並非2000年式的無獲利泡沫，而是建立在高利潤與現金流基礎上的「優質泡沫」。然而，市場焦點已從「FOMO」轉向「ROIC」審查。NVIDIA 財報雖優於預期，但市場反應平淡，顯示估值容錯率已降至極低。
+                    </p>
+                    <p>
+                        <strong>核心判斷：</strong>短期崩盤機率低，但中期（6-12個月）面臨估值修正風險極高。Shiller P/E 已達 40 倍，透支未來成長。
+                    </p>
+                </div>
+
+                <!-- Probability Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 w-full text-left">2026 市場情境機率</h3>
+                    <div class="w-full h-64 relative">
+                        <canvas id="probabilityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Market Sentiment & Valuation -->
+        <section id="market-sentiment" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2. 市場氛圍與估值壓力</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Sentiment Analysis -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">NVIDIA 財報後的「賣事實」</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                        <li><strong>預期管理的極限：</strong>僅"擊敗預期"已不足夠，市場渴求"毀滅性擊敗"。成長率從三位數回落至62%，引發動能投資者獲利了結。</li>
+                        <li><strong>宏觀干擾：</strong>美債殖利率維持 4.10% 高位 (Higher for Longer)，壓抑科技股估值模型。</li>
+                        <li><strong>機構對立：</strong>Ray Dalio 警告進入泡沫區域；Michael Burry 質疑折舊會計與需求真實性。</li>
+                    </ul>
+                </div>
+
+                <!-- Valuation Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">估值對比：Mag 7 vs S&P 500</h3>
+                    <div class="w-full">
+                         <canvas id="valuationChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 text-center">資料來源：Bloomberg, 報告整理</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Company Monitoring Matrix (Interactive Table) -->
+        <section id="company-matrix" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">3. 重點企業監控矩陣 (Interactive)</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Search Filter -->
+                <div class="p-4 border-b border-gray-100 bg-gray-50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <h3 class="text-lg font-semibold text-gray-700">產業鏈關鍵數據篩選</h3>
+                    <div class="relative w-full sm:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司名稱或代碼..." 
+                               class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm transition-all">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">代碼 (Ticker)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">公司名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">領域 (Sector)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">關鍵數據/狀態</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">策略觀點</th>
+                            </tr>
+                        </thead>
+                        <tbody id="companyTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Data populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 bg-gray-50 text-xs text-gray-500 text-right">
+                    * 資料截至 2025 Q3 財報
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Investment Strategy -->
+        <section id="investment-strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">4. 2026 投資戰略部署：槓鈴策略</h2>
+            
+            <p class="text-gray-600 mb-6 text-lg">建議放棄單邊做多，採取「槓鈴策略」(Barbell Strategy)，同時配置核心成長資產與防禦性資產。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Strategy Card: Offense -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-sky-100 rounded-full mr-3">
+                            <svg class="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">進攻端 (Growth)</h3>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">具備高護城河、高現金流的 AI 核心資產。</p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span><strong>基礎設施：</strong>NVIDIA (NVDA), TSMC (TSM)</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span><strong>軟體變現：</strong>Palantir (PLTR), ServiceNow</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span><strong>AI 能源：</strong>Constellation Energy (CEG)</li>
+                    </ul>
+                </div>
+
+                <!-- Strategy Card: Defense -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-yellow-500 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-yellow-100 rounded-full mr-3">
+                            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">防禦端 (Defense)</h3>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">與科技股低相關性，提供下檔保護。</p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><span class="text-yellow-500 mr-2">●</span><strong>公用事業：</strong>Utilities (XLU)</li>
+                        <li class="flex items-start"><span class="text-yellow-500 mr-2">●</span><strong>黃金：</strong>Gold - 對沖貨幣貶值與地緣風險</li>
+                        <li class="flex items-start"><span class="text-yellow-500 mr-2">●</span><strong>高品質債券：</strong>鎖定高殖利率</li>
+                    </ul>
+                </div>
+
+                <!-- Strategy Card: Phase 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-purple-500 hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-purple-100 rounded-full mr-3">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">戰術輪動：第二階段</h3>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">尋找「邊緣運算」與「實體經濟」結合的機會。</p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><span class="text-purple-500 mr-2">●</span><strong>Edge AI：</strong>Apple (iPhone 17), Qualcomm, MediaTek</li>
+                        <li class="flex items-start"><span class="text-purple-500 mr-2">●</span><strong>ASIC：</strong>Broadcom (AVGO), Marvell</li>
+                        <li class="flex items-start"><span class="text-purple-500 mr-2">●</span><strong>實體結合：</strong>藥物研發, 工業自動化</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI泡沫化風險研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 AI 相關公開資料 (2025年11月21日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Data Definitions ---
+        const companyData = [
+            { ticker: "NVDA", name: "NVIDIA", sector: "基礎設施 (Infrastructure)", status: "Hold/Watch", metric: "營收年增 62%", note: "成長放緩，基期過高" },
+            { ticker: "TSM", name: "TSMC (台積電)", sector: "製造 (Manufacturing)", status: "Buy", metric: "CoWoS 產能滿載", note: "供給側瓶頸，需求無虞" },
+            { ticker: "PLTR", name: "Palantir", sector: "軟體 (Software)", status: "Buy", metric: "商業營收 +121%", note: "AIP Bootcamp 證明 ROI" },
+            { ticker: "MSFT", name: "Microsoft", sector: "雲端 (Hyperscaler)", status: "Neutral", metric: "Capex >$80B/yr", note: "支出壓力大，Copilot 變現待觀察" },
+            { ticker: "META", name: "Meta", sector: "雲端 (Hyperscaler)", status: "Caution", metric: "Capex 上調至 $70B", note: "投資人對無止盡支出不耐" },
+            { ticker: "VRT", name: "Vertiv", sector: "能源/設備 (Energy)", status: "Buy", metric: "電力設備需求強勁", note: "AI 物理限制受惠股" },
+            { ticker: "AAPL", name: "Apple", sector: "邊緣運算 (Edge AI)", status: "Watch", metric: "iPhone 17 週期", note: "2026 年邊緣 AI 復甦題材" },
+            { ticker: "QCOM", name: "Qualcomm", sector: "晶片 (Semiconductor)", status: "Watch", metric: "AI 手機晶片", note: "推論向端側轉移受益者" },
+        ];
+
+        // --- 2. Chart.js Initialization ---
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Chart 1: Probability Pie Chart
+            const ctxProb = document.getElementById('probabilityChart').getContext('2d');
+            new Chart(ctxProb, {
+                type: 'doughnut',
+                data: {
+                    labels: ['劇烈修正 (Correction)', '全面崩盤 (Bust)', '持續狂熱 (Boom)'],
+                    datasets: [{
+                        data: [60, 20, 20],
+                        backgroundColor: ['#0ea5e9', '#ef4444', '#10b981'], // sky-500, red-500, emerald-500
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right' }
+                    }
+                }
+            });
+
+            // Chart 2: Valuation Bar Chart
+            const ctxVal = document.getElementById('valuationChart').getContext('2d');
+            new Chart(ctxVal, {
+                type: 'bar',
+                data: {
+                    labels: ['S&P 500 (長期平均)', 'S&P 500 (當前)', 'Microsoft', 'NVIDIA', 'Dot-com 高峰'],
+                    datasets: [{
+                        label: 'P/E Ratio (本益比)',
+                        data: [17, 25, 30, 40, 44], // Approximate data from report context
+                        backgroundColor: [
+                            '#d1d5db', // gray-300
+                            '#9ca3af', // gray-400
+                            '#38bdf8', // sky-400
+                            '#0284c7', // sky-600 (Highlight)
+                            '#fca5a5'  // red-300 (Comparison)
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: '倍數 (x)' } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + 'x';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- 3. Interactive Table Logic ---
+            const tableBody = document.getElementById('companyTableBody');
+            const searchInput = document.getElementById('tableSearch');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if(data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">查無資料</td></tr>';
+                    return;
+                }
+
+                data.forEach(item => {
+                    // Determine Status Color
+                    let statusClass = "bg-gray-100 text-gray-800";
+                    if(item.status === 'Buy') statusClass = "bg-green-100 text-green-800";
+                    if(item.status === 'Caution' || item.status === 'Hold/Watch') statusClass = "bg-yellow-100 text-yellow-800";
+                    if(item.status.includes('Neutral')) statusClass = "bg-blue-100 text-blue-800";
+
+                    const row = `
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.ticker}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-bold">${item.name}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.sector}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${item.metric}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
+                                    ${item.status}
+                                </span>
+                                <div class="text-xs text-gray-400 mt-1">${item.note}</div>
+                            </td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+
+            // Initial Render
+            renderTable(companyData);
+
+            // Search Event Listener
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = companyData.filter(item => 
+                    item.name.toLowerCase().includes(term) || 
+                    item.ticker.toLowerCase().includes(term) ||
+                    item.sector.toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+
+            // --- 4. Mobile Menu Toggle ---
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // --- 5. Active Link Highlighting (Intersection Observer) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px', // Trigger when section is near top
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Remove active class from all
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        
+                        // Add active class to current
+                        const id = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`a[href="#${id}"]`);
+                        if(activeLink) {
+                            activeLink.classList.remove('inactive-nav-link');
+                            activeLink.classList.add('active-nav-link');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
