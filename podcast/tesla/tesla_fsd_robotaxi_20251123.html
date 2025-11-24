@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Tesla FSD & Robotaxi 分析報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom Styles for specific interactive states -->
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        /* Hide scrollbar for table container but allow scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- 1. Navigation: Sticky Header -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-bold text-xl text-stone-800 tracking-wider"><span class="text-sky-500">Tesla FSD & Robotaxi 分析</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">執行摘要</a>
+                    <a href="#tech" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">FSD 技術拐點</a>
+                    <a href="#economics" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">Robotaxi 經濟模型</a>
+                    <a href="#valuation" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">SOTP 估值</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">執行摘要</a>
+                <a href="#tech" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">FSD 技術拐點</a>
+                <a href="#economics" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">Robotaxi 經濟模型</a>
+                <a href="#valuation" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">SOTP 估值</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-stone-100 to-stone-50">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-stone-900 mb-4">
+                Tesla (TSLA) 戰略深度研究報告
+            </h1>
+            <p class="text-xl text-stone-600 max-w-3xl mx-auto">
+                FSD V14.2 技術拐點、Robotaxi 經濟模型重構與投資策略全景分析
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 pb-12">
+
+        <!-- Section 1: Executive Summary -->
+        <section id="summary" class="scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                1. 執行摘要與核心邏輯
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold mb-3 text-stone-800">雙 S 曲線交接點</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        Tesla 正處於企業生命週期的關鍵時刻。第一條曲線（電動汽車製造）面臨需求疲軟與利潤壓縮；第二條曲線（自動駕駛 TaaS）承載數兆美元估值。投資者分歧劇烈，但單位經濟效益構建了強大護城河。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-indigo-500">
+                    <h3 class="text-xl font-bold mb-3 text-stone-800">估值體系重構</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        從製造業 P/E 轉向科技業 P/S。若將 Robotaxi 視為高利潤率 SaaS 平台，潛在貢獻市值超過 60%。華爾街目標價差異極大（$130 - $2,600+），反映了對 Robotaxi 成功率的押注差異。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: FSD Technology -->
+        <section id="tech" class="scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                2. FSD V14.2 技術深潛
+            </h2>
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- Tech Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 transition hover:-translate-y-1 duration-300">
+                    <div class="text-sky-500 mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">解析度與語義飛躍</h3>
+                    <p class="text-stone-600 text-sm">升級版神經網絡視覺編碼器，能處理高解析度特徵與像素間語義關係。成功識別警車、救護車並執行受控靠邊停車 (L4 級別能力)。</p>
+                </div>
+                <!-- Tech Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 transition hover:-translate-y-1 duration-300">
+                    <div class="text-sky-500 mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">駕駛行為擬人化</h3>
+                    <p class="text-stone-600 text-sm">V14.2 被稱為「服藥後的版本」，加速度變化率（Jerk）顯著降低，模擬人類線性制動，提升乘客舒適度，這是 Robotaxi 商業化的必要條件。</p>
+                </div>
+                <!-- Tech Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 transition hover:-translate-y-1 duration-300 border-red-100 border">
+                    <div class="text-red-500 mb-4">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">物理極限與缺陷</h3>
+                    <p class="text-stone-600 text-sm">純視覺方案在「細鐵鍊」測試中失敗，且在多層停車場導航中出現邏輯死循環。顯示距離真正的無監督駕駛仍有技術鴻溝。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Economics (Interactive Table & Chart) -->
+        <section id="economics" class="scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                3. Robotaxi 經濟模型與競爭分析
+            </h2>
+
+            <!-- Chart Section -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4 text-stone-700">每英里營運成本對比 (OpEx)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-xs text-stone-500 text-center">圖表來源：基於報告表 3.1 數據重製</p>
+                </div>
+                <div class="bg-stone-50 rounded-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold mb-4 text-stone-800">核心洞察：成本護城河</h3>
+                    <ul class="space-y-3 text-stone-600 list-disc pl-5">
+                        <li>Tesla 利用「開箱工藝」與純視覺方案，將每英里成本壓低至 <strong>$0.20 - $0.30</strong>。</li>
+                        <li>相較之下，Uber/Lyft 模式成本高達 $2.50，Waymo 因感測器昂貴成本約 $1.00。</li>
+                        <li>即使半價提供服務 ($1.00/mile)，Tesla 仍可獲得 <strong>60% 以上毛利率</strong>。</li>
+                        <li>混合模式（自有+車主加盟）允許輕資產快速擴張。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Interactive Table Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 overflow-hidden">
+                <div class="flex justify-between items-center mb-4 flex-wrap gap-4">
+                    <h3 class="text-lg font-bold text-stone-800">單位經濟效益詳細數據 (Table 3.1)</h3>
+                    <input type="text" id="tableSearch" placeholder="搜尋指標..." class="border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">關鍵指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-sky-600 uppercase tracking-wider bg-sky-50">Tesla Cybercab (預測)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Waymo (現狀估算)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Uber/Lyft (傳統)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="economicsTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Data inserted by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden text-center py-4 text-gray-500">無符合搜尋結果</div>
+            </div>
+        </section>
+
+        <!-- Section 4: Valuation (SOTP) -->
+        <section id="valuation" class="scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                4. SOTP 估值模型 (2025-2026)
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Bear Case -->
+                <div class="bg-gray-100 rounded-lg shadow p-6 border-t-4 border-gray-400">
+                    <div class="text-center mb-4">
+                        <h3 class="text-lg font-bold text-gray-600">熊市情境 (Bear)</h3>
+                        <p class="text-3xl font-extrabold text-gray-800 mt-2">$100 - $130</p>
+                        <span class="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">股價預估</span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Robotaxi 技術失敗或被監管封殺</li>
+                        <li>• 汽車銷量增長停滯</li>
+                        <li>• Robotaxi 估值貢獻：$0</li>
+                    </ul>
+                </div>
+
+                <!-- Base Case -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 transform scale-105 z-10">
+                    <div class="text-center mb-4">
+                        <h3 class="text-lg font-bold text-sky-600">基準情境 (Base)</h3>
+                        <p class="text-4xl font-extrabold text-stone-800 mt-2">$400 - $450</p>
+                        <span class="text-xs bg-sky-100 text-sky-600 px-2 py-1 rounded">股價預估</span>
+                    </div>
+                    <ul class="text-sm text-stone-600 space-y-2">
+                        <li>• Robotaxi 業務估值 $4,000億</li>
+                        <li>• 能源業務成為第二增長極</li>
+                        <li>• FSD 授權開始產生收益</li>
+                    </ul>
+                </div>
+
+                <!-- Bull Case -->
+                <div class="bg-indigo-50 rounded-lg shadow p-6 border-t-4 border-indigo-500">
+                    <div class="text-center mb-4">
+                        <h3 class="text-lg font-bold text-indigo-600">牛市情境 (Bull)</h3>
+                        <p class="text-3xl font-extrabold text-indigo-900 mt-2">$1,000 - $2,600</p>
+                        <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-1 rounded">股價預估</span>
+                    </div>
+                    <ul class="text-sm text-stone-600 space-y-2">
+                        <li>• 壟斷出行市場，獲平台級估值</li>
+                        <li>• Robotaxi 貢獻 > $2兆 市值</li>
+                        <li>• Optimus 機器人開始貢獻情緒價值</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Strategy -->
+        <section id="strategy" class="scroll-mt-24 section-observe mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                5. 投資策略建議
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="mb-6">
+                    <h4 class="text-lg font-bold text-stone-800 mb-2">🎯 戰略性配置</h4>
+                    <p class="text-stone-600">Tesla 目前是「深價外看漲期權」。建議利用 2025 年底至 2026 年初可能的技術延遲（AI5 晶片與 Cybercab 量產）造成的回調機會分批建倉。</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <div>
+                        <h4 class="font-bold text-sky-600 border-b border-gray-200 pb-2 mb-3">關鍵催化劑日曆</h4>
+                        <ul class="space-y-3 text-sm text-stone-600">
+                            <li class="flex items-start">
+                                <span class="font-bold mr-2 w-24">2025/11/06:</span>
+                                <span>年度股東大會（量產時間表、Optimus）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-bold mr-2 w-24">2025年底:</span>
+                                <span>加州無人駕駛許可申請、FSD V15 發布</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="font-bold mr-2 w-24">2026/04:</span>
+                                <span>預計 Cybercab 開始爬坡生產</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-red-500 border-b border-gray-200 pb-2 mb-3">風險監控</h4>
+                        <ul class="space-y-3 text-sm text-stone-600">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-red-400 rounded-full mr-2"></span>AI5 晶片量產推遲至 2027 年</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-red-400 rounded-full mr-2"></span>「細鐵鍊」等邊緣場景無法解決</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-red-400 rounded-full mr-2"></span>關鍵人物風險與監管凍結</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Tesla FSD & Robotaxi 分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-500">資料來源：基於網路中 Tesla 相關公開資料 (2025年11月21日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // 2. Interactive Table Data & Logic
+        const productData = [
+            { metric: "車輛購置成本 (CapEx)", tesla: "~$25,000", waymo: ">$100,000", uber: "~$30,000 (司機資產)" },
+            { metric: "傳感器套件成本", tesla: "<$500 (純視覺)", waymo: ">$40,000 (LiDAR)", uber: "N/A" },
+            { metric: "每英里營運成本 (OpEx)", tesla: "$0.20 - $0.30", waymo: ">$0.80 - $1.00", uber: ">$2.00 - $2.50" },
+            { metric: "司機成本/分潤", tesla: "$0", waymo: "$0", uber: "70%-80% 行程費" },
+            { metric: "消費者定價 (每英里)", tesla: "~$1.00", waymo: "~$2.00+", uber: "~$2.50 - $3.00" },
+            { metric: "運營模式", tesla: "混合模式 (自營+加盟)", waymo: "重資產自營", uber: "輕資產撮合" }
+        ];
+
+        const tableBody = document.getElementById('economicsTableBody');
+        const searchInput = document.getElementById('tableSearch');
+        const noResults = document.getElementById('noResults');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+            
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${row.metric}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-sky-600 font-bold bg-sky-50">${row.tesla}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${row.waymo}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${row.uber}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Initial Render
+        renderTable(productData);
+
+        // Filter Logic
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.metric.toLowerCase().includes(term) ||
+                item.tesla.toLowerCase().includes(term) ||
+                item.waymo.toLowerCase().includes(term) ||
+                item.uber.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. Chart.js Visualization
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('costChart').getContext('2d');
+            
+            // Data derived from report (using mid-points for ranges)
+            // Tesla: 0.25, Waymo: 0.90, Uber: 2.25
+            const chartData = {
+                labels: ['Tesla Cybercab', 'Waymo (競品)', 'Uber/Lyft (傳統)'],
+                datasets: [{
+                    label: '每英里營運成本 (USD)',
+                    data: [0.25, 0.90, 2.25],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.8)', // Sky 500
+                        'rgba(156, 163, 175, 0.6)', // Gray 400
+                        'rgba(75, 85, 99, 0.6)'   // Gray 600
+                    ],
+                    borderColor: [
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(156, 163, 175, 1)',
+                        'rgba(75, 85, 99, 1)'
+                    ],
+                    borderWidth: 1,
+                    barPercentage: 0.6
+                }]
+            };
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '成本 (美元/英里)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // 4. Active Link State via Intersection Observer
+        const sections = document.querySelectorAll('.section-observe');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px', // Adjust area to trigger active state
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Update Nav Links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
