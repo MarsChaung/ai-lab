@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Google Gemini 3 研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Phosphor Icons (for icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        /* 自定義樣式補充 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: bold;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        /* 表格滾動條樣式 */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d6d3d1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e; 
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="ph ph-robot text-3xl text-sky-600 mr-2"></i>
+                    <span class="font-bold text-xl tracking-wide text-stone-900">Gemini 3 深度解析</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#tech" class="nav-link inactive-nav-link px-1 py-2 text-sm transition-colors">技術特點</a>
+                    <a href="#impact" class="nav-link inactive-nav-link px-1 py-2 text-sm transition-colors">用戶與商業</a>
+                    <a href="#data" class="nav-link inactive-nav-link px-1 py-2 text-sm transition-colors">數據分析</a>
+                    <a href="#investment" class="nav-link inactive-nav-link px-1 py-2 text-sm transition-colors">投資觀點</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none">
+                        <i class="ph ph-list text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#tech" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">技術特點</a>
+                <a href="#impact" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">用戶與商業</a>
+                <a href="#data" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">數據分析</a>
+                <a href="#investment" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資觀點</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-br from-stone-900 to-stone-800 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Google Gemini 3 上線後的影響研究</h1>
+            <p class="text-xl text-stone-300 max-w-3xl mx-auto">
+                邁向通用人工智慧（AGI）的關鍵一步：從 1.2 兆參數規模到 Deep Think 推理模式的全面解析。
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <span class="inline-flex items-center bg-sky-600/20 text-sky-300 px-3 py-1 rounded-full text-sm font-medium border border-sky-500/30">
+                    <i class="ph ph-cpu mr-1"></i> 1.2 兆參數
+                </span>
+                <span class="inline-flex items-center bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm font-medium border border-purple-500/30">
+                    <i class="ph ph-brain mr-1"></i> Deep Think 模式
+                </span>
+                <span class="inline-flex items-center bg-green-600/20 text-green-300 px-3 py-1 rounded-full text-sm font-medium border border-green-500/30">
+                    <i class="ph ph-chart-line-up mr-1"></i> 股價 +70%
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- Section 1: 技術與框架 -->
+        <section id="tech" class="scroll-mt-24 section-observer">
+            <h2 class="text-3xl font-bold text-stone-800 mb-8 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="ph ph-circuitry text-sky-600 mr-3"></i> AI 能力與技術特點
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-t-4 border-sky-500">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-sky-100 rounded-lg text-sky-600 mr-3"><i class="ph ph-files text-2xl"></i></div>
+                        <h3 class="text-xl font-bold text-stone-800">原生多模態</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        理解文字、圖像、影音、語音及程式碼。擁有 100 萬 token 的超長上下文窗，能「讀懂空氣」，捕捉微妙線索。
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-t-4 border-purple-500">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-purple-100 rounded-lg text-purple-600 mr-3"><i class="ph ph-lightning text-2xl"></i></div>
+                        <h3 class="text-xl font-bold text-stone-800">Deep Think 模式</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        強化高難度問題推理。Humanity’s Last Exam 正確率達 41.0%，GPQA Diamond 達 93.8%，解決前所未見的難題。
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-t-4 border-emerald-500">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-emerald-100 rounded-lg text-emerald-600 mr-3"><i class="ph ph-code text-2xl"></i></div>
+                        <h3 class="text-xl font-bold text-stone-800">代理式編程 (Agentic)</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        被稱為最強 "vibe coding" 模型。能自主規劃任務，作為思維夥伴，甚至將科學概念轉化為高保真視覺圖表。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="mt-12 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h3 class="text-xl font-bold text-stone-800 mb-6 text-center">Gemini 3 基準測試表現 (Scores)</h3>
+                <div class="relative w-full h-80 md:h-96">
+                    <canvas id="benchmarkChart"></canvas>
+                </div>
+                <p class="text-center text-xs text-stone-500 mt-4">數據來源：Google DeepMind 官方測試數據 (Humanity's Last Exam, GPQA, etc.)</p>
+            </div>
+        </section>
+
+        <!-- Section 2: 用戶與商業影響 -->
+        <section id="impact" class="scroll-mt-24 section-observer">
+            <h2 class="text-3xl font-bold text-stone-800 mb-8 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="ph ph-users-three text-sky-600 mr-3"></i> 用戶與商業影響
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- User Impact -->
+                <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-sky-500 mr-3 rounded-full"></span>一般使用者體驗
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="ph ph-check-circle text-sky-600 mt-1 mr-2 text-lg"></i>
+                            <div>
+                                <span class="font-bold text-stone-800">搜尋整合：</span>
+                                <span class="text-stone-600">發布首日即整合至 Google 搜尋 (AI Mode)，提供完整生成的答案介面，而非連結列表。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ph ph-check-circle text-sky-600 mt-1 mr-2 text-lg"></i>
+                            <div>
+                                <span class="font-bold text-stone-800">Gemini Agent：</span>
+                                <span class="text-stone-600">自動化處理多步驟任務，如整理郵件、預訂行程，邁向「萬用助理」。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ph ph-check-circle text-sky-600 mt-1 mr-2 text-lg"></i>
+                            <div>
+                                <span class="font-bold text-stone-800">普及率目標：</span>
+                                <span class="text-stone-600">目標 2025 年底前達 5 億用戶。目前搜尋 AI 摘要月觸及 20 億人次。</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Impact -->
+                <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-purple-500 mr-3 rounded-full"></span>企業與產業價值
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="ph ph-briefcase text-purple-600 mt-1 mr-2 text-lg"></i>
+                            <div>
+                                <span class="font-bold text-stone-800">開發平台 Antigravity：</span>
+                                <span class="text-stone-600">允許 AI 代理自主寫程式、除錯，大幅提升企業軟體開發效率。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ph ph-briefcase text-purple-600 mt-1 mr-2 text-lg"></i>
+                            <div>
+                                <span class="font-bold text-stone-800">Apple 戰略合作：</span>
+                                <span class="text-stone-600">傳 Apple 每年支付 10 億美元授權 Gemini 技術強化 Siri，顯示技術獲競對認可。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ph ph-briefcase text-purple-600 mt-1 mr-2 text-lg"></i>
+                            <div>
+                                <span class="font-bold text-stone-800">雲端業務增長：</span>
+                                <span class="text-stone-600">超過 70% 的 Google Cloud 企業客戶已使用 AI 技術，營收年增逾 20%。</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 數據分析表格 -->
+        <section id="data" class="scroll-mt-24 section-observer">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="ph ph-table text-sky-600 mr-3"></i> 關鍵數據總覽
+            </h2>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Search Filter -->
+                <div class="p-4 bg-stone-50 border-b border-stone-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <h3 class="font-bold text-lg text-stone-700">報告重點數據表</h3>
+                    <div class="relative w-full sm:w-64">
+                        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-stone-400"></i>
+                        <input type="text" id="tableSearch" placeholder="搜尋指標 (如: 股價, 參數)..." 
+                            class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all text-sm">
+                    </div>
+                </div>
+
+                <!-- Interactive Table -->
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200 whitespace-nowrap">類別</th>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200 whitespace-nowrap">指標項目</th>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200 whitespace-nowrap">數值/表現</th>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200 min-w-[200px]">詳細說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-100">
+                            <!-- Data populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden p-8 text-center text-stone-500 bg-stone-50">
+                    查無相關資料
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 投資觀點 -->
+        <section id="investment" class="scroll-mt-24 section-observer">
+            <h2 class="text-3xl font-bold text-stone-800 mb-8 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="ph ph-trend-up text-sky-600 mr-3"></i> 投資觀點與建議
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card: Existing Investors -->
+                <div class="bg-gradient-to-br from-white to-sky-50 rounded-lg shadow-lg p-6 border-l-4 border-sky-600">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                        <i class="ph ph-wallet text-sky-600 mr-2 text-2xl"></i> 已持有者建議
+                    </h3>
+                    <div class="space-y-3">
+                        <p class="font-bold text-sky-700 text-lg">繼續長期持有 (Hold)</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            Alphabet 處於 AI 成長快車道，優勢尚未完全反映於股價（如龐大用戶生態、雲服務增長）。無明顯理由退出，可參與未來數年的 AI 紅利。
+                        </p>
+                        <div class="mt-4 p-3 bg-white rounded border border-sky-100 text-sm text-stone-500">
+                            <i class="ph ph-info mr-1"></i> 策略：逢低增持，定期檢視持股比例。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: New Investors -->
+                <div class="bg-gradient-to-br from-white to-emerald-50 rounded-lg shadow-lg p-6 border-l-4 border-emerald-600">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                        <i class="ph ph-money text-emerald-600 mr-2 text-2xl"></i> 尚未持有者建議
+                    </h3>
+                    <div class="space-y-3">
+                        <p class="font-bold text-emerald-700 text-lg">分批佈局 / 關注成長</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            Alphabet 是穩健的 AI 成長標的。因股價處於高位，建議採取定期定額或分批買入策略以攤平成本，降低短期波動風險。
+                        </p>
+                        <div class="mt-4 p-3 bg-white rounded border border-emerald-100 text-sm text-stone-500">
+                            <i class="ph ph-info mr-1"></i> 策略：耐心等待回調時機，長期看好市值突破 4 兆美元。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Highlight -->
+            <div class="mt-8 bg-stone-800 text-white rounded-lg p-6 md:flex justify-between items-center shadow-lg">
+                <div class="mb-4 md:mb-0">
+                    <h4 class="text-lg font-bold text-stone-200">財務表現亮點</h4>
+                    <p class="text-stone-400 text-sm mt-1">AI 投資轉化為實質收益，雲端與廣告雙引擎驅動。</p>
+                </div>
+                <div class="flex gap-6 text-center">
+                    <div>
+                        <div class="text-2xl font-bold text-sky-400">~70%</div>
+                        <div class="text-xs text-stone-400">年初至今漲幅</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-sky-400">$3.8T</div>
+                        <div class="text-xs text-stone-400">市值規模</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-sky-400">+20%</div>
+                        <div class="text-xs text-stone-400">雲端營收年增</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8 border-t border-stone-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Google Gemini 3 研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-2 text-stone-500">資料來源：基於網路中 Alphabet (Google) 相關公開資料 (2025年11月21日)。</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Data Source (Based on report content)
+        const productData = [
+            { category: "模型規格", metric: "參數數量", value: "1.2 兆 (Trillion)", detail: "遠超前代，具備大規模知識儲存能力。" },
+            { category: "模型規格", metric: "上下文窗口", value: "100 萬 Token", detail: "可處理超長文本、完整書籍或大量程式碼。" },
+            { category: "基準測試", metric: "LMArena ELO", value: "1501 分", detail: "突破性最高分，領先業界模型。" },
+            { category: "基準測試", metric: "GPQA Diamond", value: "93.8%", detail: "Deep Think 模式下的高難度推理表現。" },
+            { category: "基準測試", metric: "Humanity’s Last Exam", value: "41.0%", detail: "針對極端困難問題的推理能力測試。" },
+            { category: "基準測試", metric: "MMMU-Pro (多模態)", value: "81.0%", detail: "圖像與多模態理解能力的當前最佳水準。" },
+            { category: "基準測試", metric: "Video-MMMU", value: "87.6%", detail: "影片理解能力的顯著提升。" },
+            { category: "基準測試", metric: "SimpleQA", value: "72.1%", detail: "事實正確性 (Factuality) 的驗證分數。" },
+            { category: "財務表現", metric: "股價漲幅 (YTD)", value: "~70%", detail: "截至 2025 年 11 月底的年度累計漲幅。" },
+            { category: "財務表現", metric: "公司市值", value: "~3.8 兆美元", detail: "逼近 4 兆美元大關，歷史新高區間。" },
+            { category: "用戶規模", metric: "搜尋 AI 摘要觸及", value: "20 億人次/月", detail: "AI 功能在搜尋引擎中的廣泛滲透。" },
+            { category: "商業合作", metric: "Apple 授權費", value: "~10 億美元/年", detail: "傳聞 Apple 擬支付費用以將 Gemini 整合至 Siri。" }
+        ];
+
+        // 2. Render Table
+        const tableBody = document.getElementById('dataTableBody');
+        const noResults = document.getElementById('noResults');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+                // Use striping for readability
+                row.className = index % 2 === 0 ? 'bg-white hover:bg-sky-50 transition-colors' : 'bg-stone-50 hover:bg-sky-50 transition-colors';
+                
+                row.innerHTML = `
+                    <td class="p-4 text-sm font-medium text-stone-800 whitespace-nowrap">
+                        <span class="px-2 py-1 rounded bg-stone-200 text-xs">${item.category}</span>
+                    </td>
+                    <td class="p-4 text-sm text-stone-700 font-bold">${item.metric}</td>
+                    <td class="p-4 text-sm text-sky-600 font-bold">${item.value}</td>
+                    <td class="p-4 text-sm text-stone-600">${item.detail}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        renderTable(productData);
+
+        // 3. Table Search Function
+        const searchInput = document.getElementById('tableSearch');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.metric.toLowerCase().includes(term) || 
+                item.category.toLowerCase().includes(term) ||
+                item.detail.toLowerCase().includes(term) ||
+                item.value.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // 4. Chart.js Implementation (Updated for Dual Y-Axis)
+        const ctx = document.getElementById('benchmarkChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                // Removed (%) from labels, as axes now clarify units
+                labels: ['LMArena (ELO)', 'GPQA Diamond', 'MMMU-Pro', 'Video-MMMU', 'SimpleQA', 'Humanity Exam'],
+                datasets: [
+                    {
+                        label: 'ELO 分數',
+                        data: [1501, null, null, null, null, null],
+                        backgroundColor: 'rgba(14, 165, 233, 0.7)', // sky-500
+                        borderColor: 'rgb(14, 165, 233)',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        yAxisID: 'y', // Map to left axis
+                        order: 2
+                    },
+                    {
+                        label: '百分比 (%)',
+                        data: [null, 93.8, 81.0, 87.6, 72.1, 41.0],
+                        backgroundColor: [
+                            'rgba(0, 0, 0, 0)', // placeholder for first item
+                            'rgba(168, 85, 247, 0.7)', // purple-500
+                            'rgba(16, 185, 129, 0.7)', // emerald-500
+                            'rgba(245, 158, 11, 0.7)', // amber-500
+                            'rgba(239, 68, 68, 0.7)',  // red-500
+                            'rgba(99, 102, 241, 0.7)'  // indigo-500
+                        ],
+                        borderColor: [
+                            'rgba(0, 0, 0, 0)',
+                            'rgb(168, 85, 247)',
+                            'rgb(16, 185, 129)',
+                            'rgb(245, 158, 11)',
+                            'rgb(239, 68, 68)',
+                            'rgb(99, 102, 241)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        yAxisID: 'y1', // Map to right axis
+                        order: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'ELO 分數 (1500+)'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        min: 0,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: '百分比 (%)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        stacked: true, // This aligns the bars in the same column space
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y;
+                                    if (context.dataset.yAxisID === 'y1') {
+                                        label += '%';
+                                    }
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 5. Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // 6. Intersection Observer for Active Navigation State
+        const sections = document.querySelectorAll('.section-observer');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px', // Trigger when section is near top
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
