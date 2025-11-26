@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-OpenAI Shopping Research功能研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        /* 自定義導航狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7; /* sky-600 */
+        }
+        /* 隱藏滾動條但保持功能 (Optional polish) */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-sky-200 selection:text-stone-900">
+
+    <!-- Navigation: Sticky Header -->
+    <nav id="navbar" class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="flex-shrink-0 flex items-center gap-2">
+                        <!-- Simple SVG Logo Icon -->
+                        <svg class="h-8 w-8 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="font-bold text-xl tracking-tight text-stone-800">OpenAI Shopping Research功能</span>
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="#overview" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">變革緒論</a>
+                    <a href="#technology" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">技術架構</a>
+                    <a href="#analysis" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">數據分析</a>
+                    <a href="#specs" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">規格詳情</a>
+                    <a href="#impact" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">商業影響</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-600 hover:text-sky-600 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <span class="sr-only">開啟選單</span>
+                        <!-- Icon: Menu -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">變革緒論</a>
+                <a href="#technology" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">技術架構</a>
+                <a href="#analysis" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">數據分析</a>
+                <a href="#specs" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">規格詳情</a>
+                <a href="#impact" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">商業影響</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Hero Section -->
+        <div class="text-center py-10 lg:py-16">
+            <h1 class="text-4xl tracking-tight font-extrabold text-stone-900 sm:text-5xl md:text-6xl">
+                <span class="block">2025 AI 驅動商務變革</span>
+                <span class="block text-sky-600">Shopping Research 深度報告</span>
+            </h1>
+            <p class="mt-3 max-w-md mx-auto text-base text-stone-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                從「搜尋引擎」到「代理式商務」的典範轉移。解析 OpenAI 如何透過 GPT-5 mini 與 Agentic Commerce Protocol 重構全球電商生態。
+            </p>
+        </div>
+
+        <!-- Section 1: 變革緒論 (Overview) -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">數位商務的第三次浪潮</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow border-l-4 border-stone-300">
+                    <div class="text-sky-600 mb-3">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">目錄索引時代</h3>
+                    <p class="text-stone-600">以 Yahoo 為代表，解決資訊上線問題，結構簡單但缺乏靈活性。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow border-l-4 border-yellow-400">
+                    <div class="text-yellow-500 mb-3">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">算法推薦時代</h3>
+                    <p class="text-stone-600">以 Google 和 Amazon 為代表，透過關鍵字與協同過濾解決匹配效率，但充滿廣告干擾。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow border-l-4 border-sky-600 bg-sky-50">
+                    <div class="text-sky-600 mb-3">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">代理式商務時代</h3>
+                    <p class="text-stone-800">以 OpenAI Shopping Research 為起點，AI 代理人理解複雜意圖、執行多步推理，提供無廣告的決策支援。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 技術架構 (Technology) -->
+        <section id="technology" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">GPT-5 mini 技術核心</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Info Card: Model Specs -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-sky-500 mr-3 rounded-full"></span>
+                        模型規格與經濟學
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mt-1">✓</div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-stone-900">超大上下文視窗</p>
+                                <p class="text-sm text-stone-500">支援高達 400,000 tokens，可同時讀取數百個產品頁面與長期對話歷史。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mt-1">✓</div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-stone-900">極致成本效益</p>
+                                <p class="text-sm text-stone-500">輸入每百萬 tokens 僅 $0.25 美元，是提供「無限量」服務的經濟基礎。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mt-1">✓</div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-stone-900">後訓練優化</p>
+                                <p class="text-sm text-stone-500">基於 GPT-5-Thinking-mini 進行強化學習（RLHF），專精於購物多約束條件推理。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Info Card: Privacy & Trust -->
+                <div class="bg-stone-50 rounded-lg shadow-inner p-6 mb-6 border border-stone-200">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">信任機制重建</h3>
+                    <div class="space-y-4 text-stone-700">
+                        <p><strong>非廣告承諾：</strong> 推薦結果獨立生成，不受廣告費影響，建立中立第三方地位。</p>
+                        <p><strong>可信來源過濾：</strong> 優先讀取 Wirecutter, Rtings, Reddit 等真實用戶與專業評測，過濾內容農場。</p>
+                        <p><strong>結構化數據解析：</strong> 深度利用 Schema.org (Product, Offer) 標記，精準提取價格與庫存。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 互動圖表 (Chart) -->
+        <section id="analysis" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">推理能力數據分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-6">針對「多約束條件查詢」（例如：預算$500以下、寵物友善、低噪音吸塵器）的產品推薦準確率比較。</p>
+                <div class="relative h-72 md:h-96 w-full">
+                    <canvas id="accuracyChart"></canvas>
+                </div>
+                <div class="mt-4 text-sm text-center text-stone-500">
+                    資料來源：OpenAI 內部測試報告 (2025)
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 互動表格 (Interactive Table) -->
+        <section id="specs" class="scroll-mt-24">
+            <div class="flex flex-col md:flex-row justify-between items-end md:items-center mb-6 border-b-2 border-sky-500 pb-2">
+                <h2 class="text-3xl font-bold text-stone-800">Shopping Research 核心規格表</h2>
+                <!-- Table Search Filter -->
+                <div class="mt-4 md:mt-0 relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-stone-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <input type="text" id="tableSearch" 
+                        class="block w-full pl-10 pr-3 py-2 border border-stone-300 rounded-md leading-5 bg-white placeholder-stone-500 focus:outline-none focus:placeholder-stone-400 focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm" 
+                        placeholder="搜尋規格項目...">
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-stone-200">
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table class="min-w-full divide-y divide-stone-200" id="specTable">
+                        <thead class="bg-stone-50 sticky top-0 z-10">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">維度</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">詳細規格 / 說明</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200" id="tableBody">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden p-4 text-center text-stone-500">
+                    找不到符合的資料。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 商業影響 (Business Impact) -->
+        <section id="impact" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場格局與商業策略</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Impact Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 text-red-600">反 Amazon 聯盟</h3>
+                    <p class="text-stone-700 mb-4">OpenAI 的崛起迫使零售巨頭選邊站。Target 與 Walmart 選擇接入 ChatGPT 以對抗 Amazon 的流量霸權。相對地，Amazon 透過 robots.txt 全面封鎖 OpenAI 爬蟲，保護其每年 560 億美元的廣告金礦。</p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-semibold">合作派: Target, Walmart, Shopify</span>
+                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full font-semibold">對抗派: Amazon</span>
+                    </div>
+                </div>
+                
+                <!-- Impact Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 text-indigo-600">從 SEO 到 AIO</h3>
+                    <p class="text-stone-700 mb-4">行銷規則重寫。企業策略需從搜尋引擎優化 (SEO) 轉向人工智慧優化 (AIO)。品牌聲譽將取決於真實論壇 (如 Reddit) 的口碑與結構化數據的完整性，而非關鍵字堆砌。</p>
+                </div>
+
+                <!-- Impact Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2 bg-gradient-to-r from-sky-50 to-white">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">2030 市場預測</h3>
+                    <p class="text-stone-700">根據 Morgan Stanley 模型預測，到 2030 年，「在線購物代理」將為美國電商市場帶來 <span class="font-bold text-sky-600 text-lg">$500 億至 $1150 億美元</span> 的增量消費。AI 代理預計將驅動 10%-20% 的電商交易，成為緩解 AI 泡沫化疑慮的關鍵營收引擎。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-ChatGPT購物研究功能報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 OpenAI 與電子商務相關公開資料 (2025年11月21日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* =========================================
+               1. Navigation Logic (Sticky & Mobile)
+            ========================================= */
+            const nav = document.getElementById('navbar');
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+
+            // Mobile Menu Toggle
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu on link click
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            /* =========================================
+               2. Active Link State (Intersection Observer)
+            ========================================= */
+            const sections = document.querySelectorAll('section');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px', // Adjust trigger zone
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        updateActiveLink(id);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            function updateActiveLink(id) {
+                // Desktop
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.remove('inactive-nav-link');
+                        link.classList.add('active-nav-link');
+                    } else {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    }
+                });
+                // Mobile highlight (simplified)
+                mobileLinks.forEach(link => {
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('text-sky-600', 'bg-stone-50');
+                        link.classList.remove('text-stone-700');
+                    } else {
+                        link.classList.remove('text-sky-600', 'bg-stone-50');
+                        link.classList.add('text-stone-700');
+                    }
+                });
+            }
+
+            /* =========================================
+               3. Chart.js Implementation
+            ========================================= */
+            const ctx = document.getElementById('accuracyChart').getContext('2d');
+            
+            // Data from report: Section 2.1.2
+            // Shopping Research 52% vs Traditional Search 37%
+            const accuracyChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['傳統 ChatGPT Search', 'GPT-5 mini Shopping Research'],
+                    datasets: [{
+                        label: '多約束條件查詢準確率 (%)',
+                        data: [37, 52],
+                        backgroundColor: [
+                            'rgba(168, 162, 158, 0.6)', // stone-400
+                            'rgba(14, 165, 233, 0.7)'  // sky-500
+                        ],
+                        borderColor: [
+                            'rgba(168, 162, 158, 1)',
+                            'rgba(14, 165, 233, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            title: {
+                                display: true,
+                                text: '準確率 (%)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '% 準確率';
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+
+            /* =========================================
+               4. Interactive Table Logic
+            ========================================= */
+            // Data extracted from "Table 1" in report
+            const productData = [
+                { category: "發布時間", spec: "2025 年 11 月 24 日", note: "針對假日購物季戰略突襲" },
+                { category: "核心模型", spec: "GPT-5 mini", note: "強化購物推理與後訓練 (RLHF)" },
+                { category: "上下文視窗", spec: "400,000 Tokens", note: "可讀取大量產品頁與歷史對話" },
+                { category: "輸入成本", spec: "$0.25 / 1M tokens", note: "極低成本支援免費版用戶使用" },
+                { category: "輸出成本", spec: "$2.00 / 1M tokens", note: "-" },
+                { category: "查詢準確率", spec: "52%", note: "多約束條件下 (vs Search 37%)" },
+                { category: "合作夥伴", spec: "Shopify, Stripe, Target, Walmart", note: "反 Amazon 聯盟成員" },
+                { category: "受限平台", spec: "Amazon", note: "透過 robots.txt 封鎖爬蟲" },
+                { category: "市場預測", spec: "$1150 億美元 (2030年)", note: "AI Agent 帶動的增量消費" }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('tableSearch');
+            const noResultsMsg = document.getElementById('noResults');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    noResultsMsg.classList.remove('hidden');
+                    return;
+                } else {
+                    noResultsMsg.classList.add('hidden');
+                }
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-sky-50 transition-colors';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.category}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-700 font-bold">${item.spec}</td>
+                        <td class="px-6 py-4 text-sm text-stone-500">${item.note}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // Initial Render
+            renderTable(productData);
+
+            // Filter Logic
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = productData.filter(item => 
+                    item.category.toLowerCase().includes(term) || 
+                    item.spec.toLowerCase().includes(term) ||
+                    item.note.toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+
+        });
+    </script>
+</body>
+</html>
