@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2025/11/24~11/29)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* 自定義樣式補充 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav id="navbar" class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / 標題 -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-stone-800 tracking-wider">
+                        <span class="text-sky-600">美股市場週報</span>
+                    </span>
+                </div>
+                
+                <!-- 電腦版選單 -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#summary" class="nav-item inactive-nav-link px-1 pt-1 text-sm font-medium transition-colors">市場總覽</a>
+                    <a href="#macro" class="nav-item inactive-nav-link px-1 pt-1 text-sm font-medium transition-colors">宏觀經濟</a>
+                    <a href="#ai-sector" class="nav-item inactive-nav-link px-1 pt-1 text-sm font-medium transition-colors">AI與半導體</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link px-1 pt-1 text-sm font-medium transition-colors">投資策略</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-500 hover:text-stone-800 focus:outline-none p-2">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單內容 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">市場總覽</a>
+                <a href="#macro" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">宏觀經濟</a>
+                <a href="#ai-sector" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">AI與半導體</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Header Title -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">
+                <span class="text-sky-600">輝達失寵、博通稱王？</span>
+            </h1>
+            <p class="text-lg text-stone-600 max-w-3xl mx-auto">
+                AI 分化、數據真空與聯準會的決策十字路口：從「普漲」到「價值重估」的關鍵轉折。
+            </p>
+            <p class="mt-2 text-sm text-stone-400">資料期間：2025/11/24~11/29</p>
+        </div>
+
+        <!-- Section 1: 市場總覽 (Summary) -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要與市場動態</h2>
+            
+            <!-- 資訊卡片 Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">市場雙軌特徵</h3>
+                    <p class="text-stone-600">S&P 500 與道瓊延續強勢，但納斯達克月線首度下跌。資金從高估值軟體轉向硬體基建與小型股。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">聯準會政策轉向</h3>
+                    <p class="text-stone-600">摩根大通預測12月降息，期貨市場定價降息機率超過80%。利率敏感型板塊（如羅素2000）大漲4.5%。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-yellow-500 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">黑色星期五數據</h3>
+                    <p class="text-stone-600">線上銷售額創紀錄達118億美元（年增9.5%），但依賴深度折扣，利潤率恐承壓。</p>
+                </div>
+            </div>
+
+            <!-- Chart.js 區域 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">本週關鍵資產表現 (%)</h3>
+                <div class="relative w-full h-80"> <!-- 包一層 div 控制高度 -->
+                    <canvas id="marketChart"></canvas>
+                </div>
+                <p class="text-xs text-stone-500 mt-2 text-center">資料來源：週報附錄數據 (11月24日-29日)</p>
+            </div>
+        </section>
+
+        <!-- Section 2: 宏觀經濟 (Macro) -->
+        <section id="macro" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏觀經濟與政策迷霧</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-stone-100 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-3">政府停擺的後遺症</h3>
+                    <ul class="list-disc list-inside space-y-2 text-stone-700">
+                        <li><strong>數據真空：</strong> 10月CPI報告缺失，11月數據推遲至12月會議後。市場處於「沒有壞消息就是好消息」的狀態。</li>
+                        <li><strong>就業扭曲：</strong> 停擺導致家庭調查與機構調查對就業定義出現落差，增加政策誤判風險。</li>
+                        <li><strong>通膨預期：</strong> 缺乏過熱數據反駁，美債殖利率回落至 4.00%-4.04% 區間。</li>
+                    </ul>
+                </div>
+                <div class="bg-stone-100 rounded-lg p-6">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-3">華爾街集體轉向</h3>
+                    <p class="text-stone-700 mb-4">
+                        隨著紐約聯儲總裁 John Williams 釋出鴿派訊號，市場重心已從「通膨固化」轉向「勞動力疲軟」。摩根大通首席經濟學家 Michael Feroli 呼籲 12 月應預防性降息 25 個基點。
+                    </p>
+                    <div class="bg-white p-4 rounded shadow-inner border border-stone-200">
+                        <p class="font-semibold text-sky-700 text-center">期貨市場定價：12月降息機率 > 80%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: AI 與半導體 (AI Sector) -->
+        <section id="ai-sector" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 板塊深度解析：分化與新王</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Nvidia -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-gray-400">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-bold text-stone-800">Nvidia (NVDA)</h3>
+                        <span class="text-sm font-bold text-red-500 bg-red-100 px-2 py-1 rounded">修正</span>
+                    </div>
+                    <p class="text-sm text-stone-500 mb-3">11月累計下跌雙位數</p>
+                    <p class="text-stone-700 text-sm">
+                        財報營收年增62%仍被市場懲罰。面臨「大數法則」成長重力，以及Meta轉單Google晶片的傳聞壓力。正處於 Hopper 向 Blackwell 架構的過渡空窗期。
+                    </p>
+                </div>
+
+                <!-- Broadcom -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-bold text-stone-800">Broadcom (AVGO)</h3>
+                        <span class="text-sm font-bold text-green-600 bg-green-100 px-2 py-1 rounded">領漲</span>
+                    </div>
+                    <p class="text-sm text-stone-500 mb-3">週一單日上漲 >11%</p>
+                    <p class="text-stone-700 text-sm">
+                        自研晶片（ASIC）趨勢最大贏家。深度綁定 Google TPU 與 Gemini 3 模型。扮演「軍火商中的軍火商」，與客戶利益一致性高於 Nvidia。
+                    </p>
+                </div>
+
+                <!-- Alphabet -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-500">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-bold text-stone-800">Alphabet (GOOGL)</h3>
+                        <span class="text-sm font-bold text-green-600 bg-green-100 px-2 py-1 rounded">新高</span>
+                    </div>
+                    <p class="text-sm text-stone-500 mb-3">11月累計上漲 ~14%</p>
+                    <p class="text-stone-700 text-sm">
+                        Gemini 3 發布消除技術落後焦慮。擁有 TPU 基礎設施的成本優勢（不完全依賴 Nvidia GPU）。市場肯定其「軟硬整合」策略。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 投資策略 (Strategy Table) -->
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2026年初 投資策略矩陣</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- 搜尋與篩選區 -->
+                <div class="mb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="relative w-full md:w-1/2">
+                        <input type="text" id="tableSearch" placeholder="搜尋主題或標的 (例如: 硬體, GOOGL)..." 
+                               class="w-full pl-4 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 text-stone-700 transition">
+                    </div>
+                    <div class="text-sm text-stone-500">
+                        顯示 <span id="rowCount" class="font-bold">5</span> 筆策略建議
+                    </div>
+                </div>
+
+                <!-- 互動式表格 -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">投資主題</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">建議操作</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">核心邏輯</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">首選標的</th>
+                            </tr>
+                        </thead>
+                        <tbody id="strategyTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS將自動填充內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noDataMessage" class="hidden text-center py-8 text-stone-500">
+                    沒有找到符合的資料。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2025/11/24~11/29)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2025年11月30日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        // --- 1. 資料準備 (Data Preparation) ---
+        const productData = [
+            {
+                theme: "AI 硬體",
+                action: "買入 (Buy)",
+                actionClass: "text-green-600 bg-green-50",
+                logic: "資金從通用GPU輪動至客製化晶片(ASIC)與製造端。基礎建設週期尚未結束。",
+                picks: "Broadcom (AVGO), TSMC (TSM)"
+            },
+            {
+                theme: "AI 軟體",
+                action: "中立/減碼 (Hold/Trim)",
+                actionClass: "text-yellow-600 bg-yellow-50",
+                logic: "估值過高，變現週期長。需等待更好的入場點或業績驗證。",
+                picks: "Palantir (PLTR), Oracle (ORCL)"
+            },
+            {
+                theme: "大型科技",
+                action: "增持 (Overweight)",
+                actionClass: "text-blue-600 bg-blue-50",
+                logic: "具備強大現金流與自研晶片能力的平台型公司，能抵禦硬體成本上升。",
+                picks: "Alphabet (GOOGL), Amazon (AMZN)"
+            },
+            {
+                theme: "小型股",
+                action: "戰術性買入 (Tactical Buy)",
+                actionClass: "text-green-600 bg-green-50",
+                logic: "受益於 12 月降息預期與「美國優先」政策傾向。",
+                picks: "羅素 2000 ETF (IWM)"
+            },
+            {
+                theme: "避險資產",
+                action: "持有 (Hold)",
+                actionClass: "text-stone-600 bg-stone-100",
+                logic: "對沖地緣政治風險與數據真空可能帶來的政策失誤。",
+                picks: "黃金 (Gold)"
+            }
+        ];
+
+        // --- 2. 互動式表格邏輯 (Interactive Table) ---
+        const tableBody = document.getElementById('strategyTableBody');
+        const searchInput = document.getElementById('tableSearch');
+        const rowCountEl = document.getElementById('rowCount');
+        const noDataMsg = document.getElementById('noDataMessage');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noDataMsg.classList.remove('hidden');
+            } else {
+                noDataMsg.classList.add('hidden');
+                data.forEach(item => {
+                    const row = `
+                        <tr class="hover:bg-stone-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.theme}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${item.actionClass}">
+                                    ${item.action}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-stone-600">${item.logic}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${item.picks}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+            rowCountEl.textContent = data.length;
+        }
+
+        // 初始化表格
+        renderTable(productData);
+
+        // 搜尋篩選功能
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = productData.filter(item => {
+                return item.theme.toLowerCase().includes(searchTerm) ||
+                       item.picks.toLowerCase().includes(searchTerm) ||
+                       item.logic.toLowerCase().includes(searchTerm) ||
+                       item.action.toLowerCase().includes(searchTerm);
+            });
+            renderTable(filteredData);
+        });
+
+        // --- 3. Chart.js 圖表邏輯 (Dynamic Chart) ---
+        const ctx = document.getElementById('marketChart').getContext('2d');
+        const marketChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Broadcom', '羅素2000', 'Nasdaq', 'S&P 500', '黃金', 'Nvidia'],
+                datasets: [{
+                    label: '本週漲跌幅 (%)',
+                    data: [11.0, 4.5, 1.7, 1.5, 1.4, -2.6],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.7)',  // Broadcom (Red for highlight)
+                        'rgba(16, 185, 129, 0.7)', // Russell (Green)
+                        'rgba(59, 130, 246, 0.7)', // Nasdaq (Blue)
+                        'rgba(59, 130, 246, 0.7)', // S&P
+                        'rgba(245, 158, 11, 0.7)', // Gold (Yellow)
+                        'rgba(107, 114, 128, 0.7)' // Nvidia (Gray/Negative)
+                    ],
+                    borderColor: [
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(245, 158, 11, 1)',
+                        'rgba(107, 114, 128, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#e7e5e4'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- 4. 導航與介面互動 (Navigation & UI Interactions) ---
+        
+        // 手機版選單切換
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Intersection Observer for Active Link State
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3 // 當區塊出現 30% 時觸發
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
