@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Tesla FSD 歐洲進展研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome for Icons (Optional but recommended for UI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Styles for Active Navigation */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        
+        /* Table Scrollbar Customization */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 1. Navigation (Sticky Header) -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-stone-800 tracking-tight">
+                        <i class="fa-solid fa-car-bolt text-sky-500 mr-2"></i>Tesla FSD 歐洲進展研究
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex md:items-center md:space-x-8" id="desktop-menu">
+                    <a href="#overview" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">總覽</a>
+                    <a href="#policy-status" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">各國政策</a>
+                    <a href="#eu-regulation" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">歐盟法規</a>
+                    <a href="#business-model" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">商業與營收</a>
+                    <a href="#investment" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">投資分析</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div class="md:hidden hidden bg-white border-t border-gray-100" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg">
+                <a href="#overview" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">總覽</a>
+                <a href="#policy-status" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">各國政策</a>
+                <a href="#eu-regulation" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">歐盟法規</a>
+                <a href="#business-model" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">商業與營收</a>
+                <a href="#investment" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">投資分析</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header id="overview" class="bg-gradient-to-r from-stone-800 to-stone-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                    Tesla FSD 在歐洲測試與商業化進展調查
+                </h1>
+                <p class="text-lg md:text-xl text-stone-300 max-w-3xl mx-auto leading-relaxed">
+                    深入剖析 2025 年 Tesla 在歐洲各國的自動駕駛測試許可、歐盟法規互通性、營收潛力預估及對股價的影響。
+                </p>
+                <div class="mt-8 flex justify-center space-x-4">
+                    <div class="bg-white/10 backdrop-blur px-4 py-2 rounded-lg border border-white/20">
+                        <span class="block text-2xl font-bold text-sky-400">2026 Feb</span>
+                        <span class="text-xs text-stone-300">荷蘭關鍵審查節點</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur px-4 py-2 rounded-lg border border-white/20">
+                        <span class="block text-2xl font-bold text-sky-400">€2.6B</span>
+                        <span class="text-xs text-stone-300">潛在年營收增量(樂觀)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 2. Policy Status Section (Interactive Table) -->
+        <section id="policy-status" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                各主要歐洲國家 FSD 測試許可進度
+            </h2>
+            <p class="mb-4 text-stone-600">
+                歐洲各國對 FSD 測試態度謹慎，但在 2025 年已取得多項突破。您可以透過下方表格搜尋特定國家進展。
+            </p>
+
+            <!-- Search Filter -->
+            <div class="mb-4 relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-search text-stone-400"></i>
+                </div>
+                <input type="text" id="tableSearch" 
+                    class="block w-full pl-10 pr-3 py-2 border border-stone-300 rounded-md leading-5 bg-white placeholder-stone-400 focus:outline-none focus:placeholder-stone-300 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 sm:text-sm transition duration-150 ease-in-out" 
+                    placeholder="搜尋國家名稱 (例如：荷蘭、德國)...">
+            </div>
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-stone-200">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0 z-10">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">國家</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">進度狀態</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">關鍵詳情與時間點</th>
+                            </tr>
+                        </thead>
+                        <tbody id="policyTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- Data will be populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden px-6 py-4 text-center text-stone-500">
+                    查無相關資料。
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. EU Regulations Section (Cards) -->
+        <section id="eu-regulation" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                歐盟法規互通性機制
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4 border-sky-500">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-file-contract text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">Article 39 豁免程序</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        針對缺乏現行法規的新技術，成員國可代表製造商向歐盟委員會申請豁免。Tesla 選擇由<strong>荷蘭 RDW</strong> 提出申請，若獲批則在荷蘭有效，並可作為其他國家的參考範本。
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4 border-emerald-500">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mr-3">
+                            <i class="fa-solid fa-users-viewfinder text-emerald-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">互通與擴散效應</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        一旦荷蘭核准，其他歐盟國家可基於互信機制「立即承認」或快速跟進。最終目標是透過歐盟技術委員會 (TCMV) 投票，轉化為全歐盟適用的共同許可，實現<strong>「一處批准、處處通行」</strong>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Business Model & Chart Section -->
+        <section id="business-model" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                商業模式與營收潛力
+            </h2>
+            
+            <!-- Information Cards -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-stone-100 rounded-lg p-5 border border-stone-200">
+                    <h4 class="text-sm font-semibold text-stone-500 uppercase mb-2">預估潛在車輛數</h4>
+                    <p class="text-2xl font-bold text-stone-800">150萬 - 200萬</p>
+                    <p class="text-xs text-stone-500 mt-1">預計至 2026-2027 年歐洲 Tesla 保有量</p>
+                </div>
+                <div class="bg-stone-100 rounded-lg p-5 border border-stone-200">
+                    <h4 class="text-sm font-semibold text-stone-500 uppercase mb-2">FSD 預估售價</h4>
+                    <p class="text-2xl font-bold text-stone-800">€7,500 / €100</p>
+                    <p class="text-xs text-stone-500 mt-1">買斷價格 / 月訂閱費用</p>
+                </div>
+                <div class="bg-stone-100 rounded-lg p-5 border border-stone-200">
+                    <h4 class="text-sm font-semibold text-stone-500 uppercase mb-2">預估滲透率</h4>
+                    <p class="text-2xl font-bold text-stone-800">10% - 25%</p>
+                    <p class="text-xs text-stone-500 mt-1">初期至中期的採用比例</p>
+                </div>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">年度營收增量預估 (單位：億歐元)</h3>
+                <div class="relative h-72 md:h-96 w-full">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="mt-4 text-sm text-stone-500 text-center">
+                    * 數據基於報告中保守、中性及樂觀三種情境模型估算。
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Investment & Financial Impact Section -->
+        <section id="investment" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                財務影響與投資建議
+            </h2>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Financial Impact -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-stone-700"><i class="fa-solid fa-chart-line mr-2"></i>財務指標影響</h3>
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-500">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-600 p-1 rounded mr-3 text-xs mt-1"><i class="fa-solid fa-arrow-up"></i></span>
+                                <div>
+                                    <strong class="block text-stone-800">營收規模</strong>
+                                    <p class="text-stone-600 text-sm">中性情境下每年新增約 25 億美元營收，約佔 2024 年總營收 2-3%，具備軟體高成長性。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-600 p-1 rounded mr-3 text-xs mt-1"><i class="fa-solid fa-percent"></i></span>
+                                <div>
+                                    <strong class="block text-stone-800">毛利率與獲利</strong>
+                                    <p class="text-stone-600 text-sm">FSD 軟體毛利高達 80-90%，可顯著提升公司整體毛利率與每股盈餘 (EPS)。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-600 p-1 rounded mr-3 text-xs mt-1"><i class="fa-solid fa-coins"></i></span>
+                                <div>
+                                    <strong class="block text-stone-800">估值重估</strong>
+                                    <p class="text-stone-600 text-sm">強化「軟體即服務 (SaaS)」定位，市場可能給予更高的本益比 (P/E) 估值倍數。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Investment Advice -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-stone-700"><i class="fa-solid fa-scale-balanced mr-2"></i>投資策略建議</h3>
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                        <div class="mb-4 pb-4 border-b border-stone-100">
+                            <strong class="text-lg text-stone-800 block mb-1">對已持有者</strong>
+                            <p class="text-stone-600 text-sm">建議續抱。關注 2026 年前後關鍵里程碑（如荷蘭 RDW 決定）。視進展靈活調整，長線參與軟體收入帶來的基本面提升。</p>
+                        </div>
+                        <div>
+                            <strong class="text-lg text-stone-800 block mb-1">對尚未持有者</strong>
+                            <p class="text-stone-600 text-sm">可視為潛在進場契機。在重大監管消息前逢低佈局可能有較佳風險收益比，但需注意股價波動，建議小量試單，不宜盲目追高。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Risk Warning -->
+                    <div class="bg-red-50 rounded-lg p-4 border border-red-100">
+                        <strong class="text-red-700 text-sm block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 風險提示</strong>
+                        <p class="text-red-600 text-xs">需注意監管審批延後、歐洲市場對自駕接受度不如預期，以及來自傳統車廠與其他自駕技術公司的競爭風險。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 6. Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Tesla FSD 歐洲進展研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-2 text-stone-500">資料來源：基於網路中 Tesla 公司及歐洲各國交通局相關公開資料 (2025年12月1日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // --- 1. Data Definition ---
+        const countryData = [
+            {
+                country: "荷蘭 (Netherlands)",
+                status: "審查關鍵期",
+                details: "Tesla 推動 FSD 歐洲上線的關鍵。申請 Article 39 豁免。預計 2026 年 2 月決定是否核准。若通過將成為歐盟範本。"
+            },
+            {
+                country: "德國 (Germany)",
+                status: "允許載客示範",
+                details: "尚未全面批准。2025 年 12 月起在慕尼黑、柏林等地提供由員工駕駛的 FSD 乘客試乘。等待歐盟統一決議。"
+            },
+            {
+                country: "法國 (France)",
+                status: "測試突破",
+                details: "巴黎、里昂進行內部測試，累計安全駕駛逾 1 萬公里。2025 年底提供乘客試乘演示。態度開放但依賴歐盟架構。"
+            },
+            {
+                country: "挪威 (Norway)",
+                status: "率先批准測試",
+                details: "2025 年 4 月批准 Tesla 獲得兩年 FSD 測試豁免。僅限 Tesla 員工監督駕駛。非歐盟成員但具參考價值。"
+            },
+            {
+                country: "西班牙 (Spain)",
+                status: "最寬鬆測試國",
+                details: "2025 年 11 月授權全國範圍 FSD 測試 (最多 19 輛)。允許遠端監控測試 (ES-AV 第3階段)，旨在支持創新。"
+            },
+            {
+                country: "瑞典 (Sweden)",
+                status: "小規模測試",
+                details: "2025 年 10 月批准 3 輛測試車在國道運行。需通過兩週現地數據評估。僅限員工測試。"
+            }
+        ];
+
+        // --- 2. Interactive Table Logic ---
+        const tableBody = document.getElementById('policyTableBody');
+        const searchInput = document.getElementById('tableSearch');
+        const noResultsMsg = document.getElementById('noResults');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                noResultsMsg.classList.remove('hidden');
+                return;
+            } else {
+                noResultsMsg.classList.add('hidden');
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors duration-150';
+                
+                // Status Color Logic
+                let statusClass = "text-stone-600 bg-stone-100";
+                if(item.status.includes("批准") || item.status.includes("寬鬆")) statusClass = "text-green-700 bg-green-100";
+                else if(item.status.includes("關鍵") || item.status.includes("示範")) statusClass = "text-amber-700 bg-amber-100";
+
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${item.country}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
+                            ${item.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-stone-600 leading-relaxed">${item.details}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initial Render
+        renderTable(countryData);
+
+        // Filter Event Listener
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = countryData.filter(item => 
+                item.country.toLowerCase().includes(searchTerm) || 
+                item.status.toLowerCase().includes(searchTerm) ||
+                item.details.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filteredData);
+        });
+
+        // --- 3. Chart.js Logic ---
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['保守情境 (滲透率10%)', '中性情境 (滲透率15%)', '樂觀情境 (滲透率25%)'],
+                datasets: [{
+                    label: '預估年度營收 (億歐元)',
+                    data: [12.0, 23.7, 26.25], // Data from report
+                    backgroundColor: [
+                        'rgba(168, 162, 158, 0.6)', // Stone-400
+                        'rgba(14, 165, 233, 0.6)',  // Sky-500
+                        'rgba(16, 185, 129, 0.6)'   // Emerald-500
+                    ],
+                    borderColor: [
+                        'rgba(168, 162, 158, 1)',
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(16, 185, 129, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    barPercentage: 0.6,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' 億歐元';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '營收 (億歐元)'
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- 4. Navigation Interaction (Active State & Smooth Scroll) ---
+        
+        // Active Link State using Intersection Observer
+        const sections = document.querySelectorAll('section, header');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -70% 0px', // Trigger when section is near top
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Update Desktop Links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+
+                    // Update Mobile Links (Optional: highlight active in mobile menu)
+                    mobileLinks.forEach(link => {
+                         if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('text-sky-500', 'bg-stone-50');
+                            link.classList.remove('text-stone-700');
+                        } else {
+                            link.classList.remove('text-sky-500', 'bg-stone-50');
+                            link.classList.add('text-stone-700');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // --- 5. Mobile Menu Toggle ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+    </script>
+</body>
+</html>
