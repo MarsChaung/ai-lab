@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-MongoDB 2025Q3財報分析研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* 自定義樣式補充 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        /* 隱藏滾動條但保留功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 導航列 (Navigation) -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <i class="fa-solid fa-leaf text-green-600 text-2xl mr-2"></i>
+                    <span class="font-bold text-xl text-stone-800 tracking-tight">MongoDB 2025Q3</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden xl:flex space-x-4 items-center overflow-x-auto no-scrollbar whitespace-nowrap">
+                    <a href="#operations" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">營運概況</a>
+                    <a href="#financials" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">財務績效</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">營運策略</a>
+                    <a href="#product" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">技術戰略</a>
+                    <a href="#industry" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">產業地位</a>
+                    <a href="#competition" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">競爭格局</a>
+                    <a href="#supply-chain" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">生態系</a>
+                    <a href="#valuation" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">估值分析</a>
+                    <a href="#investment" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors">綜合評估</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center xl:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#operations" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">營運概況</a>
+                <a href="#financials" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財務績效</a>
+                <a href="#strategy" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">營運策略</a>
+                <a href="#product" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">產品技術</a>
+                <a href="#industry" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">產業地位</a>
+                <a href="#competition" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">競爭格局</a>
+                <a href="#valuation" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">市場觀點</a>
+                <a href="#investment" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">綜合評估</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header class="bg-gradient-to-r from-stone-800 to-stone-700 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">MongoDB (MDB) 2025 Q3 財報深度分析</h1>
+            <p class="text-xl text-stone-300 max-w-3xl mx-auto">
+                深入探討雲端資料庫領導者在 AI 技術趨勢、多雲策略及財務績效上的表現與未來展望。
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <span class="bg-green-600 px-4 py-2 rounded-full text-sm font-semibold">營收年增 19%</span>
+                <span class="bg-sky-600 px-4 py-2 rounded-full text-sm font-semibold">Atlas 佔比 75%</span>
+                <span class="bg-purple-600 px-4 py-2 rounded-full text-sm font-semibold">AI 向量搜尋</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- 1. 公司營運概況 -->
+        <section id="operations" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3"><i class="fa-solid fa-cloud mr-2"></i>核心業務引擎</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        MongoDB 是開源文件式資料庫的領導廠商。核心產品 <strong>MongoDB Atlas</strong>（雲端資料庫即服務平台）已成為成長主力，2025 Q3 營收年增 30%，佔總營收 75%。提供多雲部署，支援 AWS、Azure、GCP。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-emerald-700 mb-3"><i class="fa-solid fa-layer-group mr-2"></i>Translytical 架構</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        打造統一的開發者資料平台，整合搜尋 (Atlas Search)、分析與行動應用支援 (Realm)。支援同一資料庫同時處理「交易」與「分析」工作負載，迎合 AI 時代對即時數據處理的需求。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 財務績效剖析 -->
+        <section id="financials" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務績效剖析</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- Chart Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-center text-stone-700">營收結構分佈 (2025 Q3)</h3>
+                    <div class="relative h-64 w-full flex justify-center">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Financial Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-stone-50 rounded-lg p-4 border-l-4 border-sky-500">
+                        <span class="block text-sm text-stone-500">總營收 (Quarterly)</span>
+                        <span class="block text-2xl font-bold text-stone-800">$6.283 億 USD</span>
+                        <span class="text-xs text-green-600 font-bold">▲ 19% YoY</span>
+                    </div>
+                    <div class="bg-stone-50 rounded-lg p-4 border-l-4 border-green-500">
+                        <span class="block text-sm text-stone-500">Atlas 營收成長</span>
+                        <span class="block text-2xl font-bold text-stone-800">30%</span>
+                        <span class="text-xs text-stone-500">動能回升</span>
+                    </div>
+                    <div class="bg-stone-50 rounded-lg p-4 border-l-4 border-orange-500">
+                        <span class="block text-sm text-stone-500">Non-GAAP 營業利潤</span>
+                        <span class="block text-2xl font-bold text-stone-800">$1.231 億 USD</span>
+                        <span class="text-xs text-stone-500">利潤率 20%</span>
+                    </div>
+                    <div class="bg-stone-50 rounded-lg p-4 border-l-4 border-purple-500">
+                        <span class="block text-sm text-stone-500">自由現金流 (FCF)</span>
+                        <span class="block text-2xl font-bold text-stone-800">$1.401 億 USD</span>
+                        <span class="text-xs text-green-600 font-bold">大幅優於去年同期</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-sm text-stone-500 text-center italic">註：GAAP 淨虧損大幅收窄至 $200 萬美元，接近損益兩平。</p>
+        </section>
+
+        <!-- 3. 營運策略分析 -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運策略分析</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600">
+                        <i class="fa-brands fa-microsoft text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">深化多雲與 Azure 合作</h4>
+                    <p class="text-sm text-stone-600">獲選微軟美國年度合作夥伴。推出 Atlas Azure Native ISV 服務，整合 Azure OpenAI 與 Fabric，降低企業採用門檻。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="h-12 w-12 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600">
+                        <i class="fa-solid fa-users text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">平衡開源與商業</h4>
+                    <p class="text-sm text-stone-600">利用社群版 (Community Edition) 擴大開發者基礎，同時透過 SSPL 授權保護商業利益，將進階功能下放以培養用戶習慣。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="h-12 w-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4 text-yellow-600">
+                        <i class="fa-solid fa-arrow-trend-up text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">客戶擴充策略</h4>
+                    <p class="text-sm text-stone-600">ARR 淨擴充率維持約 120%。推動後付使用制 (Pay-as-you-go)，降低預付門檻，吸引新工作負載導入。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 產品技術戰略 -->
+        <section id="product" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產品技術戰略</h2>
+            <div class="bg-stone-900 text-stone-100 rounded-lg p-8 shadow-xl">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 pr-6">
+                        <h3 class="text-2xl font-bold text-sky-400 mb-4">擁抱 AI 技術堆疊</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-white">向量搜尋 (Vector Search)：</strong>
+                                    <span class="text-stone-400">支援 AI 應用關鍵技術，將全文檢索與向量相似度查詢整合，適用於 RAG (檢索增強生成) 架構。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-white">收購 Voyage AI：</strong>
+                                    <span class="text-stone-400">強化向量化及重排序模型能力，提升資料檢索精準度，降低 LLM 幻覺風險。</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-white">MongoDB AMP：</strong>
+                                    <span class="text-stone-400">AI 應用現代化平台，利用 AI 工具協助企業將舊系統快速現代化（如澳洲 Bendigo Bank 縮短 70% 時程）。</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/3 mt-6 md:mt-0 flex justify-center">
+                        <i class="fa-solid fa-robot text-9xl text-stone-700 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 產業地位與戰略 -->
+        <section id="industry" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業地位與戰略</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow p-6 border-t-4 border-sky-600">
+                    <h3 class="text-xl font-bold mb-2">NoSQL 文件資料庫領導者</h3>
+                    <p class="text-stone-600">連續四年入選 Gartner CDBMS 魔力象限領導者。全球客戶超過 62,500 家。文件模型對開發者極其友好，特別適合處理 AI 時代的非結構化資料。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 border-t-4 border-purple-600">
+                    <h3 class="text-xl font-bold mb-2">市場定位差異化</h3>
+                    <p class="text-stone-600">
+                        不同於 Snowflake 專注於「資料倉儲」與 Databricks 的「資料湖」，MongoDB 聚焦於<strong>線上應用 (OLTP) 與即時操作</strong>。雖然邊界日益模糊，但 MongoDB 在應用程式開發端的生態優勢難以被取代。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 競爭格局與潛在風險 (Interactive Table) -->
+        <section id="competition" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">競爭格局與潛在風險</h2>
+            
+            <!-- Comparison Chart -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-lg font-bold text-center mb-4">主要競爭對手營收年增率比較 (YoY)</h3>
+                <div class="relative h-64 w-full">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4 bg-stone-100 border-b border-stone-200 flex justify-between items-center flex-wrap gap-4">
+                    <h3 class="font-bold text-lg text-stone-700">雲端資料庫市場競爭比較</h3>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="fa-solid fa-search text-stone-400"></i>
+                        </span>
+                        <input type="text" id="tableSearch" placeholder="搜尋公司或產品..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm w-64">
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky left-0 bg-stone-50">公司名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">年營收規模 (YoY)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">市值/估值</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">核心定位</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200" id="competitorTableBody">
+                            <!-- JS將自動填充資料 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-4 bg-stone-50 text-xs text-stone-500">
+                    * 資料來源：根據 2025 年相關財報與市場估值整理。
+                </div>
+            </div>
+
+            <!-- Risk Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                <div class="bg-red-50 rounded-lg p-5 border border-red-100">
+                    <h4 class="font-bold text-red-700 mb-2">宏觀經濟風險</h4>
+                    <p class="text-sm text-stone-700">高利率與經濟下行可能導致企業 IT 預算縮減，影響訂閱增長或導致用量消費降低。</p>
+                </div>
+                <div class="bg-red-50 rounded-lg p-5 border border-red-100">
+                    <h4 class="font-bold text-red-700 mb-2">競爭價格壓力</h4>
+                    <p class="text-sm text-stone-700">AWS DynamoDB 等雲端原生服務及新興向量資料庫可能分食市場，或引發價格戰壓縮利潤。</p>
+                </div>
+                <div class="bg-red-50 rounded-lg p-5 border border-red-100">
+                    <h4 class="font-bold text-red-700 mb-2">開源模式挑戰</h4>
+                    <p class="text-sm text-stone-700">SSPL 授權可能引發社群不滿，Amazon DocumentDB 等分叉版本或完全開源替代品仍具威脅。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 供應鏈生態系 -->
+        <section id="supply-chain" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">供應鏈與合作生態系</h2>
+            <div class="bg-gradient-to-br from-white to-stone-50 rounded-lg shadow-lg p-8">
+                <p class="text-stone-600 mb-6">
+                    作為純軟體公司，MongoDB 的「供應鏈」主要由雲端基礎設施供應商與開發者生態系統構成。這種競合關係（Co-opetition）是其商業模式的核心。
+                </p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4 text-stone-800 border-l-4 border-blue-500 pl-3">雲端基礎設施 (IaaS)</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center bg-white p-3 rounded shadow-sm">
+                                <i class="fa-brands fa-aws text-orange-500 mr-3 text-xl"></i>
+                                <span><strong>AWS：</strong>最大的基礎設施合作夥伴，同時也是 DocumentDB 的競爭者。</span>
+                            </li>
+                            <li class="flex items-center bg-white p-3 rounded shadow-sm">
+                                <i class="fa-brands fa-microsoft text-blue-500 mr-3 text-xl"></i>
+                                <span><strong>Azure：</strong>近期深度戰略合作夥伴，整合 OpenAI 與 Fabric。</span>
+                            </li>
+                            <li class="flex items-center bg-white p-3 rounded shadow-sm">
+                                <i class="fa-brands fa-google text-red-500 mr-3 text-xl"></i>
+                                <span><strong>Google Cloud：</strong>提供多雲部署選項，強化 AI 工具整合。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4 text-stone-800 border-l-4 border-green-500 pl-3">開發者與技術生態</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center bg-white p-3 rounded shadow-sm">
+                                <i class="fa-solid fa-code text-stone-600 mr-3"></i>
+                                <span><strong>開發者社群：</strong>透過 Community Edition 培養的龐大用戶群是主要推廣力量。</span>
+                            </li>
+                            <li class="flex items-center bg-white p-3 rounded shadow-sm">
+                                <i class="fa-solid fa-microchip text-purple-600 mr-3"></i>
+                                <span><strong>AI 技術夥伴：</strong>Voyage AI (向量模型)、LangChain 等 AI 開發框架整合。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 金融市場觀點與估值分析 -->
+        <section id="valuation" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">金融市場觀點與估值分析</h2>
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">市場反應：財報後飆漲</h3>
+                    <p class="text-stone-600 mb-4">
+                        2025 Q3 財報發布後，股價單日漲幅約 20-25%，創一年新高。市場對營收與盈餘雙重擊敗預期（Earnings Beat）反應熱烈。華爾街機構普遍上調目標價，認為 MongoDB 在 AI 驅動的資料庫市場地位穩固。
+                    </p>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                        <p class="text-sm text-blue-800"><strong>分析師觀點：</strong>摩根大通與摩根士丹利讚賞 Atlas 的成長動能及上調的全年指引。被視為少數基本面與技術面共振的「AI 受益股」。</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">估值風險</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between border-b pb-2">
+                            <span class="text-stone-500">市值 (Est.)</span>
+                            <span class="font-mono font-bold">~$290 億</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span class="text-stone-500">P/S Ratio</span>
+                            <span class="font-mono font-bold">12-13x</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span class="text-stone-500">PEG 風險</span>
+                            <span class="font-mono font-bold text-red-500">偏高</span>
+                        </li>
+                    </ul>
+                    <p class="text-xs text-stone-400 mt-4">註：因 GAAP 獲利接近損平，傳統本益比參考性較低，市場主要以營收倍數估值，溢價反映高成長預期。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 綜合評估 -->
+        <section id="investment" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">綜合評估</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-emerald-50 rounded-xl p-6 shadow-sm border border-emerald-100">
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3"><i class="fa-solid fa-user-check mr-2"></i>既有持股者</h3>
+                    <ul class="list-disc list-inside text-stone-700 space-y-2">
+                        <li><strong>建議：續抱 (Hold)</strong></li>
+                        <li>基本面強勁，技術走勢偏多，可參與後續潛在漲勢。</li>
+                        <li>若成本較低且浮盈豐厚，可考慮分批獲利了結以鎖定收益。</li>
+                        <li>設定移動停損（如 10日/50日均線）保護帳面獲利。</li>
+                    </ul>
+                </div>
+                <div class="bg-sky-50 rounded-xl p-6 shadow-sm border border-sky-100">
+                    <h3 class="text-xl font-bold text-sky-800 mb-3"><i class="fa-solid fa-user-plus mr-2"></i>新進投資人</h3>
+                    <ul class="list-disc list-inside text-stone-700 space-y-2">
+                        <li><strong>建議：觀望 / 分批佈局</strong></li>
+                        <li>短線漲幅過大，存在回調風險，切忌追高。</li>
+                        <li>等待股價回測關鍵支撐（如缺口或月線）且量縮回穩時介入。</li>
+                        <li>成長型組合權重建議 5-10%，並保持長期持有心態。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 bg-stone-800 text-stone-200 p-6 rounded-lg text-center">
+                <p class="font-medium">總結：審慎樂觀。長期看好「雲端+AI」雙引擎，但需警惕高估值帶來的波動風險。</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-MongoDB 2025Q3財報分析研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中MongoDB相關公開資料 (2025年12月4日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Mobile Menu Toggle ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // --- 2. Chart.js Data & Rendering ---
+        
+        // Revenue Chart (Doughnut)
+        const ctxRev = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctxRev, {
+            type: 'doughnut',
+            data: {
+                labels: ['MongoDB Atlas (雲端)', '傳統授權與其他'],
+                datasets: [{
+                    data: [75, 25],
+                    backgroundColor: ['#0ea5e9', '#d6d3d1'], // sky-500, stone-300
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Growth Chart (Bar)
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctxGrowth, {
+            type: 'bar',
+            data: {
+                labels: ['Databricks', 'Snowflake', 'MongoDB', 'Oracle'],
+                datasets: [{
+                    label: '年營收成長率 (YoY %)',
+                    data: [50, 29, 19, 9],
+                    backgroundColor: [
+                        '#d946ef', // fuchsia-500
+                        '#3b82f6', // blue-500
+                        '#10b981', // emerald-500
+                        '#f97316'  // orange-500
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: '成長率 (%)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- 3. Interactive Table Logic ---
+        const competitorData = [
+            { name: "MongoDB (MDB)", revenue: "$20.06 億 (+19%)", valuation: "~$290 億", core: "NoSQL 文件資料庫、Atlas 雲平台" },
+            { name: "Snowflake (SNOW)", revenue: "$36.3 億 (+29%)", valuation: "~$850 億", core: "雲端數據倉儲、資料共享" },
+            { name: "Databricks", revenue: "~$40 億 (>50%)", valuation: "~$1000 億", core: "資料湖 (Lakehouse)、AI 平台" },
+            { name: "Oracle (ORCL)", revenue: "$574 億 (+9%)", valuation: "~$5700 億", core: "傳統關聯式資料庫、雲端轉型" }
+        ];
+
+        const tableBody = document.getElementById('competitorTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-stone-500">無符合資料</td></tr>';
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900 sticky left-0 bg-white sm:bg-transparent">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.revenue}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.valuation}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.core}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initial Render
+        renderTable(competitorData);
+
+        // Search Filter
+        searchInput.addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = competitorData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.core.toLowerCase().includes(term) ||
+                item.revenue.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // --- 4. Active Link State (Intersection Observer) ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        const observerOptions = {
+            threshold: 0.2, // Trigger when 20% of section is visible
+            rootMargin: "-64px 0px 0px 0px" // Offset for sticky header
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Desktop Links Update
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+
+                    // Mobile Links Update (optional style change)
+                    mobileLinks.forEach(link => {
+                        link.classList.remove('text-sky-600', 'bg-stone-50');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('text-sky-600', 'bg-stone-50');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
