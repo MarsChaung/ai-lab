@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Netflix收購WBD研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        /* 自定義導航列 Active 樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* stone-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-sky-200 selection:text-sky-900">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent">NETFLIX</span>
+                        <span class="text-stone-400">x</span>
+                        <span class="text-xl font-bold text-sky-700">WBD</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="#summary" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">執行摘要</a>
+                    <a href="#structure" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">交易架構</a>
+                    <a href="#assets" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">核心資產</a>
+                    <a href="#market" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">市場版圖</a>
+                    <a href="#competition" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">競爭分析</a>
+                    <a href="#risks" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">風險評估</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path class="hidden" id="icon-close" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            <path id="icon-menu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-600 hover:bg-stone-50">執行摘要</a>
+                <a href="#structure" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-600 hover:bg-stone-50">交易架構</a>
+                <a href="#assets" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-600 hover:bg-stone-50">核心資產</a>
+                <a href="#market" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-600 hover:bg-stone-50">市場版圖</a>
+                <a href="#competition" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-600 hover:bg-stone-50">競爭分析</a>
+                <a href="#risks" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-600 hover:bg-stone-50">風險評估</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero -->
+    <header class="bg-white shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-4xl font-bold leading-7 text-stone-900 sm:text-5xl sm:truncate tracking-tight mb-2">
+                        Netflix 收購 WBD 影視資產
+                    </h2>
+                    <p class="text-xl text-stone-500 mt-2">全球媒體版圖重塑與深度戰略評估</p>
+                </div>
+                <div class="mt-5 flex lg:mt-0 lg:ml-4">
+                    <span class="ml-3 inline-flex items-center px-4 py-2 rounded-md bg-red-50 text-red-700 font-medium text-sm">
+                        狀態：達成協議 (待監管審查)
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- Section 1: Executive Summary -->
+        <section id="summary" class="scroll-mt-24">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <span class="mr-2">📊</span> 執行摘要
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Key Stat Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <p class="text-sm font-medium text-stone-500 uppercase">總企業價值 (EV)</p>
+                    <p class="text-3xl font-bold text-stone-800 mt-1">827億 <span class="text-lg text-stone-500">美元</span></p>
+                    <p class="text-xs text-stone-400 mt-2">包含股權對價與承擔債務</p>
+                </div>
+                 <!-- Key Stat Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-sm font-medium text-stone-500 uppercase">每股收購價</p>
+                    <p class="text-3xl font-bold text-stone-800 mt-1">$27.75</p>
+                    <p class="text-xs text-stone-400 mt-2">現金 $23.25 + 股票 $4.50</p>
+                </div>
+                 <!-- Key Stat Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <p class="text-sm font-medium text-stone-500 uppercase">現金融資規模</p>
+                    <p class="text-3xl font-bold text-stone-800 mt-1">590億 <span class="text-lg text-stone-500">美元</span></p>
+                    <p class="text-xs text-stone-400 mt-2">由銀行團提供過橋貸款</p>
+                </div>
+                 <!-- Key Stat Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                    <p class="text-sm font-medium text-stone-500 uppercase">預計協同效應</p>
+                    <p class="text-3xl font-bold text-stone-800 mt-1">20-30億 <span class="text-lg text-stone-500">美元/年</span></p>
+                    <p class="text-xs text-stone-400 mt-2">成本優化與利潤率改善</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <p class="text-lg text-stone-700 leading-relaxed mb-4">
+                    2025年12月5日，Netflix 正式宣佈收購 Warner Bros. Discovery 旗下的核心影視資產。這是一場「先分拆、後併購」的複雜交易，WBD 將其線性電視業務（如 CNN、TNT）剝離為獨立公司 <strong>Discovery Global</strong>，而 Netflix 則吞併擁有百年歷史的華納兄弟片廠、HBO 及 HBO Max。
+                </p>
+                <div class="p-4 bg-sky-50 rounded-md border border-sky-100">
+                    <strong class="text-sky-800">戰略意義：</strong> Netflix 從「內容聚合者」轉型為擁有深厚文化遺產的「全方位媒體帝國」，徹底解決原創IP缺乏歷史厚度的弱點，確立與 Disney 的雙寡頭格局。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Transaction Structure -->
+        <section id="structure" class="scroll-mt-24">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <span class="mr-2">🏛️</span> 交易架構與財務
+            </h3>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Deal Structure -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-bold text-stone-800 mb-4">支付結構與條款</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mt-0.5">✓</span>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-stone-900">混合支付模式</p>
+                                <p class="text-sm text-stone-500">現金佔比高達 84% ($23.25)，極大吸引了急需流動性的 WBD 股東。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mt-0.5">✓</span>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-stone-900">領子機制 (Collar Mechanism)</p>
+                                <p class="text-sm text-stone-500">設定 Netflix 股價區間 $97.91 - $119.67，保護雙方免受市場劇烈波動影響。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 mt-0.5">✓</span>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-stone-900">分手費 (Breakup Fees)</p>
+                                <p class="text-sm text-stone-500">若監管失敗，Netflix 需支付 <span class="font-bold text-red-600">58億美元</span>；展現極高的完成交易決心。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Debt Structure -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-xl font-bold text-stone-800 mb-4">債務與分拆處理</h4>
+                    <div class="space-y-4">
+                        <div class="bg-stone-50 p-4 rounded-md">
+                            <h5 class="font-bold text-sky-700 mb-2">Netflix 承接</h5>
+                            <p class="text-sm text-stone-600">承擔約 <strong>107億美元</strong> 與工作室/IP相關的淨債務。自身槓桿率預計升至 3.5x - 4.0x，可能影響信用評級。</p>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-md">
+                            <h5 class="font-bold text-amber-700 mb-2">Discovery Global (SpinCo)</h5>
+                            <p class="text-sm text-stone-600">繼承線性電視資產 (CNN, TNT Sports US)。利用 Netflix 支付的巨額現金償還大部分舊債，以健康體質重新上市。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Strategic Assets -->
+        <section id="assets" class="scroll-mt-24">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <span class="mr-2">💎</span> 核心資產組合
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Asset 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-2 bg-indigo-900"></div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2">Warner Bros. Studios</h4>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Harry Potter</span>
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Lord of the Rings</span>
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Matrix</span>
+                        </div>
+                        <p class="text-sm text-stone-600">獲得百年片庫與製作能力，補足 Netflix 缺乏長期文化沉澱的問題。</p>
+                    </div>
+                </div>
+
+                <!-- Asset 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-2 bg-purple-600"></div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2">HBO & HBO Max</h4>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Game of Thrones</span>
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Succession</span>
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Friends</span>
+                        </div>
+                        <p class="text-sm text-stone-600">"Prestige TV" 的代名詞。整合後全球訂閱戶預計突破 4 億，鎖定高端用戶群。</p>
+                    </div>
+                </div>
+
+                <!-- Asset 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-2 bg-blue-500"></div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2">DC Studios</h4>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Superman</span>
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Batman</span>
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Joker</span>
+                        </div>
+                        <p class="text-sm text-stone-600">對抗 Marvel 的唯一拼圖。在 James Gunn 領導下重啟，結合 Netflix 發行網潛力巨大。</p>
+                    </div>
+                </div>
+
+                 <!-- Asset 4 -->
+                 <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-2 bg-red-600"></div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2">TNT Sports UK</h4>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">英超聯賽</span>
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">歐冠盃</span>
+                        </div>
+                        <p class="text-sm text-stone-600">戰略性獲得英國/愛爾蘭市場體育版權，作為涉足體育直播的重要試驗場。</p>
+                    </div>
+                </div>
+
+                <!-- Asset 5 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="h-2 bg-amber-500"></div>
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2">WB Games</h4>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Hogwarts Legacy</span>
+                            <span class="bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded">Mortal Kombat</span>
+                        </div>
+                        <p class="text-sm text-stone-600">強化 Netflix Games 部門，直接取得 3A 級遊戲開發能力，實現影遊聯動。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Market Landscape Chart -->
+        <section id="market" class="scroll-mt-24">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <span class="mr-2">📈</span> 全球串流版圖預測
+            </h3>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="text-stone-600 mb-6">此交易將創造一個遙遙領先的市場霸主。以下為交易完成後，主要競爭對手的全球預估訂閱戶數對比。</p>
+                <div class="relative h-[400px] w-full">
+                    <canvas id="marketChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Interactive Competitor Table -->
+        <section id="competition" class="scroll-mt-24">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <span class="mr-2">⚔️</span> 競爭格局分析
+            </h3>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Table Search -->
+                <div class="p-4 border-b border-stone-200 bg-stone-50 flex items-center justify-between flex-wrap gap-4">
+                    <h4 class="font-bold text-stone-700">主要競爭者數據對比 (預估)</h4>
+                    <input type="text" id="searchInput" placeholder="搜尋公司或 IP (例如: Disney, Marvel)..." 
+                           class="w-full sm:w-64 px-4 py-2 rounded-md border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky left-0 bg-stone-100 z-10">公司</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">全球訂閱戶 (預估)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">核心 IP / 品牌</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">主要風險</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competitorTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 bg-stone-50 text-xs text-stone-400 text-right">
+                    * 數據基於報告預估值，實際情況可能變動。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Risks -->
+        <section id="risks" class="scroll-mt-24">
+            <h3 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <span class="mr-2">⚠️</span> 潛在風險與不確定性
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-red-50 rounded-lg p-6 border border-red-100">
+                    <h4 class="text-lg font-bold text-red-800 mb-2">反壟斷審查 (Antitrust)</h4>
+                    <p class="text-sm text-red-700 mb-3">DOJ 與 FTC 極可能將市場狹義定義為「SVOD」，導致合併後市佔率超標。Paramount 等對手可能進行政治遊說阻撓。</p>
+                </div>
+                <div class="bg-red-50 rounded-lg p-6 border border-red-100">
+                    <h4 class="text-lg font-bold text-red-800 mb-2">勞工與工會壓力</h4>
+                    <p class="text-sm text-red-700 mb-3">好萊塢工會 (WGA, SAG-AFTRA) 擔憂「單一買家壟斷」(Monopsony) 壓低薪資，可能發動罷工或抗議。</p>
+                </div>
+                <div class="bg-orange-50 rounded-lg p-6 border border-orange-100">
+                    <h4 class="text-lg font-bold text-orange-800 mb-2">財務槓桿風險</h4>
+                    <p class="text-sm text-orange-700 mb-3">舉債 590 億美元將使債務/EBITDA 比率升至 4.0x，可能失去投資級評級並限制未來幾年的資本靈活性。</p>
+                </div>
+                <div class="bg-orange-50 rounded-lg p-6 border border-orange-100">
+                    <h4 class="text-lg font-bold text-orange-800 mb-2">文化整合衝突</h4>
+                    <p class="text-sm text-orange-700 mb-3">Netflix 的「矽谷數據文化」與華納的「傳統片廠創作者文化」存在本質衝突，人才流失風險極高。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Netflix收購WBD研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Netflix與Warner Bros. Discovery相關公開資料 (2025年12月8日)。</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Data Source for Table & Chart ---
+        const competitorData = [
+            {
+                company: "Netflix + WBD",
+                subscribers: "3.8 億",
+                sub_num: 380, // for chart
+                ips: "Harry Potter, DC, Game of Thrones, Stranger Things, Friends",
+                risk: "債務槓桿、監管審查、文化整合"
+            },
+            {
+                company: "Disney (DIS)",
+                subscribers: "2.3 億",
+                sub_num: 230,
+                ips: "Marvel, Star Wars, Pixar, Avatar, Disney Princess",
+                risk: "傳統電視衰退、樂園週期性波動"
+            },
+            {
+                company: "Amazon Prime Video",
+                subscribers: "2.0 億",
+                sub_num: 200,
+                ips: "Lord of the Rings (TV), The Boys, James Bond (MGM)",
+                risk: "缺乏專注度、內容品質不穩"
+            },
+            {
+                company: "Paramount Global",
+                subscribers: "7,000 萬",
+                sub_num: 70,
+                ips: "Star Trek, Top Gun, Yellowstone, SpongeBob",
+                risk: "規模不足、生存空間受擠壓"
+            }
+        ];
+
+        // --- 2. Chart.js Implementation ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            
+            // Prepare data
+            const labels = competitorData.map(d => d.company);
+            const dataPoints = competitorData.map(d => d.sub_num);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '全球預估訂閱戶數 (百萬)',
+                        data: dataPoints,
+                        backgroundColor: [
+                            'rgba(220, 38, 38, 0.8)', // Netflix Red
+                            'rgba(14, 165, 233, 0.6)', // Disney Blue
+                            'rgba(245, 158, 11, 0.6)', // Amazon Orange
+                            'rgba(107, 114, 128, 0.6)' // Paramount Grey
+                        ],
+                        borderColor: [
+                            'rgb(220, 38, 38)',
+                            'rgb(14, 165, 233)',
+                            'rgb(245, 158, 11)',
+                            'rgb(107, 114, 128)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' 百萬訂閱戶';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // --- 3. Interactive Table Implementation ---
+        const tableBody = document.getElementById('competitorTableBody');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-stone-500">查無資料</td></tr>';
+                return;
+            }
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors';
+                
+                // Highlight IPs based on search could be added here, but keeping it simple
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-bold text-stone-900">${item.company}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-stone-900">${item.subscribers}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-stone-500">${item.ips}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-stone-500">${item.risk}</div>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initial Render
+        renderTable(competitorData);
+
+        // Search Logic
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = competitorData.filter(item => 
+                item.company.toLowerCase().includes(term) || 
+                item.ips.toLowerCase().includes(term) ||
+                item.risk.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // --- 4. Navigation & Mobile Menu Logic ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconClose = document.getElementById('icon-close');
+        
+        // Toggle Mobile Menu
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            iconMenu.classList.toggle('hidden');
+            iconClose.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                iconMenu.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            });
+        });
+
+        // --- 5. Active Link State (Intersection Observer) ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px', // Trigger when section is in middle of viewport
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active class from all links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    });
+                    
+                    // Add active class to corresponding link
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('inactive-nav-link');
+                        activeLink.classList.add('active-nav-link');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
