@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Nvidia Nemotron 3 研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        /* 隱藏捲軸但保持功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-black text-stone-900 tracking-tighter"><span class="text-sky-600">Nvidia Nemotron 3 研究報告</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link font-medium transition-colors hover:text-sky-500">事件綜述</a>
+                    <a href="#architecture" class="nav-link font-medium transition-colors hover:text-sky-500">技術架構</a>
+                    <a href="#products" class="nav-link font-medium transition-colors hover:text-sky-500">產品矩陣</a>
+                    <a href="#comparison" class="nav-link font-medium transition-colors hover:text-sky-500">巔峰對決</a>
+                    <a href="#investment" class="nav-link font-medium transition-colors hover:text-sky-500">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m7 6H4" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 py-4 space-y-2">
+            <a href="#summary" class="block text-stone-700 hover:text-sky-500 py-2">事件綜述</a>
+            <a href="#architecture" class="block text-stone-700 hover:text-sky-500 py-2">技術架構</a>
+            <a href="#products" class="block text-stone-700 hover:text-sky-500 py-2">產品矩陣</a>
+            <a href="#comparison" class="block text-stone-700 hover:text-sky-500 py-2">巔峰對決</a>
+            <a href="#investment" class="block text-stone-700 hover:text-sky-500 py-2">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-stone-900 to-stone-800 text-white py-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Nemotron 3：AI 基礎設施的戰略轉折</h1>
+            <p class="text-xl text-stone-300 max-w-3xl mx-auto">Nvidia 於 2025 年 12 月 15 日正式發布開源模型家族，定義推理能力的新標準。</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- 1. 事件綜述 -->
+        <section id="summary" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">1. 宏觀背景與事件綜述</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold mb-3 text-sky-700">戰略性反攻</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        在 OpenAI、Google 與 AWS 自研晶片的夾擊下，Nvidia 透過 Nemotron 3 執行「商品化互補品」戰略。當模型開源且免費時，企業將更關注運行效率，而深度綁定 Nvidia 硬體的 Nemotron 3 確保了 GPU 的絕對領先地位。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                    <h3 class="text-xl font-bold mb-3 text-green-700">全棧開源策略</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2">
+                        <li><strong>模型層：</strong> 混合 Mamba-Transformer 架構</li>
+                        <li><strong>數據層：</strong> 開源高質量訓練數據集</li>
+                        <li><strong>工具層：</strong> 發布 NeMo Gym 強化學習環境</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 技術架構 -->
+        <section id="architecture" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2. 技術深潛：混合架構革命</h2>
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform">
+                    <div class="text-sky-500 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">混合 Mamba 架構</h3>
+                    <p class="text-stone-600 text-sm">結合 Transformer 的邏輯推理與 Mamba 的線性擴展性，完美支持 1M+ token 長文本，且推理延遲極低。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform">
+                    <div class="text-emerald-500 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">NVFP4 物理綁定</h3>
+                    <p class="text-stone-600 text-sm">原生支持 4-bit 浮點格式，僅在 Blackwell 架構上可實現 4 倍吞吐量提升，築起強大硬體護城河。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform">
+                    <div class="text-amber-500 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Latent MoE 技術</h3>
+                    <p class="text-stone-600 text-sm">新型專家路由機制，Ultra 版本雖有 500B 參數，每次僅激活 50B，效率與精度兼得。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 產品矩陣表格 -->
+        <section id="products" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">3. 產品矩陣與互動查詢</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <input type="text" id="table-filter" placeholder="搜尋模型名稱或特性 (例如: Nano, 推理)..." class="w-full md:w-1/3 p-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse" id="product-table">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="p-4 border-b font-bold text-stone-700">模型名稱</th>
+                                <th class="p-4 border-b font-bold text-stone-700">總參數 / 激活參數</th>
+                                <th class="p-4 border-b font-bold text-stone-700">核心定位</th>
+                                <th class="p-4 border-b font-bold text-stone-700">推薦場景</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-stone-600">
+                            <tr class="hover:bg-sky-50 transition-colors">
+                                <td class="p-4 border-b font-semibold">Nemotron 3 Nano</td>
+                                <td class="p-4 border-b">30B / 3B Active</td>
+                                <td class="p-4 border-b">邊緣計算、極低延遲</td>
+                                <td class="p-4 border-b">代碼輔助、多智能體路由、手機端推理</td>
+                            </tr>
+                            <tr class="hover:bg-sky-50 transition-colors">
+                                <td class="p-4 border-b font-semibold">Nemotron 3 Super</td>
+                                <td class="p-4 border-b">100B / 10B Active</td>
+                                <td class="p-4 border-b">企業 IT 自動化</td>
+                                <td class="p-4 border-b">票務處理、文檔自動化、RAG 檢索</td>
+                            </tr>
+                            <tr class="hover:bg-sky-50 transition-colors">
+                                <td class="p-4 border-b font-semibold">Nemotron 3 Ultra</td>
+                                <td class="p-4 border-b">500B / 50B Active</td>
+                                <td class="p-4 border-b">旗艦級企業推理引擎</td>
+                                <td class="p-4 border-b">深度科研、複雜邏輯推理、多模態分析</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 巔峰對決圖表 -->
+        <section id="comparison" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">4. 巔峰對決：效能指標分析</h2>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold mb-4 text-center">核心基準測試得分 (AIME & SWE-bench)</h3>
+                    <div class="h-[300px]">
+                        <canvas id="benchmarkChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold mb-4 text-sky-700">競爭差異化總覽</h3>
+                    <div class="space-y-4 text-stone-600">
+                        <p><strong>對標 GPT-5.2：</strong> GPT-5.2 強於「深度思考」邏輯，但 Nemotron 3 在<strong>性價比</strong>與<strong>推理速度</strong>上取得領先，更適合高頻企業應用。</p>
+                        <p><strong>對標 Gemini 3：</strong> Gemini 3 強於 Workspace 生態整合，Nemotron 3 則主打<strong>私有化部署</strong>與<strong>主權數據安全</strong>。</p>
+                        <p><strong>上下文優勢：</strong> 混合架構提供原生 1M+ 上下文支持，推理成本顯著低於純 Transformer 模型。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 投資策略 -->
+        <section id="investment" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">5. 投資策略與財報展望</h2>
+            
+            <!-- Financial Cards -->
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-sky-500 text-white rounded-lg p-6 text-center shadow-lg">
+                    <p class="text-sm opacity-80 mb-1">Q4 FY26 預計營收</p>
+                    <p class="text-3xl font-bold">$650 億美元</p>
+                </div>
+                <div class="bg-stone-800 text-white rounded-lg p-6 text-center shadow-lg">
+                    <p class="text-sm opacity-80 mb-1">Blackwell 訂單積壓</p>
+                    <p class="text-3xl font-bold">$5,000 億</p>
+                </div>
+                <div class="bg-green-600 text-white rounded-lg p-6 text-center shadow-lg">
+                    <p class="text-sm opacity-80 mb-1">目前動態 P/E</p>
+                    <p class="text-3xl font-bold">30-40x</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-1 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-8 border-sky-500">
+                    <h3 class="text-2xl font-bold mb-4">一般投資者策略</h3>
+                    <div class="space-y-3">
+                        <span class="inline-block bg-red-100 text-red-700 font-bold px-3 py-1 rounded">長期持有</span>
+                        <p class="text-stone-600">對於投資者而言，眼前的股價回調並非趨勢的終結，而是新一輪增長周期的起點。Nvidia 正在從一家週期性的硬體製造商，蛻變為一家擁有極高用戶黏性的 AI 平台與公用事業公司。</p>
+                        <p class="text-stone-600 font-semibold">長期目標價：$250</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Nvidia Nemotron 3 研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網絡中 Nvidia 相關公開資料 (2025年12月18日)。</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Table Filter
+        const tableFilter = document.getElementById('table-filter');
+        const tableRows = document.querySelectorAll('#product-table tbody tr');
+        tableFilter.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            tableRows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+
+        // 3. Chart.js Visualization
+        const ctx = document.getElementById('benchmarkChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['AIME (數學推理)', 'SWE-bench (編碼)', 'Context Window (Max)'],
+                datasets: [
+                    {
+                        label: 'ChatGPT 5.2',
+                        data: [100, 80, 15], // 15 represents 128k scale
+                        backgroundColor: 'rgba(15, 118, 110, 0.7)',
+                    },
+                    {
+                        label: 'Nemotron 3 Ultra',
+                        data: [96, 75, 100], // 100 represents 1M scale
+                        backgroundColor: 'rgba(14, 165, 233, 0.7)',
+                    },
+                    {
+                        label: 'Gemini 3',
+                        data: [95, 76, 100],
+                        backgroundColor: 'rgba(245, 158, 11, 0.7)',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 110,
+                        title: {
+                            display: true,
+                            text: '得分 / 比例'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // 4. Smooth Scrolling Active State (Intersection Observer)
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+        
+        const observerOptions = {
+            root: null,
+            threshold: 0.3,
+            rootMargin: "-10% 0px -70% 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
