@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-TikTok 合資案股價影響研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        /* 隱藏捲軸但保持功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="bg-sky-600 text-white p-1.5 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-stone-800">TikTok USDS 研究</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center h-full">
+                    <a href="#summary" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-600" data-section="summary">摘要</a>
+                    <a href="#structure" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-600" data-section="structure">股權架構</a>
+                    <a href="#oracle" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-600" data-section="oracle">甲骨文效應</a>
+                    <a href="#landscape" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-600" data-section="landscape">競爭格局</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg id="menu-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu Content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">摘要</a>
+                <a href="#structure" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">股權架構</a>
+                <a href="#oracle" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">甲骨文效應</a>
+                <a href="#landscape" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">競爭格局</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="mb-16 text-center lg:text-left">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-2/3">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-6 leading-tight">
+                        TikTok USDS 合資案：<br><span class="text-sky-600 underline decoration-sky-200">美股資本市場結構性影響剖析</span>
+                    </h1>
+                    <p class="text-lg text-stone-600 max-w-2xl">
+                        此交易標誌著圍繞 TikTok 在美運營權長達五年的地緣政治博弈進入最終實施階段，旨在滿足「合格剝離」法律要求，服務超 1.7 億美國用戶。
+                    </p>
+                </div>
+                <div class="hidden lg:block lg:w-1/3">
+                    <div class="bg-sky-50 border border-sky-100 rounded-2xl p-8 shadow-inner">
+                        <div class="text-sm font-semibold text-sky-700 uppercase tracking-widest mb-2">關鍵日期</div>
+                        <div class="text-2xl font-bold text-stone-800">2026 年 1 月 22 日</div>
+                        <div class="text-sm text-sky-600">預計正式完成交割</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. 摘要 (Summary) -->
+        <section id="summary" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">報告摘要</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-sky-500">
+                    <div class="flex items-center gap-3 mb-4 text-sky-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        <h3 class="font-bold text-xl">交易核心</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        字節跳動與 Oracle、Silver Lake 及 MGX 達成協議，成立 TikTok USDS。此舉並非簡單股權轉讓，而是「主權與商業利益置換」。
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-sky-500">
+                    <div class="flex items-center gap-3 mb-4 text-sky-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <h3 class="font-bold text-xl">治理結構</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        新公司由美國人控制，設立七人董事會，字節跳動僅佔一席。另設國家安全委員會，擁有數據安全一票否決權。
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-sky-500">
+                    <div class="flex items-center gap-3 mb-4 text-sky-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <h3 class="font-bold text-xl">戰略贏家</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        Oracle (甲骨文) 為最大戰略受益者，確立其「主權雲」地位，將獲每年 15-20 億美元雲服務營收。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 股權架構與資料表格 (Structure) -->
+        <section id="structure" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">股權架構解析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Chart Box -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-700 mb-4">股權佔比視覺化 (百分比)</h3>
+                    <div class="relative h-64">
+                        <canvas id="equityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="bg-sky-900 text-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold mb-4">政治數學：權力與利益的剝離</h3>
+                    <p class="text-sky-100 text-sm leading-relaxed mb-4">
+                        股權設計精確維持 ByteDance 在 19.9%（低於 20% 紅線），確保非「外國對手控制」。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-sky-800/50 p-4 rounded-lg">
+                            <div class="text-sky-300 text-xs uppercase">美國成分比例</div>
+                            <div class="text-2xl font-bold">80.1%</div>
+                        </div>
+                        <div class="bg-sky-800/50 p-4 rounded-lg">
+                            <div class="text-sky-300 text-xs uppercase">管理投資者佔比</div>
+                            <div class="text-2xl font-bold">45.0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <h3 class="text-lg font-bold text-stone-700">股權分配詳細清單</h3>
+                    <div class="relative w-full sm:w-64">
+                        <input type="text" id="tableFilter" placeholder="搜尋實體名稱..." 
+                               class="w-full pl-10 pr-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="overflow-x-auto rounded-lg border border-stone-100">
+                    <table class="min-w-full divide-y divide-stone-200" id="equityTable">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-stone-500 uppercase tracking-wider">股東類別</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-stone-500 uppercase tracking-wider">實體名稱</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-stone-500 uppercase tracking-wider text-right">持股比例</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-stone-500 uppercase tracking-wider">戰略角色</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200" id="tableBody">
+                            <!-- Table rows will be injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Oracle Section (Oracle) -->
+        <section id="oracle" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">甲骨文 (ORCL) 價值重塑</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-xl font-bold text-sky-700 mb-3">OCI 規模效應</h3>
+                        <p class="text-stone-600 text-sm">
+                            TikTok 作為雲端資源的「吞金獸」，將顯著改善 Oracle 雲基礎設施 (OCI) 的毛利率。預計帶來每年 15-20 億美元的營收增量，佔其雲營收約 8-10%。
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-xl font-bold text-sky-700 mb-3">AI 算法重訓機會</h3>
+                        <p class="text-stone-600 text-sm">
+                            協議要求在美國本土重訓推薦模型。這將消耗數萬張 NVIDIA GPU 算力。Oracle 將借此證明其 RDMA 網絡架構優勢，吸引更多 AI 初創公司。
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-stone-800 text-stone-100 rounded-lg p-8 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold mb-6 text-sky-400">受信任的安全合作夥伴</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <span class="bg-sky-500 rounded-full p-1 text-white mt-1">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                                </span>
+                                <span><strong>合規性即服務：</strong> 高額審計、代碼託管及安全監控費。</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-sky-500 rounded-full p-1 text-white mt-1">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                                </span>
+                                <span><strong>主權雲品牌：</strong> 確立其作為「最懂政府需求的雲服務商」形象。</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-sky-500 rounded-full p-1 text-white mt-1">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                                </span>
+                                <span><strong>估值溢價：</strong> 市盈率 (P/E) 有望隨營收併表進一步擴張。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Decorative SVG Icon -->
+                    <svg class="absolute -right-12 -bottom-12 w-48 h-48 text-stone-700 opacity-20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Competitive Landscape (Landscape) -->
+        <section id="landscape" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">社交媒體競爭格局</h2>
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8">
+                <p class="text-amber-800 font-medium">🚨 戰略觀點：TikTok 的存續意味著「禁令紅利」消失，市場回歸算法基本面競爭。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Snap -->
+                <div class="bg-white rounded-xl shadow p-6 border border-stone-200">
+                    <div class="text-rose-500 font-bold text-xs uppercase mb-1">風險最高</div>
+                    <h3 class="text-xl font-extrabold mb-4 flex items-center gap-2">
+                        Snap Inc. (SNAP)
+                    </h3>
+                    <ul class="text-sm text-stone-600 space-y-3">
+                        <li>• <strong>廣告擠出：</strong> 品牌主對 TikTok 的顧慮消除，預算將被吸走。</li>
+                        <li>• <strong>天花板效應：</strong> Gen Z 用戶與 TikTok 高度重疊。</li>
+                    </ul>
+                </div>
+                <!-- Meta -->
+                <div class="bg-white rounded-xl shadow p-6 border border-stone-200">
+                    <div class="text-amber-500 font-bold text-xs uppercase mb-1">防禦升級</div>
+                    <h3 class="text-xl font-extrabold mb-4 flex items-center gap-2">
+                        Meta (META)
+                    </h3>
+                    <ul class="text-sm text-stone-600 space-y-3">
+                        <li>• <strong>軍備競賽：</strong> 需大幅提升 AI 支出（720億美金）以對抗 TikTok 推薦。</li>
+                        <li>• <strong>定價壓力：</strong> 短視頻廣告庫存過剩限制 CPM 提升。</li>
+                    </ul>
+                </div>
+                <!-- Alphabet -->
+                <div class="bg-white rounded-xl shadow p-6 border border-stone-200">
+                    <div class="text-sky-500 font-bold text-xs uppercase mb-1">防禦穩健</div>
+                    <h3 class="text-xl font-extrabold mb-4 flex items-center gap-2">
+                        Alphabet (GOOGL)
+                    </h3>
+                    <ul class="text-sm text-stone-600 space-y-3">
+                        <li>• <strong>YouTube Shorts：</strong> 作為防禦性產品表現穩健。</li>
+                        <li>• <strong>長視頻威脅：</strong> 需防範 TikTok USDS 測試 30 分鐘長視頻的進攻。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-TikTok 合資案股價影響研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 TikTok 合資案相關公開資料 (2025年12月19日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Data Initialization ---
+        const equityData = [
+            { category: "戰略管理投資者", entity: "Oracle Corporation", percentage: 15.0, role: "技術錨點與雲託管" },
+            { category: "戰略管理投資者", entity: "Silver Lake", percentage: 15.0, role: "資本運作與財務工程" },
+            { category: "戰略管理投資者", entity: "MGX (阿布扎比投資)", percentage: 15.0, role: "地緣制衡與中東資本" },
+            { category: "被動投資者", entity: "ByteDance 現有股東", percentage: 30.1, role: "權益下沉，增加美國成分" },
+            { category: "原母公司", entity: "ByteDance (字節跳動)", percentage: 19.9, role: "利益保留，低於 20% 紅線" },
+            { category: "其他投資者", entity: "未公開財團", percentage: 5.0, role: "平衡股權結構" }
+        ];
+
+        // --- 2. Chart.js Implementation ---
+        function initChart() {
+            const ctx = document.getElementById('equityChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: equityData.map(d => d.entity),
+                    datasets: [{
+                        label: '持股比例 (%)',
+                        data: equityData.map(d => d.percentage),
+                        backgroundColor: [
+                            '#0ea5e9', '#0284c7', '#0369a1', '#7dd3fc', '#cbd5e1', '#94a3b8'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            max: 35,
+                            ticks: { callback: value => value + '%' }
+                        },
+                        x: {
+                            ticks: {
+                                display: false // Hide long names on x-axis for mobile
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- 3. Interactive Table ---
+        function renderTable(filterText = '') {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            const filtered = equityData.filter(item => 
+                item.entity.toLowerCase().includes(filterText.toLowerCase()) ||
+                item.category.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            filtered.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${item.category}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${item.entity}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900 text-right font-mono">${item.percentage.toFixed(1)}%</td>
+                        <td class="px-6 py-4 text-sm text-stone-500">${item.role}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        // --- 4. Navigation Interaction (Intersection Observer) ---
+        function initNavObserver() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id]');
+            
+            const options = {
+                root: null,
+                threshold: 0.5,
+                rootMargin: "-64px 0px 0px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.dataset.section === id) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // --- 5. Mobile Menu Toggle ---
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+            // Close menu when clicking link
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => menu.classList.add('hidden'));
+            });
+        }
+
+        // --- Initialization on Load ---
+        window.onload = function() {
+            initChart();
+            renderTable();
+            initNavObserver();
+            initMobileMenu();
+
+            // Table filter listener
+            document.getElementById('tableFilter').addEventListener('input', (e) => {
+                renderTable(e.target.value);
+            });
+        };
+    </script>
+</body>
+</html>
