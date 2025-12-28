@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2025/12/22~12/27)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-700 tracking-tight">美股市場週報</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">重點摘要</a>
+                    <a href="#ai-tech" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">AI與半導體</a>
+                    <a href="#industry" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">機器人與餐飲</a>
+                    <a href="#retail" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">零售與科技監管</a>
+                    <a href="#data-table" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">企業數據庫</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+            <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">重點摘要</a>
+            <a href="#ai-tech" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">AI與半導體</a>
+            <a href="#industry" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">機器人與餐飲</a>
+            <a href="#retail" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">零售與科技監管</a>
+            <a href="#data-table" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">企業數據庫</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Section -->
+        <section id="summary" class="mb-12">
+            <div class="bg-gradient-to-r from-sky-700 to-indigo-800 rounded-2xl p-8 text-white shadow-xl">
+                <h1 class="text-4xl md:text-4xl font-extrabold mb-4">2025年12月第4週市場投資週報</h1>
+                <p class="text-lg opacity-90 max-w-3xl mb-6">解析 2025/12/22 – 12/27 關鍵產業變動，從 AI 泡沫疑慮、半導體技術爭奪到零售業假日表現的深度報告。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20">
+                        <span class="block text-sm opacity-70">假日零售成長</span>
+                        <span class="text-2xl font-bold">~4.0%</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20">
+                        <span class="block text-sm opacity-70">AI 龍頭焦點</span>
+                        <span class="text-2xl font-bold">NVDA / ORCL</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20">
+                        <span class="block text-sm opacity-70">市場氛圍</span>
+                        <span class="text-2xl font-bold">審慎樂觀</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Chart Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">假日銷售數據分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="mb-4 text-stone-600 italic">比較 11月初至 12月21日 之各項零售銷售成長率數據 (YoY %)</p>
+                <div class="relative h-[300px] md:h-[400px]">
+                    <canvas id="retailChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI & Semiconductors Section -->
+        <section id="ai-tech" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 與 半導體產業</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">AI 產業：過熱隱憂與監管</h3>
+                    <ul class="space-y-3 text-stone-600">
+                        <li><strong class="text-stone-800">Oracle (ORCL)：</strong> 財報預測不佳且支出飆升，股價暴跌約13%，引發市場對AI投資泡沫的審慎。</li>
+                        <li><strong class="text-stone-800">Meta (META)：</strong> 旗下 WhatsApp 面臨義大利反壟斷機構下令暫停第三方機器人限制，監管風險升溫。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">半導體：技術授權與美中角力</h3>
+                    <ul class="space-y-3 text-stone-600">
+                        <li><strong class="text-stone-800">Nvidia (NVDA)：</strong> 取得 Groq 技術授權並延攬人才，強化推論（Inference）晶片競爭力。</li>
+                        <li><strong class="text-stone-800">記憶體風險：</strong> 南韓檢方針對 HBM 技術遭竊起訴 10 人，顯示中國追趕力道強勁，對美光等廠商構成長線利空。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Robots & F&B Section -->
+        <section id="industry" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">人形機器人與餐飲轉型</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-emerald-50 rounded-lg shadow-lg p-6 border border-emerald-100">
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3 uppercase tracking-wide">特斯拉 Optimus</h3>
+                    <p class="text-emerald-900 text-sm leading-relaxed">馬斯克強調 Robotaxi 與 Optimus 為長遠核心。雖然目前營收主力仍是電動車，但無人測試激勵股價創一年新高。</p>
+                </div>
+                <div class="bg-rose-50 rounded-lg shadow-lg p-6 border border-rose-100">
+                    <h3 class="text-xl font-bold text-rose-800 mb-3 uppercase tracking-wide">減重藥衝擊速食</h3>
+                    <p class="text-rose-900 text-sm leading-relaxed">口服 Wegovy (GLP-1) 核准預期明年普及，研究顯示家庭速食支出可能減少 8%。麥當勞已研擬高蛋白與小份量餐點因應。</p>
+                </div>
+                <div class="bg-indigo-50 rounded-lg shadow-lg p-6 border border-indigo-100">
+                    <h3 class="text-xl font-bold text-indigo-800 mb-3 uppercase tracking-wide">軟體板塊輪動</h3>
+                    <p class="text-indigo-900 text-sm leading-relaxed">市場預期 2025 年將是「軟體的年份」，資金可能從漲多半導體輪動至基本面穩健的軟體龍頭（如 CRM）。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Retail & Tech Regulation Section -->
+        <section id="retail" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">零售概況與科技合規</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center">
+                        <span class="w-2 h-6 bg-sky-500 mr-2 rounded"></span> 零售亮點：Nike 與 Holiday Sales
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-3 bg-stone-50 rounded border-l-4 border-stone-300">
+                            <h4 class="font-bold">Nike (NKE)</h4>
+                            <p class="text-sm text-stone-600">Tim Cook 增持 5 萬股展現信心，股價單日漲 4.6%，舒緩中國市場疲軟帶來的陰霾。</p>
+                        </div>
+                        <div class="p-3 bg-stone-50 rounded border-l-4 border-stone-300">
+                            <h4 class="font-bold">消費電子與服飾</h4>
+                            <p class="text-sm text-stone-600">年終熱銷品類，Visa 數據顯示電子產品增幅達 5.8%。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center">
+                        <span class="w-2 h-6 bg-rose-500 mr-2 rounded"></span> 監管挑戰：心理健康法與反壟斷
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-3 bg-stone-50 rounded border-l-4 border-stone-300">
+                            <h4 class="font-bold">紐約州新法</h4>
+                            <p class="text-sm text-stone-600">要求 Meta 與 Google 對沉迷式設計標註警示，可能影響用戶黏著度。</p>
+                        </div>
+                        <div class="p-3 bg-stone-50 rounded border-l-4 border-stone-300">
+                            <h4 class="font-bold">Microsoft (MSFT)</h4>
+                            <p class="text-sm text-stone-600">與歐盟就 Teams 綑綁案達成和解，提供降價版 Office，利空出盡。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table Section -->
+        <section id="data-table" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心企業數據庫</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <label for="table-search" class="sr-only">搜尋企業或產業</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <input type="text" id="table-search" class="block w-full pl-10 pr-3 py-2 border border-stone-300 rounded-md leading-5 bg-white placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm" placeholder="輸入企業名稱、代號或產業進行篩選...">
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto border border-stone-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200" id="product-table">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">企業名稱 (代號)</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">所屬產業</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">關鍵事件 / 動態</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">投資評價</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="bg-white divide-y divide-stone-200">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2025/12/22~12/27)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2025年12月28日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. 資料定義 (Real Data from Report) ---
+        const productData = [
+            { name: "Oracle (ORCL)", industry: "人工智慧", event: "財報預測不佳且AI支出激增，股價月跌約13%", sentiment: "短期利空" },
+            { name: "Nvidia (NVDA)", industry: "半導體", event: "授權 Groq 技術並延攬前 Google 核心高管", sentiment: "利多消息" },
+            { name: "Tesla (TSLA)", industry: "人形機器人", event: "無人計程車開始無人化測試，馬斯克強調 Optimus 是未來核心", sentiment: "願景利多" },
+            { name: "McDonald's (MCD)", industry: "餐飲業", event: "口服減重藥 Wegovy 核准可能使客群支出減少 8%", sentiment: "短期利空" },
+            { name: "Nike (NKE)", industry: "零售業", event: "Tim Cook 增持 5萬股背書新任 CEO 振興計畫", sentiment: "意外利多" },
+            { name: "Microsoft (MSFT)", industry: "科技業", event: "Teams 反壟斷案與歐盟達成和解，消除罰款威脅", sentiment: "利空出盡" },
+            { name: "Meta (META)", industry: "科技業", event: "紐約州心理健康警示法案與義大利監管壓力", sentiment: "中性偏利空" },
+            { name: "Salesforce (CRM)", industry: "軟體業", event: "資金預期由半導體板塊輪動至軟體龍頭", sentiment: "長線正向" }
+        ];
+
+        // --- 2. 初始化表格 ---
+        const tableBody = document.getElementById('table-body');
+        const searchInput = document.getElementById('table-search');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-stone-50 transition-colors";
+                
+                let sentimentColor = "bg-stone-100 text-stone-700";
+                if (item.sentiment.includes("利多")) sentimentColor = "bg-emerald-100 text-emerald-700";
+                if (item.sentiment.includes("利空")) sentimentColor = "bg-rose-100 text-rose-700";
+
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-900">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${item.industry}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.event}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${sentimentColor}">
+                            ${item.sentiment}
+                        </span>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        renderTable(productData);
+
+        // 表格篩選功能
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.industry.toLowerCase().includes(term) ||
+                item.event.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // --- 3. 手機版選單切換 ---
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊選單項目後自動關閉
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 4. Chart.js 數據視覺化 ---
+        const ctx = document.getElementById('retailChart').getContext('2d');
+        const retailChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['假日整體銷售', 'Visa數據', '萬事達卡數據', '電子產品', '服飾類'],
+                datasets: [{
+                    label: '銷售成長率 (YoY %)',
+                    data: [4.0, 4.2, 3.9, 5.8, 5.3],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.7)', // sky
+                        'rgba(56, 189, 248, 0.7)',
+                        'rgba(125, 211, 252, 0.7)',
+                        'rgba(79, 70, 229, 0.7)', // indigo
+                        'rgba(99, 102, 241, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(56, 189, 248, 1)',
+                        'rgba(125, 211, 252, 1)',
+                        'rgba(79, 70, 229, 1)',
+                        'rgba(99, 102, 241, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // --- 5. Intersection Observer (Active Nav State) ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const options = {
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, options);
+
+        sections.forEach(section => observer.observe(section));
+
+    </script>
+</body>
+</html>
