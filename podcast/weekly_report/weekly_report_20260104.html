@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2025/12/29~2026/1/3)</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font Awesome for Icons (Optional for better UI) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* 自定義滾動條樣式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+
+        /* 導航列 Active 狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed">
+
+    <!-- 1. 導航互動 (Sticky Header) -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / Title -->
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <i class="fa-solid fa-chart-line text-sky-600 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-stone-800">美股市場週報</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#summary" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">執行摘要</a>
+                    <a href="#market-charts" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">市場數據</a>
+                    <a href="#geopolitics" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">地緣政治</a>
+                    <a href="#sectors" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">產業深度</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-400 hover:text-stone-500 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">打開選單</span>
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden bg-white border-t border-stone-200" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">執行摘要</a>
+                <a href="#market-charts" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">市場數據</a>
+                <a href="#geopolitics" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">地緣政治</a>
+                <a href="#sectors" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">產業深度</a>
+                <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-stone-800 text-white py-12" id="home">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">2026年全球投資視野：新秩序下的市場重構</h1>
+            <p class="text-sky-400 text-lg mb-2">報告區間：2025年12月29日 至 2026年1月3日</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- Section: Executive Summary -->
+        <section id="summary" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要：震盪與啟航</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                <p class="mb-4 text-lg">
+                    站在2026年的起點，市場情緒經歷了從「聖誕老人行情」到「地緣政治黑天鵝」的劇烈轉換。
+                    <strong class="text-red-600">委內瑞拉政權更迭</strong>成為本週最大變數，川普政府的軍事行動將重塑全球能源版圖。
+                    同時，<strong class="text-sky-600">AI基礎設施</strong>的投資焦點正從單純算力轉向存儲（Sandisk 以 559% 年漲幅奪冠），醫療與消費板塊則在政策微調中尋找新機遇。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sky-100 p-3 rounded-full mr-4 text-sky-600"><i class="fa-solid fa-microchip"></i></div>
+                        <h3 class="font-bold text-lg">科技：存儲崛起</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm">AI投資從GPU擴散至存儲與數據基礎設施，Sandisk、WDC、Micron 包攬S&P 500年度漲幅前三名。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-3 rounded-full mr-4 text-red-600"><i class="fa-solid fa-oil-well"></i></div>
+                        <h3 class="font-bold text-lg">能源：委內瑞拉變局</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm">美軍捕獲馬杜羅，美國接管委內瑞拉。短期油價波動，長期或釋放巨大產能，利好 Chevron 等石油巨頭。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4 text-green-600"><i class="fa-solid fa-pills"></i></div>
+                        <h3 class="font-bold text-lg">醫療：FDA批准潮</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm">Vanda、Novo Nordisk 等多款重磅新藥獲批，生物科技板塊在利率預期下降背景下展現防禦性成長。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Market Charts -->
+        <section id="market-charts" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2025 市場全景回顧</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Market Indices -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-center">2025年主要指數表現</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="indicesChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-xs text-stone-500 text-center">資料來源：2025年全年市場數據。S&P 500 連續三年牛市。</p>
+                </div>
+
+                <!-- Chart 2: Top Performers -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-center">S&P 500 2025年漲幅冠軍 (AI存儲)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="topStocksChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-xs text-stone-500 text-center">存儲板塊包攬前三名，顯示資金尋找AI價值窪地。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Geopolitics (Venezuela) -->
+        <section id="geopolitics" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">地緣政治焦點：委內瑞拉行動</h2>
+            <div class="bg-stone-800 text-white rounded-lg shadow-xl p-8 mb-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-red-600 rounded-full opacity-20"></div>
+                <h3 class="text-2xl font-bold mb-4">事件：美軍「雷霆手段」捕獲馬杜羅</h3>
+                <p class="mb-4">2026年1月3日，川普總統證實美軍成功執行行動，捕獲委內瑞拉總統馬杜羅。美國宣布將「暫時管理」該國以確保能源與政治過渡。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-stone-700 p-4 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-bold text-yellow-500">短期衝擊 (看漲風險)</h4>
+                        <p class="text-sm mt-1">擔心基礎設施破壞及地緣政治反彈（俄、伊反應），可能引發原油與黃金的膝跳式上漲。</p>
+                    </div>
+                    <div class="bg-stone-700 p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-bold text-green-500">中長期展望 (看跌潛力)</h4>
+                        <p class="text-sm mt-1">若美國巨頭引入技術重建，委內瑞拉產能回升將對長期油價構成下行壓力。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Sector Deep Dive -->
+        <section id="sectors" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業深度分析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- AI & Semi -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-purple-500">
+                    <h3 class="text-xl font-bold mb-3 flex items-center justify-between">
+                        AI 與 半導體
+                        <span class="text-xs font-normal bg-purple-100 text-purple-800 px-2 py-1 rounded">熱點</span>
+                    </h3>
+                    <ul class="space-y-3 text-sm text-stone-600">
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-purple-500"></i><span><strong>Sandisk (SNDK):</strong> 年漲幅559%，受益於AI數據存儲需求激增。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-purple-500"></i><span><strong>Nvidia (NVDA):</strong> H200「中國特供」計畫面臨25%收入分成條款，地緣政治博弈加劇。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-purple-500"></i><span><strong>百度 (BIDU):</strong> 分拆昆侖芯上市，釋放被低估的資產價值。</span></li>
+                    </ul>
+                </div>
+
+                <!-- Retail -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-orange-500">
+                    <h3 class="text-xl font-bold mb-3 flex items-center justify-between">
+                        零售與消費
+                        <span class="text-xs font-normal bg-orange-100 text-orange-800 px-2 py-1 rounded">政策利好</span>
+                    </h3>
+                    <ul class="space-y-3 text-sm text-stone-600">
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-orange-500"></i><span><strong>家具關稅推遲:</strong> 白宮推遲關稅至2027年，Wayfair (W) 與 RH (RH) 獲重大利潤喘息空間。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-orange-500"></i><span><strong>假日銷售:</strong> 增長3.9%，電商激增7.4%，體驗式消費強勁。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-orange-500"></i><span><strong>Tesla (TSLA):</strong> 交付量下滑，轉型 Robotaxi 概念面臨業績檢驗。</span></li>
+                    </ul>
+                </div>
+
+                <!-- Healthcare -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-teal-500">
+                    <h3 class="text-xl font-bold mb-3 flex items-center justify-between">
+                        醫療與生技
+                        <span class="text-xs font-normal bg-teal-100 text-teal-800 px-2 py-1 rounded">防禦首選</span>
+                    </h3>
+                    <ul class="space-y-3 text-sm text-stone-600">
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-teal-500"></i><span><strong>Vanda (VNDA):</strong> 預防暈動病新藥獲批，股價大漲25%。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-teal-500"></i><span><strong>Novo Nordisk:</strong> Wegovy 獲 MASH 標籤擴展，鞏固代謝領域統治力。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-angle-right mt-1 mr-2 text-teal-500"></i><span><strong>趨勢:</strong> 利率預期下降利好生技融資與併購活動。</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Strategy Table -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2026 Q1 投資策略與關注標的</h2>
+            
+            <!-- Search Input -->
+            <div class="mb-6 relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-search text-stone-400"></i>
+                </div>
+                <input type="text" id="searchInput" class="block w-full pl-10 pr-3 py-3 border border-stone-300 rounded-md leading-5 bg-white placeholder-stone-500 focus:outline-none focus:placeholder-stone-400 focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm shadow-sm" placeholder="搜尋公司、代碼或主題 (例如: Chevron, AI, 能源)...">
+            </div>
+
+            <!-- Table Container -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-stone-200">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">投資主題</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">代碼</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">公司名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">核心邏輯</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">風險因素</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden p-8 text-center text-stone-500">
+                    沒有找到符合的搜尋結果。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2025/12/29~2026/1/3)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年1月4日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Chart.js Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart 1: Market Indices
+            const ctxIndices = document.getElementById('indicesChart').getContext('2d');
+            new Chart(ctxIndices, {
+                type: 'bar',
+                data: {
+                    labels: ['S&P 500', 'Nasdaq', 'Dow Jones'],
+                    datasets: [{
+                        label: '2025年漲幅 (%)',
+                        data: [17.9, 20.0, 13.0],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)', // sky-500
+                            'rgba(168, 85, 247, 0.7)', // purple-500
+                            'rgba(100, 116, 139, 0.7)' // slate-500
+                        ],
+                        borderColor: [
+                            'rgba(14, 165, 233, 1)',
+                            'rgba(168, 85, 247, 1)',
+                            'rgba(100, 116, 139, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Chart 2: Top Stocks (Sandisk Highlight)
+            const ctxTop = document.getElementById('topStocksChart').getContext('2d');
+            new Chart(ctxTop, {
+                type: 'bar',
+                data: {
+                    labels: ['Sandisk (SNDK)', 'Western Digital', 'Micron'],
+                    datasets: [{
+                        label: '2025年漲幅 (%)',
+                        data: [559, 282, 239],
+                        backgroundColor: [
+                            'rgba(234, 179, 8, 0.8)', // yellow-500 (Winner)
+                            'rgba(209, 213, 219, 0.7)',
+                            'rgba(209, 213, 219, 0.7)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // Horizontal bar chart
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+
+        // 2. Interactive Table Data & Logic
+        const productData = [
+            { theme: "能源重建", ticker: "CVX", company: "Chevron", logic: "唯一在委內瑞拉保持運營的美國巨頭，重建合約首選。", risk: "委內瑞拉局勢長期內戰化。" },
+            { theme: "能源重建", ticker: "XOM", company: "Exxon Mobil", logic: "潛在產能擴張贏家，資本優勢明顯。", risk: "油價長期因供給增加下跌。" },
+            { theme: "能源重建", ticker: "SLB", company: "Schlumberger", logic: "基礎設施重建需要大量油田服務與設備。", risk: "項目啟動延遲。" },
+            { theme: "AI存儲", ticker: "PSTG", company: "Pure Storage", logic: "全閃存取代HDD趨勢；相比SNDK估值更具吸引力。", risk: "企業IT支出放緩。" },
+            { theme: "AI存儲", ticker: "SNDK", company: "Sandisk", logic: "2025年冠軍，動能強勁，但需警惕估值。", risk: "NAND價格週期波動。" },
+            { theme: "生物科技", ticker: "VNDA", company: "Vanda Pharma", logic: "暈動病新藥獲批，滿足巨大未滿足需求。", risk: "單一產品依賴風險。" },
+            { theme: "生物科技", ticker: "NVO", company: "Novo Nordisk", logic: "Wegovy 擴展至 MASH 肝病領域，增長新引擎。", risk: "高估值與藥價監管。" },
+            { theme: "消費復甦", ticker: "W", company: "Wayfair", logic: "家具關稅推遲至2027年，利潤率壓力緩解。", risk: "房地產市場持續低迷。" },
+            { theme: "消費復甦", ticker: "RH", company: "RH", logic: "高端定位護城河，受惠於關稅政策利好。", risk: "高階消費力減弱。" },
+            { theme: "價值重估", ticker: "BIDU", company: "Baidu (百度)", logic: "昆侖芯分拆上市，釋放AI資產價值。", risk: "中美科技戰與宏觀經濟。" },
+            { theme: "地緣對沖", ticker: "GOLD", company: "Barrick Gold", logic: "應對地緣政治動盪的避險配置。", risk: "利率維持高位壓制金價。" }
+        ];
+
+        const tableBody = document.getElementById('stockTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors';
+                
+                // Set theme color badge
+                let themeColor = 'bg-stone-100 text-stone-800';
+                if(item.theme.includes('能源')) themeColor = 'bg-red-100 text-red-800';
+                if(item.theme.includes('AI')) themeColor = 'bg-purple-100 text-purple-800';
+                if(item.theme.includes('生')) themeColor = 'bg-teal-100 text-teal-800';
+                if(item.theme.includes('消費')) themeColor = 'bg-orange-100 text-orange-800';
+
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${themeColor}">${item.theme}</span></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-900">${item.ticker}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-700">${item.company}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.logic}</td>
+                    <td class="px-6 py-4 text-sm text-stone-500 italic">${item.risk}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initial Render
+        renderTable(productData);
+
+        // Search Event Listener
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.company.toLowerCase().includes(term) || 
+                item.ticker.toLowerCase().includes(term) ||
+                item.theme.toLowerCase().includes(term) ||
+                item.logic.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. Navigation Logic (Mobile Menu & Active State)
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section, header');
+
+        // Toggle Mobile Menu
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Active State
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -60% 0px', // Adjust trigger point
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    // Update Desktop Links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
