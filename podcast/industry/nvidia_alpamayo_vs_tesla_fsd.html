@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Nvidia 與 Tesla 自駕技術研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+            border-bottom: 2px solid transparent;
+        }
+        .section-anchor {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">自動駕駛技術對決</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium hover:text-sky-500 transition-colors">概覽</a>
+                    <a href="#nvidia" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium hover:text-sky-500 transition-colors">Nvidia 技術</a>
+                    <a href="#tesla" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium hover:text-sky-500 transition-colors">Tesla 技術</a>
+                    <a href="#comparison" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium hover:text-sky-500 transition-colors">對比分析</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium hover:text-sky-500 transition-colors">商業策略</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-stone-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">概覽</a>
+                <a href="#nvidia" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">Nvidia 技術</a>
+                <a href="#tesla" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">Tesla 技術</a>
+                <a href="#comparison" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">對比分析</a>
+                <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">商業策略</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="section-anchor mb-16">
+            <div class="bg-gradient-to-br from-stone-800 to-stone-900 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Nvidia Alpamayo 與 Tesla FSD v14.2<br><span class="text-sky-400 text-3xl md:text-4xl">技術比較與市場影響研究</span></h1>
+                <p class="text-stone-300 text-lg max-w-3xl mb-8">
+                    探討 2026 年自駕技術的兩大支柱：Nvidia 的開源推理生態系統與 Tesla 的垂直整合端到端模型。這是實體 AI 的「ChatGPT 時刻」。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl">
+                        <div class="text-sky-400 text-sm font-bold uppercase mb-1">Nvidia Alpamayo</div>
+                        <div class="text-2xl font-bold italic">100 億參數</div>
+                        <div class="text-stone-400 text-xs mt-1">VLA 推理模型</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl">
+                        <div class="text-sky-400 text-sm font-bold uppercase mb-1">Tesla FSD v14.2</div>
+                        <div class="text-2xl font-bold italic">端到端神經網路</div>
+                        <div class="text-stone-400 text-xs mt-1">HW4 硬體平台</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl">
+                        <div class="text-sky-400 text-sm font-bold uppercase mb-1">市場定位</div>
+                        <div class="text-2xl font-bold italic">Android vs iOS</div>
+                        <div class="text-stone-400 text-xs mt-1">開源生態與封閉整合</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nvidia Section -->
+        <section id="nvidia" class="section-anchor mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nvidia Alpamayo：開源與模擬之力</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+                        架構詳情
+                    </h3>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span> <strong>10B 參數 VLA 模型：</strong> 具備「連鎖思維」推理能力，能解釋每個決策背後的邏輯。</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span> <strong>蒸餾技術：</strong> 提供教師模型權重，可微調壓縮為車載輕量版。</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span> <strong>多感測器融合：</strong> 採「攝影機+雷達+LiDAR」組合，應對長尾邊緣案例。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                        工具生態系
+                    </h3>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span> <strong>AlpaSim 模擬器：</strong> GitHub 開源高擬真框架，支援閉環測試。</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span> <strong>開放數據集：</strong> 涵蓋 1,700 小時多地理天候數據，強化長尾學習。</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">●</span> <strong>NIM 微服務：</strong> 提供標準 API 優化雲端及邊緣部署，實現持續學習。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tesla Section -->
+        <section id="tesla" class="section-anchor mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Tesla FSD v14.2：數據飛輪與端到端</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <h4 class="font-bold text-stone-800 mb-2 underline decoration-red-200">端到端網路</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        棄用硬編碼規則，由「感知」與「規劃」兩大深度學習子模型協作，將環境語義 Token 化後推演駕駛決策。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <h4 class="font-bold text-stone-800 mb-2 underline decoration-red-200">數據飛輪</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        利用數百萬輛實車數據，透過「自動標注」與「預測 vs 結果」的比對進行模仿學習，形成高效更新循環。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <h4 class="font-bold text-stone-800 mb-2 underline decoration-red-200">HW4 硬體平台</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        針對 v14.x 優化的自研 AI 晶片，支援更高精度的感知網絡，實現每秒 15-30 次的推理決策。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Data Viz Section -->
+        <section id="comparison" class="section-anchor mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">技術規格對比</h2>
+            
+            <!-- Chart Container -->
+            <!--<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">模型參數規模預估 (Billion)</h3>
+                    <div class="h-64 relative">
+                        <canvas id="paramChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">訓練資料來源權重 (示意)</h3>
+                    <div class="h-64 relative">
+                        <canvas id="dataChart"></canvas>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 md:mb-0">詳細技術對比表</h3>
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋功能或規格..." class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-sky-500 outline-none transition-all">
+                        <svg class="w-5 h-5 absolute left-3 top-2.5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200" id="comparisonTable">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">技術指標</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Nvidia Alpamayo</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Tesla FSD v14.2</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="section-anchor mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">商業與產業影響分析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded mr-2">策略類型</span>
+                        <h3 class="text-xl font-bold text-stone-800">Nvidia：開放生態 (Android 模式)</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4 flex-grow">
+                        透過免費開源模型吸引 JLR、Lucid、Uber 等夥伴，降低自駕開發門檻，卻透過硬體 (Orin/Thor) 與雲端服務獲利。目標成為自駕領域的底層標準。
+                    </p>
+                    <div class="mt-4 p-4 bg-stone-50 rounded border-l-4 border-green-500">
+                        <span class="text-sm font-bold text-stone-700 block mb-1">關鍵夥伴：</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-white border px-2 py-1 rounded">JLR</span>
+                            <span class="text-xs bg-white border px-2 py-1 rounded">Lucid</span>
+                            <span class="text-xs bg-white border px-2 py-1 rounded">Uber</span>
+                            <span class="text-xs bg-white border px-2 py-1 rounded">Bosch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded mr-2">策略類型</span>
+                        <h3 class="text-xl font-bold text-stone-800">Tesla：垂直整合 (iOS 模式)</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4 flex-grow">
+                        掌控從晶片、車輛到軟體的完整技術鏈。透過 OTA 快速部署，目標實現真無人 Robotaxi 服務，轉型為高毛利運輸服務商。
+                    </p>
+                    <div class="mt-4 p-4 bg-stone-50 rounded border-l-4 border-blue-500">
+                        <span class="text-sm font-bold text-stone-700 block mb-1">市場優勢：</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-white border px-2 py-1 rounded">數據規模優勢</span>
+                            <span class="text-xs bg-white border px-2 py-1 rounded">OTA 即時更新</span>
+                            <span class="text-xs bg-white border px-2 py-1 rounded">Robotaxi 網路</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quote Block -->
+            <div class="mt-12 bg-sky-50 border-l-8 border-sky-500 p-8 rounded-r-lg">
+                <p class="text-xl italic text-sky-900 leading-relaxed mb-4">
+                    "Elon 的自動駕駛路線是業界最先進的，如人所知難有批評之處。實體 AI 的 ChatGPT 時刻已然到來，Robotaxi 將是首批受惠者。"
+                </p>
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-sky-200 rounded-full flex items-center justify-center font-bold text-sky-700 mr-3">JH</div>
+                    <div>
+                        <div class="font-bold text-stone-800">黃仁勳 Jensen Huang</div>
+                        <div class="text-sm text-stone-500">Nvidia 創辦人兼執行長，CES 2026 評論</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Nvidia 與 Tesla 自駕技術研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中自駕技術相關公開資料 (2026年1月7日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Table
+        const productData = [
+            { indicator: "模型架構", nvidia: "視覺-語言-行動 (VLA) 連鎖思維", tesla: "端到端 (E2E) 神經網絡" },
+            { indicator: "參數規模", nvidia: "100 億 (10B)", tesla: "數億級 (推測, 針對硬體優化)" },
+            { indicator: "感知方案", nvidia: "攝影機 + 雷達 + LiDAR (融合)", tesla: "純視覺 (Vision Only)" },
+            { indicator: "開發策略", nvidia: "開源權重與模擬工具 (生態開放)", tesla: "封閉系統與軟硬整合 (垂直壟斷)" },
+            { indicator: "關鍵優勢", nvidia: "決策可解釋性、解決長尾邊緣案例", tesla: "海量真實道路數據、數據飛輪效應" },
+            { indicator: "部署形式", nvidia: "NIM 微服務、開放車載 API", tesla: "OTA 整體軟體包升級" },
+            { indicator: "市場定位", nvidia: "自駕界的 Android (技術賦能者)", tesla: "自駕界的 iOS (軟硬服務一體化)" },
+            { indicator: "模擬依賴", nvidia: "極高 (模擬驅動，實測驗證)", tesla: "中低 (真實優先，模擬補充)" }
+        ];
+
+        // Mobile Menu Logic
+        const mobileBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Table Rendering & Filtering
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-900">${item.indicator}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.nvidia}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.tesla}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        renderTable(productData);
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.indicator.toLowerCase().includes(term) || 
+                item.nvidia.toLowerCase().includes(term) || 
+                item.tesla.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // Intersection Observer for Active Links
+        const sections = document.querySelectorAll('.section-anchor');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.3,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Charts initialization
+        window.onload = function() {
+            // Param Chart
+            const ctx1 = document.getElementById('paramChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Nvidia Alpamayo 1', 'Tesla FSD (Est.)'],
+                    datasets: [{
+                        label: '參數規模 (Billion)',
+                        data: [10, 0.5],
+                        backgroundColor: ['rgba(14, 165, 233, 0.7)', 'rgba(239, 68, 68, 0.7)'],
+                        borderColor: ['#0ea5e9', '#ef4444'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Data Type Chart
+            const ctx2 = document.getElementById('dataChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'pie',
+                data: {
+                    labels: ['真實道路數據', '合成/模擬數據'],
+                    datasets: [{
+                        data: [40, 60], // Nvidia style
+                        backgroundColor: ['#4b5563', '#0ea5e9'],
+                        label: 'Nvidia 資料分佈'
+                    }, {
+                        data: [90, 10], // Tesla style
+                        backgroundColor: ['#991b1b', '#fca5a5'],
+                        label: 'Tesla 資料分佈'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
