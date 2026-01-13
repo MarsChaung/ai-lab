@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Apple x Gemini 研究報告</title>
+    
+    <!-- 1. Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Font Awesome for Icons (Optional for UI enhancement) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom Styles for Interactive States */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased selection:bg-sky-200">
+
+    <!-- 1. 導航互動 (Sticky Header) -->
+    <header id="main-header" class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-brands fa-apple text-2xl mr-2"></i>
+                    <span class="font-bold text-xl tracking-tight text-stone-900">Apple x Gemini <span class="text-sky-600">2026</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">事件總覽</a>
+                    <a href="#technology" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">技術細節</a>
+                    <a href="#financial" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">財務與市場</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">投資策略表格</a>
+                    <a href="#charts" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">數據圖表</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 手機版選單 (Mobile Menu) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">事件總覽</a>
+                <a href="#technology" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">技術細節</a>
+                <a href="#financial" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財務與市場</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略表格</a>
+                <a href="#charts" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">數據圖表</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- Hero Section -->
+        <div class="text-center py-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">
+                Apple 選擇 Google Gemini AI <br class="hidden md:inline">升級 Siri 全面分析
+            </h1>
+            <p class="mt-4 text-xl text-stone-600 max-w-3xl mx-auto">
+                2026年科技產業的合縱連橫：從技術細節、財務影響到金融投資視角的深度剖析。
+            </p>
+            <div class="mt-8 flex justify-center gap-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-sky-100 text-sky-800">
+                    <i class="fa-solid fa-calendar-days mr-2"></i> 2026年1月12日公告
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    <i class="fa-solid fa-money-bill-trend-up mr-2"></i> Alphabet 市值破 4兆
+                </span>
+            </div>
+        </div>
+
+        <!-- Section 1: Overview -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-newspaper mr-2 text-sky-500"></i>事件背景與總覽
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">戰略合作公告</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        Apple 宣布與 Google 簽署多年協議，採用 <strong>Gemini AI</strong> 作為 Siri 和 Apple Intelligence 的核心基礎模型。這標誌著 Apple 放棄完全自研模型的堅持，轉向務實主義以加速 AI 部署。
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">決策背景</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        面對 OpenAI ChatGPT 的壓力，Apple 內部開發進度緩慢，Siri 升級計畫從 2025 推遲至 2026。最終選擇 Gemini 是因其「最具能力的基礎」，能解鎖創新體驗，優於 OpenAI 與 Anthropic 的方案。
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-emerald-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">競爭格局影響</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        OpenAI 角色降級為輔助，Google 取得巨大勝利。此合作強化了 Google 在 AI 競賽的領先地位，但也引發了 Elon Musk 等人對「權力集中」及反壟斷的批評。
+                    </p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-purple-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">隱私與合規</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        Apple 強調維持「業界領先的隱私標準」，資料不離 Apple 生態，Gemini 將在受控環境（私人雲端計算）運行。然歐盟與英國監管機構可能對此「雙寡頭」合作展開調查。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Technology -->
+        <section id="technology" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-microchip mr-2 text-sky-500"></i>技術整合與 Siri 升級
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="text-center p-4 rounded-lg bg-stone-50">
+                        <div class="text-4xl text-sky-600 mb-4"><i class="fa-solid fa-robot"></i></div>
+                        <h4 class="font-bold text-lg mb-2">全面升級的 Siri</h4>
+                        <p class="text-sm text-stone-600">預計 2026 春季推出，具備多模態輸入（語音、文字、影像），從語音助手轉型為智能 AI 伴侶。</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-stone-50">
+                        <div class="text-4xl text-sky-600 mb-4"><i class="fa-solid fa-cloud-lock"></i></div>
+                        <h4 class="font-bold text-lg mb-2">混合架構運行</h4>
+                        <p class="text-sm text-stone-600">本地運行 + 私人雲端計算 (Private Cloud Compute)。Gemini 處理核心功能，確保高效能與隱私。</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-stone-50">
+                        <div class="text-4xl text-sky-600 mb-4"><i class="fa-solid fa-bolt"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Google 雲端優勢</h4>
+                        <p class="text-sm text-stone-600">整合 Google 雲端技術提升模型訓練與推論速度，彌補 Apple 在 AI 基礎設施上的不足。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Financials -->
+        <section id="financial" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-chart-line mr-2 text-sky-500"></i>財務影響與市場反應
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                 <div class="bg-stone-800 text-white rounded-lg p-6 shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-sky-400">Google (Alphabet)</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><i class="fa-solid fa-check mt-1 mr-2 text-green-400"></i><span>市值突破 4 兆美元，成為第四家達標公司。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check mt-1 mr-2 text-green-400"></i><span>2025年股價上漲 65%，創 2009 年以來最佳。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check mt-1 mr-2 text-green-400"></i><span>雲端業務受益，獲得 Apple 每年約 10 億美元合約。</span></li>
+                    </ul>
+                </div>
+                <div class="bg-gray-100 text-stone-800 rounded-lg p-6 shadow-lg border border-gray-200">
+                    <h3 class="text-xl font-bold mb-4 text-stone-600">Apple</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><i class="fa-solid fa-circle-info mt-1 mr-2 text-sky-500"></i><span>每年支付 Google 約 10 億美元 AI 授權費。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-circle-info mt-1 mr-2 text-sky-500"></i><span>股價反應相對溫和 (+0.3%)，但分析師目標價上看 $350。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-circle-info mt-1 mr-2 text-sky-500"></i><span>持續收取 Google 每年約 200 億美元 Search 預設費用。</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Table (Investment Strategy) -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-table-list mr-2 text-sky-500"></i>互動式投資策略分析
+            </h2>
+            
+            <!-- Filter Input -->
+            <div class="mb-6 bg-white p-4 rounded-lg shadow-md flex items-center">
+                <i class="fa-solid fa-search text-stone-400 mr-3"></i>
+                <input type="text" id="tableSearch" placeholder="搜尋策略關鍵字 (例如：持有、風險、買入...)" 
+                       class="w-full border-none focus:ring-0 text-stone-700 placeholder-stone-400 focus:outline-none text-lg">
+            </div>
+
+            <!-- Table Container -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-stone-200">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="sticky top-0 px-6 py-4 text-left text-sm font-bold text-stone-500 uppercase tracking-wider bg-stone-50">投資面向</th>
+                                <th scope="col" class="sticky top-0 px-6 py-4 text-left text-sm font-bold text-sky-600 uppercase tracking-wider bg-stone-50">Alphabet 持有者策略</th>
+                                <th scope="col" class="sticky top-0 px-6 py-4 text-left text-sm font-bold text-stone-600 uppercase tracking-wider bg-stone-50">Apple 持有者策略</th>
+                                <th scope="col" class="sticky top-0 px-6 py-4 text-left text-sm font-bold text-emerald-600 uppercase tracking-wider bg-stone-50">未持有者建議</th>
+                            </tr>
+                        </thead>
+                        <tbody id="strategyTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden p-8 text-center text-stone-500">
+                    查無符合資料
+                </div>
+            </div>
+            <p class="text-xs text-stone-500 mt-2 text-right">* 表格資料來源：基於報告之金融投資視角分析。</p>
+        </section>
+
+        <!-- Section 5: Dynamic Charts -->
+        <section id="charts" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-chart-pie mr-2 text-sky-500"></i>關鍵數據視覺化
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Money Flow -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">Apple 與 Google 資金流向對比 (年度)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="moneyFlowChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-400 mt-2">單位：十億美元 (Billions USD)</p>
+                </div>
+
+                <!-- Chart 2: Stock Performance / Sentiment -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">2025年股價表現與分析師目標</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-400 mt-2">Alphabet 2025漲幅 vs Apple 分析師潛在漲幅</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="mb-2 font-medium">&copy; 巴菲特AI價值投資-Apple x Gemini 研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-500">資料來源：基於網路中 Apple 與 Google 合作相關公開資料 (2026年1月13日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        /**
+         * 3. 互動資料表格 (Interactive Table) Logic
+         * 資料來源：從報告「金融投資視角」章節提取的真實資料
+         */
+        const strategyData = [
+            {
+                aspect: "短期策略",
+                alphabet: "部分獲利了結 (賣出10-20%)，鎖定65%漲幅，持續監測AI新聞。",
+                apple: "維持持有，若因短期波動回落可加碼。",
+                others: "買入科技 ETF (如 QQQ) 以獲取廣泛曝險。"
+            },
+            {
+                aspect: "長期策略",
+                alphabet: "繼續持有，目標市值挑戰 5 兆美元，捕捉長期 AI 增長。",
+                apple: "監測 2026 Siri 推出後的銷售反應，目標價 $350。",
+                others: "優先買入 Apple 作為入門，並分散配置至 GOOGL。"
+            },
+            {
+                aspect: "風險考量",
+                alphabet: "AI 競爭加劇 (OpenAI, xAI)、反壟斷調查風險。",
+                apple: "記憶體成本上升、對 Google 的 10 億年費壓縮毛利、內部開發能力弱。",
+                others: "市場波動風險、地緣政治影響供應鏈。"
+            },
+            {
+                aspect: "潛在回報",
+                alphabet: "高 (受益於 AI 領導地位與雲端業務擴張)。",
+                apple: "中高 (期待 iPhone 換機潮帶動銷售復甦)。",
+                others: "中 (透過 ETF 獲得分散投資效益)。"
+            },
+            {
+                aspect: "操作建議",
+                alphabet: "視為最大受益者，但需居高思危。",
+                apple: "視為「墊腳石」策略，投資論點轉為中性/持有。",
+                others: "採用 60/40 股債配置，增加黃金 ETF 對沖。"
+            }
+        ];
+
+        const tableBody = document.getElementById('strategyTableBody');
+        const searchInput = document.getElementById('tableSearch');
+        const noResultsMsg = document.getElementById('noResults');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                noResultsMsg.classList.remove('hidden');
+                return;
+            } else {
+                noResultsMsg.classList.add('hidden');
+            }
+
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-sky-50 transition-colors duration-150";
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900 border-r border-stone-100">${row.aspect}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${row.alphabet}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600 bg-stone-50/50">${row.apple}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${row.others}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Initial Render
+        renderTable(strategyData);
+
+        // Search Filter Event
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = strategyData.filter(item => 
+                item.aspect.toLowerCase().includes(term) ||
+                item.alphabet.toLowerCase().includes(term) ||
+                item.apple.toLowerCase().includes(term) ||
+                item.others.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+
+        /**
+         * 4. 動態圖表 (Chart.js) Logic
+         */
+        
+        // Chart 1: Money Flow (Bar Chart)
+        const ctxMoney = document.getElementById('moneyFlowChart').getContext('2d');
+        new Chart(ctxMoney, {
+            type: 'bar',
+            data: {
+                labels: ['Google 支付給 Apple (搜尋引擎)', 'Apple 支付給 Google (AI 授權)'],
+                datasets: [{
+                    label: '金額 (十億美元)',
+                    data: [20, 1], // Report data: ~$20B Search vs ~$1B AI
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.7)', // Green for Google paying
+                        'rgba(14, 165, 233, 0.7)'  // Blue for Apple paying
+                    ],
+                    borderColor: [
+                        'rgb(16, 185, 129)',
+                        'rgb(14, 165, 233)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: '十億美元 ($B)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Chart 2: Stock Analysis (Bar/Line Combo style logic)
+        const ctxStock = document.getElementById('stockChart').getContext('2d');
+        new Chart(ctxStock, {
+            type: 'bar',
+            data: {
+                labels: ['Alphabet 2025實際漲幅', 'Apple 目標價潛在漲幅 (Wedbush)'],
+                datasets: [{
+                    label: '漲幅百分比 (%)',
+                    data: [65, 35], // Report data: Alphabet +65%, Wedbush targets +35% for Apple
+                    backgroundColor: [
+                        'rgba(245, 158, 11, 0.7)', // Amber
+                        'rgba(99, 102, 241, 0.7)'  // Indigo
+                    ],
+                    borderColor: [
+                        'rgb(245, 158, 11)',
+                        'rgb(99, 102, 241)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: '百分比 (%)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+        /**
+         * 1 & 2. 導航互動與手機選單 (Navigation & Mobile Menu)
+         */
+        
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Active Link State using Intersection Observer
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px', // Trigger when section is in middle of viewport
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    });
+
+                    // Add active class to corresponding link
+                    const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('inactive-nav-link');
+                        activeLink.classList.add('active-nav-link');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
