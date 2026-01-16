@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-NVIDIA H200銷售分析研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons (SVG) -->
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Navigation Header -->
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-black text-stone-800 tracking-tighter"><span class="text-sky-600 underline">NVIDIA H200銷售研究</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center font-medium">
+                    <a href="#summary" class="nav-link inactive-nav-link transition hover:text-sky-500 py-1">執行摘要</a>
+                    <a href="#policy" class="nav-link inactive-nav-link transition hover:text-sky-500 py-1">政策解析</a>
+                    <a href="#tech" class="nav-link inactive-nav-link transition hover:text-sky-500 py-1">技術對抗</a>
+                    <a href="#business" class="nav-link inactive-nav-link transition hover:text-sky-500 py-1">營收影響</a>
+                    <a href="#investment" class="nav-link inactive-nav-link transition hover:text-sky-500 py-1">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-stone-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 py-4 space-y-2">
+            <a href="#summary" class="block text-stone-700 hover:text-sky-600 py-2">執行摘要</a>
+            <a href="#policy" class="block text-stone-700 hover:text-sky-600 py-2">政策解析</a>
+            <a href="#tech" class="block text-stone-700 hover:text-sky-600 py-2">技術對抗</a>
+            <a href="#business" class="block text-stone-700 hover:text-sky-600 py-2">營收影響</a>
+            <a href="#investment" class="block text-stone-700 hover:text-sky-600 py-2">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-6">全球算力博弈新秩序：川普關稅壁壘與 NVIDIA 戰略困境</h1>
+            <p class="text-xl text-stone-600 max-w-3xl mx-auto">深度研究 2026 年美中晶片戰轉型：解構「25% 晶片稅」對 NVIDIA 營收與股價的結構性衝擊。</p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">地緣政治專報</span>
+                <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">2026年Q1更新</span>
+            </div>
+        </div>
+
+        <!-- Section 1: Executive Summary -->
+        <section id="summary" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要：從封鎖到尋租</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <h3 class="font-bold text-xl mb-3">政策轉向</h3>
+                    <p class="text-stone-600 text-sm">川普政府正式批准 H200 出口，但附加 25% 關稅並要求經美測試。這標誌著從「絕對封鎖」向「管控獲利」的轉變。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <h3 class="font-bold text-xl mb-3">中國回應</h3>
+                    <p class="text-stone-600 text-sm">北京採取「報復性採購」策略，透過信創清單與窗口指導，強制國企轉向華為、壁仞科技等本土替代方案。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-3">財務衝擊</h3>
+                    <p class="text-stone-600 text-sm">高關稅將導致 NVIDIA 中國區營收下修。華爾街預估 2026 年中國市場可能從營收引擎轉變為高波動風險源。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Policy Analysis -->
+        <section id="policy" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">政策解析：25% 晶片稅機制</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-4">交易型外交的「榨取」策略</h3>
+                        <p class="mb-4">根據 1962 年《貿易擴展法》第 232 條款，NVIDIA 出口至中國的晶片必須依循：<span class="font-bold text-sky-600 underline">台灣製造 → 美國清關測試 → 繳納 25% 稅金 → 再出口中國</span>。這一機制旨在資助美國本土半導體製造業，同時提高中國獲得高階算力的成本。</p>
+                        <div class="bg-stone-50 p-4 rounded-md border-l-4 border-stone-300 italic text-stone-700">
+                            「這筆預計數十億美元的關稅收入，被明確規劃用於資助美國本土半導體製造業的擴張。」
+                        </div>
+                    </div>
+                    <div class="flex-1 w-full grid grid-cols-2 gap-4">
+                        <div class="bg-sky-50 p-6 rounded-lg text-center">
+                            <div class="text-4xl font-bold text-sky-600">25%</div>
+                            <div class="text-sm text-stone-500">出口附加關稅</div>
+                        </div>
+                        <div class="bg-stone-100 p-6 rounded-lg text-center">
+                            <div class="text-4xl font-bold text-stone-600">2-4W</div>
+                            <div class="text-sm text-stone-500">物流延遲 (週)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Tech Comparison -->
+        <section id="tech" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">技術對抗：H200 vs. 國產晶片</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 overflow-hidden">
+                <div class="mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-stone-600">搜尋下方表格以比對 NVIDIA、華為與壁仞科技的產品參數：</p>
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋晶片名稱..." class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-sky-500 outline-none">
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-800 text-white sticky top-0">
+                            <tr>
+                                <th class="p-4">產品名稱</th>
+                                <th class="p-4">架構</th>
+                                <th class="p-4">記憶體容量</th>
+                                <th class="p-4">記憶體頻寬</th>
+                                <th class="p-4">核心優勢</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="divide-y divide-stone-200">
+                            <!-- Data injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Revenue Impact -->
+        <section id="business" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營收影響：2026 情境分析</h2>
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-6 text-center">2026E 中國區營收預估 (單位：億美元)</h3>
+                    <div class="relative h-80">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4">
+                        <h4 class="font-bold text-emerald-800">樂觀情境 (Bull Case) - 150~170億</h4>
+                        <p class="text-sm text-emerald-700">關稅成本成功轉嫁；國產晶片產能严重不足；NVIDIA 仍維持技術絕對領先。</p>
+                    </div>
+                    <div class="bg-sky-50 border-l-4 border-sky-500 p-4">
+                        <h4 class="font-bold text-sky-800">基準情境 (Base Case) - 80~100億</h4>
+                        <p class="text-sm text-sky-700">NVIDIA 吸收部分關稅；信創政策嚴格執行；市場份額逐漸向華為流失。</p>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                        <h4 class="font-bold text-red-800">悲觀情境 (Bear Case) - 30~50億</h4>
+                        <p class="text-sm text-red-700">中國實施隱性全面禁令；關稅進一步上調至 50%；客戶全面轉向本土生態。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Investment Strategy -->
+        <section id="investment" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略：金融專家觀點</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Holder -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden flex flex-col">
+                    <div class="bg-stone-800 p-6 text-white">
+                        <h3 class="text-2xl font-bold">已持有 NVIDIA 股票者</h3>
+                        <p class="text-stone-400 text-sm mt-2">核心建議：持有但必須避險</p>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full p-1 mr-3 mt-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                                </span>
+                                <span>使用<strong>保護性賣權 (Protective Put)</strong> 鎖定下行風險，防止政策突變導致的崩盤。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full p-1 mr-3 mt-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                                </span>
+                                <span><strong>領口策略 (Collar)</strong>：賣出虛值買權以支付賣權保費，適合長期持有者。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Not Holder -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden flex flex-col">
+                    <div class="bg-sky-600 p-6 text-white">
+                        <h3 class="text-2xl font-bold">尚未持有 NVIDIA 股票者</h3>
+                        <p class="text-sky-200 text-sm mt-2">核心建議：逢低買入，關注邊際</p>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full p-1 mr-3 mt-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                                </span>
+                                <span>等待預期本益比 (P/E) 回落至 <strong>30-35 倍</strong> 區間的分批建倉機會。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full p-1 mr-3 mt-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                                </span>
+                                <span>多元化配置：分散風險至 <strong>Intel (INTC)</strong> 或 <strong>壁仞科技 (港股)</strong> 以對沖地緣政治波動。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-NVIDIA H200銷售分析研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 NVIDIA 相關公開資料 (2026年1月16日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Interactive Table
+        const productData = [
+            { name: "NVIDIA H200", arch: "Hopper 改良", memory: "141 GB HBM3e", bandwidth: "4.8 TB/s", advantage: "CUDA 壟斷生態，推理效率之王" },
+            { name: "Huawei Ascend 910C", arch: "Da Vinci", memory: "128 GB HBM", bandwidth: "3.5 TB/s (預估)", advantage: "國產替代首選，互聯技術領先" },
+            { name: "Biren BR100", arch: "BiLia", memory: "64 GB HBM2e", bandwidth: "1.64 TB/s", advantage: "通用性強，專為 LLM 訓練優化" },
+            { name: "Cambricon MLU", arch: "思元", memory: "32 GB+ LPDDR", bandwidth: "1.2 TB/s", advantage: "視覺處理優化，信創名單核心" }
+        ];
+
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Table Search and Render
+        const tableBody = document.getElementById('productTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition">
+                        <td class="p-4 font-bold text-stone-800">${item.name}</td>
+                        <td class="p-4">${item.arch}</td>
+                        <td class="p-4">${item.memory}</td>
+                        <td class="p-4">${item.bandwidth}</td>
+                        <td class="p-4 text-sm text-stone-600">${item.advantage}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        renderTable(productData);
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.arch.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. Chart.js Implementation
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['樂觀情境', '基準情境', '悲觀情境'],
+                datasets: [{
+                    label: '預估營收 (億美元)',
+                    data: [160, 90, 40],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.7)', // emerald-500
+                        'rgba(14, 165, 233, 0.7)', // sky-500
+                        'rgba(239, 68, 68, 0.7)'   // red-500
+                    ],
+                    borderColor: [
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(239, 68, 68, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 4. Active Link Observer
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
