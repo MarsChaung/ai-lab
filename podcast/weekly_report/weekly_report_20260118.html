@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/1/12~2026/1/16)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto+Sans+TC', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #444;
+        }
+        .section-title {
+            @apply text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2;
+        }
+        .card {
+            @apply bg-white rounded-lg shadow-lg p-6 mb-6;
+        }
+        /* Sticky table header utility */
+        .sticky-table-header th {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-700">美股市場週報</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 h-full items-center">
+                    <a href="#summary" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">週報摘要</a>
+                    <a href="#macro" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">宏觀政策</a>
+                    <a href="#earnings" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">財報分析</a>
+                    <a href="#tech-geo" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">科技地緣</a>
+                    <a href="#strategy" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">綜合評估</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m7 6H4" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 px-4 py-2">
+            <a href="#summary" class="block py-2 text-stone-600">週報摘要</a>
+            <a href="#macro" class="block py-2 text-stone-600">宏觀政策</a>
+            <a href="#earnings" class="block py-2 text-stone-600">財報分析</a>
+            <a href="#tech-geo" class="block py-2 text-stone-600">科技地緣</a>
+            <a href="#strategy" class="block py-2 text-stone-600">綜合評估</a>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header class="bg-sky-900 text-white py-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">政策黑天鵝與AI新秩序下的資本博弈</h1>
+            <p class="text-xl text-sky-200 max-w-3xl mx-auto">研究區間: 2026/01/12 - 01/16</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+
+        <!-- 1. 執行摘要 & 數據總覽 -->
+        <section id="summary" class="scroll-mt-20 mb-16">
+            <h2 class="section-title">本週執行摘要</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card bg-sky-50 border-l-4 border-sky-500">
+                    <h3 class="font-bold text-sky-900 mb-2">宏觀變數</h3>
+                    <p class="text-stone-700 text-sm">CPI 年增 2.7% 顯示通膨黏性，聯準會面臨司法部傳票壓力，獨立性受質疑。</p>
+                </div>
+                <div class="card bg-emerald-50 border-l-4 border-emerald-500">
+                    <h3 class="font-bold text-emerald-900 mb-2">板塊輪動</h3>
+                    <p class="text-stone-700 text-sm">房地產 (+4.2%) 與必需消費品領漲，科技股因反壟斷陰影微跌。</p>
+                </div>
+                <div class="card bg-amber-50 border-l-4 border-amber-500">
+                    <h3 class="font-bold text-amber-900 mb-2">重大事件</h3>
+                    <p class="text-stone-700 text-sm">Google 市值超越 Apple，委內瑞拉政權更迭引發能源板塊重構。</p>
+                </div>
+            </div>
+
+            <!-- Chart Section: Sector Performance -->
+            <div class="card mt-8">
+                <h3 class="text-xl font-bold mb-4 text-center">本週 S&P 500 板塊漲跌幅 (%)</h3>
+                <div class="h-80 w-full relative">
+                    <canvas id="sectorChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 宏觀政策風險 -->
+        <section id="macro" class="scroll-mt-20 mb-16">
+            <h2 class="section-title">宏觀經濟與政策風險</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-xl font-bold text-red-700 mb-3">Fed 獨立性危機</h3>
+                    <p class="text-stone-600 leading-relaxed mb-4">
+                        聯準會主席鮑威爾證實收到司法部傳票，市場憂心貨幣政策將受行政權力干預，導致美元信用風險溢價上升。黃金與非主權資產 (比特幣) 受到資金追捧。
+                    </p>
+                    <div class="bg-stone-100 p-4 rounded text-sm italic">
+                        "這可能是1970年代以來對央行獨立性最嚴峻的考驗。"
+                    </div>
+                </div>
+                <div class="card border-t-4 border-amber-400">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">12月 CPI：通膨的「最後一哩路」</h3>
+                    <ul class="space-y-2 text-stone-600 text-sm">
+                        <li class="flex justify-between border-b pb-1"><span>核心 CPI 年增率</span> <span class="font-bold text-stone-800">2.6%</span></li>
+                        <li class="flex justify-between border-b pb-1"><span>住房成本 (Shelter)</span> <span class="font-bold text-red-500">高黏性</span></li>
+                        <li class="flex justify-between border-b pb-1"><span>耐用商品價格</span> <span class="font-bold text-emerald-500">通縮趨勢</span></li>
+                    </ul>
+                    <p class="mt-4 text-xs text-stone-500 italic">資料來源：美國勞工統計局 (BLS)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 金融巨頭財報 -->
+        <section id="earnings" class="scroll-mt-20 mb-16">
+            <h2 class="section-title">金融巨頭財報與信貸風險</h2>
+            <div class="card overflow-hidden">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 md:mb-0">2025 Q4 主要銀行業績搜索</h3>
+                    <input type="text" id="bankSearch" placeholder="搜尋銀行名稱..." class="border border-stone-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500 outline-none w-full md:w-64">
+                </div>
+                
+                <div class="overflow-x-auto border rounded-lg">
+                    <table class="min-w-full text-left">
+                        <thead class="bg-stone-50 border-b sticky-table-header">
+                            <tr>
+                                <th class="px-6 py-4 text-sm font-bold text-stone-600 uppercase tracking-wider">銀行名稱</th>
+                                <th class="px-6 py-4 text-sm font-bold text-stone-600 uppercase tracking-wider">營收 (Revenue)</th>
+                                <th class="px-6 py-4 text-sm font-bold text-stone-600 uppercase tracking-wider">EPS 表現</th>
+                                <th class="px-6 py-4 text-sm font-bold text-stone-600 uppercase tracking-wider">市場反應</th>
+                                <th class="px-6 py-4 text-sm font-bold text-stone-600 uppercase tracking-wider">核心議題</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bankTableBody" class="divide-y divide-stone-200">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card bg-red-50 border border-red-200">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-bold text-red-800">警訊：信用卡利率上限提案</h4>
+                        <p class="text-sm text-red-700 leading-relaxed">
+                            川普提議將信用卡利率上限設為 10%。分析認為這將導致銀行收緊信貸，引發「金融排斥」，衝擊消費支出。相關板塊 (COF, SYF) 面臨劇烈估值回調。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 科技新秩序與地緣政治 -->
+        <section id="tech-geo" class="scroll-mt-20 mb-16">
+            <h2 class="section-title">科技霸權與地緣政治</h2>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Tech Card -->
+                <div class="card border-l-8 border-indigo-600">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                            <svg class="h-6 w-6 text-indigo-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">Alphabet (Google) 登基</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4">
+                        Google 市值正式超越 Apple，象徵資本市場對 AI 基礎設施價值的優先認可。Apple 轉向與 Google 合作整合 Gemini 模型，標誌著 AI 競爭進入「聚合器」時代。
+                    </p>
+                    <div class="bg-indigo-50 p-3 rounded-lg flex justify-between items-center">
+                        <span class="text-xs font-bold text-indigo-800">市值排位</span>
+                        <span class="text-xs text-indigo-700 font-medium">Nvidia > Google > Apple</span>
+                    </div>
+                </div>
+                <!-- Geo Card -->
+                <div class="card border-l-8 border-orange-600">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-orange-100 p-2 rounded-lg mr-4">
+                            <svg class="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">能源版圖：委內瑞拉變局</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4">
+                        馬杜羅政權終結，美國實施「卡達機制」接管石油收入。Chevron (CVX) 憑藉唯一運作許可成為最大受益者。重質原油的回歸對墨西哥灣煉油廠 (VLO, PSX) 為長線利多。
+                    </p>
+                    <div class="flex space-x-2">
+                        <span class="bg-orange-100 text-orange-800 text-[10px] font-bold px-2 py-1 rounded">Chevron CVX</span>
+                        <span class="bg-orange-100 text-orange-800 text-[10px] font-bold px-2 py-1 rounded">重質原油利差</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 投資策略 -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="section-title">投資專家綜合評估</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card border-t-4 border-sky-500 hover:scale-105 transition-transform">
+                    <h4 class="font-bold mb-2">布局實體 AI</h4>
+                    <p class="text-xs text-stone-500">關注 Walmart (WMT)、Google 這種擁有數據與應用場景的巨頭。</p>
+                </div>
+                <div class="card border-t-4 border-emerald-500 hover:scale-105 transition-transform">
+                    <h4 class="font-bold mb-2">抗通膨對沖</h4>
+                    <p class="text-xs text-stone-500">建議配置 5-10% 黃金對沖央行獨立性風險與法幣信用疑慮。</p>
+                </div>
+                <div class="card border-t-4 border-purple-500 hover:scale-105 transition-transform">
+                    <h4 class="font-bold mb-2">精選銀行龍頭</h4>
+                    <p class="text-xs text-stone-500">偏好 JPM 與 BAC。避開受利率上限政策影響較大的信用卡銀行。</p>
+                </div>
+                <div class="card border-t-4 border-orange-500 hover:scale-105 transition-transform">
+                    <h4 class="font-bold mb-2">基礎設施投資</h4>
+                    <p class="text-xs text-stone-500">BlackRock (BLK) 管理規模破 14 兆，私募基金將受惠再工業化趨勢。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/1/12~2026/1/16)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年1月18日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Interactive Table
+        const bankData = [
+            { name: "摩根大通 (JPM)", revenue: "46.8B (+7%)", eps: "4.63 (Beat)", reaction: "波動", highlight: "淨利創新高，NII 指引保守" },
+            { name: "美國銀行 (BAC)", revenue: "28.4B (+7%)", eps: "0.98 (Beat)", reaction: "+1.8%", highlight: "交易業務與數位化強勁" },
+            { name: "富國銀行 (WFC)", revenue: "21.3B (+4%)", eps: "1.76 (Beat)", reaction: "-4.6%", highlight: "營收不及預期，資產上限解除紅利未現" },
+            { name: "花旗集團 (C)", revenue: "19.9B (+2%)", eps: "1.19 (Miss)", reaction: "下跌", highlight: "受俄羅斯業務與重組成本拖累" }
+        ];
+
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Render Bank Table
+        const renderTable = (data) => {
+            const tbody = document.getElementById('bankTableBody');
+            tbody.innerHTML = data.map(bank => `
+                <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-6 py-4 font-medium text-stone-900">${bank.name}</td>
+                    <td class="px-6 py-4 text-stone-600">${bank.revenue}</td>
+                    <td class="px-6 py-4 text-stone-600">${bank.eps}</td>
+                    <td class="px-6 py-4 ${bank.reaction.includes('-') || bank.reaction.includes('下') ? 'text-red-600' : 'text-emerald-600'} font-bold">${bank.reaction}</td>
+                    <td class="px-6 py-4 text-xs text-stone-500">${bank.highlight}</td>
+                </tr>
+            `).join('');
+        };
+        renderTable(bankData);
+
+        // 3. Search Filter Logic
+        document.getElementById('bankSearch').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = bankData.filter(b => b.name.toLowerCase().includes(searchTerm) || b.highlight.toLowerCase().includes(searchTerm));
+            renderTable(filtered);
+        });
+
+        // 4. Chart.js Initialization: Sector Rotation
+        const ctx = document.getElementById('sectorChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['房地產', '必需消費', '工業', '能源', '資訊科技', '非必需消費'],
+                datasets: [{
+                    label: '本週漲跌幅 (%)',
+                    data: [4.20, 3.10, 3.03, 2.42, -0.23, -2.00],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.7)', // Emerald
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(239, 68, 68, 0.7)', // Red
+                        'rgba(239, 68, 68, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(239, 68, 68, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { callback: value => value + '%' }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 5. Active Link Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active-nav-link'));
+                    if (navLink) navLink.classList.add('active-nav-link');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+    </script>
+</body>
+</html>
