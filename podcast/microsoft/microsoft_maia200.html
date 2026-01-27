@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-微軟 Maia 200 研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-stone-800 tracking-tight">微軟 Maia 200 研究</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#maia200" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500">Maia 200 規格</a>
+                    <a href="#triton" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500">Triton 與 CUDA</a>
+                    <a href="#impact" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500">市場影響</a>
+                    <a href="#investment" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu Content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 pt-2 pb-4 space-y-1">
+            <a href="#maia200" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-500">Maia 200 規格</a>
+            <a href="#triton" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-500">Triton 與 CUDA</a>
+            <a href="#impact" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-500">市場影響</a>
+            <a href="#investment" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-500">投資策略</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-800 mb-4 leading-tight">
+                微軟 Maia 200 與 Triton 挑戰 Nvidia<br>
+                <span class="text-sky-600 text-3xl md:text-4xl">中期影響深度分析報告</span>
+            </h1>
+            <p class="text-lg text-stone-600 max-w-3xl mx-auto">
+                2026 年初，微軟正式推出第二代 AI 推論加速器 Maia 200，結合 Triton 開源編譯器，這將如何改寫 Nvidia 壟斷的 AI 市場格局？
+            </p>
+        </div>
+
+        <!-- Section 1: Maia 200 Overview -->
+        <section id="maia200" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Maia 200 核心規格與優勢</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Spec Cards -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="text-sky-600 mb-2 font-bold uppercase text-xs tracking-wider">製程技術</div>
+                    <div class="text-2xl font-bold text-stone-800">TSMC 3nm</div>
+                    <p class="text-stone-500 mt-2 text-sm">提供極致的功耗比與電晶體密度。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="text-sky-600 mb-2 font-bold uppercase text-xs tracking-wider">峰值性能 (FP4)</div>
+                    <div class="text-2xl font-bold text-stone-800">10 PetaFLOPS</div>
+                    <p class="text-stone-500 mt-2 text-sm">FP8 性能亦達 5 PetaFLOPS 以上。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="text-sky-600 mb-2 font-bold uppercase text-xs tracking-wider">記憶體配置</div>
+                    <div class="text-2xl font-bold text-stone-800">216GB HBM3e</div>
+                    <p class="text-stone-500 mt-2 text-sm">頻寬達 7 TB/s，極大化數據吞吐量。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="text-sky-600 mb-2 font-bold uppercase text-xs tracking-wider">成本效益</div>
+                    <div class="text-2xl font-bold text-stone-800">-30% 單位成本</div>
+                    <p class="text-stone-500 mt-2 text-sm">相較目前 Azure 部署硬體大幅降成本。</p>
+                </div>
+            </div>
+
+            <!-- Chart Visualization -->
+            <div class="mt-10 bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4 text-stone-700 text-center">AI 加速器性能對比 (峰值 PetaFLOPS)</h3>
+                <div class="relative h-80 w-full">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                <p class="text-xs text-stone-400 mt-4">* 數據基於 Maia 200 FP4 性能與競爭對手公開聲明之預期對比。</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Triton vs CUDA -->
+        <section id="triton" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Triton 開源編譯器：去鎖定效應</h2>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8 bg-sky-600 text-white">
+                        <h3 class="text-2xl font-bold mb-4">挑戰 CUDA 的軟體護城河</h3>
+                        <p class="mb-4">Triton 是由 OpenAI 開發的開源工具，讓開發者能以 Python 語法撰寫 GPU 核心程式。這打破了 Nvidia CUDA 長期以來的封閉壟斷。</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-sky-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg>
+                                <span>降低門檻：無須 C++ 或 CUDA 專業背景。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-sky-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg>
+                                <span>可移植性：易於將負載移至 Maia 或 AMD GPU。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-sky-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg>
+                                <span>效能優化：繞過封閉庫，直接控制硬體代碼。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 p-8 bg-stone-50">
+                        <h4 class="font-bold text-stone-700 mb-4">分析觀點：去鎖定 (Un-locking)</h4>
+                        <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                            「隨著 PyTorch 2.0 與 OpenAI 的 Triton 問世，Nvidia 倚賴軟體護城河所鞏固的主導地位正受到干擾」。雖然不會立刻取代 CUDA，但這條路徑讓雲端業者能更靈活地切換不同硬體。
+                        </p>
+                        <div class="p-4 bg-white rounded border border-stone-200">
+                            <span class="text-xs font-bold text-sky-600 block mb-1">關鍵收穫</span>
+                            <span class="text-stone-800">軟體去中心化將導致 Nvidia 營收高毛利率（70%+）難以維持。</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Market Analysis Table -->
+        <section id="impact" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">自研晶片競爭者對照表</h2>
+            <div class="mb-6">
+                <input type="text" id="tableSearch" placeholder="搜尋晶片名稱或廠商..." class="w-full md:w-1/3 px-4 py-2 rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            </div>
+            <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+                <table class="min-w-full divide-y divide-stone-200" id="productTable">
+                    <thead class="bg-stone-50 sticky top-0">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">廠商</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">AI 晶片系列</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">定位/用途</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">主要優勢</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-200 text-sm" id="tableBody">
+                        <!-- Data will be populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 4: Market & Investment Strategy -->
+        <section id="investment" class="mb-20">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Market Outlook -->
+                <div class="lg:col-span-2 space-y-6">
+                    <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">中期市場影響分析</h2>
+                    <div class="bg-white p-6 rounded-lg shadow shadow-stone-200">
+                        <h3 class="font-bold text-lg text-stone-800 mb-2">1. 需求端結構性改變</h3>
+                        <p class="text-stone-600">四大雲端巨頭貢獻 Nvidia 約 40–50% 營收。推論佔 AI 運算 80%，若大廠自研晶片承接 80% 推論工作，Nvidia 潛在市場將受重大侵蝕。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow shadow-stone-200">
+                        <h3 class="font-bold text-lg text-stone-800 mb-2">2. Nvidia 的防禦反擊</h3>
+                        <p class="text-stone-600">Nvidia 透過 Rubin CPX 專用架構、收購 Groq 關鍵資產及史上最大幅度 CUDA 升級來應戰，力求守住技術與生態領先。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow shadow-stone-200">
+                        <h3 class="font-bold text-lg text-stone-800 mb-2">3. 財經界觀點</h3>
+                        <p class="text-stone-600 italic">「Nvidia 的最大客戶正在親手打造『取代者』。」雖然短期股價反應溫和，但長期利空風險已被列入評估清單。</p>
+                    </div>
+                </div>
+
+                <!-- Investment Strategy Card -->
+                <div class="bg-stone-800 text-white rounded-xl p-8 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-6 border-b border-stone-600 pb-2">投資策略建議</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-green-500 text-white p-1 rounded-full mr-3 mt-1"><svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></div>
+                                <div>
+                                    <h4 class="font-bold">維持核心持股</h4>
+                                    <p class="text-sm text-stone-400">盈利能見度高，Nvidia 仍是 AI 硬體首選，短期無需恐慌。</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-yellow-500 text-white p-1 rounded-full mr-3 mt-1"><svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></div>
+                                <div>
+                                    <h4 class="font-bold">動態監控趨勢</h4>
+                                    <p class="text-sm text-stone-400">觀察 Triton 採用率與雲端大廠採購 Nvidia GPU 減少之跡象。</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-500 text-white p-1 rounded-full mr-3 mt-1"><svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"/></svg></div>
+                                <div>
+                                    <h4 class="font-bold">適度分批獲利</h4>
+                                    <p class="text-sm text-stone-400">在高點分批減碼鎖定收益，維持健康的現金儲備。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-stone-700">
+                        <p class="text-xs text-stone-500 leading-relaxed">
+                            「AI 時代的盈利能見度依然良好，但必須將自研晶片視為行業良性競爭的開端。」
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-微軟 Maia 200 研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中微軟 Maia 200 與 Triton 相關公開資料 (2026年1月27日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Data Definitions
+        const productData = [
+            { provider: "Microsoft", series: "Maia 200", purpose: "雲端推論 (LLM/Token Gen)", advantage: "3nm, 216GB HBM3e, 成本降低 30%" },
+            { provider: "Amazon", series: "Trainium 3", purpose: "訓練與推論", advantage: "性價比極高，AWS 原生整合" },
+            { provider: "Google", series: "TPU v7", purpose: "大模型推論/搜尋", advantage: "支撐 Gemini 生態，大規模部署優勢" },
+            { provider: "Meta", series: "MTIA", purpose: "特定推論工作負載", advantage: "專為推薦算法與社群內容優化" },
+            { provider: "AMD", series: "MI300X", purpose: "GPU 通用運算/推論", advantage: "成本低 20-30%，軟體棧大幅改善" },
+            { provider: "Nvidia", series: "Rubin CPX", purpose: "長上下文/生成式推論", advantage: "絕對性能霸主，成熟 CUDA 生態" }
+        ];
+
+        // 2. Initial Setup & Table Population
+        const tableBody = document.getElementById('tableBody');
+        const tableSearch = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-6 py-4 font-bold text-stone-700">${item.provider}</td>
+                        <td class="px-6 py-4 text-sky-600 font-medium">${item.series}</td>
+                        <td class="px-6 py-4">${item.purpose}</td>
+                        <td class="px-6 py-4"><span class="bg-stone-100 px-2 py-1 rounded text-xs">${item.advantage}</span></td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        renderTable(productData);
+
+        // 3. Search Interactivity
+        tableSearch.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.provider.toLowerCase().includes(query) || 
+                item.series.toLowerCase().includes(query) ||
+                item.purpose.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        // 4. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 5. Chart.js Visualization
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Maia 200 (FP4)', 'Trainium 3 (預計)', 'TPU v7 (預計)', 'Maia 200 (FP8)', 'TPU v6 (現行)'],
+                datasets: [{
+                    label: '峰值性能 (PetaFLOPS)',
+                    data: [10, 3.3, 4.5, 5, 2.5],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.8)',
+                        'rgba(168, 85, 247, 0.6)',
+                        'rgba(34, 197, 94, 0.6)',
+                        'rgba(14, 165, 233, 0.5)',
+                        'rgba(156, 163, 175, 0.5)'
+                    ],
+                    borderColor: [
+                        '#0ea5e9', '#a855f7', '#22c55e', '#0ea5e9', '#9ca3af'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'PetaFLOPS' } }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // 6. Intersection Observer for Navigation active state
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.id;
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${activeId}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
