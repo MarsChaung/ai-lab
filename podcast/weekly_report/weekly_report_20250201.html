@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/1/26~1/30)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold text-sky-600 italic">美股市場週報</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 text-sm font-semibold">
+                    <a href="#earnings" class="nav-link inactive-nav-link py-5 transition-colors hover:text-sky-500" data-section="earnings">財報分析</a>
+                    <a href="#macro" class="nav-link inactive-nav-link py-5 transition-colors hover:text-sky-500" data-section="macro">宏觀政策</a>
+                    <a href="#ai-tech" class="nav-link inactive-nav-link py-5 transition-colors hover:text-sky-500" data-section="ai-tech">AI 技術</a>
+                    <a href="#market-outlook" class="nav-link inactive-nav-link py-5 transition-colors hover:text-sky-500" data-section="market-outlook">市場展望</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#earnings" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">財報分析</a>
+                <a href="#macro" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">宏觀政策</a>
+                <a href="#ai-tech" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">AI 技術</a>
+                <a href="#market-outlook" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">市場展望</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">
+                人工智慧實體化與全球宏觀政策轉型
+            </h1>
+            <p class="text-lg text-stone-600 max-w-3xl mx-auto">
+                2026年2月1日專家週報：深度解析上週 AI 產業與美股七巨頭之核心變革，掌握 2026 年投資新標竿。
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <span class="bg-sky-100 text-sky-700 px-4 py-1 rounded-full text-sm font-bold">研究區間：01/26 - 01/30</span>
+                <span class="bg-stone-200 text-stone-700 px-4 py-1 rounded-full text-sm font-bold">標普500 PE: 22.2x</span>
+            </div>
+        </div>
+
+        <!-- 1. Earnings Section -->
+        <section id="earnings" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">巨頭財報分化：資本回報效能</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Chart Wrapper -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-stone-700">2025 Q4 巨頭營收對比 (Billion USD)</h3>
+                    <div class="h-80"><canvas id="revenueChart"></canvas></div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                        <h4 class="font-bold text-lg text-sky-600 mb-2">微軟 (MSFT)</h4>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            雖然營收達 812.7 億美元超預期，但 Azure 增速受限於產能瓶頸。關鍵亮點在於 AI 訂單（RPO）暴增 110%。
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                        <h4 class="font-bold text-lg text-emerald-600 mb-2">Meta Platforms (META)</h4>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            AI 變現能力的典範。廣告點擊率提升 3.5%，市場認可其上千億美元的資本支出投入。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Table Container -->
+            <div class="bg-white rounded-lg shadow-lg p-6 overflow-hidden">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
+                    <h3 class="text-xl font-bold text-stone-700">核心財報互動數據表</h3>
+                    <input type="text" id="tableSearch" placeholder="搜尋公司名稱..." 
+                        class="px-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none w-full md:w-64">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 text-stone-600 sticky top-0">
+                            <tr>
+                                <th class="p-4 border-b">公司名稱</th>
+                                <th class="p-4 border-b text-center">營收 (B)</th>
+                                <th class="p-4 border-b text-center">營收同比</th>
+                                <th class="p-4 border-b text-center">EPS</th>
+                                <th class="p-4 border-b text-center">市場反應</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Macro & Geopolitical Section -->
+        <section id="macro" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏觀政策重塑與地緣風暴</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <h3 class="font-bold text-lg mb-2">凱文·沃什提名</h3>
+                    <p class="text-stone-600 text-sm">
+                        新任聯準會主席提名引發「鷹派」預期，市場重新評估 4% 以上的長期收益率環境。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <h3 class="font-bold text-lg mb-2">格陵蘭島事件</h3>
+                    <p class="text-stone-600 text-sm">
+                        地緣政治衝突引發「拋售美國」交易，單日暴跌 2%，凸顯 2026 年市場的脆弱性。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-800">
+                    <h3 class="font-bold text-lg mb-2">流動性警訊</h3>
+                    <p class="text-stone-600 text-sm">
+                        週五金銀價格集體崩盤，顯示市場槓桿率可能較高，追加保證金壓力大。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. AI Technology Evolution -->
+        <section id="ai-tech" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 技術演進：代理化與實體化</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Agentic AI Card -->
+                <div class="bg-gradient-to-br from-sky-600 to-indigo-700 rounded-xl p-8 text-white shadow-xl relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold bg-white/20 px-2 py-1 rounded mb-4 inline-block tracking-wider uppercase">Trend 01</span>
+                        <h3 class="text-2xl font-bold mb-4 italic">代理型 AI (Agentic AI)</h3>
+                        <p class="text-sky-50 leading-relaxed mb-6">
+                            從單純的「對話」轉向「自主執行」。預計到 2026 年，40% 的企業應用將整合具備跨系統決策能力的 AI 代理。
+                        </p>
+                        <ul class="text-sm space-y-2 opacity-90">
+                            <li>• 跨系統自動化工作流</li>
+                            <li>• 降低後勤營運成本 30%</li>
+                            <li>• 軟體估值邏輯重定義</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Physical AI Card -->
+                <div class="bg-stone-900 rounded-xl p-8 text-white shadow-xl relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold bg-white/10 px-2 py-1 rounded mb-4 inline-block tracking-wider uppercase">Trend 02</span>
+                        <h3 class="text-2xl font-bold mb-4 italic">物理 AI (Physical AI)</h3>
+                        <p class="text-stone-300 leading-relaxed mb-6">
+                            AI 進入生產線。Tesla Optimus 與現代汽車 Atlas 機器人開始實質試點，解決勞動力成本上升之痛。
+                        </p>
+                        <div class="flex space-x-4 mt-4 text-center">
+                            <div class="bg-white/5 p-3 rounded-lg flex-1">
+                                <div class="text-emerald-400 font-bold">NVDA</div>
+                                <div class="text-xs text-stone-400 italic">CoreWeave 入股</div>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg flex-1">
+                                <div class="text-sky-400 font-bold">Blackwell</div>
+                                <div class="text-xs text-stone-400 italic">288GB HBM3e</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Investment Suggestions -->
+        <section id="market-outlook" class="mb-20">
+            <div class="bg-sky-50 rounded-2xl p-8 md:p-12 border border-sky-100 shadow-inner">
+                <h2 class="text-3xl font-bold text-sky-900 mb-8 flex items-center">
+                    <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    專家綜合投資建議
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col">
+                        <div class="text-sky-600 font-black text-4xl mb-2">01.</div>
+                        <h4 class="font-bold text-stone-800 mb-2">AI 第二層效應</h4>
+                        <p class="text-stone-600 text-sm">
+                            關注能利用 AI 代理大幅提升毛利的傳統企業，而不僅僅是算力提供者。
+                        </p>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="text-sky-600 font-black text-4xl mb-2">02.</div>
+                        <h4 class="font-bold text-stone-800 mb-2">基礎設施為王</h4>
+                        <p class="text-stone-600 text-sm">
+                            電力、冷卻系統與資料庫是 AI 大廈的地基，具備高度防禦性與穩定增長性。
+                        </p>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="text-sky-600 font-black text-4xl mb-2">03.</div>
+                        <h4 class="font-bold text-stone-800 mb-2">全球配置對沖</h4>
+                        <p class="text-stone-600 text-sm">
+                            地緣風險頻發，配置與美股相關性低之資產（如日本市場）以分散政策衝擊風險。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/1/26~1/30)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年2月1日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data ---
+        const productData = [
+            { name: "蘋果 (AAPL)", revenue: 143.8, growth: "+16.0%", eps: 2.84, reaction: "下跌 1%", color: "text-stone-600" },
+            { name: "微軟 (MSFT)", revenue: 81.27, growth: "+16.7%", eps: 4.14, reaction: "下跌 4%", color: "text-red-500" },
+            { name: "Meta (META)", revenue: 59.89, growth: "+23.8%", eps: 8.88, reaction: "上漲 5%", color: "text-emerald-500" },
+            { name: "特斯拉 (TSLA)", revenue: 24.90, growth: "-2.3%", eps: 0.50, reaction: "上漲 3%", color: "text-emerald-500" },
+            { name: "萬事達卡 (MA)", revenue: 8.80, growth: "超預期", eps: 4.76, reaction: "持平/穩健", color: "text-stone-600" }
+        ];
+
+        // --- Navigation Interactions ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Sticky Header Active State (Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-80px 0px 0px 0px',
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.dataset.section === id) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // --- Table Filtering ---
+        const tableBody = document.getElementById('dataTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors border-b border-stone-100">
+                        <td class="p-4 font-semibold text-stone-800">${item.name}</td>
+                        <td class="p-4 text-center text-stone-600">${item.revenue}</td>
+                        <td class="p-4 text-center text-stone-600">${item.growth}</td>
+                        <td class="p-4 text-center font-mono text-sky-600">${item.eps}</td>
+                        <td class="p-4 text-center font-bold ${item.color}">${item.reaction}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        // --- Chart.js Initialization ---
+        function initCharts() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['蘋果 (AAPL)', '微軟 (MSFT)', 'Meta (META)', '特斯拉 (TSLA)'],
+                    datasets: [{
+                        label: '營收 (Billion USD)',
+                        data: [143.8, 81.27, 59.89, 24.9],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)',
+                            'rgba(99, 102, 241, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(244, 63, 94, 0.7)'
+                        ],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        x: { 
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initial Load
+        window.onload = () => {
+            renderTable(productData);
+            initCharts();
+        };
+    </script>
+</body>
+</html>
