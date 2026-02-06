@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Amazon 2025Q4財報分析報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7; /* sky-600 */
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans">
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-black text-sky-600 tracking-tighter">Amazon 2025Q4</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link text-sm font-medium transition-colors hover:text-sky-600">財務摘要</a>
+                    <a href="#aws" class="nav-link text-sm font-medium transition-colors hover:text-sky-600">AWS與AI</a>
+                    <a href="#capex" class="nav-link text-sm font-medium transition-colors hover:text-sky-600">資本支出</a>
+                    <a href="#retail" class="nav-link text-sm font-medium transition-colors hover:text-sky-600">零售效率</a>
+                    <a href="#strategy" class="nav-link text-sm font-medium transition-colors hover:text-sky-600">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-sky-50 hover:text-sky-600">財務摘要</a>
+                <a href="#aws" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-sky-50 hover:text-sky-600">AWS與AI</a>
+                <a href="#capex" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-sky-50 hover:text-sky-600">資本支出</a>
+                <a href="#retail" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-sky-50 hover:text-sky-600">零售效率</a>
+                <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-sky-50 hover:text-sky-600">投資策略</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section class="mb-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-stone-800 mb-4 tracking-tight">
+                Amazon 2025 Q4 財務深度研究
+            </h1>
+            <p class="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
+                分析 2,133 億美元營收背後的成長動能，以及引發市場震盪的 2,000 億美元資本支出計畫。
+            </p>
+        </section>
+
+        <!-- Key Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-sky-500 card-hover">
+                <p class="text-sm font-semibold text-stone-500 uppercase">單季淨銷售額</p>
+                <h3 class="text-3xl font-bold text-stone-800">$2,133.9B</h3>
+                <p class="text-sm text-emerald-600 font-bold mt-2">↑ 14% YoY</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-amber-500 card-hover">
+                <p class="text-sm font-semibold text-stone-500 uppercase">AWS 營收增速</p>
+                <h3 class="text-3xl font-bold text-stone-800">24%</h3>
+                <p class="text-sm text-stone-500 mt-2">13 季以來最強增長</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-indigo-500 card-hover">
+                <p class="text-sm font-semibold text-stone-500 uppercase">廣告營收</p>
+                <h3 class="text-3xl font-bold text-stone-800">$21.3B</h3>
+                <p class="text-sm text-emerald-600 font-bold mt-2">↑ 23% YoY</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-rose-500 card-hover">
+                <p class="text-sm font-semibold text-stone-500 uppercase">2026 資本支出預估</p>
+                <h3 class="text-3xl font-bold text-stone-800">$2,000B</h3>
+                <p class="text-sm text-rose-600 font-bold mt-2">高於預期 400B+</p>
+            </div>
+        </div>
+
+        <!-- Section: Summary -->
+        <section id="summary" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2025 Q4 財務摘要分析</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-lg font-bold mb-4 text-stone-700">各部門營收佔比分析</h4>
+                    <div class="h-64 relative">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h4 class="text-xl font-bold text-sky-700 mb-3">核心洞察：獲利能力的張力</h4>
+                        <p class="text-stone-600 leading-relaxed mb-4">
+                            Amazon 首度突破 2,000 億美元單季營收門檻。雖然淨利潤受到 24 億美元特別費用影響（稅務、裁員、減值），但剔除後營業利潤高達 274 億美元，顯示底層營運效率仍在攀升。
+                        </p>
+                        <ul class="space-y-2 text-sm text-stone-700">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-sky-500 rounded-full mr-2"></span> 北美利潤率由 8% 攀升至 9%</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-sky-500 rounded-full mr-2"></span> 廣告營收增長 23% 成為重要獲利墊片</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: AWS -->
+        <section id="aws" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AWS 雲端運算與 GenAI 再加速</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/3">
+                        <div class="bg-sky-50 rounded-xl p-6 text-center">
+                            <div class="text-5xl font-black text-sky-600 mb-2">35.0%</div>
+                            <div class="text-stone-600 font-medium">AWS 營業利潤率</div>
+                        </div>
+                        <div class="mt-6 space-y-4">
+                            <div class="p-4 border border-stone-100 rounded-lg">
+                                <p class="text-xs text-stone-400">訂單積壓 (Backlog)</p>
+                                <p class="text-xl font-bold text-stone-700">$2,440 億</p>
+                                <p class="text-xs text-emerald-600">↑ 40% YoY</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <p class="text-stone-600 leading-relaxed mb-6">
+                            AWS 的再加速歸功於「自底向上」的垂直整合戰略。Trainium 2 晶片的大規模部署與 Amazon Bedrock 客戶支出環比增長 60%，證明了企業正將 AI 工作負載遷移至數據所在地。
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                            <div class="flex items-start bg-stone-50 p-4 rounded-lg">
+                                <span class="text-sky-500 mr-3 text-xl">✓</span>
+                                <div>
+                                    <h5 class="font-bold text-stone-800">自研晶片紅利</h5>
+                                    <p class="text-stone-500">Trainium 性價比較 GPU 高出 30-40%</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start bg-stone-50 p-4 rounded-lg">
+                                <span class="text-sky-500 mr-3 text-xl">✓</span>
+                                <div>
+                                    <h5 class="font-bold text-stone-800">現代化需求</h5>
+                                    <p class="text-stone-500">企業核心工作負載重新啟動雲端遷移</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Table: Segment Data -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">部門營運明細 (2025 Q4)</h2>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4 bg-stone-50 border-b border-stone-100">
+                    <input type="text" id="tableSearch" placeholder="搜尋部門或指標..." class="w-full md:w-64 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left" id="segmentTable">
+                        <thead class="bg-stone-800 text-white sticky top-0">
+                            <tr>
+                                <th class="px-6 py-4 text-sm font-semibold uppercase tracking-wider">營運部門</th>
+                                <th class="px-6 py-4 text-sm font-semibold uppercase tracking-wider">淨銷售額 (百萬)</th>
+                                <th class="px-6 py-4 text-sm font-semibold uppercase tracking-wider">成長率 (YoY)</th>
+                                <th class="px-6 py-4 text-sm font-semibold uppercase tracking-wider">營業利潤 (百萬)</th>
+                                <th class="px-6 py-4 text-sm font-semibold uppercase tracking-wider">利潤率</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-100">
+                            <!-- JS will inject data here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: CapEx & Strategy -->
+        <div id="capex" class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <section>
+                <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2,000 億美元的戰略豪賭</h2>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <p class="text-stone-600 mb-6">
+                        Amazon 預計 2026 年投入約 2,000 億美元資本支出，年增長超過 50%。這筆資金主要鎖定三大領域：
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-3 bg-rose-50 rounded-lg">
+                            <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center text-rose-600 font-bold mr-4">AI</div>
+                            <div>
+                                <h5 class="font-bold">AI 基礎設施</h5>
+                                <p class="text-xs text-stone-500">擴建數據中心與自研晶片產能</p>
+                            </div>
+                        </div>
+                        <div id="retail" class="flex items-center p-3 bg-indigo-50 rounded-lg">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-bold mr-4">Leo</div>
+                            <div>
+                                <h5 class="font-bold">Amazon Leo (衛星)</h5>
+                                <p class="text-xs text-stone-500">2026 年預計發射超過 20 次</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-emerald-50 rounded-lg">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 font-bold mr-4">Log</div>
+                            <div>
+                                <h5 class="font-bold">物流自動化</h5>
+                                <p class="text-xs text-stone-500">部署超過 100 萬台機器人提升效率</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="strategy">
+                <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資人行動建議</h2>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                        <h4 class="text-xl font-bold text-emerald-800 mb-3">已有持股：持股續抱，耐心守候</h4>
+                        <p class="text-stone-600 text-sm">
+                            雖然 2,000 億支出導致短期自由現金流下滑，但 AWS 的訂單積壓是堅實的保障。不要在情緒性的恐慌拋售中離場，長期價值正在構築門檻。
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                        <h4 class="text-xl font-bold text-sky-800 mb-3">尚未持有：分批建倉，把握陣痛期</h4>
+                        <p class="text-stone-600 text-sm">
+                            2026 年是財務「陣痛年」，股價回落至 105-115 美元區間（若發生）將是極佳的長線買點。建議建立 20% 偵察倉位，觀察 AWS 是否維持 24% 以上增速。
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Amazon 2025Q4財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Amazon 相關公開資料 (2026年2月6日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Table
+        const segmentData = [
+            { name: "北美區域 (North America)", revenue: 127110, growth: "10%", income: 11500, margin: "9.0%" },
+            { name: "國際區域 (International)", revenue: 50670, growth: "17%", income: 1100, margin: "2.2%" },
+            { name: "AWS 雲端計算", revenue: 35606, growth: "24%", income: 12465, margin: "35.0%" },
+            { name: "廣告業務 (Advertising)", revenue: 21300, growth: "23%", income: "-", margin: "-" }
+        ];
+
+        // 1. Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.onclick = () => mobileMenu.classList.toggle('hidden');
+
+        // 2. Chart.js Implementation
+        window.onload = function() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['北美', '國際', 'AWS'],
+                    datasets: [{
+                        label: '營收 (單位：十億美元)',
+                        data: [127.1, 50.7, 35.6],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)', // sky-500
+                            'rgba(99, 102, 241, 0.7)', // indigo-500
+                            'rgba(245, 158, 11, 0.7)'  // amber-500
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(99, 102, 241)',
+                            'rgb(245, 158, 11)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            renderTable(segmentData);
+        };
+
+        // 3. Interactive Table Search/Filter
+        const searchInput = document.getElementById('tableSearch');
+        function renderTable(data) {
+            const tbody = document.querySelector('#segmentTable tbody');
+            tbody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-6 py-4 font-medium text-stone-800">${item.name}</td>
+                        <td class="px-6 py-4 text-stone-600">$${item.revenue.toLocaleString()}</td>
+                        <td class="px-6 py-4 font-bold text-emerald-600">${item.growth}</td>
+                        <td class="px-6 py-4 text-stone-600">${item.income === '-' ? '-' : '$' + item.income.toLocaleString()}</td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 bg-sky-50 text-sky-700 rounded text-xs font-bold">${item.margin}</span></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        searchInput.oninput = (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = segmentData.filter(i => 
+                i.name.toLowerCase().includes(val) || 
+                i.growth.toLowerCase().includes(val)
+            );
+            renderTable(filtered);
+        };
+
+        // 4. Smooth Scroll & Active Link State
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.onscroll = () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active-nav-link");
+                link.classList.add("inactive-nav-link");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active-nav-link");
+                    link.classList.remove("inactive-nav-link");
+                }
+            });
+        };
+    </script>
+</body>
+</html>
