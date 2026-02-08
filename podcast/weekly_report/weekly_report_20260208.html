@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026年2月美股與AI產業深度投資週報</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        .section-anchor {
+            scroll-margin-top: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans">
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-600 tracking-tight">美股市場週報</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link text-sm font-medium transition-colors hover:text-sky-500">執行摘要</a>
+                    <a href="#visuals" class="nav-link text-sm font-medium transition-colors hover:text-sky-500">數據可視化</a>
+                    <a href="#market-data" class="nav-link text-sm font-medium transition-colors hover:text-sky-500">市場焦點</a>
+                    <a href="#details" class="nav-link text-sm font-medium transition-colors hover:text-sky-500">深度剖析</a>
+                    <a href="#strategy" class="nav-link text-sm font-medium transition-colors hover:text-sky-500">投資建議</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 py-2 space-y-1">
+            <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">執行摘要</a>
+            <a href="#visuals" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">數據可視化</a>
+            <a href="#market-data" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">市場焦點</a>
+            <a href="#details" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">深度剖析</a>
+            <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">投資建議</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <section id="summary" class="section-anchor mb-16">
+            <div class="bg-gradient-to-r from-sky-600 to-indigo-700 rounded-3xl p-8 md:p-12 text-white shadow-xl">
+                <p class="text-sky-200 font-semibold mb-2">2026年2月9日 | 美股投資週報</p>
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">
+                    轉折點上的資本紀律與<br class="hidden md:block">生產力革命
+                </h1>
+                <p class="text-lg text-sky-100 max-w-3xl leading-relaxed">
+                    AI 投資正從「敘事」轉向「實證」。本週市場經歷了自 2025 年以來最重要的反思期，亞馬遜 2,000 億美元的開支計畫與 Anthropic 的插件發布，正重塑軟硬體與傳統產業的邊界。
+                </p>
+            </div>
+        </section>
+
+        <!-- Visual Analytics -->
+        <section id="visuals" class="section-anchor mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週關鍵企業表現 (漲跌幅 %)</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart Container -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-stone-700">科技與醫療巨頭震盪</h3>
+                    <div class="relative h-64 md:h-80">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-stone-500 text-center italic">數據顯示 2026 年 2 月第一週之重大股價變動</p>
+                </div>
+                
+                <!-- Quick Insight Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-red-800 font-bold mb-1 italic">最大跌幅預警</h4>
+                        <p class="text-2xl font-black text-red-600">聯合健康 -20%</p>
+                        <p class="text-sm text-red-700 mt-2">因 Medicare Advantage 報銷率低於預期及營收衰退預警。</p>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-green-800 font-bold mb-1 italic">里程碑成就</h4>
+                        <p class="text-2xl font-black text-green-600">沃爾瑪 $1T</p>
+                        <p class="text-sm text-green-700 mt-2">正式跨入一兆美元市值俱樂部，年初至今大漲 14%。</p>
+                    </div>
+                    <div class="bg-sky-50 border-l-4 border-sky-500 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-sky-800 font-bold mb-1 italic">資本支出狂潮</h4>
+                        <p class="text-2xl font-black text-sky-600">$2,000 億</p>
+                        <p class="text-sm text-sky-700 mt-2">亞馬遜 2026 年 AI 預算，引發市場對現金流稀釋的焦慮。</p>
+                    </div>
+                    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-indigo-800 font-bold mb-1 italic">生產力溢價</h4>
+                        <p class="text-2xl font-black text-indigo-600">Goldman AI</p>
+                        <p class="text-sm text-indigo-700 mt-2">部署 Anthropic 代理處理合規業務，強化經營槓桿。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table -->
+        <section id="market-data" class="section-anchor mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">受影響標的清單</h2>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-stone-200">
+                <div class="p-6 bg-stone-50 border-b border-stone-200">
+                    <div class="relative max-w-sm">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司名稱、板塊或影響因素..." 
+                               class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none transition-all">
+                        <div class="absolute left-3 top-2.5 text-stone-400">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-stone-800 text-white">
+                                <th class="px-6 py-4 font-semibold uppercase text-xs tracking-wider sticky top-0">公司/組織</th>
+                                <th class="px-6 py-4 font-semibold uppercase text-xs tracking-wider sticky top-0">板塊</th>
+                                <th class="px-6 py-4 font-semibold uppercase text-xs tracking-wider sticky top-0">事件/影響</th>
+                                <th class="px-6 py-4 font-semibold uppercase text-xs tracking-wider sticky top-0">市場反應</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="divide-y divide-stone-200">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Insights (Cards) -->
+        <section id="details" class="section-anchor mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-8 border-b-2 border-sky-500 pb-2">報告核心剖析</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-orange-500 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mt-2 mb-4">亞馬遜開支「炸彈」</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        2,000 億美元投資計畫引發 2/5 科技股下挫。市場關注點已從單純的建設規模轉向 AI 的「真實獲利成本」。
+                    </p>
+                    <ul class="text-xs space-y-2 text-stone-500 font-medium">
+                        <li>• 股價暴跌 9.6% (單日)</li>
+                        <li>• 自研晶片 Trainium2 戰略</li>
+                        <li>• 自由現金流稀釋隱憂</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-purple-500 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mt-2 mb-4">Anthropic 去中介化</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        「Claude Cowork」插件直接整合法律、財務工作流，對傳統 SaaS 數據服務商構成生存威脅。
+                    </p>
+                    <ul class="text-xs space-y-2 text-stone-500 font-medium">
+                        <li>• Thomson Reuters 重挫 18%</li>
+                        <li>• SaaS 的「API 陷阱」現形</li>
+                        <li>• 專業工作流產品打包趨勢</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-emerald-500 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mt-2 mb-4">聯準會新生產力週期</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        川普提名凱文·沃什 (Kevin Warsh)。其認為 AI 正在提升產出效率，利於經濟增長同時壓制通膨。
+                    </p>
+                    <ul class="text-xs space-y-2 text-stone-500 font-medium">
+                        <li>• 鷹派立場 + 技術樂觀主義</li>
+                        <li>• 減少 Forward Guidance</li>
+                        <li>• 關注獲利能力大於利率預測</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-blue-500 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mt-2 mb-4">Blackwell 晶片本土化</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        輝達與台積電亞利桑那廠 Fab 21 達成高良率生產。為美國 AI 基礎設施提供「地理保險」。
+                    </p>
+                    <ul class="text-xs space-y-2 text-stone-500 font-medium">
+                        <li>• Blackwell (B200/B100) 量產</li>
+                        <li>• 在岸供應 (Onshored) 溢價</li>
+                        <li>• 降低地緣政治供應鏈風險</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-pink-500 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mt-2 mb-4">2026 半導體配置危機</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        結構性產能危機。高毛利 AI 晶片排擠汽車與消費電子行業。
+                    </p>
+                    <ul class="text-xs space-y-2 text-stone-500 font-medium">
+                        <li>• HBM 產能被巨頭鎖定</li>
+                        <li>• 輝達可能暫停遊戲 GPU 更新</li>
+                        <li>• 汽車業面臨零件成本壓力</li>
+                    </ul>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-stone-600 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mt-2 mb-4">醫療保健系統風險</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        聯合健康 (UNH) 遭遇報銷費率與成本比率 (MCR) 雙重打擊，顯示防禦性板塊亦有脆弱點。
+                    </p>
+                    <ul class="text-xs space-y-2 text-stone-500 font-medium">
+                        <li>• 2026 營收自 1989 年首度下滑</li>
+                        <li>• MCR 飆升至 88.9% 以上</li>
+                        <li>• 試圖透過 AI 削減 10 億成本</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Strategy -->
+        <section id="strategy" class="section-anchor mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2026 投資佈局建議</h2>
+            <div class="bg-stone-800 rounded-2xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <svg class="h-48 w-48" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57c0 .542-.008 1.1-.021 1.666V16a2 2 0 01-2 2H4a2 2 0 01-2-2v-3.764c-.013-.565-.021-1.124-.021-1.666V8a2 2 0 012-2h2zM9 4a1 1 0 011-1h2a1 1 0 011 1v2H9V4zm1 8a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-sky-400">核心觀察</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-sky-500 p-2 rounded-lg mr-4">
+                                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold">看重「變現能力」大於「投入規模」</p>
+                                    <p class="text-stone-400 text-sm">Meta、沃爾瑪、高盛等能將 AI 轉化為毛利或效率的公司更受青睞。</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-sky-500 p-2 rounded-lg mr-4">
+                                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 15.636c-.77 1.333.192 3 1.732 3z" /></svg>
+                                </div>
+                                <div>
+                                    <p class="font-bold">重新評估 API SaaS 護城河</p>
+                                    <p class="text-stone-400 text-sm">警惕缺乏核心技術壁壘、僅依賴數據中介的軟體標的。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-sky-400">資產配置避風港</h3>
+                        <p class="text-stone-300 mb-6 italic">在不確定的利率環境與半導體危機下：</p>
+                        <ul class="space-y-4">
+                            <li class="bg-white/10 p-4 rounded-xl border border-white/10">
+                                <span class="text-sky-300 font-bold">#1 半導體差異化：</span> 專注於掌控先進封裝與核心供應鏈的龍頭 (NVDA, TSMC)。
+                            </li>
+                            <li class="bg-white/10 p-4 rounded-xl border border-white/10">
+                                <span class="text-sky-300 font-bold">#2 現金流王者：</span> 具備低負債、積極擁抱 AI 轉型的傳產龍頭 (WMT, AAPL)。
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-2026年2月美股與AI產業深度投資週報。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股AI七巨頭相關公開資料 (2026年1月4日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data for Interactive Table ---
+        const productData = [
+            { name: "亞馬遜 (Amazon)", sector: "科技 / 電商", event: "2,000 億美元年度 AI 支出計畫", impact: "單日暴跌 9.6%" },
+            { name: "Anthropic", sector: "AI 初創", event: "發布 Claude Cowork 插件", impact: "引發 SaaS 板塊地震" },
+            { name: "Thomson Reuters", sector: "法律數據服務", event: "面臨 Anthropic 技術威脅", impact: "單日重挫近 18%" },
+            { name: "RELX (LexisNexis)", sector: "資訊服務", event: "AI 工作流去中介化隱憂", impact: "暴跌 14.4% (1988年來最大)" },
+            { name: "沃爾瑪 (Walmart)", sector: "零售", event: "市值突破 1 兆美元里程碑", impact: "年初至今上漲 >14%" },
+            { name: "聯合健康 (UNH)", sector: "醫療保健", event: "Medicare 費率低於預期 / 營收衰退預警", impact: "股價暴跌近 20%" },
+            { name: "輝達 (Nvidia)", sector: "半導體", event: "Blackwell 亞利桑那廠量產成功", impact: "穩固 AI 硬體領導地位" },
+            { name: "高盛 (Goldman Sachs)", sector: "金融服務", event: "部署 Claude AI 代理自動化後勤", impact: "經營槓桿預期提升" },
+            { name: "美光 (Micron)", sector: "半導體 (記憶體)", event: "產能轉向 HBM3e，排擠消費型 RAM", impact: "高利潤轉型，產品價漲" },
+            { name: "Humana", sector: "醫療保險", event: "受聯合健康連鎖效應影響", impact: "股價下跌 20% (創2017來新低)" }
+        ];
+
+        // --- Render Table ---
+        const tableBody = document.getElementById('productTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors';
+                
+                // Color formatting for impact
+                let impactClass = 'text-stone-600';
+                if (item.impact.includes('跌') || item.impact.includes('挫') || item.impact.includes('縮')) {
+                    impactClass = 'text-red-600 font-medium';
+                } else if (item.impact.includes('漲') || item.impact.includes('升') || item.impact.includes('成功')) {
+                    impactClass = 'text-green-600 font-medium';
+                }
+
+                row.innerHTML = `
+                    <td class="px-6 py-4 font-bold text-stone-800">${item.name}</td>
+                    <td class="px-6 py-4 text-stone-500 text-sm">${item.sector}</td>
+                    <td class="px-6 py-4 text-stone-600 text-sm">${item.event}</td>
+                    <td class="px-6 py-4 text-sm ${impactClass}">${item.impact}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // --- Table Search Logic ---
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.sector.toLowerCase().includes(term) ||
+                item.event.toLowerCase().includes(term) ||
+                item.impact.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // --- Mobile Menu Toggle ---
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Chart.js Configuration ---
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['聯合健康 (UNH)', 'T. Reuters', 'RELX', '亞馬遜 (AMZN)', '沃爾瑪 (YTD)'],
+                datasets: [{
+                    label: '本週變動比例 (%)',
+                    data: [-20, -18, -14.4, -9.6, 14],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.7)',
+                        'rgba(239, 68, 68, 0.7)',
+                        'rgba(239, 68, 68, 0.7)',
+                        'rgba(249, 115, 22, 0.7)',
+                        'rgba(34, 197, 94, 0.7)'
+                    ],
+                    borderColor: [
+                        '#b91c1c', '#b91c1c', '#b91c1c', '#c2410c', '#15803d'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { color: '#e7e5e4' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // --- Intersection Observer for Active Nav ---
+        const sections = document.querySelectorAll('.section-anchor');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href').slice(1) === entry.target.id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Initial Table Render
+        window.onload = () => {
+            renderTable(productData);
+        };
+    </script>
+</body>
+</html>
