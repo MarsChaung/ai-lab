@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Broadcom 投資論證研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-800 */
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0">
+                    <span class="text-xl font-bold text-sky-700">Broadcom 投資論證</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#growth" class="nav-link inactive-nav-link hover:text-sky-500 transition px-1 py-2 text-sm font-medium">核心成長</a>
+                    <a href="#backlog" class="nav-link inactive-nav-link hover:text-sky-500 transition px-1 py-2 text-sm font-medium">訂單積壓</a>
+                    <a href="#valuation" class="nav-link inactive-nav-link hover:text-sky-500 transition px-1 py-2 text-sm font-medium">估值分析</a>
+                    <a href="#comparison" class="nav-link inactive-nav-link hover:text-sky-500 transition px-1 py-2 text-sm font-medium">NVDA vs AVGO</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-800 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu Content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 py-2 space-y-1">
+            <a href="#growth" class="block px-3 py-2 text-base font-medium text-stone-800">核心成長</a>
+            <a href="#backlog" class="block px-3 py-2 text-base font-medium text-stone-800">訂單積壓</a>
+            <a href="#valuation" class="block px-3 py-2 text-base font-medium text-stone-800">估值分析</a>
+            <a href="#comparison" class="block px-3 py-2 text-base font-medium text-stone-800">NVDA vs AVGO</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">Broadcom (AVGO) 投資論證報告</h1>
+            <p class="text-xl text-stone-600 max-w-3xl mx-auto">
+                憑藉 AI 網路交換器與自訂 XPU，挑戰 Magnificent 7 主導地位，鎖定長期成長紅利。
+            </p>
+        </div>
+
+        <!-- 核心成長引擎 -->
+        <section id="growth" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心成長引擎：AI 業務爆炸性動能</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <p class="text-stone-700">
+                        Broadcom 的 AI 業務已展現遠超預期的動能。2025 財年 AI 半導體營收達 200 億美元（年增 65%），並預計 2026 財年第一季營收將翻倍至 82 億美元以上。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-sky-500">
+                            <p class="text-sm text-stone-500">2025 AI 營收</p>
+                            <p class="text-2xl font-bold text-sky-700">$20B</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500">
+                            <p class="text-sm text-stone-500">AI 半導體年增</p>
+                            <p class="text-2xl font-bold text-green-700">+74%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-center">Broadcom AI 半導體營收趨勢 (單位: 十億美元)</h3>
+                    <div class="h-64">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 訂單積壓 -->
+        <section id="backlog" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">訂單積壓：未來成長的高度能見度</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="text-sky-500 mb-4">
+                        <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM5 12a1 1 0 112 0 1 1 0 01-2 0zm7 0a1 1 0 112 0 1 1 0 01-2 0z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">總訂單積壓</h3>
+                    <p class="text-4xl font-extrabold text-stone-800">$1,620億</p>
+                    <p class="mt-2 text-stone-500 text-sm">提供未來 1-2 年營收穩定軌跡，大幅降低「黑天鵝」風險。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="text-indigo-500 mb-4">
+                        <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.5a1 1 0 01.8.4l1.9 2.533a1 1 0 001.6 0l1.9-2.533a1 1 0 01.8-.4H15a2 2 0 002-2V5a1 1 0 000-2H3z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">AI 相關積壓</h3>
+                    <p class="text-4xl font-extrabold text-stone-800">$730億</p>
+                    <p class="mt-2 text-stone-500 text-sm">包含 $530億 自訂 XPU 及 $200億 AI 網絡與機架訂單。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="text-emerald-500 mb-4">
+                        <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">網路交換器</h3>
+                    <p class="text-4xl font-extrabold text-stone-800">$100億+</p>
+                    <p class="mt-2 text-stone-500 text-sm">Tomahawk 6 等交換器需求強勁，預計未來 18 個月逐步出貨。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 估值與獲利 -->
+        <section id="valuation" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">估值分析：具備安全邊際的成長股</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <span class="bg-sky-500 w-2 h-6 mr-3"></span> 市場預期與目標價
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex justify-between border-b border-stone-100 pb-2">
+                                <span class="text-stone-600">當前股價 (2026/02/17)</span>
+                                <span class="font-bold">$332.54</span>
+                            </li>
+                            <li class="flex justify-between border-b border-stone-100 pb-2">
+                                <span class="text-stone-600">平均目標價</span>
+                                <span class="font-bold text-sky-600">$433 - $456</span>
+                            </li>
+                            <li class="flex justify-between border-b border-stone-100 pb-2">
+                                <span class="text-stone-600">潛在上漲空間</span>
+                                <span class="font-bold text-green-600">30% - 38%</span>
+                            </li>
+                            <li class="flex justify-between border-b border-stone-100 pb-2">
+                                <span class="text-stone-600">股息殖利率</span>
+                                <span class="font-bold">0.78% (年息 $2.60)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col justify-center bg-stone-50 p-6 rounded-lg border border-stone-200">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2">投資專家觀點</h4>
+                        <p class="text-stone-600 text-sm italic">
+                            「Broadcom 目前前瞻本益比約 32-33 倍，考慮到超過 50% 的 EPS 成長預期，PEG 僅約 0.9，遠低於純 AI 晶片龍頭。這代表成長股價格卻帶有價值股安全邊際。」
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="h-1 w-full bg-stone-200 rounded">
+                                <div class="h-1 bg-sky-500 rounded" style="width: 85%"></div>
+                            </div>
+                            <span class="ml-3 text-xs font-bold text-sky-600">Strong Buy (32/34)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NVDA vs AVGO 比較表格 -->
+        <section id="comparison" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nvidia (NVDA) vs Broadcom (AVGO) 對比</h2>
+            
+            <!-- Table Search -->
+            <div class="mb-4">
+                <div class="relative max-w-xs">
+                    <input type="text" id="tableSearch" placeholder="搜尋指標 (例如: 本益比)..." class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:ring-sky-500 focus:border-sky-500 outline-none transition">
+                    <div class="absolute left-3 top-2.5 text-stone-400">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden border border-stone-200">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200" id="comparisonTable">
+                        <thead class="bg-stone-800 text-white sticky top-0">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">指標項目</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Nvidia (NVDA)</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Broadcom (AVGO)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-100" id="tableBody">
+                            <!-- Data injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p class="mt-4 text-sm text-stone-500 italic">資料來源：根據 2026/02/17 收盤數據及各家財報指引。</p>
+        </section>
+
+        <!-- 總結與建議 -->
+        <section class="bg-sky-700 text-white rounded-2xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-3xl font-bold mb-6">對一般投資人的投資價值結論</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-sky-200">為何選擇 Broadcom (AVGO)？</h3>
+                        <ul class="list-disc list-inside space-y-2 text-sky-50">
+                            <li>能見度極高：$730億 AI 積壓訂單鎖定至 2027 年成長。</li>
+                            <li>多元化護城河：客製晶片、網路設備、VMware 軟體三大支柱。</li>
+                            <li>股息與成長並重：連續 15 年增息，現金流轉換率領先同業。</li>
+                            <li>波動相對穩定：Beta 值 1.22，遠低於 Nvidia 的 2.31。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20">
+                        <h3 class="text-xl font-bold mb-4">建議配置策略</h3>
+                        <p class="mb-4">
+                            AVGO 是「AI 供應鏈中的價值成長股」，建議於 <span class="font-bold text-yellow-400">$320 - $340</span> 區間分批布局，長期持有 3-5 年。
+                        </p>
+                        <p class="text-sm text-sky-100">兩者並非互斥，建議 Nvidia 占 AI 核心爆發成長，Broadcom 占基礎設施穩健部位。</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative circle -->
+            <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-sky-600 rounded-full opacity-50 blur-3xl"></div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Broadcom 投資論證研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Broadcom 及 Nvidia 相關公開資料 (2026年2月18日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // 2. Data for Table
+        const productData = [
+            { metric: "收盤股價 (2/17)", nvda: "$184.97", avgo: "$332.54" },
+            { metric: "市值", nvda: "$4.5 兆", avgo: "$1.55 兆" },
+            { metric: "前瞻本益比 (Forward P/E)", nvda: "24-25x", avgo: "32-33x" },
+            { metric: "PEG 比率", nvda: "0.71 (低估)", avgo: "0.90 (合理)" },
+            { metric: "毛利率 (Gross Margin)", nvda: "53-63%", avgo: "~36%" },
+            { metric: "AI 業務營收 (2025)", nvda: "$2,135 億 (預估FY26)", avgo: "$200 億" },
+            { metric: "訂單能見度", nvda: "極高 (供不應求)", avgo: "極高 ($730億積壓)" },
+            { metric: "波動性 (Beta)", nvda: "2.31 (高波動)", avgo: "1.22 (穩健)" },
+            { metric: "股利殖利率", nvda: "0.02%", avgo: "0.78%" }
+        ];
+
+        const tableBody = document.getElementById('tableBody');
+        const renderTable = (data) => {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `<tr class="hover:bg-stone-50 transition">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.metric}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.nvda}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600 font-semibold">${item.avgo}</td>
+                </tr>`;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        };
+        renderTable(productData);
+
+        // 3. Table Search Filter
+        document.getElementById('tableSearch').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.metric.toLowerCase().includes(term) || 
+                item.nvda.toLowerCase().includes(term) || 
+                item.avgo.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // 4. Chart.js Implementation
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2025 財年', '2026 財年 Q1 (指引)'],
+                datasets: [{
+                    label: 'AI 業務營收 (十億美元)',
+                    data: [20, 32.8], // 8.2*4 as a rough annualized target based on guidance
+                    backgroundColor: ['rgba(14, 165, 233, 0.7)', 'rgba(16, 185, 129, 0.7)'],
+                    borderColor: ['#0ea5e9', '#10b981'],
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'USD Billions' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) label += ': ';
+                                if (context.parsed.y !== null) label += '$' + context.parsed.y + 'B';
+                                return label;
+                            },
+                            afterLabel: function(context) {
+                                if (context.dataIndex === 1) return "(預計單季 $8.2B 以上)";
+                                return "";
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 5. Active Link State (Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
