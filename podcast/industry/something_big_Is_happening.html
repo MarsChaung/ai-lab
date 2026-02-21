@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Something Big Is Happening 研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        /* 表格固定表頭 */
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            background-color: #f8fafc;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-900">
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-600 tracking-tight">AI產業觀察</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#intro" class="nav-link px-3 py-2 text-sm font-medium transition-colors inactive-nav-link" data-section="intro">報告序言</a>
+                    <a href="#acceleration" class="nav-link px-3 py-2 text-sm font-medium transition-colors inactive-nav-link" data-section="acceleration">演進速度</a>
+                    <a href="#impact" class="nav-link px-3 py-2 text-sm font-medium transition-colors inactive-nav-link" data-section="impact">產業衝擊</a>
+                    <a href="#strategy" class="nav-link px-3 py-2 text-sm font-medium transition-colors inactive-nav-link" data-section="strategy">應對策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 py-4 space-y-2">
+            <a href="#intro" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">報告序言</a>
+            <a href="#acceleration" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">演進速度</a>
+            <a href="#impact" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">產業衝擊</a>
+            <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">應對策略</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="intro" class="pt-16 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="bg-gradient-to-r from-sky-600 to-indigo-700 rounded-2xl p-8 md:p-12 shadow-2xl text-white mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Something Big Is Happening</h1>
+            <p class="text-xl opacity-90 max-w-3xl mb-6">「我們正處於比 Covid 更龐大、影響更深遠的某種事物的『被低估階段』。」<br>—— Matt Shumer (OthersideAI共同創辦人兼執行長)</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                <h3 class="text-stone-500 text-sm font-bold uppercase mb-2">關鍵預測</h3>
+                <p class="text-2xl font-bold text-stone-800">50%</p>
+                <p class="text-stone-600 text-sm mt-1">初級白領職位可能在 1-5 年內消失</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                <h3 class="text-stone-500 text-sm font-bold uppercase mb-2">能力增長週期</h3>
+                <p class="text-2xl font-bold text-stone-800">4-7 個月</p>
+                <p class="text-stone-600 text-sm mt-1">AI 處理任務的複雜度翻倍週期</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                <h3 class="text-stone-500 text-sm font-bold uppercase mb-2">技術轉折點</h3>
+                <p class="text-2xl font-bold text-stone-800">GPT-5.3</p>
+                <p class="text-stone-600 text-sm mt-1">首個「參與自身創建」的 AI 模型</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acceleration Section -->
+    <section id="acceleration" class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 演進的指數級速度</h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4 text-stone-700">METR 任務完成能力趨勢 (小時)</h3>
+                <p class="text-stone-600 mb-6 text-sm">衡量 AI 在無需人類干預下，端到端完成專業任務的連續工作時長。</p>
+                <div class="h-[300px]">
+                    <canvas id="accelerationChart"></canvas>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <div class="bg-sky-50 rounded-lg p-6 border border-sky-100">
+                    <h4 class="font-bold text-sky-800 mb-2">智能爆炸 (Intelligence Explosion)</h4>
+                    <p class="text-stone-700 leading-relaxed">
+                        OpenAI 的 GPT-5.3 Codex 與 Anthropic 的新模型標誌著一個重大轉向：AI 開始編寫自身的代碼。這種回饋循環使得每一代 AI 都能以更快的速度開發出下一代更強大的 AI。
+                    </p>
+                </div>
+                <div class="bg-stone-800 text-white rounded-lg p-6 shadow-lg">
+                    <h4 class="font-bold mb-2">里程碑回顧</h4>
+                    <ul class="text-sm space-y-2 opacity-90">
+                        <li>• 2022年：無法可靠執行基本算術。</li>
+                        <li>• 2023年：通過律師資格考試。</li>
+                        <li>• 2024年：撰寫可用軟體、解釋研究生級別科學。</li>
+                        <li>• 2025年：軟體工程師將大部分編碼工作移交。</li>
+                        <li>• 2026年2月：具備「判斷力」與「品味」的模型問世。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">受衝擊產業分析</h2>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                <p class="text-stone-600">根據報告分析，以下產業的正遭遇劇烈變革。輸入關鍵字篩選產業：</p>
+                <input type="text" id="tableFilter" placeholder="搜尋產業或內容..." class="px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none w-full md:w-64">
+            </div>
+
+            <div class="overflow-x-auto border border-stone-100 rounded-lg">
+                <table class="min-w-full divide-y divide-stone-200" id="industryTable">
+                    <thead class="bg-stone-50 sticky-header">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">產業領域</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">衝擊描述 / 核心能力</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">替代潛力</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-stone-200 text-sm" id="tableBody">
+                        <!-- JS 動態注入 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Section -->
+    <section id="strategy" class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">生存與應對策略</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-sky-500">
+                <div class="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center mb-4">
+                    <span class="text-sky-600 font-bold">1</span>
+                </div>
+                <h4 class="font-bold mb-2">成為早期採用者</h4>
+                <p class="text-stone-600 text-sm">不要只把 AI 當搜尋引擎。訂閱付費版本（如 Claude Opus 4.6），並將其推入您的核心工作流中。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-sky-500">
+                <div class="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center mb-4">
+                    <span class="text-sky-600 font-bold">2</span>
+                </div>
+                <h4 class="font-bold mb-2">建立實驗習慣</h4>
+                <p class="text-stone-600 text-sm">每天花 1 小時與 AI 協作，挑戰它處理更難的問題，這將使您領先 99% 的人。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-sky-500">
+                <div class="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center mb-4">
+                    <span class="text-sky-600 font-bold">3</span>
+                </div>
+                <h4 class="font-bold mb-2">財務與彈性</h4>
+                <p class="text-stone-600 text-sm">建立儲蓄緩衝，對債務保持謹慎。在高度不確定的轉型期，靈活性是最有價值的資產。</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-sky-500">
+                <div class="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center mb-4">
+                    <span class="text-sky-600 font-bold">4</span>
+                </div>
+                <h4 class="font-bold mb-2">強化無法替代性</h4>
+                <p class="text-stone-600 text-sm">專注於建立深層的人際信任、物理現場工作、或具有法律問責制、受監管保護的領域。</p>
+            </div>
+        </div>
+
+        <div class="mt-12 bg-stone-100 rounded-2xl p-8 border border-stone-200">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">Matt Shumer 的最終建議</h3>
+                    <blockquote class="italic text-stone-700 border-l-4 border-stone-400 pl-4 py-2 mb-4">
+                        「這將是你職業生涯中最重要的年份。保持謙遜，不要因為擁有資歷就拒絕接觸 AI。即使是頂尖律師事務所的合夥人，現在也每天花數小時與 AI 共處。」
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Something Big Is Happening 研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Matt Shumer及其報告相關公開資料 (2026年1月4日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. 資料表格數據 (productData Mapping to Industry Data) ---
+        const industryData = [
+            { industry: "軟體工程 (Software Engineering)", content: "AI 從撰寫數行代碼演進到能處理幾十萬行代碼，並能自行執行、測試、修正錯誤。", impact: "高 (High)" },
+            { industry: "法律服務 (Legal Work)", content: "閱讀合約、總結案例、起草簡報。頂尖合夥人認為 AI 正表現得像一組即時待命的律師助理。", impact: "高 (High)" },
+            { industry: "金融分析 (Finance)", content: "建立財務模型、分析混亂的試算表、撰寫投資備忘錄、生成專業報告。", impact: "高 (High)" },
+            { industry: "醫學分析 (Medical)", content: "判讀掃描影像、分析實驗結果、提供診斷建議、檢閱醫學文獻，性能正接近或超越人類。", impact: "中高 (Medium-High)" },
+            { industry: "客戶服務 (Customer Service)", content: "具備理解能力的 AI 代理程式，能處理複雜的多步驟問題，超越傳統的 Chatbot。", impact: "高 (High)" },
+            { industry: "寫作與營銷 (Content)", content: "營銷文案、技術寫作、新聞報導。質量已達到專業人士難以區分 AI 與人工輸出的程度。", impact: "高 (High)" },
+            { industry: "教育與培訓 (Education)", content: "AI 成為 24/7 待命、具備無限耐心的私人導師，能以任何等級解釋知識。", impact: "變革級 (Transformative)" }
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = data.map(item => `
+                <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-6 py-4 font-bold text-stone-800">${item.industry}</td>
+                    <td class="px-6 py-4 text-stone-600">${item.content}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 rounded text-xs font-bold ${item.impact.includes('高') ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}">
+                            ${item.impact}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // 表格篩選功能
+        document.getElementById('tableFilter').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = industryData.filter(item => 
+                item.industry.toLowerCase().includes(term) || 
+                item.content.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // --- 2. 動態圖表 (Chart.js) ---
+        function initChart() {
+            const ctx = document.getElementById('accelerationChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2023 初', '2024 中', '2025.11 (Opus 4.5)', '2026.02 (Projected)'],
+                    datasets: [{
+                        label: '連續完成複雜任務時長 (小時)',
+                        data: [0.16, 1, 5, 12],
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointBackgroundColor: '#0ea5e9'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e7e5e4' },
+                            title: { display: true, text: '小時' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- 3. 手機版選單 ---
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- 4. Intersection Observer (Active Nav Link) ---
+        function initScrollSpy() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                threshold: 0.3,
+                rootMargin: "-20% 0px -50% 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.dataset.section === id) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // 初始化
+        window.onload = () => {
+            renderTable(industryData);
+            initChart();
+            initScrollSpy();
+        };
+    </script>
+</body>
+</html>
