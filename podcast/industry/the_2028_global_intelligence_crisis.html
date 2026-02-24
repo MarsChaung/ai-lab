@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI 敘事引發市場波動應對研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        section {
+            scroll-margin-top: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans">
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-600">敘事引發市場波動應對研究</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link">事件概覽</a>
+                    <a href="#market-impact" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link">市場衝擊</a>
+                    <a href="#core-logic" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link">2028GIC邏輯</a>
+                    <a href="#case-study" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link">個案分析</a>
+                    <a href="#strategy" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#overview" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50 hover:text-sky-600">事件概覽</a>
+                <a href="#market-impact" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50 hover:text-sky-600">市場衝擊</a>
+                <a href="#core-logic" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50 hover:text-sky-600">2028GIC邏輯</a>
+                <a href="#case-study" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50 hover:text-sky-600">個案分析</a>
+                <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50 hover:text-sky-600">投資策略</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="mb-16">
+            <div class="bg-gradient-to-r from-sky-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-white shadow-xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">敘事型風險的架構</h1>
+                <p class="text-xl opacity-90 mb-6">2028 年全球智能危機：來自未來的金融史思想實驗</p>
+            </div>
+            <div class="mt-12">
+                <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">事件背景</h2>
+                <div class="prose prose-stone max-w-none text-stone-600 leading-relaxed">
+                    <p>2026 年 2 月 23 日，市場經歷了一場典型的「敘事驅動」去風險事件。由 Citrini Research 發佈的《2028 年全球智能危機》思想實驗報告在社群迅速發酵，引發投資者對代理型 AI 深度滲透白領工作後的消費收縮、失業以及金融體系穩定性的極度擔憂。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Impact Section -->
+        <section id="market-impact" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2/23 受衝擊個股分析</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8 mb-10">
+                <!-- Chart Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-stone-700">核心個股單日跌幅 (%)</h3>
+                    <div class="h-[300px]">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Summary Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-stone-700">拋售機制觀察</h3>
+                    <ul class="space-y-4 text-stone-600">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mr-3 font-bold text-sm">1</span>
+                            <span><strong>複合催化劑：</strong> 關稅不確定性、Anthropic 新安全工具發佈與 2028GIC 報告共振。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mr-3 font-bold text-sm">2</span>
+                            <span><strong>技術疲勞：</strong> 標普 500 跌破 50 日均線，Beta 因子在上午 11:00 後發生崩潰。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-6 h-6 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mr-3 font-bold text-sm">3</span>
+                            <span><strong>去風險傾向：</strong> 資金流向防禦型策略，軟體與高槓桿金融股成為重災區。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 border-b border-stone-100 bg-stone-50 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <h3 class="text-xl font-semibold text-stone-700">受衝擊個股詳細數據表</h3>
+                    <div class="relative">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司或代碼..." class="pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 w-full md:w-64">
+                        <svg class="h-5 w-5 text-stone-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="sticky top-0 bg-stone-100 z-10">
+                            <tr>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200">股票代碼</th>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200">公司名稱</th>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200 text-right">當日跌幅</th>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200 text-right">交易量變化</th>
+                                <th class="p-4 font-semibold text-stone-600 border-b border-stone-200">主要驅動力</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2028GIC Logic Section -->
+        <section id="core-logic" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2028GIC 報告核心邏輯</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="text-sky-600 mb-4">
+                        <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">代理型 AI 與零摩擦</h3>
+                    <p class="text-stone-600 text-sm">AI 代理具備自主規劃與執行力。傳統 SaaS 授權從資產變商品，消費平台去中介化，利潤空間被極度壓縮。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <div class="text-amber-600 mb-4">
+                        <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">幽靈 GDP 與失業螺旋</h3>
+                    <p class="text-stone-600 text-sm">生產力維持但勞動分紅比例驟降。高薪白領裁員導致消費循環中斷，預測失業率攀升至 10.2%。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-500">
+                    <div class="text-rose-600 mb-4">
+                        <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">金融體系脆性</h3>
+                    <p class="text-stone-600 text-sm">抵押貸款市場依賴白領薪資，失業將引發違約潮。私貸基金對軟體公司的高曝險面臨估值重定價。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Study Section -->
+        <section id="case-study" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">企業對抗 AI 衝擊的命運對比</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Chegg -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-l-8 border-red-400">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 bg-red-100 text-red-600 rounded-full mr-4 text-2xl">⚠️</div>
+                        <h3 class="text-2xl font-bold">Chegg (被替代者)</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4">首家承認業務受 ChatGPT 重創。學生轉向免費 AI，導致市值在兩年內蒸發 70% 以上。</p>
+                    <div class="bg-stone-50 p-4 rounded-lg italic text-sm border border-stone-100">
+                        「估值發生永久性的去定級 (De-rating)，即便裁員重組也難回高峰。」
+                    </div>
+                </div>
+                <!-- Klarna -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-l-8 border-emerald-400">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 bg-emerald-100 text-emerald-600 rounded-full mr-4 text-2xl">🚀</div>
+                        <h3 class="text-2xl font-bold">Klarna (利用進化者)</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4">透過 AI 自動化，人均營收增長 3.6 倍，同時員工人數減半，轉型為輕資產數位銀行模式。</p>
+                    <div class="bg-stone-50 p-4 rounded-lg italic text-sm border border-stone-100">
+                        「效率被視為理所當然，市場更關注利潤品質與長期競爭力。」
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Strategy Section -->
+        <section id="strategy" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資者的應對策略</h2>
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- Strategy 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform duration-300">
+                    <div class="text-sky-500 text-3xl mb-4 font-bold">01</div>
+                    <h3 class="text-xl font-bold mb-3">尋找數據護城河</h3>
+                    <p class="text-stone-600 text-sm">佈局擁有實體屏障 (如數據中心) 或專有金融、用戶數據的公司。AI 無法輕易複製實體基礎設施或「真值數據」。</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="bg-stone-100 px-2 py-1 text-xs rounded border border-stone-200">APH</span>
+                        <span class="bg-stone-100 px-2 py-1 text-xs rounded border border-stone-200">VRT</span>
+                        <span class="bg-stone-100 px-2 py-1 text-xs rounded border border-stone-200">MCO</span>
+                    </div>
+                </div>
+                <!-- Strategy 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform duration-300">
+                    <div class="text-sky-500 text-3xl mb-4 font-bold">02</div>
+                    <h3 class="text-xl font-bold mb-3">利用波動率偏斜</h3>
+                    <p class="text-stone-600 text-sm">當情緒恐慌且價外看跌期權 (OTM Put) 過貴時，利用期權垂直價差策略降低對沖成本，博取情緒回歸利潤。</p>
+                    <div class="mt-4 flex flex-wrap gap-2 text-xs text-sky-600 font-semibold">
+                        策略：Vertical Spread / Skew Monitoring
+                    </div>
+                </div>
+                <!-- Strategy 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform duration-300">
+                    <div class="text-sky-500 text-3xl mb-4 font-bold">03</div>
+                    <h3 class="text-xl font-bold mb-3">區分敘事與數據</h3>
+                    <p class="text-stone-600 text-sm">避開「一鍵清倉」。應在估值修正時階段性買入現金流穩健者。關注 NRR (淨留存率) 是否真的因 AI 出現惡化。</p>
+                    <div class="mt-4 flex flex-wrap gap-2 text-xs text-amber-600 font-semibold">
+                        關注指標：NRR / 白領就業數據
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balanced View Alert -->
+            <div class="mt-12 bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
+                <h4 class="text-lg font-bold text-indigo-800 mb-2">平衡視角：為什麼不應過度悲觀？</h4>
+                <p class="text-indigo-900/80 text-sm leading-relaxed">
+                    儘管 2028GIC 描繪了極端情境，但專家預測 40% 的 AI 代理項目將因遺留系統架構、安全性及人機協作的情感溢價而失敗。AI 不會消滅軟體需求，反而會增加系統管理的複雜度。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI 敘事引發市場波動應對研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 AI 敘事與 Citrini Research 相關公開資料 (2026年2月24日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data derived from the report
+        const stockData = [
+            { code: 'CRWD', name: 'CrowdStrike', change: -10.40, volume: '+213.0%', reason: 'Anthropic 安全工具引發市場萎縮疑慮' },
+            { code: 'KKR', name: 'KKR & Co. Inc.', change: -8.46, volume: '+22.8%', reason: '私貸對軟體公司曝險引發估值疑慮' },
+            { code: 'AXP', name: 'American Express', change: -7.50, volume: '+24.3%', reason: '擔憂白領失業與 AI 去中介化' },
+            { code: 'BX', name: 'Blackstone Inc.', change: -6.56, volume: '+71.7%', reason: '軟體 ARR 估值修正與私貸風險' },
+            { code: 'DASH', name: 'DoorDash', change: -6.24, volume: '異常放大', reason: 'AI 代理消除交易摩擦，削弱定價權' },
+            { code: 'CRM', name: 'Salesforce', change: -5.30, volume: '顯著增加', reason: '白領裁員導致軟體席位流失' },
+            { code: 'UBER', name: 'Uber Technologies', change: -3.80, volume: '異常放大', reason: 'AI 對共享經濟模式的去中介化衝擊' },
+            { code: 'MA', name: 'Mastercard', change: -3.65, volume: '顯著增加', reason: '消費收縮情境下的交易量減少疑慮' }
+        ];
+
+        // Populate Table
+        const tableBody = document.getElementById('stockTableBody');
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(stock => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="p-4 border-b border-stone-100 font-mono text-sky-600 font-bold">${stock.code}</td>
+                        <td class="p-4 border-b border-stone-100 font-medium">${stock.name}</td>
+                        <td class="p-4 border-b border-stone-100 text-right font-bold text-rose-600">${stock.change.toFixed(2)}%</td>
+                        <td class="p-4 border-b border-stone-100 text-right text-stone-500">${stock.volume}</td>
+                        <td class="p-4 border-b border-stone-100 text-stone-600 text-sm">${stock.reason}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+        renderTable(stockData);
+
+        // Search Interaction
+        document.getElementById('tableSearch').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const filtered = stockData.filter(s => 
+                s.name.toLowerCase().includes(query) || 
+                s.code.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        // Initialize Chart
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        const sortedForChart = [...stockData].sort((a, b) => a.change - b.change);
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: sortedForChart.map(s => s.code),
+                datasets: [{
+                    label: '當日跌幅 (%)',
+                    data: sortedForChart.map(s => s.change),
+                    backgroundColor: sortedForChart.map(s => s.change < -8 ? '#e11d48' : '#38bdf8'),
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { color: '#f5f5f4' },
+                        title: { display: true, text: '跌幅 (%)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Navigation Interactivity
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav-link');
+                link.classList.add('inactive-nav-link');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active-nav-link');
+                    link.classList.remove('inactive-nav-link');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+    </script>
+</body>
+</html>
