@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-荷姆茲海峽危機與美股市場研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        /* 隱藏捲動條但保有功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans">
+
+    <!-- Navigation Header -->
+    <header class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-xl font-bold text-stone-800 tracking-tight">荷姆茲海峽危機</span>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#overview" class="nav-link px-1 py-2 transition-colors duration-200">市場概況</a>
+                    <a href="#hormuz" class="nav-link px-1 py-2 transition-colors duration-200">荷姆茲海峽</a>
+                    <a href="#energy" class="nav-link px-1 py-2 transition-colors duration-200">能源走勢</a>
+                    <a href="#analysis" class="nav-link px-1 py-2 transition-colors duration-200">板塊分析</a>
+                    <a href="#strategy" class="nav-link px-1 py-2 transition-colors duration-200">應對策略</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 hover:text-sky-600 rounded-md">市場概況</a>
+                <a href="#hormuz" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 hover:text-sky-600 rounded-md">荷姆茲海峽</a>
+                <a href="#energy" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 hover:text-sky-600 rounded-md">能源走勢</a>
+                <a href="#analysis" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 hover:text-sky-600 rounded-md">板塊分析</a>
+                <a href="#strategy" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 hover:text-sky-600 rounded-md">應對策略</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="mb-16">
+            <div class="bg-gradient-to-br from-stone-800 to-stone-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">中東地緣政治危機爆發：<br><span class="text-sky-400">全球能源動脈與美股連鎖反應</span></h1>
+                    <p class="text-stone-300 text-lg max-w-2xl mb-8 leading-relaxed">
+                        荷姆茲海峽實質關閉導致 20% 石油供應中斷，美股開盤重挫 2.4%。這不僅是短期震盪，更是全球供應鏈的重新定價。
+                    </p>
+                </div>
+                <!-- Abstract visual element -->
+                <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-sky-600/20 rounded-full blur-3xl"></div>
+            </div>
+        </section>
+
+        <!-- Information Cards (Quick Facts) -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow-sm">
+                <h3 class="text-red-800 font-bold mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/></svg>
+                    通膨警報
+                </h3>
+                <p class="text-stone-700 text-sm">油價每上漲 $10，CPI 預計推升 0.4%。目前的飆升可能迫使 Fed 推遲降息至 2026 年底。</p>
+            </div>
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-lg shadow-sm">
+                <h3 class="text-amber-800 font-bold mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    物流延遲
+                </h3>
+                <p class="text-stone-700 text-sm">航商繞道非洲好望角，航程增加 10-15 天，保險費率飆升 50%，供應鏈成本面臨結構性暴漲。</p>
+            </div>
+            <div class="bg-sky-50 border-l-4 border-sky-500 p-6 rounded-r-lg shadow-sm">
+                <h3 class="text-sky-800 font-bold mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    板塊避風港
+                </h3>
+                <p class="text-stone-700 text-sm">能源 (XLE) 與國防 (ITA) 逆勢上漲 2-6%，高品質 AI 基礎設施股 (NVDA) 仍展現強大韌性。</p>
+            </div>
+        </div>
+
+        <!-- Hormuz Strait Section -->
+        <section id="hormuz" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">荷姆茲海峽：全球能源心臟停跳</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <p class="text-stone-600 mb-4 leading-relaxed">
+                        荷姆茲海峽每日流通約 2,100 萬桶石油與全球 20% 的液化天然氣 (LNG)。2026年3月初的封鎖導致海峽內無 AIS 信號，超過 150 艘商船被迫停航。
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="bg-sky-100 text-sky-600 p-1 rounded">01</span>
+                            <div>
+                                <span class="font-bold text-stone-800">航道流量</span>
+                                <p class="text-sm text-stone-500">從每日 2,100 萬桶驟降至接近於 0。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="bg-sky-100 text-sky-600 p-1 rounded">02</span>
+                            <div>
+                                <span class="font-bold text-stone-800">戰爭險溢價</span>
+                                <p class="text-sm text-stone-500">費率從 0.125% 飆升至 0.4%，且多數保險公司已撤銷承保。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="bg-sky-100 text-sky-600 p-1 rounded">03</span>
+                            <div>
+                                <span class="font-bold text-stone-800">替代路徑不足</span>
+                                <p class="text-sm text-stone-500">沙烏地與阿聯酋管道僅能承載不到 40% 的流量需求。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-center font-bold text-stone-700 mb-4">地緣政治風險對油價的推力</h4>
+                    <div class="aspect-video">
+                        <canvas id="oilPriceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sector Performance (Interactive Table) -->
+        <section id="analysis" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">美股板塊表現分析：防禦與輪動</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-bold text-stone-700">板塊即時衝擊追蹤</h4>
+                        <p class="text-sm text-stone-500">基於 2026-03-03 收盤數據</p>
+                    </div>
+                    <div class="relative">
+                        <input type="text" id="tableSearch" placeholder="搜尋板塊或個股..." class="w-full md:w-64 pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-stone-100 text-stone-600 uppercase text-xs font-bold tracking-wider">
+                                <th class="px-4 py-3 border-b sticky top-0">板塊類型</th>
+                                <th class="px-4 py-3 border-b sticky top-0">代表代號</th>
+                                <th class="px-4 py-3 border-b sticky top-0">核心衝擊因素</th>
+                                <th class="px-4 py-3 border-b sticky top-0 text-right">今日漲跌</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sectorTableBody">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="font-bold text-stone-700 mb-6 border-l-4 border-sky-500 pl-3">板塊漲跌幅視覺化</h4>
+                    <div>
+                        <canvas id="sectorBarChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-green-50 rounded-lg p-5 border border-green-100 shadow-sm">
+                        <h5 class="font-bold text-green-800 mb-2">強勢板塊：能源與國防</h5>
+                        <p class="text-sm text-green-700">受益於油價暴漲 (XOM, CVX) 及軍備支出增加 (RTX, ITA)。Palantir (PLTR) 憑藉 AI 軍事應用逆勢大漲 6%。</p>
+                    </div>
+                    <div class="bg-red-50 rounded-lg p-5 border border-red-100 shadow-sm">
+                        <h5 class="font-bold text-red-800 mb-2">重災區：軟體與交通</h5>
+                        <p class="text-sm text-red-700">軟體股受利率與 AI 變現疑慮雙重打擊 (IGV)；航空股 (AAL, UAL) 因燃油成本激增而重挫 3-5%。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Strategies -->
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資者應對策略與情境預測</h2>
+            
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- Optimistic -->
+                <div class="bg-white border border-stone-200 rounded-xl overflow-hidden shadow-md flex flex-col">
+                    <div class="bg-emerald-500 text-white p-4 text-center font-bold">樂觀情境</div>
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs text-stone-500">預計油價</span>
+                            <span class="text-lg font-bold text-emerald-600">$70 - $75</span>
+                        </div>
+                        <p class="text-stone-700 text-sm mb-6 leading-relaxed">
+                            海峽在一週內重啟。聯準會維持利率不變。市場將出現「報復性反彈」。
+                        </p>
+                        <div class="text-xs font-bold text-stone-400 uppercase mb-2">建議操作</div>
+                        <p class="text-stone-900 font-semibold text-sm">分批抄底大型科技成長股 (Big Tech)。</p>
+                    </div>
+                </div>
+
+                <!-- Baseline -->
+                <div class="bg-white border border-stone-200 rounded-xl overflow-hidden shadow-md flex flex-col scale-105 ring-4 ring-sky-500/20">
+                    <div class="bg-sky-500 text-white p-4 text-center font-bold">基準情境 (機率最高)</div>
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs text-stone-500">預計油價</span>
+                            <span class="text-lg font-bold text-sky-600">$85 - $95</span>
+                        </div>
+                        <p class="text-stone-700 text-sm mb-6 leading-relaxed">
+                            封鎖騷擾持續約 1 個月。降息推遲至 2026 年底。高通膨壓力持續存在。
+                        </p>
+                        <div class="text-xs font-bold text-stone-400 uppercase mb-2">建議操作</div>
+                        <p class="text-stone-900 font-semibold text-sm">持有能源、國防板塊，避開航空與高槓桿小型股。</p>
+                    </div>
+                </div>
+
+                <!-- Pessimistic -->
+                <div class="bg-white border border-stone-200 rounded-xl overflow-hidden shadow-md flex flex-col">
+                    <div class="bg-red-500 text-white p-4 text-center font-bold">悲觀情境</div>
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs text-stone-500">預計油價</span>
+                            <span class="text-lg font-bold text-red-600">$120+</span>
+                        </div>
+                        <p class="text-stone-700 text-sm mb-6 leading-relaxed">
+                            全面戰爭封鎖超過 3 個月。全球陷入「停滯性通膨」，聯準會被迫重啟升息。
+                        </p>
+                        <div class="text-xs font-bold text-stone-400 uppercase mb-2">建議操作</div>
+                        <p class="text-stone-900 font-semibold text-sm">轉向美元與實體黃金，增加現金儲備。防守優先。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-stone-800 text-stone-100 rounded-2xl p-8 shadow-xl">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="md:w-2/3">
+                        <h4 class="text-2xl font-bold mb-4">專家總結：保持理性，優化配置</h4>
+                        <p class="text-stone-400 leading-relaxed">
+                            地緣政治危機往往是「短期劇痛、長期修正」。目前市場反映的是對「不確定性」的極度厭惡。重點在於保持流動性，並在情緒性恐慌導致優質資產（如 AI 基礎設施龍頭）被錯殺時，擇機入場。
+                        </p>
+                    </div>
+                    <div class="md:w-1/3 w-full border-l-0 md:border-l border-stone-700 pl-0 md:pl-8 space-y-4">
+                        <div>
+                            <p class="text-xs text-stone-500 mb-1">避險推薦</p>
+                            <p class="font-bold">黃金 ($5,200/oz 支撐)</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-stone-500 mb-1">對沖工具</p>
+                            <p class="font-bold">美元指數 (DXY > 100)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-荷姆茲海峽危機與美股市場研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-500">資料來源：基於網路中 2026 年地緣政治相關公開資料 (2026年3月4日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Table and Charts
+        const sectorData = [
+            { category: '能源', symbol: 'XLE, XOM', impact: '油價暴漲直接提升利潤率', change: 2.0, color: '#10b981' },
+            { category: '國防', symbol: 'ITA, RTX', impact: '地緣衝突與軍費支出預期增加', change: 4.5, color: '#059669' },
+            { category: '半導體', symbol: 'NVDA, TSM', impact: 'AI 基礎設施需求依然穩固', change: 0.5, color: '#3b82f6' },
+            { category: '軟體', symbol: 'IGV, CRM', impact: '利率壓力與 AI 變現速度緩慢', change: -3.2, color: '#ef4444' },
+            { category: '航空', symbol: 'JETS, AAL', impact: '燃油成本飆升與中東航線停飛', change: -4.8, color: '#b91c1c' },
+            { category: '房地產', symbol: 'XHB, DHI', impact: '美債殖利率上升導致貸款負擔', change: -4.1, color: '#991b1b' }
+        ];
+
+        const oilPriceScenario = {
+            labels: ['2月中旬', '2月底 (衝突前)', '3月1日', '3月2日', '3月3日', '預測(一週內)'],
+            data: [72, 70, 78, 82, 85.1, 95]
+        };
+
+        // Initialize Table
+        const tableBody = document.getElementById('sectorTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors duration-150';
+                row.innerHTML = `
+                    <td class="px-4 py-4 border-b text-sm font-semibold text-stone-800">${item.category}</td>
+                    <td class="px-4 py-4 border-b text-sm text-stone-500 font-mono">${item.symbol}</td>
+                    <td class="px-4 py-4 border-b text-sm text-stone-600">${item.impact}</td>
+                    <td class="px-4 py-4 border-b text-sm font-bold text-right ${item.change >= 0 ? 'text-green-600' : 'text-red-600'}">
+                        ${item.change >= 0 ? '+' : ''}${item.change}%
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        renderTable(sectorData);
+
+        // Table Filtering
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = sectorData.filter(item => 
+                item.category.toLowerCase().includes(searchTerm) || 
+                item.symbol.toLowerCase().includes(searchTerm) ||
+                item.impact.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filtered);
+        });
+
+        // Charts Initialization
+        window.onload = function() {
+            // Oil Price Chart
+            const ctxOil = document.getElementById('oilPriceChart').getContext('2d');
+            new Chart(ctxOil, {
+                type: 'line',
+                data: {
+                    labels: oilPriceScenario.labels,
+                    datasets: [{
+                        label: '布蘭特原油 (USD/桶)',
+                        data: oilPriceScenario.data,
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#0ea5e9',
+                        pointBorderColor: '#fff',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { 
+                            beginAtZero: false,
+                            grid: { color: '#f1f1f1' }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            // Sector Performance Chart
+            const ctxBar = document.getElementById('sectorBarChart').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: sectorData.map(d => d.category),
+                    datasets: [{
+                        data: sectorData.map(d => d.change),
+                        backgroundColor: sectorData.map(d => d.change >= 0 ? 'rgba(16, 185, 129, 0.8)' : 'rgba(239, 68, 68, 0.8)'),
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { 
+                            grid: { color: '#f1f1f1' },
+                            ticks: { callback: value => value + '%' }
+                        },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        };
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Intersection Observer for Nav Links
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.3,
+            rootMargin: "-10% 0px -70% 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+    </script>
+</body>
+</html>
