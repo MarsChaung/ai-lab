@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jefferies 與 Western Alliance 投資研究報告</title>
+    <title>巴菲特AI價值投資-Jefferies 與 Western Alliance 研究報告</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .active-nav-link {
@@ -18,20 +20,24 @@
 </head>
 <body class="bg-stone-50 text-stone-900 font-sans leading-normal">
 
+    <!-- Sticky Header -->
     <header class="sticky top-0 z-50 bg-white shadow-md border-b border-stone-200">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex-shrink-0 flex items-center">
-                    <span class="text-xl font-bold text-stone-800">巴菲特 AI 價值投資</span>
+                    <span class="text-xl font-bold text-stone-800">影子銀行曝險事件</span>
                 </div>
                 
-                <div class="hidden md:flex space-x-8">
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 lg:space-x-8">
                     <a href="#summary" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">報告摘要</a>
                     <a href="#timeline" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">事件時間線</a>
                     <a href="#valuation" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">情境估值</a>
                     <a href="#exposure" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">曝險明細</a>
+                    <a href="#insights" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">投資啟示</a>
                 </div>
 
+                <!-- Mobile menu button -->
                 <div class="md:hidden">
                     <button id="mobile-menu-button" class="p-2 rounded-md text-stone-600 hover:text-stone-900 focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,16 +48,19 @@
             </div>
         </nav>
 
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 px-4 pt-2 pb-4 space-y-1">
             <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">報告摘要</a>
             <a href="#timeline" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">事件時間線</a>
             <a href="#valuation" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">情境估值</a>
             <a href="#exposure" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">曝險明細</a>
+            <a href="#insights" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">投資啟示</a>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         
+        <!-- Hero Section -->
         <section class="mb-12 text-center">
             <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4 leading-tight">
                 Jefferies 與 Western Alliance <br>
@@ -60,15 +69,11 @@
             <p class="text-lg text-stone-600 max-w-3xl mx-auto">
                 探討非追索權貸款爭議、影子銀行信用鏈條風控，以及受監管銀行對 NDFIs 曝險之系統性影響。
             </p>
-            <div class="mt-6 flex justify-center space-x-4 text-sm text-stone-500">
-                <span>報告日期：2026/03/10</span>
-                <span>|</span>
-                <span>分析對象：JEF, WAL</span>
-            </div>
         </section>
 
+        <!-- Executive Summary -->
         <section id="summary" class="mb-16">
-            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要</h2>
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">摘要</h2>
             <div class="grid md:grid-cols-3 gap-6">
                 <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
                     <h3 class="text-xl font-bold mb-3">事件本質</h3>
@@ -91,6 +96,7 @@
             </div>
         </section>
 
+        <!-- Timeline Section -->
         <section id="timeline" class="mb-16">
             <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵事件時間線</h2>
             <div class="bg-white rounded-lg shadow-lg p-8">
@@ -133,6 +139,7 @@
             </div>
         </section>
 
+        <!-- Valuation Scenarios -->
         <section id="valuation" class="mb-16">
             <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三情境估值模型 (示範性)</h2>
             <div class="grid md:grid-cols-2 gap-8">
@@ -141,29 +148,26 @@
                     <div class="h-64">
                         <canvas id="jefChart"></canvas>
                     </div>
-                    <p class="text-xs text-stone-500 mt-4 italic">* 以 TBV 8.5bn 為基準進行敏感度分析 [cite: 55]</p>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg p-6">
                     <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">Western Alliance (WAL) 隱含股價 (美元)</h3>
                     <div class="h-64">
                         <canvas id="walChart"></canvas>
                     </div>
-                    <p class="text-xs text-stone-500 mt-4 italic">* 以 TBVPS 61.29 為基準進行敏感度分析 [cite: 82]</p>
                 </div>
             </div>
         </section>
 
+        <!-- Interactive Table -->
         <section id="exposure" class="mb-16">
             <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">數據摘要與曝險明細</h2>
-            
             <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
                 <p class="text-stone-600">即時篩選財務指標與爭議金額細節：</p>
                 <div class="relative">
-                    <input type="text" id="tableSearch" placeholder="搜尋關鍵字 (如 WAL, 投資...)" 
+                    <input type="text" id="tableSearch" placeholder="搜尋關鍵字..." 
                            class="w-full md:w-64 px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none">
                 </div>
             </div>
-
             <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
                 <table class="min-w-full divide-y divide-stone-200">
                     <thead class="bg-stone-800 text-white sticky top-0">
@@ -174,31 +178,68 @@
                             <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">說明</th>
                         </tr>
                     </thead>
-                    <tbody id="dataTableBody" class="divide-y divide-stone-200 text-sm text-stone-600">
-                        </tbody>
+                    <tbody id="dataTableBody" class="divide-y divide-stone-200 text-sm text-stone-600"></tbody>
                 </table>
+            </div>
+        </section>
+
+        <!-- Insights for Investors -->
+        <section id="insights" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資人啟示</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="bg-sky-50 p-6 rounded-lg border-l-4 border-sky-500">
+                        <h3 class="font-bold text-sky-900 text-xl mb-2">1. 影子銀行曝險的「蟑螂理論」</h3>
+                        <p class="text-stone-700 leading-relaxed">
+                            單一銀行的 1.264 億美元損失可能可控，但連續的信用事件揭露了私募信貸市場中「不透明負債」的問題。投資人應警惕銀行對 NDFI 放款規模（達 1.9 兆美元）可能隱藏的類似瑕疵，通常一隻蟑螂的出現暗示著背後有一群。
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-6 rounded-lg border-l-4 border-amber-500">
+                        <h3 class="font-bold text-amber-900 text-xl mb-2">2. 法律義務 vs 經濟義務的落差</h3>
+                        <p class="text-stone-700 leading-relaxed">
+                            即使 Jefferies 在法律上可能透過「非追索權」條款免責，但其在 ABS/倉儲融資業務上的信譽受損，將導致未來融資成本上升與對手方要求更高的折價。投資人不應僅看「一次性損失」，更應關注「平台估值溢價」的縮減。
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-stone-100 p-6 rounded-lg border-l-4 border-stone-500">
+                        <h3 class="font-bold text-stone-900 text-xl mb-2">3. 區域銀行資產負債表的「新戰場」</h3>
+                        <p class="text-stone-700 leading-relaxed">
+                            傳統區域銀行的風險焦點正在從房地產轉向「非典型資產曝險」。Western Alliance 的案例提醒我們，投資人需密切追蹤銀行在 NDFI 領域的資產佔比，以及這類曝險是否會觸發存款成本的額外風險溢價。
+                        </p>
+                    </div>
+                    <div class="bg-emerald-50 p-6 rounded-lg border-l-4 border-emerald-500">
+                        <h3 class="font-bold text-emerald-900 text-xl mb-2">4. 監管環境的長期再定價</h3>
+                        <p class="text-stone-700 leading-relaxed">
+                            FDIC 與聯準會已開始加強對 NDFI 放款的揭露要求。未來更嚴格的資本金要求將降低這類業務的 ROE。長期投資人應重新評估那些高度依賴「非銀信用鏈條」成長的金融機構，其長期獲利能力可能受限。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-stone-800 text-white p-6 rounded-lg text-center">
+                <p class="text-lg font-semibold italic">「當市場對透明度產生疑慮時，所有的錨點都會回歸到『有形帳面價值 (TBV)』。這就是為何 JEF 與 WAL 在本案中都面臨倍數修正的壓力。」</p>
             </div>
         </section>
 
     </main>
 
+    <!-- Footer -->
     <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; 巴菲特AI價值投資-Jefferies 與 Western Alliance 研究報告。僅供參考，不構成投資建議。</p>
-            <p class="text-xs mt-1">資料來源：基於報告中相關公開資料 (2026年3月10日)。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Jefferies 與 Western Alliance 相關公開資料 (2026年3月11日)。</p>
         </div>
     </footer>
 
     <script>
         // --- DATA ---
         const financialData = [
-            { category: "Western Alliance", name: "未收回本金餘額", value: "1.264 億美元", note: "公司已全數 charge-off [cite: 138]" },
-            { category: "Western Alliance", name: "2025 PPNR", value: "約 14 億美元", note: "稅前核銷前營運利潤 [cite: 131]" },
-            { category: "Western Alliance", name: "CET1 資本比率影響", value: "約 7bps", note: "扣除證券處分利益後之影響 [cite: 75]" },
-            { category: "Jefferies", name: "First Brands 間接投資", value: "約 4,300 萬美元", note: "佔 Point Bonita 權益約 5.9% [cite: 138]" },
-            { category: "Jefferies", name: "MFS 估計淨影響", value: "< 2,000 萬美元", note: "歐洲子公司之重複質押曝險 [cite: 138]" },
-            { category: "Jefferies", name: "FY2025 淨營收", value: "73 億美元", note: "全年營收規模 [cite: 131]" },
-            { category: "市場趨勢", name: "銀行對 NDFIs 放款規模", value: "約 1.9 兆美元", note: "聯準會 H.8 數據觀察值 [cite: 6]" }
+            { category: "Western Alliance", name: "未收回本金餘額", value: "1.264 億美元", note: "公司已全數 charge-off" },
+            { category: "Western Alliance", name: "2025 PPNR", value: "約 14 億美元", note: "稅前核銷前營運利潤" },
+            { category: "Western Alliance", name: "CET1 資本比率影響", value: "約 7bps", note: "扣除證券處分利益後之影響" },
+            { category: "Jefferies", name: "First Brands 間接投資", value: "約 4,300 萬美元", note: "佔 Point Bonita 權益約 5.9%" },
+            { category: "Jefferies", name: "MFS 估計淨影響", value: "< 2,000 萬美元", note: "歐洲子公司之重複質押曝險" },
+            { category: "市場趨勢", name: "銀行對 NDFIs 放款規模", value: "約 1.9 兆美元", note: "聯準會 H.8 數據觀察值" }
         ];
 
         // --- RENDER TABLE ---
@@ -213,7 +254,7 @@
                         <td class="px-6 py-4 whitespace-nowrap font-medium text-stone-800">${item.category}</td>
                         <td class="px-6 py-4 whitespace-nowrap">${item.name}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-right font-mono text-sky-700">${item.value}</td>
-                        <td class="px-6 py-4">${item.note}</td>
+                        <td class="px-6 py-4 text-xs lg:text-sm">${item.note}</td>
                     </tr>
                 `;
                 tableBody.insertAdjacentHTML('beforeend', row);
@@ -222,7 +263,6 @@
 
         renderTable(financialData);
 
-        // Search functionality
         searchInput.addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
             const filtered = financialData.filter(item => 
@@ -234,7 +274,6 @@
         });
 
         // --- CHARTS ---
-        // JEF Chart
         const jefCtx = document.getElementById('jefChart').getContext('2d');
         new Chart(jefCtx, {
             type: 'bar',
@@ -247,15 +286,9 @@
                     borderRadius: 6
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: false, min: 6, max: 10 } }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 6, max: 10 } } }
         });
 
-        // WAL Chart
         const walCtx = document.getElementById('walChart').getContext('2d');
         new Chart(walCtx, {
             type: 'line',
@@ -272,43 +305,28 @@
                     pointBackgroundColor: '#f59e0b'
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: false, min: 40, max: 90 } }
-            }
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 40, max: 90 } } }
         });
 
-        // --- INTERACTION & NAVIGATION ---
         // Mobile Menu Toggle
         const menuBtn = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-        // Active Nav State (Intersection Observer)
-        const sections = document.querySelectorAll('section');
+        // Intersection Observer for Nav Links
         const navLinks = document.querySelectorAll('.nav-link');
-
-        const observerOptions = { threshold: 0.3 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
                     navLinks.forEach(link => {
-                        link.classList.remove('active-nav-link');
-                        link.classList.add('inactive-nav-link');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('active-nav-link');
-                            link.classList.remove('inactive-nav-link');
-                        }
+                        link.classList.toggle('active-nav-link', link.getAttribute('href') === `#${id}`);
+                        link.classList.toggle('inactive-nav-link', link.getAttribute('href') !== `#${id}`);
                     });
                 }
             });
-        }, observerOptions);
-
-        sections.forEach(section => observer.observe(section));
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
