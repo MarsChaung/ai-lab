@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Meta 自研晶片研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        /* 自定義捲軸樣式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-black text-stone-800 tracking-tighter uppercase italic">Meta自研AI晶片</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">摘要</a>
+                    <a href="#roadmap" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">路線圖</a>
+                    <a href="#market" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">市場分析</a>
+                    <a href="#data" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500">供應鏈數據</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu Content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">摘要</a>
+                <a href="#roadmap" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">路線圖</a>
+                <a href="#market" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">市場分析</a>
+                <a href="#data" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">供應鏈數據</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <div class="bg-gradient-to-r from-stone-800 to-stone-700 text-white rounded-2xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <div class="relative z-10 max-w-3xl">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Meta 自研 AI 晶片路線圖揭示了什麼？</h1>
+                    <p class="text-lg text-stone-300 mb-6">從 GPU 主導，走向「平台巨頭＋ASIC＋代工」的新一輪 AI 基建分工。重點在於降低成本，並將推論負載規模化。</p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="bg-sky-500/20 border border-sky-400/30 text-sky-300 px-3 py-1 rounded-full text-sm font-semibold">MTIA 全棧方案</span>
+                        <span class="bg-stone-600/50 border border-stone-500/30 text-stone-200 px-3 py-1 rounded-full text-sm font-semibold">Inference-First 策略</span>
+                    </div>
+                </div>
+                <div class="absolute right-0 top-0 w-1/3 h-full opacity-10 flex items-center justify-center pointer-events-none">
+                    <svg viewBox="0 0 200 200" class="w-full h-full fill-current text-white">
+                        <path d="M40,-62C52.1,-54.1,62.2,-43.3,69.5,-30.7C76.8,-18.1,81.3,-3.7,78.8,9.7C76.2,23.1,66.6,35.5,55.5,45.7C44.4,55.9,31.7,63.9,18.1,67.6C4.4,71.2,-10.1,70.5,-23.7,65.6C-37.3,60.6,-50.1,51.3,-59.6,39.3C-69.2,27.3,-75.6,12.6,-75.4,-2.2C-75.2,-17,-68.4,-31.9,-58.1,-43.3C-47.8,-54.8,-34.1,-62.8,-20.5,-68.7C-7,-74.6,6.3,-78.3,20.5,-75C34.7,-71.7,49.8,-61.4,40,-62Z" transform="translate(100 100)" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Stats / Information Cards -->
+        <section id="roadmap" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">MTIA 路線圖與關鍵數據</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 transition-transform hover:scale-105">
+                    <p class="text-stone-500 text-sm font-bold uppercase mb-1">2026 資本支出預估</p>
+                    <p class="text-3xl font-black text-stone-800">1,150億</p>
+                    <p class="text-stone-400 text-xs">美金 (上限達 1,350 億)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500 transition-transform hover:scale-105">
+                    <p class="text-stone-500 text-sm font-bold uppercase mb-1">部署規模</p>
+                    <p class="text-3xl font-black text-stone-800">數十萬顆</p>
+                    <p class="text-stone-400 text-xs">MTIA 晶片已投入生產</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500 transition-transform hover:scale-105">
+                    <p class="text-stone-500 text-sm font-bold uppercase mb-1">AMD 合作案規模</p>
+                    <p class="text-3xl font-black text-stone-800">600億</p>
+                    <p class="text-stone-400 text-xs">5年協議上限 (美金)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500 transition-transform hover:scale-105">
+                    <p class="text-stone-500 text-sm font-bold uppercase mb-1">更新節奏</p>
+                    <p class="text-3xl font-black text-stone-800">每 6 個月</p>
+                    <p class="text-stone-400 text-xs">目標迭代一代新晶片</p>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">Meta AI 基礎設施佈局分析</h3>
+                <div class="h-80 md:h-96">
+                    <canvas id="strategyChart"></canvas>
+                </div>
+                <p class="mt-4 text-sm text-stone-500 italic text-center">圖表：Meta 對於不同供應商算力資源的策略性配置（示意）</p>
+            </div>
+        </section>
+
+        <!-- Market Analysis Cards -->
+        <section id="market" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業受惠者與市場地位分析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Card 1: Meta -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full border-t-4 border-sky-600">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Meta (META)</h3>
+                        <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">核心受益者</span>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4 flex-grow">
+                        將 AI 從「燒錢技術」轉化為「可規模化商業能力」。透過自研 MTIA 降低推論成本，並提升廣告轉換效率。估值邏輯從「敢花錢」轉向「會花錢」。
+                    </p>
+                    <ul class="text-xs text-stone-500 space-y-1">
+                        <li>• MTIA 450/500 優先支援 GenAI 推論</li>
+                        <li>• 採取 Portfolio Approach 混合算力</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Broadcom -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full border-t-4 border-orange-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Broadcom (AVGO)</h3>
+                        <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">結構性利多</span>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4 flex-grow">
+                        大型客戶（Hyperscaler）自研 ASIC 的核心合作夥伴。隨著市場從通用 GPU 轉向客製化矽晶片，Broadcom 的協作與設計能力將換來更穩定的訂單。
+                    </p>
+                    <ul class="text-xs text-stone-500 space-y-1">
+                        <li>• 參與 Meta 晶片部分設計</li>
+                        <li>• 2027 AI 晶片銷售預期破千億美元</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: TSMC -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full border-t-4 border-red-600">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">TSMC (2330)</h3>
+                        <span class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">確定性最強</span>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4 flex-grow">
+                        無論設計端如何分散（Nvidia、AMD 或 ASIC），先進製程與封裝需求不可或缺。身為 MTIA 代工廠，台積電處於「坐收紅利」的戰略位置。
+                    </p>
+                    <ul class="text-xs text-stone-500 space-y-1">
+                        <li>• 負責 Meta 全系列自研晶片代工</li>
+                        <li>• 受惠於異質加速器市場放量</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Nvidia -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full border-t-4 border-green-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Nvidia (NVDA)</h3>
+                        <span class="bg-amber-100 text-amber-700 text-xs px-2 py-1 rounded">短期強勁 / 長期分流</span>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4 flex-grow">
+                        護城河仍深，尤其在最前沿訓練市場。但「每一塊算力都非它不可」的敘事鬆動。推論預算將逐漸被自研 ASIC 分流，影響估值倍數。
+                    </p>
+                    <ul class="text-xs text-stone-500 space-y-1">
+                        <li>• 已簽署數百萬顆 Blackwell/Rubin 供應協議</li>
+                        <li>• 短期營收見度高，長期敘事現裂縫</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5: AMD -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full border-t-4 border-red-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">AMD (AMD)</h3>
+                        <span class="bg-amber-100 text-amber-700 text-xs px-2 py-1 rounded">過渡期受益者</span>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4 flex-grow">
+                        作為去 Nvidia 化的第二供應商首選。拿下的 600 億大單證明其大規模部署能力。但終究需面對 ASIC 在推論市場的競爭。
+                    </p>
+                    <ul class="text-xs text-stone-500 space-y-1">
+                        <li>• MI450 系列將於 2026 下半年供貨</li>
+                        <li>• 市場地位顯著提升，但不代表最終勝負</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table -->
+        <section id="data" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta AI 供應鏈協議與技術規格彙整</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4 bg-stone-50 border-b border-stone-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <span class="text-sm font-semibold text-stone-600">供應商與協議篩選：</span>
+                    <div class="relative max-w-sm">
+                        <input type="text" id="tableFilter" placeholder="搜尋公司、晶片或角色..." class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none text-sm">
+                        <div class="absolute left-3 top-2.5 text-stone-400">
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-stone-100 text-stone-600 text-xs uppercase font-bold tracking-wider">
+                                <th class="px-6 py-4 sticky top-0 bg-stone-100 z-10">供應商 / 來源</th>
+                                <th class="px-6 py-4 sticky top-0 bg-stone-100 z-10">晶片系列 / 產品</th>
+                                <th class="px-6 py-4 sticky top-0 bg-stone-100 z-10">協議內容 / 角色</th>
+                                <th class="px-6 py-4 sticky top-0 bg-stone-100 z-10">關鍵時點</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="text-sm divide-y divide-stone-100">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResult" class="hidden p-10 text-center text-stone-400 italic">
+                    找不到符合條件的資料...
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Meta 自研晶片研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Meta 相關公開資料 (2026年3月12日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. 資料陣列 (productData) ---
+        const productData = [
+            { vendor: "Meta (自研)", chip: "MTIA 300", role: "內容與廣告推論最佳化", timing: "已進入生產" },
+            { vendor: "Meta (自研)", chip: "MTIA 450 / 500", role: "GenAI Inference 優先支援", timing: "2026 - 2027 部署" },
+            { vendor: "Nvidia", chip: "Blackwell / Rubin", role: "高階訓練與全系列算力協議", timing: "多年度協議 (數百萬顆)" },
+            { vendor: "Nvidia", chip: "Grace / Vera CPU", role: "系統級與中央處理架構", timing: "現有及未來供貨" },
+            { vendor: "AMD", chip: "MI450 系列", role: "第二供應商大單 (600億美元)", timing: "2026 下半年起供貨" },
+            { vendor: "Google", chip: "TPU (Tensor Processing Unit)", role: "雲端租用協議 (數十億美元規模)", timing: "多年度租賃" },
+            { vendor: "Broadcom", chip: "Custom ASIC", role: "系統設計與客製化處理器協作", timing: "2027 前產值預期破千億" },
+            { vendor: "TSMC", chip: "先進製程 (N5/N3)", role: "MTIA 系列獨家代工與先進封裝", timing: "持續進行中" }
+        ];
+
+        // --- 2. 資料表格渲染與篩選 ---
+        const tableBody = document.getElementById('dataTableBody');
+        const filterInput = document.getElementById('tableFilter');
+        const noResult = document.getElementById('noResult');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noResult.classList.remove('hidden');
+            } else {
+                noResult.classList.add('hidden');
+                data.forEach(item => {
+                    const row = `
+                        <tr class="hover:bg-sky-50 transition-colors">
+                            <td class="px-6 py-4 font-semibold text-stone-800">${item.vendor}</td>
+                            <td class="px-6 py-4 text-sky-600 font-medium">${item.chip}</td>
+                            <td class="px-6 py-4 text-stone-600">${item.role}</td>
+                            <td class="px-6 py-4"><span class="bg-stone-100 text-stone-600 px-2 py-1 rounded-md text-xs">${item.timing}</span></td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+        }
+
+        filterInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.vendor.toLowerCase().includes(term) || 
+                item.chip.toLowerCase().includes(term) || 
+                item.role.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // --- 3. 動態圖表 (Chart.js) ---
+        function initChart() {
+            const ctx = document.getElementById('strategyChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Nvidia (通用GPU)', 'AMD (第二供應商)', 'Meta MTIA (自研ASIC)', 'Google TPU (雲端租賃)', 'Broadcom (設計夥伴)'],
+                    datasets: [{
+                        label: '戰略重要性 / 部署比例趨勢 (2026-2027 預估)',
+                        data: [90, 45, 65, 30, 70],
+                        backgroundColor: [
+                            'rgba(76, 175, 80, 0.7)',  // Nvidia Green
+                            'rgba(244, 67, 54, 0.7)',   // AMD Red
+                            'rgba(14, 165, 233, 0.7)',  // Meta Sky
+                            'rgba(255, 193, 7, 0.7)',   // Google Amber
+                            'rgba(255, 152, 0, 0.7)'    // Broadcom Orange
+                        ],
+                        borderColor: [
+                            'rgba(76, 175, 80, 1)',
+                            'rgba(244, 67, 54, 1)',
+                            'rgba(14, 165, 233, 1)',
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(255, 152, 0, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#1c1917',
+                            padding: 12
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) { return value + '%'; }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- 4. 導航列 Active 狀態處理 (Intersection Observer) ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // --- 5. 手機版選單切換 ---
+        const mobileBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊選單項目後自動關閉選單
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 頁面加載完成後啟動
+        window.onload = () => {
+            renderTable(productData);
+            initChart();
+        };
+    </script>
+</body>
+</html>
