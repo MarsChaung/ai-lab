@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/3/9~3/13)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-800 */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- 導航列 -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-600">美股市場週報</span>
+                </div>
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#overview" class="nav-link px-1 pt-1 text-sm font-medium transition-colors" data-section="overview">大環境概況</a>
+                    <a href="#ai-tech" class="nav-link px-1 pt-1 text-sm font-medium transition-colors" data-section="ai-tech">AI 與技術</a>
+                    <a href="#retail-consumer" class="nav-link px-1 pt-1 text-sm font-medium transition-colors" data-section="retail-consumer">零售與消費</a>
+                    <a href="#risk-management" class="nav-link px-1 pt-1 text-sm font-medium transition-colors" data-section="risk-management">風險管理</a>
+                    <a href="#data-table" class="nav-link px-1 pt-1 text-sm font-medium transition-colors" data-section="data-table">數據總覽</a>
+                </div>
+                <!-- 手機版選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">大環境概況</a>
+                <a href="#ai-tech" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">AI 與技術</a>
+                <a href="#retail-consumer" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">零售與消費</a>
+                <a href="#risk-management" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">風險管理</a>
+                <a href="#data-table" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">數據總覽</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="bg-sky-700 text-white py-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">上週美股需要關注的 10個關鍵重點</h1>
+            <p class="text-xl text-sky-100 max-w-2xl mx-auto">從油價、AI 軍備競賽，到零售與醫療公司的真實壓力。市場焦點正從「追逐題材」回歸「檢查基本面」。</p>
+            <div class="mt-8 text-sm text-sky-200">資料期間：2026年3月9日 - 3月13日</div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- 區塊一：大環境概況 -->
+        <section id="overview" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、大環境概況：市場最怕「又貴又慢」</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-stone-700">當週指數表現</h3>
+                    <div class="h-64">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-stone-500 italic">* 三大指數連續第三週收黑</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                        <h4 class="font-bold text-stone-800 mb-2">通膨與經濟壓力</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2">
+                            <li>2 月 CPI 年增率 2.4%</li>
+                            <li>1 月 PCE 2.8% / 核心 PCE 3.1%</li>
+                            <li>2025 Q4 GDP 下修至 0.7%</li>
+                            <li>消費者信心指數跌至 55.5</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                        <h4 class="font-bold text-stone-800 mb-2">關鍵觀點</h4>
+                        <p class="text-stone-600">油價大漲推升物流與原物料成本，投資人不再只看聯準會降息，更擔心企業獲利是否能撐住「高成本、低成長」的環境。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊二：AI 與技術 -->
+        <section id="ai-tech" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、AI 與技術：從「建賽車」到「比油耗」</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Meta -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform">
+                    <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mb-4 text-sky-600 font-bold">Meta</div>
+                    <h3 class="font-bold text-lg mb-2">自研晶片 MTIA 路線</h3>
+                    <p class="text-stone-600 text-sm">發布 MTIA 300-500 系列。重點在於爭取「省錢權」，將大量的推論工作轉向自研晶片，以壓低長期成本。</p>
+                </div>
+                <!-- Nvidia -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600 font-bold">NVDA</div>
+                    <h3 class="font-bold text-lg mb-2">GTC 大會轉向回報率</h3>
+                    <p class="text-stone-600 text-sm">市場已不再只聽夢想。Nvidia 需要證明其 AI 基礎建設能為企業帶來實質商業回報，重點移向「推論效率」。</p>
+                </div>
+                <!-- Oracle -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 text-red-600 font-bold">ORCL</div>
+                    <h3 class="font-bold text-lg mb-2">實質訂單交成績單</h3>
+                    <p class="text-stone-600 text-sm">剩餘履約金額 (RPO) 暴增 325% 至 5,530 億美元，證明 AI 資料中心需求並未降溫，而是進入實質落地期。</p>
+                </div>
+                <!-- Google/Wiz -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600 font-bold">GOOG</div>
+                    <h3 class="font-bold text-lg mb-2">收購 Wiz 佈局雲端安全</h3>
+                    <p class="text-stone-600 text-sm">AI 時代資料安全需求爆炸性成長。Google 補上安全拼圖，顯示 AI 受惠股不只是晶片，也包含安全與資料治理。</p>
+                </div>
+                <!-- Policy -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform col-span-1 md:col-span-2">
+                    <div class="w-12 h-12 bg-stone-100 rounded-full flex items-center justify-center mb-4 text-stone-600 font-bold">!</div>
+                    <h3 class="font-bold text-lg mb-2">政策風險與出口規則</h3>
+                    <p class="text-stone-600 text-sm">美國撤回 AI 晶片出口規則草案，顯示內部對於管制作法仍存分歧。對投資人而言，「不確定性」本身就是潛在風險。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊三：零售與消費 -->
+        <section id="retail-consumer" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、零售與消費：行為分化嚴重</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-stone-100">
+                    <div class="bg-sky-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-3">Target</h3>
+                        <p class="text-stone-600 text-sm mb-4">調降逾 3,000 項商品價格。消費者並非不花錢，而是更在意值不值得。大規模降價是銷量保衛戰。</p>
+                        <span class="inline-block px-3 py-1 bg-sky-50 text-sky-700 text-xs font-semibold rounded-full">中產階級縮手</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-stone-100">
+                    <div class="bg-stone-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-3">Dollar General</h3>
+                        <p class="text-stone-600 text-sm mb-4">保守看待 2026 展望。生活成本、油價與關稅壓力，讓低收入族群對非必需品消費明顯縮手。</p>
+                        <span class="inline-block px-3 py-1 bg-stone-50 text-stone-700 text-xs font-semibold rounded-full">低收入壓力</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-stone-100">
+                    <div class="bg-pink-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-3">Ulta Beauty</h3>
+                        <p class="text-stone-600 text-sm mb-4">成本上升壓縮獲利空間。高端品牌需求雖在，但無法完全轉嫁全球衝突與供應鏈帶來的成本。</p>
+                        <span class="inline-block px-3 py-1 bg-pink-50 text-pink-700 text-xs font-semibold rounded-full">獲利能力受壓</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊四：風險管理 -->
+        <section id="risk-management" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、風險管理：私募信貸與資安</h2>
+            <div class="bg-stone-800 text-stone-100 rounded-2xl p-8 flex flex-col md:flex-row gap-8">
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold mb-4 text-sky-400">JPMorgan 的警示</h3>
+                    <p class="text-stone-300">下調私募信貸基金貸款組合價值。這顯示風險正從透明的科技股轉向「不透明」的信用市場。2026 年的風險可能先從信貸市場爆開。</p>
+                </div>
+                <div class="w-px bg-stone-700 hidden md:block"></div>
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold mb-4 text-red-400">Stryker 的教訓</h3>
+                    <p class="text-stone-300">醫療股不再是天然避風港。遭受資安攻擊後導致訂單處理中斷。在數位化時代，資安韌性已成為醫療公司營運的「必考題」。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 互動數據表格 -->
+        <section id="data-table" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">重點企業數據篩選</h2>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4 bg-stone-50 border-b border-stone-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <span class="text-stone-600 font-medium">企業動態即時檢索</span>
+                    <input type="text" id="tableFilter" placeholder="搜尋企業或關鍵字..." class="px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none w-full md:w-64">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="p-4 border-b border-stone-200 font-bold text-stone-700">公司</th>
+                                <th class="p-4 border-b border-stone-200 font-bold text-stone-700">板塊</th>
+                                <th class="p-4 border-b border-stone-200 font-bold text-stone-700">核心動態</th>
+                                <th class="p-4 border-b border-stone-200 font-bold text-stone-700">狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody">
+                            <!-- JS 會填入資料 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/3/9~3/13)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年3月15日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. 初始化資料 ---
+        const productData = [
+            { name: "Meta", sector: "科技/社群", news: "發布 MTIA 自研晶片路線圖，專注 AI 推論成本優化", status: "轉向效率" },
+            { name: "Nvidia", sector: "科技/半導體", news: "GTC 大會展示 AI 基礎設施，市場關注推論商業回報", status: "高度聚焦" },
+            { name: "Oracle", sector: "軟體/雲端", news: "營收 $171.9 億，RPO 成長 325%，AI 訂單強勁", status: "業績噴發" },
+            { name: "Google", sector: "科技/雲端", news: "完成 Wiz 收購，強化 AI 時代雲端安全佈局", status: "策略擴張" },
+            { name: "Target", sector: "零售", news: "調降 3,000 項商品售價以應對消費疲軟", status: "價格競爭" },
+            { name: "JPMorgan", sector: "金融", news: "下調私募信貸資產價值，警示信用品質風險", status: "風險趨避" },
+            { name: "Dollar General", sector: "折扣零售", news: "保守看待 2026 展望，反映低收入族群壓力", status: "保守預期" },
+            { name: "Ulta Beauty", sector: "美妝零售", news: "獲利受成本上升壓縮，高端消費出現疲態", status: "利潤受壓" },
+            { name: "Stryker", sector: "醫療器材", news: "遭網攻導致營運中斷，凸顯醫療業資安風險", status: "營運警訊" }
+        ];
+
+        // --- 2. 渲染表格與篩選功能 ---
+        const tableBody = document.getElementById('dataTableBody');
+        const tableFilter = document.getElementById('tableFilter');
+
+        function renderTable(filter = "") {
+            tableBody.innerHTML = "";
+            const filteredData = productData.filter(item => 
+                item.name.toLowerCase().includes(filter.toLowerCase()) || 
+                item.news.toLowerCase().includes(filter.toLowerCase()) ||
+                item.sector.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            filteredData.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-stone-50 transition-colors";
+                row.innerHTML = `
+                    <td class="p-4 border-b border-stone-100 font-bold">${item.name}</td>
+                    <td class="p-4 border-b border-stone-100 text-stone-500">${item.sector}</td>
+                    <td class="p-4 border-b border-stone-100 text-stone-600">${item.news}</td>
+                    <td class="p-4 border-b border-stone-100">
+                        <span class="px-2 py-1 bg-sky-100 text-sky-700 text-xs rounded">${item.status}</span>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        tableFilter.addEventListener('input', (e) => renderTable(e.target.value));
+        renderTable();
+
+        // --- 3. 初始化圖表 (Chart.js) ---
+        const ctx = document.getElementById('marketChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['道瓊指數 (DJI)', '標普 500 (S&P 500)', '那斯達克 (Nasdaq)'],
+                datasets: [{
+                    label: '當週漲跌幅 (%)',
+                    data: [-2.0, -1.6, -1.3],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.7)', // red
+                        'rgba(245, 158, 11, 0.7)', // amber
+                        'rgba(14, 165, 233, 0.7)'  // sky
+                    ],
+                    borderColor: [
+                        '#b91c1c', '#b45309', '#0369a1'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { color: '#e7e5e4' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // --- 4. 導航互動 (Mobile Menu & Scroll Spy) ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 監測滾動以更新導航狀態
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav-link');
+                link.classList.add('inactive-nav-link');
+                if (link.dataset.section === current) {
+                    link.classList.add('active-nav-link');
+                    link.classList.remove('inactive-nav-link');
+                }
+            });
+        });
+
+        // 平滑滾動處理
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
