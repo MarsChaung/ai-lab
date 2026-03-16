@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-私募信貸流動性壓力研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons (Inline SVGs will be used) -->
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        canvas {
+            max-height: 400px;
+        }
+        .bg-stone-50 { background-color: #fafaf9; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-700 tracking-tight">私募信貸流動性研究</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 h-full items-center">
+                    <a href="#overview" class="nav-link inactive-nav-link text-sm font-medium transition-colors hover:text-sky-600 px-1 py-5">市場概況</a>
+                    <a href="#cases" class="nav-link inactive-nav-link text-sm font-medium transition-colors hover:text-sky-600 px-1 py-5">指標案例</a>
+                    <a href="#analysis" class="nav-link inactive-nav-link text-sm font-medium transition-colors hover:text-sky-600 px-1 py-5">數據視覺化</a>
+                    <a href="#risks" class="nav-link inactive-nav-link text-sm font-medium transition-colors hover:text-sky-600 px-1 py-5">風險因子</a>
+                    <a href="#outlook" class="nav-link inactive-nav-link text-sm font-medium transition-colors hover:text-sky-600 px-1 py-5">市場展望</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">市場概況</a>
+            <a href="#cases" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">指標案例</a>
+            <a href="#analysis" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">數據視覺化</a>
+            <a href="#risks" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">風險因子</a>
+            <a href="#outlook" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">市場展望</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <section class="mb-16">
+            <div class="bg-gradient-to-r from-sky-900 to-slate-800 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">私募信貸流動性壓力：<br><span class="text-sky-300">從「小眾產品」轉向「定價課題」</span></h1>
+                <p class="text-lg text-stone-300 max-w-3xl">這是一場正在展開的壓力測試。長年期企業貸款被包裝進「半流動性」產品後，當擠兌發生，系統平穩性正經受嚴峻挑戰。</p>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                        <p class="text-xs uppercase tracking-wider text-sky-200 mb-1">全球市場規模 (AUM)</p>
+                        <p class="text-2xl font-bold">~2.0 兆美元</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                        <p class="text-xs uppercase tracking-wider text-sky-200 mb-1">BDC 平均折價</p>
+                        <p class="text-2xl font-bold">22% (P/B 0.78)</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                        <p class="text-xs uppercase tracking-wider text-sky-200 mb-1">私貸企業違約率</p>
+                        <p class="text-2xl font-bold">9.2% (創新高)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Overview -->
+        <section id="overview" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-50 pb-2 flex items-center">
+                <span class="w-2 h-8 bg-sky-500 mr-3 rounded-sm"></span>
+                市場現狀與機制
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border border-stone-100">
+                    <h3 class="text-xl font-bold text-sky-800 mb-4">流動性錯配的核心</h3>
+                    <p class="text-stone-600 mb-4">
+                        私募信貸產品通常提供「季度性流動性」（季度贖回），但底層資產多為 <strong>3 到 7 年期</strong> 且缺乏次級市場的企業貸款。當退出需求在同一時間放大，結構性錯配就會迫使基金啟動「門檻條款」。
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span class="text-stone-700 font-medium italic">間隔基金：必須按 NAV 回購 5%-25%</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-sky-500 mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span class="text-stone-700 font-medium italic">非交易型 BDC：普遍設有 5% 回購上限</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-sky-50 rounded-lg p-6 border border-sky-100">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">資金結構演變</h3>
+                    <p class="text-stone-600">
+                        過去以保險公司、退休基金等長線機構為主；近年大型資管（如 Blackstone, BlackRock）大力推向零售通路。這導致資金來源更具「情緒化」特徵：
+                    </p>
+                    <div class="mt-4 space-y-3">
+                        <div class="bg-white p-3 rounded shadow-sm border-l-4 border-amber-400">
+                            <p class="text-sm font-semibold text-stone-800">散戶化風險</p>
+                            <p class="text-xs text-stone-500">零售投資人相較機構投資人更缺乏耐心，易受新聞與短期波動影響。</p>
+                        </div>
+                        <div class="bg-white p-3 rounded shadow-sm border-l-4 border-sky-500">
+                            <p class="text-sm font-semibold text-stone-800">品牌溢價分化</p>
+                            <p class="text-xs text-stone-500">規模較大的平台（如 BCRED）能靠母公司資金維穩，小型平台則容易直接關門。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies -->
+        <section id="cases" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">指標性贖回案例分析</h2>
+            
+            <!-- Table Search -->
+            <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-stone-500 text-sm italic">點擊下方基金名稱或直接搜尋來篩選數據</p>
+                <div class="relative w-full sm:w-64">
+                    <input type="text" id="tableSearch" placeholder="搜尋基金名稱..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-sky-500 focus:outline-none transition-all">
+                    <svg class="absolute left-3 top-2.5 h-5 w-5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-stone-200">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse" id="productTable">
+                        <thead>
+                            <tr class="bg-stone-800 text-white">
+                                <th class="px-6 py-4 font-semibold text-sm uppercase sticky top-0">基金名稱 (代號)</th>
+                                <th class="px-6 py-4 font-semibold text-sm uppercase sticky top-0 text-center">贖回申請 (%)</th>
+                                <th class="px-6 py-4 font-semibold text-sm uppercase sticky top-0 text-center">最終受理 (%)</th>
+                                <th class="px-6 py-4 font-semibold text-sm uppercase sticky top-0">策略應對 / 現狀</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-200">
+                            <!-- Data injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization -->
+        <section id="analysis" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">數據深度分析</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
+                    <h3 class="text-lg font-bold text-stone-800 mb-6 flex items-center justify-between">
+                        贖回缺口：申請 vs 實際滿足
+                        <span class="text-xs font-normal text-stone-500 px-2 py-1 bg-stone-100 rounded">2026 Q1 估算</span>
+                    </h3>
+                    <div class="relative h-64 md:h-80">
+                        <canvas id="redemptionChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 leading-relaxed">
+                        數據顯示，多數大型基金目前嚴格執行 5% 的季度贖回門檻，導致約半數以上的贖回需求未能被滿足。
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-100">
+                    <h3 class="text-lg font-bold text-stone-800 mb-6">BDC 市場定價修正 (Price to Book)</h3>
+                    <div class="relative h-64 md:h-80">
+                        <canvas id="pbRatioChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 leading-relaxed">
+                        公開交易的 BDC 已出現顯著折價（從 P/B 1.0 降至 0.78），這反映了市場對帳面資產（NAV）真實價值的懷疑。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Factors -->
+        <section id="risks" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四大核心壓力來源</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Risk 1 -->
+                <div class="bg-white p-6 rounded-xl shadow border-t-4 border-red-500 hover:-translate-y-1 transition-transform">
+                    <div class="bg-red-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-red-600">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                    </div>
+                    <h4 class="font-bold mb-2">基本面惡化</h4>
+                    <p class="text-sm text-stone-600">Fitch 指出私貸企業違約率升至 9.2%，浮動利率持續壓縮中型企業現金流。</p>
+                </div>
+                <!-- Risk 2 -->
+                <div class="bg-white p-6 rounded-xl shadow border-t-4 border-amber-500 hover:-translate-y-1 transition-transform">
+                    <div class="bg-amber-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-amber-600">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h4 class="font-bold mb-2">估值透明度</h4>
+                    <p class="text-sm text-stone-600">市場對「低波動 NAV」產生質疑，要求更高的安全邊際，反映在 BDC 股價大幅折價上。</p>
+                </div>
+                <!-- Risk 3 -->
+                <div class="bg-white p-6 rounded-xl shadow border-t-4 border-indigo-500 hover:-translate-y-1 transition-transform">
+                    <div class="bg-indigo-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-indigo-600">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    </div>
+                    <h4 class="font-bold mb-2">零售資金不穩定</h4>
+                    <p class="text-sm text-stone-600">新資金來源轉向散戶與高資產客戶，粘著度降低，壓力時容易觸發規模性撤資。</p>
+                </div>
+                <!-- Risk 4 -->
+                <div class="bg-white p-6 rounded-xl shadow border-t-4 border-sky-500 hover:-translate-y-1 transition-transform">
+                    <div class="bg-sky-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-sky-600">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h4 class="font-bold mb-2">AI 曝險修正</h4>
+                    <p class="text-sm text-stone-600">JPMorgan 調降軟體業貸款組合估值。AI 產業前景重估可能衝擊私貸借款人的現金流。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Outlook -->
+        <section id="outlook" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略與觀察重點</h2>
+            <div class="bg-stone-900 text-white rounded-2xl p-8 shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <div class="text-sky-400 text-3xl font-bold mb-2">誰能撐過？</div>
+                        <p class="text-sm text-stone-400">觀察資產管理公司的品牌信用與自有資金投入（如 Blackstone 注入 4 億美元）。</p>
+                    </div>
+                    <div>
+                        <div class="text-sky-400 text-3xl font-bold mb-2">NAV 可信度？</div>
+                        <p class="text-sm text-stone-400">追蹤公開 BDC 的折價率。若折價持續擴大，則暗示資產質量隱憂尚未反映。</p>
+                    </div>
+                    <div>
+                        <div class="text-sky-400 text-3xl font-bold mb-2">資金續航力？</div>
+                        <p class="text-sm text-stone-400">關注「新申購資金」與「贖回申請」的比例。一旦新申購轉弱，流動性門檻將更緊繃。</p>
+                    </div>
+                </div>
+                <div class="mt-10 border-t border-stone-700 pt-8">
+                    <p class="text-lg italic font-medium text-stone-300">
+                        「這不是私募信貸的終點，但它很可能是估值邏輯改變的起點。勝出者將是那些能證明其資產真能變現、估值能被驗證的管理人。」
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-私募信貸流動性壓力研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中私募信貸市場相關公開資料 (2026年3月16日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Data Definitions
+        const productData = [
+            { name: "BlackRock HLEND", requested: 9.3, met: 5.0, note: "嚴格守門。申請 12 億美元，支付 6.2 億。未滿足部分不遞延。" },
+            { name: "Morgan Stanley PIF", requested: 10.9, met: 5.0, note: "滿足率約 45.8%。強調為了保護資本結構，條款優先於安撫。" },
+            { name: "Blackstone BCRED", requested: 7.0, met: 7.0, note: "提高回購上限。配合 20 億新申購與 4 億自有資金，需求全滿足。" },
+            { name: "Cliffwater CCLFX", requested: 14.0, met: 7.0, note: "雖上調回購比例但仍無法全數滿足。面臨極大流動性壓力。" },
+            { name: "Blue Owl OBDC II", requested: 30.0, met: 30.0, note: "永久停辦 Tender Offer。改以出售資產後的季度返還資本取代。" }
+        ];
+
+        // 2. DOM Elements
+        const tableBody = document.querySelector("#productTable tbody");
+        const tableSearch = document.getElementById("tableSearch");
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        // 3. Render Table
+        function renderTable(filter = "") {
+            tableBody.innerHTML = "";
+            const filtered = productData.filter(d => d.name.toLowerCase().includes(filter.toLowerCase()));
+            
+            filtered.forEach(item => {
+                const row = document.createElement("tr");
+                row.className = "hover:bg-stone-50 transition-colors";
+                row.innerHTML = `
+                    <td class="px-6 py-4 font-bold text-stone-800">${item.name}</td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="inline-block px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded">${item.requested}%</span>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">${item.met}%</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.note}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 4. Initialize Charts
+        function initCharts() {
+            // Redemption Gap Chart
+            const ctx1 = document.getElementById('redemptionChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: productData.map(d => d.name.split(' ')[1]), // Short names
+                    datasets: [{
+                        label: '申請贖回 (%)',
+                        data: productData.map(d => d.requested),
+                        backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                        borderColor: '#ef4444',
+                        borderWidth: 1
+                    }, {
+                        label: '實際滿足 (%)',
+                        data: productData.map(d => d.met),
+                        backgroundColor: 'rgba(14, 165, 233, 0.7)',
+                        borderColor: '#0ea5e9',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: '百分比 (%)' } }
+                    }
+                }
+            });
+
+            // P/B Ratio Trend Chart
+            const ctx2 = document.getElementById('pbRatioChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: ['2025 年初', '2026 年初', '2026 年 3 月'],
+                    datasets: [{
+                        label: 'BDC 平均 P/B 值',
+                        data: [1.0, 0.85, 0.78],
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { min: 0.5, max: 1.1, title: { display: true, text: 'P/B Ratio' } }
+                    }
+                }
+            });
+        }
+
+        // 5. Active Link Tracking (Intersection Observer)
+        function initObserver() {
+            const sections = document.querySelectorAll("section[id]");
+            const navLinks = document.querySelectorAll(".nav-link");
+
+            const observerOptions = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute("id");
+                        navLinks.forEach((link) => {
+                            link.classList.remove("active-nav-link");
+                            link.classList.add("inactive-nav-link");
+                            if (link.getAttribute("href") === `#${id}`) {
+                                link.classList.add("active-nav-link");
+                                link.classList.remove("inactive-nav-link");
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach((section) => observer.observe(section));
+        }
+
+        // 6. Interaction Event Listeners
+        tableSearch.addEventListener("input", (e) => renderTable(e.target.value));
+
+        mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        // Event for closing mobile menu on link click
+        document.querySelectorAll("#mobile-menu a").forEach(link => {
+            link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+        });
+
+        // Initialize everything on load
+        window.onload = () => {
+            renderTable();
+            initCharts();
+            initObserver();
+        };
+    </script>
+</body>
+</html>
