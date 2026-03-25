@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股交易主線：油價、利率與房貸研究報告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-800 */
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-stone-800 tracking-tight">油價、利率與房貸</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#market-trend" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">市場趨勢</a>
+                    <a href="#macro-risks" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">總經風險</a>
+                    <a href="#strategy" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">投資策略</a>
+                    <a href="#watchlist" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">觀察名單</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m12 6H4" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#market-trend" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">市場趨勢</a>
+            <a href="#macro-risks" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">總經風險</a>
+            <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">投資策略</a>
+            <a href="#watchlist" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">觀察名單</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <div class="mb-16 text-center lg:text-left">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-6 leading-tight">
+                美股真正的交易主線：<br>
+                <span class="text-sky-600">不是 AI，而是油價、利率與房貸</span>
+            </h1>
+            <p class="text-lg text-stone-600 max-w-3xl">
+                2026年3月下旬，市場焦點從 AI 敘事轉向中東局勢。油價成為短線總開關，通膨預期與殖利率雙雙走高，高估值股票容忍度面臨嚴峻考驗。
+            </p>
+        </div>
+
+        <section id="market-trend" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場短線定價權：油價是總開關</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-stone-700">3月下旬市場走勢分析</h3>
+                    <div class="h-64 sm:h-80">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-stone-500 italic text-center">數據示意圖：油價與美股表現呈明顯負相關</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white border-l-4 border-sky-500 p-6 shadow-md rounded-r-lg">
+                        <h4 class="font-bold text-sky-700 mb-2">3月23日：油價暴跌</h4>
+                        <p class="text-stone-600">和談希望升溫帶動油價下行，美股應聲大漲。</p>
+                    </div>
+                    <div class="bg-white border-l-4 border-amber-500 p-6 shadow-md rounded-r-lg">
+                        <h4 class="font-bold text-amber-700 mb-2">3月24日：利率壓力</h4>
+                        <p class="text-stone-600">油價反彈及 Michael Barr 鷹派發言，殖利率走高導致股市回吐。</p>
+                    </div>
+                    <div class="bg-white border-l-4 border-emerald-500 p-6 shadow-md rounded-r-lg">
+                        <h4 class="font-bold text-emerald-700 mb-2">3月25日：趨勢確立</h4>
+                        <p class="text-stone-600">市場確認「油價即是短線方向」，股市隨油價波動反彈。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="macro-risks" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總經警訊：通膨、PMI 與房貸</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <div class="text-sm font-bold text-stone-400 uppercase tracking-wider mb-2">進口物價月增率</div>
+                    <div class="text-4xl font-bold text-stone-800 mb-2">1.3%</div>
+                    <p class="text-stone-600 text-sm">近四年最大升幅。非燃料與資本財價格同步上揚，成本壓力外溢。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <div class="text-sm font-bold text-stone-400 uppercase tracking-wider mb-2">3月 Flash PMI</div>
+                    <div class="text-4xl font-bold text-stone-800 mb-2">51.4</div>
+                    <p class="text-stone-600 text-sm">創 2025 年 4 月以來新低，對應年化 GDP 僅約 1% 成長，經濟明顯降速。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-500">
+                    <div class="text-sm font-bold text-stone-400 uppercase tracking-wider mb-2">30年期房貸利率</div>
+                    <div class="text-4xl font-bold text-stone-800 mb-2">6.43%</div>
+                    <p class="text-stone-600 text-sm">房貸申請量大跌 10.5%，高利率開始壓抑家庭消費與建材裝修需求。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">雙層投資佈局建議</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-stone-800 text-stone-100 rounded-xl p-8 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sky-500 p-2 rounded-lg mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold">核心部位：防禦性增長</h3>
+                    </div>
+                    <ul class="space-y-4 text-stone-300">
+                        <li class="flex items-start"><span class="text-sky-400 mr-2">●</span> 資產負債表穩健，在高利率環境下具備韌性。</li>
+                        <li class="flex items-start"><span class="text-sky-400 mr-2">●</span> 現金流清晰且穩定，避免高度依賴敘事的估值股。</li>
+                        <li class="flex items-start"><span class="text-sky-400 mr-2">●</span> 能承受甚至受益於長期高通膨環境的公司。</li>
+                    </ul>
+                </div>
+                <div class="bg-white border border-stone-200 rounded-xl p-8 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-amber-500 p-2 rounded-lg mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-800">戰術部位：事件敏感交易</h3>
+                    </div>
+                    <ul class="space-y-4 text-stone-600">
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">●</span> <strong>能源對沖：</strong> 應對中東局勢不確定性，保留能源持倉。</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">●</span> <strong>反彈波段：</strong> 若和談有進展，配置航空、郵輪等休閒股。</li>
+                        <li class="flex items-start"><span class="text-amber-500 mr-2">●</span> <strong>景氣雷達：</strong> 透過零售與建商觀察經濟降溫程度。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="watchlist" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">焦點標的觀察名單</h2>
+            
+            <div class="mb-6">
+                <div class="relative max-w-md">
+                    <input type="text" id="tableSearch" placeholder="搜尋代號、名稱或策略類型..." 
+                        class="w-full px-4 py-3 pl-10 bg-white border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition-all">
+                    <div class="absolute left-3 top-3.5 text-stone-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden overflow-x-auto">
+                <table class="min-w-full divide-y divide-stone-200" id="stockTable">
+                    <thead class="bg-stone-100 sticky top-0">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">代號</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">名稱</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">分類策略</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">關鍵摘要</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-stone-200">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股交易主線：油價、利率與房貸研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股相關公開資料 (2026年3月25日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Data for Table
+        const productData = [
+            { id: "XOM", name: "Exxon Mobil", category: "能源對沖", desc: "大型上游油氣與 LNG 成長組合，防禦性強。" },
+            { id: "CVX", name: "Chevron", category: "能源對沖", desc: "強調在各種環境下創造高回報與股東價值。" },
+            { id: "COP", name: "ConocoPhillips", category: "能源對沖", desc: "純上游勘探公司，對油價敏感度最直接。" },
+            { id: "SLB", name: "SLB (舒伯格)", category: "能源科技", desc: "與 Nvidia 合作發展能源 AI 基礎設施。" },
+            { id: "UAL", name: "United Airlines", category: "停火反彈", desc: "受惠油價下跌，高端旅遊策略支撐營收。" },
+            { id: "CCL", name: "Carnival", category: "停火反彈", desc: "旅遊休閒指標，對燃油成本變動極度敏感。" },
+            { id: "NCLH", name: "Norwegian Cruise Line", category: "停火反彈", desc: "具備短線彈性的戰術配置標的。" },
+            { id: "DHI", name: "D.R. Horton", category: "景氣雷達", desc: "全美最大住宅建商，房市溫度的先行指標。" },
+            { id: "HD", name: "Home Depot", category: "景氣雷達", desc: "居家修繕龍頭，反映高利率下的消費信心。" }
+        ];
+
+        function populateTable(data) {
+            const tbody = document.querySelector('#stockTable tbody');
+            tbody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap font-bold text-sky-600">${item.id}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-stone-700">${item.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 py-1 text-xs rounded-full ${getBadgeColor(item.category)}">${item.category}</span>
+                        </td>
+                        <td class="px-6 py-4 text-stone-500 text-sm">${item.desc}</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        function getBadgeColor(cat) {
+            switch(cat) {
+                case '能源對沖': return 'bg-amber-100 text-amber-700';
+                case '能源科技': return 'bg-sky-100 text-sky-700';
+                case '停火反彈': return 'bg-emerald-100 text-emerald-700';
+                case '景氣雷達': return 'bg-stone-200 text-stone-700';
+                default: return 'bg-stone-100';
+            }
+        }
+
+        // Search logic
+        document.getElementById('tableSearch').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.id.toLowerCase().includes(query) || 
+                item.name.toLowerCase().includes(query) || 
+                item.category.toLowerCase().includes(query)
+            );
+            populateTable(filtered);
+        });
+
+        // 3. Chart.js Initialization
+        const ctx = document.getElementById('marketChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['3/23', '3/24', '3/25'],
+                datasets: [
+                    {
+                        label: '油價變動 (示意)',
+                        data: [-4, 2.5, -3.2],
+                        backgroundColor: 'rgba(245, 158, 11, 0.7)',
+                        borderColor: 'rgb(245, 158, 11)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '美股大盤變動 (示意)',
+                        data: [2.1, -1.8, 1.5],
+                        backgroundColor: 'rgba(14, 165, 233, 0.7)',
+                        borderColor: 'rgb(14, 165, 233)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: '漲跌幅 (%)' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // 4. Smooth Scroll & Active Link State (Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Initial table load
+        populateTable(productData);
+    </script>
+</body>
+</html>
