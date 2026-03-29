@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/3/23~3/27)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        /* 固定表頭樣式 */
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            background-color: #f8fafc;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-stone-800 tracking-tight">美股市場週報</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">市場綜述</a>
+                    <a href="#macro" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">總體環境</a>
+                    <a href="#tech" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">AI 與科技</a>
+                    <a href="#financial" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">金融與併購</a>
+                    <a href="#strategy" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">投資策略</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">市場綜述</a>
+                <a href="#macro" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">總體環境</a>
+                <a href="#tech" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">AI 與科技</a>
+                <a href="#financial" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">金融與併購</a>
+                <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-stone-800 to-stone-900 text-white py-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">油價、通膨與 AI 投資同時升溫的一週</h1>
+            <p class="text-xl text-stone-300 max-w-3xl mx-auto">美股投資人現在該怎麼看市場？解析 2026 年 3 月 23 日至 3 月 27 日的市場劇變。</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Market Summary -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週市場綜述</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-6 border-l-4 border-sky-500">
+                <p class="text-lg text-stone-700 leading-relaxed mb-4">
+                    本週美股市場最值得注意的不是單一利多，而是整個投資環境變得更複雜。中東衝突推升油價，通膨壓力再起，市場正從「只要有題材就能漲」，切換成「誰能在高成本、高利率下維持成長」的新階段。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-100">
+                        <p class="text-sm text-red-600 font-bold uppercase tracking-wider">股市警訊</p>
+                        <p class="text-2xl font-bold text-red-800">修正區</p>
+                        <p class="text-sm text-stone-600">Nasdaq (3/26) & Dow (3/27)</p>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-lg border border-amber-100">
+                        <p class="text-sm text-amber-600 font-bold uppercase tracking-wider">核心變數</p>
+                        <p class="text-2xl font-bold text-amber-800">能源油價</p>
+                        <p class="text-sm text-stone-600">直接影響通膨預期與企業成本</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <p class="text-sm text-blue-600 font-bold uppercase tracking-wider">AI 動態</p>
+                        <p class="text-2xl font-bold text-blue-800">軍備競賽</p>
+                        <p class="text-sm text-stone-600">巨頭持續加碼基礎設施投資</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Macro Economic Section -->
+        <section id="macro" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總體經濟環境分析</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Text Content -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-4">景氣數據放緩與通膨預期</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full p-1 mr-3 mt-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                </span>
+                                <div>
+                                    <p class="font-bold">PMI 創 11 個月低點</p>
+                                    <p class="text-stone-600">3月綜合 PMI 降至 51.4，顯示服務業動能變弱。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full p-1 mr-3 mt-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                </span>
+                                <div>
+                                    <p class="font-bold">消費者信心下滑</p>
+                                    <p class="text-stone-600">信心指數降至 53.3，通膨預期升至 3.8%。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-600 rounded-full p-1 mr-3 mt-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                </span>
+                                <div>
+                                    <p class="font-bold">全球展望調整</p>
+                                    <p class="text-stone-600">OECD 下修全球成長預估並上調 G20 通膨預測。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Chart Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">關鍵經濟指標走勢</h3>
+                    <div class="h-64">
+                        <canvas id="macroChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4 text-center italic">數據顯示 2-3 月間 PMI 指數與消費者信心指數的變化趨勢</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI & Tech Section -->
+        <section id="tech" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 與科技巨頭動態</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Apple Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-800">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-stone-100 rounded-lg mr-3">
+                            <svg class="w-6 h-6 text-stone-800" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7H7v6h6V7z"/><path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v1H4a2 2 0 00-2 2v9a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7zm0 2h6v1H7V4zm-3 3h12v9H4V7z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">Apple</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4 leading-relaxed">新增 4 億美元投資強化本土供應鏈。同時計畫讓 Siri 串接 Gemini 與 Claude，並延攬前 Google 高層主導 AI 行銷，將 iPhone 轉型為 AI 入口平台。</p>
+                    <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded">軟硬體轉型期</span>
+                </div>
+                <!-- Meta Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-600">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-blue-50 rounded-lg mr-3">
+                            <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">Meta</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4 leading-relaxed">一邊裁員數百人，一邊將德州 AI 資料中心投資從 15 億提高至 100 億美元。顯示公司資源向未來回報率最高的 AI 基建集中。</p>
+                    <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded">資源精準投入</span>
+                </div>
+                <!-- Policy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-amber-50 rounded-lg mr-3">
+                            <svg class="w-6 h-6 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">PCAST 顧問團</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4 leading-relaxed">川普任命黃仁勳、祖克柏、Lisa Su 等人加入科技顧問團。AI 已被視為國家競爭力的一部分，而不僅是企業技術題材。</p>
+                    <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded">國家級戰略</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial & Corporate Actions Section -->
+        <section id="financial" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">金融板塊與企業併購動態</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 bg-stone-50 border-b border-stone-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <h3 class="text-xl font-bold text-stone-800">互動式企業動態追蹤表</h3>
+                    <div class="relative">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司或行動..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm w-full md:w-64">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="sticky-header">
+                            <tr class="bg-stone-100 text-stone-600 text-xs uppercase tracking-wider">
+                                <th class="px-6 py-4 font-semibold border-b border-stone-200">公司名稱</th>
+                                <th class="px-6 py-4 font-semibold border-b border-stone-200">產業類別</th>
+                                <th class="px-6 py-4 font-semibold border-b border-stone-200">核心行動</th>
+                                <th class="px-6 py-4 font-semibold border-b border-stone-200">影響/備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="companyTableBody" class="divide-y divide-stone-100">
+                            <!-- Table rows injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-red-50 p-6 rounded-lg border border-red-100">
+                    <h4 class="text-lg font-bold text-red-800 mb-2">私募信貸風險提醒</h4>
+                    <p class="text-stone-700 text-sm">Apollo 與 Ares 限制旗下信貸基金贖回，顯示另類資產產品流動性在壓力環境下可能出現重新定價。投資者應檢視資產透明度。</p>
+                </div>
+                <div class="bg-sky-50 p-6 rounded-lg border border-sky-100">
+                    <h4 class="text-lg font-bold text-sky-800 mb-2">醫療板塊的穩定性</h4>
+                    <p class="text-stone-700 text-sm">Merck 67 億美元收購 Terns Pharma 旨在提早補強腫瘤產品線。擁有穩定現金流與明確管線的藥廠是景氣波動時的防禦首選。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">未來投資策略思考</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-6 rounded-lg shadow shadow-sky-100 border-t-2 border-sky-500">
+                    <div class="text-sky-500 mb-3"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div>
+                    <h4 class="font-bold mb-2">停止盲目追價</h4>
+                    <p class="text-sm text-stone-600">不再適用「只要是 AI 就衝」的邏輯，高估值成長股容忍度將被壓縮。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow shadow-sky-100 border-t-2 border-sky-500">
+                    <div class="text-sky-500 mb-3"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                    <h4 class="font-bold mb-2">優先現金流</h4>
+                    <p class="text-sm text-stone-600">挑選具備定價能力、能將成本轉嫁的大型科技或防禦型公司。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow shadow-sky-100 border-t-2 border-sky-500">
+                    <div class="text-sky-500 mb-3"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                    <h4 class="font-bold mb-2">流動性警覺</h4>
+                    <p class="text-sm text-stone-600">金融股應挑選透明的大型機構，警惕結構複雜的私募信貸標的。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow shadow-sky-100 border-t-2 border-sky-500">
+                    <div class="text-sky-500 mb-3"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg></div>
+                    <h4 class="font-bold mb-2">零售與併購</h4>
+                    <p class="text-sm text-stone-600">消費板塊不僅看名氣，更要關注管理層執行整併風險的能力。</p>
+                </div>
+            </div>
+            
+            <!-- Summary Note -->
+            <div class="mt-8 bg-stone-800 text-white p-8 rounded-xl">
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    總結建議
+                </h3>
+                <p class="text-stone-300">
+                    2026 年 3 月下旬這一週的教訓：AI 熱潮並未消失，但已不足以單獨支撐估值。接下來幾週市場焦點將圍繞**油價走勢、消費韌性與 AI 支出的獲利轉化**。成熟的投資者應在此時將持股結構調整至「防禦+質量」的組合，而非急於猜測短線反彈。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/3/23~3/27)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年3月29日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Navigation Active State (Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 3. Chart.js Implementation
+        const ctx = document.getElementById('macroChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['PMI (3月)', '消費者信心 (2月)', '消費者信心 (3月)', '通膨預期 (3月)'],
+                datasets: [{
+                    label: '數值指標',
+                    data: [51.4, 56.6, 53.3, 3.8],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.7)', // sky-500
+                        'rgba(120, 113, 108, 0.5)', // stone-500
+                        'rgba(239, 68, 68, 0.7)',   // red-500
+                        'rgba(245, 158, 11, 0.7)'   // amber-500
+                    ],
+                    borderColor: [
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(120, 113, 108, 1)',
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(245, 158, 11, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 70
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // 4. Interactive Table Logic
+        const companyData = [
+            { name: 'Apple', industry: '科技', action: '本土供應鏈增資/AI領導層異動', impact: '4億美元增資；延攬 Lilian Rincon 主導 AI' },
+            { name: 'Meta', industry: '科技', action: '資料中心大增資/裁員', impact: '投資提升至 100 億美元；資源集中化' },
+            { name: 'Merck', industry: '醫療', action: '收購 Terns Pharma', impact: '67 億美元併購；補強腫瘤藥物管線' },
+            { name: 'Apollo/Ares', industry: '金融', action: '限制信貸基金贖回', impact: '暴露私募信貸流動性風險' },
+            { name: 'Estée Lauder', industry: '零售/美妝', action: '洽談合併 Puig', impact: '補強香氛競爭力，但面臨執行風險' },
+            { name: 'S&P Global', industry: '總體經濟', action: '發布 3月 PMI 初值', impact: '51.4 (11個月低點)；成本壓力上升' }
+        ];
+
+        const tableBody = document.getElementById('companyTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-6 py-4 font-bold text-stone-800">${item.name}</td>
+                        <td class="px-6 py-4 text-stone-600"><span class="bg-stone-100 px-2 py-0.5 rounded text-xs">${item.industry}</span></td>
+                        <td class="px-6 py-4 text-stone-700">${item.action}</td>
+                        <td class="px-6 py-4 text-stone-500 text-sm italic">${item.impact}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = companyData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.industry.toLowerCase().includes(term) ||
+                item.action.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // Initial render
+        renderTable(companyData);
+
+    </script>
+</body>
+</html>
