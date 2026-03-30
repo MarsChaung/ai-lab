@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-七巨頭不再是唯一答案研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+        }
+        .nav-transition {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-600">七巨頭與能源產業</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link px-1 py-2 text-sm font-medium nav-transition inactive-nav-link" data-section="overview">市場概況</a>
+                    <a href="#drivers" class="nav-link px-1 py-2 text-sm font-medium nav-transition inactive-nav-link" data-section="drivers">核心變數</a>
+                    <a href="#sectors" class="nav-link px-1 py-2 text-sm font-medium nav-transition inactive-nav-link" data-section="sectors">產業輪動</a>
+                    <a href="#stocks" class="nav-link px-1 py-2 text-sm font-medium nav-transition inactive-nav-link" data-section="stocks">觀察名單</a>
+                    <a href="#strategy" class="nav-link px-1 py-2 text-sm font-medium nav-transition inactive-nav-link" data-section="strategy">配置策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-stone-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#overview" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">市場概況</a>
+            <a href="#drivers" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">核心變數</a>
+            <a href="#sectors" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">產業輪動</a>
+            <a href="#stocks" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">觀察名單</a>
+            <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">配置策略</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="mb-16">
+            <div class="bg-gradient-to-r from-sky-700 to-indigo-800 rounded-3xl p-8 md:p-12 text-white shadow-2xl mb-12">
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">
+                    七巨頭不再是唯一答案：<br>
+                    <span class="text-sky-300">油價、利率與資金輪動</span>
+                </h1>
+                <p class="text-lg md:text-xl text-sky-100 max-w-3xl mb-8">
+                    正在改寫 2026 年美股劇本。市場領導權正從少數 Megacap 科技股，擴散到能源、工業與公用事業。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <p class="text-sky-200 text-sm mb-1 uppercase tracking-wider">Mag 7 ETF 表現</p>
+                        <p class="text-3xl font-bold">-10% <span class="text-sm font-normal">(年初至今)</span></p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <p class="text-sky-200 text-sm mb-1 uppercase tracking-wider">布蘭特原油價格</p>
+                        <p class="text-3xl font-bold">$116 <span class="text-sm font-normal">/桶</span></p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <p class="text-sky-200 text-sm mb-1 uppercase tracking-wider">AI 資本支出 (2026E)</p>
+                        <p class="text-3xl font-bold">$6,300 <span class="text-sm font-normal">億美元</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場修正與評價重構</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-stone-700 italic underline decoration-sky-300">AI 相關資本支出預估 (十億美元)</h3>
+                    <div>
+                        <canvas id="capexChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
+                        <p class="text-amber-800 font-medium">重估值警訊</p>
+                        <p class="text-stone-600 text-sm mt-1">
+                            那斯達克指數於 3 月 26 日正式進入修正區。市場正在重新評價「大型科技股是否值得繼續給予高估值」。
+                        </p>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+                        <p class="text-green-800 font-medium">權力擴散</p>
+                        <p class="text-stone-600 text-sm mt-1">
+                            若以 S&P 500 等權重計算，市場其實呈現上漲，顯示支撐力道正從科技股擴散至小型股、工業股與醫療股。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Driving Factors Section -->
+        <section id="drivers" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場風格轉變的核心推手</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 bg-red-100 rounded-full mr-4">
+                            <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">能源衝擊與通膨</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4">
+                        中東局勢惡化使油價單月大漲 59%。Morgan Stanley 將全球股票評等下調至「中性」，能源成本推升通膨並拖累景氣，資金開始尋求避險與求穩。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 bg-blue-100 rounded-full mr-4">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">現金流與資本支出</h3>
+                    </div>
+                    <p class="text-stone-600 mb-4">
+                        目前大型科技股約 70% 的營運現金流被用於 AI 相關資本支出。當借錢成本變高且現金消耗加快，市場開始質疑這些投資轉化為股東回報的速度。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sectors Analysis -->
+        <section id="sectors" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">資金輪動：新成長與防禦方向</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Energy Card -->
+                <div class="bg-stone-800 text-white rounded-lg shadow-lg p-6">
+                    <span class="inline-block px-3 py-1 bg-amber-500 text-xs font-semibold rounded-full mb-4 uppercase">直接受惠</span>
+                    <h3 class="text-xl font-bold mb-2 text-amber-400">能源板塊</h3>
+                    <p class="text-stone-300 text-sm mb-4">受油價上升帶動逆勢上漲，獲利空間顯著擴張。</p>
+                    <ul class="text-xs space-y-2 text-stone-400 italic">
+                        <li>• 現金流強勁</li>
+                        <li>• 受地緣政治溢價支撐</li>
+                    </ul>
+                </div>
+                <!-- Industrial Card -->
+                <div class="bg-sky-50 border border-sky-200 rounded-lg shadow-lg p-6">
+                    <span class="inline-block px-3 py-1 bg-sky-500 text-white text-xs font-semibold rounded-full mb-4 uppercase">中性偏多</span>
+                    <h3 class="text-xl font-bold mb-2 text-sky-800">工業與原物料</h3>
+                    <p class="text-stone-600 text-sm mb-4">Barclays 調升評等，AI 帶動實體資本支出對工業股有利。</p>
+                    <ul class="text-xs space-y-2 text-stone-500 italic">
+                        <li>• 實體基礎設施建設</li>
+                        <li>• 工業自動化需求</li>
+                    </ul>
+                </div>
+                <!-- Utilities Card -->
+                <div class="bg-green-50 border border-green-200 rounded-lg shadow-lg p-6">
+                    <span class="inline-block px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full mb-4 uppercase">資金停泊區</span>
+                    <h3 class="text-xl font-bold mb-2 text-green-800">公用事業</h3>
+                    <p class="text-stone-600 text-sm mb-4">受監管、現金流穩定。在波動環境中展現極強韌性。</p>
+                    <ul class="text-xs space-y-2 text-stone-500 italic">
+                        <li>• 防禦性特徵</li>
+                        <li>• 穩定股利回報</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus Stocks Table -->
+        <section id="stocks" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">精選觀察名單</h2>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-stone-200">
+                <div class="p-4 border-b border-stone-200 bg-stone-50 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <p class="text-sm text-stone-500">篩選類別、代號或公司名稱：</p>
+                    <input type="text" id="tableSearch" placeholder="搜尋公司..." class="px-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 w-full md:w-64">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-4 text-sm font-semibold text-stone-700 uppercase">公司名稱</th>
+                                <th class="px-6 py-4 text-sm font-semibold text-stone-700 uppercase">分類標籤</th>
+                                <th class="px-6 py-4 text-sm font-semibold text-stone-700 uppercase">投資邏輯</th>
+                                <th class="px-6 py-4 text-sm font-semibold text-stone-700 uppercase">建議角色</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody" class="divide-y divide-stone-200">
+                            <!-- Table content will be injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2026 年投資配置建議</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-sky-800 text-white p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <svg class="h-6 w-6 mr-2 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        三位一體策略
+                    </h3>
+                    <ul class="space-y-6">
+                        <li class="flex">
+                            <span class="font-bold text-sky-400 mr-4 text-xl">01</span>
+                            <div>
+                                <p class="font-bold text-lg">AI資產精簡化</p>
+                                <p class="text-sky-100 text-sm mt-1">不放棄AI主線，但從追逐題材轉向優先關注現金流、客戶基礎與獲利能見度高的龍頭。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <span class="font-bold text-sky-400 mr-4 text-xl">02</span>
+                            <div>
+                                <p class="font-bold text-lg">增持價值與防禦</p>
+                                <p class="text-sky-100 text-sm mt-1">適度增加能源、工業與防禦型股票。在高油價與通膨壓力下，韌性優於成長股。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <span class="font-bold text-sky-400 mr-4 text-xl">03</span>
+                            <div>
+                                <p class="font-bold text-lg">降低單一風格曝險</p>
+                                <p class="text-sky-100 text-sm mt-1">若部位過度集中 Mag 7，應提高「等權重」部位或非科技龍頭，應對主線切換風險。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col justify-center space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-sky-600">
+                        <h4 class="font-bold text-stone-800">核心思考點：</h4>
+                        <p class="text-stone-600 mt-2 italic text-lg">
+                            「市場主線已從『只要 AI』變成『AI 也要講回報、講現金流、講估值』。」
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-amber-500">
+                        <h4 class="font-bold text-stone-800">風險提示：</h4>
+                        <p class="text-stone-600 mt-2 text-sm leading-relaxed">
+                            中東荷姆茲海峽風險上升、油價高於 116 美元、高利率環境持續。最危險的是用 2024 年的思維看 2026 年的市場。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-七巨頭不再是唯一答案研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股市場趨勢相關公開資料 (2026年3月30日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for the chart
+        const capexData = {
+            labels: ['2026 (預估)', '2027 (預估)'],
+            datasets: [{
+                label: '大型科技公司 AI 資本支出 (十億美元)',
+                data: [630, 800],
+                backgroundColor: ['#0ea5e9', '#6366f1'],
+                borderRadius: 8,
+                barThickness: 60
+            }]
+        };
+
+        // Data for the table
+        const stockData = [
+            { name: "Nvidia / Microsoft", category: "AI 核心資產", logic: "短線受利率與支出壓力影響，但具長線合理切入價值", role: "中長線核心" },
+            { name: "Alphabet / Amazon", category: "AI 核心資產", logic: "具備強大客戶基礎與現金流支撐", role: "中長線核心" },
+            { name: "Exxon Mobil / Chevron", category: "能源龍頭", logic: "最直接受惠油價與地緣風險，基本面強勁支撐", role: "抗通膨/進攻" },
+            { name: "Southern Co.", category: "公用事業", logic: "受監管、現金流穩定，具備市場穩定器角色", role: "防禦配置" },
+            { name: "Consolidated Edison", category: "公用事業", logic: "波動市況中的避風港，跌幅優於大盤", role: "防禦配置" },
+            { name: "工業股 (整體)", category: "工業/原物料", logic: "受惠 AI 帶動之實體基礎建設資本支出", role: "資產分散" }
+        ];
+
+        // Chart Initialization
+        window.onload = function() {
+            const ctx = document.getElementById('capexChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: capexData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '十億美元' }
+                        }
+                    }
+                }
+            });
+
+            renderTable(stockData);
+        };
+
+        // Table Rendering Function
+        function renderTable(data) {
+            const tbody = document.getElementById('stockTableBody');
+            tbody.innerHTML = '';
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 font-medium text-stone-900">${item.name}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 text-xs font-semibold rounded-md ${getCategoryStyle(item.category)}">${item.category}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.logic}</td>
+                    <td class="px-6 py-4 text-sm font-semibold text-stone-700">${item.role}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function getCategoryStyle(category) {
+            if (category.includes('AI')) return 'bg-sky-100 text-sky-800';
+            if (category.includes('能源')) return 'bg-amber-100 text-amber-800';
+            if (category.includes('公用')) return 'bg-green-100 text-green-800';
+            return 'bg-stone-100 text-stone-800';
+        }
+
+        // Table Filtering
+        document.getElementById('tableSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = stockData.filter(item => 
+                item.name.toLowerCase().includes(searchTerm) || 
+                item.category.toLowerCase().includes(searchTerm) ||
+                item.logic.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filteredData);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Intersection Observer for Active Nav Link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-section') === id) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
