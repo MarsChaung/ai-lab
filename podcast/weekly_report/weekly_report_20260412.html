@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/4/6~4/10)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c;
+        }
+        canvas {
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-stone-800 font-sans leading-relaxed">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-600">美股市場週報</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link px-1 py-2 text-sm font-medium transition-colors duration-200">概覽</a>
+                    <a href="#macro" class="nav-link px-1 py-2 text-sm font-medium transition-colors duration-200">宏觀趨勢</a>
+                    <a href="#ai-infra" class="nav-link px-1 py-2 text-sm font-medium transition-colors duration-200">AI基礎設施</a>
+                    <a href="#software" class="nav-link px-1 py-2 text-sm font-medium transition-colors duration-200">軟體與資安</a>
+                    <a href="#policy" class="nav-link px-1 py-2 text-sm font-medium transition-colors duration-200">政策受益</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu List -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 pt-2 pb-6 space-y-2">
+            <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-700">概覽</a>
+            <a href="#macro" class="block px-3 py-2 text-base font-medium text-stone-700">宏觀趨勢</a>
+            <a href="#ai-infra" class="block px-3 py-2 text-base font-medium text-stone-700">AI基礎設施</a>
+            <a href="#software" class="block px-3 py-2 text-base font-medium text-stone-700">軟體與資安</a>
+            <a href="#policy" class="block px-3 py-2 text-base font-medium text-stone-700">政策受益</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <section id="summary" class="mb-16">
+            <div class="bg-gradient-to-r from-sky-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
+                <h1 class="text-4xl md:text-4xl font-extrabold mb-4">AI 漏洞獵人降臨：Claude Mythos 震撼彈，為何引發資安板塊估值重塑？</h1>
+                <p class="text-lg md:text-xl text-sky-100 mb-8 opacity-90">2026年4月6日 － 4月10日</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <h3 class="font-bold text-xl mb-2">三大利多主線</h3>
+                        <ul class="text-sm space-y-2 list-disc list-inside opacity-90">
+                            <li>地緣政治停火希望（短線）</li>
+                            <li>AI 客製化晶片長期協議</li>
+                            <li>醫療給付與銀行資本放寬</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <h3 class="font-bold text-xl mb-2">三大核心壓力</h3>
+                        <ul class="text-sm space-y-2 list-disc list-inside opacity-90">
+                            <li>3月CPI通膨跳升至3.3%</li>
+                            <li>能源價格年增達12.5%</li>
+                            <li>消費者信心摔至歷史低點</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <h3 class="font-bold text-xl mb-2">投資策略核心</h3>
+                        <p class="text-sm opacity-90">「今年是選股年」。當政策寬鬆預期減弱，重點在於現金流、產業位置與政策紅利能否真正兌現。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Macro Trends Section -->
+        <section id="macro" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏觀趨勢：能源與通膨的硬撞擊</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-stone-700">美國3月通膨與能源數據 (年增率)</h3>
+                    <div class="relative">
+                        <canvas id="inflationChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-stone-500 italic">* 汽油單月跳漲 21.2%，成為推升通膨的主力。</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                        <h4 class="font-bold text-lg mb-2">消費者預期惡化</h4>
+                        <p class="text-stone-600">紐約聯儲調查顯示一年通膨預期升至 3.4%，密西根大學消費者信心跌至 47.6 的歷史低位。這增加了聯準會轉向鴿派的難度。</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                        <h4 class="font-bold text-lg mb-2">供應鏈與服務業雙壓</h4>
+                        <p class="text-stone-600">ISM 服務業價格指數升至 70.7，創 13 年最大升幅。通膨不再只是單純的油價效應，而是正在向服務端傳導。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Infrastructure Section -->
+        <section id="ai-infra" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 基礎設施：從 GPU 走向客製化平台</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Broadcom & Google -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform duration-300">
+                    <div class="h-12 w-12 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2">Broadcom & Google</h4>
+                    <p class="text-stone-600 text-sm">簽署至 2031 年長約，共同開發 TPU 客製化晶片。顯示雲端巨頭正加速尋找 Nvidia 以外的替代方案。</p>
+                </div>
+                <!-- AWS & Uber -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform duration-300">
+                    <div class="h-12 w-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2">AWS & Uber</h4>
+                    <p class="text-stone-600 text-sm">Uber 採用 Graviton 與 Trainium 晶片。證明 AWS 自研晶片已從內部優化工具轉向具市場競爭力的產品。</p>
+                </div>
+                <!-- Intel -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform duration-300">
+                    <div class="h-12 w-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    </div>
+                    <h4 class="font-bold text-xl mb-2">Intel 平衡架構</h4>
+                    <p class="text-stone-600 text-sm">與 Google 擴大合作部署 Xeon 及 IPU。AI 擴展不只需要加速器，CPU 與網路架構的重要性正在回升。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software & Cybersecurity -->
+        <section id="software" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">軟體與資安：Claude Mythos 的震撼彈</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border-t-8 border-stone-800">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="md:w-1/2">
+                        <h4 class="text-2xl font-bold mb-4">Anthropic: Project Glasswing</h4>
+                        <p class="text-stone-600 mb-4">
+                            最新模型 <strong>Claude Mythos Preview</strong> 投入資安防禦，已發現 OpenBSD 27 年漏洞。這引發市場對傳統軟體商業模式的重新估值。
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-red-50 p-4 rounded-lg">
+                                <span class="block text-red-600 font-bold text-xl">-25.5%</span>
+                                <span class="text-xs text-stone-500 uppercase font-semibold">S&P 軟體指數年至今</span>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded-lg">
+                                <span class="block text-red-600 font-bold text-xl">-8.8%</span>
+                                <span class="text-xs text-stone-500 uppercase font-semibold">Zscaler 單日跌幅</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 w-full">
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h5 class="font-bold text-center mb-2">資安個股單週受壓表現 (%)</h5>
+                            <canvas id="softwareImpactChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Policy Beneficiaries -->
+        <section id="policy" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">政策受益與市場追蹤</h2>
+            
+            <!-- Company Interaction Table -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+                <div class="p-6 bg-stone-50 border-b border-stone-200">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <h3 class="text-xl font-bold text-stone-700">關鍵標的追蹤表</h3>
+                        <div class="relative">
+                            <input type="text" id="tableSearch" placeholder="搜尋公司或板塊..." class="pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none w-full md:w-64">
+                            <svg class="w-5 h-5 absolute left-3 top-2.5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-stone-100 text-stone-600 text-sm uppercase font-semibold">
+                            <tr>
+                                <th class="px-6 py-4 sticky top-0">公司/板塊</th>
+                                <th class="px-6 py-4 sticky top-0">核心訊號</th>
+                                <th class="px-6 py-4 sticky top-0">展望評級</th>
+                                <th class="px-6 py-4 sticky top-0">板塊類型</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-200">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-green-50 rounded-lg p-6 border-t-4 border-green-500">
+                    <h4 class="font-bold text-xl mb-3 text-green-800">醫療保險：政策風向轉順</h4>
+                    <p class="text-stone-700 text-sm leading-relaxed">
+                        2027 年 Medicare Advantage 整體付款增幅約 5%（130 億美元）。UnitedHealth 與 Humana 壓力大減。
+                    </p>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-6 border-t-4 border-blue-500">
+                    <h4 class="font-bold text-xl mb-3 text-blue-800">銀行業：資本規則放鬆</h4>
+                    <p class="text-stone-700 text-sm leading-relaxed">
+                        聯準會放寬資本要求，預估大型銀行可釋放 3,200 億美元。未來在庫藏股與股利發放有更大彈性。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/4/6~4/10)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年4月13日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Data Definitions ---
+        const productData = [
+            { name: "Broadcom", signal: "與 Google 簽署 2031 年客製化晶片長約", rating: "正面", sector: "半導體" },
+            { name: "Google", signal: "擴大 Intel Xeon/IPU 部署，推動 TPU 多元化", rating: "中性偏正", sector: "科技巨頭" },
+            { name: "AWS (Amazon)", signal: "Uber 採用 Graviton/Trainium，展示自研算力服務", rating: "正面", sector: "雲端服務" },
+            { name: "Anthropic", signal: "Claude Mythos 發佈，顛覆傳統軟體與資安邏輯", rating: "破壞性", sector: "人工智慧" },
+            { name: "UnitedHealth", signal: "Medicare Advantage 給付上調 5%，政策利空出盡", rating: "正面", sector: "醫療保險" },
+            { name: "Morgan Stanley", signal: "受惠資本規則放寬，預估釋放 3,200 億資本", rating: "正面", sector: "金融銀行" },
+            { name: "Constellation Brands", signal: "需求具韌性但撤回 2028 財測，管理層轉向保守", rating: "中性偏負", sector: "消費類股" },
+            { name: "CrowdStrike", signal: "受 AI 顛覆性恐慌影響，單日下跌 4.9%-6.5%", rating: "觀望", sector: "資訊安全" }
+        ];
+
+        // --- 2. Initialize UI Components ---
+        
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Table Filtering
+        const searchInput = document.getElementById('tableSearch');
+        const tableBody = document.getElementById('dataTableBody');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-slate-50 transition-colors duration-150';
+                
+                let ratingClass = 'text-green-600 font-semibold';
+                if (item.rating.includes('負') || item.rating.includes('觀望')) ratingClass = 'text-amber-600 font-semibold';
+                if (item.rating === '破壞性') ratingClass = 'text-red-600 font-semibold';
+
+                row.innerHTML = `
+                    <td class="px-6 py-4 font-bold text-stone-800">${item.name}</td>
+                    <td class="px-6 py-4 text-stone-600 text-sm">${item.signal}</td>
+                    <td class="px-6 py-4"><span class="${ratingClass}">${item.rating}</span></td>
+                    <td class="px-6 py-4 text-sm text-stone-500">${item.sector}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.sector.toLowerCase().includes(term) ||
+                item.signal.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // Initial Table Render
+        renderTable(productData);
+
+        // --- 3. Charts ---
+        
+        // Inflation Chart (Macro)
+        const ctxInf = document.getElementById('inflationChart').getContext('2d');
+        new Chart(ctxInf, {
+            type: 'bar',
+            data: {
+                labels: ['3月 CPI 年增', '2月 CPI 年增', '3月 核心CPI', '能源價格 年增', '汽油單月 漲幅'],
+                datasets: [{
+                    label: '百分比 (%)',
+                    data: [3.3, 2.4, 2.6, 12.5, 21.2],
+                    backgroundColor: [
+                        '#0ea5e9', '#94a3b8', '#38bdf8', '#f59e0b', '#ef4444'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // Software Stock Impact Chart
+        const ctxSw = document.getElementById('softwareImpactChart').getContext('2d');
+        new Chart(ctxSw, {
+            type: 'line',
+            data: {
+                labels: ['Palo Alto', 'CrowdStrike', 'Okta', 'Zscaler'],
+                datasets: [{
+                    label: '單日跌幅 (%)',
+                    data: [-4.5, -5.2, -6.1, -8.8],
+                    borderColor: '#1e293b',
+                    backgroundColor: 'rgba(30, 41, 59, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#ef4444'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { 
+                    y: { 
+                        reverse: true,
+                        ticks: { callback: v => v + '%' } 
+                    } 
+                }
+            }
+        });
+
+        // --- 4. Navigation Active State ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav-link');
+                link.classList.add('inactive-nav-link');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active-nav-link');
+                    link.classList.remove('inactive-nav-link');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
