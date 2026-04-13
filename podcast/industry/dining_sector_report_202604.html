@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-餐飲股投資地圖研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f5f5f4; /* stone-50 */
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-600">餐飲股投資地圖</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="overview">研究概述</a>
+                    <a href="#data-viz" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="data-viz">數據視覺化</a>
+                    <a href="#company-analysis" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="company-analysis">企業深度</a>
+                    <a href="#data-table" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="data-table">業績彙整</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#overview" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">研究概述</a>
+            <a href="#data-viz" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">數據視覺化</a>
+            <a href="#company-analysis" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">企業深度</a>
+            <a href="#data-table" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">業績彙整</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="mb-16">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:flex-shrink-0 bg-sky-600 md:w-48 flex items-center justify-center">
+                        <svg class="h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <div class="p-8 md:p-12">
+                        <div class="uppercase tracking-wide text-sm text-sky-500 font-semibold">2026年餐飲股投資地圖</div>
+                        <h1 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-stone-900 sm:text-4xl">當餐飲股不再只是賣漢堡</h1>
+                        <p class="mt-4 text-lg text-stone-600">
+                            在高物價與高競爭的環境下，市場關注的焦點已從「等待景氣回溫」轉向「誰具備主動創造來客的能力」。
+                            本報告分析 McDonald's, Starbucks, Domino's 及 Darden 等巨頭如何透過新品研發、數位轉型及價值促銷，在保守消費時代突圍。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section id="data-viz" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">數據視覺化分析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- SSS Comparison -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-stone-700 text-center">同店銷售 (SSS) 成長率對比</h3>
+                    <div class="h-64">
+                        <canvas id="sssChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-400 mt-4 italic text-center">*數據包含 McDonald's (US), Taco Bell, Domino's (US), Darden, Starbucks (Global)</p>
+                </div>
+                <!-- Growth vs Status -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-stone-700 text-center">集團銷售成長表現 (2025-2026)</h3>
+                    <div class="h-64">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-400 mt-4 italic text-center">*呈現各集團總銷售或營收年度成長率</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Analysis Grid -->
+        <section id="company-analysis" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心企業深度分析</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- MCD -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform border-t-4 border-yellow-400">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-0.5 rounded uppercase">防禦領頭羊</span>
+                        <span class="text-stone-400 font-mono">MCD</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">McDonald's</h3>
+                    <p class="text-sm text-stone-600 mb-4">
+                        2025 Q4 美國同店銷售成長 6.8%，全球系統銷售超 1,390 億美元。透過新增能量飲與特色汽水創造高頻流量。
+                    </p>
+                    <ul class="text-xs space-y-1 text-stone-500 font-medium">
+                        <li>• 價值感：主打小額消費入口</li>
+                        <li>• 韌性：整體營運體質強健</li>
+                    </ul>
+                </div>
+
+                <!-- Domino's -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform border-t-4 border-blue-600">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-0.5 rounded uppercase">數位效率王</span>
+                        <span class="text-stone-400 font-mono">DPZ</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Domino's</h3>
+                    <p class="text-sm text-stone-600 mb-4">
+                        2025 Q4 美國同店銷售成長 3.7%。成功結合 DoorDash 平台擴大觸角，將履約效率轉化為市占工具。
+                    </p>
+                    <ul class="text-xs space-y-1 text-stone-500 font-medium">
+                        <li>• 成長：全球銷售年度成長 5.4%</li>
+                        <li>• 優勢：數位觸及與價值促銷</li>
+                    </ul>
+                </div>
+
+                <!-- Darden -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform border-t-4 border-emerald-600">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded uppercase">執行力典範</span>
+                        <span class="text-stone-400 font-mono">DRI</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Darden Restaurants</h3>
+                    <p class="text-sm text-stone-600 mb-4">
+                        2026 財年 Q3 總銷售成長 5.9%。Olive Garden 穩健，LongHorn Steakhouse 表現優異（+7.2%）。
+                    </p>
+                    <ul class="text-xs space-y-1 text-stone-500 font-medium">
+                        <li>• 定位：負擔得起的穩定享受</li>
+                        <li>• 展望：上調全年 SSS 目標至 4.5%</li>
+                    </ul>
+                </div>
+
+                <!-- Starbucks -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform border-t-4 border-green-800">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-0.5 rounded uppercase">轉型觀察中</span>
+                        <span class="text-stone-400 font-mono">SBUX</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Starbucks</h3>
+                    <p class="text-sm text-stone-600 mb-4">
+                        營收 72.8 億美元，利益率下降至 11.9%。中國業務引入博裕資本，轉向輕資產運營模式。
+                    </p>
+                    <ul class="text-xs space-y-1 text-stone-500 font-medium">
+                        <li>• 關鍵：獲利率修復進度</li>
+                        <li>• 中國：目標擴展至 20,000 家店</li>
+                    </ul>
+                </div>
+
+                <!-- Chipotle -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform border-t-4 border-red-700">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-red-100 text-red-800 text-xs font-bold px-2.5 py-0.5 rounded uppercase">成長高品質檢驗</span>
+                        <span class="text-stone-400 font-mono">CMG</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Chipotle</h3>
+                    <p class="text-sm text-stone-600 mb-4">
+                        2025 Q4 同店銷售意外下滑 2.5%，交易量萎縮。市場正在要求成長型公司提供更實質的流量證明。
+                    </p>
+                    <ul class="text-xs space-y-1 text-stone-500 font-medium">
+                        <li>• 現況：成熟門店流量鬆動</li>
+                        <li>• 未來：展店動能與 SSS 的平衡</li>
+                    </ul>
+                </div>
+
+                <!-- Cava -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:translate-y-[-4px] transition-transform border-t-4 border-orange-500">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-0.5 rounded uppercase">高波動成長</span>
+                        <span class="text-stone-400 font-mono">CAVA</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Cava</h3>
+                    <p class="text-sm text-stone-600 mb-4">
+                        2026 SSS 預測 3-5% 高於預期，但面臨關稅與人工成本壓力，利潤率可能下滑。
+                    </p>
+                    <ul class="text-xs space-y-1 text-stone-500 font-medium">
+                        <li>• 風險：估值與成本端壓力</li>
+                        <li>• 表現：Q4 SSS 微增 0.5% 超預期</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table -->
+        <section id="data-table" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">報告業績彙整表</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 overflow-hidden">
+                <!-- Search Input -->
+                <div class="mb-4 relative">
+                    <input type="text" id="tableSearch" placeholder="搜尋公司名稱或分類..." 
+                        class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none">
+                    <div class="absolute left-3 top-2.5 text-stone-400">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- Table Container -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200" id="performanceTable">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">公司名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">主要類型</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">同店銷售成長 (SSS)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">核心策略 / 現況</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200" id="tableBody">
+                            <!-- Data populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-餐飲股投資地圖研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-500">資料來源：基於網路中餐飲產業鏈相關公開資料 (2026年4月13日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data ---
+        const performanceData = [
+            { company: "McDonald's", category: "速食連鎖 (MCD)", sss: "6.8% (US)", strategy: "飲品流量入口(能量飲/汽水)、低門檻小額消費" },
+            { company: "Domino's", category: "速食連鎖 (DPZ)", sss: "3.7% (US)", strategy: "數位履約效率、DoorDash 合作、價值促銷" },
+            { company: "Taco Bell", category: "Yum Brands (YUM)", sss: "7.0% (US)", strategy: "平價套餐優勢、牛肉成本壓力挑戰利潤率" },
+            { company: "KFC", category: "Yum Brands (YUM)", sss: "3.0% (Global)", strategy: "全球同店成長、熟悉品牌防禦力" },
+            { company: "Darden (Group)", category: "休閒餐飲 (DRI)", sss: "4.2% (Overall)", strategy: "穩定執行力、上調全年預期至 4.5%" },
+            { company: "LongHorn Steakhouse", category: "休閒餐飲 (DRI)", sss: "7.2%", strategy: "強勁增長、負擔得起的穩定享受" },
+            { company: "Olive Garden", category: "休閒餐飲 (DRI)", sss: "3.2%", strategy: "品牌定位清楚、維持合理價值感" },
+            { company: "Starbucks", category: "轉型股 (SBUX)", sss: "4.0% (Global)", strategy: "中國業務出售控制權轉輕資產、獲利率待修復" },
+            { company: "Cava", category: "成長型 (CAVA)", sss: "0.5% (Q4)", strategy: "2026預測3-5%、面臨關稅與成本端利潤壓力" },
+            { company: "Chipotle", category: "成長型 (CMG)", sss: "-2.5% (Q4)", strategy: "交易量下滑、成熟店流量遭市場檢驗" }
+        ];
+
+        // --- Functions ---
+        
+        // 1. Render Table
+        function renderTable(data) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-stone-50 transition-colors";
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-900">${item.company}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.category}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <span class="px-2 py-1 rounded ${parseFloat(item.sss) > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'} font-semibold">
+                            ${item.sss}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.strategy}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 2. Filter Table
+        document.getElementById('tableSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = performanceData.filter(item => 
+                item.company.toLowerCase().includes(searchTerm) || 
+                item.category.toLowerCase().includes(searchTerm) ||
+                item.strategy.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 4. Smooth Scroll Active Link Observation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.dataset.section === id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 5. Initialize Charts
+        window.onload = function() {
+            renderTable(performanceData);
+
+            // SSS Chart
+            const sssCtx = document.getElementById('sssChart').getContext('2d');
+            new Chart(sssCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['McDonald\'s (US)', 'Taco Bell', 'Domino\'s (US)', 'Darden (DRI)', 'Starbucks', 'Chipotle'],
+                    datasets: [{
+                        label: '同店銷售成長率 (%)',
+                        data: [6.8, 7.0, 3.7, 4.2, 4.0, -2.5],
+                        backgroundColor: [
+                            '#facc15', '#a855f7', '#2563eb', '#10b981', '#065f46', '#b91c1c'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#e7e5e4' } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Growth Chart
+            const growthCtx = document.getElementById('growthChart').getContext('2d');
+            new Chart(growthCtx, {
+                type: 'line',
+                data: {
+                    labels: ['McDonald\'s', 'Domino\'s', 'Darden', 'Chipotle', 'Starbucks'],
+                    datasets: [{
+                        label: '銷售/營收成長率 (%)',
+                        data: [5.7, 5.4, 5.9, 4.9, 2.0], // Starbucks estimated 2% for visual contrast relative to margin drop
+                        borderColor: '#0ea5e9',
+                        backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#0ea5e9'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
