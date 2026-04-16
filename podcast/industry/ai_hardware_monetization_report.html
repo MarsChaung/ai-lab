@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI硬體兌現期研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7; /* sky-600 */
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        /* 固定表頭樣式 */
+        .sticky-header th {
+            position: sticky;
+            top: 0;
+            background-color: #f5f5f4; /* stone-100 */
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-700 uppercase tracking-wider">AI Insight</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">趨勢核心</a>
+                    <a href="#tesla" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">Tesla AI5</a>
+                    <a href="#infrastructure" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">Meta & Broadcom</a>
+                    <a href="#supply-chain" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">上游展望</a>
+                    <a href="#data-table" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-600">數據概覽</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="p-2 rounded-md text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m12 6H4" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">趨勢核心</a>
+            <a href="#tesla" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">Tesla AI5</a>
+            <a href="#infrastructure" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">Meta & Broadcom</a>
+            <a href="#supply-chain" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">上游展望</a>
+            <a href="#data-table" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50">數據概覽</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-sky-900 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">AI 熱潮進入硬體兌現期</h1>
+            <p class="text-xl text-sky-100 max-w-3xl mx-auto italic">「市場買的不再只是故事，而是誰能把 AI 變成晶片、算力與訂單。」</p>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Section: Summary -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">趨勢核心：從敘事到兌現</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <h3 class="font-bold text-xl mb-3 text-sky-800">平台提前定價</h3>
+                    <p class="text-stone-600">資金願意為「下一代 AI 平台」提前支付溢價，Tesla 的 AI5 晶片進展即是典型代表。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                    <h3 class="font-bold text-xl mb-3 text-emerald-800">去 N-霸主化</h3>
+                    <p class="text-stone-600">大型科技公司（Meta, Broadcom）正致力於自研 ASIC，建立 GPU 與 ASIC 並行的雙體系。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <h3 class="font-bold text-xl mb-3 text-amber-800">上游實質成長</h3>
+                    <p class="text-stone-600">ASML 與台積電雙雙上修 2026 年展望，證實硬體層的資本支出尚未見頂。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Tesla -->
+        <section id="tesla" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Tesla AI5：實體 AI 平台的野心</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="flex-1">
+                        <p class="mb-4">Tesla 已完成 AI5 晶片 <strong>Tape-out</strong>，這標誌著從電動車公司轉型為「實體 AI 平台」的重要里程碑，晶片將用於自駕、Robotaxi 及 Optimus 人形機器人。</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded mr-3 mt-1">利多</span>
+                                <span>設計定稿代表技術路徑明確，有望降低長期對第三方算力的依賴。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded mr-3 mt-1">風險</span>
+                                <span>Tape-out 不等於量產，良率、封裝與實際導入仍需面臨數季的考驗。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 md:w-1/3">
+                        <h4 class="font-bold text-stone-800 mb-2">觀察重點</h4>
+                        <p class="text-sm text-stone-600">4 月 22 日財報後續說明中，是否能明確化 AI5 的量產路徑與商業化節奏。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Meta & Broadcom -->
+        <section id="infrastructure" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta & Broadcom：基礎設施權力重組</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-4 flex items-center">
+                        <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
+                        長期戰略合作
+                    </h3>
+                    <p class="text-stone-600 mb-4">Meta 與 Broadcom 合作延長至 2029 年，共同開發客製化 AI 晶片，初期承諾運算力超過 1 GW。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-4 flex items-center">
+                        <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
+                        MTIA 晶片加速
+                    </h3>
+                    <p class="text-stone-600 mb-4">Meta 將在兩年內部署四個新世代 MTIA 晶片，優化推薦系統與生成式 AI 工作負載。</p>
+                </div>
+            </div>
+            <div class="mt-8 bg-sky-50 border border-sky-100 p-6 rounded-lg text-sky-900">
+                <p class="font-medium">💡 投資啟示：Broadcom 從單純賣晶片，升級為雲端巨頭「自研晶片」的核心合作夥伴。這標誌著市場從單一霸主時代（Nvidia）轉向 GPU 與 ASIC 並行的結構性變化。</p>
+            </div>
+        </section>
+
+        <!-- Section: Supply Chain / Charts -->
+        <section id="supply-chain" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">最上游驗證：ASML 與台積電</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="text-center font-bold text-stone-700 mb-6 underline decoration-sky-400">2026 年展望數據對比</h4>
+                    <div class="h-64 relative">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4 text-center">數據來源：ASML 與台積電 4/15 第一季財報公告</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white p-5 rounded-lg shadow-sm border border-stone-200">
+                        <h4 class="font-bold text-lg text-sky-700 mb-2">ASML 展望上修</h4>
+                        <p class="text-stone-600 text-sm italic mb-2">「需求仍大於供給，客戶正加快 2026 後擴產」</p>
+                        <p class="text-stone-700 font-medium">預估 2026 全年營收提升至 360 億 - 400 億歐元。</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm border border-stone-200">
+                        <h4 class="font-bold text-lg text-emerald-700 mb-2">台積電 (TSMC) 超標表現</h4>
+                        <p class="text-stone-600 text-sm italic mb-2">「AI 需求極為強勁，資本支出維持區間高標」</p>
+                        <ul class="text-stone-700 list-disc list-inside space-y-1">
+                            <li>第一季獲利年增 58%</li>
+                            <li>2026 美元營收成長預估上修至 >30%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Data Table -->
+        <section id="data-table" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">硬體供應鏈關鍵指標表格</h2>
+            <div class="mb-4 flex items-center space-x-2">
+                <label for="table-search" class="text-sm font-medium text-stone-700">搜尋公司或關鍵字：</label>
+                <input type="text" id="table-search" placeholder="例如：Tesla..." class="px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none text-sm w-full max-w-xs">
+            </div>
+            <div class="overflow-x-auto bg-white rounded-lg shadow-lg border border-stone-200">
+                <table class="min-w-full text-left">
+                    <thead class="sticky-header">
+                        <tr class="text-stone-600 uppercase text-xs font-semibold">
+                            <th class="px-6 py-4">公司名稱</th>
+                            <th class="px-6 py-4">核心 AI 產品/技術</th>
+                            <th class="px-6 py-4">2026 年展望/關鍵節點</th>
+                            <th class="px-6 py-4">角色定位</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-table-body" class="divide-y divide-stone-100">
+                        <!-- Data populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI硬體兌現期研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 AI 硬體供應鏈 相關公開資料 (2026年4月16日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript For Interactivity -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Data for the Interactive Table
+        const productData = [
+            { name: "Tesla", tech: "AI5 晶片", outlook: "Tape-out 完成, FSD 上路", role: "實體 AI 平台" },
+            { name: "Broadcom", tech: "客製化 ASIC & Ethernet", outlook: "與 Meta 合作至 2029", role: "網通及客製化晶片" },
+            { name: "Meta", tech: "MTIA 晶片系列", outlook: "2年內部署4代晶片", role: "下游平台與自研主導者" },
+            { name: "ASML", tech: "EUV 先進製程設備", outlook: "營收 360B-400B 歐元", role: "最上游設備供應商" },
+            { name: "TSMC", tech: "晶圓代工 (2nm/3nm)", outlook: "營收成長 > 30%", role: "半導體製造核心" },
+            { name: "Nvidia", tech: "H100/B200 GPU", outlook: "維持霸主但面臨 ASIC 分流", role: "算力晶片標準制定者" }
+        ];
+
+        const tableBody = document.getElementById('product-table-body');
+        const searchInput = document.getElementById('table-search');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-6 py-4 font-bold text-stone-800">${item.name}</td>
+                        <td class="px-6 py-4 text-stone-600">${item.tech}</td>
+                        <td class="px-6 py-4 font-medium text-sky-700">${item.outlook}</td>
+                        <td class="px-6 py-4 text-sm"><span class="bg-stone-100 px-2 py-1 rounded border border-stone-200 text-stone-600">${item.role}</span></td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        renderTable(productData);
+
+        // Search filtering logic
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.tech.toLowerCase().includes(term) ||
+                item.role.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. Chart.js Initialization
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['ASML 2026 營收 (億歐元)', '台積電 2026 成長率 (%)'],
+                datasets: [
+                    {
+                        label: '原本預估 (低標)',
+                        data: [360, 30],
+                        backgroundColor: 'rgba(12, 74, 110, 0.7)',
+                        borderColor: 'rgb(12, 74, 110)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '上修後預估 (高標)',
+                        data: [400, 32],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                        borderColor: 'rgb(16, 185, 129)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // 4. Smooth Scroll & Active Link Interaction
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+    </script>
+</body>
+</html>
