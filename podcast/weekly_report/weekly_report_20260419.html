@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/4/13~4/17)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .active-nav-link {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #475569;
+        }
+        .section-header {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-600">美股市場週報</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8" id="desktop-nav">
+                    <a href="#summary" class="nav-item inactive-nav-link font-medium hover:text-sky-500 transition">市場概況</a>
+                    <a href="#macro" class="nav-item inactive-nav-link font-medium hover:text-sky-500 transition">總經趨勢</a>
+                    <a href="#ai-tech" class="nav-item inactive-nav-link font-medium hover:text-sky-500 transition">AI科技</a>
+                    <a href="#financials" class="nav-item inactive-nav-link font-medium hover:text-sky-500 transition">金融與財報</a>
+                    <a href="#data-viz" class="nav-item inactive-nav-link font-medium hover:text-sky-500 transition">數據分析</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 pt-2 pb-6 space-y-2 shadow-inner">
+            <a href="#summary" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">市場概況</a>
+            <a href="#macro" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">總經趨勢</a>
+            <a href="#ai-tech" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">AI科技</a>
+            <a href="#financials" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">金融與財報</a>
+            <a href="#data-viz" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">數據分析</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Section -->
+        <section id="summary" class="mb-12">
+            <div class="bg-gradient-to-r from-sky-600 to-indigo-700 rounded-2xl p-8 text-white shadow-2xl">
+                <h1 class="text-3xl md:text-4xl font-extrabold mb-4">美股投資週報：高點之下，市場真正擔心的其實不是財報</h1>
+                <p class="text-lg opacity-90 mb-6">資料日期：2026年4月13日 - 4月17日</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20">
+                        <h3 class="font-bold text-sky-200 mb-1">指數表現</h3>
+                        <p>S&P 500 與 Nasdaq 持續創高，但個股分化明顯。</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20">
+                        <h3 class="font-bold text-sky-200 mb-1">主線風險</h3>
+                        <p>油價、中東局勢、聯準會降息路徑不明。</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20">
+                        <h3 class="font-bold text-sky-200 mb-1">投資建議</h3>
+                        <p>不再隨便買都會漲，挑選「高品質龍頭」為關鍵。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Macro Section -->
+        <section id="macro" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">1. 聯準會路徑與實體經濟</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold mb-3 text-stone-700">降息預期降溫</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        德意志銀行於 4 月 17 日撤回降息預期，改為全年不降息。聯準會褐皮書也警示中東衝突導致能源成本及不確定性上升。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <h3 class="text-xl font-bold mb-3 text-stone-700">經濟數據壓力</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        3 月工業生產月減 0.5%，製造業產出月減 0.1%，反映實體經濟並非毫無壓力。資金開始朝大型高品質龍頭靠攏。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Technology Section -->
+        <section id="ai-tech" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2. AI 與機器人前瞻佈局</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-6 items-start">
+                    <div class="w-full md:w-1/3 bg-sky-50 p-4 rounded-lg text-center">
+                        <span class="text-sm text-sky-600 font-bold block uppercase tracking-wider mb-2">Meta x Broadcom</span>
+                        <div class="text-4xl font-bold text-sky-700">2029</div>
+                        <p class="text-stone-500 text-sm mt-1">合作延展年份</p>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <h3 class="text-xl font-bold mb-2">客製化 AI 晶片競爭白熱化</h3>
+                        <p class="text-stone-600">Meta 擴大與 Broadcom 合作開發客製化 AI 加速器。這代表 AI 晶片供應鏈正在變寬，不再僅限於 Nvidia 一家獨大，ASIC 與資料中心架構重要性提升。</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-6 items-start">
+                    <div class="w-full md:w-1/3 bg-indigo-50 p-4 rounded-lg text-center">
+                        <span class="text-sm text-indigo-600 font-bold block uppercase tracking-wider mb-2">Nvidia x Cadence</span>
+                        <div class="text-4xl font-bold text-indigo-700">Digital Twin</div>
+                        <p class="text-stone-500 text-sm mt-1">數位孿生與模擬</p>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <h3 class="text-xl font-bold mb-2">AI 主戰場轉向「實體世界」</h3>
+                        <p class="text-stone-600">透過物理模擬引擎整合 AI 模型，用於機器人與自動化系統開發。AI 下一階段是將模型帶進工廠與工程流程，推升自動化供應鏈價值。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financials Section -->
+        <section id="financials" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">3. 財報重點回顧</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- JPM Card -->
+                <div class="bg-white rounded-xl shadow p-6 hover:shadow-xl transition border-t-4 border-blue-600">
+                    <h3 class="font-bold text-lg mb-2">JPMorgan (JPM)</h3>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-stone-400">Q1 EPS</p>
+                            <p class="text-2xl font-bold text-blue-600">$5.94</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-stone-400 text-green-600">高於預期</p>
+                            <p class="text-sm font-semibold">$5.45 (預估)</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-stone-500 leading-snug">營收年增 10%，投資銀行費用大幅增長 28%。</p>
+                </div>
+
+                <!-- Citi Card -->
+                <div class="bg-white rounded-xl shadow p-6 hover:shadow-xl transition border-t-4 border-sky-400">
+                    <h3 class="font-bold text-lg mb-2">Citigroup (C)</h3>
+                    <div>
+                        <p class="text-xs text-stone-400">Q1 營收</p>
+                        <p class="text-2xl font-bold text-sky-600">$246 億</p>
+                    </div>
+                    <p class="mt-4 text-sm text-stone-500 leading-snug">創下十年來最佳單季表現之一，反映資本市場活動回暖。</p>
+                </div>
+
+                <!-- Abbott Card -->
+                <div class="bg-white rounded-xl shadow p-6 hover:shadow-xl transition border-t-4 border-red-400">
+                    <h3 class="font-bold text-lg mb-2">Abbott (ABT)</h3>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-stone-400">Q1 EPS</p>
+                            <p class="text-2xl font-bold text-red-600">$1.15</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-red-500">展望下修</p>
+                            <p class="text-sm font-semibold">至 $5.38 - $5.58</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-stone-500 leading-snug">市場對其獲利品質與併購稀釋獲利感到擔憂，股價反應負面。</p>
+                </div>
+            </div>
+
+            <!-- Netflix & BofA/MS Summary -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-stone-50 rounded-lg p-6 border border-stone-200">
+                    <h4 class="font-bold text-xl mb-4 text-indigo-800">Netflix (NFLX) 市場啟示</h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2">
+                        <li>第一季營收 $122.5 億 (年增 16.2%)</li>
+                        <li>Q2 展望趨於保守，引發市場疑慮</li>
+                        <li>管理層變動：Reed Hastings 不再連任董事</li>
+                        <li class="font-bold text-red-600">重點：市場不再滿足於「僅超越預期」，更在意成長品質。</li>
+                    </ul>
+                </div>
+                <div class="bg-stone-50 rounded-lg p-6 border border-stone-200">
+                    <h4 class="font-bold text-xl mb-4 text-emerald-800">資本市場活動全面回歸</h4>
+                    <p class="text-stone-600 mb-4">
+                        Bank of America (BofA) 與 Morgan Stanley (MS) 第一季表現皆優於預期。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <p class="text-xs text-stone-400">BofA 營收</p>
+                            <p class="text-lg font-bold text-emerald-600">$303 億</p>
+                        </div>
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <p class="text-xs text-stone-400">BofA EPS</p>
+                            <p class="text-lg font-bold text-emerald-600">$1.11</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section id="data-viz" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">4. 數據看板</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Chart -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold mb-4 text-stone-700">Q1 營收數據對比 (10億美元)</h3>
+                    <div class="h-[300px]">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Interactive Table -->
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col">
+                    <h3 class="text-lg font-bold mb-4 text-stone-700">企業財報詳細指標</h3>
+                    <div class="mb-4">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司名稱..." 
+                               class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                    </div>
+                    <div class="flex-grow overflow-auto max-h-[300px] border rounded-lg">
+                        <table class="min-w-full divide-y divide-stone-200" id="reportTable">
+                            <thead class="bg-stone-100 sticky top-0">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">公司</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">營收 (B)</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">EPS</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">趨勢</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-stone-200" id="tableBody">
+                                <!-- JS populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conclusion Card -->
+            <div class="bg-sky-50 rounded-xl p-8 border border-sky-200">
+                <h3 class="text-2xl font-bold text-sky-900 mb-4">結論：現在是挑選公司的行情</h3>
+                <p class="text-sky-800 leading-relaxed mb-4">
+                    市場背後的條件變得更嚴格。油價壓力、聯準會觀望與財報位階，決定了未來的漲跌動力。建議優先關注以下三類公司：
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="flex items-center space-x-3 text-sky-900 font-medium">
+                        <div class="w-2 h-2 bg-sky-500 rounded-full"></div>
+                        <span>已證明能將 AI 轉為業績的龍頭</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-sky-900 font-medium">
+                        <div class="w-2 h-2 bg-sky-500 rounded-full"></div>
+                        <span>高品質、高獲利能力的金融股</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-sky-900 font-medium">
+                        <div class="w-2 h-2 bg-sky-500 rounded-full"></div>
+                        <span>擁有定價權與穩定現金流的企業</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/4/13~4/17)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年4月19日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Data for Table and Chart
+        const productData = [
+            { name: "JPMorgan (JPM)", revenue: 50.5, eps: 5.94, trend: "優於預期" },
+            { name: "Bank of America (BofA)", revenue: 30.3, eps: 1.11, trend: "穩定增長" },
+            { name: "Citigroup (C)", revenue: 24.6, eps: "N/A", trend: "十年高點" },
+            { name: "Netflix (NFLX)", revenue: 12.25, eps: "N/A", trend: "展望保守" },
+            { name: "Abbott (ABT)", revenue: 11.16, eps: 1.15, trend: "下修指引" }
+        ];
+
+        // 3. Populate Table
+        const tableBody = document.getElementById('tableBody');
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">$${item.revenue} B</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${item.eps}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <span class="px-2 py-1 rounded-full text-xs font-semibold ${item.trend === '下修指引' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
+                            ${item.trend}
+                        </span>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+        renderTable(productData);
+
+        // 4. Table Search Filtering
+        const tableSearch = document.getElementById('tableSearch');
+        tableSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = productData.filter(item => 
+                item.name.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filteredData);
+        });
+
+        // 5. Chart.js Implementation
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: productData.map(item => item.name.split(' (')[0]),
+                datasets: [{
+                    label: '第一季營收 (十億美元)',
+                    data: productData.map(item => item.revenue),
+                    backgroundColor: [
+                        'rgba(37, 99, 235, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(56, 189, 248, 0.7)',
+                        'rgba(129, 140, 248, 0.7)',
+                        'rgba(248, 113, 113, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgb(37, 99, 235)',
+                        'rgb(16, 185, 129)',
+                        'rgb(56, 189, 248)',
+                        'rgb(129, 140, 248)',
+                        'rgb(248, 113, 113)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9' },
+                        title: { display: true, text: 'Billion USD' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // 6. Intersection Observer for Active Nav State
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navItems.forEach(item => {
+                        const href = item.getAttribute('href').substring(1);
+                        if (href === entry.target.id) {
+                            item.classList.add('active-nav-link');
+                            item.classList.remove('inactive-nav-link');
+                        } else {
+                            item.classList.remove('active-nav-link');
+                            item.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+    </script>
+</body>
+</html>
