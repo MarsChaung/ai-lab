@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Tesla 自駕敘事轉型研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+        .section-header {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-700 tracking-tight">Tesla 自駕敘事</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link font-medium transition duration-150 ease-in-out hover:text-sky-500 py-5">核心數據</a>
+                    <a href="#milestones" class="nav-link font-medium transition duration-150 ease-in-out hover:text-sky-500 py-5">發展里程碑</a>
+                    <a href="#metrics" class="nav-link font-medium transition duration-150 ease-in-out hover:text-sky-500 py-5">營運指標</a>
+                    <a href="#strategy" class="nav-link font-medium transition duration-150 ease-in-out hover:text-sky-500 py-5">投資策略</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 pt-2 pb-4 space-y-1">
+            <a href="#overview" class="block px-3 py-2 text-stone-600 font-medium">核心數據</a>
+            <a href="#milestones" class="block px-3 py-2 text-stone-600 font-medium">發展里程碑</a>
+            <a href="#metrics" class="block px-3 py-2 text-stone-600 font-medium">營運指標</a>
+            <a href="#strategy" class="block px-3 py-2 text-stone-600 font-medium">投資策略</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <div class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">當 Tesla 不再只是賣車</h1>
+            <p class="text-xl text-stone-600 max-w-3xl">自駕敘事進入關鍵時刻：從賣車公司升級為 AI／機器人平台的驗證點。</p>
+        </div>
+
+        <!-- 1. Overview Cards & Chart -->
+        <section id="overview" class="section-header mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心數據概覽</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-sm font-semibold text-stone-500 uppercase">目前股價 (2026/04/20)</p>
+                    <p class="text-3xl font-bold text-stone-800 mt-1">$389.95</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-sm font-semibold text-stone-500 uppercase">市場估值</p>
+                    <p class="text-3xl font-bold text-stone-800 mt-1">$1.43 兆美元</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <p class="text-sm font-semibold text-stone-500 uppercase">2026 資本支出計畫</p>
+                    <p class="text-3xl font-bold text-stone-800 mt-1">>200 億美元</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                    <p class="text-sm font-semibold text-stone-500 uppercase">歐洲 3 月純電車銷量</p>
+                    <p class="text-3xl font-bold text-stone-800 mt-1">+51.3%</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-stone-800">資本支出大幅擴張 (2025 vs 2026)</h3>
+                    <div class="relative h-64">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 italic">主要投資於 Cybercab、Optimus、電池與 AI 基礎設施。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold mb-4 text-stone-800">關鍵轉向：Rollout Metrics</h3>
+                    <p class="text-stone-600 mb-4">分析師指出，接下來最重要的領先指標已不再只是「交車量」，而是自駕與 Robotaxi 的實際落地速度（Rollout Metrics）。</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-stone-700">
+                            <span class="w-2 h-2 bg-sky-500 rounded-full mr-2"></span>
+                            荷蘭 FSD 潛在安裝基礎：10 萬台 Model 3/Y
+                        </li>
+                        <li class="flex items-center text-stone-700">
+                            <span class="w-2 h-2 bg-sky-500 rounded-full mr-2"></span>
+                            Austin/灣區載客車隊：>500 台
+                        </li>
+                        <li class="flex items-center text-stone-700">
+                            <span class="w-2 h-2 bg-sky-500 rounded-full mr-2"></span>
+                            目標 2026 年底覆蓋美境 1/4 至 1/2 區域
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Milestones Timeline -->
+        <section id="milestones" class="section-header mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">自駕技術發展里程碑</h2>
+            <div class="space-y-6">
+                <div class="flex">
+                    <div class="flex flex-col items-center mr-4">
+                        <div class="flex items-center justify-center w-8 h-8 bg-sky-500 text-white rounded-full font-bold">1</div>
+                        <div class="w-px h-full bg-stone-300"></div>
+                    </div>
+                    <div class="pb-6">
+                        <h4 class="text-lg font-bold text-stone-800">2025 年 6 月 - Austin 初期啟動</h4>
+                        <p class="text-stone-600">Robotaxi 開始在有限區域行駛，避開複雜路口與壞天氣，並配備前座安全員。</p>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="flex flex-col items-center mr-4">
+                        <div class="flex items-center justify-center w-8 h-8 bg-sky-500 text-white rounded-full font-bold">2</div>
+                        <div class="w-px h-full bg-stone-300"></div>
+                    </div>
+                    <div class="pb-6">
+                        <h4 class="text-lg font-bold text-stone-800">2026 年 1 月 - 移除安全員</h4>
+                        <p class="text-stone-600">Austin 推出部分付費載客服務，並正式移除 Safety Monitor（安全監控員）。</p>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="flex flex-col items-center mr-4">
+                        <div class="flex items-center justify-center w-8 h-8 bg-sky-500 text-white rounded-full font-bold">3</div>
+                        <div class="w-px h-full bg-stone-300"></div>
+                    </div>
+                    <div class="pb-6">
+                        <h4 class="text-lg font-bold text-stone-800">2026 年 4 月 - 德州擴城</h4>
+                        <p class="text-stone-600">Robotaxi 服務正式擴散至 Dallas 與 Houston，驗證營運模式的可複製性。</p>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="flex flex-col items-center mr-4">
+                        <div class="flex items-center justify-center w-8 h-8 bg-sky-500 text-white rounded-full font-bold">4</div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-stone-800">2026 年 Q4 - Cybercab 投產</h4>
+                        <p class="text-stone-600">官方確認開始安裝生產線，雖然產量爬坡緩慢且面臨無方向盤設計的監管障礙。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Interactive Data Table -->
+        <section id="metrics" class="section-header mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">區域營運與監管進度指標</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 border-b border-stone-200">
+                    <div class="relative max-w-sm">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-400">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </span>
+                        <input id="tableSearch" type="text" placeholder="搜尋城市或區域..." class="block w-full pl-10 pr-3 py-2 border border-stone-300 rounded-md leading-5 bg-white placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm transition">
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0">地區/城市</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0">發展狀態</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0">關鍵細節</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0">風險標籤</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Investment Strategy -->
+        <section id="strategy" class="section-header mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略建議</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-sky-50 rounded-lg p-8 border border-sky-100">
+                    <h3 class="text-2xl font-bold text-sky-800 mb-4">積極型投資人</h3>
+                    <p class="text-stone-700 mb-4">值得持有或分批佈局。核心邏輯在於賭 2026-2027 年自駕服務從「示範」走向「規模化」。</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">✓</span>
+                            <span>觀察新城市擴張節奏</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">✓</span>
+                            <span>監控 FSD 訂閱率轉化</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-emerald-50 rounded-lg p-8 border border-emerald-100">
+                    <h3 class="text-2xl font-bold text-emerald-800 mb-4">穩健型投資人</h3>
+                    <p class="text-stone-700 mb-4">目前不宜追高，建議等待 4/22 財報驗證。觀察管理層是否提供更具體的營運參數。</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✓</span>
+                            <span>確認 Cybercab 生產瓶頸</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✓</span>
+                            <span>等待無安全員比例數據化</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Risk Warning -->
+            <div class="mt-8 bg-amber-50 rounded-lg p-6 border border-amber-100">
+                <h4 class="text-lg font-bold text-amber-800 mb-2">⚠ 重大驗證風險</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-stone-700">
+                    <div class="flex items-center">
+                        <span class="w-1.5 h-1.5 bg-amber-400 rounded-full mr-2"></span>
+                        NHTSA 對惡劣天候下 FSD 安全性的審查
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-1.5 h-1.5 bg-amber-400 rounded-full mr-2"></span>
+                        歐盟層級對 FSD 全面開放的遲疑
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-1.5 h-1.5 bg-amber-400 rounded-full mr-2"></span>
+                        Cybercab 無方向盤設計的法規門檻
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-1.5 h-1.5 bg-amber-400 rounded-full mr-2"></span>
+                        資本支出翻倍對短期利潤的侵蝕
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Tesla 自駕敘事轉型研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Tesla 相關公開資料 (2026年4月20日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Interactive Table
+        const productData = [
+            { region: "荷蘭 (Amsterdam)", status: "監管突破", detail: "RDW 批准 supervised FSD，歐洲城市道路首例", risk: "監管嚴格/窄路複雜" },
+            { region: "美國 (Austin)", status: "無人營運", detail: "2026/1 移除安全員，提供付費載客", risk: "天候適應性" },
+            { region: "美國 (Dallas/Houston)", status: "商業擴張", detail: "2026/4 展開 Robotaxi 服務，驗證複製力", risk: "細節不透明" },
+            { region: "全美", status: "目標設定", detail: "2026 年底覆蓋美國 1/4 至 1/2 區域", risk: "過往時程跳票" },
+            { region: "Cybercab 生產線", status: "工業化推進", detail: "2026/4 預計生產，無方向盤/踏板設計", risk: "聯邦法規障礙" },
+            { region: "歐洲市場", status: "BEV 需求上升", detail: "3 月純電車銷量年增 51.3%", risk: "競爭壓力加劇" }
+        ];
+
+        // Render Table
+        function renderTable(data) {
+            const tbody = document.getElementById('dataTableBody');
+            tbody.innerHTML = data.map(item => `
+                <tr class="hover:bg-stone-50 transition">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-900">${item.region}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-700">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-sky-100 text-sky-800">
+                            ${item.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.detail}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-amber-600 font-medium">${item.risk}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Table Search Logic
+        document.getElementById('tableSearch').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.region.toLowerCase().includes(term) || 
+                item.status.toLowerCase().includes(term) ||
+                item.detail.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // Initialize Chart.js
+        function initChart() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2025 資本支出', '2026 資本支出 (計畫)'],
+                    datasets: [{
+                        label: '金額 (十億美元)',
+                        data: [8.5, 20],
+                        backgroundColor: ['rgba(14, 165, 233, 0.6)', 'rgba(14, 165, 233, 0.9)'],
+                        borderColor: ['#0ea5e9', '#0ea5e9'],
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: value => '$' + value + 'B' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Navigation Active State Logic
+        function initNavigationObserver() {
+            const sections = document.querySelectorAll('.section-header');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const options = {
+                root: null,
+                threshold: 0.5,
+                rootMargin: "-80px 0px -50% 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Bootstrap the page
+        window.onload = () => {
+            renderTable(productData);
+            initChart();
+            initNavigationObserver();
+        };
+    </script>
+</body>
+</html>
