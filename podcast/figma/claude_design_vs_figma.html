@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-當 AI 開始自己做設計研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-800 */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-black text-sky-600 tracking-tighter">Figma 的考驗</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">趨勢概覽</a>
+                    <a href="#product" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">產品解析</a>
+                    <a href="#impact" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">產業衝擊</a>
+                    <a href="#figma" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">Figma 現況</a>
+                    <a href="#investment" class="nav-link inactive-nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500">投資觀點</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-800 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="#overview" class="block px-3 py-2 text-base font-medium text-stone-800 hover:bg-sky-50">趨勢概覽</a>
+                <a href="#product" class="block px-3 py-2 text-base font-medium text-stone-800 hover:bg-sky-50">產品解析</a>
+                <a href="#impact" class="block px-3 py-2 text-base font-medium text-stone-800 hover:bg-sky-50">產業衝擊</a>
+                <a href="#figma" class="block px-3 py-2 text-base font-medium text-stone-800 hover:bg-sky-50">Figma 現況</a>
+                <a href="#investment" class="block px-3 py-2 text-base font-medium text-stone-800 hover:bg-sky-50">投資觀點</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="mb-20">
+            <div class="bg-gradient-to-br from-sky-600 to-indigo-700 rounded-3xl p-8 md:p-16 text-white shadow-2xl overflow-hidden relative">
+                <div class="relative z-10">
+                    <h1 class="text-3xl md:text-4xl font-extrabold mb-6">當 AI 開始自己做設計：<br>Claude Design 對 Figma 壓力測試</h1>
+                    <p class="text-lg md:text-xl text-sky-50 max-w-2xl">
+                        Anthropic 推出的 Claude Design 不僅是一個新功能，更是 AI 模型公司直球對決 SaaS 應用層的標誌性事件。這將如何重新定義設計軟體的未來？
+                    </p>
+                </div>
+                <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none">
+                    <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#FFFFFF" d="M44.7,-76.4C58.1,-69.2,69.2,-58.1,76.4,-44.7C83.7,-31.3,87.1,-15.7,86.1,-0.6C85,14.5,79.5,29.1,71.2,42.1C62.9,55.1,51.8,66.6,38.6,73.4C25.4,80.2,10.1,82.4,-4.3,89.8C-18.7,97.2,-37.4,109.9,-51.1,104.2C-64.8,98.5,-73.5,74.3,-79.6,54.7C-85.7,35.1,-89.2,20.1,-89.8,4.9C-90.4,-10.3,-88.2,-25.6,-81.1,-38.7C-74,-51.8,-62,-62.7,-48.5,-69.8C-35,-76.9,-20,-80.2,-2.5,-75.9C15,-71.6,29.9,-59.8,44.7,-76.4Z" transform="translate(100 100)" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Features Section -->
+        <section id="product" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 italic">Claude Design：核心能力解析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-sky-500 hover:translate-y-[-4px] transition-transform">
+                    <div class="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center mb-4 text-sky-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">多樣化視覺產出</h3>
+                    <p class="text-stone-600 text-sm">由 Claude Opus 4.7 驅動，支持對話式建立設計稿、互動原型、投影片、產品 Wireframe 及 3D 程式化原型。</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-indigo-500 hover:translate-y-[-4px] transition-transform">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4 text-indigo-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 01-2 2v2M8 7h4a2 2 0 002-2V4a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">深度流程整合</h3>
+                    <p class="text-stone-600 text-sm">自動讀取 codebase 與設計規範，匯入各類文檔 (PPTX, XLSX)，並可匯出至 Canva 或 HTML 交付開發。</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-emerald-500 hover:translate-y-[-4px] transition-transform">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 text-emerald-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">自主化創作工具</h3>
+                    <p class="text-stone-600 text-sm">從「想法」到「交付」的全鏈路打通，被市場歸類為「Creative Autonomous Tools」，威脅傳統軟體需求。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Performance & Data Table -->
+        <section id="impact" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 italic">市場反應與數據透視</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Chart 1: Market Index Comparison -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold mb-4 text-stone-700">2026 年初至今漲跌幅對比 (%)</h3>
+                    <div class="h-[300px]">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-400 mt-4 italic">* 數據來源：Reuters 4月22日報導數據</p>
+                </div>
+                
+                <!-- Chart 2: Figma Revenue Growth -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold mb-4 text-stone-700">Figma 營收成長趨勢 (百萬美元)</h3>
+                    <div class="h-[300px]">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-400 mt-4 italic">* 數據來源：Figma 2月財報公開數據</p>
+                </div>
+            </div>
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 overflow-hidden">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                    <h3 class="text-xl font-bold text-stone-800">Figma 關鍵營運指標 (2025-2026)</h3>
+                    <div class="relative">
+                        <input type="text" id="tableFilter" placeholder="搜尋指標名稱..." class="pl-10 pr-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none w-full">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                </div>
+                <div class="overflow-x-auto border border-stone-100 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">指標類別</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">指標名稱</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">數值 / 狀態</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-stone-100">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Layers Section -->
+        <section id="figma" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 italic">Figma 的護城河與挑戰</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="bg-amber-50 border-l-4 border-amber-400 p-6 rounded-r-xl">
+                        <h3 class="text-xl font-bold text-amber-800 mb-2">威脅：低端與早期場景壓縮</h3>
+                        <p class="text-amber-700">創業者、PM、行銷人員在初期畫 Wireframe 或簡單 Landing page 時，可能優先轉向 Claude，壓縮 Figma 作為「第一入口」的份額。</p>
+                    </div>
+                    <div class="bg-sky-50 border-l-4 border-sky-400 p-6 rounded-r-xl">
+                        <h3 class="text-xl font-bold text-sky-800 mb-2">優勢：高端企業協作平台</h3>
+                        <p class="text-sky-700">大型團隊需要的版本控制、共享元件庫、權限治理與預測性成本管理，目前仍是 Figma 的核心競爭力所在。</p>
+                    </div>
+                </div>
+                <div class="bg-stone-800 text-stone-100 rounded-2xl p-8 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center">
+                        <span class="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center text-xs mr-3">VS</span>
+                        競爭格局的轉變
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-sky-400 mr-2">●</span>
+                            <span><strong>模型公司擴張：</strong>從文字助理轉向具備工作入口能力的應用。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-400 mr-2">●</span>
+                            <span><strong>應用層回應：</strong>Figma 已推出 Make/Weave/Sites，將 AI 內建於流程。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-400 mr-2">●</span>
+                            <span><strong>權力重組：</strong>未來更值錢的是定義流程與品牌規則的人，而非單純畫圖。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Outlook Section -->
+        <section id="investment" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 italic">投資人核心觀點</h2>
+            <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-stone-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <div class="mb-8">
+                            <h4 class="text-sky-600 font-bold uppercase tracking-widest text-sm mb-2">策略建議</h4>
+                            <p class="text-stone-600">不應只看短線股價，而要追蹤「淨美元留存率」與「AI Credits 採用率」，判斷 AI 是否真正推動變現。</p>
+                        </div>
+                        <div class="mb-8">
+                            <h4 class="text-sky-600 font-bold uppercase tracking-widest text-sm mb-2">警鐘效應</h4>
+                            <p class="text-stone-600">模型公司切入應用層是明確信號，缺乏深度工作流綁定的單點 SaaS 公司，未來估值將持續承壓。</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-stone-50 rounded-xl border border-stone-100">
+                            <p class="font-bold text-stone-800">1. 企業客戶成長力</p>
+                            <p class="text-stone-500 text-sm">Figma 已有 1,405 家 10 萬美元級客戶，企業滲透深度仍深。</p>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-xl border border-stone-100">
+                            <p class="font-bold text-stone-800">2. 毛利率動向</p>
+                            <p class="text-stone-500 text-sm">關注模型成本（如選用 Claude Opus 4.7）是否導致利潤惡化。</p>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-xl border border-stone-100">
+                            <p class="font-bold text-stone-800">3. 定價權維持</p>
+                            <p class="text-stone-500 text-sm">混合變現模式（AI Credits）是否能被企業端接受。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-當 AI 開始自己做設計研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Claude Design & Figma 相關公開資料 (2026年4月22日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Interactive Table
+        const productData = [
+            { category: "營收表現", name: "2025 全年營收", value: "10.56 億美元", note: "年增 41%" },
+            { category: "營收表現", name: "2025 Q4 營收", value: "3.038 億美元", note: "年增 40%" },
+            { category: "用戶黏度", name: "淨美元留存率 (NDR)", value: "136%", note: "維持極高水準" },
+            { category: "企業客戶", name: "$1萬+ ARR 客戶", value: "13,861 家", note: "滲透廣度" },
+            { category: "企業客戶", name: "$10萬+ ARR 客戶", value: "1,405 家", note: "滲透深度" },
+            { category: "企業客戶", name: "$100萬+ ARR 客戶", value: "67 家", note: "大客戶穩定度" },
+            { category: "產品動向", name: "Mike Krieger 辭任董事", value: "4月14日提交", note: "競爭敏感訊號" },
+            { category: "市場大盤", name: "軟體與服務指數漲跌", value: "-16%", note: "明顯落後 S&P 500" },
+            { category: "變現模式", name: "AI Credits", value: "混合變現模式", note: "2026年營收新動能" }
+        ];
+
+        // 1. Mobile Menu Logic
+        const mobileBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Interactive Table Logic
+        const tableBody = document.getElementById('dataTableBody');
+        const filterInput = document.getElementById('tableFilter');
+
+        function renderTable(data) {
+            tableBody.innerHTML = data.map(item => `
+                <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-sky-700">${item.category}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-900">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-800">${item.value}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${item.note}</td>
+                </tr>
+            `).join('');
+        }
+
+        filterInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(searchTerm) || 
+                item.category.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. Navigation Intersection Observer
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav-link');
+                link.classList.add('inactive-nav-link');
+                if (link.href.includes(current)) {
+                    link.classList.add('active-nav-link');
+                    link.classList.remove('inactive-nav-link');
+                }
+            });
+        });
+
+        // 4. Chart.js Initialization
+        window.onload = function() {
+            renderTable(productData);
+
+            // Market Comparison Chart
+            const ctxMarket = document.getElementById('marketChart').getContext('2d');
+            new Chart(ctxMarket, {
+                type: 'bar',
+                data: {
+                    labels: ['軟體與服務指數 (YTD)', 'S&P 500 (YTD)'],
+                    datasets: [{
+                        label: '漲跌幅 (%)',
+                        data: [-16, 3.2],
+                        backgroundColor: ['rgba(239, 68, 68, 0.7)', 'rgba(14, 165, 233, 0.7)'],
+                        borderColor: ['#ef4444', '#0ea5e9'],
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: false, grid: { color: '#f1f1f1' } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // Figma Revenue Growth Chart
+            const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctxRevenue, {
+                type: 'line',
+                data: {
+                    labels: ['2023 全年', '2024 全年', '2025 全年', '2026 指引'],
+                    datasets: [{
+                        label: '營收 (百萬美元)',
+                        data: [520, 750, 1056, 1480], // 部分為估算以利視覺化趨勢
+                        borderColor: '#6366f1',
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#6366f1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#f1f1f1' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
