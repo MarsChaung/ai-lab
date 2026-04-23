@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Tesla 2026Q1 財報分析研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-sky-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl italic">T</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-stone-800">Tesla 2026Q1</span>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition">總結</a>
+                    <a href="#financials" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition">財務數據</a>
+                    <a href="#ai-robotaxi" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition">AI 與 Robotaxi</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link font-medium hover:text-sky-500 transition">商業策略</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 text-stone-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 py-4 space-y-2 shadow-inner">
+            <a href="#summary" class="block px-3 py-2 text-stone-600 font-medium">總結</a>
+            <a href="#financials" class="block px-3 py-2 text-stone-600 font-medium">財務數據</a>
+            <a href="#ai-robotaxi" class="block px-3 py-2 text-stone-600 font-medium">AI 與 Robotaxi</a>
+            <a href="#strategy" class="block px-3 py-2 text-stone-600 font-medium">商業策略</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <div class="bg-gradient-to-r from-sky-600 to-blue-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl overflow-hidden relative">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Tesla 不再只是賣車公司：<br>市場真正擔心的是 AI 夢想要花多少錢</h1>
+                    <p class="text-lg md:text-xl text-sky-50 opacity-90 max-w-3xl mb-8">
+                        這是一份優於預期的成績單，但投資人的焦點已轉向 Robotaxi、FSD 與 Optimus 的變現能力，以及每年超過 250 億美元的高額支出壓力。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <div class="text-sky-200 text-sm mb-1">Q1 營收</div>
+                            <div class="text-2xl font-bold">223.87 億美元</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <div class="text-sky-200 text-sm mb-1">Non-GAAP EPS</div>
+                            <div class="text-2xl font-bold">$0.41</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <div class="text-sky-200 text-sm mb-1">GAAP 毛利率</div>
+                            <div class="text-2xl font-bold">21.1%</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Abstract Design Decor -->
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-sky-400 rounded-full blur-3xl opacity-20"></div>
+            </div>
+        </section>
+
+        <!-- Financial Insights -->
+        <section id="financials" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務表現與數據趨勢</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- Revenue Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-stone-700">Q1 營收結構分析 (單位：億美元)</h3>
+                    <div class="h-64 relative">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Financial Highlights -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-emerald-50 border border-emerald-100 rounded-lg p-6 text-center">
+                        <p class="text-emerald-600 text-sm font-semibold mb-1">自由現金流</p>
+                        <p class="text-3xl font-bold text-emerald-700">14.44億</p>
+                        <p class="text-xs text-emerald-500 mt-2">美元</p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-6 text-center">
+                        <p class="text-blue-600 text-sm font-semibold mb-1">營運現金流</p>
+                        <p class="text-3xl font-bold text-blue-700">39.37億</p>
+                        <p class="text-xs text-blue-500 mt-2">美元</p>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-6 text-center">
+                        <p class="text-orange-600 text-sm font-semibold mb-1">汽車毛利率</p>
+                        <p class="text-3xl font-bold text-orange-700">19.2%</p>
+                        <p class="text-xs text-orange-500 mt-2">(扣除監管信用)</p>
+                    </div>
+                    <div class="bg-purple-50 border border-purple-100 rounded-lg p-6 text-center">
+                        <p class="text-purple-600 text-sm font-semibold mb-1">現金儲備</p>
+                        <p class="text-3xl font-bold text-purple-700">447.4億</p>
+                        <p class="text-xs text-purple-500 mt-2">美元</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                    <h3 class="text-xl font-semibold text-stone-700">財報關鍵數據細節</h3>
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋項目名稱..." class="w-full pl-10 pr-4 py-2 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="overflow-x-auto border border-stone-100 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">數據項目</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">數據值</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">說明 / 年增率</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-stone-100">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI & Robotaxi Section -->
+        <section id="ai-robotaxi" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 轉型與自動駕駛商業化</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- FSD Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-sky-100 rounded-lg text-sky-600 mr-3">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">FSD 軟體進展</h3>
+                    </div>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">•</span>活躍訂閱數突破 128 萬戶</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">•</span>荷蘭監管機構已批准 FSD (Supervised)</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">•</span>Q1 淨新增訂閱量創歷史新高</li>
+                    </ul>
+                </div>
+                <!-- Robotaxi Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-500">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-3">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path><path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10V8h3l3.33 4.67c.44.61.67 1.34.67 2.08V16a1 1 0 001 1h1a1 1 0 001-1v-4.17c0-.74-.23-1.47-.67-2.08L14.33 4H3z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">Robotaxi 落地</h3>
+                    </div>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex items-start"><span class="text-blue-500 mr-2">•</span>達拉斯、休士頓啟動無人監督服務</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2">•</span>付費里程較前一季近乎翻倍</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2">•</span>Cybercab 專用產線建置中</li>
+                    </ul>
+                </div>
+                <!-- Optimus Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-purple-500">
+                    <div class="flex items-center mb-4">
+                        <div class="p-2 bg-purple-100 rounded-lg text-purple-600 mr-3">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 10-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 112 0v1a1 1 0 11-2 0zM13.536 15.657a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414l.707.707z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">Optimus 與 AI 基礎</h3>
+                    </div>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex items-start"><span class="text-purple-500 mr-2">•</span>第一代量產線正在進行設備安裝</li>
+                        <li class="flex items-start"><span class="text-purple-500 mr-2">•</span>完成下一代 AI5 推論晶片設計</li>
+                        <li class="flex items-start"><span class="text-purple-500 mr-2">•</span>與 SpaceX 合作推進大型晶圓廠計畫</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Analysis -->
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心商業策略與未來挑戰</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- CapEx and FCF Warning -->
+                <div class="bg-stone-800 text-stone-100 rounded-lg p-8 shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">重資本支出的 AI 轉向</h3>
+                            <p class="text-stone-400 text-sm">資本支出與現金流壓力</p>
+                        </div>
+                    </div>
+                    <p class="mb-6 opacity-90">
+                        Tesla 已將 2026 年資本支出計畫從 200 億美元上調至 <span class="text-red-400 font-bold">250 億美元</span> 以上。CFO 表示 2026 年剩餘時間的自由現金流可能轉為負值，這顯示公司正以前所未有的規模押注基礎設施。
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-stone-700 pb-2">
+                            <span>2026 預計資本支出</span>
+                            <span class="font-mono text-sky-400">>$25.0B</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-stone-700 pb-2">
+                            <span>研發與晶圓廠計畫</span>
+                            <span class="font-mono text-sky-400">AI5 & SpaceX 合作</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-stone-700 pb-2">
+                            <span>未來現金流展望</span>
+                            <span class="font-mono text-red-400">轉向負值負擔</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Investment Thesis -->
+                <div class="flex flex-col justify-between space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2 flex items-center">
+                            <span class="w-2 h-6 bg-sky-500 mr-2 rounded"></span>
+                            投資觀察焦點一：毛利率的可持續性
+                        </h4>
+                        <p class="text-stone-600">
+                            Q1 的毛利改善受惠於保固、關稅等一次性利益。投資人需觀察在監管信用收入下降（本季降至 3.8 億美元）的情況下，本業毛利是否能維持結構性增長。
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2 flex items-center">
+                            <span class="w-2 h-6 bg-blue-500 mr-2 rounded"></span>
+                            投資觀察焦點二：供需匹配與庫存
+                        </h4>
+                        <p class="text-stone-600">
+                            全球車輛庫存天數為 27 天，且 Q1 生產比交付多出約 5 萬台。雖然歐洲需求回溫（德國廠增員 1,000 人），但庫存壓力仍是不可忽視的成本變數。
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h4 class="text-lg font-bold text-stone-800 mb-2 flex items-center">
+                            <span class="w-2 h-6 bg-indigo-500 mr-2 rounded"></span>
+                            投資觀察焦點三：變現時間表
+                        </h4>
+                        <p class="text-stone-600">
+                            目前 Tesla 的市值約 1.31 兆美元（P/E 約 255 倍），極高的估值建立在 AI 平台敘事上。Robotaxi 與 Optimus 的商業化進度必須與支出規模同步。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Tesla 2026Q1 財報分析研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Tesla 相關公開資料 (2026年4月23日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Logic
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Data Table Setup
+        const productData = [
+            { item: "總營收", value: "223.87 億美元", note: "年增 16%，優於預期" },
+            { item: "汽車業務營收", value: "162.34 億美元", note: "核心營收來源" },
+            { item: "服務與其他營收", value: "37.45 億美元", note: "年增 42%，成長強勁" },
+            { item: "能源業務營收", value: "24.08 億美元", note: "年減 12%，短線數字較弱" },
+            { item: "GAAP 毛利率", value: "21.1%", note: "去年同期與前季均有所改善" },
+            { item: "監管信用額收入", value: "3.8 億美元", note: "低於去年同期的 5.95 億" },
+            { item: "Q1 交付量", value: "358,023 輛", note: "年增 6%" },
+            { item: "Q1 生產量", value: "408,386 輛", note: "生產多於交付 50,363 輛" },
+            { item: "FSD 活躍戶", value: "128 萬", note: "淨新增訂閱創歷史新高" },
+            { item: "2026 資本支出計畫", value: "> 250 億美元", note: "年初預期為 200 億美元" },
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('dataTableBody');
+            tbody.innerHTML = data.map(row => `
+                <tr class="hover:bg-stone-50 transition">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-stone-800">${row.item}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-sky-600 font-mono">${row.value}</td>
+                    <td class="px-6 py-4 text-sm text-stone-500">${row.note}</td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('tableSearch').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = productData.filter(d => d.item.toLowerCase().includes(query));
+            renderTable(filtered);
+        });
+
+        renderTable(productData);
+
+        // 3. Chart.js Implementation
+        window.onload = function() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['汽車業務', '服務與其他', '能源業務'],
+                    datasets: [{
+                        label: 'Q1 營收 (億美元)',
+                        data: [162.34, 37.45, 24.08],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)',
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(168, 85, 247, 0.7)'
+                        ],
+                        borderColor: [
+                            '#0ea5e9',
+                            '#3b82f6',
+                            '#a855f7'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f3f4f6' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // 4. Smooth Scroll Active State (Intersection Observer)
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            const observerOptions = {
+                root: null,
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        }
+    </script>
+</body>
+</html>
