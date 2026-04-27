@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Verizon 與 Domino’s 財報解析研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+        }
+        .nav-transition {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <span class="text-xl font-black text-sky-700 tracking-tighter">美股防禦股 vs 消費股</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#overview" class="nav-link nav-transition font-medium px-1 pt-1">總體概覽</a>
+                    <a href="#verizon" class="nav-link nav-transition font-medium px-1 pt-1">Verizon分析</a>
+                    <a href="#dominos" class="nav-link nav-transition font-medium px-1 pt-1">Domino's分析</a>
+                    <a href="#macro" class="nav-link nav-transition font-medium px-1 pt-1">總體環境</a>
+                    <a href="#strategy" class="nav-link nav-transition font-medium px-1 pt-1">投資策略</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">總體概覽</a>
+                <a href="#verizon" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">Verizon分析</a>
+                <a href="#dominos" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">Domino's分析</a>
+                <a href="#macro" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">總體環境</a>
+                <a href="#strategy" class="block px-3 py-2 text-stone-600 hover:bg-sky-50 rounded-md">投資策略</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Hero Section -->
+        <section id="overview" class="mb-16">
+            <div class="bg-gradient-to-r from-sky-800 to-indigo-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4">從 Verizon 到 Domino’s：<br><span class="text-sky-300">美股防禦股回來了，但消費股沒有想像中安全</span></h1>
+                <p class="text-lg text-sky-100 max-w-3xl mb-8">
+                    2026 年 4 月 27 日財報解讀：資金正重新定義「真正有現金流支撐的防禦股」與「受需求轉弱影響的消費股」。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                        <p class="text-sky-200 text-sm">關鍵趨勢</p>
+                        <p class="text-xl font-bold">防禦股出現轉機</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                        <p class="text-sky-200 text-sm">消費預警</p>
+                        <p class="text-xl font-bold">低價餐飲受壓</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                        <p class="text-sky-200 text-sm">總體壓力</p>
+                        <p class="text-xl font-bold">通膨與信心下滑</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據對比</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">Verizon 第一季用戶數 (月付費無線用戶)</h3>
+                    <div class="h-64 relative">
+                        <canvas id="verizonChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 italic text-center">* 自 2021 年以來最好的首季表現，大幅優於預期。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">Domino's 美國同店銷售成長率 (%)</h3>
+                    <div class="h-64 relative">
+                        <canvas id="dominosChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 italic text-center">* 實際表現大幅低於分析師預期，顯示消費降級壓力。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verizon Section -->
+        <section id="verizon" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Verizon：穩定現金流的轉機</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                        <h4 class="font-bold text-emerald-700 mb-2">財報亮點</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2">
+                            <li>調整後 EPS 1.28 美元 (年增 7.6%)</li>
+                            <li>2026 全年 EPS 指引上修至 4.95 - 4.99 美元</li>
+                            <li>月付費無線用戶淨增 5.5 萬名 (市場預期流失 8 萬)</li>
+                            <li>Mobility 與 Broadband 收入年增 1.6%</li>
+                        </ul>
+                    </div>
+                    <p class="text-stone-600">
+                        Verizon 的意義在於「防禦股修復題材」。公司策略從單純降價轉向「無線 + 寬頻」綁定，提高客戶離開成本。當市場擔心通膨時，這種穩定且可預測的現金流重新獲得青睞。
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-sky-100 p-6 rounded-xl text-center">
+                        <p class="text-sky-600 text-sm font-bold uppercase">營運現金流預估</p>
+                        <p class="text-2xl font-black text-sky-800">380 億</p>
+                        <p class="text-stone-500 text-xs">美元 (2026 全年)</p>
+                    </div>
+                    <div class="bg-indigo-100 p-6 rounded-xl text-center">
+                        <p class="text-indigo-600 text-sm font-bold uppercase">資本支出預估</p>
+                        <p class="text-2xl font-black text-indigo-800">165 億</p>
+                        <p class="text-stone-500 text-xs">美元 (2026 全年)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Domino's Section -->
+        <section id="dominos" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-orange-500 pb-2">Domino’s：低價餐飲的兩難</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <h3 class="text-xl font-bold mb-4 text-stone-700">消費者變得更挑、更省</h3>
+                        <p class="text-stone-600 mb-4">
+                            雖然營業利益仍成長 9.6%，但美國同店銷售成長僅 0.9%，遠低於市場期待。公司不得不調降 2026 全年展望。關鍵挑戰在於「促銷陷阱」：當所有品牌都打折時，促銷不再是優勢，而是侵蝕利潤的必要成本。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-sm font-medium">9.99 美元 Best Deal</span>
+                            <span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-sm font-medium">加盟商利潤受壓</span>
+                            <span class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-sm font-medium">國際市場下滑 0.4%</span>
+                        </div>
+                    </div>
+                    <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+                        <h4 class="text-orange-700 font-bold mb-3 italic">⚠️ 警訊點</h4>
+                        <ul class="text-sm text-stone-600 space-y-3">
+                            <li class="flex items-start"><span class="text-orange-500 mr-2">●</span> 自由現金流從 1.64 億降至 1.47 億美元。</li>
+                            <li class="flex items-start"><span class="text-orange-500 mr-2">●</span> 美國同店銷售展望下調至「低個位數」。</li>
+                            <li class="flex items-start"><span class="text-orange-500 mr-2">●</span> 回購股票雖然持續，但難掩需求放緩。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Table -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財報數據詳細清單</h2>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4 border-b border-stone-200 bg-stone-50">
+                    <input type="text" id="tableSearch" placeholder="搜尋指標 (如：EPS, 營收...)" class="w-full md:w-64 px-4 py-2 rounded-lg border border-stone-300 focus:ring-2 focus:ring-sky-500 outline-none">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-800 text-white sticky top-0">
+                            <tr>
+                                <th class="p-4 font-bold">公司名稱</th>
+                                <th class="p-4 font-bold">指標項目</th>
+                                <th class="p-4 font-bold">數值內容</th>
+                                <th class="p-4 font-bold">趨勢說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody">
+                            <!-- JS content here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Macro Environment -->
+        <section id="macro" class="mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-stone-800 text-white p-8 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-6 text-sky-400">總體環境壓力測試</h2>
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-stone-400 text-sm uppercase mb-1">消費者信心指數 (4月)</p>
+                        <div class="flex items-end gap-4">
+                            <span class="text-4xl font-bold">49.8</span>
+                            <span class="text-red-400 mb-1">▼ 低於 3 月 53.3</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-stone-700 pt-4">
+                        <p class="text-stone-300 mb-4">油價與能源成本推升運輸與食材成本，P&G 警告將對 2027 獲利造成 10 億美元衝擊。</p>
+                        <div class="bg-stone-700 p-4 rounded-lg text-sm text-stone-300">
+                            自中東衝突以來，已有 24 家公司撤回指引，35 家公司提到漲價可能。
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col justify-center">
+                <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">分化現象</h2>
+                <p class="text-stone-600 mb-4">
+                    Verizon 提供的服務屬於「生活必要支出」，即使消費者信心下滑，也不太可能取消通訊服務，因此被視為<strong>防禦型資產</strong>。
+                </p>
+                <p class="text-stone-600">
+                    Domino's 雖是低價外食，但屬於「非必要支出的替代品」。當家庭對未來收入不安時，外食訂單仍會被縮減，顯示<strong>消費股並不具備絕對安全性</strong>。
+                </p>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition-shadow border-t-4 border-sky-500">
+                    <h3 class="text-xl font-bold mb-4">Verizon (VZ) - 偏正面，但不追高</h3>
+                    <p class="text-stone-600 mb-4 text-sm leading-relaxed">
+                        轉型初具成效，可列入「收益型部位」。建議等待回落至合理殖利率區間分批布局。
+                    </p>
+                    <div class="bg-stone-50 p-4 rounded-lg">
+                        <p class="text-xs font-bold text-stone-500 mb-2">追蹤指標：</p>
+                        <ul class="text-xs text-stone-600 space-y-1">
+                            <li>● Postpaid Phone Net Adds 持續為正</li>
+                            <li>● 寬頻業務的客戶黏著度</li>
+                            <li>● 收購 Frontier 的整合效果</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition-shadow border-t-4 border-orange-500">
+                    <h3 class="text-xl font-bold mb-4">Domino's (DPZ) - 謹慎等待</h3>
+                    <p class="text-stone-600 mb-4 text-sm leading-relaxed">
+                        雖然品牌強韌，但需等待需求重新加速的訊號。不宜只因股價下跌就急著抄底。
+                    </p>
+                    <div class="bg-stone-50 p-4 rounded-lg">
+                        <p class="text-xs font-bold text-stone-500 mb-2">啟動條件：</p>
+                        <ul class="text-xs text-stone-600 space-y-1">
+                            <li>● 美國同店銷售重新加速</li>
+                            <li>● 國際市場停止下滑</li>
+                            <li>● 促銷未明顯壓縮利潤</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Verizon 與 Domino’s 財報解析研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Verizon 與 Domino’s財報及消費股趨勢相關公開資料 (2026年4月27日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Interactive Table
+        const productData = [
+            { company: "Verizon", category: "調整後 EPS", value: "1.28 美元", trend: "年增 7.6%，2021 以來最高" },
+            { company: "Verizon", category: "無線用戶淨增", value: "+5.5 萬名", trend: "首季意外由負轉正" },
+            { company: "Verizon", category: "2026 EPS 指引", value: "4.95 - 4.99 美元", trend: "上修，年增 5-6%" },
+            { company: "Verizon", category: "營運現金流", value: "375-380 億美元", trend: "穩定支持配息與投資" },
+            { company: "Domino's", category: "美國同店銷售", value: "+0.9%", trend: "低於預期 (2.72%)" },
+            { company: "Domino's", category: "稀釋 EPS", value: "4.13 美元", trend: "低於去年 (4.33 美元)" },
+            { company: "Domino's", category: "2026 銷售展望", value: "低個位數 %", trend: "下調預期 (原為 3%)" },
+            { company: "Domino's", category: "自由現金流", value: "1.47 億美元", trend: "低於去年同期" },
+            { company: "Macro", category: "消費者信心", value: "49.8", trend: "明顯下滑 (前值 53.3)" }
+        ];
+
+        // Populate Table
+        const tableBody = document.getElementById('dataTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="border-b border-stone-100 hover:bg-stone-50">
+                        <td class="p-4 font-medium text-sky-700">${item.company}</td>
+                        <td class="p-4 text-stone-700">${item.category}</td>
+                        <td class="p-4 font-bold text-stone-900">${item.value}</td>
+                        <td class="p-4 text-stone-500 text-sm">${item.trend}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        renderTable(productData);
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.company.toLowerCase().includes(term) || 
+                item.category.toLowerCase().includes(term) || 
+                item.trend.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navigation Active State (Intersection Observer)
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav-link');
+                link.classList.add('inactive-nav-link');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active-nav-link');
+                    link.classList.remove('inactive-nav-link');
+                }
+            });
+        });
+
+        // Chart.js - Verizon User Growth
+        const vCtx = document.getElementById('verizonChart').getContext('2d');
+        new Chart(vCtx, {
+            type: 'bar',
+            data: {
+                labels: ['預期 (Analyst)', '實際 (Actual)'],
+                datasets: [{
+                    label: '月付費無線用戶 (人數)',
+                    data: [-81800, 55000],
+                    backgroundColor: ['#f43f5e', '#10b981'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: false, grid: { display: false } }
+                }
+            }
+        });
+
+        // Chart.js - Domino's Comp Sales
+        const dCtx = document.getElementById('dominosChart').getContext('2d');
+        new Chart(dCtx, {
+            type: 'bar',
+            data: {
+                labels: ['預期 (Analyst)', '實際 (Actual)'],
+                datasets: [{
+                    label: '銷售成長率 (%)',
+                    data: [2.72, 0.9],
+                    backgroundColor: ['#e2e8f0', '#f97316'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, max: 3, grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
