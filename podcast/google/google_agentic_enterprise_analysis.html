@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Google 代理型企業轉型研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c;
+        }
+        .section-fade {
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
+                        Google Cloud Next ‘26
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#summary" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">概觀</a>
+                    <a href="#strategy" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">代理策略</a>
+                    <a href="#technology" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">硬體技術</a>
+                    <a href="#finance" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">財務回報</a>
+                    <a href="#stocks" class="nav-link px-1 py-2 text-sm font-medium transition-colors inactive-nav-link">股票觀察</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu List -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">概觀</a>
+            <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">代理策略</a>
+            <a href="#technology" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">硬體技術</a>
+            <a href="#finance" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">財務回報</a>
+            <a href="#stocks" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">股票觀察</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Section -->
+        <section id="summary" class="mb-16">
+            <div class="bg-sky-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">從搜尋引擎到代理型企業：<br>Google AI 戰場全面升級</h1>
+                    <p class="text-lg md:text-xl text-sky-100 max-w-3xl mb-8">
+                        Alphabet 正將 AI 商業模式從「工具型助手」轉向「企業營運系統」。Gemini Enterprise 將成為企業內部各種 AI 代理的管理中樞。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4">
+                            <p class="text-sky-200 text-sm">2026 預估資本支出</p>
+                            <p class="text-2xl font-bold">1,800 億美元</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4">
+                            <p class="text-sky-200 text-sm">TPU 8i 性價比提升</p>
+                            <p class="text-2xl font-bold">80% ↑</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4">
+                            <p class="text-sky-200 text-sm">目標市場</p>
+                            <p class="text-2xl font-bold">企業 Agent 治理</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Simple Decorative SVG background element -->
+                <svg class="absolute right-0 bottom-0 opacity-10 pointer-events-none" width="400" height="400" viewBox="0 0 200 200">
+                    <circle cx="150" cy="150" r="100" fill="white" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、Agentic Enterprise：AI 作業系統化</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-sky-700 mb-4">Gemini Enterprise Agent Platform</h3>
+                    <p class="text-stone-600 mb-4">Google 將其定位為企業部署 AI 代理的「作業系統」，不僅僅提供模型，更強調治理、安全與調度。</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">✓</span><span>Agent Studio：快速建置與擴展</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">✓</span><span>Agent Identity：代理人身份認證</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">✓</span><span>Observability：運行狀態監控與審計</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-amber-700 mb-4">解決企業痛點</h3>
+                    <p class="text-stone-600">企業不擔憂 AI 的智慧，而是擔憂「失控」。Google 透過強調資安、合規與權限控制，吸引金融、醫療等高監管產業導入大規模 AI 工作流。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section id="technology" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、第八代 TPU：成本控制為核心武器</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="font-bold text-stone-400 mb-2 uppercase tracking-widest text-xs text-center">大規模訓練</div>
+                    <h4 class="text-2xl font-bold text-sky-800 text-center mb-4 italic">TPU 8t</h4>
+                    <p class="text-sm text-stone-600">效能提升接近 3 倍。將前沿模型開發週期從數月縮短至數週，專注於高效大規模運算。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-500">
+                    <div class="font-bold text-stone-400 mb-2 uppercase tracking-widest text-xs text-center">即時推論</div>
+                    <h4 class="text-2xl font-bold text-blue-800 text-center mb-4 italic">TPU 8i</h4>
+                    <p class="text-sm text-stone-600">性價比提升 80%。針對 MoE 模型與數千個代理互動設計，有效降低大規模部署成本。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <div class="font-bold text-stone-400 mb-2 uppercase tracking-widest text-xs text-center">NVIDIA 協作</div>
+                    <h4 class="text-2xl font-bold text-emerald-800 text-center mb-4 italic">Vera Rubin A5X</h4>
+                    <p class="text-sm text-stone-600">Google 並未放棄 GPU，採「TPU+GPU」雙軌策略，滿足不同開發者對 CUDA 生態的需求。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Section & Chart -->
+        <section id="finance" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、財務回報：超高資本支出的考驗</h2>
+            <div class="grid lg:grid-cols-2 gap-10 items-center">
+                <div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-bold mb-4 flex items-center">
+                            <svg class="h-5 w-5 text-amber-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+                            Alphabet 資本支出 (CapEx) 趨勢分析
+                        </h3>
+                        <div class="h-64 relative">
+                            <canvas id="capexChart"></canvas>
+                        </div>
+                        <p class="text-xs text-stone-400 mt-4 text-center">單位：十億美元 (USD Billion)</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-4">
+                        <p class="font-bold text-amber-800">投資回報焦慮</p>
+                        <p class="text-sm text-amber-700">市場質疑 2026 年高達 1,800 億美元的支出能否轉化為 Cloud 的利潤率改善與營收增長。</p>
+                    </div>
+                    <div class="bg-stone-800 text-white p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-2">關鍵財務觀察點：</h4>
+                        <ul class="text-stone-300 text-sm space-y-2">
+                            <li>• Google Cloud 是否能維持高雙位數成長？</li>
+                            <li>• Cloud Margin (利潤率) 是否隨 TPU 自研規模擴大而改善？</li>
+                            <li>• 國防合約與 Gemini Enterprise 是否帶來長約客戶？</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stock Analysis Section -->
+        <section id="stocks" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、相關受惠與受壓股票觀察</h2>
+            
+            <div class="mb-6">
+                <div class="relative max-w-sm">
+                    <input type="text" id="tableFilter" placeholder="搜尋公司或評註..." class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none bg-white">
+                    <svg class="h-5 w-5 text-stone-400 absolute right-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+                <table class="min-w-full divide-y divide-stone-200">
+                    <thead class="bg-stone-50 sticky top-0">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">標的</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">主要利多/利空分析</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">市場定位</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stockTableBody" class="bg-white divide-y divide-stone-200">
+                        <!-- JS Dynamic Injection -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Conclusion Card -->
+        <section class="mb-16">
+            <div class="bg-stone-100 p-8 rounded-2xl border border-stone-200">
+                <h2 class="text-2xl font-bold text-stone-800 mb-4">投資總結</h2>
+                <p class="text-stone-700 mb-4">
+                    Google 的 AI 故事正在從「模型競賽」升級成「企業營運平台競賽」。儘管 2026 年巨額的 CapEx 帶來財務壓力，但 Google 具備了從底層晶片 (TPU)、基礎設施 (Cloud) 到應用治理 (Gemini Enterprise) 的垂直整合優勢。
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex-1 p-4 bg-sky-50 rounded-lg">
+                        <p class="font-bold text-sky-800">中長期看好：</p>
+                        <p class="text-sm">具備完整 AI 敘事：基礎設施 + 企業軟體 + 廣告現金流。</p>
+                    </div>
+                    <div class="flex-1 p-4 bg-rose-50 rounded-lg">
+                        <p class="font-bold text-rose-800">短期風險：</p>
+                        <p class="text-sm">折舊與現金流壓力大，需財報確認 Cloud 獲利路徑。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Google 代理型企業轉型研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Google Cloud Next ‘26 相關公開資料 (2026年4月28日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data ---
+        const stockData = [
+            { company: "Alphabet (GOOGL)", impact: "Gemini Enterprise、TPU 8i、國防合約構成利多，但短期受 CapEx 折舊壓力影響。", position: "中長期核心標的" },
+            { company: "Nvidia (NVDA)", impact: "TPU 進展是競爭壓力，但 Google 仍導入 Rubin A5X，維持雙軌需求。", position: "GPU 市場霸主" },
+            { company: "Broadcom (AVGO)", impact: "Google 自研 ASIC 與 TPU 生態擴張的直接受惠者。", position: "客製化晶片領導者" },
+            { company: "Microsoft (MSFT)", impact: "Agentic Enterprise 是直接競爭，需證明 Copilot 滲透率超越 Google。", position: "企業軟體主要競爭者" },
+            { company: "Amazon (AMZN)", impact: "需要證明 AWS 不僅是算力租賃，也能在代理平台層維持競爭力。", position: "雲端基礎設施龍頭" }
+        ];
+
+        // --- Chart.js Initializtion ---
+        function initChart() {
+            const ctx = document.getElementById('capexChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023 實際', '2026 預估 (低標)', '2026 預估 (高標)'],
+                    datasets: [{
+                        label: '資本支出 (十億美元)',
+                        data: [32.3, 175, 185],
+                        backgroundColor: [
+                            'rgba(120, 113, 108, 0.5)',
+                            'rgba(14, 165, 233, 0.7)',
+                            'rgba(3, 105, 161, 0.9)'
+                        ],
+                        borderColor: [
+                            'rgb(120, 113, 108)',
+                            'rgb(14, 165, 233)',
+                            'rgb(3, 105, 161)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Table Management ---
+        function renderTable(data) {
+            const tableBody = document.getElementById('stockTableBody');
+            tableBody.innerHTML = '';
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-900">${item.company}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.impact}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-sky-600 font-medium">${item.position}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // --- Interaction Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            renderTable(stockData);
+
+            // Filter logic
+            const filterInput = document.getElementById('tableFilter');
+            filterInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = stockData.filter(s => 
+                    s.company.toLowerCase().includes(term) || 
+                    s.impact.toLowerCase().includes(term) || 
+                    s.position.toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Intersection Observer for Nav Links
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                threshold: 0.3
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
