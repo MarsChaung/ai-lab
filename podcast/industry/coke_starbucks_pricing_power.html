@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Coca-Cola 與 Starbucks品牌定價力研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        .nav-transition {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed">
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-600">可口可樂與星巴克</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-link nav-transition px-1 pt-1 text-sm font-medium inactive-nav-link">摘要</a>
+                    <a href="#coke" class="nav-link nav-transition px-1 pt-1 text-sm font-medium inactive-nav-link">可口可樂</a>
+                    <a href="#starbucks" class="nav-link nav-transition px-1 pt-1 text-sm font-medium inactive-nav-link">星巴克</a>
+                    <a href="#comparison" class="nav-link nav-transition px-1 pt-1 text-sm font-medium inactive-nav-link">數據對比</a>
+                    <a href="#strategy" class="nav-link nav-transition px-1 pt-1 text-sm font-medium inactive-nav-link">投資策略</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-stone-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 py-2 space-y-1">
+            <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">摘要</a>
+            <a href="#coke" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">可口可樂</a>
+            <a href="#starbucks" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">星巴克</a>
+            <a href="#comparison" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">數據對比</a>
+            <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="summary" class="py-16 bg-gradient-to-br from-stone-900 to-stone-800 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="md:w-2/3">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-6">一瓶可樂與一杯咖啡：<br><span class="text-sky-400">通膨時代的品牌定價力</span></h1>
+                <p class="text-lg text-stone-300 mb-8 leading-relaxed">
+                    在 AI 股票吸走市場注意力的同時，這兩份財報傳達了一個重要訊號：美國消費者正變得精挑細選。唯有具備「品牌黏著度」與「讓產品顯得值得多花錢」能力的公司，才能在高物價環境中勝出。
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-stone-800/50 p-4 rounded-lg border border-stone-700">
+                        <span class="block text-sky-400 text-2xl font-bold">92.8</span>
+                        <span class="text-sm text-stone-400">4月消費者信心</span>
+                    </div>
+                    <div class="bg-stone-800/50 p-4 rounded-lg border border-stone-700">
+                        <span class="block text-sky-400 text-2xl font-bold">5.1%</span>
+                        <span class="text-sm text-stone-400">12個月通膨預期</span>
+                    </div>
+                    <div class="bg-stone-800/50 p-4 rounded-lg border border-stone-700">
+                        <span class="block text-sky-400 text-2xl font-bold">定價力</span>
+                        <span class="text-sm text-stone-400">核心競爭優勢</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Coca-Cola Section -->
+        <section id="coke" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Coca-Cola：高品質防禦型消費股</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-600">
+                        <h3 class="text-xl font-semibold mb-4 text-stone-700">財報關鍵數據 (Q1)</h3>
+                        <ul class="space-y-3 text-stone-600">
+                            <li class="flex justify-between"><span>淨營收</span> <span class="font-bold text-stone-900">$125億 (+12%)</span></li>
+                            <li class="flex justify-between"><span>有機營收成長</span> <span class="font-bold text-stone-900">10%</span></li>
+                            <li class="flex justify-between"><span>可比 EPS</span> <span class="font-bold text-stone-900">$0.86 (+18%)</span></li>
+                            <li class="flex justify-between"><span>營業利益率</span> <span class="font-bold text-stone-900">34.5%</span></li>
+                        </ul>
+                    </div>
+                    <div class="prose text-stone-600">
+                        <p>Coca-Cola 的成長並非單純依靠漲價，而是靠<strong>產品組合</strong>與<strong>小包裝策略</strong>。北美 mini-can 銷量的高成長與菲律賓單人份產品的普及，證明了公司能有效維持購買門檻並保住利潤。</p>
+                        <p class="mt-2 font-medium text-stone-800 italic">「高品質防禦股，適合在投資組合中扮演穩定器。」</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-stone-700">銷量成長分佈 (Q1 Volume Growth)</h3>
+                    <div class="h-64">
+                        <canvas id="cokeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Starbucks Section -->
+        <section id="starbucks" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Starbucks：品牌體驗修復的開端</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="order-2 lg:order-1 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-stone-700">同店銷售成長拆解</h3>
+                    <div class="h-64">
+                        <canvas id="starbucksChart"></canvas>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-600">
+                        <h3 class="text-xl font-semibold mb-4 text-stone-700">財報關鍵數據 (FY26 Q2)</h3>
+                        <ul class="space-y-3 text-stone-600">
+                            <li class="flex justify-between"><span>合併營收</span> <span class="font-bold text-stone-900">$95億 (+9%)</span></li>
+                            <li class="flex justify-between"><span>全球同店銷售</span> <span class="font-bold text-stone-900">+6.2%</span></li>
+                            <li class="flex justify-between"><span>美國同店銷售</span> <span class="font-bold text-stone-900">+7.1%</span></li>
+                            <li class="flex justify-between"><span>交易量成長</span> <span class="font-bold text-stone-900">+3.8%</span></li>
+                        </ul>
+                    </div>
+                    <div class="prose text-stone-600">
+                        <p>CEO Brian Niccol 的 <strong>"Back to Starbucks"</strong> 策略初見成效，重點在於縮短等待時間（4-4-12 目標）與修復顧客體驗。即使在經濟不確定下，消費者仍願意為「生活中的小奢侈」支付溢價。</p>
+                        <p class="mt-2 font-medium text-stone-800 italic">「轉機型資產，關鍵在於客流回升能否轉化為長期利潤。」</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table -->
+        <section id="comparison" class="mb-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">消費股分化對比表</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 overflow-hidden">
+                <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <p class="text-stone-500">輸入品牌名稱篩選數據：</p>
+                    <input type="text" id="tableFilter" placeholder="搜尋公司名稱..." class="px-4 py-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-sky-500 outline-none w-full md:w-64">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">品牌名稱</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">營收成長</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">銷量/同店成長</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">營利率</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">投資屬性</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="bg-white divide-y divide-stone-100">
+                            <!-- JS data will inject here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略建議</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-sky-50 p-6 rounded-xl border border-sky-100 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 bg-sky-500 text-white rounded-full mr-4">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-sky-900">可口可樂：穩定與防禦</h3>
+                    </div>
+                    <ul class="space-y-2 text-sky-800 list-disc list-inside">
+                        <li>適合追求穩定現金流與股息的投資人。</li>
+                        <li>優勢：品牌全球化、通路極強、現金流穩定。</li>
+                        <li>風險：成本（油價、包裝）上升壓縮利潤，安全性溢價過高。</li>
+                        <li>策略：分批、逢回持有。</li>
+                    </ul>
+                </div>
+                <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 bg-emerald-500 text-white rounded-full mr-4">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-emerald-900">星巴克：轉機與成長</h3>
+                    </div>
+                    <ul class="space-y-2 text-emerald-800 list-disc list-inside">
+                        <li>適合能接受波動、押注品牌修復的投資人。</li>
+                        <li>優勢：客流開始回升、服務效率改善、會員黏著度。</li>
+                        <li>風險：人力成本侵蝕獲利、中國業務競爭、咖啡豆通膨。</li>
+                        <li>策略：觀察同店銷售持續性，股價回穩後介入。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Coca-Cola 與 Starbucks品牌定價力研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Coca-Cola 與 Starbucks 相關公開資料 (2026年4月29日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data ---
+        const brandData = [
+            { name: 'Coca-Cola', growth: '12%', specific: '銷量 +3%', margin: '34.5%', attribute: '防禦型穩定資產' },
+            { name: 'Starbucks', growth: '9%', specific: '同店 +6.2%', margin: '9.9% (NA)', attribute: '轉機型品牌修復' },
+            { name: 'Domino’s Pizza', growth: '低於預期', specific: '美國同店 +0.9%', margin: '受壓', attribute: '高敏感度競爭' }
+        ];
+
+        // --- DOM Elements ---
+        const tableBody = document.getElementById('productTableBody');
+        const tableFilter = document.getElementById('tableFilter');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        // --- Functions ---
+
+        // 1. Render Table
+        function renderTable(filter = '') {
+            tableBody.innerHTML = '';
+            const filteredData = brandData.filter(d => d.name.toLowerCase().includes(filter.toLowerCase()));
+            
+            filteredData.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-900">${item.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.growth}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.specific}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.margin}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <span class="px-2 py-1 rounded-full text-xs font-semibold ${item.attribute.includes('防禦') ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'}">
+                                ${item.attribute}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        // 2. Navigation Active State (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 3. Charts
+        function initCharts() {
+            // Coke Chart
+            const cokeCtx = document.getElementById('cokeChart').getContext('2d');
+            new Chart(cokeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Zero Sugar', 'Diet Coke', '水/運動/咖啡', '北美銷量', '亞太銷量'],
+                    datasets: [{
+                        label: '銷量成長率 (%)',
+                        data: [13, 6, 5, 4, 5],
+                        backgroundColor: 'rgba(220, 38, 38, 0.7)',
+                        borderColor: 'rgb(220, 38, 38)',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 15 }
+                    }
+                }
+            });
+
+            // Starbucks Chart
+            const sbuxCtx = document.getElementById('starbucksChart').getContext('2d');
+            new Chart(sbuxCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['客單價增加 (%)', '交易量增加 (%)'],
+                    datasets: [{
+                        data: [2.3, 3.8],
+                        backgroundColor: ['rgba(5, 150, 105, 0.4)', 'rgba(5, 150, 105, 0.8)'],
+                        borderColor: ['#fff', '#fff'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        // --- Event Listeners ---
+        tableFilter.addEventListener('input', (e) => renderTable(e.target.value));
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Initialize
+        window.onload = () => {
+            renderTable();
+            initCharts();
+        };
+    </script>
+</body>
+</html>
