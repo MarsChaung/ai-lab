@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI資本戰財報研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons (Inline SVGs will be used) -->
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-sky-600 p-1.5 rounded-lg text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-stone-800">四大科技巨頭財報研究</span>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link text-sm font-medium transition-colors hover:text-sky-500" data-section="overview">概覽</a>
+                    <a href="#alphabet" class="nav-link text-sm font-medium transition-colors hover:text-sky-500" data-section="alphabet">Alphabet</a>
+                    <a href="#amazon" class="nav-link text-sm font-medium transition-colors hover:text-sky-500" data-section="amazon">Amazon</a>
+                    <a href="#microsoft" class="nav-link text-sm font-medium transition-colors hover:text-sky-500" data-section="microsoft">Microsoft</a>
+                    <a href="#meta" class="nav-link text-sm font-medium transition-colors hover:text-sky-500" data-section="meta">Meta</a>
+                    <a href="#data-table" class="nav-link text-sm font-medium transition-colors hover:text-sky-500" data-section="data-table">數據對照</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="p-2 text-stone-600 hover:bg-stone-100 rounded-md">
+                        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#overview" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">概覽</a>
+                <a href="#alphabet" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">Alphabet</a>
+                <a href="#amazon" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">Amazon</a>
+                <a href="#microsoft" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">Microsoft</a>
+                <a href="#meta" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">Meta</a>
+                <a href="#data-table" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md">數據對照</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="mb-20 pt-16">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">AI 資本戰進入驗收期</h1>
+                <p class="text-xl text-stone-600 max-w-3xl mx-auto italic">「市場不再只看 AI 故事，而是要看 AI 是否能帶來營收與現金流。」</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-sky-600 text-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center">
+                    <p class="text-sm opacity-80 uppercase font-bold mb-1">預估年度總支出</p>
+                    <p class="text-3xl font-bold">> 7,000 億</p>
+                    <p class="text-xs mt-1">美元 (Big Tech 合計)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-emerald-500">
+                    <p class="text-sm text-stone-500 font-bold mb-1">Google Cloud 成長</p>
+                    <p class="text-3xl font-bold text-stone-800">63%</p>
+                    <p class="text-xs text-emerald-600 mt-1">大幅超越市場預期</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-amber-500">
+                    <p class="text-sm text-stone-500 font-bold mb-1">Microsoft AI 年化營收</p>
+                    <p class="text-3xl font-bold text-stone-800">> 370 億</p>
+                    <p class="text-xs text-amber-600 mt-1">年增 123%</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-rose-500">
+                    <p class="text-sm text-stone-500 font-bold mb-1">Meta 資本支出上修</p>
+                    <p class="text-3xl font-bold text-stone-800">1,450 億</p>
+                    <p class="text-xs text-rose-600 mt-1">引發市場對獲利能力的擔憂</p>
+                </div>
+            </div>
+
+            <!-- Visualization Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-12">
+                <h3 class="text-xl font-bold text-stone-800 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-500"><path d="m19 20-4-4m0-7a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/></svg>
+                    核心雲端/AI 成長率比較 (%)
+                </h3>
+                <div class="relative h-80">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Analysis: Alphabet -->
+        <section id="alphabet" class="mb-20 pt-10">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Alphabet：Google Cloud 成為最大驚喜</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            Alphabet 在本次財報中展現了最強的「變現能力」。Google Cloud 營收年增 63%，遠高於市場預期，且相關企業解決方案成長高達八倍。
+                        </p>
+                        <ul class="space-y-2 text-stone-600 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-sky-500 font-bold">•</span>
+                                <div><strong>Backlog：</strong> 接近 4,600 億美元，預期 50% 將在未來 24 個月轉為營收。</div>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-sky-500 font-bold">•</span>
+                                <div><strong>自研晶片：</strong> 擁有 TPU 與 Gemini 模型，形成從基礎設施到應用的完整優勢。</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-sky-50 border border-sky-100 rounded-lg p-5">
+                        <p class="text-xs text-sky-600 font-bold uppercase mb-1">Cloud Operating Income</p>
+                        <p class="text-3xl font-bold text-sky-800">66 億</p>
+                        <p class="text-xs text-stone-500 mt-1">展示規模化後的獲利能力</p>
+                    </div>
+                    <div class="bg-stone-800 text-white rounded-lg p-5">
+                        <p class="text-xs opacity-70 font-bold uppercase mb-1">投資建議</p>
+                        <p class="text-sm italic">「目前最能證明 AI 資本支出正在轉成營收的公司。」</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Analysis: Amazon -->
+        <section id="amazon" class="mb-20 pt-10">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Amazon：AWS 重新加速，但回報期較長</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="space-y-4 order-2 lg:order-1">
+                    <div class="bg-amber-50 border border-amber-100 rounded-lg p-5">
+                        <p class="text-xs text-amber-600 font-bold uppercase mb-1">AWS AI 年化收入</p>
+                        <p class="text-3xl font-bold text-amber-800">> 150 億</p>
+                        <p class="text-xs text-stone-500 mt-1">Bedrock 處理量創紀錄</p>
+                    </div>
+                    <div class="bg-white border border-stone-200 rounded-lg p-5 shadow-sm">
+                        <p class="text-xs text-stone-400 font-bold uppercase mb-1">Q1 Capital Expenditure</p>
+                        <p class="text-2xl font-bold text-stone-700">442 億 (+76%)</p>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-6 order-1 lg:order-2">
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            AWS 成長率回升至 28%，雖然亮眼，但在 Google Cloud 63% 的成長對比下略顯遜色。Amazon 強調目前的龐大支出是為了 2027-2028 年的長期收穫。
+                        </p>
+                        <p class="text-sm text-stone-500 italic mb-4">「Amazon 的 AI 投資邏輯不是沒有回報，而是回報期可能比市場短線資金願意等待的時間更長。」</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Analysis: Microsoft -->
+        <section id="microsoft" class="mb-20 pt-10">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Microsoft：品質最高，但市場標準最苛</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            Microsoft 營收與獲利均穩健增長，Azure 成長 40% 且 AI 需求仍超過供給。然而市場開始關注 Copilot 的變現速度以及基礎建設成本對毛利率的壓力。
+                        </p>
+                        <div class="bg-indigo-50 p-4 rounded-md border-l-4 border-indigo-500">
+                            <p class="text-sm font-bold text-indigo-800 mb-1">市場挑戰：</p>
+                            <p class="text-sm text-indigo-700">高品質公司面臨估值檢驗。投資人關注 AI 資本支出是否會壓縮雲端毛利率。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-lg p-5">
+                        <p class="text-xs text-indigo-600 font-bold uppercase mb-1">Azure 雲端成長</p>
+                        <p class="text-3xl font-bold text-indigo-800">40%</p>
+                        <p class="text-xs text-stone-500 mt-1">包含顯著的 AI 驅動動能</p>
+                    </div>
+                    <div class="bg-stone-100 rounded-lg p-5">
+                        <p class="text-xs text-stone-500 font-bold uppercase mb-1">企業剩餘合約 (RPO)</p>
+                        <p class="text-2xl font-bold text-stone-800">6,270 億</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Analysis: Meta -->
+        <section id="meta" class="mb-20 pt-10">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta：廣告引擎強勁，但成本與風險並存</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h4 class="font-bold text-stone-800 mb-3">亮點：廣告效率提升</h4>
+                    <p class="text-stone-600 text-sm mb-4">
+                        廣告收入達 550 億美元，曝光量年增 19%，顯示 Meta 透過 AI 成功優化了廣告引擎。
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="text-center bg-stone-50 p-3 rounded flex-1">
+                            <p class="text-xl font-bold text-stone-800">19%</p>
+                            <p class="text-[10px] text-stone-500">曝光成長</p>
+                        </div>
+                        <div class="text-center bg-stone-50 p-3 rounded flex-1">
+                            <p class="text-xl font-bold text-stone-800">12%</p>
+                            <p class="text-[10px] text-stone-500">價格成長</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 bg-rose-50 border border-rose-100 rounded-lg p-6">
+                    <h4 class="font-bold text-rose-800 mb-3 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                        投資人擔憂點
+                    </h4>
+                    <ul class="space-y-3 text-rose-700 text-sm font-medium">
+                        <li>• 資本支出預估上修至 1,250 億 - 1,450 億美元。</li>
+                        <li>• Reality Labs 本季虧損超過 40 億美元。</li>
+                        <li>• 歐美監管法律與青少年用戶訴訟風險。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table -->
+        <section id="data-table" class="mb-20 pt-10">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四大巨頭財報數據對照</h2>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <!-- Search Bar -->
+                <div class="p-4 border-b border-stone-100 flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-stone-400"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <input type="text" id="tableSearch" placeholder="搜尋公司名稱或指標..." class="w-full bg-transparent border-none focus:ring-0 text-stone-600 text-sm">
+                </div>
+                
+                <!-- Scrollable Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider">公司名稱</th>
+                                <th class="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider">總營收 (B)</th>
+                                <th class="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider">年成長率</th>
+                                <th class="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider">核心業務</th>
+                                <th class="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider">核心成長率</th>
+                                <th class="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider">AI/雲端亮點</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-100">
+                            <!-- Data injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Summary -->
+        <section class="bg-stone-900 text-white rounded-2xl p-8 md:p-12">
+            <div class="max-w-3xl">
+                <h2 class="text-3xl font-bold mb-6">投資總結：從「題材」轉向「現金流」</h2>
+                <div class="space-y-6 text-stone-300">
+                    <div class="flex gap-4">
+                        <div class="bg-sky-500 text-white h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">1</div>
+                        <p><strong>財務驗證期開始：</strong> 市場現在更在乎資本配置效率，而非只是宣示投入 AI。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="bg-sky-500 text-white h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">2</div>
+                        <p><strong>Alphabet 領跑：</strong> 雲端成長 63% 與驚人的訂單儲備量 (Backlog) 確立其變現龍頭地位。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="bg-sky-500 text-white h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">3</div>
+                        <p><strong>風險溢價：</strong> Meta 雖然獲利強勁，但由於高額的支出預期與監管壓力，市場給予較高的折價。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI資本戰財報研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Alphabet, Amazon, Microsoft, Meta 相關公開資料 (2026年4月30日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data for Table ---
+        const reportData = [
+            { company: "Alphabet", revenue: "$109.9B", growth: "22%", core: "Google Cloud", coreGrowth: "63%", highlight: "Backlog $460B, AI 業務成長 8 倍" },
+            { company: "Amazon", revenue: "$181.5B", growth: "17%", core: "AWS", coreGrowth: "28%", highlight: "AI 年化收入 >$15B" },
+            { company: "Microsoft", revenue: "$82.9B", growth: "18%", core: "Azure", coreGrowth: "40%", highlight: "AI 年化收入 >$37B, RPO $627B" },
+            { company: "Meta", revenue: "$56.3B", growth: "33%", core: "廣告業務", coreGrowth: "33%", highlight: "廣告曝光成長 19%" }
+        ];
+
+        // --- Render Table ---
+        function renderTable(data) {
+            const tbody = document.getElementById('dataTableBody');
+            tbody.innerHTML = data.map(item => `
+                <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-6 py-4 font-bold text-stone-800">${item.company}</td>
+                    <td class="px-6 py-4">${item.revenue}</td>
+                    <td class="px-6 py-4 font-semibold text-emerald-600">${item.growth}</td>
+                    <td class="px-6 py-4 text-stone-600">${item.core}</td>
+                    <td class="px-6 py-4 font-bold text-sky-600">${item.coreGrowth}</td>
+                    <td class="px-6 py-4 text-sm text-stone-500">${item.highlight}</td>
+                </tr>
+            `).join('');
+        }
+
+        // --- Search Functionality ---
+        document.getElementById('tableSearch').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = reportData.filter(item => 
+                item.company.toLowerCase().includes(term) || 
+                item.core.toLowerCase().includes(term) ||
+                item.highlight.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // --- Initialize Chart ---
+        function initChart() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Google Cloud', 'Azure (MSFT)', 'AWS (AMZN)', 'Meta Ads'],
+                    datasets: [{
+                        label: '核心成長率 (%)',
+                        data: [63, 40, 28, 33],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)', // sky-500
+                            'rgba(99, 102, 241, 0.7)', // indigo-500
+                            'rgba(245, 158, 11, 0.7)', // amber-500
+                            'rgba(225, 29, 72, 0.7)'   // rose-600
+                        ],
+                        borderColor: [
+                            'rgba(14, 165, 233, 1)',
+                            'rgba(99, 102, 241, 1)',
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(225, 29, 72, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e7e5e4' },
+                            ticks: { callback: value => value + '%' }
+                        },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) { return context.parsed.y + '% 成長'; }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Active Link Observer ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-section') === id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // --- Initial Load ---
+        window.onload = () => {
+            renderTable(reportData);
+            initChart();
+        };
+    </script>
+</body>
+</html>
