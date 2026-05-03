@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/4/27~5/1)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        /* 隱藏捲動條但保留功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-600">美股市場週報</span>
+                </div>
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#overview" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500 active-nav-link">大盤綜觀</a>
+                    <a href="#macro" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500 inactive-nav-link">總體經濟</a>
+                    <a href="#bigtech" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500 inactive-nav-link">科技巨頭</a>
+                    <a href="#infra" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500 inactive-nav-link">基礎建設</a>
+                    <a href="#consumer" class="nav-link px-1 pt-1 text-sm font-medium transition-colors hover:text-sky-500 inactive-nav-link">消費與醫療</a>
+                </div>
+                <!-- 手機版漢堡按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版選單內容 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#overview" class="block px-3 py-2 text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md text-base font-medium">大盤綜觀</a>
+                <a href="#macro" class="block px-3 py-2 text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md text-base font-medium">總體經濟</a>
+                <a href="#bigtech" class="block px-3 py-2 text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md text-base font-medium">科技巨頭</a>
+                <a href="#infra" class="block px-3 py-2 text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md text-base font-medium">基礎建設</a>
+                <a href="#consumer" class="block px-3 py-2 text-stone-700 hover:bg-sky-50 hover:text-sky-600 rounded-md text-base font-medium">消費與醫療</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Banner -->
+    <header class="bg-gradient-to-r from-sky-700 to-indigo-800 text-white py-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-4xl font-extrabold mb-4">AI 財報通過第一關，但市場開始計算「燒錢的代價」</h1>
+            <p class="text-xl md:text-1xl text-sky-100 font-light max-w-3xl mx-auto">資料日期：2026年4月27日至5月1日</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- 大盤綜觀 -->
+        <section id="overview" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-50 pb-2 flex items-center">
+                <span class="w-2 h-8 bg-sky-500 mr-3 rounded-full"></span>大盤綜觀
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-emerald-500">
+                    <p class="text-sm text-stone-500 font-medium uppercase tracking-wider">S&P 500 表現</p>
+                    <p class="text-3xl font-bold text-emerald-600">連續六週上漲</p>
+                    <p class="text-sm mt-2 text-stone-600">1950 年以來第二強的 4 月表現</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-sky-500">
+                    <p class="text-sm text-stone-500 font-medium uppercase tracking-wider">預估 Q1 獲利成長</p>
+                    <p class="text-3xl font-bold text-sky-600">27.8%</p>
+                    <p class="text-sm mt-2 text-stone-600">2021 年 Q4 以來最大增幅</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
+                    <p class="text-sm text-stone-500 font-medium uppercase tracking-wider">Fed 基準利率</p>
+                    <p class="text-3xl font-bold text-amber-600">3.50% - 3.75%</p>
+                    <p class="text-sm mt-2 text-stone-600">通膨偏高，維持利率不變</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <p class="text-stone-700 text-lg leading-relaxed mb-4">
+                    上週美股主軸明確：AI 仍是推動股市創高的核心力量，但投資人開始檢查「AI 投資到底能不能變成營收、獲利與現金流」。買進理由已從「Fed 會降息」轉向「企業獲利真的夠強」。
+                </p>
+            </div>
+        </section>
+
+        <!-- 總體經濟 -->
+        <section id="macro" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總體經濟數據與趨勢</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="font-bold text-xl text-stone-800 mb-2">PCE 物價指數：3.5%</h3>
+                        <p class="text-stone-600">扣除食品與能源後的核心 PCE 年增 3.2%。能源價格衝擊開始反映到總體數據，這對高估值成長股並非好消息。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="font-bold text-xl text-stone-800 mb-2">GDP 成長率：2.0%</h3>
+                        <p class="text-stone-600">高於前一季的 0.5%。AI 相關設備與智慧財產投資是反彈關鍵推力。AI 已進入 GDP 組成，成為經濟韌性一部分。</p>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h4 class="text-center font-bold text-stone-700 mb-4">關鍵宏觀數據視覺化 (%)</h4>
+                    <div class="h-64">
+                        <canvas id="macroChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 科技巨頭 -->
+        <section id="bigtech" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 科技巨頭財報分析</h2>
+            
+            <!-- 互動式表格 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
+                <div class="p-6 border-b border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <h3 class="text-xl font-bold text-stone-800 italic">企業財報數據快篩</h3>
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司名稱..." class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-sky-500 outline-none">
+                        <svg class="absolute left-3 top-2.5 h-5 w-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th class="p-4 font-semibold text-stone-700">公司</th>
+                                <th class="p-4 font-semibold text-stone-700">季度營收 (B)</th>
+                                <th class="p-4 font-semibold text-stone-700">核心成長亮點</th>
+                                <th class="p-4 font-semibold text-stone-700">資本支出展望 (B)</th>
+                                <th class="p-4 font-semibold text-stone-700">市場評價</th>
+                            </tr>
+                        </thead>
+                        <tbody id="techTableBody" class="divide-y divide-stone-100">
+                            <!-- 由 JS 動態填充 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 圖表分析 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h4 class="text-lg font-bold text-stone-800 mb-4 text-center">三大雲端服務成長率 (%)</h4>
+                    <div class="h-64">
+                        <canvas id="cloudGrowthChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h4 class="text-lg font-bold text-stone-800 mb-4 text-center">2026 年度資本支出上限預估 (B USD)</h4>
+                    <div class="h-64">
+                        <canvas id="capexChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 基礎建設 -->
+        <section id="infra" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 基礎建設與儲存</h2>
+            <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold text-sky-700 mb-4">不只是 GPU：擴散效應啟動</h3>
+                    <p class="text-stone-700 mb-4">
+                        Seagate 財測強於預期，預估 Q4 營收 34.5 億美元。這標誌著 AI 產業鏈正從「只看 Nvidia GPU」擴散到完整的基礎設施（儲存、記憶體、電力）。
+                    </p>
+                    <ul class="space-y-2 text-stone-600">
+                        <li class="flex items-start"><span class="text-sky-500 mr-2 font-bold">✓</span> 雲端與影片資料量爆發</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2 font-bold">✓</span> 高容量硬碟與儲存需求增加</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2 font-bold">✓</span> AI 應用從訓練進入推論階段</li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 bg-stone-50 p-6 rounded-lg border border-stone-200">
+                    <h4 class="font-bold text-stone-800 mb-3 uppercase text-sm">受益族群</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="p-3 bg-white shadow-sm rounded border-l-4 border-sky-400 font-semibold">Seagate</div>
+                        <div class="p-3 bg-white shadow-sm rounded border-l-4 border-sky-400 font-semibold">Western Digital</div>
+                        <div class="p-3 bg-white shadow-sm rounded border-l-4 border-sky-400 font-semibold">SanDisk</div>
+                        <div class="p-3 bg-white shadow-sm rounded border-l-4 border-sky-400 font-semibold">Micron</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 消費與醫療 -->
+        <section id="consumer" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">消費與醫療：K 型結構顯現</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 支付與金融 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-blue-500">
+                    <h3 class="font-bold text-xl mb-3 text-blue-800">金融支付</h3>
+                    <p class="text-stone-600 text-sm mb-4">Visa 與 Mastercard 獲利優於預期。Visa 第二季支付量成長 9%，反映消費韌性。</p>
+                    <div class="bg-blue-50 p-3 rounded text-blue-700 text-sm font-medium">趨勢：高收入家庭旅遊與娛樂強勁。</div>
+                </div>
+                <!-- 零售餐飲 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-green-700">
+                    <h3 class="font-bold text-xl mb-3 text-green-800">零售餐飲</h3>
+                    <p class="text-stone-600 text-sm mb-4">Starbucks 同店銷售成長 6.2%，顯著高於預期的 3.7%。</p>
+                    <div class="bg-green-50 p-3 rounded text-green-700 text-sm font-medium">趨勢：品牌力強者仍能吸引回流。</div>
+                </div>
+                <!-- 醫療健康 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-red-500">
+                    <h3 class="font-bold text-xl mb-3 text-red-800">醫療健康</h3>
+                    <p class="text-stone-600 text-sm mb-4">Eli Lilly 上修全年展望，受 GLP-1 減重與糖尿病藥物推動。</p>
+                    <div class="bg-red-50 p-3 rounded text-red-700 text-sm font-medium">EPS 預期：上修至 35.5 - 37.0 美元。</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/4/27~5/1)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年5月3日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. 公司資料數據
+        const productData = [
+            { name: "Alphabet (Google)", revenue: "1,099", highlight: "Cloud 營收大增 63%", capex: "180 - 190", mood: "最清楚受益者 (↑)" },
+            { name: "Microsoft", revenue: "82.9", highlight: "Azure 成長 40%", capex: "未具體 (↑)", mood: "需求強但支出壓力 (→)" },
+            { name: "Amazon", revenue: "181.5", highlight: "AWS 成長 28%", capex: "2,000", mood: "AWS 重新加速 (↑)" },
+            { name: "Meta", revenue: "56.3", highlight: "淨利增 61%", capex: "125 - 145", mood: "支出過快遭懲罰 (↓)" },
+            { name: "Apple", revenue: "111.2", highlight: "服務收入歷史新高", capex: "未具體", mood: "新 CEO 時代期待 (↑)" },
+        ];
+
+        // 2. 初始化表格
+        const techTableBody = document.getElementById('techTableBody');
+        function renderTable(data) {
+            techTableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-sky-50 transition-colors">
+                        <td class="p-4 font-bold text-stone-800">${item.name}</td>
+                        <td class="p-4">${item.revenue}</td>
+                        <td class="p-4 text-sm text-stone-600">${item.highlight}</td>
+                        <td class="p-4 font-mono text-sky-700">${item.capex}</td>
+                        <td class="p-4 font-medium">${item.mood}</td>
+                    </tr>
+                `;
+                techTableBody.innerHTML += row;
+            });
+        }
+        renderTable(productData);
+
+        // 3. 表格篩選功能
+        document.getElementById('tableSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = productData.filter(item => 
+                item.name.toLowerCase().includes(searchTerm) || 
+                item.highlight.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filteredData);
+        });
+
+        // 4. 手機選單切換
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // 5. Active Link State (Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const observerOptions = {
+            root: null,
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 6. 圖表初始化
+        window.onload = function() {
+            // 宏觀數據圖
+            const ctxMacro = document.getElementById('macroChart').getContext('2d');
+            new Chart(ctxMacro, {
+                type: 'bar',
+                data: {
+                    labels: ['PCE 年增', '核心 PCE', 'GDP 成長', 'Fed 利率上限'],
+                    datasets: [{
+                        label: '比例 (%)',
+                        data: [3.5, 3.2, 2.0, 3.75],
+                        backgroundColor: ['#f59e0b', '#fbbf24', '#0ea5e9', '#6366f1']
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            // 雲端成長圖
+            const ctxCloud = document.getElementById('cloudGrowthChart').getContext('2d');
+            new Chart(ctxCloud, {
+                type: 'line',
+                data: {
+                    labels: ['Google Cloud', 'Microsoft Azure', 'Amazon AWS'],
+                    datasets: [{
+                        label: '營收成長率 (%)',
+                        data: [63, 40, 28],
+                        borderColor: '#0ea5e9',
+                        tension: 0.3,
+                        fill: true,
+                        backgroundColor: 'rgba(14, 165, 233, 0.1)'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            // 資本支出圖
+            const ctxCapex = document.getElementById('capexChart').getContext('2d');
+            new Chart(ctxCapex, {
+                type: 'bar',
+                data: {
+                    labels: ['Amazon', 'Alphabet', 'Meta'],
+                    datasets: [{
+                        label: '預估資本支出 (B USD)',
+                        data: [200, 190, 145],
+                        backgroundColor: ['#374151', '#0284c7', '#4f46e5']
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        };
+    </script>
+</body>
+</html>
