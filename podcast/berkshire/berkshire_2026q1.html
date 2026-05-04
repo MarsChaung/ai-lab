@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-波克夏 2026Q1 財報分析報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-stone-800 tracking-tight">波克夏 2026Q1</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="overview">財報綜覽</a>
+                    <a href="#financials" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="financials">數據分析</a>
+                    <a href="#strategy" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="strategy">資本策略</a>
+                    <a href="#lessons" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="lessons">投資啟示</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-stone-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-6 space-y-2">
+            <a href="#overview" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">財報綜覽</a>
+            <a href="#financials" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">數據分析</a>
+            <a href="#strategy" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">資本策略</a>
+            <a href="#lessons" class="block px-3 py-2 text-base font-medium text-stone-700 hover:bg-stone-100 rounded-md">投資啟示</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="mb-20">
+            <div class="bg-gradient-to-r from-stone-800 to-stone-700 rounded-2xl p-8 md:p-12 text-white shadow-2xl">
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-6">現金高牆背後的警訊：<br><span class="text-sky-400">Berkshire 第一季財報的耐心課</span></h1>
+                <p class="text-lg md:text-xl text-stone-300 max-w-3xl mb-8">
+                    在美股持續受 AI 與高估值題材推動的環境下，波克夏的超高現金部位與持續賣股動作，形成了一個值得深思的市場訊號。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+                        <p class="text-sm text-stone-400 uppercase tracking-wider font-semibold">第一季營業利益</p>
+                        <p class="text-3xl font-bold text-white">113.5 億美元</p>
+                        <p class="text-sm text-emerald-400 mt-2">↑ 年增 18%</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+                        <p class="text-sm text-stone-400 uppercase tracking-wider font-semibold">股票淨賣出額</p>
+                        <p class="text-3xl font-bold text-white">81 億美元</p>
+                        <p class="text-sm text-amber-400 mt-2">連續 14 季淨賣方</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+                        <p class="text-sm text-stone-400 uppercase tracking-wider font-semibold">現金部位規模</p>
+                        <p class="text-3xl font-bold text-white">> 3,800 億美元</p>
+                        <p class="text-sm text-sky-400 mt-2">歷史高點區間</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Analysis Section -->
+        <section id="financials" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">主要業務利潤成長分析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-semibold text-stone-700 mb-4 text-center">2023 vs 2024 第一季稅後盈餘 (單位: 億美元)</h3>
+                    <div class="relative h-80">
+                        <canvas id="profitChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Table Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold text-stone-700">業務數據詳情</h3>
+                        <input type="text" id="tableSearch" placeholder="搜尋業務名稱..." class="px-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none text-sm">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-stone-50 border-b border-stone-200">
+                                    <th class="px-4 py-3 text-stone-600 font-semibold sticky top-0 bg-stone-50">業務名稱</th>
+                                    <th class="px-4 py-3 text-stone-600 font-semibold">2023 Q1 (億美元)</th>
+                                    <th class="px-4 py-3 text-stone-600 font-semibold">2024 Q1 (億美元)</th>
+                                    <th class="px-4 py-3 text-stone-600 font-semibold">年成長率</th>
+                                </tr>
+                            </thead>
+                            <tbody id="businessTableBody">
+                                <!-- Data will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">資本配置與「耐心」策略</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Strategy Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">「現金」是權利金，而非拖累</h3>
+                    <p class="text-stone-600 mb-4 italic">「公司營運沒有壞，但管理層仍然認為值得大舉出手的便宜資產不多。」</p>
+                    <ul class="space-y-3 text-stone-700">
+                        <li class="flex items-start">
+                            <span class="text-amber-500 mr-2">●</span>
+                            <span>波克夏連續 14 季成為股票淨賣方，反映對當前市場估值的審慎。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-amber-500 mr-2">●</span>
+                            <span>第一季買進 159 億美元，賣出 240 億美元，展現了明確的收縮態勢。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Strategy Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">極小規模庫藏股的訊號</h3>
+                    <p class="text-stone-600 mb-4 italic">第一季僅回購 2.35 億美元，佔現金比重極微。</p>
+                    <ul class="space-y-3 text-stone-700">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">●</span>
+                            <span>買回條件：股價需低於保守估算的內在價值。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">●</span>
+                            <span>結論：目前股價在管理層眼中「不夠便宜」，寧可持有美債等待時機。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Transition Highlight -->
+            <div class="mt-8 p-6 bg-sky-50 rounded-xl border border-sky-100 flex items-center">
+                <div class="mr-6 bg-sky-500 text-white p-3 rounded-full hidden sm:block">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sky-900 text-lg">後巴菲特時代的起點</h4>
+                    <p class="text-sky-800">Greg Abel 於 1 月接任 CEO，這份財報是他展現資本配置與營運管理能力的關鍵起點，市場正密切觀察其是否能延續巴菲特的紀律。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lessons Section -->
+        <section id="lessons" class="mb-20 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">給美股投資人的三個啟示</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Lesson 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border-t-4 border-stone-800">
+                    <div class="text-4xl mb-4">🏷️</div>
+                    <h3 class="text-lg font-bold mb-2">區分「好公司」與「好價格」</h3>
+                    <p class="text-stone-600 text-sm">
+                        AI 或科技股基本面可能極佳，但估值未必合理。波克夏的動作提醒我們，不要為了好公司支付過高的價格。
+                    </p>
+                </div>
+                <!-- Lesson 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border-t-4 border-stone-800">
+                    <div class="text-4xl mb-4">🎟️</div>
+                    <h3 class="text-lg font-bold mb-2">現金是一種選擇權</h3>
+                    <p class="text-stone-600 text-sm">
+                        在瘋狂的多頭市場中持有現金看起來很笨，但當市場修正、流動性緊縮時，這就是能讓你逆勢進攻的門票。
+                    </p>
+                </div>
+                <!-- Lesson 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border-t-4 border-stone-800">
+                    <div class="text-4xl mb-4">🧱</div>
+                    <h3 class="text-lg font-bold mb-2">分批進場比重押更佳</h3>
+                    <p class="text-stone-600 text-sm">
+                        目前的環境不適合猜頂部或全面空手，合理的策略是核心持股保留，其餘資金等待估值合理化後分批佈局。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-波克夏 2026Q1 財報分析報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Berkshire Hathaway 相關公開資料 (2026年5月4日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data Definitions ---
+        const businessData = [
+            { name: "保險承保稅後盈餘", q1_2023: 13.36, q1_2024: 17.17, growth: "28.5%" },
+            { name: "BNSF 鐵路稅後盈餘", q1_2023: 12.14, q1_2024: 13.77, growth: "13.4%" },
+            { name: "製造、服務與零售", q1_2023: 30.60, q1_2024: 31.99, growth: "4.5%" },
+            { name: "保險投資收益", q1_2023: 19.69, q1_2024: 25.98, growth: "31.9%" } // 估算數據
+        ];
+
+        // --- Table Rendering & Filtering ---
+        const tableBody = document.getElementById('businessTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
+                        <td class="px-4 py-4 font-medium text-stone-800">${item.name}</td>
+                        <td class="px-4 py-4 text-stone-600">${item.q1_2023}</td>
+                        <td class="px-4 py-4 text-stone-800 font-semibold">${item.q1_2024}</td>
+                        <td class="px-4 py-4">
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-bold">
+                                ${item.growth}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = businessData.filter(item => item.name.toLowerCase().includes(term));
+            renderTable(filtered);
+        });
+
+        // --- Chart.js Implementation ---
+        function initChart() {
+            const ctx = document.getElementById('profitChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: businessData.map(d => d.name),
+                    datasets: [
+                        {
+                            label: '2023 Q1',
+                            data: businessData.map(d => d.q1_2023),
+                            backgroundColor: '#d6d3d1', // stone-300
+                            borderRadius: 4
+                        },
+                        {
+                            label: '2024 Q1',
+                            data: businessData.map(d => d.q1_2024),
+                            backgroundColor: '#0ea5e9', // sky-500
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '億美元' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- UI Interactions ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Intersection Observer for Active Links
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-section') === id) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- Initialization ---
+        window.onload = () => {
+            renderTable(businessData);
+            initChart();
+        };
+    </script>
+</body>
+</html>
