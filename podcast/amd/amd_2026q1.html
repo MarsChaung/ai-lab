@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AMD 2026Q1財報分析研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #444;
+        }
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-black text-sky-600 tracking-tighter">AMD 2026Q1</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="overview">概覽</a>
+                    <a href="#performance" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="performance">財務表現</a>
+                    <a href="#strategy" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="strategy">AI 策略</a>
+                    <a href="#products" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="products">產品線</a>
+                    <a href="#risks" class="nav-link px-1 py-2 text-sm font-medium transition-colors hover:text-sky-500" data-section="risks">風險評估</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">概覽</a>
+                <a href="#performance" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">財務表現</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">AI 策略</a>
+                <a href="#products" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">產品線</a>
+                <a href="#risks" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">風險評估</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Hero Section -->
+        <section id="overview" class="mb-16 scroll-mt-24">
+            <div class="bg-gradient-to-br from-sky-900 to-indigo-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">AMD 財報真正的訊號：<br><span class="text-sky-400">市場開始重估「CPU＋加速器」</span></h1>
+                    <p class="text-lg md:text-xl text-sky-100 max-w-3xl mb-8">
+                        2026 年第一季財報揭示了 AI 投資敘事正從單純的 GPU 擴張至資料中心全架構升級。AMD 成功證明其在「推理、Agentic AI 與系統調度」中的關鍵地位。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <span class="block text-sky-300 text-sm uppercase tracking-wider font-bold">Q1 營收</span>
+                            <span class="text-3xl font-bold">102.53 億美元</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <span class="block text-sky-300 text-sm uppercase tracking-wider font-bold">年增率</span>
+                            <span class="text-3xl font-bold">+38%</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <span class="block text-sky-300 text-sm uppercase tracking-wider font-bold">非 GAAP EPS</span>
+                            <span class="text-3xl font-bold">1.37 美元</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Abstract Background SVG -->
+                <svg class="absolute right-0 bottom-0 opacity-10 w-1/2 h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#BAE6FD" d="M44.7,-76.4C58.1,-69.2,69.2,-57.9,76.4,-44.7C83.5,-31.5,86.7,-15.7,85.2,-0.9C83.6,14,77.3,27.9,69.2,40.1C61,52.3,51,62.8,38.9,70.1C26.8,77.4,12.5,81.5,-2.1,85.2C-16.7,88.8,-33.3,92.1,-46.8,86.4C-60.3,80.7,-70.6,66,-77.8,51.3C-84.9,36.6,-88.8,21.8,-87.3,7.9C-85.8,-6.1,-78.9,-19.1,-70.9,-30.9C-62.8,-42.6,-53.6,-53,-42.4,-61.5C-31.2,-70,-18.1,-76.7,-2.1,-73.1C13.9,-69.4,27.8,-55.4,44.7,-76.4Z" transform="translate(100 100)" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- Financial Performance Section -->
+        <section id="performance" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務與數據視覺化</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Revenue Breakdown Chart -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-stone-100">
+                    <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">2026 Q1 業務部門營收佔比 (單位: 億美元)</h3>
+                    <div class="relative h-64">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Prediction Comparison -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border border-stone-100">
+                    <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">營收與獲利：實際 vs 市場預期</h3>
+                    <div class="relative h-64">
+                        <canvas id="expectChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highlights Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                    <h4 class="text-blue-800 font-bold mb-2">資料中心成長</h4>
+                    <p class="text-stone-700 text-sm">營收 58 億美元，年增 57%。受惠於 EPYC 處理器及 Instinct GPU 出貨持續放量。</p>
+                </div>
+                <div class="bg-emerald-50 border-l-4 border-emerald-500 p-6 rounded-r-lg">
+                    <h4 class="text-emerald-800 font-bold mb-2">第二季財測亮眼</h4>
+                    <p class="text-stone-700 text-sm">預估 112 億美元，年增 46%。明顯優於市場預期的 105.2 億美元。</p>
+                </div>
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-lg">
+                    <h4 class="text-amber-800 font-bold mb-2">伺服器 CPU 市佔</h4>
+                    <p class="text-stone-700 text-sm">第二季伺服器 CPU 營收預期年增超過 70%，顯示 AI 推理正拉動傳統運算需求。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Strategy Section -->
+        <section id="strategy" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 策略：第二波算力紅利</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-xl font-bold text-sky-600 mb-3 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                            從「追趕者」到「系統供應商」
+                        </h3>
+                        <p class="text-stone-600">
+                            AMD 不再只是 Nvidia 的「第二選擇」，而是致力於成為資料中心 **CPU、GPU、機櫃級系統整合方案** 的供應商。AI 工作負載從訓練轉向推理，使得 CPU 的角色在任務調度與平行運算中變得不可或缺。
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-xl font-bold text-sky-600 mb-3 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                            大客戶 Meta 深度結盟
+                        </h3>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2">
+                            <li>Meta 計畫部署最高 **6GW** 的 AMD Instinct GPU。</li>
+                            <li>首批 1GW 採用基於 **MI450** 的客製化版本。</li>
+                            <li>Meta 亦成為第六代 EPYC **「Venice」** 與 **「Verano」** 的主要客戶。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-stone-800 rounded-2xl p-8 text-white flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-6 text-sky-400 uppercase tracking-widest">市場潛力上修</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-stone-300 uppercase text-xs font-bold">2030 伺服器 CPU TAM 預估</span>
+                                <span class="text-sky-400 font-bold">1,200 億美元+</span>
+                            </div>
+                            <div class="w-full bg-stone-700 rounded-full h-2">
+                                <div class="bg-sky-500 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="border-t border-stone-600 pt-4">
+                                <span class="block text-stone-400 text-xs">舊預估年增率</span>
+                                <span class="text-xl font-bold">~18%</span>
+                            </div>
+                            <div class="border-t border-stone-600 pt-4">
+                                <span class="block text-sky-400 text-xs font-bold">新預估年增率</span>
+                                <span class="text-xl font-bold text-sky-400">35%+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-8 text-stone-400 text-sm italic">
+                        "Lisa Su：我們預期伺服器 CPU 市場規模將以超過 35% 的年複合成長率擴張..."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Products Table -->
+        <section id="products" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵產品線與動態</h2>
+            
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-stone-200">
+                <div class="p-4 bg-stone-50 border-b border-stone-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="text-sm text-stone-500 font-medium">篩選產品細節：</div>
+                    <input type="text" id="tableSearch" placeholder="搜尋產品或類別..." class="px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none w-full sm:w-64 text-sm">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-stone-100 text-stone-700 uppercase text-xs tracking-wider">
+                                <th class="px-6 py-4 font-bold border-b">產品名稱 / 系列</th>
+                                <th class="px-6 py-4 font-bold border-b">類別</th>
+                                <th class="px-6 py-4 font-bold border-b">關鍵亮點 / 大客戶</th>
+                                <th class="px-6 py-4 font-bold border-b">狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <!-- JS will inject rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Analysis Section -->
+        <section id="risks" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心風險評估</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">高估值壓力</h3>
+                    <p class="text-stone-600 text-sm">
+                        財報後股價盤後大漲 12%，已充分反映高成長預期。後續任何出貨延遲或毛利率壓力都可能導致劇烈修正。
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">產能與競爭</h3>
+                    <p class="text-stone-600 text-sm">
+                        高度依賴台積電代工，需確保晶圓與 CoWoS 封裝產能。同時面臨 Nvidia 生態系與 Intel 製造能力的競爭。
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-stone-100 text-stone-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">非資料中心降溫</h3>
+                    <p class="text-stone-600 text-sm">
+                        PC 成本上升可能使下半年出貨轉弱，遊戲業務營收預期第二季後半將下降超過 20%。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AMD 2026Q1財報分析研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 AMD 相關公開資料 (2026年5月6日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Components -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Navigation Active State (Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-section') === id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('text-stone-700');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('text-stone-700');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 3. Data Table Rendering & Search
+        const productData = [
+            { name: "EPYC (General)", category: "Server CPU", note: "強勁需求帶動資料中心 58億營收", status: "量產中" },
+            { name: "Instinct GPU (MI300/MI325)", category: "AI Accelerator", note: "出貨持續放量，AI 營收主力", status: "量產中" },
+            { name: "MI450", category: "Next-gen GPU", note: "Meta 客製化首選，預計 1GW 部署", status: "研發/初期量產" },
+            { name: "EPYC Venice", category: "Server CPU (6th Gen)", note: "高效能大核心架構，Meta 主要客戶", status: "即將推出" },
+            { name: "EPYC Verano", category: "Server CPU (Cloud)", note: "雲端優化核心，針對推理優化", status: "即將推出" },
+            { name: "Client & Gaming", category: "PC/Gaming", note: "營收 36億，下半年面臨成本壓力", status: "穩定/降溫中" }
+        ];
+
+        const tableBody = document.getElementById('productTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = data.map(item => `
+                <tr class="hover:bg-sky-50 transition-colors">
+                    <td class="px-6 py-4 text-sm font-bold text-stone-800 border-b border-stone-100">${item.name}</td>
+                    <td class="px-6 py-4 text-sm text-stone-500 border-b border-stone-100">
+                        <span class="px-2 py-1 bg-stone-100 rounded-md">${item.category}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-stone-600 border-b border-stone-100">${item.note}</td>
+                    <td class="px-6 py-4 text-sm border-b border-stone-100">
+                        <span class="${item.status === '量產中' ? 'text-emerald-600 bg-emerald-50' : 'text-sky-600 bg-sky-50'} px-2 py-1 rounded text-xs font-bold uppercase">
+                            ${item.status}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(i => 
+                i.name.toLowerCase().includes(term) || 
+                i.category.toLowerCase().includes(term) || 
+                i.note.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        renderTable(productData);
+
+        // 4. Charts Initialization
+        window.addEventListener('load', () => {
+            // Revenue Breakdown Chart
+            const revCtx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(revCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['資料中心', '客戶端與遊戲', '嵌入式'],
+                    datasets: [{
+                        label: '2026 Q1 營收',
+                        data: [58, 36, 8.73],
+                        backgroundColor: ['#0ea5e9', '#6366f1', '#a8a29e'],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, title: { display: true, text: '億美元' } } }
+                }
+            });
+
+            // Expectations Chart
+            const expCtx = document.getElementById('expectChart').getContext('2d');
+            new Chart(expCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['營收 (億美元)', 'EPS (美元)'],
+                    datasets: [
+                        {
+                            label: '市場預期',
+                            data: [98.9, 1.29],
+                            backgroundColor: '#e5e7eb'
+                        },
+                        {
+                            label: '實際結果',
+                            data: [102.5, 1.37],
+                            backgroundColor: '#0ea5e9'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
