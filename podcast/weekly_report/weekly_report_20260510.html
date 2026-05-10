@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/5/4~5/8)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+        }
+        section {
+            scroll-margin-top: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans leading-relaxed">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-700">美股市場週報</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">核心總結</a>
+                    <a href="#ai-tech" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">AI 與半導體</a>
+                    <a href="#cloud-software" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">雲端與軟體</a>
+                    <a href="#consumption" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">消費與服務</a>
+                    <a href="#data-table" class="nav-link px-1 pt-1 text-sm font-medium transition-colors duration-200">財務數據表</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-stone-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#summary" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">核心總結</a>
+            <a href="#ai-tech" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">AI 與半導體</a>
+            <a href="#cloud-software" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">雲端與軟體</a>
+            <a href="#consumption" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">消費與服務</a>
+            <a href="#data-table" class="block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50">財務數據表</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero / Summary Section -->
+        <section id="summary" class="mb-12">
+            <div class="bg-gradient-to-r from-sky-900 to-indigo-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
+                <p class="text-sky-300 font-semibold mb-2">資料區間：2026年5月4日至5月8日</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-6">AI 與企業獲利撐起新高</h1>
+                <p class="text-lg md:text-xl text-stone-200 max-w-3xl">
+                    上週美股的核心訊號是「企業獲利夠強，足以壓過總經雜音」。儘管油價波動與消費者信心處於低點，但 AI 相關供應鏈與第一季財報的強勁表現推動 S&P 500 與 Nasdaq 續創歷史新高。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <h3 class="text-sky-300 font-bold mb-2">S&P 500 獲利</h3>
+                        <p class="text-3xl font-bold">27.7%</p>
+                        <p class="text-sm text-stone-300">第一季混合成長率</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <h3 class="text-sky-300 font-bold mb-2">非農就業</h3>
+                        <p class="text-3xl font-bold">11.5 萬</p>
+                        <p class="text-sm text-stone-300">4 月新增人數</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                        <h3 class="text-sky-300 font-bold mb-2">財報表現</h3>
+                        <p class="text-3xl font-bold">84%</p>
+                        <p class="text-sm text-stone-300">EPS 優於預期之公司比例</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Chart Section -->
+        <section id="charts" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營收成長視覺化 (YoY Growth)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="h-[400px]">
+                    <canvas id="growthChart"></canvas>
+                </div>
+                <p class="text-center text-sm text-stone-500 mt-4 italic font-serif">
+                    數據來源：FactSet, Reuters 及企業財報。反映 2026 年 Q1 各主要公司的營收成長表現。
+                </p>
+            </div>
+        </section>
+
+        <!-- AI & Tech Sections -->
+        <section id="ai-tech" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 與半導體：成長的核心引擎</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- AMD Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-orange-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">AMD (超微半導體)</h3>
+                        <span class="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-1 rounded">資料中心成長 57%</span>
+                    </div>
+                    <p class="text-stone-600 mb-4">
+                        第一季營收達 $102.5$ 億美元。關鍵在於 EPYC 伺服器與 Instinct GPU。市場重新認識到 AI 不只是 Nvidia 的獨秀，資料中心 CPU 市場預估到 2030 年複合成長率將超過 35%。
+                    </p>
+                </div>
+                <!-- Nvidia/Memory Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Nvidia & 記憶體供應鏈</h3>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">美光漲幅 > 15%</span>
+                    </div>
+                    <p class="text-stone-600 mb-4">
+                        AI 交易進入「擴散期」。除了核心 GPU，市場資金開始湧向第二、三層：記憶體（Micron, Sandisk）、網通設備與基礎設施。
+                    </p>
+                </div>
+                <!-- Alphabet Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Alphabet (Google)</h3>
+                        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded">雲端營收 +63%</span>
+                    </div>
+                    <p class="text-stone-600 mb-4">
+                        市值逼近 Nvidia，反映 Google Cloud 與自研 TPU 生態系的價值。AI 戰場已從單純的晶片銷售延伸至雲端平台與搜尋廣告的整合。
+                    </p>
+                </div>
+                <!-- Advanced Manufacturing Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-gray-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">先進製程產能</h3>
+                        <span class="bg-gray-100 text-gray-700 text-xs font-bold px-2 py-1 rounded">Apple x Intel 協議</span>
+                    </div>
+                    <p class="text-stone-600 mb-4">
+                        Apple 尋求與 Intel、Samsung 合作，顯示「先進製程」已成戰略資源。分散 TSMC 風險成為科技巨頭的首要目標。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cloud & Software Sections -->
+        <section id="cloud-software" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 軟體與雲端監控</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">Palantir：AI 實際收入的證明</h3>
+                    <p class="text-stone-600">
+                        營收年增 85%，美國商業營收翻倍（+133%）。證明 AI 不只是聊天機器人，而是已深入國防、決策系統與企業流程。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">Datadog：雲端監控需求激增</h3>
+                    <p class="text-stone-600">
+                        財報後股價大漲 36%。AI 系統的複雜化帶動了更多監控、安全與管理工具的需求，顯示 AI 基礎設施軟體層的強勁韌性。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consumption & Service Section -->
+        <section id="consumption" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">消費市場的分化</h2>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-8">
+                <h3 class="text-lg font-bold text-amber-800 mb-2">💡 關鍵觀察：品牌與客群結構是勝負手</h3>
+                <p class="text-amber-900">消費支出並未崩壞，但出現明顯分化。Monster 的國際擴張優於 McDonald's 對低收入消費壓力的警訊。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-bold text-stone-800 mb-2">Disney</h4>
+                    <p class="text-sm text-stone-600">串流獲利轉正與樂園韌性支撐。EPS $1.57$ 優於預期。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-bold text-stone-800 mb-2">Uber</h4>
+                    <p class="text-sm text-stone-600">總訂單金達 $537$ 億美元，反映服務型消費仍具吸引力。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-bold text-stone-800 mb-2">Monster</h4>
+                    <p class="text-sm text-stone-600">海外銷售年增 44.9%，顯示強大品牌力在國際市場的擴張性。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table -->
+        <section id="data-table" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">互動式企業財報亮點</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4">
+                    <input type="text" id="tableSearch" placeholder="搜尋公司名稱或關鍵字..." 
+                        class="w-full md:w-1/3 px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">公司名稱</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">營收表現</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">成長率 (YoY)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">關鍵亮點</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS will inject data here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Conclusion -->
+        <section id="conclusion" class="mb-12">
+            <div class="bg-stone-800 rounded-2xl p-8 text-white">
+                <h2 class="text-3xl font-bold mb-6">投資策略總結</h2>
+                <div class="space-y-4">
+                    <p class="flex items-start">
+                        <span class="text-sky-400 mr-3 text-xl">●</span>
+                        <span><strong>維持偏多但需具備紀律：</strong> 目前市場主要由獲利支撐而非單純本益比擴張，但高期待意味著容錯率降低。</span>
+                    </p>
+                    <p class="flex items-start">
+                        <span class="text-sky-400 mr-3 text-xl">●</span>
+                        <span><strong>AI 佈局三層論：</strong> 第一層核心晶片/雲端、第二層軟體平台、第三層基礎設施（電力/記憶體）。</span>
+                    </p>
+                    <p class="flex items-start">
+                        <span class="text-sky-400 mr-3 text-xl">●</span>
+                        <span><span><strong>消費股需汰弱留強：</strong> 優先選擇具備國際定價權與海外成長空間的品牌。</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-900 text-stone-400 mt-12 py-12 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/5/4~5/8)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年5月10日)。</p>
+        </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Chart and Table
+        const productData = [
+            { name: "Palantir", revenue: "$1.63 B", growth: "85%", highlight: "美國商業營收成長 133%，AI 軟體進入實際獲利期" },
+            { name: "Alphabet (Cloud)", revenue: "N/A", growth: "63%", highlight: "Google Cloud 成長強勁，市值逼近 Nvidia" },
+            { name: "AMD", revenue: "$10.25 B", growth: "38%", highlight: "資料中心營收年增 57%， Instinct GPU 出貨強勁" },
+            { name: "Datadog", revenue: "$1 B", growth: "32%", highlight: "雲端安全需求推動獲利，股價單日大漲 36%" },
+            { name: "Monster", revenue: "$2.35 B", growth: "26.9%", highlight: "海外銷售成長 44.9%，品牌力跨國擴散" },
+            { name: "Uber", revenue: "$13.2 B", growth: "14%", highlight: "總預訂額 $537 億，服務型消費展現韌性" },
+            { name: "Pfizer", revenue: "$14.5 B", growth: "5%", highlight: "財報止穩，研發重心轉向肥胖症與腫瘤藥物" },
+            { name: "Disney", revenue: "$25.2 B", growth: "7%", highlight: "串流獲利改善，美國樂園消費持續強勁" }
+        ];
+
+        // 1. Chart.js Implementation
+        function initChart() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: productData.map(d => d.name),
+                    datasets: [{
+                        label: '營收成長率 (%)',
+                        data: productData.map(d => parseFloat(d.growth)),
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)', 
+                            'rgba(56, 189, 248, 0.7)',
+                            'rgba(249, 115, 22, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(139, 92, 246, 0.7)',
+                            'rgba(236, 72, 153, 0.7)',
+                            'rgba(107, 114, 128, 0.7)',
+                            'rgba(234, 179, 8, 0.7)'
+                        ],
+                        borderRadius: 8,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `成長率: ${context.raw}%`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            beginAtZero: true,
+                            grid: { display: false },
+                            ticks: { callback: (value) => value + '%' }
+                        },
+                        y: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 2. Interactive Table Implementation
+        const tableBody = document.getElementById('productTableBody');
+        const tableSearch = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-stone-50 transition-colors";
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.revenue}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-sky-600">${item.growth}</td>
+                    <td class="px-6 py-4 text-sm text-stone-500">${item.highlight}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        tableSearch.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.highlight.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. Navigation Observer for Active Link
+        function initNavObserver() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                threshold: 0.6
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // 4. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Initialize all functions
+        window.onload = () => {
+            initChart();
+            renderTable(productData);
+            initNavObserver();
+        };
+    </script>
+</body>
+</html>
