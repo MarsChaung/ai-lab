@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Tesla AI 轉型研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-900">
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-black tracking-tighter text-sky-600">TESLA <span class="text-stone-800">AI</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#valuation" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500 inactive-nav-link">估值重定義</a>
+                    <a href="#robotaxi" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500 inactive-nav-link">Robotaxi實測</a>
+                    <a href="#global" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500 inactive-nav-link">全球監管與安全</a>
+                    <a href="#market" class="nav-link px-3 py-2 text-sm font-medium transition-colors hover:text-sky-500 inactive-nav-link">中國與供應鏈</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 px-4 py-4 space-y-2">
+            <a href="#valuation" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">估值重定義</a>
+            <a href="#robotaxi" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">Robotaxi實測</a>
+            <a href="#global" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">全球監管與安全</a>
+            <a href="#market" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">中國與供應鏈</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-br from-sky-900 to-indigo-900 rounded-3xl p-8 mb-12 text-white shadow-2xl">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Tesla 又被當成 AI 股定價：能否撐住 1.5 兆美元市值？</h1>
+                <p class="text-sky-100 text-lg mb-6 leading-relaxed">
+                    市場重新聚焦 FSD、Robotaxi、Optimus 與中國成長故事。TSLA 目前股價約 440 美元，市值突破 1.55 兆，本益比超過 400 倍，反映了市場對 AI 平台化的高期望。
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <span class="bg-sky-500/30 border border-sky-400/50 px-4 py-2 rounded-full text-sm font-semibold">FSD 落地加速</span>
+                    <span class="bg-indigo-500/30 border border-indigo-400/50 px-4 py-2 rounded-full text-sm font-semibold">Robotaxi 德州試營運</span>
+                    <span class="bg-emerald-500/30 border border-emerald-400/50 px-4 py-2 rounded-full text-sm font-semibold">中國銷售 +36%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Valuation -->
+        <section id="valuation" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、市場定價的邏輯轉向</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">核心矛盾：車廠 vs AI 平台</h3>
+                    <p class="text-stone-600 leading-relaxed mb-4">
+                        如果 Tesla 只是車廠，目前的估值難以解釋。投資人押注的是其將 FSD 與 Robotaxi 做成「高毛利平台」的潛力。近期 Elon Musk 隨川普訪中，更帶動了 FSD 在中國落地可能加速的樂觀預期。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-2">
+                        <div class="bg-stone-50 p-4 rounded-lg text-center">
+                            <p class="text-xs text-stone-500 uppercase tracking-wider">最新股價 (約)</p>
+                            <p class="text-2xl font-bold text-sky-600">$440</p>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-lg text-center">
+                            <p class="text-xs text-stone-500 uppercase tracking-wider">本益比 (PE)</p>
+                            <p class="text-2xl font-bold text-sky-600">400x+</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-4">柏林工廠產能規劃 (電池 GWh)</h3>
+                    <div class="h-64">
+                        <canvas id="capacityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Robotaxi -->
+        <section id="robotaxi" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、Robotaxi：理想與現實的距離</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="flex items-center mb-6">
+                    <div class="bg-amber-100 p-3 rounded-full mr-4">
+                        <svg class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-stone-800">德州三城實測回饋</h3>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="border-l-4 border-amber-500 pl-4">
+                        <p class="font-bold text-stone-800">Dallas (達拉斯)</p>
+                        <p class="text-stone-600 text-sm mt-2">5英里路程耗時接近 2 小時。出現繞路、複雜路口判斷不順及下車點過遠等問題。</p>
+                    </div>
+                    <div class="border-l-4 border-amber-500 pl-4">
+                        <p class="font-bold text-stone-800">Austin (奧斯汀)</p>
+                        <p class="text-stone-600 text-sm mt-2">營運近一年，但等待時間超過 15 分鐘極為常見，27% 的查詢顯示「無車可用」。</p>
+                    </div>
+                    <div class="border-l-4 border-emerald-500 pl-4">
+                        <p class="font-bold text-stone-800">關鍵結論</p>
+                        <p class="text-stone-600 text-sm mt-2 font-medium italic">目前服務仍像「測試版」，穩定性與大規模複製能力是未來兩年的核心指標。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Global & Market -->
+        <section id="global" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、全球進展與產品安全</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- EU Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-sky-600 mb-4">
+                        <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">歐洲 FSD 進度</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        荷蘭已給予暫定核准，比利時考慮跟進。然而北歐國家（瑞典、芬蘭等）監管機構仍有疑慮，全歐審批進度可能放緩。
+                    </p>
+                </div>
+                <!-- Safety Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <div class="text-emerald-600 mb-4">
+                        <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Model Y 安全認證</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        2026 Model Y 成為首款通過 NHTSA 新 ADAS 測試標準車型，包含行人自動煞車等項目的高分認證，強化安全形象。
+                    </p>
+                </div>
+                <!-- China Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-rose-600 mb-4">
+                        <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">中國 4 月銷量</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        上海工廠銷量 79,478 輛，年增 36%。雖然面臨本土品牌低價競爭，但其製造基地競爭力依然強勁。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Data Table -->
+        <section id="market" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、核心數據與供應鏈概覽</h2>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-4 bg-stone-50 border-b border-stone-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <h3 class="font-bold text-stone-700">重要訊號清單</h3>
+                    <div class="relative">
+                        <input type="text" id="table-search" placeholder="搜尋關鍵字 (如: 中國, 電池...)" class="pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 w-full md:w-64">
+                        <svg class="h-5 w-5 text-stone-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-stone-100 text-stone-600 uppercase text-xs font-bold sticky top-0">
+                            <tr>
+                                <th class="px-6 py-4">分類</th>
+                                <th class="px-6 py-4">核心數據/事件</th>
+                                <th class="px-6 py-4">狀態</th>
+                                <th class="px-6 py-4">投資解讀</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body" class="divide-y divide-stone-100">
+                            <!-- Table rows will be inserted by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Chart 2 -->
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-sky-700">中國市場銷量趨勢</h3>
+                <div class="h-64">
+                    <canvas id="chinaSalesChart"></canvas>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-stone-800 mb-4">結論：市場領先現實</h3>
+                <p class="text-stone-600 leading-relaxed mb-6">
+                    Tesla 正在經歷從「硬體製造」到「AI 軟體」的估值轉換期。目前的股價已高度反映未來 FSD 全球落地與 Robotaxi 商業化的預期。短線投資人應關注股價波動，中長線則需緊盯以下三大變數：
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="bg-sky-100 text-sky-600 font-bold rounded-full h-6 w-6 flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                        <span class="text-stone-700">中國 FSD 是否真正獲批落地。</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-sky-100 text-sky-600 font-bold rounded-full h-6 w-6 flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                        <span class="text-stone-700">Robotaxi 服務是否能從「測試版」轉向穩定商業運作。</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-sky-100 text-sky-600 font-bold rounded-full h-6 w-6 flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                        <span class="text-stone-700">汽車本業毛利率是否能止穩回升。</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Tesla AI 轉型研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Tesla 相關公開資料 (2026年4月26日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Table
+        const productData = [
+            { category: "中國銷量", event: "4月銷量 79,478 輛", status: "正向 (年增 36%)", analysis: "製造競爭力仍強，但月減 7.2% 顯示競爭加劇。" },
+            { category: "柏林工廠", event: "加碼 2.5 億美元投資", status: "穩定擴張", analysis: "電池產能從 8GWh 升至 18GWh，強化歐洲供應鏈。" },
+            { category: "產品安全", event: "Model Y 通過新 ADAS 測試", status: "加分項目", analysis: "第一款通過新標準的車型，利於支撐品牌形象。" },
+            { category: "Robotaxi", event: "德州三城擴張", status: "早期測試", analysis: "體驗仍有明顯限制，理想與現實仍有距離。" },
+            { category: "政經動態", event: "Musk 隨川普訪中", status: "高想像空間", analysis: "市場預期 FSD 在中國落地審批可能加速。" },
+            { category: "歐洲監管", event: "荷蘭暫定核准 FSD", status: "分裂中", analysis: "北歐國家仍有疑慮，全歐推廣時間表不明。" }
+        ];
+
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Navigation Active State (Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 3. Table Filtering Logic
+        const tableBody = document.getElementById('data-table-body');
+        const searchInput = document.getElementById('table-search');
+
+        function renderTable(data) {
+            tableBody.innerHTML = data.map(item => `
+                <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-sky-700">${item.category}</td>
+                    <td class="px-6 py-4 text-stone-800">${item.event}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 rounded text-xs font-bold ${
+                            item.status.includes('正向') || item.status.includes('加分') ? 'bg-emerald-100 text-emerald-700' : 
+                            item.status.includes('測試') || item.status.includes('想像') ? 'bg-amber-100 text-amber-700' : 'bg-stone-200 text-stone-700'
+                        }">${item.status}</span>
+                    </td>
+                    <td class="px-6 py-4 text-stone-600 text-sm">${item.analysis}</td>
+                </tr>
+            `).join('');
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.category.toLowerCase().includes(term) || 
+                item.event.toLowerCase().includes(term) || 
+                item.analysis.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // 4. Initialize Charts
+        window.onload = function() {
+            renderTable(productData);
+
+            // Chart 1: Berlin Capacity
+            const ctx1 = document.getElementById('capacityChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['原產能目標', '新產能目標'],
+                    datasets: [{
+                        label: '電池年產能 (GWh)',
+                        data: [8, 18],
+                        backgroundColor: ['rgba(14, 165, 233, 0.4)', 'rgba(14, 165, 233, 1)'],
+                        borderColor: ['rgba(14, 165, 233, 1)', 'rgba(14, 165, 233, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            // Chart 2: China Sales
+            const ctx2 = document.getElementById('chinaSalesChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: ['去年 4 月', '今年 3 月', '今年 4 月'],
+                    datasets: [{
+                        label: '銷售/出口量',
+                        data: [58440, 85600, 79478], // Derived approx values for visualization
+                        borderColor: '#0284c7',
+                        backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#0284c7',
+                        pointRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: false } }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
