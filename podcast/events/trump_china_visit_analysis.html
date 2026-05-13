@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-川普訪中策略研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+        }
+        /* Table Sticky Header Hack */
+        .sticky-table-head {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-900">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-600 tracking-tight">川普訪中分析報告</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="overview">核心觀點</a>
+                    <a href="#semi" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="semi">AI 半導體</a>
+                    <a href="#platform" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="platform">科技巨頭</a>
+                    <a href="#finance" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="finance">航太金融</a>
+                    <a href="#data-viz" class="nav-link px-3 py-2 text-sm font-medium transition-colors duration-200 inactive-nav-link" data-section="data-viz">數據視覺化</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 py-2 space-y-1">
+            <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">核心觀點</a>
+            <a href="#semi" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">AI 半導體</a>
+            <a href="#platform" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">科技巨頭</a>
+            <a href="#finance" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">航太金融</a>
+            <a href="#data-viz" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">數據視覺化</a>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header id="overview" class="relative bg-stone-900 py-16 sm:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6">
+                    川普訪中：美股投資人的<br><span class="text-sky-400">「中國市場再開門」</span>定價機會
+                </h1>
+                <p class="text-xl text-stone-300 max-w-3xl mx-auto mb-8">
+                    在美股估值偏高、通膨壓力重現（4月CPI 3.8%）且降息預期降溫的背景下，投資人應從「外交辭令」轉向「市場准入」與「實質訂單」。
+                </p>
+            </div>
+        </div>
+        <!-- Abstract Background -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-stone-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Core Indicators Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                <h3 class="text-sm font-bold text-stone-500 uppercase tracking-wider mb-2">關鍵指標 1</h3>
+                <p class="text-2xl font-bold text-stone-800">Nvidia H200</p>
+                <p class="text-stone-600 mt-2">出口許可是否獲准，將決定 AI 供應鏈營收上修空間。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                <h3 class="text-sm font-bold text-stone-500 uppercase tracking-wider mb-2">關鍵指標 2</h3>
+                <p class="text-2xl font-bold text-stone-800">Tesla FSD 落地</p>
+                <p class="text-stone-600 mt-2">決定 Tesla 從「硬體車廠」轉向「AI 軟體公司」的定價關鍵。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                <h3 class="text-sm font-bold text-stone-500 uppercase tracking-wider mb-2">關鍵指標 3</h3>
+                <p class="text-2xl font-bold text-stone-800">Boeing 採購協議</p>
+                <p class="text-stone-600 mt-2">大型飛機訂單重啟將直接改善現金流預期與引擎服務需求。</p>
+            </div>
+        </div>
+
+        <!-- Section: AI & Semiconductors -->
+        <section id="semi" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資主線一：AI 與半導體供應鏈</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-600 mb-4 italic">「科技戰的有限鬆動」</h3>
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        此區塊波動最大。市場聚焦於黃仁勳最後一刻加入行程，意味著高端 AI 晶片出口可能出現談判契機。然而，仍需警惕中國本土替代政策對 Micron 等公司的長線風險。
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">●</span>
+                            <span><strong>Nvidia (NVDA)：</strong> 營收上修的核心觀察點。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">●</span>
+                            <span><strong>Micron (MU)：</strong> 政策敏感，注意監管審查風險。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">●</span>
+                            <span><strong>Coherent (COHR)：</strong> 關注「銦」等關鍵材料供應穩定。</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-stone-800 rounded-lg shadow-lg p-6 text-white flex flex-col justify-center">
+                    <p class="text-lg font-medium mb-4">「這不只是外交，更是高估值環境下的營收救命稻草。」</p>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-10 h-1 h-px bg-sky-500"></div>
+                        <span class="text-stone-400 text-sm">策略建議：核心持有 Nvidia，彈性配置 Micron</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Platform Giants -->
+        <section id="platform" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資主線二：平台型科技巨頭</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-sky-600 font-bold">TSLA</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Tesla</h3>
+                    <p class="text-stone-600 text-sm">FSD 全自動駕駛在中國的落地許可，是重啟估值想像空間的唯一鑰匙。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-stone-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-stone-600 font-bold">AAPL</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Apple</h3>
+                    <p class="text-stone-600 text-sm">穩健配置。比起新訂單，供應鏈穩定與關稅減免對 Apple 獲利更具防禦意義。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-indigo-600 font-bold">META</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Meta</h3>
+                    <p class="text-stone-600 text-sm">關注中國對美商參與亞洲 AI 生態系（如 Manus）的監管鬆動可能。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Finance & Aerospace -->
+        <section id="finance" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資主線三：航太、金融與支付</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="flex flex-wrap -mx-4">
+                    <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                        <h3 class="text-xl font-bold text-stone-800 mb-4 underline decoration-sky-500 underline-offset-8">最快見效的實質利益</h3>
+                        <p class="text-stone-600 mb-6">這條主線常被 AI 光環掩蓋，但其帶來的訂單與牌照獲取，往往能轉化為最直接的現金流改善。</p>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-stone-50 rounded-lg">
+                                <h4 class="font-bold">Boeing (BA) / GE Aerospace (GE)</h4>
+                                <p class="text-sm text-stone-500 italic">最具訂單可見度：中國大單重啟</p>
+                            </div>
+                            <div class="p-4 bg-stone-50 rounded-lg">
+                                <h4 class="font-bold">Visa / Mastercard</h4>
+                                <p class="text-sm text-stone-500 italic">銀行卡清算牌照與長期成長選擇權</p>
+                            </div>
+                            <div class="p-4 bg-stone-50 rounded-lg">
+                                <h4 class="font-bold">Goldman Sachs / Citi</h4>
+                                <p class="text-sm text-stone-500 italic">全資證券牌照准入與估值支撐</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2 px-4">
+                        <div class="bg-sky-50 p-6 rounded-xl border border-sky-100 h-full">
+                            <h3 class="text-lg font-bold text-sky-800 mb-4">地緣政治風險提示</h3>
+                            <p class="text-stone-700 text-sm leading-relaxed mb-4">
+                                <strong>資產管理公司 (BlackRock, Blackstone)：</strong>
+                                面臨更深層的地緣政治審查（如港口資產收購案）。這代表中國機會不只是賣基金，更牽涉戰略水道影響力的權力博弈。
+                            </p>
+                            <div class="bg-white p-4 rounded shadow-inner">
+                                <p class="text-xs font-bold text-red-500 mb-1 uppercase tracking-tighter">風險警告</p>
+                                <p class="text-xs text-stone-500">中美關係若再次降溫，此類跨國合資或戰略收購案將首當其衝。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Data Visualization -->
+        <section id="data-viz" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">數據視覺化與互動分析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Chart.js Visualization -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-6">各板塊對「訪中成果」的敏感度評估</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-400 mt-4 italic">* 評分基準基於營收預期上修潛力與監管風險降低程度 (1-10分)</p>
+                </div>
+
+                <!-- Interactive Data Table -->
+                <div class="bg-white rounded-lg shadow-lg p-6 overflow-hidden flex flex-col">
+                    <div class="mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">標的公司動態篩選</h3>
+                        <div class="mt-2 relative">
+                            <input type="text" id="tableFilter" placeholder="搜尋公司名稱或主線項目..." class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-2 focus:ring-sky-500 focus:outline-none text-sm">
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto overflow-y-auto max-h-64">
+                        <table class="min-w-full divide-y divide-stone-200">
+                            <thead class="bg-stone-50 sticky-table-head">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">代號</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">投資主線</th>
+                                    <th class="px-4 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">核心觀察點</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTableBody" class="bg-white divide-y divide-stone-200">
+                                <!-- Data will be injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conclusion Checklist -->
+            <div class="bg-stone-900 text-white rounded-lg p-8 shadow-xl">
+                <h3 class="text-2xl font-bold mb-6 text-sky-400">總結判斷：三個必須落地的具體指標</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center font-bold">1</div>
+                        <p class="text-lg"><strong>H200 晶片：</strong> 是否真正開始出貨給中國客戶？</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center font-bold">2</div>
+                        <p class="text-lg"><strong>Tesla FSD：</strong> 中國監管是否白紙黑字批准落地？</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center font-bold">3</div>
+                        <p class="text-lg"><strong>Boeing 訂單：</strong> 是否簽署具法律約束力的大型採購協議？</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-stone-400 text-sm italic">只有當政治場合轉化為具體訂單與牌照，外交新聞才會真正沉澱為美股的長線投資價值。</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-川普訪中策略研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中川普訪中相關公開資料 (2026年5月13日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Interactive Table
+        const productData = [
+            { ticker: "NVDA", theme: "AI 半導體", point: "H200 出口許可與營收上修" },
+            { ticker: "TSLA", theme: "科技巨頭", point: "FSD 落地與 AI 軟體轉型" },
+            { ticker: "BA", theme: "航太金融", point: "重啟中國飛機訂單與現金流" },
+            { ticker: "MU", theme: "AI 半導體", point: "監管審查與 AI 基礎建設需求" },
+            { ticker: "V / MA", theme: "航太金融", point: "銀行卡清算牌照與長期選擇權" },
+            { ticker: "AAPL", theme: "科技巨頭", point: "供應鏈穩定與關稅減免利多" },
+            { ticker: "QCOM", theme: "AI 半導體", point: "中國手機復甦與邊緣 AI 題材" },
+            { ticker: "GE", theme: "航太金融", point: "飛機引擎訂單與售後服務增長" },
+            { ticker: "GS / C", theme: "航太金融", point: "全資證券牌照與跨境業務擴張" },
+            { ticker: "COHR", theme: "AI 半導體", point: "光通訊關鍵材料供應穩定性" }
+        ];
+
+        // 1. Mobile Menu Logic
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // 2. Table Filtering Logic
+        const filterInput = document.getElementById('tableFilter');
+        const tableBody = document.getElementById('dataTableBody');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-bold text-stone-900">${item.ticker}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-600">${item.theme}</td>
+                        <td class="px-4 py-3 text-sm text-stone-600">${item.point}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        filterInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.ticker.toLowerCase().includes(val) || 
+                item.theme.toLowerCase().includes(val) || 
+                item.point.toLowerCase().includes(val)
+            );
+            renderTable(filtered);
+        });
+
+        // Initial Render
+        renderTable(productData);
+
+        // 3. Chart.js Implementation
+        const ctx = document.getElementById('impactChart').getContext('2d');
+        const impactChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Nvidia', 'Tesla', 'Boeing', 'Micron', 'Visa', 'Apple'],
+                datasets: [{
+                    label: '敏感度得分 (1-10)',
+                    data: [9.5, 9.0, 8.5, 7.5, 6.0, 5.5],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.8)', // sky-500
+                        'rgba(14, 165, 233, 0.7)',
+                        'rgba(14, 165, 233, 0.6)',
+                        'rgba(14, 165, 233, 0.5)',
+                        'rgba(14, 165, 233, 0.4)',
+                        'rgba(14, 165, 233, 0.3)'
+                    ],
+                    borderColor: 'rgb(14, 165, 233)',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // 4. Intersection Observer for Active Nav Links
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section, header');
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-section') === id) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+    </script>
+</body>
+</html>
