@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Cerebras IPO研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* 導覽列 Active 狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        /* 增加錨點位移，避免 fixed header 遮擋標題 */
+        section {
+            scroll-margin-top: 5rem; 
+        }
+    </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-800 antialiased leading-relaxed">
+
+    <!-- Sticky 導覽列 -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo & Title -->
+                <div class="flex items-center">
+                    <span class="text-xl font-extrabold text-stone-800 tracking-tight">
+                        <span class="text-sky-500">Cerebras IPO</span> 
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#overview" class="desktop-nav-link active-nav-link pb-1 font-semibold transition-colors duration-200">IPO 摘要</a>
+                    <a href="#market-data" class="desktop-nav-link inactive-nav-link pb-1 font-semibold transition-colors duration-200">市場數據</a>
+                    <a href="#financials" class="desktop-nav-link inactive-nav-link pb-1 font-semibold transition-colors duration-200">財務與圖表</a>
+                    <a href="#analysis" class="desktop-nav-link inactive-nav-link pb-1 font-semibold transition-colors duration-200">核心分析</a>
+                    <a href="#strategy" class="desktop-nav-link inactive-nav-link pb-1 font-semibold transition-colors duration-200">投資啟示</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-sky-600 bg-sky-50">IPO 摘要</a>
+                <a href="#market-data" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">市場數據</a>
+                <a href="#financials" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財務與圖表</a>
+                <a href="#analysis" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">核心分析</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資啟示</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-stone-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-4 leading-tight">Cerebras 不是下一個 Nvidia</h1>
+            <p class="text-xl sm:text-2xl text-sky-400 font-light mb-6">而是市場對 AI 基礎建設的壓力測試</p>
+            <p class="max-w-2xl mx-auto text-stone-300">Cerebras 的上市不只是一家 AI 晶片公司的 IPO，更代表著市場正在尋找「Nvidia 之外的第二條 AI 算力路線」。</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Section: Overview -->
+        <section id="overview" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵資訊摘要</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Info Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-sm text-stone-500 font-semibold mb-1">股票代號</p>
+                    <p class="text-3xl font-bold text-stone-800">CBRS</p>
+                    <p class="text-xs text-stone-400 mt-2">Nasdaq Global Select Market</p>
+                </div>
+                <!-- Info Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-sm text-stone-500 font-semibold mb-1">上市日期</p>
+                    <p class="text-2xl font-bold text-stone-800">2026年5月14日</p>
+                    <p class="text-xs text-stone-400 mt-2">5月15日預計交割</p>
+                </div>
+                <!-- Info Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-sm text-stone-500 font-semibold mb-1">IPO 定價與募資</p>
+                    <p class="text-2xl font-bold text-stone-800">$185 <span class="text-sm font-normal">/ 股</span></p>
+                    <p class="text-xs text-stone-400 mt-2">發行3,000萬股，募資約55.5億美元</p>
+                </div>
+                <!-- Info Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-sm text-stone-500 font-semibold mb-1">2026 最大 IPO</p>
+                    <p class="text-2xl font-bold text-stone-800">20 倍</p>
+                    <p class="text-xs text-stone-400 mt-2">投資人認購需求超過可供股票數量</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Market Data (Interactive Table) -->
+        <section id="market-data" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">上市首日表現與估值 (互動式資料表)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                
+                <div class="mb-4">
+                    <label for="table-search" class="block text-sm font-medium text-stone-700 mb-1">搜尋與篩選資料：</label>
+                    <input type="text" id="table-search" class="w-full md:w-1/3 px-4 py-2 border border-stone-300 rounded-md focus:ring-sky-500 focus:border-sky-500" placeholder="輸入關鍵字 (如: 估值, 350, 收盤)...">
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">項目</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">數據/價格</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">備註分析</th>
+                            </tr>
+                        </thead>
+                        <tbody id="market-table-body" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態生成表格內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-stone-400 mt-3 text-right">* 上市首日：2026年5月14日</p>
+            </div>
+        </section>
+
+        <!-- Section: Financials (Charts) -->
+        <section id="financials" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務與估值圖表</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Revenue Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">年度營收成長 (百萬美元)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 text-center">2024 至 2025 年營收增長表現，顯示出強勁的實際營收基礎。</p>
+                </div>
+                
+                <!-- Valuation Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">完全稀釋後估值飆升 (億美元)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="valuationChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 text-center">從 IPO 定價到開盤跳漲的估值變化，市場給予極高的未來預期。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Analysis -->
+        <section id="analysis" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">深入分析：Cerebras 的定位與挑戰</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">高估值的背後邏輯</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm">
+                        <li><strong>AI 故事性強：</strong>搭上美國 IPO 市場回溫與 AI 算力不足的題材。</li>
+                        <li><strong>具備實質營收：</strong>2025年營收達 5.10 億美元，非純概念股。</li>
+                        <li><strong>市場需求旺盛：</strong>超額認購高達 20 倍以上，推升發行價與股數。</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-stone-100 text-stone-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">晶圓級引擎的差異化</h3>
+                    <p class="text-sm text-stone-600 mb-3">
+                        不同於 Nvidia 將許多高效能 GPU 組合成團隊，Cerebras (如 WSE-3) 將龐大算力集中於「單一超大型晶片平台」。
+                    </p>
+                    <p class="text-sm text-stone-600">
+                        <strong>優勢：</strong>減少資料搬移與系統協調複雜度，特別適合追求低延遲、高速度的 <strong>AI 推論任務</strong>。
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">無法輕易取代 Nvidia</h3>
+                    <p class="text-sm text-stone-600 mb-3">
+                        投資人不應被「Nvidia 殺手」的行銷術語誤導。Nvidia 的護城河在於其強大的<strong>生態系 (CUDA、網路、伺服器、社群)</strong>。
+                    </p>
+                    <p class="text-sm text-stone-600">
+                        Cerebras 更是 AI 算力市場的「差異化供應商」，要全面取代 Nvidia 的全方位地位，難度極高。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Strategy & Risks -->
+        <section id="strategy" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">最大風險與投資策略啟示</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Risks -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4 border-b pb-2">警示與風險</h3>
+                    <ul class="space-y-4 mt-4">
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2 mt-1">●</span>
+                            <div>
+                                <h4 class="font-bold text-stone-800">估值已反映完美預期</h4>
+                                <p class="text-sm text-stone-600">開盤市值突破千億，市場幾乎預設其未來能輕易規模化並成為核心供應商。只要毛利率或增長稍不如預期，股價易劇烈修正。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2 mt-1">●</span>
+                            <div>
+                                <h4 class="font-bold text-stone-800">短線波動極大</h4>
+                                <p class="text-sm text-stone-600">盤中高點 385 美元跌至收盤 311 美元，顯示獲利了結賣壓沉重。一旦市場風向從「追AI」轉「看估值」，修正速度極快。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2 mt-1">●</span>
+                            <div>
+                                <h4 class="font-bold text-stone-800">客戶過度集中風險</h4>
+                                <p class="text-sm text-stone-600">需觀察未來是否能從少數大型實驗室與雲端客戶，順利擴展到更廣泛的企業與產業應用。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Strategy -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4 border-b pb-2">投資策略建議</h3>
+                    <div class="space-y-4 mt-4">
+                        <div class="p-4 bg-stone-50 rounded-lg">
+                            <h4 class="font-bold text-sky-700 mb-1">保守型投資人</h4>
+                            <p class="text-sm text-stone-600">不急於追高。建議等待 2~3 季財報驗證營收成長、毛利率、現金流與訂單能見度。待熱潮回落、基本面支撐時再尋找良好的風險報酬比。</p>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-lg">
+                            <h4 class="font-bold text-sky-700 mb-1">積極型投資人</h4>
+                            <p class="text-sm text-stone-600">若看好 AI 推論市場與晶圓級架構，可將其視為高波動成長股，用<strong>小部位參與</strong>，避免重倉押注。</p>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-lg">
+                            <h4 class="font-bold text-sky-700 mb-1">半導體產業佈局者</h4>
+                            <p class="text-sm text-stone-600">這是一個產業訊號：AI 硬體進入「多架構時代」。短期對 Nvidia、AMD 甚至台積電供應鏈反而是信心利多，證明 AI 算力需求尚未飽和。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Cerebras IPO研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Cerebras Systems相關公開資料 (2026年5月15日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        // 1. 行動版選單切換
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // 點擊手機選單後自動隱藏
+        menu.addEventListener('click', (e) => {
+            if(e.target.tagName === 'A') {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // 2. 互動資料表 (Interactive Table) 產生與篩選
+        const tableData = [
+            { item: "IPO 定價", value: "$185", note: "發行 3,000 萬股" },
+            { item: "開盤價", value: "$350", note: "開盤跳漲幅度達 89%" },
+            { item: "盤中最高價", value: "超過 $385", note: "顯示短線資金動能極強" },
+            { item: "首日收盤價", value: "$311", note: "較 IPO 價上漲約 68%，從高點回落顯示獲利了結" },
+            { item: "IPO 完全稀釋後估值", value: "$564.3 億", note: "成為2026年截至當時美國最大IPO" },
+            { item: "開盤完全稀釋後估值", value: "$1,067.5 億", note: "市值突破千億，市場預期極高" }
+        ];
+
+        const tbody = document.getElementById('market-table-body');
+        
+        function renderTable(data) {
+            tbody.innerHTML = '';
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white hover:bg-sky-50 transition-colors' : 'bg-stone-50 hover:bg-sky-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${row.item}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-sky-600">${row.value}</td>
+                    <td class="px-6 py-4 text-sm text-stone-500">${row.note}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        renderTable(tableData);
+
+        // 表格篩選功能
+        document.getElementById('table-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = tableData.filter(row => 
+                row.item.toLowerCase().includes(searchTerm) || 
+                row.value.toLowerCase().includes(searchTerm) || 
+                row.note.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filteredData);
+        });
+
+        // 3. 導覽列 Active 狀態追蹤 (Intersection Observer)
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.desktop-nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // 調整觸發範圍
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link', 'text-sky-500');
+                        link.classList.add('inactive-nav-link');
+                        
+                        if (link.getAttribute('href') === `#${currentId}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(sec => observer.observe(sec));
+
+        // 4. 繪製 Chart.js 圖表
+        document.addEventListener("DOMContentLoaded", function() {
+            // 圖表共同樣式與配置
+            Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+            Chart.defaults.color = '#78716c'; // stone-500
+
+            // 營收圖表 (Bar Chart)
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctxRev, {
+                type: 'bar',
+                data: {
+                    labels: ['2024年', '2025年'],
+                    datasets: [{
+                        label: '年度營收 (百萬美元)',
+                        data: [290.3, 510.0],
+                        backgroundColor: [
+                            'rgba(120, 113, 108, 0.7)', // stone-500
+                            'rgba(14, 165, 233, 0.9)'   // sky-500
+                        ],
+                        borderColor: [
+                            'rgb(120, 113, 108)',
+                            'rgb(14, 165, 233)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `$${context.raw} 百萬美元`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f5f5f4' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // 估值圖表 (Bar Chart)
+            const ctxVal = document.getElementById('valuationChart').getContext('2d');
+            new Chart(ctxVal, {
+                type: 'bar',
+                data: {
+                    labels: ['IPO 定價估值', '開盤後估值'],
+                    datasets: [{
+                        label: '完全稀釋後估值 (億美元)',
+                        data: [564.3, 1067.5],
+                        backgroundColor: [
+                            'rgba(120, 113, 108, 0.7)', // stone-500
+                            'rgba(239, 68, 68, 0.8)'   // red-500 (強調危險/火熱)
+                        ],
+                        borderColor: [
+                            'rgb(120, 113, 108)',
+                            'rgb(239, 68, 68)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `$${context.raw} 億美元`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f5f5f4' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
