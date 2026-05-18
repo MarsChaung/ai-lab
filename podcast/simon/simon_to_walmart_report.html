@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美國消費產業分析研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 導航列自訂樣式設定 */
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind text-stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / Title -->
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-700">美國消費分層觀察</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#summary" class="nav-link inactive-nav-link py-2">核心觀點</a>
+                    <a href="#simon" class="nav-link inactive-nav-link py-2">SPG財報亮點</a>
+                    <a href="#retailers" class="nav-link inactive-nav-link py-2">零售四大指標</a>
+                    <a href="#macro" class="nav-link inactive-nav-link py-2">總體經濟壓力</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-2">投資策略</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">核心觀點</a>
+                <a href="#simon" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">SPG財報亮點</a>
+                <a href="#retailers" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">零售四大指標</a>
+                <a href="#macro" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">總體經濟壓力</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首標題區 -->
+    <header class="bg-gradient-to-r from-stone-800 to-stone-700 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">從 Simon 到 Walmart</h1>
+            <h2 class="text-xl md:text-2xl font-light text-stone-300">美國消費沒有崩壞，但投資人該看懂「分層消費」的訊號</h2>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- Section 1: 核心觀點 -->
+        <section id="summary" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心結論：消費並非衰退，而是分化</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                <p class="text-lg text-stone-700 leading-relaxed">
+                    美股市場目光集中在 AI 與科技巨頭，但「美國消費撐不撐得住」是另一條重要主線。根據 Simon Property Group 與近期總經數據顯示，<strong>美國消費不是全面衰退，而是走向分化</strong>。高品質資產與高效率零售商仍具備定價能力，但中低收入者、非必需品消費正成為壓力點。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-emerald-50 rounded-lg p-6 border border-emerald-100 shadow-sm">
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">🟢 表現強韌的領域</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-stone-700">
+                        <li>高品質購物中心、Premium Outlets</li>
+                        <li>餐飲娛樂與體驗型消費場景</li>
+                        <li>高收入客群消費動能</li>
+                    </ul>
+                </div>
+                <div class="bg-rose-50 rounded-lg p-6 border border-rose-100 shadow-sm">
+                    <h3 class="text-xl font-bold text-rose-800 mb-2">🔴 面臨壓力的領域</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-stone-700">
+                        <li>一般家庭與中低收入消費者購買力</li>
+                        <li>房屋修繕與大型耐久財支出</li>
+                        <li>中價位非必需消費品（服飾、家具）</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Simon 財報 -->
+        <section id="simon" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Simon 財報訊號：高品質資產的定價能力</h2>
+            <p class="mb-6 text-stone-700">Simon Property Group (SPG) 2026年第一季財報顯示，在高利率環境下，其優質實體資產非但沒有被電商壓垮，反而展現強大的定價能力與銷售成長。</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- 數據卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center text-center">
+                    <div class="text-sm text-stone-500 mb-1">Q1 出租率 (vs 去年95.9%)</div>
+                    <div class="text-4xl font-black text-sky-600">96.0%</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center text-center">
+                    <div class="text-sm text-stone-500 mb-1">每平方英尺基本租金 (年增)</div>
+                    <div class="text-4xl font-black text-emerald-600">$61.99 <span class="text-lg font-bold">+5.2%</span></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center text-center">
+                    <div class="text-sm text-stone-500 mb-1">租戶每平方英尺銷售額 (年增)</div>
+                    <div class="text-4xl font-black text-indigo-600">$819 <span class="text-lg font-bold">+11.8%</span></div>
+                </div>
+            </div>
+
+            <!-- 動態圖表 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">SPG 2026 Q1 關鍵指標年增率 (YoY)</h3>
+                <div class="w-full h-72">
+                    <canvas id="spgGrowthChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 零售四大天王 (互動表格) -->
+        <section id="retailers" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">下一個考試：零售巨頭財報壓力測試</h2>
+            <p class="mb-6 text-stone-700">本週即將公布財報的大型零售商，涵蓋了不同收入階層與消費屬性。市場將透過它們的財報，檢驗通膨是否已經壓縮一般家庭的購買力。</p>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <!-- 搜尋/篩選框 -->
+                <div class="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2 sm:mb-0">觀察指標清單</h3>
+                    <input type="text" id="searchInput" placeholder="搜尋公司名稱或領域..." class="w-full sm:w-64 px-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+
+                <!-- 互動資料表格 -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-stone-100 text-stone-700 border-b border-stone-300">
+                                <th class="py-3 px-4 font-semibold">公司名稱</th>
+                                <th class="py-3 px-4 font-semibold">代表領域與客群</th>
+                                <th class="py-3 px-4 font-semibold">財報觀察重點</th>
+                                <th class="py-3 px-4 font-semibold">表現強勢代表的意義</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-stone-200">
+                            <!-- JS 動態生成內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noDataMsg" class="hidden text-center py-4 text-stone-500">找不到符合的資料</div>
+            </div>
+        </section>
+
+        <!-- Section 4: 總經壓力 -->
+        <section id="macro" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">雙重擠壓：油價、通膨與利率</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- 原油與通膨卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full border-t-4 border-amber-500">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <h3 class="text-xl font-bold text-stone-800">高油價與通膨壓力</h3>
+                    </div>
+                    <ul class="list-disc pl-5 space-y-2 text-stone-700 flex-grow">
+                        <li>布蘭特原油升至 ~$110.55/桶，美國原油 ~$102.48/桶。</li>
+                        <li>汽油、運輸成本上升壓縮企業毛利率。</li>
+                        <li>消費者被迫將預算轉向加油與必需品，排擠服飾、家具與娛樂支出（低收入家庭受創最深）。</li>
+                        <li>4月核心零售實質成長估計僅有 0.1%，名目成長多來自物價上漲而非數量。</li>
+                    </ul>
+                </div>
+
+                <!-- 利率與殖利率卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full border-t-4 border-red-500">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        <h3 class="text-xl font-bold text-stone-800">高利率環境</h3>
+                    </div>
+                    <ul class="list-disc pl-5 space-y-2 text-stone-700 flex-grow">
+                        <li>美國 10 年期公債殖利率升至 4.631%，30 年期升至 5.159%。</li>
+                        <li><strong>對 REIT 的影響：</strong> 資金成本上升，高股息吸引力被債券分流，壓抑估值。</li>
+                        <li><strong>對消費的影響：</strong> 房貸利率上升拖累房市，連帶影響房屋修繕與大型家電支出（如 Home Depot 觀察指標）。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 投資策略 -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論與投資策略</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg font-semibold text-sky-800 mb-4">總結一句話：Simon 證明美國消費還有韌性，但本週零售財報會確認，這種韌性是全面存在，還是只集中在高品質資產與低價通路。</p>
+                
+                <div class="space-y-4">
+                    <div class="bg-stone-50 p-4 rounded-md border border-stone-200">
+                        <h4 class="font-bold text-stone-800 mb-2">情境一：消費韌性廣泛存在</h4>
+                        <p class="text-stone-600 text-sm">若 Walmart 穩健、Target 未惡化、Home Depot 展望佳。市場將重新評價消費股、商業地產、支付與物流板塊。</p>
+                    </div>
+                    
+                    <div class="bg-stone-50 p-4 rounded-md border border-stone-200">
+                        <h4 class="font-bold text-stone-800 mb-2">情境二：消費分化加劇 (Simon 只是例外)</h4>
+                        <p class="text-stone-600 text-sm">若 Walmart 低收入客群壓力大、Target 疲弱、TJX 因降級消費受惠。投資人應對消費循環股持謹慎態度。</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 border-t border-stone-200 pt-4">
+                    <h4 class="font-bold text-stone-800 mb-2">針對 SPG (Simon Property Group) 的投資建議：</h4>
+                    <ul class="list-disc pl-5 text-stone-700 text-sm space-y-1">
+                        <li>可視為「高品質商業地產與消費韌性觀察股」，而非單純高股息防禦股。</li>
+                        <li>風險提醒：需留意長債殖利率維持高檔的估值風險，以及租戶未來展店續租能力的風險。</li>
+                        <li>策略：穩健型投資人可等待殖利率壓力或市場修正時分批佈局；為投資組合提供不同現金流來源。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美國消費產業分析研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中從 Simon 到 Walmart 相關公開資料 (2026年5月18日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 功能實作 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* =========================================
+               1. 手機版漢堡選單切換
+            ========================================= */
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // 點擊手機版選單連結後自動關閉選單
+            const mobileLinks = menu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            /* =========================================
+               2. 導航列 Active 狀態追蹤 (Intersection Observer)
+            ========================================= */
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // 調整觸發邊界，讓滾動體驗更精準
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 更新所有導航連結狀態
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            /* =========================================
+               3. 互動資料表格與篩選功能
+            ========================================= */
+            const retailData = [
+                {
+                    name: "Walmart",
+                    sector: "民生必需品與低價通路 (低收入家庭)",
+                    focus: "低收入客群壓力、生活必需品銷售佔比",
+                    meaning: "若強勢，代表消費者仍買必需品；若弱，代表基層購買力受通膨嚴重擠壓。"
+                },
+                {
+                    name: "Home Depot",
+                    sector: "房屋修繕、裝修與耐久財支出",
+                    focus: "大型專案需求、消費者對房市/利率的信心",
+                    meaning: "若弱，代表高利率與房市壓力正在拖累家庭大型支出。"
+                },
+                {
+                    name: "Target",
+                    sector: "中價位非必需消費 (中產階級)",
+                    focus: "服飾、居家用品與可選商品支出",
+                    meaning: "若弱，代表消費者開始削減非必需品開支，中產階級縮手。"
+                },
+                {
+                    name: "TJX",
+                    sector: "折扣零售通路 (降級消費)",
+                    focus: "來客數成長、尋找折扣商品的客群變化",
+                    meaning: "若強勢，可能代表消費者轉向更便宜的通路，而非消費力全面恢復 (消費降級)。"
+                }
+            ];
+
+            const tbody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMsg = document.getElementById('noDataMsg');
+
+            function renderTable(data) {
+                tbody.innerHTML = '';
+                if(data.length === 0) {
+                    noDataMsg.classList.remove('hidden');
+                } else {
+                    noDataMsg.classList.add('hidden');
+                    data.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.className = "hover:bg-sky-50 transition-colors duration-150";
+                        tr.innerHTML = `
+                            <td class="py-4 px-4 font-bold text-sky-700">${item.name}</td>
+                            <td class="py-4 px-4 text-stone-700">${item.sector}</td>
+                            <td class="py-4 px-4 text-stone-600 text-sm">${item.focus}</td>
+                            <td class="py-4 px-4 text-stone-600 text-sm border-l-4 border-transparent hover:border-sky-400 pl-3">${item.meaning}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            }
+
+            // 初始化表格
+            renderTable(retailData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filteredData = retailData.filter(item => 
+                    item.name.toLowerCase().includes(term) || 
+                    item.sector.toLowerCase().includes(term) ||
+                    item.focus.toLowerCase().includes(term)
+                );
+                renderTable(filteredData);
+            });
+
+            /* =========================================
+               4. Chart.js 動態圖表
+            ========================================= */
+            const ctx = document.getElementById('spgGrowthChart').getContext('2d');
+            
+            // 由於原數據為租金金額與銷售金額，且單位不同。為了在同一個圖表中呈現，
+            // 這裡使用報告中提到的「年增率 (YoY %)」來繪製長條圖。
+            const chartData = {
+                labels: ['Real Estate FFO 每股', '整體 FFO 每股', '每平方英尺基本租金', '租戶每平方英尺銷售額'],
+                datasets: [{
+                    label: '2026 Q1 年增長率 (%)',
+                    data: [7.5, 9.0, 5.2, 11.8],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.7)',  // sky-500
+                        'rgba(14, 165, 233, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',  // emerald-500
+                        'rgba(99, 102, 241, 0.7)'   // indigo-500
+                    ],
+                    borderColor: [
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(99, 102, 241, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            };
+
+            const chartConfig = {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false // 隱藏圖例，因為標籤已經夠清楚
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '增長率 (%)',
+                                color: '#78716c' // stone-500
+                            },
+                            grid: {
+                                color: '#e7e5e4' // stone-200
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#44403c', // stone-700
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, chartConfig);
+        });
+    </script>
+</body>
+</html>
