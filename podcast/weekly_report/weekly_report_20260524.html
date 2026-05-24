@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/5/18~5/22)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自訂樣式：平滑滾動偏移，避免固定導航列遮擋標題 */
+        section {
+            scroll-margin-top: 5rem;
+        }
+        /* 導航列啟動狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* text-sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* text-stone-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        
+        /* 隱藏滾動條但保留滾動功能 (用於特定表格區塊) */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- 導航互動 (Sticky Header) -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-xl font-bold text-sky-600 truncate max-w-[200px] sm:max-w-xs">
+                        美股市場週報
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden xl:flex space-x-4 lg:space-x-6" id="desktop-menu">
+                    <a href="#overview" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">營運概況</a>
+                    <a href="#finance" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">財務績效</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">營運策略</a>
+                    <a href="#product" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">產品技術</a>
+                    <a href="#industry" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">產業地位</a>
+                    <a href="#risks" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">競爭與風險</a>
+                    <a href="#supplychain" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">供應鏈</a>
+                    <a href="#market" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">市場觀點</a>
+                    <a href="#investment" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">投資建議</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="xl:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-stone-200 shadow-lg absolute w-full">
+            <div class="px-4 pt-2 pb-4 space-y-1 h-80 overflow-y-auto">
+                <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">公司營運概況</a>
+                <a href="#finance" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">財務績效剖析</a>
+                <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">營運策略分析</a>
+                <a href="#product" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">產品技術戰略</a>
+                <a href="#industry" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">產業地位與戰略</a>
+                <a href="#risks" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">競爭格局與風險</a>
+                <a href="#supplychain" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">供應鏈生態系</a>
+                <a href="#market" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">市場觀點與估值</a>
+                <a href="#investment" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">投資策略建議</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主視覺區塊 -->
+    <div class="bg-gradient-to-r from-stone-800 to-stone-700 py-16 text-white mb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4">美股投資週報</h1>
+            <p class="text-xl md:text-2xl text-sky-300 font-medium mb-6">AI 仍是主引擎，但油價、利率與精打細算的消費者正在改變選股邏輯</p>
+            <div class="inline-flex items-center px-4 py-2 bg-stone-900/50 rounded-full text-sm font-medium">
+                <svg class="w-4 h-4 mr-2 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                資料期間：2026 年 5 月 18 日至 5 月 22 日
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        
+        <!-- 1. 公司營運概況 -->
+        <section id="overview" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">公司營運概況</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">科技巨頭營運強勁</h3>
+                    <p class="text-stone-600">Nvidia 的財報再次證明資料中心與 AI 晶片需求尚未降溫。Google 將生成式 AI 更深地放入搜尋與工作流程。大型科技公司仍在大量建設基礎設施。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">消費零售出現分歧</h3>
+                    <p class="text-stone-600">美國消費者並未全面停止花錢，但更偏向「價格合理、折扣明確」的選擇。Walmart 業績穩健，Target 銷售回溫，而折扣零售商 TJX、Ross Stores 則強勢增長。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-amber-500 hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">房屋修繕與其他領域</h3>
+                    <p class="text-stone-600">Home Depot 與 Lowe’s 反映大型修繕需求仍然保守，主要靠維修基本盤支撐。醫療保健板塊（如 Pfizer 新疫苗試驗）為市場提供了科技與零售外的發展契機。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 財務績效剖析 -->
+        <section id="finance" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務績效剖析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 動態圖表區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">2026年Q1 關鍵企業營收成長率 (YoY)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 重點財務數據總結 -->
+                <div class="bg-stone-100 rounded-lg shadow-inner p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        財務亮點解讀
+                    </h3>
+                    <ul class="space-y-4 text-stone-700">
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-sky-500 mt-2 mr-3 flex-shrink-0"></span>
+                            <span><strong>Nvidia：</strong>Q1營收 816 億美元 (YoY +85%)，資料中心高達 752 億美元 (YoY +92%)，並新增 800 億回購額度。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mt-2 mr-3 flex-shrink-0"></span>
+                            <span><strong>零售板塊：</strong>Walmart 全球營收達 1,778 億美元；Ross Stores 總銷售年增 21%，同店銷售暴增 17%，展現極強的折扣零售動能。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mt-2 mr-3 flex-shrink-0"></span>
+                            <span><strong>軟體轉型陣痛：</strong>Intuit 營收 86 億美元 (YoY +10%)，但宣布裁減 17% 人力以重整 AI 資源。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 互動資料表格 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-4 bg-stone-50 border-b border-stone-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <h3 class="text-lg font-bold text-stone-800">各企業第一季財報摘要</h3>
+                    <div class="relative w-full sm:w-64">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <input type="text" id="tableSearch" class="block w-full pl-10 pr-3 py-2 border border-stone-300 rounded-md leading-5 bg-white placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm" placeholder="搜尋公司或關鍵字...">
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-100">企業名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-100">Q1 營收/銷售</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-100">年增率 (YoY)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-100">重要營運亮點</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS將動態渲染此處 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noDataMessage" class="hidden p-8 text-center text-stone-500">
+                    找不到符合的資料，請嘗試其他關鍵字。
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 營運策略分析 -->
+        <section id="strategy" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運策略分析</h2>
+            <div class="grid lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sky-100 p-3 rounded-full mr-4">
+                            <svg class="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">Google：防守核心獲利來源</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        Alphabet 將 AI 直接放入搜尋入口，讓使用者可透過搜尋介面完成購物、規劃與跨 App 資訊整理。其投資邏輯已改變：能否把龐大使用者基礎轉化為新的 AI 訂閱收入（降價高階訂閱方案）與更高效率的廣告收益，是其營運策略核心。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-emerald-100 p-3 rounded-full mr-4">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">零售業：價值導向與防禦型策略</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        Walmart 利用低價日用品優勢吸引預算緊縮的客群；Target 透過商品更新與同日配送策略挽回銷售；TJX 與 Ross Stores 等折扣店更是迎合了「尋寶型」購物與「價格導向消費」，成為消費板塊中的最大贏家。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 產品技術戰略 -->
+        <section id="product" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產品技術戰略</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-sky-100 rounded-full opacity-50"></div>
+                <ul class="space-y-6 relative z-10">
+                    <li class="border-l-4 border-sky-500 pl-4">
+                        <h4 class="text-lg font-bold text-stone-800">Nvidia 資料中心與 AI 晶片</h4>
+                        <p class="text-stone-600 mt-1">雲端服務商與新創仍在大量採購運算設備，基礎建設循環仍在強勢進行中。</p>
+                    </li>
+                    <li class="border-l-4 border-indigo-500 pl-4">
+                        <h4 class="text-lg font-bold text-stone-800">Google Gemini 3.5 Flash</h4>
+                        <p class="text-stone-600 mt-1">更強的 AI 代理功能導入搜尋，並推出針對企業與開發者的訂閱方案，加強與 OpenAI 等對手競爭。</p>
+                    </li>
+                    <li class="border-l-4 border-amber-500 pl-4">
+                        <h4 class="text-lg font-bold text-stone-800">Intuit AI 軟體整合</h4>
+                        <p class="text-stone-600 mt-1">不賣晶片，而是利用 AI 改善報稅 (TurboTax) 與會計 (QuickBooks) 產品服務品質，但伴隨著資源重組的代價。</p>
+                    </li>
+                    <li class="border-l-4 border-rose-500 pl-4">
+                        <h4 class="text-lg font-bold text-stone-800">Pfizer 25 價肺炎鏈球菌疫苗</h4>
+                        <p class="text-stone-600 mt-1">實驗性新疫苗抗體反應高出現有產品 9 至 15 倍，涵蓋兒童疾病 90% 菌株，展現生技領域的研發突破。</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 5. 產業地位與戰略 -->
+        <section id="industry" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業地位與戰略</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+                <h3 class="text-2xl font-bold text-sky-700 mb-4">AI 投資從「成長題材」演變為「資本成本考試」</h3>
+                <p class="text-stone-700 text-lg leading-relaxed mb-6">
+                    美股七巨頭（Magnificent Seven）的戰略地位正在發生質變。根據統計，Alphabet、Amazon、Meta 等為建設資料中心，2026年以來發行債券金額高達 1,340 億美元。
+                </p>
+                <div class="bg-stone-50 p-6 rounded-lg border border-stone-200">
+                    <h4 class="font-bold text-stone-800 mb-2">戰略啟示：</h4>
+                    <p class="text-stone-600">
+                        未來的競爭不再只是「誰的模型最強」，而是「誰能用合理成本取得電力、晶片與客戶付費」。市場將檢視龐大資本支出是否帶來實質獲利，這將使 AI 題材中的贏家與輸家差距逐漸擴大。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 競爭格局與潛在風險 -->
+        <section id="risks" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">競爭格局與潛在風險</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 風險卡片 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">高利率環境延續</h3>
+                    <p class="text-stone-600 text-sm">聯準會態度轉謹慎，若通膨居高不下，可能進一步收緊政策。高利率對高估值科技股、高負債企業及房地產帶來直接壓力。</p>
+                </div>
+                <!-- 風險卡片 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">油價與地緣政治</h3>
+                    <p class="text-stone-600 text-sm">中東局勢動盪推升油價，成為決定股市漲勢能否延續的「風險開關」。高能源價格直接侵蝕企業毛利與民眾可支配所得。</p>
+                </div>
+                <!-- 風險卡片 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">自研晶片競爭</h3>
+                    <p class="text-stone-600 text-sm">Nvidia 雖財報亮眼但股價未大漲，反映市場擔憂其大型客戶（Amazon、Google、Microsoft）發展自研晶片帶來的長期替代風險。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 供應鏈生態系 -->
+        <section id="supplychain" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">供應鏈生態系</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    當前供應鏈的關鍵變數聚焦於<strong>能源成本</strong>與<strong>物流壓力</strong>。
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border border-stone-200 p-4 rounded bg-stone-50">
+                        <h4 class="font-bold text-stone-800 mb-2">物流與配送壓力</h4>
+                        <p class="text-stone-600 text-sm">高油價對零售商的物流構成直接壓力。以 Walmart 為例，其財報中明確指出，高油價使季度燃料相關成本增加了約 1.75 億美元，對毛利率形成侵蝕。</p>
+                    </div>
+                    <div class="border border-stone-200 p-4 rounded bg-stone-50">
+                        <h4 class="font-bold text-stone-800 mb-2">AI 基礎建設供應鏈</h4>
+                        <p class="text-stone-600 text-sm">科技巨頭投入千億美元建設資料中心，帶動了電力設備、散熱、伺服器組裝與先進製程晶片的供應鏈榮景。然而，電力取得成本與供應穩定度正成為新瓶頸。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 金融市場觀點與估值分析 -->
+        <section id="market" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">金融市場觀點與估值分析</h2>
+            <div class="flex flex-col lg:flex-row gap-6">
+                <div class="lg:w-1/3 bg-stone-800 text-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-400 mb-4">市場關鍵數據指引</h3>
+                    <ul class="space-y-4">
+                        <li class="border-b border-stone-600 pb-2">
+                            <span class="block text-sm text-stone-400">10年期美債殖利率</span>
+                            <span class="text-2xl font-bold">~4.56%</span>
+                        </li>
+                        <li class="border-b border-stone-600 pb-2">
+                            <span class="block text-sm text-stone-400">聯邦基金利率目標</span>
+                            <span class="text-2xl font-bold">3.50% - 3.75%</span>
+                        </li>
+                        <li class="pb-2">
+                            <span class="block text-sm text-stone-400">S&P 500 走勢</span>
+                            <span class="text-xl font-bold text-emerald-400">連八週上漲</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:w-2/3 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">估值邏輯的轉變：不再只聽成長故事</h3>
+                    <p class="text-stone-600 leading-relaxed mb-4">
+                        S&P 500 完成連續八週上漲，背後有企業獲利與 AI 題材的支撐。然而，市場邏輯已發生改變：投資人不願只買單純的「成長故事」，開始嚴格要求企業證明<strong>投資回報、成本控制能力</strong>，以及是否已經產生<strong>實質現金流</strong>。
+                    </p>
+                    <p class="text-stone-600 leading-relaxed">
+                        經濟數據呈現兩面性：就業與製造業仍穩，但綜合 PMI 成長動能減弱、企業售價壓力升溫。只要油價仍高、企業轉嫁成本推升物價，市場將無法期待快速降息來支撐美股估值，這將壓抑缺乏實質獲利的高估值科技股。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 投資策略建議 -->
+        <section id="investment" class="scroll-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略建議</h2>
+            <div class="bg-sky-50 border-l-4 border-sky-600 p-6 rounded-r-lg shadow-md mb-6">
+                <p class="text-lg text-stone-800 font-medium mb-4">
+                    結論：市場趨勢偏正面，但選股比追指數更重要。不宜只因為「AI 很熱」就忽略價格、成本與風險。
+                </p>
+                <h3 class="font-bold text-stone-800 mb-3 text-lg">建議投資組合配置三面向：</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded shadow-sm border border-sky-100">
+                        <div class="font-bold text-sky-700 mb-2">1. AI 實質受惠股</div>
+                        <p class="text-sm text-stone-600">挑選具備實質 AI 營收或入口優勢的長期成長股（如 Nvidia、Alphabet）。但需密切關注其資本支出效益。</p>
+                    </div>
+                    <div class="bg-white p-4 rounded shadow-sm border border-emerald-100">
+                        <div class="font-bold text-emerald-700 mb-2">2. 防禦型價值消費</div>
+                        <p class="text-sm text-stone-600">布局受惠於消費者精打細算、重視價格與折扣的防守型零售商（如 Walmart、TJX、Ross Stores）。</p>
+                    </div>
+                    <div class="bg-white p-4 rounded shadow-sm border border-purple-100">
+                        <div class="font-bold text-purple-700 mb-2">3. 醫療板塊分散風險</div>
+                        <p class="text-sm text-stone-600">適度配置與科技循環不同的醫療題材（如輝瑞 Pfizer），為大量持有科技股的投資組合提供防禦與平衡。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/5/18~5/22)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路相關公開資料 (2026年5月24日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 手機版選單切換
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // 點擊手機選單項目後自動關閉選單
+            const mobileLinks = document.querySelectorAll('.mobile-nav-item');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // 2. 滾動監聽 (Scroll Spy)
+            const sections = document.querySelectorAll('.scroll-section');
+            const desktopLinks = document.querySelectorAll('#desktop-menu .nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px', // 調整觸發範圍
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 更新 Desktop 選單狀態
+                        desktopLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 3. 互動資料表格 (資料與篩選)
+            const earningsData = [
+                { company: 'Nvidia', revenue: '816 億美元', yoy: '+85%', highlight: '資料中心營收年增 92%；新增 800 億美元股票回購' },
+                { company: 'Walmart', revenue: '1,778 億美元', yoy: '+7.3%', highlight: '電子商務銷售成長 26%；受高油價侵蝕 1.75 億獲利' },
+                { company: 'Target', revenue: '未提總額', yoy: '+6.7% (淨銷售)', highlight: '同店銷售成長 5.6% 創四年最佳；上修全年預估' },
+                { company: 'TJX', revenue: '未提總額', yoy: '+6% (同店)', highlight: '每股盈餘大增 29%；提高全年同店銷售與獲利展望' },
+                { company: 'Ross Stores', revenue: '未提總額', yoy: '+21% (總銷售)', highlight: '同店銷售暴增 17%；營業利益率達 13.4%' },
+                { company: 'Home Depot', revenue: '417.7 億美元', yoy: '+4.8%', highlight: '同店銷售僅微增 0.6%；反映大型修繕需求保守' },
+                { company: 'Lowe’s', revenue: '230.8 億美元', yoy: '+0.6% (同店)', highlight: '線上銷售成長 15.5%；EPS 優於預期' },
+                { company: 'Intuit', revenue: '86 億美元', yoy: '+10%', highlight: '宣布裁減 17% 人力重整 AI 資源；市場反應負面' }
+            ];
+
+            const tableBody = document.getElementById('dataTableBody');
+            const searchInput = document.getElementById('tableSearch');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            // 渲染表格函數
+            const renderTable = (data) => {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    noDataMessage.classList.remove('hidden');
+                } else {
+                    noDataMessage.classList.add('hidden');
+                    data.forEach((item, index) => {
+                        // 交替背景色
+                        const bgClass = index % 2 === 0 ? 'bg-white' : 'bg-stone-50';
+                        const row = `
+                            <tr class="${bgClass} hover:bg-sky-50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${item.company}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.revenue}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-emerald-600 font-medium">${item.yoy}</td>
+                                <td class="px-6 py-4 text-sm text-stone-600">${item.highlight}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                }
+            };
+
+            // 初始渲染表格
+            renderTable(earningsData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = earningsData.filter(item => {
+                    return item.company.toLowerCase().includes(keyword) || 
+                           item.highlight.toLowerCase().includes(keyword);
+                });
+                renderTable(filteredData);
+            });
+
+            // 4. Chart.js 動態圖表初始化
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Nvidia', 'Ross Stores', 'Intuit', 'Walmart', 'Target', 'Home Depot'],
+                    datasets: [{
+                        label: 'Q1 營收/銷售年增率 (YoY %)',
+                        data: [85, 21, 10, 7.3, 6.7, 4.8],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.8)',  // sky-500
+                            'rgba(16, 185, 129, 0.8)',  // emerald-500
+                            'rgba(139, 92, 246, 0.8)',  // violet-500
+                            'rgba(245, 158, 11, 0.8)',  // amber-500
+                            'rgba(244, 63, 94, 0.8)',   // rose-500
+                            'rgba(168, 162, 158, 0.8)'  // stone-400
+                        ],
+                        borderWidth: 0,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(231, 229, 228, 0.5)' // stone-200
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
