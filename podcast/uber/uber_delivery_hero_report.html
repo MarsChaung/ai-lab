@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Uber與DeliveryHero併購案研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 為固定導航列預留滾動空間 */
+        section {
+            scroll-margin-top: 80px;
+        }
+        /* 導航列啟用與未啟用狀態的自訂顏色 */
+        .active-nav-link {
+            color: #0284c7; /* text-sky-600 */
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* text-stone-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-extrabold text-sky-600 tracking-wider">Uber併購DH分析</span>
+                </div>
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">執行摘要</a>
+                    <a href="#background" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">交易背景</a>
+                    <a href="#financials" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">財務數據與圖表</a>
+                    <a href="#data-table" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">關鍵數據檢索</a>
+                    <a href="#risks" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">風險與結論</a>
+                </div>
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-sky-600 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">執行摘要</a>
+                <a href="#background" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">交易背景</a>
+                <a href="#financials" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財務數據與圖表</a>
+                <a href="#data-table" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">關鍵數據檢索</a>
+                <a href="#risks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">風險與結論</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首主視覺 -->
+    <header class="bg-gradient-to-r from-stone-800 to-stone-700 py-16 text-white text-center px-4">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Uber 併購 Delivery Hero 的成長誘惑與股東考題</h1>
+            <p class="text-lg text-stone-300 md:text-xl">搶下全球外送版圖，還是付出過高學費？深度解析併購案的戰略與風險</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Section 1: 執行摘要 -->
+        <section id="summary" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">執行摘要</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    Uber 欲收購知名外送平台 foodpanda 母公司 <strong>Delivery Hero</strong>。此舉不僅是歐洲企業併購，更涉及全球外送版圖與品牌價值的重大重整。Uber 已將 Delivery Hero 的直接持股提高至 <strong>19.5%</strong>，成為其最大股東。
+                </p>
+                <p class="text-stone-700 leading-relaxed">
+                    Uber 意在取得 Delivery Hero 橫跨餐飲、生鮮、日用品的「全球日常消費入口」。然而，高昂的潛在收購價（逾 40 歐元/股）、全球 22 個市場重疊帶來的反壟斷審查，以及台灣 foodpanda 已確認將出售給 Grab 等因素，皆成為 Uber 投資人必須審慎評估的考題。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: 交易背景與現況 -->
+        <section id="background">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">併購案現況與戰略板塊</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">價格拉鋸戰</h3>
+                    <p class="text-stone-600 text-sm">Uber 初步提出 <strong>33歐元</strong> 指示性收購方案。傳聞曾以 <strong>38歐元</strong> 接觸遭拒，部分大股東期望超過 <strong>40歐元</strong>。5月25日 DH 股價已上漲至 37.85 歐元。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">台灣市場獨立交易</h3>
+                    <p class="text-stone-600 text-sm">台灣 Uber Eats 併購 foodpanda 因壟斷遭拒。2026年3月，DH 協議以 <strong>6億美元現金</strong> 將台灣 foodpanda 售予 Grab。這意味著 Uber 若收購 DH，將不包含台灣高價值資產。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">全球日常消費入口</h3>
+                    <p class="text-stone-600 text-sm">收購能讓 Uber 取得 foodpanda, talabat, Glovo 等品牌，將服務從餐飲延伸至生鮮、日用品，擴大會員經濟與物流廣告價值。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 財務與圖表 -->
+        <section id="financials">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2026年第一季營運成長動能</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 文字數據區 -->
+                <div class="flex flex-col justify-center space-y-4">
+                    <div class="bg-white rounded-lg shadow p-5 border-l-4 border-stone-800">
+                        <h4 class="font-bold text-lg text-stone-800">Uber 強勁的現金流與外送成長</h4>
+                        <p class="text-stone-600 mt-2 text-sm">Q1 總訂單達 537 億美元 (YoY +25%)，其中外送業務高達 260 億美元 (YoY +28%)。期末擁現金約 61 億美元。</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-5 border-l-4 border-sky-500">
+                        <h4 class="font-bold text-lg text-stone-800">Delivery Hero 快商務崛起</h4>
+                        <p class="text-stone-600 mt-2 text-sm">Q1 平台交易總額達 125 億歐元 (YoY +8.8%)，營收 37 億歐元。快商務 (生鮮雜貨) 成長驚人，YoY 高達 +30%，已占總交易額 18%。</p>
+                    </div>
+                </div>
+                <!-- 圖表區 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-center font-bold text-stone-700 mb-4">2026年Q1各項業務年增率 (YoY) 比較</h3>
+                    <div class="relative h-72 w-full">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 互動資料表格 -->
+        <section id="data-table">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數據與估值檢索</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p class="text-sm text-stone-500">可透過關鍵字篩選報告中的重要財務與交易數據。</p>
+                    <div class="relative w-full sm:w-64">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <input type="text" id="searchInput" class="block w-full pl-10 pr-3 py-2 border border-stone-300 rounded-md leading-5 bg-stone-50 placeholder-stone-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm transition-colors" placeholder="搜尋項目、數值或說明...">
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto border border-stone-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-700 uppercase tracking-wider sticky top-0 bg-stone-100">指標項目</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-700 uppercase tracking-wider sticky top-0 bg-stone-100">數據 / 數值</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-700 uppercase tracking-wider sticky top-0 bg-stone-100 hidden md:table-cell">詳細說明與備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態插入內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 無資料提示 -->
+                <div id="noDataMsg" class="hidden text-center py-6 text-stone-500">
+                    找不到符合的數據。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 風險與結論 -->
+        <section id="risks">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">潛在風險與投資判斷</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- 風險卡片 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-red-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2 flex items-center">
+                        <svg class="w-5 h-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                        價格紀律問題
+                    </h3>
+                    <p class="text-sm text-stone-600">若最終收購價須提高至 40 歐元以上，整體成本將接近百億美元規模。Uber 可能須動用現金、增加借款或發行新股，這會影響現有股東短期回報。</p>
+                </div>
+                <!-- 風險卡片 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-red-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2 flex items-center">
+                        <svg class="w-5 h-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                        反壟斷審查 (Antitrust)
+                    </h3>
+                    <p class="text-sm text-stone-600">雙方在全球有 22 個重疊市場（含歐洲 9 國）。外送平台規模愈大，監管疑慮愈強。若被迫出售部分市場或限制資料整合，將嚴重削弱預期的規模效益。</p>
+                </div>
+            </div>
+
+            <!-- 結論區塊 -->
+            <div class="bg-sky-50 rounded-lg p-6 lg:p-8 border border-sky-100">
+                <h3 class="text-2xl font-bold text-sky-800 mb-4">結論：審慎偏正面的長期催化劑</h3>
+                <p class="text-stone-700 mb-4">
+                    Uber 具備強勁的基本面，兩家公司結合在策略上絕對合理。然而，<strong>「買得到，不代表買得划算」</strong>。目前投資人仍缺少三項關鍵資訊：<span class="font-bold text-stone-900">正式報價、融資方式、監管機關條件</span>。
+                </p>
+                <ul class="list-disc list-inside text-stone-700 space-y-2 ml-2">
+                    <li>對於已持有 Uber 的投資人：建議繼續持有，密切關注報價是否高於 40 歐元及財務槓桿變化。</li>
+                    <li>對於未持有 Uber 的投資人：建議等待正式併購條件與監管態度明朗後，再評估是否進場。</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Uber與DeliveryHero併購案研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Uber, Delivery Hero 相關公開資料 (2026年5月25日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        // --- 1. 手機版選單切換 ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊手機版連結後自動收起選單
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 2. 導航列滾動監聽 (Active Link State) ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('#desktop-menu .nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // 調整觸發區域
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 移除所有 active 樣式
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    });
+                    
+                    // 找到對應的連結並加入 active 樣式
+                    const activeId = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`#desktop-menu a[href="#${activeId}"]`);
+                    
+                    if (activeLink) {
+                        activeLink.classList.remove('inactive-nav-link');
+                        activeLink.classList.add('active-nav-link');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- 3. Chart.js 動態圖表 ---
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        const growthChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Uber 總訂單', 'Uber 外送業務', 'DH 平台交易', 'DH 營收', 'DH 快商務'],
+                datasets: [{
+                    label: '2026年 Q1 年增率 (YoY %)',
+                    data: [25, 28, 8.8, 17.8, 30],
+                    backgroundColor: [
+                        'rgba(2, 132, 199, 0.8)', // Sky 600
+                        'rgba(2, 132, 199, 0.8)',
+                        'rgba(249, 115, 22, 0.8)', // Orange 500
+                        'rgba(249, 115, 22, 0.8)',
+                        'rgba(34, 197, 94, 0.8)'  // Green 500
+                    ],
+                    borderColor: [
+                        'rgba(2, 132, 199, 1)',
+                        'rgba(2, 132, 199, 1)',
+                        'rgba(249, 115, 22, 1)',
+                        'rgba(249, 115, 22, 1)',
+                        'rgba(34, 197, 94, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- 4. 互動資料表格 (即時篩選) ---
+        // 資料來源：報告內的真實數據
+        const reportData = [
+            { item: "Uber Q1 總訂單金額", value: "537 億美元", note: "年增 25%" },
+            { item: "Uber Q1 總營收", value: "132 億美元", note: "年增 14%" },
+            { item: "Uber Q1 外送訂單金額", value: "260 億美元", note: "年增 28%，接近叫車業務規模" },
+            { item: "Uber Q1 自由現金流", value: "約 23 億美元", note: "期末現金與短期投資約 61 億美元" },
+            { item: "Delivery Hero Q1 平台交易總額", value: "125 億歐元", note: "年增 8.8%" },
+            { item: "Delivery Hero Q1 營收", value: "37 億歐元", note: "年增 17.8%" },
+            { item: "Delivery Hero 快商務交易總額", value: "佔集團總額 18%", note: "年增 30% (生鮮、日用品等)" },
+            { item: "Uber 潛在收購報價", value: "每股 33~40 歐元+", note: "33歐元為初步方案，部分股東要價超40歐元" },
+            { item: "Uber 對 DH 直接持股", value: "19.5%", note: "已成為 Delivery Hero 最大股東" },
+            { item: "Grab 收購台灣 foodpanda", value: "6 億美元現金", note: "預計2026下半年完成，取得台灣高價值業務" },
+            { item: "台灣 foodpanda 2025 交易總額", value: "約 15 億歐元", note: "在未分攤集團成本前已達獲利" },
+            { item: "Uber 與 DH 重疊市場", value: "22 個", note: "其中 9 個位於歐洲，面臨反壟斷審查風險" }
+        ];
+
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const noDataMsg = document.getElementById('noDataMsg');
+
+        // 渲染表格函式
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                noDataMsg.classList.remove('hidden');
+            } else {
+                noDataMsg.classList.add('hidden');
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-stone-50 transition-colors";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${row.item}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-sky-600 font-bold">${row.value}</td>
+                        <td class="px-6 py-4 text-sm text-stone-500 hidden md:table-cell">${row.note}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+        }
+
+        // 初始化表格
+        renderTable(reportData);
+
+        // 綁定搜尋輸入事件
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = reportData.filter(row => {
+                return row.item.toLowerCase().includes(searchTerm) || 
+                       row.value.toLowerCase().includes(searchTerm) || 
+                       row.note.toLowerCase().includes(searchTerm);
+            });
+            renderTable(filteredData);
+        });
+
+    </script>
+</body>
+</html>
