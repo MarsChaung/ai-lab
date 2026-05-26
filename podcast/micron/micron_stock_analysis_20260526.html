@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美光(Micron)專題研究報告</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自訂導航列啟動狀態樣式 */
+        .active-nav-link {
+            color: #0284c7; /* text-sky-600 */
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* text-stone-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased leading-relaxed">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-sky-700">美光(Micron)專題研究</span>
+                </div>
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">核心結論</a>
+                    <a href="#catalysts" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">暴漲催化劑</a>
+                    <a href="#financials" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">財報與AI效應</a>
+                    <a href="#valuation" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">估值與風險</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors">投資策略</a>
+                </div>
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-700 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 shadow-inner">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">核心結論</a>
+                <a href="#catalysts" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">暴漲催化劑</a>
+                <a href="#financials" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財報與AI效應</a>
+                <a href="#valuation" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">估值與風險</a>
+                <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首標題區塊 -->
+    <header class="bg-gradient-to-r from-sky-800 to-sky-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">從記憶體週期股到 AI 戰略資產</h1>
+            <p class="text-xl md:text-2xl text-sky-100 font-light mb-8">Micron 為何在 5 月 26 日暴漲，投資人該追還是該等？</p>
+            
+            <div class="flex justify-center gap-4 flex-wrap">
+                <div class="bg-white/10 backdrop-blur-md rounded-lg px-6 py-3 border border-white/20 text-left">
+                    <p class="text-sm text-sky-200">5/26 盤中高點</p>
+                    <p class="text-2xl font-bold text-emerald-400">$860.38 <span class="text-sm text-emerald-400 ml-1">(+14.6%)</span></p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg px-6 py-3 border border-white/20 text-left">
+                    <p class="text-sm text-sky-200">公司市值</p>
+                    <p class="text-2xl font-bold text-white">~ $9,830 億</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg px-6 py-3 border border-white/20 text-left">
+                    <p class="text-sm text-sky-200">UBS 目標價上修</p>
+                    <p class="text-2xl font-bold text-yellow-400">$1,625</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 核心結論 -->
+        <section id="summary" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">先說結論：不只是跟著 AI 族群上漲</h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 border-l-4 border-sky-500">
+                <p class="text-lg mb-4">5 月 26 日，美股半導體板塊因 AI 熱度走強，但 <strong>Micron (美光) 的表現明顯強過整個族群</strong>（當日漲幅高達 14.6%，遠超費半指數的 4.1%）。</p>
+                <p class="text-lg">AI 族群行情只能解釋部分漲幅，真正讓 Micron 大幅領漲的關鍵，在於市場同時收到了<span class="font-bold text-sky-700">「美國製造」</span>、<span class="font-bold text-sky-700">「政策支持」</span>與<span class="font-bold text-sky-700">「獲利估值上修」</span>三個明確的個別催化劑訊號。Micron 已被市場重新定義為「AI 基礎建設供應商」與「美國記憶體戰略供應商」。</p>
+            </div>
+        </section>
+
+        <!-- 暴漲催化劑 -->
+        <section id="catalysts" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">推升股價的三大獨立催化劑</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow border border-stone-100">
+                    <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center text-sky-600 mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">1. 維吉尼亞州擴建進展</h3>
+                    <p class="text-stone-600 text-sm">5/22 宣布 Manassas 廠開始製造最先進的 1-alpha DRAM。證明美國供應鏈布局正在實際落地，預計 2026 年底前使該廠供應量增加至四倍，滿足國防與車用長期需求。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow border border-stone-100">
+                    <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center text-sky-600 mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">2. 美國政策公開支持</h3>
+                    <p class="text-stone-600 text-sm">美國總統特朗普在紐約州公開活動中點名稱讚 Micron，並強調其接近千億美元的投資計畫。這讓市場對其在美國半導體政策中的戰略地位（補助、保護、政府採購）想像快速升溫。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow border border-stone-100">
+                    <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center text-sky-600 mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">3. UBS 大幅上調目標價</h3>
+                    <p class="text-stone-600 text-sm">分析師將目標價從 535 美元狂升至 1,625 美元。核心理由是 AI 讓產業轉向長期合約與穩定高定價，Micron 將擺脫過去暴起暴落的週期宿命，獲得更高的估值倍數。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 財報與動態圖表 -->
+        <section id="financials" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 記憶體需求改變了獲利結構</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-stone-700 mb-4">Micron 最近一季的財報（2026 FY Q2），已經不是一般景氣復甦的程度。當高階記憶體（如 HBM）供不應求時，Micron 的獲利彈性非常大。</p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✔</span>
+                            <span><strong>營收暴增：</strong>Q2 營收達 238.6 億美元，遠高於去年同期的 80.5 億美元。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✔</span>
+                            <span><strong>毛利率翻倍：</strong>調整後毛利率由去年同期的 37.9% 飆升至 74.9%。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✔</span>
+                            <span><strong>強勁展望：</strong>Q3 預估營收達 335 億美元，毛利率預期達 81%。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✔</span>
+                            <span><strong>排擠效應：</strong>產能轉向 HBM 等 AI 產品，導致一般 DRAM 與 NAND 供應緊縮而漲價，帶來雙重利多。</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Chart.js 容器 -->
+                <div class="bg-white rounded-lg shadow-lg p-4 border border-stone-200">
+                    <h3 class="text-center font-bold text-stone-700 mb-2">Micron 營收與毛利率躍升軌跡</h3>
+                    <div class="relative h-72">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 估值與風險 -->
+        <section id="valuation" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">估值與潛在風險：是否還值得追價？</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-xl font-bold text-stone-800 mb-2">樂觀的估值</h4>
+                        <p class="text-stone-600 mb-4">依即時行情，過去獲利計算本益比約 40.6 倍；但依據未來盈餘預估，本益比僅約 <span class="font-bold text-sky-600">8.4 倍</span>。這代表市場預期未來獲利將呈爆發性成長。如果 AI 資本支出如期進行，現階段股價仍有基本面支撐。</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-rose-700 mb-2 flex items-center">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            潛在週期風險
+                        </h4>
+                        <p class="text-stone-600">半導體歷史常發生「擴產過度導致價格下跌」。若 Samsung、SK Hynix 同步大幅擴產，且雲端巨頭 AI 支出降溫，高獲利將面臨週期回調壓力。最危險的時刻往往是財報最好、預期最樂觀之時。</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 border-t border-stone-200 pt-6">
+                    <h4 class="text-lg font-bold text-stone-800 mb-4">後續五大觀察重點：</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-sm">1. Q3財報是否達標(營收335億/毛利81%)</span>
+                        <span class="bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-sm">2. HBM供貨能見度與雲端資本支出</span>
+                        <span class="bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-sm">3. Samsung/SK Hynix 競爭與擴產進度</span>
+                        <span class="bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-sm">4. 美國建廠政策補助與實際ROI</span>
+                        <span class="bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-sm">5. AI需求是否擴散至網通與儲存設備</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 互動資料表格：投資策略 -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">針對不同投資人的行動建議</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                
+                <!-- 搜尋與篩選區 -->
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p class="text-stone-600 text-sm">使用下方輸入框篩選適合您的投資策略定位：</p>
+                    <div class="relative w-full sm:w-64">
+                        <input type="text" id="searchInput" placeholder="輸入關鍵字 (如: 持有、保守)..." 
+                               class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 互動表格 -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-stone-100 border-b-2 border-stone-200">
+                                <th class="p-4 font-bold text-stone-700 w-1/4">投資人狀態</th>
+                                <th class="p-4 font-bold text-stone-700 w-2/4">核心策略建議</th>
+                                <th class="p-4 font-bold text-stone-700 w-1/4">關注指標 / 前提</th>
+                            </tr>
+                        </thead>
+                        <tbody id="strategyTableBody" class="divide-y divide-stone-200">
+                            <!-- 由 JavaScript 動態生成內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden text-center py-4 text-stone-500">
+                    找不到符合的結果，請嘗試其他關鍵字。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美光(Micron)專題研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Micron 相關公開資料 (2026年5月26日)。</p>
+        </div>
+    </footer>
+
+    <!-- 互動邏輯腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. 手機版選單切換 ---
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-item');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden'); // 點擊後關閉選單
+                });
+            });
+
+            // --- 2. 導航列 Scroll Spy (自動標示當前區塊) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // 判定進入視野的範圍調整
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 更新導航列樣式
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- 3. Chart.js 動態圖表繪製 ---
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            
+            // 資料：去年同期(25Q2), 當前季(26Q2), 預估季(26Q3)
+            const chartData = {
+                labels: ['FY25 Q2 (去年同期)', 'FY26 Q2 (本季公告)', 'FY26 Q3 (下一季預估)'],
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: '營收 (十億美元)',
+                        data: [8.05, 23.86, 33.50],
+                        backgroundColor: 'rgba(2, 132, 199, 0.7)', // sky-600
+                        borderColor: 'rgba(2, 132, 199, 1)',
+                        borderWidth: 1,
+                        yAxisID: 'y',
+                        order: 2
+                    },
+                    {
+                        type: 'line',
+                        label: '毛利率 (%)',
+                        data: [37.9, 74.9, 81.0],
+                        backgroundColor: 'rgba(16, 185, 129, 1)', // emerald-500
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
+                        pointRadius: 5,
+                        yAxisID: 'y1',
+                        order: 1
+                    }
+                ]
+            };
+
+            new Chart(ctx, {
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '營收 (Billion USD)'
+                            },
+                            suggestedMax: 40
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '毛利率 (%)'
+                            },
+                            grid: {
+                                drawOnChartArea: false, // 避免背景網格線重疊
+                            },
+                            suggestedMax: 100,
+                            suggestedMin: 0
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y;
+                                        if (context.datasetIndex === 0) label += ' 億美元';
+                                        if (context.datasetIndex === 1) label += ' %';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- 4. 互動資料表格與搜尋過濾 ---
+            const strategyData = [
+                {
+                    type: "已持有者",
+                    strategy: "只要財報證實高階記憶體需求、毛利率與自由現金流維持強勁，持有邏輯仍在。但股價漲幅已大，應重新檢視在整體資產中的比重，避免單一股票占比過高。",
+                    condition: "財報與自由現金流達標"
+                },
+                {
+                    type: "尚未持有者 (考慮進場)",
+                    strategy: "現在追價風險較高。不建議因單日新聞投入大量資金，應等待股價波動後分批建立部位。Micron 現階段應視為「核心觀察股」。",
+                    condition: "下一次財報展望、HBM 供需狀況"
+                },
+                {
+                    type: "偏保守投資人",
+                    strategy: "Micron 屬高度波動標的。若無法承受記憶體價格、估值快速修正造成的震盪，建議透過較分散的「科技 ETF」或「半導體 ETF」參與 AI 產業，避免重押單一公司。",
+                    condition: "追求穩定，避開單一週期風險"
+                }
+            ];
+
+            const tbody = document.getElementById('strategyTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noResultsMsg = document.getElementById('noResults');
+
+            // 渲染表格函數
+            function renderTable(data) {
+                tbody.innerHTML = '';
+                if(data.length === 0) {
+                    noResultsMsg.classList.remove('hidden');
+                } else {
+                    noResultsMsg.classList.add('hidden');
+                    data.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'hover:bg-stone-50 transition-colors';
+                        tr.innerHTML = `
+                            <td class="p-4 border-t border-stone-200">
+                                <span class="inline-block px-3 py-1 bg-sky-100 text-sky-800 rounded-full text-sm font-medium">
+                                    ${item.type}
+                                </span>
+                            </td>
+                            <td class="p-4 border-t border-stone-200 text-stone-700 leading-relaxed">${item.strategy}</td>
+                            <td class="p-4 border-t border-stone-200 text-stone-600 text-sm">${item.condition}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            }
+
+            // 初始化表格
+            renderTable(strategyData);
+
+            // 監聽搜尋輸入事件
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = strategyData.filter(item => 
+                    item.type.toLowerCase().includes(keyword) || 
+                    item.strategy.toLowerCase().includes(keyword) ||
+                    item.condition.toLowerCase().includes(keyword)
+                );
+                renderTable(filteredData);
+            });
+        });
+    </script>
+</body>
+</html>
