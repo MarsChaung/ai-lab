@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Robinhood研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 導航列狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind stone-700 */
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        /* 確保點擊導航錨點時，標題不會被固定在頂部的導航列遮擋 */
+        section {
+            scroll-margin-top: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / 網頁標題 -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-sky-600">Robinhood AI交易代理</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#overview" class="nav-item inactive-nav-link px-1 py-2 transition-colors duration-200">功能概覽</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link px-1 py-2 transition-colors duration-200">商業策略</a>
+                    <a href="#financials" class="nav-item inactive-nav-link px-1 py-2 transition-colors duration-200">財務數據</a>
+                    <a href="#risks" class="nav-item inactive-nav-link px-1 py-2 transition-colors duration-200">風險與監管</a>
+                    <a href="#conclusion" class="nav-item inactive-nav-link px-1 py-2 transition-colors duration-200">投資建議</a>
+                </div>
+
+                <!-- 手機版漢堡按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobileMenuBtn" class="text-stone-500 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-stone-200 shadow-lg absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">功能概覽</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">商業策略</a>
+                <a href="#financials" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財務數據</a>
+                <a href="#risks" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">風險與監管</a>
+                <a href="#conclusion" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資建議</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首 Hero 區塊 -->
+    <header class="bg-gradient-to-r from-stone-800 to-sky-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                從「看盤助手」到「代客下單」
+            </h1>
+            <p class="text-lg md:text-2xl text-sky-200 max-w-3xl mx-auto">
+                Robinhood 把 AI 放進交易與支付，成長新故事背後的監管考題
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- 區塊：功能概覽 -->
+        <section id="overview" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產品邊界與 AI 新功能概覽</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-sky-700 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        Agentic Trading (AI 代理人交易)
+                    </h3>
+                    <ul class="list-disc pl-5 space-y-2 text-stone-600">
+                        <li>於 2026/05/27 推出，透過 MCP 協議連接第三方 AI 代理人。</li>
+                        <li>需建立與主帳戶分開的專屬 <span class="font-semibold text-stone-800">Agentic account</span>。</li>
+                        <li>目前僅限 <span class="text-rose-500 font-bold">股票做多交易</span>，不開放選擇權或加密貨幣。</li>
+                        <li>授權後，AI 可在無需再次詢問的情況下直接下單，用戶需自負虧損。</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <h3 class="text-xl font-bold text-emerald-700 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                        Agentic Credit Card (AI 虛擬卡)
+                    </h3>
+                    <ul class="list-disc pl-5 space-y-2 text-stone-600">
+                        <li>Robinhood Gold Card 客戶專屬功能。</li>
+                        <li>可為 AI 建立專用虛擬卡，設定消費上限與核准權限。</li>
+                        <li>適用情境：搶演唱會門票、限量球鞋、餐廳訂位等自動化消費。</li>
+                        <li>享有高達 3% 的現金回饋。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊：商業策略 -->
+        <section id="strategy" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">平台轉型與商業戰略利益</h2>
+            <p class="text-lg text-stone-600 mb-8">Robinhood 正致力從「散戶交易工具」轉型為完整的「個人金融核心入口」，AI 代理人功能為其商業模式帶來三大潛在利益：</p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- 卡片 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mb-4 text-sky-600 font-bold text-xl">1</div>
+                    <h4 class="text-lg font-bold mb-2">提高交易頻率</h4>
+                    <p class="text-sm text-stone-600">AI 能 24 小時監控條件並自動執行，讓原本低頻交易的用戶轉為高頻活動，增加平台手續費與相關衍生收入。</p>
+                </div>
+                <!-- 卡片 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mb-4 text-sky-600 font-bold text-xl">2</div>
+                    <h4 class="text-lg font-bold mb-2">提升 Gold 訂閱價值</h4>
+                    <p class="text-sm text-stone-600">AI 虛擬信用卡等進階功能與付費服務 (Robinhood Gold) 緊密綁定，創造出更穩定且不受市場波動影響的訂閱收入來源。</p>
+                </div>
+                <!-- 卡片 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mb-4 text-sky-600 font-bold text-xl">3</div>
+                    <h4 class="text-lg font-bold mb-2">極大化轉移成本</h4>
+                    <p class="text-sm text-stone-600">當客戶的投資、信用卡、存款甚至 AI 自動化腳本都建立在單一平台，生態系黏著度將大幅提升，阻止用戶流失。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊：財務數據與動態圖表 -->
+        <section id="financials" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務基本面分析 (2026 Q1)</h2>
+            
+            <!-- 數據 Highlight 卡片 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-stone-800 text-white rounded-lg p-4 shadow-md text-center">
+                    <div class="text-sm text-stone-300">第一季總營收</div>
+                    <div class="text-2xl font-bold mt-1">$10.7億 <span class="text-sm text-emerald-400 font-normal">↑15%</span></div>
+                </div>
+                <div class="bg-stone-800 text-white rounded-lg p-4 shadow-md text-center">
+                    <div class="text-sm text-stone-300">平台總資產 (AUC)</div>
+                    <div class="text-2xl font-bold mt-1">$3,070億 <span class="text-sm text-emerald-400 font-normal">↑39%</span></div>
+                </div>
+                <div class="bg-stone-800 text-white rounded-lg p-4 shadow-md text-center">
+                    <div class="text-sm text-stone-300">Gold 訂閱戶數</div>
+                    <div class="text-2xl font-bold mt-1">430萬 <span class="text-sm text-emerald-400 font-normal">↑36%</span></div>
+                </div>
+                <div class="bg-stone-800 text-white rounded-lg p-4 shadow-md text-center">
+                    <div class="text-sm text-stone-300">平均年化收入(ARPU)</div>
+                    <div class="text-2xl font-bold mt-1">$157 <span class="text-sm text-emerald-400 font-normal">↑8%</span></div>
+                </div>
+            </div>
+
+            <!-- 圖表與表格雙欄佈局 -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- 動態圖表區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-700 mb-4">2026 Q1 各業務營收/用戶成長率 (YoY)</h3>
+                    <div class="relative w-full h-64 md:h-80">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4">* 雖然股票與選擇權交易強勁成長，但加密貨幣業務衰退明顯，突顯平台仍受高波動市場影響。</p>
+                </div>
+
+                <!-- 互動式資料表格區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-stone-700">詳細營運與財務指標</h3>
+                    </div>
+                    
+                    <!-- 搜尋篩選器 -->
+                    <div class="mb-4">
+                        <input type="text" id="searchInput" placeholder="搜尋指標名稱 (例如：營收、資產)..." class="w-full px-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-shadow">
+                    </div>
+
+                    <div class="overflow-x-auto h-64 md:h-80 border border-stone-200 rounded-md">
+                        <table class="min-w-full text-sm text-left">
+                            <thead class="text-xs text-stone-700 uppercase bg-stone-100 sticky top-0 shadow-sm z-10">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">指標名稱</th>
+                                    <th scope="col" class="px-6 py-3">數據表現</th>
+                                    <th scope="col" class="px-6 py-3">年成長 (YoY)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTableBody" class="divide-y divide-stone-200">
+                                <!-- JavaScript 動態生成列 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 當無搜尋結果時顯示 -->
+                    <div id="noDataMessage" class="hidden text-center py-4 text-stone-500">查無相關資料</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊：風險與監管考題 -->
+        <section id="risks" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 自動交易背後的監管考題與風險</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 mb-6 leading-relaxed">
+                    券商推出 AI 功能，與一般軟體最大的不同在於：錯誤的結果將直接造成投資人真金白銀的虧損。即便 Robinhood 強調客戶需承擔損失，但不代表平台的監管責任消失。FINRA 亦聲明現有證券法規對 AI 同樣適用。
+                </p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start bg-rose-50 p-4 rounded-md border border-rose-100">
+                        <svg class="w-6 h-6 text-rose-500 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <div>
+                            <h4 class="font-bold text-rose-800">平台監管與資安保護義務</h4>
+                            <p class="text-sm text-rose-700 mt-1">若第三方 AI 代理人依據錯誤資訊大量交易，Robinhood 是否具備異常偵測與限制機制？此外，防範資料外洩、未授權存取與 AI 提示注入攻擊將成資安考驗。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start bg-amber-50 p-4 rounded-md border border-amber-100">
+                        <svg class="w-6 h-6 text-amber-500 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <h4 class="font-bold text-amber-800">支付授權的爭議界定</h4>
+                            <p class="text-sm text-amber-700 mt-1">AI 虛擬卡的交易被視為用戶授權行為。若 AI 被惡意指令操控，或誤買商品，責任界定將直接影響產品的品牌信任度與普及率。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start bg-stone-100 p-4 rounded-md border border-stone-200">
+                        <svg class="w-6 h-6 text-stone-500 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        <div>
+                            <h4 class="font-bold text-stone-800">仍高度依賴加密貨幣與市場熱度</h4>
+                            <p class="text-sm text-stone-700 mt-1">2026/04/29 因加密貨幣交易量轉弱，曾導致股價大跌約 11%。AI 若只增加短線炒作次數而未轉化為穩定資產，高波動的獲利結構依然存在。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊：投資建議與結論 -->
+        <section id="conclusion" class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">估值與投資建議</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-1 bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center items-center border-t-4 border-stone-800">
+                    <h3 class="text-lg font-bold text-stone-500 mb-2">當前估值快照</h3>
+                    <div class="text-4xl font-extrabold text-stone-800 mb-1">$75.9</div>
+                    <p class="text-sm text-stone-500 mb-4">截至 2026/05/27 盤中</p>
+                    <div class="w-full text-left space-y-2 text-sm">
+                        <div class="flex justify-between border-b pb-1"><span>市值 (Market Cap)</span> <span class="font-bold">~$694億美元</span></div>
+                        <div class="flex justify-between border-b pb-1"><span>本益比 (P/E Ratio)</span> <span class="font-bold">~36.8倍</span></div>
+                        <div class="flex justify-between pb-1"><span>S&P 500 成分股</span> <span class="font-bold">金融業</span></div>
+                    </div>
+                </div>
+                <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">投資人該如何看待？</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-sky-600">成長型投資人</h4>
+                            <p class="text-sm text-stone-600 mt-1">市場已給予 Robinhood 轉型為「AI 金融科技平台」的成長溢價。需持續追蹤 Agentic Trading 是否能帶動訂閱與穩定的資產管理收入，不宜僅因「AI 話題」追高。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-600">價值 / 防禦型投資人</h4>
+                            <p class="text-sm text-stone-600 mt-1">目前 Robinhood 仍非防禦型金融股，其獲利深受散戶情緒與加密貨幣波動影響，高本益比也反映了極高期待。建議等待 AI 產品財務貢獻明朗，或估值修正時再佈局。</p>
+                        </div>
+                        <div class="bg-sky-50 p-3 rounded border border-sky-100">
+                            <h4 class="font-bold text-sky-800 text-sm">關鍵追蹤指標</h4>
+                            <p class="text-sm text-sky-700 mt-1">未來數季應檢視：Gold 訂閱成長率、平台資產淨流入、AI 帳戶資產規模、以及 AI 自動交易是否引發重大客訴或監管介入。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Robinhood研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Robinhood相關公開資料 (2026年5月27日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        // 1. 手機版選單切換
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊手機選單項目後自動關閉選單
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. 導航列 Active 狀態自動更新 (使用 Intersection Observer)
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // 觸發判定區域調整
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // 移除所有 nav 的 active class
+                    navItems.forEach(item => {
+                        item.classList.remove('active-nav-link');
+                        item.classList.add('inactive-nav-link');
+                    });
+                    
+                    // 加上當前 active 的 class
+                    const activeLink = document.querySelector(`.nav-item[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('inactive-nav-link');
+                        activeLink.classList.add('active-nav-link');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // 3. 動態資料表格與搜尋過濾功能
+        const reportData = [
+            { metric: "總營收", value: "10.7億美元", growth: "+15%" },
+            { metric: "稀釋後每股盈餘 (EPS)", value: "0.38美元", growth: "+3%" },
+            { metric: "淨利", value: "3.46億美元", growth: "轉虧為盈/未揭露比率" },
+            { metric: "平台總資產 (AUC)", value: "3,070億美元", growth: "+39%" },
+            { metric: "有資金客戶數", value: "2,740萬人", growth: "+170萬人" },
+            { metric: "Robinhood Gold 訂閱人數", value: "430萬人", growth: "+36%" },
+            { metric: "每戶平均年化收入 (ARPU)", value: "157美元", growth: "+8%" },
+            { metric: "交易相關營收", value: "6.23億美元", growth: "+7%" },
+            { metric: "股票交易營收", value: "未揭露絕對值", growth: "+46%" },
+            { metric: "選擇權交易營收", value: "未揭露絕對值", growth: "+8%" },
+            { metric: "加密貨幣交易營收", value: "1.34億美元", growth: "-47%" }
+        ];
+
+        const tableBody = document.getElementById('dataTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const noDataMessage = document.getElementById('noDataMessage');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noDataMessage.classList.remove('hidden');
+            } else {
+                noDataMessage.classList.add('hidden');
+                data.forEach(item => {
+                    // 判斷成長率為正或負給予顏色
+                    let growthColor = "text-stone-700";
+                    if (item.growth.includes('+')) growthColor = "text-emerald-600 font-semibold";
+                    if (item.growth.includes('-')) growthColor = "text-rose-600 font-semibold";
+
+                    const row = `
+                        <tr class="bg-white hover:bg-stone-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-stone-800">${item.metric}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-stone-600">${item.value}</td>
+                            <td class="px-6 py-4 whitespace-nowrap ${growthColor}">${item.growth}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            }
+        }
+
+        // 初始化渲染表格
+        renderTable(reportData);
+
+        // 綁定輸入事件過濾資料
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filteredData = reportData.filter(item => 
+                item.metric.toLowerCase().includes(term) || 
+                item.value.toLowerCase().includes(term)
+            );
+            renderTable(filteredData);
+        });
+
+        // 4. 初始化 Chart.js 動態圖表
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['股票交易', '平台總資產', 'Gold訂閱', '總營收', '選擇權交易', '加密貨幣交易'],
+                    datasets: [{
+                        label: '2026 Q1 年增率 (YoY %)',
+                        data: [46, 39, 36, 15, 8, -47],
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.7)', // 綠色
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(244, 63, 94, 0.7)'   // 紅色 (負成長)
+                        ],
+                        borderColor: [
+                            'rgb(16, 185, 129)',
+                            'rgb(16, 185, 129)',
+                            'rgb(16, 185, 129)',
+                            'rgb(16, 185, 129)',
+                            'rgb(16, 185, 129)',
+                            'rgb(244, 63, 94)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
