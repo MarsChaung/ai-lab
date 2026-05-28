@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Nvidia台灣投資策略研究報告</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自訂表格表頭固定 */
+        .table-container { max-height: 400px; overflow-y: auto; }
+        thead th { position: sticky; top: 0; z-index: 10; background-color: #f3f4f6; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav id="navbar" class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-extrabold text-sky-700 tracking-wider">Nvidia在台供應鏈投資</a>
+                </div>
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#intro" class="nav-link border-b-2 border-transparent text-stone-500 hover:text-sky-600 hover:border-sky-600 px-1 py-5 text-sm font-medium transition-colors" data-target="intro">報告前言</a>
+                    <a href="#supply-chain" class="nav-link border-b-2 border-transparent text-stone-500 hover:text-sky-600 hover:border-sky-600 px-1 py-5 text-sm font-medium transition-colors" data-target="supply-chain">供應鏈現實</a>
+                    <a href="#financials" class="nav-link border-b-2 border-transparent text-stone-500 hover:text-sky-600 hover:border-sky-600 px-1 py-5 text-sm font-medium transition-colors" data-target="financials">財報與圖表</a>
+                    <a href="#stock-analysis" class="nav-link border-b-2 border-transparent text-stone-500 hover:text-sky-600 hover:border-sky-600 px-1 py-5 text-sm font-medium transition-colors" data-target="stock-analysis">股價分析</a>
+                    <a href="#signals" class="nav-link border-b-2 border-transparent text-stone-500 hover:text-sky-600 hover:border-sky-600 px-1 py-5 text-sm font-medium transition-colors" data-target="signals">觀察訊號</a>
+                </div>
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版選單面板 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#intro" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50" data-target="intro">報告前言</a>
+                <a href="#supply-chain" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50" data-target="supply-chain">供應鏈現實</a>
+                <a href="#financials" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50" data-target="financials">財報與圖表</a>
+                <a href="#stock-analysis" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50" data-target="stock-analysis">股價分析</a>
+                <a href="#signals" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50" data-target="signals">觀察訊號</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首 Hero 區塊 -->
+    <header class="bg-sky-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">在台灣打造AI供應鏈，Q1財報強勁，為何股價卻跑不動？</h1>
+            <p class="text-lg md:text-xl text-sky-200 max-w-3xl mx-auto">Nvidia 將對台灣供應鏈支出提升至每年 1,500 億美元。基本面屢創紀錄，股價卻相對停滯，背後的商業邏輯與投資風險深度解析。</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- 核心數據卡片 (Grid 佈局) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" id="intro">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 transform hover:-translate-y-1 transition duration-300">
+                <p class="text-sm text-stone-500 font-semibold">未來在台預期年支出</p>
+                <p class="text-3xl font-bold text-stone-800 mt-2">1,500 <span class="text-xl">億美元</span></p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500 transform hover:-translate-y-1 transition duration-300">
+                <p class="text-sm text-stone-500 font-semibold">FY27 Q1 總營收</p>
+                <p class="text-3xl font-bold text-stone-800 mt-2">816 <span class="text-xl">億美元</span></p>
+                <p class="text-sm text-green-600 mt-1">▲ 年增 85%</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-purple-500 transform hover:-translate-y-1 transition duration-300">
+                <p class="text-sm text-stone-500 font-semibold">FY27 Q1 資料中心營收</p>
+                <p class="text-3xl font-bold text-stone-800 mt-2">752 <span class="text-xl">億美元</span></p>
+                <p class="text-sm text-purple-600 mt-1">▲ 年增 92%</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-orange-500 transform hover:-translate-y-1 transition duration-300">
+                <p class="text-sm text-stone-500 font-semibold">2026 科技巨頭預估 AI 支出</p>
+                <p class="text-3xl font-bold text-stone-800 mt-2">> 7,000 <span class="text-xl">億美元</span></p>
+            </div>
+        </div>
+
+        <!-- Section 1: 台灣供應鏈決策 -->
+        <section id="supply-chain" class="mb-16 pt-16 -mt-16 section-spy">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">台灣決策：AI 供應鏈的現實</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 text-stone-700 leading-relaxed space-y-4">
+                <p>Nvidia 執行長黃仁勳將台灣稱為「AI 革命的中心」。這並非情感表態，而是具體的產業選擇。Nvidia 本身負責晶片架構與系統設計，而真正將晶片量產、組裝成伺服器，高度依賴台灣製造夥伴：</p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li><strong class="text-stone-900">台積電：</strong>提供先進晶片製造與高階封裝能力。</li>
+                    <li><strong class="text-stone-900">鴻海、緯創、廣達：</strong>參與 AI 伺服器、機櫃組裝與系統整合。</li>
+                </ul>
+                <p>Nvidia 將新總部預定於 2030 年在台灣啟用（可容納 4,000 名員工），正是為了就近協調這些製造夥伴，確保 Vera Rubin 等新平台能準時大量交貨。</p>
+            </div>
+        </section>
+
+        <!-- Section 2: 財報與圖表 -->
+        <section id="financials" class="mb-16 pt-16 -mt-16 section-spy">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財報無轉弱跡象與資本支出趨勢</h2>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- 文字敘述 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">打破紀錄的營運表現</h3>
+                    <p class="text-stone-700 mb-4">2027 會計年度第一季財報顯示，需求絲毫沒有疲弱：</p>
+                    <ul class="list-none space-y-3 text-stone-700">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">✔</span>
+                            <span><strong>Q2 營收預測強勁：</strong>高達 910 億美元，超越市場預期的 868.4 億美元。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">✔</span>
+                            <span><strong>獲利指標：</strong>Non-GAAP 毛利率高達 75%，EPS 1.87 美元。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">✔</span>
+                            <span><strong>股東回報：</strong>新增 800 億美元股票回購，股息由 0.01 美元大增至 0.25 美元。</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Chart.js 區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 text-center">Nvidia 在台支出與科技巨頭 AI 資本支出 (十億美元)</h3>
+                    <!-- Canvas 必須被包在 div 中 -->
+                    <div class="relative h-64 w-full">
+                        <canvas id="capitalChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 互動資料表格 (重要數據統整) -->
+        <section id="table-section" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nvidia 營運與市場關鍵數據儀表板</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center">
+                    <p class="text-stone-600 mb-2 sm:mb-0">即時篩選下方資料表以探索財務與營運細節：</p>
+                    <input type="text" id="searchInput" placeholder="搜尋類別、指標或數值..." class="w-full sm:w-1/3 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                
+                <div class="table-container overflow-x-auto border border-gray-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">類別</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">關鍵指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">數值/狀態</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">補充說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-gray-200 text-sm">
+                            <!-- 透過 JS 動態產生 -->
+                        </tbody>
+                    </table>
+                </div>
+                <p id="noDataMessage" class="hidden text-center text-red-500 mt-4">找不到符合的資料。</p>
+            </div>
+        </section>
+
+        <!-- Section 4: 股價分析 -->
+        <section id="stock-analysis" class="mb-16 pt-16 -mt-16 section-spy">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">為何財報好，股價卻跑不動？</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-600">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">1. 財報超標已成「基本要求」</h3>
+                    <p class="text-stone-600 text-sm">市值超過 5 兆美元後，市場要求的不再是下一季的好財報，而是證明 2027-2028 年 AI 基建熱潮的長期延續性。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-600">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">2. 市場轉向多種晶片並存</h3>
+                    <p class="text-stone-600 text-sm">AI 需求從「訓練」轉向「推論」。客戶（如 Alphabet、Amazon）開始研發客製化晶片。Nvidia 雖推出 Vera CPU 應對，但需時間證明交貨與營收。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-600">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">3. 中國市場營收「未計入」</h3>
+                    <p class="text-stone-600 text-sm">中國曾佔 13% 營收，雖 H200 獲批但在正式交付前，Nvidia 財測並未包含中國資料中心收入，被視為不確定的選擇權。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-600">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">4. 地緣政治與集中風險</h3>
+                    <p class="text-stone-600 text-sm">押注台灣提高生產效率，但也提高了台海安全、能源與海運的風險權重，造成估值上的折價壓力。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-600 lg:col-span-2">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">5. 供應限制與資本支出循環</h3>
+                    <p class="text-stone-600 text-sm">Nvidia 供應支出增至 1,190 億美元以防缺貨。市場擔憂大型科技公司未來若放慢建設，或雲端運算協議（300億美元）造成過度相互依賴。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 觀察訊號與投資結論 -->
+        <section id="signals" class="mb-8 pt-16 -mt-16 section-spy">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">未來觀察訊號與投資判斷</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-sky-700 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            投資人必看的 5 大訊號
+                        </h3>
+                        <ol class="list-decimal list-inside space-y-3 text-stone-700 font-medium">
+                            <li>Q2 營收是否確實達到 910 億美元高標。</li>
+                            <li>Vera CPU 與 Vera Rubin 平台的出貨與成功率。</li>
+                            <li>中國市場 H200 晶片是否實質完成交貨。</li>
+                            <li>科技巨頭 AI 資本支出是否持續，及自研晶片佔比。</li>
+                            <li>台灣供應鏈集中度 vs 美國產能備援的發展。</li>
+                        </ol>
+                    </div>
+                    <div class="border-l-0 md:border-l-2 border-gray-200 pt-6 md:pt-0 md:pl-8">
+                        <h3 class="text-xl font-bold text-sky-700 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            投資結論
+                        </h3>
+                        <p class="text-stone-700 mb-4">Nvidia 依然是 AI 核心持股，但已脫離「單靠題材即可追高」的階段。投資人需認知：</p>
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li><strong class="text-stone-900">持股者：</strong>續抱核心部位，但需警戒毛利率下滑或巨頭轉單風險。</li>
+                            <li><strong class="text-stone-900">空手者：</strong>不宜追高新聞利多，應採分批佈局。</li>
+                            <li><strong class="text-stone-900">總結：</strong>台灣讓 Nvidia 更強，但也帶來地緣集中代價。市場現在要求的是持續證明統治力的「實際業績」。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Nvidia台灣投資策略研究報告。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Nvidia相關公開資料 (2026年5月28日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. 手機版選單切換 (Mobile Menu Toggle)
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // 點擊手機版選單連結後自動收起
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // 2. 導航列滾動監聽 (Active Link State)
+            const sections = document.querySelectorAll('.section-spy, #intro');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px', // 在畫面中間交叉時觸發
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.getAttribute('id');
+                        // 更新導航列狀態
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('data-target') === targetId) {
+                                // Active State Tailwind Classes
+                                link.classList.add('text-sky-600', 'border-sky-600');
+                                link.classList.remove('text-stone-500', 'border-transparent');
+                            } else {
+                                // Inactive State Tailwind Classes
+                                link.classList.remove('text-sky-600', 'border-sky-600');
+                                link.classList.add('text-stone-500', 'border-transparent');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 3. 互動資料表格 (Interactive Table)
+            const dataTableData = [
+                { category: '投資與資本', metric: 'Nvidia 早期在台年支出', value: '100 - 150 億美元', note: '數年前預估' },
+                { category: '投資與資本', metric: 'Nvidia 目前在台年支出', value: '1,000 億美元', note: '包含採購、製造與合作' },
+                { category: '投資與資本', metric: 'Nvidia 未來在台年支出', value: '1,500 億美元', note: '推算非確定合約' },
+                { category: '財務營收', metric: 'FY27 Q1 總營收', value: '816 億美元', note: '年增 85%' },
+                { category: '財務營收', metric: 'FY27 Q1 資料中心營收', value: '752 億美元', note: '年增 92%' },
+                { category: '財務預測', metric: 'FY27 Q2 營收指引', value: '910 億美元', note: '高於市場預期的 868.4億' },
+                { category: '利潤指標', metric: 'Non-GAAP 毛利率', value: '75%', note: '維持歷史高檔' },
+                { category: '市場拓展', metric: 'Vera CPU 預期營收', value: '200 億美元', note: '跨足 CPU 推論新市場' },
+                { category: '中國市場', metric: '中國 AI 市場規模估值', value: '500 億美元', note: '目前財測尚未計入收入' },
+                { category: '客戶資本支出', metric: '2025 科技巨頭 AI 支出', value: '約 4,000 億美元', note: 'Alphabet, Amazon, MSFT' },
+                { category: '客戶資本支出', metric: '2026 科技巨頭 AI 支出', value: '> 7,000 億美元', note: '資料中心與模型訓練擴建' },
+                { category: '供應鏈管理', metric: 'Q1 供應相關支出', value: '1,190 億美元', note: '避免記憶體與零組件短缺' }
+            ];
+
+            const tableBody = document.getElementById('dataTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            // 繪製表格函式
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    noDataMessage.classList.remove('hidden');
+                } else {
+                    noDataMessage.classList.add('hidden');
+                    data.forEach(item => {
+                        const row = `
+                            <tr class="hover:bg-sky-50 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-stone-100 text-stone-800">
+                                        ${item.category}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${item.metric}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sky-700 font-bold">${item.value}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">${item.note}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                }
+            }
+
+            // 初始化載入全部資料
+            renderTable(dataTableData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = dataTableData.filter(item => 
+                    item.category.toLowerCase().includes(keyword) ||
+                    item.metric.toLowerCase().includes(keyword) ||
+                    item.value.toLowerCase().includes(keyword) ||
+                    item.note.toLowerCase().includes(keyword)
+                );
+                renderTable(filteredData);
+            });
+
+            // 4. Chart.js 動態圖表
+            const ctx = document.getElementById('capitalChart').getContext('2d');
+            
+            // 使用長條圖比較 Nvidia 在台支出 與 科技巨頭全球支出
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Nvidia昔日在台', 'Nvidia目前在台', 'Nvidia未來在台', '科技巨頭2025全球', '科技巨頭2026全球'],
+                    datasets: [{
+                        label: '資本/供應鏈支出預估 (十億美元)',
+                        data: [12.5, 100, 150, 400, 700], // 12.5 為 100-150的平均
+                        backgroundColor: [
+                            'rgba(107, 114, 128, 0.6)', // 灰
+                            'rgba(2, 132, 199, 0.6)',   // 藍
+                            'rgba(3, 105, 161, 0.9)',   // 深藍
+                            'rgba(249, 115, 22, 0.6)',  // 橘
+                            'rgba(234, 88, 12, 0.9)'    // 深橘
+                        ],
+                        borderColor: [
+                            'rgba(107, 114, 128, 1)',
+                            'rgba(2, 132, 199, 1)',
+                            'rgba(3, 105, 161, 1)',
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(234, 88, 12, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' 十億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f3f4f6'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
