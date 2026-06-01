@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth scroll-pt-24">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-機器人產業新局與估值考驗</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles for active navigation links */
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind stone-700 */
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-600">機器人產業估值</span>
+                </div>
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#trend" class="nav-link inactive-nav-link text-sm uppercase tracking-wider" data-target="trend">產業趨勢</a>
+                    <a href="#timeline" class="nav-link inactive-nav-link text-sm uppercase tracking-wider" data-target="timeline">商業化時程</a>
+                    <a href="#investment" class="nav-link inactive-nav-link text-sm uppercase tracking-wider" data-target="investment">投資策略</a>
+                    <a href="#data-chart" class="nav-link inactive-nav-link text-sm uppercase tracking-wider" data-target="data-chart">市場數據</a>
+                    <a href="#company-table" class="nav-link inactive-nav-link text-sm uppercase tracking-wider" data-target="company-table">企業分析</a>
+                </div>
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版選單內容 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#trend" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 rounded-md mobile-link">產業趨勢</a>
+                <a href="#timeline" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 rounded-md mobile-link">商業化時程</a>
+                <a href="#investment" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 rounded-md mobile-link">投資策略</a>
+                <a href="#data-chart" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 rounded-md mobile-link">市場數據</a>
+                <a href="#company-table" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 rounded-md mobile-link">企業分析</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首標題區 -->
+    <header class="bg-stone-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">從聊天AI到工作機器人</h1>
+            <p class="text-xl md:text-2xl text-stone-300 mb-6">OpenAI 進場後，Tesla 的 AI 估值故事迎來真正考驗</p>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- 區塊 1：產業趨勢轉變 -->
+        <section id="trend" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業趨勢：從硬體自動化走向「實體 AI」</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-sky-500">
+                    <h3 class="text-xl font-bold mb-3 text-stone-800">Physical AI 的崛起</h3>
+                    <p class="text-stone-600 leading-relaxed">過去機器人執行固定重複任務，現在市場追求能理解現實世界並做出判斷的 <strong>Physical AI</strong>。Nvidia 推出 GR00T 模型，目標成為機器人時代的「開發平台與算力供應商」。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="text-xl font-bold mb-3 text-stone-800">OpenAI 掌握「大腦」</h3>
+                    <p class="text-stone-600 leading-relaxed">OpenAI 進軍 robotics，優勢在於將大型語言模型、規劃與 Agent 能力帶入實體世界。這打破了 Tesla 在「AI+機器人」的獨家想像空間。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-rose-500">
+                    <h3 class="text-xl font-bold mb-3 text-stone-800">Tesla 的垂直整合與風險</h3>
+                    <p class="text-stone-600 leading-relaxed">Tesla 規劃百萬台級別的 Optimus 工廠，走高度垂直整合（車、機器人、晶片）路線。但估值已提前反映未來現金流，若量產或安全可靠度受挫，將面臨極大估值修正風險。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 2：商業化時程預測 -->
+        <section id="timeline" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">商業化時程：先工業物流，家庭機器人尚遠</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 flex flex-col md:flex-row items-start md:items-center">
+                    <div class="md:w-1/4 mb-4 md:mb-0">
+                        <span class="bg-sky-100 text-sky-800 text-lg font-bold px-4 py-2 rounded-full">未來 1~3 年</span>
+                    </div>
+                    <div class="md:w-3/4 md:pl-6">
+                        <h4 class="text-lg font-bold text-stone-800">工廠與倉儲場景優先落地</h4>
+                        <p class="text-stone-600 mt-2">環境可控且任務重複，如 BMW 測試 Figure 02、Amazon 測試 Digit、Mercedes-Benz 測試 Apollo，以「受限制任務型機器人」為主。</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500 flex flex-col md:flex-row items-start md:items-center">
+                    <div class="md:w-1/4 mb-4 md:mb-0">
+                        <span class="bg-indigo-100 text-indigo-800 text-lg font-bold px-4 py-2 rounded-full">2026 ~ 2030 年</span>
+                    </div>
+                    <div class="md:w-3/4 md:pl-6">
+                        <h4 class="text-lg font-bold text-stone-800">Pilot 轉向小規模部署</h4>
+                        <p class="text-stone-600 mt-2">全球預計生產百萬台人形機器人。企業逐步擴大應用以驗證成本效益，如德國 Schaeffler 計畫部署數千台機器人。</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-stone-400 flex flex-col md:flex-row items-start md:items-center">
+                    <div class="md:w-1/4 mb-4 md:mb-0">
+                        <span class="bg-stone-200 text-stone-600 text-lg font-bold px-4 py-2 rounded-full">2030 年代以後</span>
+                    </div>
+                    <div class="md:w-3/4 md:pl-6">
+                        <h4 class="text-lg font-bold text-stone-800">家庭與通用型普及</h4>
+                        <p class="text-stone-600 mt-2">摩根士丹利預測2050年市場達5兆美元，但前期增長緩慢，爆發期將落在2030年代後期。投資人不應過早押注「萬能人形機器人」。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 3：投資策略 -->
+        <section id="investment" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資主線：誰能把機器人變現金流？</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-stone-800 to-stone-700 text-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold">Nvidia (輝達)</h3>
+                        <span class="bg-emerald-500 text-white text-xs px-2 py-1 rounded">穩健受惠</span>
+                    </div>
+                    <p class="text-stone-300 leading-relaxed">
+                        比單一機器人公司更像「賣鏟子給淘金者」。無論誰贏，都需要算力、模擬與開發平台（Isaac, GR00T, Omniverse），為實體 AI 的底層供應商。
+                    </p>
+                </div>
+                <div class="bg-white border border-stone-200 rounded-lg shadow-lg p-6 mb-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-stone-800">Tesla (特斯拉)</h3>
+                        <span class="bg-rose-100 text-rose-800 text-xs px-2 py-1 rounded font-bold">高想像 / 高波動</span>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        擁有龐大資源與垂直整合力，但面臨 OpenAI 進場挑戰其 AI 獨占性。若 Optimus 延遲，股價可能退回「汽車+能源」估值框架。
+                    </p>
+                </div>
+                <div class="bg-white border border-stone-200 rounded-lg shadow-lg p-6 mb-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-stone-800">Intuitive Surgical</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">財報驗證</span>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        最成熟的機器人商業化案例。「機器人+耗材+服務」的商業模式已獲市場認可，為保守型投資人優質選擇。
+                    </p>
+                </div>
+                <div class="bg-white border border-stone-200 rounded-lg shadow-lg p-6 mb-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-stone-800">Alphabet & Amazon</h3>
+                        <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded font-bold">生態與效率</span>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        Alphabet 透過模型與投資切入；Amazon 則著重降低物流與倉儲履約成本，改善利潤率。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 4：資料視覺化圖表 -->
+        <section id="data-chart" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場數據分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 text-center mb-2">2024年專業服務機器人銷售結構 (預估值)</h3>
+                <p class="text-sm text-stone-500 text-center mb-6">資料來源：IFR World Robotics 報告分析 (總數約20萬台)</p>
+                <div class="relative w-full max-w-3xl mx-auto h-80">
+                    <!-- Canvas wrapper required by instructions -->
+                    <div>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 5：互動式資料表格 -->
+        <section id="company-table" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">供應鏈與相關企業動態</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4 flex justify-between items-center flex-wrap gap-4">
+                    <p class="text-stone-600">利用關鍵字即時篩選下方報告中提及之重點企業資訊：</p>
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="搜尋企業或關鍵字..." class="w-full md:w-64 pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100 sticky top-0 z-10">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">企業名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">核心產品 / 佈局</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">市場角色</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">最新進展</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- Table rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden text-center py-8 text-stone-500">
+                    找不到符合條件的企業資料。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8 border-t border-stone-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-機器人產業新局與估值考驗。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中機器人產業相關公開資料 (2026年06月01日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. 導航列互動邏輯 (Mobile Menu & Scroll Spy) ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            
+            // 漢堡選單切換
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機選單項目後自動收合
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Intersection Observer 實現滾動狀態監聽
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-100px 0px -40% 0px', // 調整觸發範圍
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentId = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('data-target') === currentId) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+
+            // --- 2. Chart.js 動態圖表 ---
+            const ctx = document.getElementById('revenueChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['運輸與物流', '醫療機器人', '專業清潔', '其他服務機器人'],
+                        datasets: [{
+                            label: '銷售量 (台)',
+                            data: [102900, 16700, 22000, 58400], // 基於內文總數約20萬，推算其餘數量供視覺展示
+                            backgroundColor: [
+                                'rgba(14, 165, 233, 0.7)', // Sky
+                                'rgba(16, 185, 129, 0.7)', // Emerald
+                                'rgba(245, 158, 11, 0.7)', // Amber
+                                'rgba(168, 162, 158, 0.7)' // Stone
+                            ],
+                            borderColor: [
+                                'rgb(14, 165, 233)',
+                                'rgb(16, 185, 129)',
+                                'rgb(245, 158, 11)',
+                                'rgb(168, 162, 158)'
+                            ],
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) label += ': ';
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('zh-TW').format(context.parsed.y) + ' 台';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                            },
+                            x: {
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- 3. 互動式資料表格 ---
+            const productData = [
+                {
+                    name: "Tesla (特斯拉)",
+                    product: "Optimus / 自研 AI 晶片",
+                    role: "垂直整合製造商",
+                    status: "籌備大型工廠產線，長期年產能目標千萬台。"
+                },
+                {
+                    name: "Nvidia (輝達)",
+                    product: "Isaac GR00T / Newton 物理引擎",
+                    role: "開發平台與算力供應商",
+                    status: "與多家人形機器人公司合作，推動平台標準化設計。"
+                },
+                {
+                    name: "OpenAI",
+                    product: "大型模型 / Agent 規劃",
+                    role: "機器人「大腦」供應者",
+                    status: "積極招募 Robotics 人才，佈局實體 AI 基礎建設。"
+                },
+                {
+                    name: "Intuitive Surgical",
+                    product: "da Vinci 輔助手術機器人",
+                    role: "醫療機器人領導者",
+                    status: "第一季業績優預期，成熟穩定的耗材服務變現模式。"
+                },
+                {
+                    name: "Amazon (亞馬遜)",
+                    product: "倉儲機器人軟體",
+                    role: "應用場景巨頭",
+                    status: "測試 Digit 移動搬運，以降低物流履約成本為主。"
+                },
+                {
+                    name: "Apptronik",
+                    product: "Apollo 人形機器人",
+                    role: "工業自動化設備商",
+                    status: "完成5.2億美元融資，獲賓士測試並推動工業商業化。"
+                },
+                {
+                    name: "Figure",
+                    product: "Figure 02",
+                    role: "人形機器人新創",
+                    status: "於 BMW 工廠累積逾125萬小時測試，協助搬運零件。"
+                },
+                {
+                    name: "Unitree (宇樹科技)",
+                    product: "低成本人形機器人",
+                    role: "中國硬體供應商",
+                    status: "具備價格優勢(低至1.35萬美元)，獲Nvidia合作但面臨地緣政治挑戰。"
+                }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noResults = document.getElementById('noResults');
+
+            // 渲染表格函數
+            function renderTable(data) {
+                tableBody.innerHTML = ''; // 清空
+                if (data.length === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                    data.forEach((item, index) => {
+                        const tr = document.createElement('tr');
+                        // 使用不同背景色交替
+                        tr.className = index % 2 === 0 ? 'bg-white hover:bg-stone-50' : 'bg-stone-50 hover:bg-stone-100';
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${item.name}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-sky-600 font-medium">${item.product}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-stone-200 text-stone-700">
+                                    ${item.role}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-stone-600">${item.status}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                }
+            }
+
+            // 初始化表格
+            renderTable(productData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => {
+                    return item.name.toLowerCase().includes(keyword) || 
+                           item.product.toLowerCase().includes(keyword) ||
+                           item.role.toLowerCase().includes(keyword) ||
+                           item.status.toLowerCase().includes(keyword);
+                });
+                renderTable(filteredData);
+            });
+
+        });
+    </script>
+</body>
+</html>
