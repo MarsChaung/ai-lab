@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股AI換檔：Marvell與HPE解析</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* 客製化捲軸隱藏或樣式 (選擇性) */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* 導航列狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / 網站名稱 -->
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold text-sky-600">AI 投資主線換檔</span>
+                    </a>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#overview" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">主線轉換</a>
+                    <a href="#marvell" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">Marvell 基礎設施</a>
+                    <a href="#hpe" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">HPE 企業部署</a>
+                    <a href="#investment-layers" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">三層投資結構</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-700 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">主線轉換</a>
+                <a href="#marvell" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">Marvell 基礎設施</a>
+                <a href="#hpe" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">HPE 企業部署</a>
+                <a href="#investment-layers" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">三層投資結構</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首 Hero 區塊 -->
+    <header class="bg-gradient-to-r from-sky-800 to-indigo-900 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                從 GPU 到 AI 工廠
+            </h1>
+            <p class="text-xl md:text-2xl text-sky-100 max-w-3xl mx-auto">
+                Marvell 與 HPE 暴漲背後，美股 AI 投資主線正在從「買 Nvidia GPU」擴大到「建完整 AI 工廠」。
+            </p>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- 區塊 1: 主線轉換 -->
+        <section id="overview" class="scroll-mt-24 section-block">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、AI 投資主線的轉移</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                <p class="text-lg text-stone-600 leading-relaxed mb-4">
+                    過去投資人最關心的是誰能供應最強的 GPU，現在市場開始重新評價哪些公司能解決 <strong class="text-sky-700">AI 資料中心的網路連接、客製化晶片、伺服器整合、電力效率與企業部署問題</strong>。
+                </p>
+                <p class="text-lg text-stone-600 leading-relaxed">
+                    AI 資料中心的問題已經不只是「有沒有足夠 GPU」，而是「GPU 之間能不能高速溝通、資料能不能快速流動、整個機櫃與資料中心能不能有效率運轉」。
+                </p>
+            </div>
+        </section>
+
+        <!-- 區塊 2: Marvell 基礎設施 -->
+        <section id="marvell" class="scroll-mt-24 section-block">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、Marvell：AI 基礎設施的高速公路</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 卡片 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">Nvidia 強力背書</h3>
+                    </div>
+                    <p class="text-stone-600">黃仁勳稱 Marvell 可能成為下一家「兆美元公司」。Nvidia 更於三月投資 20 億美元，透過 NVLink Fusion 合作，將其連接到 AI Factory 生態系。</p>
+                </div>
+
+                <!-- 卡片 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full text-green-600 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">解決真實瓶頸</h3>
+                    </div>
+                    <p class="text-stone-600">推出首款 102.4 Tbps、專為 AI 打造的交換器晶片 Teralynx T100。主打降低 25% 功耗與低延遲，直擊 GPU 機櫃功耗逼近 120 千瓦的散熱與網路痛點。</p>
+                </div>
+
+                <!-- 卡片 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-3 rounded-full text-red-600 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">投資風險提示</h3>
+                    </div>
+                    <p class="text-stone-600">股價已提前反映 2029 會計年度營收破百億美元的預期。投資人買進的是「未來爆發」的假設，需留意雲端客戶資本支出放緩或價格競爭的波動風險。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 3: HPE 企業部署 -->
+        <section id="hpe" class="scroll-mt-24 section-block">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、HPE：AI 走向整機與企業部署</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
+                <!-- 左側文字說明 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">財報強勁與訂單積壓</h3>
+                    <ul class="space-y-4 text-stone-600">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-sky-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong>Q2 營收創新高：</strong> 達 106.8 億美元 (年增 40%)，EPS 0.79 美元優於預期。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-sky-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong>AI Backlog 爆發：</strong> 超過 63 億美元，其中 61% 來自主權與企業客戶，顯示需求不只在雲端巨頭，已延伸至政府與大型機構。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-sky-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong>風險與挑戰：</strong> 伺服器硬體毛利率通常不如軟體或 IC 設計，若進入價格競爭或供應鏈成本上升，需證明有能力轉嫁成本以維持獲利率。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 右側圖表 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 text-center">HPE Q2 各部門營收年增率 (YoY)</h3>
+                    <div class="relative h-64 w-full">
+                        <!-- Chart.js 畫布需包在 div 中 -->
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-400 mt-2">資料來源：HPE 官方財報資料</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 4: 三層投資結構 (互動表格) -->
+        <section id="investment-layers" class="scroll-mt-24 section-block">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、美股 AI 投資的三層受惠結構</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-6">
+                    若將 Marvell 與 HPE 放在投資地圖上，AI 基礎設施已形成三層受惠結構。您可以透過下方搜尋框，篩選特定層級或公司名稱以了解其投資邏輯。
+                </p>
+
+                <!-- 搜尋/篩選框 -->
+                <div class="mb-4">
+                    <input type="text" id="searchInput" placeholder="搜尋公司名稱或層級 (例如: Marvell, 第二層, 伺服器)..." 
+                           class="w-full md:w-1/2 px-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                </div>
+
+                <!-- 互動式表格 -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">層級 / 領域</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">代表公司</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">業務內容與優勢</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">投資風險與注意事項</th>
+                            </tr>
+                        </thead>
+                        <tbody id="companyTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- 資料將透過 JavaScript 動態載入 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 無搜尋結果提示 -->
+                <div id="noResults" class="hidden text-center py-4 text-stone-500">
+                    找不到符合條件的資料。
+                </div>
+            </div>
+            
+            <!-- 投資策略總結卡片 -->
+            <div class="bg-stone-800 rounded-lg shadow-lg p-6 text-white mt-8">
+                <h3 class="text-2xl font-bold text-sky-400 mb-4">投資策略總結</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">1. 區分階段</h4>
+                        <p class="text-stone-300 text-sm">主線從「追逐 GPU」進入「解決資料中心瓶頸與基礎設施效率」。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">2. 現實與故事</h4>
+                        <p class="text-stone-300 text-sm">HPE 優勢在於財報已實際兌現需求；Marvell 優勢在於成長想像空間大，但高度依賴未來兌現。</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">3. 追高風險</h4>
+                        <p class="text-stone-300 text-sm">暴漲後易吸引短線資金，應等待股價整理，觀察下季訂單、現金流與毛利率是否持續支撐。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-900 text-stone-400 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股AI換檔：Marvell與HPE解析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中從 GPU 到 AI 工廠：Marvell 與 HPE 暴漲背後相關公開資料 (2026年06月02日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        // --- 1. 手機版選單切換 ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊手機選單項目後自動關閉選單
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 2. 導航列滾動監聽 (Scroll Spy) ---
+        const sections = document.querySelectorAll('section.section-block');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // 調整觸發區域
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 移除所有 active 狀態
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    });
+                    
+                    // 找出對應的導航連結並加上 active 狀態
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.nav-item[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('inactive-nav-link');
+                        activeLink.classList.add('active-nav-link');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // --- 3. 動態圖表 (Chart.js) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            // 由於只在 Tailwind 環境，我們使用 Chart.js 預設配置，並調整顏色以符合主題
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Networking', 'Server', 'Cloud & AI'],
+                    datasets: [{
+                        label: '營收年增率 (YoY %)',
+                        data: [148.2, 32.7, 22.9],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.8)',  // Tailwind sky-500
+                            'rgba(99, 102, 241, 0.8)',  // Tailwind indigo-500
+                            'rgba(168, 162, 158, 0.8)'  // Tailwind stone-400
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(99, 102, 241)',
+                            'rgb(168, 162, 158)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false // 隱藏圖例，因為只有一組資料
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // --- 4. 互動式資料表格 (Table Filtering) ---
+        const companyData = [
+            { layer: "第一層：核心算力", company: "Nvidia", desc: "GPU 供應商、AI 工廠架構標準制定者。提供 NVLink、CPU、DPU 等生態系。", risk: "估值最高、客戶自研晶片與市場競爭風險。" },
+            { layer: "第一層：核心算力", company: "AMD", desc: "AI 加速器核心供應商，Nvidia 主要競爭對手。", risk: "高估值波動、技術迭代與市佔率競爭。" },
+            { layer: "第二層：連接與協調", company: "Marvell", desc: "提供客製化晶片、高速交換器(如 Teralynx T100)、光通訊與互連技術。", risk: "股價已提前反映未來多年成長，專案能見度與估值波動大。" },
+            { layer: "第二層：連接與協調", company: "Broadcom", desc: "資料中心網路產品、客製化 ASIC 晶片領導者。", risk: "成長彈性高但受制於專案時程與市場競爭。" },
+            { layer: "第二層：連接與協調", company: "Arista", desc: "AI 網路架構與高速交換器方案提供商。", risk: "專案能見度波動與網路技術規格轉換風險。" },
+            { layer: "第三層：整機與系統", company: "HPE", desc: "AI 伺服器、網路與系統部署。將硬體整合為企業與政府能實際使用的基礎設施。", risk: "硬體毛利率較低，需留意記憶體成本上升與庫存週期。" },
+            { layer: "第三層：整機與系統", company: "Dell", desc: "提供企業級 AI 伺服器與儲存解決方案整機交付。", risk: "AI 伺服器價格競爭導致毛利率承壓。" },
+            { layer: "第三層：整機與系統", company: "Super Micro", desc: "高效能 AI 伺服器與散熱系統整合商。", risk: "營收成長快但面臨供應鏈限制與毛利率挑戰。" }
+        ];
+
+        const tableBody = document.getElementById('companyTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        // 渲染表格函式
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                
+                data.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    // 偶數行加上微灰色背景以增加可讀性
+                    tr.className = index % 2 === 0 ? 'bg-white hover:bg-stone-50' : 'bg-stone-50 hover:bg-stone-100';
+                    
+                    // 層級顏色的視覺標記
+                    let layerBadgeColor = 'bg-stone-100 text-stone-800';
+                    if(row.layer.includes('第一層')) layerBadgeColor = 'bg-red-100 text-red-800';
+                    if(row.layer.includes('第二層')) layerBadgeColor = 'bg-blue-100 text-blue-800';
+                    if(row.layer.includes('第三層')) layerBadgeColor = 'bg-green-100 text-green-800';
+
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${layerBadgeColor}">
+                                ${row.layer}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-sky-700">${row.company}</td>
+                        <td class="px-6 py-4 text-sm text-stone-600">${row.desc}</td>
+                        <td class="px-6 py-4 text-sm text-stone-500">${row.risk}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+        }
+
+        // 初始載入渲染所有資料
+        renderTable(companyData);
+
+        // 搜尋過濾事件監聽
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            const filteredData = companyData.filter(item => {
+                return item.layer.toLowerCase().includes(searchTerm) || 
+                       item.company.toLowerCase().includes(searchTerm) ||
+                       item.desc.toLowerCase().includes(searchTerm) ||
+                       item.risk.toLowerCase().includes(searchTerm);
+            });
+            
+            renderTable(filteredData);
+        });
+    </script>
+</body>
+</html>
