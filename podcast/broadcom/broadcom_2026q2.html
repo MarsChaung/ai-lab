@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Broadcom財報與AI市場分析</title>
+    <!-- 導入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 導入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 導航連結狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #d6d3d1; /* Tailwind stone-300 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #f5f5f4;
+            border-bottom: 2px solid #a8a29e;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 頂部導航列 (Sticky Header) -->
+    <header class="sticky top-0 z-50 bg-stone-900 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / 網站標題 -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-white tracking-wider">Broadcom 2026Q2</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <nav class="hidden md:flex space-x-8" id="desktop-nav">
+                    <a href="#overview" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors">報告總覽</a>
+                    <a href="#financials" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors">財報亮點與圖表</a>
+                    <a href="#analysis" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors">優勢與風險</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors">數據追蹤與策略</a>
+                </nav>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-stone-800 border-t border-stone-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700 mobile-nav-item">報告總覽</a>
+                <a href="#financials" class="block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700 mobile-nav-item">財報亮點與圖表</a>
+                <a href="#analysis" class="block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700 mobile-nav-item">優勢與風險</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700 mobile-nav-item">數據追蹤與策略</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
+        
+        <!-- 區塊 1：報告總覽 -->
+        <section id="overview" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Broadcom 不是輸給財報，而是輸給過高期待
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                <p class="text-lg text-stone-600 leading-relaxed mb-4">
+                    Broadcom 這次財報最值得投資人注意的地方，不是公司基本面突然轉壞，而是<strong class="text-stone-900">市場對 AI 晶片股的標準已經明顯提高</strong>。雖然營收、現金流、AI 需求都很強勁，但股價已經提前反映了更樂觀的未來。
+                </p>
+                <p class="text-lg text-stone-600 leading-relaxed">
+                    財報後的大跌代表市場正在進入下一個階段：AI 投資人開始要求更清楚的收入、利潤與長期訂單能見度。公司表現必須「比市場原本想像的更好」才能支撐極高的估值。
+                </p>
+            </div>
+        </section>
+
+        <!-- 區塊 2：財報亮點與圖表 -->
+        <section id="financials" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Q2 財報亮點與營收結構
+            </h2>
+            
+            <!-- 資訊卡片區塊 (Responsive Grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 bg-sky-50 hover:-translate-y-1 transition-transform">
+                    <h3 class="text-sm font-semibold text-sky-600 uppercase tracking-wide">第二季總營收</h3>
+                    <p class="mt-2 text-3xl font-extrabold text-stone-900">221.87 <span class="text-lg font-medium text-stone-500">億美元</span></p>
+                    <p class="mt-1 text-sm text-green-600 font-medium">▲ 年增 48%</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 bg-emerald-50 hover:-translate-y-1 transition-transform">
+                    <h3 class="text-sm font-semibold text-emerald-600 uppercase tracking-wide">調整後 EBITDA</h3>
+                    <p class="mt-2 text-3xl font-extrabold text-stone-900">152.44 <span class="text-lg font-medium text-stone-500">億美元</span></p>
+                    <p class="mt-1 text-sm text-stone-600">占營收比重達 69%</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 bg-amber-50 hover:-translate-y-1 transition-transform">
+                    <h3 class="text-sm font-semibold text-amber-600 uppercase tracking-wide">自由現金流</h3>
+                    <p class="mt-2 text-3xl font-extrabold text-stone-900">102.62 <span class="text-lg font-medium text-stone-500">億美元</span></p>
+                    <p class="mt-1 text-sm text-stone-600">占營收比重達 46%</p>
+                </div>
+            </div>
+
+            <!-- Chart.js 視覺化圖表 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">第二季部門營收結構 (億美元)</h3>
+                    <!-- Canvas 必須包一層 div 並控制高度 -->
+                    <div class="relative h-64 w-full">
+                        <canvas id="revenueStructureChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">AI 半導體收入成長趨勢 (億美元)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="aiGrowthChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4 text-center">* Q3為官方預估值，年增將超過 200%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 3：優勢與風險分析 -->
+        <section id="analysis" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心優勢與潛在風險
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 優勢卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
+                    <h3 class="text-xl font-bold text-emerald-600 flex items-center mb-4">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        非 Nvidia 路線的核心代表
+                    </h3>
+                    <ul class="space-y-3 text-stone-600 list-disc pl-5">
+                        <li>替大型雲端公司 (如 Meta, Google) 設計<strong class="text-stone-800">客製化 AI 晶片</strong>，並提供網路與軟體基礎設施。</li>
+                        <li>Google Cloud 成長強勁，帶動資料中心、晶片、網路與冷卻需求擴張。</li>
+                        <li>與 Meta 合作生產客製化處理器延伸至 2029 年；與 Google 長期協議延伸至 2031 年。</li>
+                        <li>具備 VMware 帶來的軟體基礎設施收入 (占營收32%)，比純晶片公司更具防禦性。</li>
+                    </ul>
+                </div>
+
+                <!-- 風險卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-rose-500">
+                    <h3 class="text-xl font-bold text-rose-600 flex items-center mb-4">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        三大潛在投資風險
+                    </h3>
+                    <ul class="space-y-3 text-stone-600 list-disc pl-5">
+                        <li><strong class="text-stone-800">客戶集中度過高：</strong>高度依賴少數超大型雲端客戶，Google 等客戶可能尋找其他設計夥伴。</li>
+                        <li><strong class="text-stone-800">競爭加劇：</strong>競爭對手 Marvell 積極切入，預估其 2029 年客製化晶片業務達百億美元。</li>
+                        <li><strong class="text-stone-800">估值已提前反映：</strong>財報前股價已大漲近 55%，財報後下跌 15%，市場面臨「高預期修正」階段。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 4：資料表格與策略 -->
+        <section id="strategy" class="mb-8 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心數據追蹤與投資策略
+            </h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-4">
+                    對於穩健型投資人，建議分批布局，並密切追蹤以下核心指標。您可以在下方輸入關鍵字 (如 "AI" 或 "營收") 即時篩選數據表內容：
+                </p>
+                
+                <!-- 搜尋列 -->
+                <div class="mb-4">
+                    <input type="text" id="searchInput" placeholder="搜尋指標名稱或數值..." class="w-full md:w-1/3 px-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                </div>
+
+                <!-- 互動式表格 -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0">核心追蹤指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0">官方數據/預估值</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0">成長幅度與比例</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0">市場意義與備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- 資料由 JavaScript 動態生成 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 結論提醒 -->
+                <div class="mt-6 bg-stone-50 border border-stone-200 rounded p-4 text-sm text-stone-600">
+                    <strong class="text-stone-800">總結：</strong> Broadcom 仍是 AI 供應鏈中最值得追蹤的核心公司之一。未來的關鍵不再只是「誰有 AI」，而是「誰能用 AI 賺到足夠多的錢，並且讓估值合理化」。
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Broadcom財報與AI市場分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Broadcom 相關公開資料 (2026年06月04日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. 手機版選單切換 ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+            const toggleMobileMenu = () => {
+                mobileMenu.classList.toggle('hidden');
+            };
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            
+            // 點擊手機選單項目後自動關閉選單
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- 2. 滾動監聽 (Active Link State) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // 調整觸發區間，讓畫面滾動到中上段時觸發
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 移除所有 nav-link 的 active 狀態
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        // 找到對應的 id 並加上 active 狀態
+                        const id = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`.nav-item[href="#${id}"]`);
+                        if(activeLink) {
+                            activeLink.classList.remove('inactive-nav-link');
+                            activeLink.classList.add('active-nav-link');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- 3. 動態資料表格與篩選 ---
+            // 真實資料來源於文章分析
+            const productData = [
+                { metric: "第二季總營收", value: "221.87 億美元", growth: "年增 48%", note: "略低於華爾街預估 (222.7億)" },
+                { metric: "第二季 AI 半導體收入", value: "108 億美元", growth: "年增 143%", note: "高於公司先前預測，大型雲端需求強" },
+                { metric: "第三季 AI 半導體收入", value: "160 億美元 (預估)", growth: "年增 > 200%", note: "重要追蹤指標：需確認是否達標" },
+                { metric: "第二季半導體解決方案收入", value: "150.09 億美元", growth: "年增 79%", note: "占總營收 68%" },
+                { metric: "第二季基礎設施軟體收入", value: "71.78 億美元", growth: "年增 9%", note: "占總營收 32%，防禦性護城河" },
+                { metric: "2027 年 AI 晶片銷售額", value: "1,000 億美元", growth: "維持原目標", note: "市場失望主因：未如預期上修" },
+                { metric: "2027 年 AI 晶片出貨能力", value: "> 10 GW", growth: "獲上修", note: "顯示基礎建設與運算容量持續擴大" }
+            ];
+
+            const tbody = document.getElementById('dataTableBody');
+            const searchInput = document.getElementById('searchInput');
+
+            // 渲染表格函數
+            const renderTable = (data) => {
+                tbody.innerHTML = '';
+                if(data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-sm text-stone-500">找不到符合的資料。</td></tr>';
+                    return;
+                }
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-stone-50 transition-colors";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${row.metric}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600 font-semibold">${row.value}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm ${row.growth.includes('增') || row.growth.includes('上修') ? 'text-green-600' : 'text-stone-600'}">${row.growth}</td>
+                        <td class="px-6 py-4 text-sm text-stone-500">${row.note}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            };
+
+            // 初始渲染
+            renderTable(productData);
+
+            // 篩選事件監聽
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => 
+                    item.metric.toLowerCase().includes(keyword) || 
+                    item.value.toLowerCase().includes(keyword) ||
+                    item.note.toLowerCase().includes(keyword)
+                );
+                renderTable(filteredData);
+            });
+
+            // --- 4. Chart.js 動態圖表初始化 ---
+            
+            // 圖表 1：營收結構 (半導體 vs 軟體) - Bar Chart
+            const ctxStructure = document.getElementById('revenueStructureChart').getContext('2d');
+            new Chart(ctxStructure, {
+                type: 'bar',
+                data: {
+                    labels: ['半導體解決方案', '基礎設施軟體'],
+                    datasets: [{
+                        label: 'Q2 營收 (億美元)',
+                        data: [150.09, 71.78],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)', // sky-500
+                            'rgba(16, 185, 129, 0.7)'  // emerald-500
+                        ],
+                        borderColor: [
+                            'rgba(14, 165, 233, 1)',
+                            'rgba(16, 185, 129, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '億美元' }
+                        }
+                    }
+                }
+            });
+
+            // 圖表 2：AI 半導體收入成長 - Bar Chart (呈現趨勢)
+            const ctxGrowth = document.getElementById('aiGrowthChart').getContext('2d');
+            new Chart(ctxGrowth, {
+                type: 'bar',
+                data: {
+                    labels: ['Q2 AI收入 (實際)', 'Q3 AI收入 (預估)'],
+                    datasets: [{
+                        label: 'AI 半導體收入 (億美元)',
+                        data: [108, 160],
+                        backgroundColor: 'rgba(245, 158, 11, 0.7)', // amber-500
+                        borderColor: 'rgba(245, 158, 11, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '億美元' }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
