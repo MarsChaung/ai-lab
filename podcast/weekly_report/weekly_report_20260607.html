@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/6/1~6/5)</title>
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* 客製化捲動條 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f4; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a8a29e; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #78716c; 
+        }
+        
+        .active-nav-link {
+            color: #0284c7; /* text-sky-600 */
+            font-weight: 700; /* font-bold */
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* text-stone-600 */
+            font-weight: 400; /* font-normal */
+            border-bottom: 2px solid transparent;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 頂部導航列 (Sticky Header) -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / 品牌名稱 -->
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-700">美股市場週報</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#overview" class="nav-link active-nav-link pb-1 transition-colors hover:text-sky-600">市場概況</a>
+                    <a href="#reasons" class="nav-link inactive-nav-link pb-1 transition-colors hover:text-sky-600">下跌主因</a>
+                    <a href="#impacts" class="nav-link inactive-nav-link pb-1 transition-colors hover:text-sky-600">市場影響</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link pb-1 transition-colors hover:text-sky-600">應對策略</a>
+                    <a href="#data" class="nav-link inactive-nav-link pb-1 transition-colors hover:text-sky-600">相關持股檢視</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-sky-700 bg-sky-50">市場概況</a>
+                <a href="#reasons" class="block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-700 hover:bg-sky-50">下跌主因</a>
+                <a href="#impacts" class="block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-700 hover:bg-sky-50">市場影響</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-700 hover:bg-sky-50">應對策略</a>
+                <a href="#data" class="block px-3 py-2 rounded-md text-base font-medium text-stone-600 hover:text-sky-700 hover:bg-sky-50">相關持股檢視</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 標題區 -->
+    <header class="bg-gradient-to-r from-stone-800 to-stone-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">Nasdaq 與半導體股急跌後</h1>
+            <p class="text-xl md:text-2xl text-sky-300">投資人該恐慌，還是該重新檢查持股？</p>
+            <p class="mt-4 text-stone-400">市場對過熱 AI 與半導體交易的一次集中壓力測試</p>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        
+        <!-- 1. 市場概況與圖表 -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">六月第一週市場概況</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 h-full flex flex-col justify-center">
+                    <p class="text-lg text-stone-700 leading-relaxed mb-4">
+                        六月第一週美股迎來非常集中的修正。真正的震央在半導體族群，創下 2020 年 3 月以來最大單日跌幅。這不是普通的震盪，而是市場對於過高估值與擁擠交易的集中壓力測試。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <div class="bg-red-50 p-4 rounded-lg border border-red-100 text-center">
+                            <p class="text-sm text-red-600 font-bold">美國掛牌晶片股市值單日蒸發</p>
+                            <p class="text-2xl font-black text-red-700 mt-1">1.3兆美元</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-lg border border-sky-100 text-center">
+                            <p class="text-sm text-sky-700 font-bold">五月非農就業新增</p>
+                            <p class="text-2xl font-black text-sky-800 mt-1">17.2萬人</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 動態圖表區 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-stone-700 mb-4 text-center">週五單日大盤跌幅比較</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 下跌主因 (卡片式設計) -->
+        <section id="reasons" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三大急跌原因解析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 原因 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow border-t-4 border-amber-400">
+                    <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">利率預期轉向</h3>
+                    <p class="text-stone-600">
+                        五月非農就業新增 17.2 萬人遠超預期，失業率維持 4.3%。強勁就業使聯準會更難降息，市場預期從「降息」轉向「年底可能升息」。依賴未來高成長想像的 AI 與半導體股最先被重新定價。
+                    </p>
+                </div>
+                <!-- 原因 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow border-t-4 border-rose-400">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center text-rose-600 mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">漲速過快、交易擁擠</h3>
+                    <p class="text-stone-600">
+                        市場資金高度集中於 AI 基礎建設核心受惠者。以 Broadcom 為例，雖 AI 業務高速成長，但因未上修 2027 目標被視為「不夠驚喜」。AI 股已進入「必須持續超出高標準期待才漲」的階段。
+                    </p>
+                </div>
+                <!-- 原因 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow border-t-4 border-indigo-400">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">重估 AI 資本支出報酬率</h3>
+                    <p class="text-stone-600">
+                        當利率上升、資金成本變高，市場開始關注「巨額 AI 投資何時能轉為穩定現金流？」。若獲利回收時間拉長，投資人將要求更低的估值與更高的安全邊際。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 市場影響 -->
+        <section id="impacts" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資人面臨的三大影響</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                    <h4 class="font-bold text-lg text-stone-800 mb-2">1. 投資組合波動放大</h4>
+                    <p class="text-stone-600 text-sm">ETF 對科技股與半導體股曝險極高。大廠同時下跌時，投資人將承受巨大壓力。需重新檢視資產集中度。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                    <h4 class="font-bold text-lg text-stone-800 mb-2">2. 追高風險變得明顯</h4>
+                    <p class="text-stone-600 text-sm">好的產業不等於任何價格都可買入。若股價已提前反映太多未來成長，一旦財報未超預期，將面臨劇烈修正。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                    <h4 class="font-bold text-lg text-stone-800 mb-2">3. 資金轉向類股輪動</h4>
+                    <p class="text-stone-600 text-sm">資金可能暫時流向醫療、金融、必需消費、能源或高股息公司，尋找「成長之外的保護」。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 應對策略 -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">具體應對策略與觀察指標</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- 左側：五大原則 -->
+                    <div>
+                        <h3 class="text-xl font-bold text-sky-700 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            五大投資原則
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded text-sm mr-3 mt-0.5">1</span>
+                                <div>
+                                    <p class="font-bold text-stone-800">勿急於全數拋售</p>
+                                    <p class="text-sm text-stone-600">將持股分為「有實質營收現金流的核心公司」與「高估值/獲利不穩定的題材公司」，前者保留，後者嚴管。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded text-sm mr-3 mt-0.5">2</span>
+                                <div>
+                                    <p class="font-bold text-stone-800">避免盲目逢低加碼</p>
+                                    <p class="text-sm text-stone-600">「跌了就買」不再絕對有效。加碼前確認：美債殖利率停升、財報上修展望、估值回到合理區間。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded text-sm mr-3 mt-0.5">3</span>
+                                <div>
+                                    <p class="font-bold text-stone-800">檢查持股集中度</p>
+                                    <p class="text-sm text-stone-600">過多科技 ETF 與單一個股等同單一交易。應搭配醫療、金融等防禦性或高現金流產業降低波動。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded text-sm mr-3 mt-0.5">4</span>
+                                <div>
+                                    <p class="font-bold text-stone-800">區分長期趨勢與短期股價</p>
+                                    <p class="text-sm text-stone-600">AI 需求真實，但短期股價已反映樂觀假設。看重能將需求轉化為持續自由現金流的企業。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded text-sm mr-3 mt-0.5">5</span>
+                                <div>
+                                    <p class="font-bold text-stone-800">從「題材」轉向「品質」</p>
+                                    <p class="text-sm text-stone-600">市場進入「AI 成長驗證」第二階段。資金應留給真正高品質、能交出亮眼財務數據的公司。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 右側：三大關鍵指標 -->
+                    <div class="bg-stone-50 p-6 rounded-lg border border-stone-200">
+                        <h3 class="text-xl font-bold text-amber-600 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            近期必盯三大指標
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <h4 class="font-bold text-stone-800">📉 美債殖利率</h4>
+                                <p class="text-sm text-stone-600 mt-1">重點觀察 10 年期與 2 年期殖利率走向，將直接牽動高估值科技股定價。</p>
+                            </div>
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <h4 class="font-bold text-stone-800">📊 半導體財報與指引</h4>
+                                <p class="text-sm text-stone-600 mt-1">檢視 AI 晶片、HBM 記憶體、資料中心交換器等硬體需求是否具備延續性。</p>
+                            </div>
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <h4 class="font-bold text-stone-800">💰 科技巨頭資本支出</h4>
+                                <p class="text-sm text-stone-600 mt-1">追蹤 Microsoft、Amazon、Alphabet、Meta 等若放緩支出，半導體股將面臨第二波修正。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 互動資料表格 -->
+        <section id="data" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">報告提及之相關 AI 概念股檢視</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <!-- 搜尋與篩選區 -->
+                <div class="mb-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-stone-600 text-sm">請依照「有實質營收」與「僅具題材」之標準重新審視以下公司部位。</p>
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="searchInput" placeholder="搜尋公司名稱或代號..." class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-shadow">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+                
+                <!-- 表格容器 (處理水平滾動) -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider sticky top-0 bg-stone-100">公司名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider sticky top-0 bg-stone-100">代號</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider sticky top-0 bg-stone-100">產業 / 領域</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider sticky top-0 bg-stone-100">報告中之定位與影響</th>
+                            </tr>
+                        </thead>
+                        <tbody id="companyTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態生成內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 查無資料提示 -->
+                <div id="noDataMessage" class="hidden text-center py-8 text-stone-500">
+                    找不到符合條件的股票資料。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/6/1~6/5)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Nasdaq 與半導體股 相關公開資料 (2026年06月07日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. 繪製 Chart.js 動態圖表 ---
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            
+            // 決定圖表數值與顏色
+            const chartData = [-4.18, -2.64, -10.30];
+            const bgColors = chartData.map(val => val < -5 ? 'rgba(239, 68, 68, 0.8)' : 'rgba(14, 165, 233, 0.8)'); // 跌幅超大用紅色，一般用藍色
+            const borderColors = chartData.map(val => val < -5 ? 'rgb(220, 38, 38)' : 'rgb(2, 132, 199)');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Nasdaq', 'S&P 500', 'PHLX 半導體'],
+                    datasets: [{
+                        label: '週五單日跌幅 (%)',
+                        data: chartData,
+                        backgroundColor: bgColors,
+                        borderColor: borderColors,
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false // 隱藏圖例，因為已經很直觀
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '跌幅百分比 (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- 2. 互動資料表格邏輯 ---
+            // 基於報告內容整理的真實公司資料
+            const companiesData = [
+                { name: 'Nvidia', ticker: 'NVDA', sector: 'AI 晶片 / 半導體', description: 'AI 基礎建設核心受惠者，需觀察訂單指引。' },
+                { name: 'Broadcom', ticker: 'AVGO', sector: '網通晶片 / 半導體', description: '財報 AI 業務雖高成長，但因未上修 2027 目標遭逢賣壓。' },
+                { name: 'AMD', ticker: 'AMD', sector: 'AI 晶片 / 半導體', description: 'AI 基礎建設重點觀察企業，易受情緒波動影響。' },
+                { name: 'Micron', ticker: 'MU', sector: 'HBM 記憶體 / 半導體', description: '記憶體需求核心，需觀察後續財報展望。' },
+                { name: 'Marvell', ticker: 'MRVL', sector: '客製化 ASIC / 半導體', description: 'AI 基礎建設受惠者，短線面臨估值重估。' },
+                { name: 'HPE', ticker: 'HPE', sector: 'AI 伺服器', description: '處於 AI 基礎建設循環中，具實質訂單需求。' },
+                { name: 'Dell', ticker: 'DELL', sector: 'AI 伺服器', description: '伺服器供應鏈，需關注營收與獲利轉換效率。' },
+                { name: 'Microsoft', ticker: 'MSFT', sector: '大型雲端服務 (CSP)', description: '重點觀察其 AI 資本支出是否持續。' },
+                { name: 'Amazon', ticker: 'AMZN', sector: '大型雲端服務 (CSP)', description: '資本支出動向為半導體需求延續性之關鍵。' },
+                { name: 'Alphabet', ticker: 'GOOGL', sector: '大型雲端服務 (CSP)', description: '雲端與資料中心 AI 算力需求來源。' },
+                { name: 'Meta', ticker: 'META', sector: '科技巨頭 / 社交', description: '其資料中心建置進度影響 AI 基礎設施訂單。' }
+            ];
+
+            const tableBody = document.getElementById('companyTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            // 渲染表格函數
+            function renderTable(data) {
+                tableBody.innerHTML = ''; // 清空
+                if (data.length === 0) {
+                    noDataMessage.classList.remove('hidden');
+                } else {
+                    noDataMessage.classList.add('hidden');
+                    data.forEach((company, index) => {
+                        const tr = document.createElement('tr');
+                        tr.className = index % 2 === 0 ? 'bg-white hover:bg-sky-50' : 'bg-stone-50 hover:bg-sky-50';
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${company.name}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600 font-mono">${company.ticker}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-stone-100 text-stone-700">
+                                    ${company.sector}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-stone-600">${company.description}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                }
+            }
+
+            // 初始化表格
+            renderTable(companiesData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = companiesData.filter(company => 
+                    company.name.toLowerCase().includes(keyword) || 
+                    company.ticker.toLowerCase().includes(keyword) ||
+                    company.sector.toLowerCase().includes(keyword)
+                );
+                renderTable(filteredData);
+            });
+
+
+            // --- 3. 手機版選單切換 ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機版連結後自動收起選單
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+
+            // --- 4. 滾動監聽 (Active Link State) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px', // 調整觸發範圍
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.id;
+                        
+                        navLinks.forEach(link => {
+                            // 先移除所有 active 樣式
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            
+                            // 比對 href 添加 active 樣式
+                            if (link.getAttribute('href') === `#${activeId}`) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(sec => {
+                observer.observe(sec);
+            });
+        });
+    </script>
+</body>
+</html>
