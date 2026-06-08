@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI投資走向建AI工廠</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 避免導航列遮擋錨點內容 */
+        section {
+            scroll-margin-top: 5rem; 
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* Tailwind stone-600 */
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+            border-bottom: 2px solid #e0f2fe;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-extrabold text-sky-600">巨頭的AI投資策略</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-item inactive-nav-link transition duration-200 py-2">核心觀點</a>
+                    <a href="#industry-moves" class="nav-item inactive-nav-link transition duration-200 py-2">大廠動態</a>
+                    <a href="#supply-chain" class="nav-item inactive-nav-link transition duration-200 py-2">AI供應鏈分層</a>
+                    <a href="#insights" class="nav-item inactive-nav-link transition duration-200 py-2">市場趨勢</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-800 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 shadow-lg">
+            <a href="#summary" class="block px-4 py-3 text-stone-600 hover:bg-sky-50 hover:text-sky-600">核心觀點</a>
+            <a href="#industry-moves" class="block px-4 py-3 text-stone-600 hover:bg-sky-50 hover:text-sky-600">大廠動態</a>
+            <a href="#supply-chain" class="block px-4 py-3 text-stone-600 hover:bg-sky-50 hover:text-sky-600">AI供應鏈分層</a>
+            <a href="#insights" class="block px-4 py-3 text-stone-600 hover:bg-sky-50 hover:text-sky-600">市場趨勢</a>
+        </div>
+    </nav>
+
+    <!-- 頁首 Hero 區塊 -->
+    <header class="bg-gradient-to-r from-stone-800 to-sky-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">從晶片到光纖：<br>AI投資主線正走向「建AI工廠」</h1>
+            <p class="text-lg md:text-xl text-sky-200 max-w-3xl mx-auto">
+                過去市場只問「誰有最強GPU」，現在要問的是「誰能把晶片、封裝、光纖、電力、散熱、資料中心與軟體整合成一座可大量運轉的 AI 工廠」。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- Section 1: 核心觀點 -->
+        <section id="summary" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心觀點：AI基礎建設「全鏈條化」</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg text-stone-700 leading-relaxed mb-4">
+                    Google 找 Intel 生產 TPU，Amazon 找 Corning 擴大光纖供應，這兩件事本質上都是同一個趨勢：大型雲端公司不再只是在市場上買現成零件，而是在提前鎖定整條 AI 供應鏈。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-sky-50 p-5 rounded-lg border-l-4 border-sky-500">
+                        <h3 class="text-xl font-bold text-sky-800 mb-2">算力供應鏈分散化</h3>
+                        <p class="text-stone-600">Google 尋求 Intel 代工 TPU，顯示大型雲端公司希望降低對單一供應商（Nvidia）的依賴，控制成本並確保未來先進封裝產能無虞。</p>
+                    </div>
+                    <div class="bg-emerald-50 p-5 rounded-lg border-l-4 border-emerald-500">
+                        <h3 class="text-xl font-bold text-emerald-800 mb-2">連接與基礎建設成瓶頸</h3>
+                        <p class="text-stone-600">Amazon 簽署巨資光纖協議，表明 AI 資料中心需要極高速的資料傳輸。光纖、散熱、電力正在成為決定 AI 服務穩定運作的關鍵。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 大廠動態 -->
+        <section id="industry-moves" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">科技巨頭最新動態解析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Google & Intel</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">自研晶片/代工</span>
+                    </div>
+                    <p class="text-stone-600 flex-grow">
+                        Google 預計於 2028 年由 Intel 生產超過 300 萬顆 TPU。這讓市場重新評估 Intel 在先進製程與封裝（如 Intel 18A, EMIB-T）的可信度。但仍屬「轉機選擇權」，需面臨良率與交期考驗。
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Amazon & Corning</h3>
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">光纖基礎建設</span>
+                    </div>
+                    <p class="text-stone-600 flex-grow">
+                        雙方簽署多年期、數十億美元協議。大量處理器需高速資料傳輸，帶動 Corning、Coherent 等光通訊硬體產業。Corning 正將美國光纖產能提高超過 50%。
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Nvidia 霸主地位</h3>
+                        <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">算力核心/供應鏈管理</span>
+                    </div>
+                    <p class="text-stone-600 flex-grow">
+                        Nvidia 評估 Intel 封裝技術，代表供應鏈進入「多來源、去瓶頸」階段。Nvidia 競爭力已不只在 GPU，更在於整體供應鏈調度能力，短期內雲端巨頭仍是其大客戶。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 互動資料表格 -->
+        <section id="supply-chain" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI供應鏈分層配置</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-4">投資策略應從「單點押注」轉向「分層配置」。您可透過下方搜尋框，篩選特定層級或企業名稱：</p>
+                
+                <!-- 篩選器 -->
+                <div class="mb-4 relative">
+                    <input type="text" id="searchInput" placeholder="搜尋層級、領域或企業名稱 (例如: Nvidia, 散熱, 第二層)..." 
+                           class="w-full md:w-1/2 px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition shadow-sm">
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200 text-left">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-sm font-bold text-stone-700 tracking-wider">供應鏈層級</th>
+                                <th scope="col" class="px-6 py-3 text-sm font-bold text-stone-700 tracking-wider">領域</th>
+                                <th scope="col" class="px-6 py-3 text-sm font-bold text-stone-700 tracking-wider">代表企業 / 產品</th>
+                                <th scope="col" class="px-6 py-3 text-sm font-bold text-stone-700 tracking-wider">投資核心趨勢</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態生成內容 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 動態圖表與市場趨勢 -->
+        <section id="insights" class="mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場趨勢：從資本支出看板塊外溢</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- 文字重點 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">資本支出與現金流的考驗</h3>
+                    <ul class="space-y-4 text-stone-600">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">➜</span>
+                            <span><strong>財務驗證期：</strong>AI 投資越來越燒錢，市場未來將檢視雲端收入、AI訂閱能否支撐龐大的資料中心折舊與資本支出。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">➜</span>
+                            <span><strong>美國本土製造崛起：</strong>Intel 與 Corning 的動作均與美國強化本土供應鏈政策有關。位處關鍵戰略位置的公司有望獲得重估。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">➜</span>
+                            <span><strong>估值風險：</strong>Corning、Intel 股價因利多消息大漲，需注意短線題材是否已被提前定價，長期仍需觀察營收轉化。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Chart.js 圖表 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-center text-stone-700 mb-4">AI 供應鏈各層級企業熱度 (提及代表性廠商數)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="supplyChainChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 text-center mt-4">註：圖表數據為依據報告內容中各領域被明確提及的代表企業/產品數量，呈現資本支出外溢廣度。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI投資走向建AI工廠。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中AI基礎建設相關公開資料 (2026年06月08日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        // 1. 手機版選單開關
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊手機選單項目後自動收合
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. 滾動偵測 (Intersection Observer) 動態更新導航列樣式
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('#desktop-menu .nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // 調整觸發範圍
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        item.classList.remove('active-nav-link');
+                        item.classList.add('inactive-nav-link');
+                        if (item.getAttribute('href') === `#${currentId}`) {
+                            item.classList.remove('inactive-nav-link');
+                            item.classList.add('active-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(sec => observer.observe(sec));
+
+        // 3. 互動資料表格 (基於報告內容的真實資料)
+        const tableData = [
+            {
+                layer: "第一層",
+                field: "算力核心",
+                companies: "Nvidia, AMD, Broadcom, Marvell, Google TPU, Amazon Trainium, Microsoft Maia",
+                trend: "成長最快，估值敏感，受財報與自研晶片影響大。"
+            },
+            {
+                layer: "第二層",
+                field: "製造與封裝",
+                companies: "TSMC (台積電), Intel Foundry",
+                trend: "需要先進製程與封裝產能，Intel轉機備受矚目。"
+            },
+            {
+                layer: "第三層",
+                field: "資料中心連接與網通",
+                companies: "Corning, Coherent, Lumentum, Arista, Broadcom, Marvell",
+                trend: "AI模型變大使得內部傳輸重要，光纖成核心瓶頸。"
+            },
+            {
+                layer: "第四層",
+                field: "能源、散熱與基礎建設",
+                companies: "Vertiv, Eaton, Super Micro, Dell, Foxconn",
+                trend: "電力設備與液冷技術成為支撐AI工廠運轉之必需。"
+            }
+        ];
+
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+
+        // 渲染表格函式
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-stone-500">找不到相符的資料</td></tr>';
+                return;
+            }
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-stone-50 transition";
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-sky-600">${item.layer}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${item.field}</td>
+                    <td class="px-6 py-4 text-sm text-stone-600">${item.companies}</td>
+                    <td class="px-6 py-4 text-sm text-stone-500">${item.trend}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 初始渲染
+        renderTable(tableData);
+
+        // 搜尋篩選功能
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = tableData.filter(item => {
+                return item.layer.toLowerCase().includes(searchTerm) || 
+                       item.field.toLowerCase().includes(searchTerm) || 
+                       item.companies.toLowerCase().includes(searchTerm) || 
+                       item.trend.toLowerCase().includes(searchTerm);
+            });
+            renderTable(filteredData);
+        });
+
+        // 4. Chart.js 動態圖表初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('supplyChainChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['算力核心', '製造與封裝', '連接與網通', '能源與基建'],
+                    datasets: [{
+                        label: '提及之代表性企業/產品數量',
+                        // 根據表格資料中的公司/產品數量：第一層(7), 第二層(2), 第三層(6), 第四層(5)
+                        data: [7, 2, 6, 5],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)',  // sky-500
+                            'rgba(168, 162, 158, 0.7)', // stone-400
+                            'rgba(16, 185, 129, 0.7)',  // emerald-500
+                            'rgba(245, 158, 11, 0.7)'   // amber-500
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(168, 162, 158)',
+                            'rgb(16, 185, 129)',
+                            'rgb(245, 158, 11)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false // 隱藏圖例使畫面更簡潔
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(28, 25, 23, 0.9)',
+                            titleFont: { size: 14 },
+                            bodyFont: { size: 14 },
+                            padding: 10
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1 },
+                            grid: { color: 'rgba(231, 229, 228, 0.5)' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
