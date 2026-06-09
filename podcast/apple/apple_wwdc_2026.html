@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Apple的AI生態與營收策略</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 隱藏捲軸但保留滾動功能 (針對表格) */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-black text-sky-600 tracking-tight">Apple WWDC 2026</span>
+                </div>
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#overview" class="nav-link text-sky-600 font-bold hover:text-sky-500 transition-colors">策略總覽</a>
+                    <a href="#ecosystem" class="nav-link text-stone-600 hover:text-sky-500 transition-colors">生態系應用</a>
+                    <a href="#data-chart" class="nav-link text-stone-600 hover:text-sky-500 transition-colors">市場數據與預估</a>
+                    <a href="#indicators" class="nav-link text-stone-600 hover:text-sky-500 transition-colors">投資指標</a>
+                </div>
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版選單面板 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="mobile-nav-link block px-3 py-2 text-base font-medium text-sky-600 font-bold hover:bg-stone-50 rounded-md">策略總覽</a>
+                <a href="#ecosystem" class="mobile-nav-link block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50 hover:text-sky-500 rounded-md">生態系應用</a>
+                <a href="#data-chart" class="mobile-nav-link block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50 hover:text-sky-500 rounded-md">市場數據與預估</a>
+                <a href="#indicators" class="mobile-nav-link block px-3 py-2 text-base font-medium text-stone-600 hover:bg-stone-50 hover:text-sky-500 rounded-md">投資指標</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首 Hero 區塊 -->
+    <header class="bg-gradient-to-r from-stone-800 to-stone-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">不只是修好 Siri：人工智慧如何打開下一條營收曲線</h1>
+            <p class="text-lg md:text-xl text-stone-300 max-w-3xl mx-auto">
+                Apple 把人工智慧變成整個裝置生態系的基礎功能，再透過硬體升級、訂閱服務、應用程式交易與支付活動創造收入。
+            </p>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 策略總覽 -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">商業佈局與核心策略</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg leading-relaxed text-stone-700 mb-4">
+                    2026年全球開發者大會 (WWDC) 上，Apple 推出了 Siri AI，但其真正的商業佈局遠不止於此。Apple 的 AI 策略並不是單獨銷售聊天機器人（如 ChatGPT Plus），而是選擇將 AI 深度嵌入其生態系，包含照片、瀏覽器、密碼管理、訊息、健康及支付等環節。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-sky-50 rounded-lg p-5 border border-sky-100">
+                        <h3 class="text-xl font-bold text-sky-800 mb-2">硬體換機潮動力</h3>
+                        <p class="text-stone-600">AI 功能（如 Image Playground 影像生成、照片 Clean Up）與新款晶片、高記憶體規格綁定，提高 Pro 系列產品的銷售佔比與升級誘因。</p>
+                    </div>
+                    <div class="bg-emerald-50 rounded-lg p-5 border border-emerald-100">
+                        <h3 class="text-xl font-bold text-emerald-800 mb-2">服務收入增長引擎</h3>
+                        <p class="text-stone-600">伺服器運算（如高階影像生成與 HomeKit AI 監控）與 iCloud+ 訂閱綁定；App Store 推出的企業/團體訂閱與 Bundle 擴大服務營收規模。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生態系應用 (卡片式設計) -->
+        <section id="ecosystem" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">人工智慧的生態系佈建</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">Safari 與入口控制</h3>
+                    <p class="text-stone-600">瀏覽器化身個人代理人，自動整理分頁並監控網站（如商品補貨與價格變動），Apple 藉此掌握購物與網路活動的接觸點。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">日常工作流程</h3>
+                    <p class="text-stone-600">Messages, Mail 與行事曆智慧連動。自動從郵件找訂位代碼、生成捷徑。這些高頻使用功能讓使用者更難離開 Apple 生態系。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">支付與 Apple Pay</h3>
+                    <p class="text-stone-600">新增帳單分攤、回饋點數與延後付款顯示。長遠來看，AI 代理人將整合從「搜尋商品」到「結帳」的完整流程，創造新廣告與金融入口。</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">iCloud+ AI 收費層</h3>
+                    <p class="text-stone-600">最高明確的收費入口：影像生成設有每日額度，HomeKit AI 監控影片等功能，皆要求使用者訂閱符合資格的 iCloud+ 付費方案。</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">開放模型與 Xcode</h3>
+                    <p class="text-stone-600">作為分配平台，Apple 開放 Foundation Models 並接入 Gemini、Claude 等模型。Apple 不做唯一模型，而是控制通路與支付來抽成。</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">健康與穿戴式裝置</h3>
+                    <p class="text-stone-600">強化家庭與兒童管理，手錶加入室內運動追蹤與更年期健康功能。不綁定 iPhone 的手錶設計降低了家庭購買多支手錶的門檻。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 市場數據與預估 (Chart & Table) -->
+        <section id="data-chart" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">資料解析：市場規模與潛力預估</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 動態圖表區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">硬體升級潛力 (Morgan Stanley 預估)</h3>
+                    <p class="text-sm text-stone-500 mb-4">由於 AI 功能下放受限，大量舊款設備成為未來的「潛在換機潮」。</p>
+                    <div class="relative h-64 w-full">
+                        <canvas id="upgradeChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 互動式資料表格區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">核心財務與市場數據總覽</h3>
+                    <p class="text-sm text-stone-500 mb-4">透過下方搜尋框，您可以即時篩選財務數據與分析師預測：</p>
+                    <div class="mb-4 relative">
+                        <input type="text" id="searchInput" placeholder="輸入關鍵字搜尋 (例如：營收、iPhone、BofA)..." class="w-full px-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                        <svg class="w-5 h-5 absolute right-3 top-2.5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <div class="overflow-x-auto no-scrollbar border border-stone-200 rounded-lg">
+                        <table class="min-w-full divide-y divide-stone-200">
+                            <thead class="bg-stone-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">指標分類</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">項目描述</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">數值 / 預估</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTableBody" class="bg-white divide-y divide-stone-200">
+                                <!-- 資料將由 JavaScript 動態生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="noDataMessage" class="hidden text-center py-4 text-stone-500">找不到相符的資料</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 投資人追蹤指標 -->
+        <section id="indicators" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資人應該追蹤的五個指標</h2>
+            
+            <div class="space-y-4">
+                <div class="bg-stone-50 border-l-4 border-sky-500 p-5 rounded-r-lg shadow-sm">
+                    <h4 class="text-lg font-bold text-stone-800">1. Pro 系列產品組合佔比</h4>
+                    <p class="text-stone-600 mt-1">不僅觀察 iPhone 總銷量，更要關注高階設備是否因 AI 完整體驗帶動銷售佔比提升。</p>
+                </div>
+                
+                <div class="bg-stone-50 border-l-4 border-emerald-500 p-5 rounded-r-lg shadow-sm">
+                    <h4 class="text-lg font-bold text-stone-800">2. 服務營收與毛利率維持</h4>
+                    <p class="text-stone-600 mt-1">觀察服務營收是否保持兩位數成長。若雲端 AI 成本大增，服務毛利率（目前 75.4%）可能會率先承壓。</p>
+                </div>
+                
+                <div class="bg-stone-50 border-l-4 border-yellow-500 p-5 rounded-r-lg shadow-sm">
+                    <h4 class="text-lg font-bold text-stone-800">3. iCloud+ 升級潮</h4>
+                    <p class="text-stone-600 mt-1">觀察既有用戶是否為了 AI 額度或家庭監控功能，大量升級至更高容量的 iCloud+ 方案，這是最直接的 AI 營收。</p>
+                </div>
+                
+                <div class="bg-stone-50 border-l-4 border-purple-500 p-5 rounded-r-lg shadow-sm">
+                    <h4 class="text-lg font-bold text-stone-800">4. 開發者採用率與 App Store 訂閱</h4>
+                    <p class="text-stone-600 mt-1">觀察第三方 App 是否廣泛運用 Foundation Models 與 App Intents，並透過新的團體/企業訂閱模式創造營收。</p>
+                </div>
+
+                <div class="bg-stone-50 border-l-4 border-red-500 p-5 rounded-r-lg shadow-sm">
+                    <h4 class="text-lg font-bold text-stone-800">5. 實際推出時間與市場開放進度</h4>
+                    <p class="text-stone-600 mt-1">追蹤 Siri AI 支援語言進度，以及歐盟與中國市場（目前受限）何時開放，這將直接影響短期即時收入。</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-stone-800 text-stone-100 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-2">結論總結</h3>
+                <p class="text-stone-300">
+                    這場 WWDC 的投資結論不是「Apple 已經贏得 AI 戰爭」，而是 <strong>Apple 提出了一套完整的商業化路線</strong>。Apple 目前不靠單一 AI 產品收費，而是藉由將 AI 深植於日常生活，打造一個「更難離開的生態系」。下一階段真正的考驗，是功能是否能順利落地全球並推動用戶付費升級。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Apple的AI生態與營收策略。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 Apple 相關公開資料 (2026年06月09日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        // 1. 手機版選單切換
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊手機選單項目後自動收合
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. 導航列 Scroll Spy (自動高亮當前區塊)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // 扣除導航列高度的緩衝
+                if (scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                // 移除所有高亮
+                link.classList.remove('text-sky-600', 'font-bold');
+                link.classList.add('text-stone-600');
+                
+                // 加上當前高亮
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.remove('text-stone-600');
+                    link.classList.add('text-sky-600', 'font-bold');
+                }
+            });
+        });
+
+        // 3. Chart.js 動態圖表
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('upgradeChart').getContext('2d');
+            
+            // 由於原文提到：8.5億部無法執行基本AI，13億部無法執行高階AI
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['無法支援基本 AI', '無法支援高階 AI'],
+                    datasets: [{
+                        label: 'iPhone 數量預估 (億部)',
+                        data: [8.5, 13],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.7)',  // Red
+                            'rgba(245, 158, 11, 0.7)'   // Yellow
+                        ],
+                        borderColor: [
+                            'rgb(239, 68, 68)',
+                            'rgb(245, 158, 11)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' 億部設備潛在換機空間';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '設備數量 (億部)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // 4. 互動資料表格與即時搜尋功能
+        const reportData = [
+            { category: '財務業務', desc: '2025年 Apple 服務營收總額', value: '1,090 億美元' },
+            { category: '財務業務', desc: '服務業務毛利率 (遠高於硬體)', value: '75.4%' },
+            { category: '分析預估', desc: 'Bank of America：2030年 AI 額外帶來營收', value: '150億 至 300億美元' },
+            { category: '硬體限制', desc: 'Morgan Stanley：無法執行基本 AI 的 iPhone', value: '超過 8.5 億部' },
+            { category: '硬體限制', desc: 'Morgan Stanley：無法支援高階 AI 功能的 iPhone', value: '超過 13 億部' },
+            { category: '市場反應', desc: 'WWDC 發表會後 Apple 股價表現', value: '收跌 1.9%' },
+            { category: '地區限制', desc: '初期受限無法使用 Siri AI 等功能的市場', value: '歐盟、中國市場' }
+        ];
+
+        const tableBody = document.getElementById('dataTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const noDataMessage = document.getElementById('noDataMessage');
+
+        // 渲染表格的函數
+        function renderTable(data) {
+            tableBody.innerHTML = ''; // 清空現有資料
+            
+            if (data.length === 0) {
+                noDataMessage.classList.remove('hidden');
+                tableBody.parentElement.classList.add('hidden');
+            } else {
+                noDataMessage.classList.add('hidden');
+                tableBody.parentElement.classList.remove('hidden');
+                
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-stone-50 transition-colors';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-sky-600">${item.category}</td>
+                        <td class="px-6 py-4 text-sm text-stone-700">${item.desc}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-stone-800">${item.value}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        }
+
+        // 初始化表格
+        renderTable(reportData);
+
+        // 綁定搜尋輸入事件
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const filteredData = reportData.filter(item => {
+                return item.category.toLowerCase().includes(searchTerm) || 
+                       item.desc.toLowerCase().includes(searchTerm) || 
+                       item.value.toLowerCase().includes(searchTerm);
+            });
+            renderTable(filteredData);
+        });
+
+    </script>
+</body>
+</html>
