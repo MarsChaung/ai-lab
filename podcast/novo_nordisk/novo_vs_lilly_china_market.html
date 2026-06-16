@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-減重藥戰：Novo與Eli Lilly</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自訂樣式：確保導航列平滑過渡 */
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .active-nav-link {
+            color: #0284c7; /* Tailwind sky-600 */
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* Tailwind gray-600 */
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-stone-800 leading-relaxed">
+
+    <!-- Sticky Header 導航列 -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-xl font-bold text-sky-700">
+                    Novo vs. ELi Lilly
+                </div>
+                <!-- 桌面版選單 -->
+                <nav class="hidden md:flex space-x-8" id="desktop-menu">
+                    <a href="#overview" class="nav-link inactive-nav-link">市場概況</a>
+                    <a href="#competitors" class="nav-link inactive-nav-link">競爭分析</a>
+                    <a href="#data-charts" class="nav-link inactive-nav-link">財務數據</a>
+                    <a href="#drug-table" class="nav-link inactive-nav-link">藥物佈局</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link">投資策略</a>
+                </nav>
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-stone-500 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版選單面板 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-3 space-y-1 shadow-lg">
+            <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50 mobile-link">市場概況</a>
+            <a href="#competitors" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50 mobile-link">競爭分析</a>
+            <a href="#data-charts" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50 mobile-link">財務數據</a>
+            <a href="#drug-table" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50 mobile-link">藥物佈局</a>
+            <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50 mobile-link">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-sky-800 to-stone-800 text-white py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Novo 口服 Wegovy 進軍中國<br><span class="text-sky-300">Eli Lilly 的王位迎來真正考驗</span></h1>
+            <p class="text-lg md:text-xl text-stone-200 max-w-3xl mx-auto mt-6">
+                減重藥市場已從「供給不足」的黃金第一階段，轉向「全面競爭」的成熟前期。中國市場將成為決定毛利率、產能與仿製藥防禦力的關鍵戰場。
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- Section 1: 市場概況 -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業週期切換與中國戰場</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold mb-3 text-sky-700">產業進入第二階段</h3>
+                    <p class="text-stone-600 mb-2"><strong>第一階段：</strong>誰有藥、誰有產能，誰就能賣爆。</p>
+                    <p class="text-stone-600"><strong>第二階段：</strong>誰能更快拿到各國核准、用更低成本供應、並擋住仿製藥與本土競爭。</p>
+                    <div class="mt-4 p-3 bg-red-50 text-red-700 rounded text-sm">
+                        ⚠️ 預估至2030年，高盛將全球肥胖藥市場規模由 1,300 億下修至 1,050 億美元，主因是價格侵蝕加速。
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-3 text-stone-800">為何中國是關鍵戰場？</h3>
+                    <ul class="list-disc list-inside space-y-2 text-stone-600">
+                        <li><strong>龐大潛力：</strong>預計 2030 年中國有超過 65% 人口處於過重或肥胖狀態。</li>
+                        <li><strong>價格敏感：</strong>高度競爭且通路複雜，Novo 與 Lilly 已調降部分藥物價格以應對支付限制。</li>
+                        <li><strong>高量低價特性：</strong>中國不再是「高價暴利」市場，而是「高量、快速競爭」的練兵場。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 競爭分析 -->
+        <section id="competitors" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">巨頭對決：Eli Lilly vs. Novo Nordisk</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Eli Lilly Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sky-100 p-3 rounded-full mr-4">
+                            <span class="text-sky-600 font-bold text-xl">Lilly</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-800">Eli Lilly 的先發與隱憂</h3>
+                    </div>
+                    <ul class="space-y-3 text-stone-600 flex-grow">
+                        <li>✅ <strong>產能佈局領先：</strong>口服 orforglipron 搶先在 2025 年底向中國遞件，並計劃未來 10 年投資 30 億美元建廠。</li>
+                        <li>✅ <strong>梯隊產品線：</strong>形成「注射版、口服版、下一代藥物(如 retatrutide)」的完整防線。</li>
+                        <li>✅ <strong>基本面強勁：</strong>Q1 財報上修，Mounjaro 全球營收年增 125%，Zepbound 美國年增 79%。</li>
+                        <li class="pt-3 border-t border-gray-100 text-amber-700 mt-3">
+                            <strong>⚠️ 投資風險：</strong>本益比約 40 倍，市值破兆，估值已高度反映成長預期。美國雇主計畫 2027 年可能停止涵蓋肥胖藥保險。
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Novo Nordisk Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-stone-100 p-3 rounded-full mr-4">
+                            <span class="text-stone-600 font-bold text-xl">Novo</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-stone-800">Novo Nordisk 的反擊與挑戰</h3>
+                    </div>
+                    <ul class="space-y-3 text-stone-600 flex-grow">
+                        <li>✅ <strong>口服藥推進：</strong>口服 Wegovy (semaglutide) 已在英、美核准，並即將在幾個月內向中國申請核准。</li>
+                        <li>✅ <strong>品牌優勢：</strong>Wegovy 與 Ozempic 醫師熟悉度高，全球製造規模化能力強。</li>
+                        <li class="pt-3 border-t border-gray-100 text-red-600 mt-3">
+                            <strong>⚠️ 投資風險：</strong>面臨價格下降與成長放緩（Q1 排除一次性因素實際售價下降）。
+                        </li>
+                        <li class="text-red-600">
+                            <strong>⚠️ 專利懸崖：</strong>Semaglutide 中國專利於 2026 年 3 月到期，仿製藥預期 2027 年 Q2 出現。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 財務與市場數據 (Chart.js) -->
+        <section id="data-charts" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">2026 Q1 重點藥物營收表現</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-6">Eli Lilly 憑藉 Mounjaro 與 Zepbound 的高爆發力撐起龐大估值；Novo 的口服 Wegovy 在美國初期亦展現需求（Q1 營收達 22.56 億丹麥克朗，約合 3.2 億美元）。</p>
+                <div class="relative w-full aspect-video md:h-96">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 藥物佈局與互動表格 -->
+        <section id="drug-table" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">重點 GLP-1 藥物競爭板塊</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                
+                <div class="mb-4 flex justify-between items-center flex-wrap gap-4">
+                    <p class="text-stone-600">檢視主要競爭藥物的劑型與市場進度，支援即時關鍵字篩選。</p>
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="搜尋藥廠、藥物或市場..." class="pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 w-full sm:w-64 transition-all">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full text-left text-sm text-stone-600 whitespace-nowrap">
+                        <thead class="bg-stone-100 text-stone-800 sticky top-0 font-bold uppercase text-xs">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 border-b">藥廠 (Company)</th>
+                                <th scope="col" class="px-6 py-4 border-b">藥物名稱 (Drug)</th>
+                                <th scope="col" class="px-6 py-4 border-b">劑型 (Type)</th>
+                                <th scope="col" class="px-6 py-4 border-b">進度與區域</th>
+                                <th scope="col" class="px-6 py-4 border-b">重點說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="divide-y divide-stone-200">
+                            <!-- 內容將由 JavaScript 動態渲染 -->
+                        </tbody>
+                    </table>
+                    <div id="no-results" class="hidden p-8 text-center text-stone-500">
+                        找不到符合的資料，請嘗試其他關鍵字。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 投資策略 -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略與核心追蹤指標</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-sky-50 border border-sky-100 rounded-lg p-5">
+                    <div class="text-sky-600 text-3xl font-black mb-2">01</div>
+                    <h4 class="font-bold text-stone-800 text-lg mb-2">中國核准與推進速度</h4>
+                    <p class="text-stone-600 text-sm">Lilly 的 orforglipron 與 Novo 的口服 Wegovy 誰先取得核准、建立醫師認知，將決定未來幾年市佔率基期。</p>
+                </div>
+                <div class="bg-sky-50 border border-sky-100 rounded-lg p-5">
+                    <div class="text-sky-600 text-3xl font-black mb-2">02</div>
+                    <h4 class="font-bold text-stone-800 text-lg mb-2">中美終端定價與利潤</h4>
+                    <p class="text-stone-600 text-sm">若中國本土藥（如 Innovent）與仿製藥迅速拉低價格，或美國保險施壓，將衝擊全球 GLP-1 長期獲利預估。</p>
+                </div>
+                <div class="bg-sky-50 border border-sky-100 rounded-lg p-5">
+                    <div class="text-sky-600 text-3xl font-black mb-2">03</div>
+                    <h4 class="font-bold text-stone-800 text-lg mb-2">口服藥的市場蠶食效應</h4>
+                    <p class="text-stone-600 text-sm">需觀察口服藥是「吸引不敢打針的新客」還是「讓高價注射用戶轉用低價口服」，後者將損害整體營收與毛利。</p>
+                </div>
+            </div>
+
+            <div class="bg-stone-800 text-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold mb-4 text-sky-400">總結操作建議</h3>
+                <div class="space-y-4 text-stone-300">
+                    <p><strong>對於 Eli Lilly：</strong>基本面依舊是醫療股最強，但目前 1.01 兆市值與 40 倍本益比已反映高度期待。<strong>不建議因「中國市場大」等單一利多短線追高。</strong>適合列為核心觀察名單，等待政策或市場修正帶來的合理買點。</p>
+                    <p><strong>對於 Novo Nordisk：</strong>目前壓力遠大於 Lilly。中國戰略是其能否在低價競爭中維持規模的壓力測試。專利到期與實際售價下滑為硬傷，市場估值趨向保守，需觀察其口服 Wegovy 放大產能的防禦成效。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-減重藥戰：Novo與Eli Lilly。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中減重藥市場競爭相關公開資料 (2026年06月16日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. 手機版選單切換
+            const mobileMenuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機版連結後自動收起選單
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 2. 導航列 Active State 偵測 (Intersection Observer)
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px', // 調整觸發範圍
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 3. 互動資料表格邏輯
+            const productData = [
+                { company: "Eli Lilly", drug: "Mounjaro", type: "注射", status: "美國/全球 (已上市)", note: "Q1 全球營收達 87 億美元 (+125%)" },
+                { company: "Eli Lilly", drug: "Zepbound", type: "注射", status: "美國/全球 (已上市)", note: "Q1 美國營收達 41 億美元 (+79%)" },
+                { company: "Eli Lilly", drug: "Foundayo (orforglipron)", type: "口服", status: "美國FDA核准 / 中國遞件", note: "在中國投資 30 億美元建廠，擴充供應鏈" },
+                { company: "Novo Nordisk", drug: "Wegovy / Ozempic", type: "注射", status: "全球市佔領先", note: "專利面臨挑戰(2026/2027)，中國面臨降價壓力" },
+                { company: "Novo Nordisk", drug: "Wegovy (tablet/pill)", type: "口服", status: "美、英核准 / 中國即將申請", note: "Q1 初步銷售 22.56 億丹麥克朗" },
+                { company: "Innovent (信達)", drug: "Xinermei (mazdutide)", type: "注射", status: "中國推進中", note: "本土強敵，熟知中國私立醫院與電商通路" },
+                { company: "Pfizer", drug: "Xianweiying", type: "體重管理", status: "中國獲准", note: "打破雙雄壟斷，加劇區域市場競爭" }
+            ];
+
+            const tableBody = document.getElementById('table-body');
+            const searchInput = document.getElementById('search-input');
+            const noResults = document.getElementById('no-results');
+
+            // 渲染表格函式
+            const renderTable = (data) => {
+                if (data.length === 0) {
+                    tableBody.innerHTML = '';
+                    noResults.classList.remove('hidden');
+                    return;
+                }
+                noResults.classList.add('hidden');
+                tableBody.innerHTML = data.map(row => `
+                    <tr class="hover:bg-sky-50 transition-colors duration-150">
+                        <td class="px-6 py-4 font-medium text-stone-800">${row.company}</td>
+                        <td class="px-6 py-4 text-sky-700 font-semibold">${row.drug}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 text-xs rounded-full ${row.type === '口服' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800'}">
+                                ${row.type}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">${row.status}</td>
+                        <td class="px-6 py-4 text-sm">${row.note}</td>
+                    </tr>
+                `).join('');
+            };
+
+            // 初始渲染
+            renderTable(productData);
+
+            // 搜尋過濾事件
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => {
+                    return Object.values(item).some(val => 
+                        String(val).toLowerCase().includes(searchTerm)
+                    );
+                });
+                renderTable(filteredData);
+            });
+
+            // 4. 動態圖表 (Chart.js)
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            // 由於文件主要強調 Lilly 具體的 Q1 美元營收，以此建立圖表
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mounjaro (Lilly)', 'Zepbound (Lilly)', 'Wegovy Pill (Novo估算)'],
+                    datasets: [{
+                        label: '2026 Q1 營收 (億美元)',
+                        data: [87, 41, 3.25], // 22.56億丹麥克朗概估約3.2億美元
+                        backgroundColor: [
+                            'rgba(2, 132, 199, 0.8)', // sky-600
+                            'rgba(56, 189, 248, 0.8)', // sky-400
+                            'rgba(168, 162, 158, 0.8)' // stone-400
+                        ],
+                        borderColor: [
+                            'rgb(2, 132, 199)',
+                            'rgb(56, 189, 248)',
+                            'rgb(168, 162, 158)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { font: { family: 'sans-serif' } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + ' 億';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                            title: {
+                                display: true,
+                                text: '營收 (億美元)'
+                            }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
