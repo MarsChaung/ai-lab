@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/6/15~6/19)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles for active nav link */
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        /* Hide scrollbar for table container but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- Navigation (Sticky) -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-xl font-bold text-sky-700 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        美股市場週報
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link inactive-nav-link h-16 inline-flex items-center px-1 pt-1 text-sm">市場概況</a>
+                    <a href="#charts" class="nav-link inactive-nav-link h-16 inline-flex items-center px-1 pt-1 text-sm">數據圖表</a>
+                    <a href="#events" class="nav-link inactive-nav-link h-16 inline-flex items-center px-1 pt-1 text-sm">本週十大事件</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link h-16 inline-flex items-center px-1 pt-1 text-sm">投資策略結論</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 mobile-link">市場概況</a>
+                <a href="#charts" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 mobile-link">數據圖表</a>
+                <a href="#events" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 mobile-link">本週十大事件</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50 mobile-link">投資策略結論</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="bg-sky-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">美股投資週報｜油價降溫帶動科技反彈，但利率與 AI 資本壓力沒有消失</h1>
+            <p class="text-sky-200 text-lg flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                資料區間：2026年06月15日~06月19日
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- Section 1: 市場概況 -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">總體經濟與市場概況</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- 指數卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 transform transition duration-300 hover:-translate-y-1">
+                    <h3 class="text-stone-500 text-sm font-semibold uppercase tracking-wider mb-2">標普500指數 (S&P 500)</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-3xl font-bold text-stone-800">+0.93%</span>
+                        <span class="text-sky-500 flex items-center text-sm font-medium">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                            本週上漲
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-teal-500 transform transition duration-300 hover:-translate-y-1">
+                    <h3 class="text-stone-500 text-sm font-semibold uppercase tracking-wider mb-2">那斯達克指數 (Nasdaq)</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-3xl font-bold text-stone-800">+2.43%</span>
+                        <span class="text-teal-500 flex items-center text-sm font-medium">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                            領漲指標
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500 transform transition duration-300 hover:-translate-y-1">
+                    <h3 class="text-stone-500 text-sm font-semibold uppercase tracking-wider mb-2">道瓊指數 (Dow Jones)</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-3xl font-bold text-stone-800">+0.71%</span>
+                        <span class="text-blue-500 flex items-center text-sm font-medium">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                            穩健上揚
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 lg:p-8">
+                <p class="text-stone-700 leading-relaxed mb-4 text-lg">
+                    市場表面上重回科技股領漲，但背後其實是<strong>油價回落</strong>、<strong>地緣政治風險暫時降溫</strong>，以及投資人重新追逐 AI 題材。聯準會偏保守的利率訊號則提醒市場，這並不是毫無風險的全面牛市。
+                </p>
+                <div class="bg-stone-50 p-4 rounded-md border border-stone-200 mt-6">
+                    <h4 class="font-bold text-stone-800 mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        聯準會動態與總經數據
+                    </h4>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2">
+                        <li><strong>利率維持不變：</strong> 維持在 3.5% - 3.75% 區間。</li>
+                        <li><strong>經濟預測下修：</strong> 2026年實質經濟成長預估由 2.4% 下修至 2.2%，但上調通膨預測。</li>
+                        <li><strong>消費力道尚存：</strong> 美國五月零售銷售月增 0.9%、年增 6.9%。</li>
+                    </ul>
+                    <p class="mt-4 text-sm text-stone-500 italic">投資人環境定調：「成長尚可、通膨仍黏、利率不易快速下降」。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 數據圖表 -->
+        <section id="charts" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">重點數據視覺化</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Index Performance -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 text-center">本週美股三大指數表現</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="indexChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: AI Capex -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 text-center">美國大型科技公司 AI 相關支出預估</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="capexChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-500 mt-2">單位：十億美元 (來源：Reuters 預估)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 本週十大事件 (Interactive Table) -->
+        <section id="events" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">本週市場焦點追蹤</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Search Bar -->
+                <div class="mb-6 relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <input type="text" id="searchInput" class="block w-full pl-10 pr-3 py-3 border border-stone-300 rounded-md leading-5 bg-stone-50 placeholder-stone-500 focus:outline-none focus:placeholder-stone-400 focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm transition duration-150 ease-in-out" placeholder="搜尋事件、公司名稱、產業或影響程度...">
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100 sticky top-0 z-10 shadow-sm">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-stone-600 uppercase tracking-wider w-1/4">焦點事件</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-stone-600 uppercase tracking-wider w-1/6">產業 / 公司</th>
+                                <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-stone-600 uppercase tracking-wider w-1/6">投資人影響</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-stone-600 uppercase tracking-wider w-5/12">分析與摘要</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventsTableBody" class="bg-white divide-y divide-stone-200 text-sm">
+                            <!-- Rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Empty State -->
+                <div id="emptyState" class="hidden text-center py-8 text-stone-500">
+                    找不到符合條件的資料，請嘗試其他關鍵字。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 投資策略結論 -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">投資策略結論</h2>
+            
+            <div class="bg-sky-50 rounded-lg shadow-md p-6 lg:p-8 mb-8">
+                <p class="text-xl font-medium text-sky-900 mb-4">核心訊號：市場重新買進科技股，不代表市場風險已經消失。</p>
+                <p class="text-stone-700 mb-6">油價回落帶來短期利多，但聯準會仍對通膨保持警戒；AI 支出仍快速擴張，但企業與投資人已開始追問「這些錢何時能賺回來」。一般投資人現階段不應全面追逐漲最多的 AI 股票，而是優先持有具備以下三項條件的公司：</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-lg shadow border border-sky-100">
+                        <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-stone-800 mb-2">穩定現金流</h4>
+                        <p class="text-sm text-stone-600">核心產品或服務已經產生穩定的自由現金流，不需過度依賴外部融資。</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow border border-sky-100">
+                        <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-stone-800 mb-2">清晰的商業用途</h4>
+                        <p class="text-sm text-stone-600">AI 投資必須能明確轉化為營收增長或成本節約，而非僅依賴市場題材炒作。</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow border border-sky-100">
+                        <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-stone-800 mb-2">穩健資產負債表</h4>
+                        <p class="text-sm text-stone-600">面對利率與油價波動時，資產負債表足以抵抗外部衝擊，降低財務風險。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-800">
+                <h3 class="font-bold text-stone-800 mb-3 text-lg">未來持續追蹤主線</h3>
+                <ul class="space-y-2 text-stone-700 list-disc list-inside">
+                    <li>聯準會對通膨與利率的態度變化。</li>
+                    <li>油價走勢與中東局勢是否再度惡化。</li>
+                    <li>AI 資本支出能否順利轉為實際企業收入。</li>
+                    <li><strong>重點事件後續：</strong>Apple-Intel 合作進展、Tesla 歐洲 FSD 審查、Eli Lilly 於中國市場的競爭態勢。</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/6/15~6/19)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股投資週報相關公開資料 (2026年06月21日)。</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Navigation & Mobile Menu Logic ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const menuIcon = document.getElementById('menu-icon');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+            // Change icon between hamburger and close (X)
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            } else {
+                menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu); // Close menu on link click
+        });
+
+        // --- 2. Active Link State via Intersection Observer ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav .nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // Trigger slightly before it hits the top
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active from all
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    });
+                    
+                    // Add active to current
+                    const activeId = entry.target.id;
+                    const activeLink = document.querySelector(`nav a[href="#${activeId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('inactive-nav-link');
+                        activeLink.classList.add('active-nav-link');
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        sections.forEach(section => observer.observe(section));
+
+        // --- 3. Interactive Data Table Logic ---
+        // Data source extracted from document
+        const reportData = [
+            {
+                event: "油價回落",
+                company: "能源 / 科技概況",
+                impact: "高",
+                summary: "美伊傳出結束衝突初步安排，油價大跌。有利壓低通膨與企業運輸成本，科技與半導體股明顯反彈。這暫時緩解風險，不代表問題完全結束。"
+            },
+            {
+                event: "聯準會維持利率不變",
+                company: "總體經濟",
+                impact: "高",
+                summary: "上調通膨預估與年底利率中位數。企業與高估值科技股不能單純依賴降息推高股價，需檢視現金流與發債需求。"
+            },
+            {
+                event: "Nvidia 發行250億美元公司債",
+                company: "半導體 / Nvidia",
+                impact: "高",
+                summary: "2021年來首次大型美元債發行，認購需求達850億美元。顯示AI產業競爭進入「資金戰」，不僅賣晶片，更考驗籌資與擴產成本。"
+            },
+            {
+                event: "AI 大資本支出持續擴大",
+                company: "大型科技公司",
+                impact: "高",
+                summary: "預估美國大型科技公司2026年AI支出超過7千億美元（遠高於2025年約4千億）。市場開始追問回報速度與轉化為收入的能力。"
+            },
+            {
+                event: "Apple 與 Intel 合作傳聞",
+                company: "半導體供應鏈",
+                impact: "中高",
+                summary: "傳將於美國進行晶片設計與製造，帶動Intel股價。需視為長期選擇權，待正式合約與產能規模確認。"
+            },
+            {
+                event: "Tesla 歐洲取得 FSD 案例",
+                company: "汽車 / Tesla",
+                impact: "中高",
+                summary: "荷蘭約4萬輛Tesla使用「全自動輔助駕駛監督版」，無重大事故。仍需駕駛監督，估值合理性取決於推廣至更多國家與收入模式。"
+            },
+            {
+                event: "Google 人才流向 Anthropic",
+                company: "AI 新創 / Alphabet",
+                impact: "中",
+                summary: "DeepMind 資深研究員 John Jumper 離職加入 Anthropic。AI 競爭不僅在 GPU 數量，人才留任與研究成果商品化同等重要。"
+            },
+            {
+                event: "Accenture 財報與 AI 商業化",
+                company: "軟體服務 / IT顧問",
+                impact: "高",
+                summary: "企業願意買 AI，但需求集中少數專案，不願全面擴張 IT 預算。對軟體服務公司而言，AI 不一定立刻帶來全面營收爆發。"
+            },
+            {
+                event: "Kroger 營收表現",
+                company: "零售 / 消費",
+                impact: "中高",
+                summary: "營收優於預期但獲利受壓，消費者精打細算偏好促銷品。零售股需關注毛利率與庫存管理，不僅看營收成長。"
+            },
+            {
+                event: "Eli Lilly 面臨中國市場競爭",
+                company: "醫療保健",
+                impact: "中高",
+                summary: "Novo Nordisk 擬為口服 Wegovy 申請中國核准，挑戰 Eli Lilly。中國市場需求龐大，但專利、仿製藥與價格競爭壓力升高。"
+            },
+            {
+                event: "Fiserv 與 Truist 管理層變動",
+                company: "金融業",
+                impact: "中",
+                summary: "Fiserv 原執行長轉任 Truist。面臨執行力與策略考驗，中長期報酬取決於管理團隊控制成本與風險能力。"
+            }
+        ];
+
+        const tableBody = document.getElementById('eventsTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const emptyState = document.getElementById('emptyState');
+
+        // Function to render table
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                emptyState.classList.remove('hidden');
+                tableBody.parentElement.classList.add('hidden');
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            tableBody.parentElement.classList.remove('hidden');
+
+            data.forEach((item, index) => {
+                // Determine styling for impact level
+                let impactColor = 'bg-stone-100 text-stone-800';
+                if (item.impact === '高') impactColor = 'bg-red-100 text-red-800';
+                if (item.impact === '中高') impactColor = 'bg-orange-100 text-orange-800';
+                if (item.impact === '中') impactColor = 'bg-yellow-100 text-yellow-800';
+
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white hover:bg-sky-50 transition-colors' : 'bg-stone-50 hover:bg-sky-50 transition-colors';
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-sky-700">${item.event}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.company}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${impactColor}">
+                            ${item.impact}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-stone-600 leading-relaxed">${item.summary}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initial render
+        renderTable(reportData);
+
+        // Search logic
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = reportData.filter(item => {
+                return (
+                    item.event.toLowerCase().includes(searchTerm) ||
+                    item.company.toLowerCase().includes(searchTerm) ||
+                    item.impact.toLowerCase().includes(searchTerm) ||
+                    item.summary.toLowerCase().includes(searchTerm)
+                );
+            });
+            renderTable(filteredData);
+        });
+
+        // --- 4. Chart.js Initialization ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup default styling for Chart.js to match Tailwind font
+            Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif';
+            Chart.defaults.color = '#44403c'; // Tailwind stone-700
+
+            // Chart 1: Market Index Performance (Bar)
+            const ctxIndex = document.getElementById('indexChart').getContext('2d');
+            new Chart(ctxIndex, {
+                type: 'bar',
+                data: {
+                    labels: ['S&P 500', 'Nasdaq', 'Dow Jones'],
+                    datasets: [{
+                        label: '本週漲幅 (%)',
+                        data: [0.93, 2.43, 0.71],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.8)', // sky-500
+                            'rgba(20, 184, 166, 0.8)', // teal-500
+                            'rgba(59, 130, 246, 0.8)'  // blue-500
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(20, 184, 166)',
+                            'rgb(59, 130, 246)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e7e5e4', borderDash: [5, 5] } // stone-200
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: AI Capital Expenditure (Bar)
+            const ctxCapex = document.getElementById('capexChart').getContext('2d');
+            new Chart(ctxCapex, {
+                type: 'bar',
+                data: {
+                    labels: ['2025年預估', '2026年預估'],
+                    datasets: [{
+                        label: 'AI 相關資本支出 (十億美元)',
+                        data: [400, 700], // Extracted from "2025年的約四千億...2026年可能超過七千億"
+                        backgroundColor: [
+                            'rgba(168, 162, 158, 0.7)', // stone-400
+                            'rgba(3, 105, 161, 0.8)'  // sky-700
+                        ],
+                        borderWidth: 0,
+                        borderRadius: 4,
+                        barThickness: 60
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '金額 (十億美元)' },
+                            grid: { color: '#e7e5e4', borderDash: [5, 5] }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
