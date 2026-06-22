@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美國零售業夏季折扣戰與趨勢分析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自訂導航列啟用與未啟用狀態的過渡效果 */
+        .nav-link {
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .active-nav-link {
+            color: #0284c7; /* Tailwind sky-600 */
+            border-bottom: 2px solid #0284c7;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind text-stone-700 */
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased pt-16">
+
+    <!-- Sticky Navigation Bar -->
+    <header class="fixed top-0 w-full bg-white/95 backdrop-blur shadow-md z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-extrabold tracking-tight text-sky-700">美國零售業夏季促銷分析</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8" id="desktop-menu">
+                    <a href="#overview" class="nav-link active-nav-link py-2 text-sm">報告摘要</a>
+                    <a href="#macro-data" class="nav-link inactive-nav-link py-2 text-sm">總經數據</a>
+                    <a href="#retailers" class="nav-link inactive-nav-link py-2 text-sm">零售商策略</a>
+                    <a href="#strategy-table" class="nav-link inactive-nav-link py-2 text-sm">活動比較</a>
+                    <a href="#investment" class="nav-link inactive-nav-link py-2 text-sm">投資啟示</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+                <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-sky-600 bg-sky-50">報告摘要</a>
+                <a href="#macro-data" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">總經數據</a>
+                <a href="#retailers" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">零售商策略</a>
+                <a href="#strategy-table" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">活動比較</a>
+                <a href="#investment" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資啟示</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- 1. 報告摘要 (Overview Section) -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">夏季折扣大戰：消費力壓力測試</h2>
+            <div class="bg-white rounded-xl shadow-lg p-6 lg:p-8 border-l-4 border-sky-500">
+                <p class="text-lg leading-relaxed text-stone-700 mb-4">
+                    美國零售業今年夏天展開一場不同於往年的促銷大戰。Amazon、Walmart 與 Target 紛紛在六月祭出年度促銷活動。表面上是電商平台與實體零售的競爭，但從投資角度來看，它更像是一次對<strong>美國家庭購買力的壓力測試</strong>。
+                </p>
+                <p class="text-lg leading-relaxed text-stone-700 mb-4">
+                    這場大戰要回答的核心問題：<span class="font-bold text-rose-600">美國人把錢花在哪裡？是否仍願意購買高單價商品？零售商能否在降價搶客的同時守住獲利？</span>
+                </p>
+                <div class="bg-stone-100 p-4 rounded-lg flex items-start gap-3 mt-6">
+                    <svg class="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <p class="text-stone-800 font-medium">目前解答：美國消費並未熄火，但消費者明顯變得更精打細算。零售商可靠折扣帶動交易量，卻不一定能提高整體獲利。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 總經數據 (Macro Data & Chart Section) -->
+        <section id="macro-data" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">消費數據與物價壓力分析</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                <!-- Text Data -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center gap-2">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full inline-block"></span>
+                            表面數據：消費仍具韌性
+                        </h3>
+                        <p class="text-stone-600">美國五月零售銷售月增 <strong>0.9%</strong>，核心零售銷售也呈成長，包含網路零售、家具、服飾與個人用品，顯示家庭支出未全面轉弱。</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center gap-2">
+                            <span class="w-2 h-6 bg-rose-500 rounded-full inline-block"></span>
+                            潛在隱憂：通膨侵蝕購買力
+                        </h3>
+                        <p class="text-stone-600">零售銷售金額並未扣除物價上漲因素。當五月美國通膨年增 <strong>4.2%</strong>、能源價格大漲 <strong>23.5%</strong> 時，家庭總支出增加不等於可支配所得增加。</p>
+                        <ul class="mt-4 space-y-2 text-sm text-stone-500 list-disc list-inside">
+                            <li>消費者轉向購買日用品與食品等必需品。</li>
+                            <li>對高單價商品（電子、家具、旅遊）更挑剔，傾向等待折扣。</li>
+                            <li>六月消費者信心回升，但仍低於去年同期，顯示對生活成本的不安感。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-center text-lg font-bold text-stone-700 mb-4">美國五月關鍵經濟指標 (%)</h3>
+                    <!-- Chart.js Canvas -->
+                    <div class="relative h-72 w-full">
+                        <canvas id="ecoChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-400 mt-4">註：能源價格大漲對家庭非必要消費預算產生排擠效應。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 零售商策略 (Retailers Strategies) -->
+        <section id="retailers" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四大零售巨頭戰略解析</h2>
+            
+            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <!-- Amazon -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow p-6 flex flex-col h-full border-t-4 border-amber-400">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-amber-100 p-3 rounded-full text-amber-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">Amazon</h3>
+                    </div>
+                    <p class="font-semibold text-stone-700 mb-2">Prime Day 的質變</p>
+                    <p class="text-stone-600 text-sm flex-grow mb-4">
+                        將重點延伸到雜貨、家庭用品與返校商品。目標是把 Prime 從「特價時才用的服務」轉為「日常生活採購工具」，利用高頻率購買增加會員黏著度與廣告曝光。並結合 Alexa 提升下單轉換率。
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-stone-100">
+                        <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">優勢：會員生態與雲端支撐獲利</span>
+                    </div>
+                </div>
+
+                <!-- Walmart -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow p-6 flex flex-col h-full border-t-4 border-blue-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full text-blue-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">Walmart</h3>
+                    </div>
+                    <p class="font-semibold text-stone-700 mb-2">低價搶市，廣告守利</p>
+                    <p class="text-stone-600 text-sm flex-grow mb-4">
+                        結合全美門市、雜貨供應鏈與物流，最能承受長時間價格戰。當前核心戰略是將龐大的「低價流量」轉化成高毛利的「零售媒體平台」收入（整合 Walmart Connect 與廣告業務）。
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-stone-100">
+                        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">優勢：實體優勢轉化為平台收入</span>
+                    </div>
+                </div>
+
+                <!-- Target -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow p-6 flex flex-col h-full border-t-4 border-red-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-red-100 p-3 rounded-full text-red-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">Target</h3>
+                    </div>
+                    <p class="font-semibold text-stone-700 mb-2">翻轉成長的考驗</p>
+                    <p class="text-stone-600 text-sm flex-grow mb-4">
+                        高度依賴服飾、美妝與非必要消費，易受景氣影響。嘗試用會員制與商品風格拉回家庭客群。目前最需證明：流量回歸後，消費者是否願意持續購買高毛利的非必要商品，而非僅為了折扣而來。
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-stone-100">
+                        <span class="text-xs font-bold text-red-600 bg-red-50 px-2 py-1 rounded">挑戰：維持高毛利商品轉換率</span>
+                    </div>
+                </div>
+
+                <!-- Costco -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow p-6 flex flex-col h-full border-t-4 border-sky-800">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-sky-100 p-3 rounded-full text-sky-800">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold">Costco</h3>
+                    </div>
+                    <p class="font-semibold text-stone-700 mb-2">通膨下的防禦護城河</p>
+                    <p class="text-stone-600 text-sm flex-grow mb-4">
+                        雖未直接加入夏季促銷大戰，但五月同店銷售強勁。證明消費者並非無購買力，而是將有限預算集中於價格可信賴、會員價值清楚的平台。必需品定位優勢顯著。
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-stone-100">
+                        <span class="text-xs font-bold text-sky-800 bg-sky-50 px-2 py-1 rounded">優勢：低價信任與高周轉率</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 互動資料表格 (Interactive Table) -->
+        <section id="strategy-table" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">促銷活動與策略比較表</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <p class="text-stone-600 text-sm">輸入關鍵字（例如：廣告、雜貨、Amazon）進行即時篩選：</p>
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="搜尋表格內容..." 
+                               class="w-full sm:w-64 pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition-shadow">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 text-stone-700 border-b-2 border-stone-300 sticky top-0">
+                            <tr>
+                                <th class="p-4 font-semibold w-1/6">零售商</th>
+                                <th class="p-4 font-semibold w-1/4">活動名稱與檔期</th>
+                                <th class="p-4 font-semibold w-1/4">主推商品類別</th>
+                                <th class="p-4 font-semibold w-1/3">核心戰略目標</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="text-stone-600 divide-y divide-stone-200">
+                            <!-- Rows injected by JS -->
+                        </tbody>
+                    </table>
+                    <!-- Empty state -->
+                    <div id="emptyState" class="hidden text-center py-8 text-stone-500">
+                        找不到符合的篩選結果。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 投資啟示 (Investment Strategies) -->
+        <section id="investment" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">夏季促銷戰的投資觀察重點</h2>
+            <p class="text-stone-600 mb-6 text-lg">美國消費仍在，但消費者變得更重視價格並向大型零售平台集中。投資人應關注以下四個面向：</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Point 1 -->
+                <div class="bg-sky-50 rounded-lg p-6 border border-sky-100">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-sky-600 text-white font-bold">1</span>
+                        <h3 class="text-lg font-bold text-sky-900">檢視銷售組合 (Sales Mix)</h3>
+                    </div>
+                    <p class="text-stone-700">不能只看成交總額。若促銷帶動的僅是食品與返校必需品，代表消費力保守；若電子、家居等高單價商品同步走強，才代表自由支配消費回升。</p>
+                </div>
+
+                <!-- Point 2 -->
+                <div class="bg-emerald-50 rounded-lg p-6 border border-emerald-100">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-600 text-white font-bold">2</span>
+                        <h3 class="text-lg font-bold text-emerald-900">交易筆數 vs. 客單價</h3>
+                    </div>
+                    <p class="text-stone-700">交易筆數增加代表購買意願仍在；客單價若下降，代表消費者只買折扣商品。最理想情況是雙雙成長，但在通膨壓力下難度極高。</p>
+                </div>
+
+                <!-- Point 3 -->
+                <div class="bg-amber-50 rounded-lg p-6 border border-amber-100">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-amber-600 text-white font-bold">3</span>
+                        <h3 class="text-lg font-bold text-amber-900">平台衍生收入 (Platform Revenue)</h3>
+                    </div>
+                    <p class="text-stone-700">觀察會員費、廣告與第三方市集收入能否抵銷促銷成本。能在價格戰勝出的公司，是能將低價流量轉化為長期服務收入的企業。</p>
+                </div>
+
+                <!-- Point 4 -->
+                <div class="bg-rose-50 rounded-lg p-6 border border-rose-100">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-rose-600 text-white font-bold">4</span>
+                        <h3 class="text-lg font-bold text-rose-900">毛利與營運成本</h3>
+                    </div>
+                    <p class="text-stone-700">為了搶市占而大幅降價雖能換取短期營收，但若導致毛利率下降、庫存激增或快速配送成本過高，股價未必會給予正面評價。</p>
+                </div>
+            </div>
+            
+            <!-- Summary Box -->
+            <div class="mt-8 bg-stone-800 text-white rounded-lg p-6 text-center shadow-xl">
+                <h3 class="text-xl font-bold mb-2">結論與投資策略</h3>
+                <p class="text-stone-300">
+                    真正值得投資的零售公司，不是促銷聲量最大者，而是能在低價競爭中持續增加 <span class="text-sky-400 font-bold">會員</span>、<span class="text-sky-400 font-bold">廣告</span>、<span class="text-sky-400 font-bold">物流效率</span> 與 <span class="text-sky-400 font-bold">現金流</span> 的平台型公司。偏向擁有「價值流量」與「平台獲利」雙重優勢的標的（如 Walmart 或 Amazon）。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美國零售業夏季折扣戰與趨勢分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美國零售業相關公開資料 (2026年6月22日)。</p>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Menu Toggle Logic
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const menuIconPath = document.getElementById('menu-icon-path');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            const toggleMenu = () => {
+                menu.classList.toggle('hidden');
+                if (menu.classList.contains('hidden')) {
+                    menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Hamburger Icon
+                } else {
+                    menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Close (X) Icon
+                }
+            };
+
+            btn.addEventListener('click', toggleMenu);
+            mobileNavLinks.forEach(link => link.addEventListener('click', () => {
+                if(!menu.classList.contains('hidden')) toggleMenu();
+            }));
+
+            // 2. Scroll Spy (Intersection Observer) for Navigation Highlighting
+            const sections = document.querySelectorAll('section');
+            const desktopNavLinks = document.querySelectorAll('#desktop-menu a.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Adjust to trigger active state nicely
+                threshold: 0
+            };
+
+            const observerCallback = (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        // Update Desktop Links
+                        desktopNavLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+
+                        // Update Mobile Links UI
+                        mobileNavLinks.forEach(link => {
+                            link.classList.remove('text-sky-600', 'bg-sky-50');
+                            link.classList.add('text-stone-700');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('text-sky-600', 'bg-sky-50');
+                                link.classList.remove('text-stone-700');
+                            }
+                        });
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            sections.forEach(section => observer.observe(section));
+
+
+            // 3. Chart.js Visualization
+            const ctx = document.getElementById('ecoChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['零售銷售月增 (%)', '整體通膨年增 (%)', '能源價格年增 (%)'],
+                    datasets: [{
+                        label: '五月數據表現',
+                        data: [0.9, 4.2, 23.5],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)', // Sky 500
+                            'rgba(244, 63, 94, 0.7)',  // Rose 500
+                            'rgba(245, 158, 11, 0.7)'  // Amber 500
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(244, 63, 94)',
+                            'rgb(245, 158, 11)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e7e5e4', // stone-200
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+
+            // 4. Interactive Data Table Logic
+            const productData = [
+                {
+                    retailer: "Amazon",
+                    campaign: "Prime Day (6/23 - 6/26)",
+                    focus: "雜貨、家庭用品、生鮮、返校商品",
+                    strategy: "將Prime轉變為日常採購工具，藉此增加會員黏著度，推動平台廣告曝光與重複購買率。"
+                },
+                {
+                    retailer: "Walmart",
+                    campaign: "Walmart Deals (6/22起 7天)",
+                    focus: "電子、服飾、美妝、家具、返校商品",
+                    strategy: "利用門市取貨與配送優勢承受價格戰，同時整合廣告業務，轉型為高毛利的零售媒體平台。"
+                },
+                {
+                    retailer: "Target",
+                    campaign: "Target Circle Deal Days",
+                    focus: "服飾、美妝、家居、玩具",
+                    strategy: "透過專屬折扣與商品風格重新拉回家庭客群，主要挑戰在於如何在促銷中維持非必要商品毛利。"
+                },
+                {
+                    retailer: "Costco",
+                    campaign: "未直接參戰 (日常平價策略)",
+                    focus: "民生必需品、大包裝商品",
+                    strategy: "以價格可信賴、清楚的會員價值作為護城河，在通膨壓力下承接尋求高性價比的家庭消費轉移。"
+                }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const emptyState = document.getElementById('emptyState');
+
+            const renderTable = (data) => {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    data.forEach((row, index) => {
+                        // Alternate row background for better readability
+                        const bgClass = index % 2 === 0 ? 'bg-white' : 'bg-stone-50';
+                        const tr = document.createElement('tr');
+                        tr.className = `${bgClass} hover:bg-sky-50 transition-colors`;
+                        tr.innerHTML = `
+                            <td class="p-4 font-bold text-stone-800">${row.retailer}</td>
+                            <td class="p-4">${row.campaign}</td>
+                            <td class="p-4 text-sm">${row.focus}</td>
+                            <td class="p-4 text-sm">${row.strategy}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                }
+            };
+
+            // Initial render
+            renderTable(productData);
+
+            // Filter functionality
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => {
+                    return item.retailer.toLowerCase().includes(searchTerm) ||
+                           item.campaign.toLowerCase().includes(searchTerm) ||
+                           item.focus.toLowerCase().includes(searchTerm) ||
+                           item.strategy.toLowerCase().includes(searchTerm);
+                });
+                renderTable(filteredData);
+            });
+
+        });
+    </script>
+</body>
+</html>
