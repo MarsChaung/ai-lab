@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI戰場新局：人才與記憶體</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義樣式調整以輔助 Tailwind */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .nav-link { transition: color 0.3s ease; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <!-- 導航列 (Sticky Header) -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / 網站標題 -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-extrabold text-sky-600 tracking-wider">AI戰場新局</span>
+                </div>
+                <!-- 桌面版選單 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2" data-target="overview">產業總覽</a>
+                    <a href="#alphabet" class="nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2" data-target="alphabet">Alphabet 挑戰</a>
+                    <a href="#micron" class="nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2" data-target="micron">Micron 結盟</a>
+                    <a href="#data-analysis" class="nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2" data-target="data-analysis">財報數據分析</a>
+                    <a href="#strategy" class="nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2" data-target="strategy">投資追蹤策略</a>
+                </nav>
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2 rounded-md" data-target="overview">產業總覽</a>
+                <a href="#alphabet" class="block nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2 rounded-md" data-target="alphabet">Alphabet 挑戰</a>
+                <a href="#micron" class="block nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2 rounded-md" data-target="micron">Micron 結盟</a>
+                <a href="#data-analysis" class="block nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2 rounded-md" data-target="data-analysis">財報數據分析</a>
+                <a href="#strategy" class="block nav-link text-stone-600 hover:text-sky-500 font-medium px-3 py-2 rounded-md" data-target="strategy">投資追蹤策略</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-r from-sky-600 to-indigo-700 rounded-xl shadow-2xl p-8 mb-12 text-white">
+            <h1 class="text-4xl font-extrabold mb-4">從 AlphaFold 到 HBM：AI競爭進入「人才與記憶體」雙戰場</h1>
+            <p class="text-lg text-sky-100 leading-relaxed max-w-3xl">
+                過去兩年市場將AI簡化為「誰的模型強、誰的GPU多」。然而近期 Google 頂尖人才出走與 Micron 結盟 Anthropic 兩大事件提醒投資人：下一階段的競爭關鍵，在於留住頂尖研究人才以及穩定取得高階記憶體等基礎設施。
+            </p>
+        </div>
+
+        <!-- Section 1: 產業總覽 -->
+        <section id="overview" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業總覽：AI 競爭焦點的轉移</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold mb-3 text-amber-700">過去的焦點</h3>
+                    <p class="text-stone-600">模型參數大小、運算能力競賽，以及市場對於 NVIDIA GPU 等核心運算晶片的搶購與爭奪。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-emerald-500">
+                    <h3 class="text-xl font-bold mb-3 text-emerald-700">現在與未來的決勝點</h3>
+                    <p class="text-stone-600">組織速度與研究文化，人才留任與技術商業化的能力；以及周邊基礎建設（高頻寬記憶體、儲存系統、電力與冷卻）的支援效率。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Alphabet 挑戰 -->
+        <section id="alphabet" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Alphabet 的挑戰：人才流失與資本回報</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-6">
+                    近期 Google DeepMind 共同創作者、諾貝爾化學獎得主 John Jumper 加入 Anthropic，以及 Gemini 共同負責人 Noam Shazeer 轉投 OpenAI，引發市場對 Alphabet 人才流失的敏感神經。
+                </p>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <!-- 卡片 1 -->
+                    <div class="bg-rose-50 rounded-lg p-5 border border-rose-100">
+                        <div class="font-bold text-rose-800 mb-2">執行風險增加</div>
+                        <p class="text-sm text-stone-600">資金能買晶片與建資料中心，但最難複製的是讓頂尖人員長期留下並將突破轉化為產品。Jumper的離開凸顯了組織文化與商業化速度的挑戰。</p>
+                    </div>
+                    <!-- 卡片 2 -->
+                    <div class="bg-sky-50 rounded-lg p-5 border border-sky-100">
+                        <div class="font-bold text-sky-800 mb-2">雲端業務依然強勁</div>
+                        <p class="text-sm text-stone-600">第一季 Google Cloud 營收達 200 億美元 (年增 63%)，雲端訂單餘額增至 4,620 億美元，顯示企業對 TPU 與雲端服務需求仍在。</p>
+                    </div>
+                    <!-- 卡片 3 -->
+                    <div class="bg-stone-100 rounded-lg p-5 border border-stone-200">
+                        <div class="font-bold text-stone-800 mb-2">龐大的資本支出</div>
+                        <p class="text-sm text-stone-600">全年資本支出預估提高至 1,800~1,900 億美元，並推 850 億美元股權籌資。市場擔憂如此巨大的投資能否順利轉換為現金流與獲利支撐估值。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Micron 結盟 -->
+        <section id="micron" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Micron 的佈局：從零件供應到架構共創</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-6">
+                    與 Alphabet 面臨的挑戰不同，Micron 透過與新銳AI巨頭 Anthropic 的合作，正處於直接受惠資料中心擴張的順風期。雙方合作不只是採購，而是共同分析工作負載並優化架構。
+                </p>
+                
+                <h3 class="text-xl font-bold text-stone-800 mb-4 mt-6">合作的三大戰略價值</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="h-12 w-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-3 font-bold text-xl">1</div>
+                        <h4 class="font-bold mb-2">供應鏈升級</h4>
+                        <p class="text-sm text-stone-600">從「出售零件」升級為「共同設計架構」，提早參與系統設計，提高高附加價值產品比重。</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="h-12 w-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-3 font-bold text-xl">2</div>
+                        <h4 class="font-bold mb-2">需求能見度</h4>
+                        <p class="text-sm text-stone-600">建立在 Anthropic 長期擴張算力的基礎上，穩定 Micron 包含高頻寬記憶體(HBM)等未來產品的需求。</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="h-12 w-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-3 font-bold text-xl">3</div>
+                        <h4 class="font-bold mb-2">自身 AI 應用</h4>
+                        <p class="text-sm text-stone-600">Micron 自身將 Claude 導入工程、製造與企業流程，兼具AI硬體供應商與企業用戶的雙重身份。</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-amber-50 border-l-4 border-amber-400 p-4 rounded text-sm text-stone-700">
+                    <span class="font-bold">投資風險提示：</span> Micron 尚未公布合約金額或採購量，且記憶體具高度循環性。若同業擴產或AI需求放緩，價格仍有回落風險。預期已高，需謹慎追高。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 財報數據分析 (Chart & Table) -->
+        <section id="data-analysis" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務與營運數據追蹤</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 圖表區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">Micron 近期營收與毛利率成長趨勢 (FY2026)</h3>
+                    <div class="relative h-80 w-full">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 重點數據卡片區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4">企業財報亮點</h3>
+                    <ul class="space-y-4">
+                        <li class="bg-stone-50 p-4 rounded-md border border-stone-200">
+                            <span class="text-xs font-bold text-sky-600 uppercase">Alphabet / Q1</span>
+                            <div class="flex justify-between items-center mt-1">
+                                <span class="text-stone-700">Google Cloud 營收</span>
+                                <span class="font-bold text-xl text-stone-800">200 億美元 <span class="text-emerald-500 text-sm">(+63%)</span></span>
+                            </div>
+                        </li>
+                        <li class="bg-stone-50 p-4 rounded-md border border-stone-200">
+                            <span class="text-xs font-bold text-sky-600 uppercase">Alphabet / 全年預估</span>
+                            <div class="flex justify-between items-center mt-1">
+                                <span class="text-stone-700">資本支出預估</span>
+                                <span class="font-bold text-xl text-rose-600">1800~1900 億美元</span>
+                            </div>
+                        </li>
+                        <li class="bg-stone-50 p-4 rounded-md border border-stone-200">
+                            <span class="text-xs font-bold text-indigo-600 uppercase">Micron / FY26 Q2</span>
+                            <div class="flex justify-between items-center mt-1">
+                                <span class="text-stone-700">資料中心營收</span>
+                                <span class="font-bold text-xl text-stone-800">56.9 億美元 <span class="text-emerald-500 text-sm">(+139% QoQ)</span></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 互動式資料表格 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2 sm:mb-0">核心財務數據檢視</h3>
+                    <div class="relative w-full sm:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司、指標或數據..." class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-96 border rounded-lg">
+                    <table class="min-w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0 shadow-sm">
+                            <tr>
+                                <th class="px-6 py-3 font-bold text-stone-700 border-b">公司名稱</th>
+                                <th class="px-6 py-3 font-bold text-stone-700 border-b">營運指標</th>
+                                <th class="px-6 py-3 font-bold text-stone-700 border-b">數據表現</th>
+                                <th class="px-6 py-3 font-bold text-stone-700 border-b">成長率/備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-200">
+                            <!-- 內容由 JavaScript 動態載入 -->
+                        </tbody>
+                    </table>
+                    <div id="noDataMessage" class="hidden text-center py-8 text-stone-500">
+                        找不到符合的數據
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 投資追蹤策略 -->
+        <section id="strategy" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略與後續追蹤</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-6 font-medium">
+                    AI投資主線已不再只是「誰的模型最聰明」，未來勝出的公司必須同時掌握：頂尖人才、演算法、晶片、記憶體、電力、資料中心與企業客戶。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 border-l-4 border-sky-500 bg-sky-50 rounded-r-lg">
+                        <h4 class="font-bold text-sky-800 text-lg mb-2">Alphabet 平台型公司策略</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm">
+                            <li>不因 Jumper 離職全面看空，應持續追蹤人才留任情況。</li>
+                            <li>觀察 Gemini 與 Google Cloud 的企業採用率。</li>
+                            <li>檢視巨額資本支出是否能穩步轉換為雲端收入與自由現金流。</li>
+                        </ul>
+                    </div>
+                    <div class="p-5 border-l-4 border-indigo-500 bg-indigo-50 rounded-r-lg">
+                        <h4 class="font-bold text-indigo-800 text-lg mb-2">Micron 供應鏈公司策略</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm">
+                            <li>不因 Anthropic 合作就立刻追高，留意高景氣是否已反映在股價。</li>
+                            <li>追蹤 6/24 財報的 HBM 需求與毛利率（預估 81%）。</li>
+                            <li>留意記憶體價格循環何時反轉，以及產能擴充造成的風險。</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 pt-6 border-t border-stone-200 text-center">
+                    <h4 class="font-bold text-stone-800 mb-2">🎯 建議每週追蹤清單</h4>
+                    <p class="text-stone-600 text-sm">
+                        Jumper 在 Anthropic 的正式職務發布 | Micron 對合作條款的後續揭露 | Alphabet 的AI人才流動與資產變化
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI戰場新局：人才與記憶體。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Alphabet與Micron相關公開資料 (2026年06月23日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 手機版選單切換
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // 點擊手機版選單連結後自動關閉選單
+            const mobileLinks = menu.querySelectorAll('.nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // 2. Navigation Active 狀態切換 (Intersection Observer)
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.getAttribute('id');
+                        
+                        navLinks.forEach(link => {
+                            // 移除啟用狀態樣式
+                            link.classList.remove('text-sky-600', 'font-bold', 'border-b-2', 'border-sky-500');
+                            link.classList.add('text-stone-600');
+                            
+                            // 加入啟用狀態樣式
+                            if (link.getAttribute('data-target') === targetId) {
+                                link.classList.remove('text-stone-600');
+                                link.classList.add('text-sky-600', 'font-bold', 'border-b-2', 'border-sky-500');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // 3. 動態圖表 (Chart.js)
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Q2 總營收 (實際)', 'Q2 資料中心', 'Q3 總營收 (預估)'],
+                    datasets: [
+                        {
+                            label: '營收金額 (億美元)',
+                            data: [238.6, 56.9, 335.0],
+                            backgroundColor: [
+                                'rgba(14, 165, 233, 0.7)', // sky-500
+                                'rgba(245, 158, 11, 0.7)', // amber-500
+                                'rgba(16, 185, 129, 0.7)'  // emerald-500
+                            ],
+                            borderColor: [
+                                'rgb(14, 165, 233)',
+                                'rgb(245, 158, 11)',
+                                'rgb(16, 185, 129)'
+                            ],
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '億美元' }
+                        }
+                    }
+                }
+            });
+
+            // 4. 互動式資料表格
+            const tableData = [
+                { company: 'Alphabet', metric: 'Google Cloud 第一季營收', value: '200 億美元', note: '年增 63% / 訂單餘額 4620 億美元' },
+                { company: 'Alphabet', metric: 'Google Cloud 第一季營業利益', value: '66 億美元', note: '企業雲端服務需求強勁' },
+                { company: 'Alphabet', metric: '全年資本支出預估', value: '1800~1900 億美元', note: '規模龐大，需關注回收期' },
+                { company: 'Alphabet', metric: '大規模股權籌資方案', value: '約 850 億美元', note: '宣布於六月籌資' },
+                { company: 'Micron', metric: 'FY26 Q2 總營收', value: '238.6 億美元', note: '毛利率高達 74.4%' },
+                { company: 'Micron', metric: 'FY26 Q2 核心資料中心營收', value: '56.9 億美元', note: '季增 139%' },
+                { company: 'Micron', metric: 'FY26 Q3 總營收預估', value: '約 335 億美元', note: '毛利率預估將達 81%' }
+            ];
+
+            const tbody = document.getElementById('dataTableBody');
+            const searchInput = document.getElementById('tableSearch');
+            const noDataMsg = document.getElementById('noDataMessage');
+
+            // 渲染表格函數
+            function renderTable(data) {
+                tbody.innerHTML = '';
+                if (data.length === 0) {
+                    noDataMsg.classList.remove('hidden');
+                } else {
+                    noDataMsg.classList.add('hidden');
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'hover:bg-stone-50 transition-colors';
+                        
+                        // 根據公司標記不同顏色
+                        const companyBadge = row.company === 'Alphabet' 
+                            ? `<span class="px-2 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-bold">${row.company}</span>`
+                            : `<span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold">${row.company}</span>`;
+
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap">${companyBadge}</td>
+                            <td class="px-6 py-4 font-medium text-stone-800">${row.metric}</td>
+                            <td class="px-6 py-4 font-bold text-sky-600">${row.value}</td>
+                            <td class="px-6 py-4 text-sm text-stone-500">${row.note}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            }
+
+            // 初始化載入表格
+            renderTable(tableData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = tableData.filter(item => 
+                    item.company.toLowerCase().includes(keyword) ||
+                    item.metric.toLowerCase().includes(keyword) ||
+                    item.value.toLowerCase().includes(keyword) ||
+                    item.note.toLowerCase().includes(keyword)
+                );
+                renderTable(filteredData);
+            });
+        });
+    </script>
+</body>
+</html>
