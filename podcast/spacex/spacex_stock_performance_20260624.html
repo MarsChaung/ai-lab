@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-SpaceX上市股價與投資分析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Tailwind Config for Custom Colors/Fonts if needed -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        stone: {
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        sky: {
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar for table wrapper */
+        .table-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-scroll::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-stone-900 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-xl font-bold text-white tracking-wide">
+                        <span class="text-sky-500">SpaceX</span> 投資分析
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-item text-sky-400 font-bold hover:text-sky-300 transition-colors duration-200">摘要與數據</a>
+                    <a href="#financials" class="nav-item text-stone-300 hover:text-white transition-colors duration-200">財務圖表</a>
+                    <a href="#data-table" class="nav-item text-stone-300 hover:text-white transition-colors duration-200">營運總表</a>
+                    <a href="#analysis" class="nav-item text-stone-300 hover:text-white transition-colors duration-200">風險與結論</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-stone-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-sky-400 bg-stone-900">摘要與數據</a>
+                <a href="#financials" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">財務圖表</a>
+                <a href="#data-table" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">營運總表</a>
+                <a href="#analysis" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">風險與結論</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Section: Summary & Key Metrics -->
+        <section id="summary" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">股價表現與上市摘要</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                <p class="text-lg leading-relaxed text-gray-700 mb-4">
+                    截至二〇二六年六月二十四日，SpaceX (SPCX) 上市後經歷典型的新股價格發現期。首日掛牌以 135 美元 IPO，募資達 750 億美元創紀錄，首日收盤 160.95 美元。近期因重估 AI 資本支出而回檔，現報 156 美元。市場正重新審視其「現金引擎 Starlink」與「高耗資 xAI」的複合型結構。
+                </p>
+            </div>
+
+            <!-- Key Metrics Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-blue-50 rounded-lg shadow p-6 border border-blue-100 transition-transform transform hover:-translate-y-1">
+                    <h3 class="text-sm font-semibold text-blue-800 uppercase tracking-wider mb-2">IPO 掛牌價與現價</h3>
+                    <p class="text-3xl font-black text-blue-600">$156 <span class="text-sm text-gray-500 font-normal">/股</span></p>
+                    <p class="text-sm text-gray-600 mt-2">較 IPO 價 $135 溢價 ~13%</p>
+                </div>
+                
+                <div class="bg-green-50 rounded-lg shadow p-6 border border-green-100 transition-transform transform hover:-translate-y-1">
+                    <h3 class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-2">Starlink 用戶基數</h3>
+                    <p class="text-3xl font-black text-green-600">1,030萬 <span class="text-sm text-gray-500 font-normal">人</span></p>
+                    <p class="text-sm text-gray-600 mt-2">佔總營收約 60%，9600顆衛星</p>
+                </div>
+
+                <div class="bg-red-50 rounded-lg shadow p-6 border border-red-100 transition-transform transform hover:-translate-y-1">
+                    <h3 class="text-sm font-semibold text-red-800 uppercase tracking-wider mb-2">2026 Q1 AI 部門虧損</h3>
+                    <p class="text-3xl font-black text-red-600">-$24.7億 <span class="text-sm text-gray-500 font-normal">美元</span></p>
+                    <p class="text-sm text-gray-600 mt-2">佔 Q1 資本支出高達 76%</p>
+                </div>
+
+                <div class="bg-yellow-50 rounded-lg shadow p-6 border border-yellow-100 transition-transform transform hover:-translate-y-1">
+                    <h3 class="text-sm font-semibold text-yellow-800 uppercase tracking-wider mb-2">最新發債超額認購</h3>
+                    <p class="text-3xl font-black text-yellow-600">$850億 <span class="text-sm text-gray-500 font-normal">美元</span></p>
+                    <p class="text-sm text-gray-600 mt-2">目標籌資 250億，信評達投資級</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Dynamic Chart -->
+        <section id="financials" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務結構分析 (2026 Q1)</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Text context beside chart -->
+                <div class="lg:col-span-1 bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">兩極化的財務引擎</h3>
+                    <p class="text-gray-600 mb-4">
+                        SpaceX 目前已轉型為複合型巨頭。依據第一季數據，<strong>Starlink</strong> 展現了強大的現金製造能力（營業利益 11.9 億美元），但 <strong>AI 部門 (xAI)</strong> 的重資本支出（虧損 24.7 億美元）嚴重拖累了整體獲利表現，導致公司整體承受 19.4 億美元的營業損失。
+                    </p>
+                    <ul class="list-disc pl-5 text-sm text-gray-500 space-y-2">
+                        <li>AI 部門占整體資本支出達 76%。</li>
+                        <li>2024年（併入xAI前）原為獲利 7.91 億美元。</li>
+                        <li>2025年預估營收成長 33%，但淨損將擴大至 49.4 億美元。</li>
+                    </ul>
+                </div>
+                
+                <!-- Chart Canvas -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <div class="w-full relative h-[350px]">
+                        <canvas id="profitChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Data Table -->
+        <section id="data-table" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">營運與財務數據總覽</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-4 space-y-4 sm:space-y-0">
+                    <p class="text-gray-600">即時篩選報告中提及的關鍵數據指標：</p>
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="搜尋業務、期間或說明..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-sky-500 focus:border-sky-500 w-full sm:w-64">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto table-scroll">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">業務 / 項目</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">期間</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">數據指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">金額 / 數量</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">影響與說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Data populated via JS -->
+                        </tbody>
+                    </table>
+                    <!-- Empty State -->
+                    <div id="emptyState" class="hidden text-center py-8 text-gray-500">
+                        找不到符合條件的資料。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Analysis & Conclusion -->
+        <section id="analysis" class="scroll-mt-20 mb-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">風險評估與中長期投資邏輯</h2>
+            
+            <!-- Cards for qualitative info -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="w-12 h-12 bg-red-100 text-red-500 rounded-full flex items-center justify-center mb-4">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">籌碼與解禁風險</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        上市初期流通股不到總數 5%，導致股價劇烈震盪。受限股將於首份季報後陸續解鎖，最多 20% 將於第二季財報後釋出，未來半年可能面臨內部人變現的賣壓。
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center mb-4">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">治理與決策集權</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Elon Musk 握有約 82% 投票權，普通股東對重大戰略影響有限。公司可能優先追求火星探索或太空 AI 資料中心等長期技術願景，而非短期利潤最大化。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-500 rounded-full flex items-center justify-center mb-4">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">發債雙刃劍</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        雖然 250 億美元發債獲超額認購，證明融資實力且避免了股權稀釋，但大幅舉債將提升未來的利息負擔。若 AI 商業化未如預期，將壓縮未來股東回報。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Conclusion Box -->
+            <div class="bg-stone-800 rounded-lg shadow-lg p-6 md:p-8 text-white">
+                <h3 class="text-2xl font-bold text-sky-400 mb-4">中長期投資追蹤四大指標</h3>
+                <p class="mb-6 text-stone-300">SpaceX 的投資本質是：Starlink 提供穩定現金流，Starship 建立護城河，xAI 則是高風險的未來選擇權。建議將其視為「高波動的衛星型配置」，並緊盯以下指標：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 text-green-400 mr-3">✓</div>
+                        <p class="text-sm text-stone-200"><strong>Starlink 營收與獲利</strong>是否持續穩健擴大，支撐燒錢業務。</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 text-green-400 mr-3">✓</div>
+                        <p class="text-sm text-stone-200"><strong>AI 部門 (xAI)</strong> 是否開始由高損失轉向可驗證的商業外部收入。</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 text-green-400 mr-3">✓</div>
+                        <p class="text-sm text-stone-200"><strong>整體債務增加後</strong>，營運現金流能否維持穩定，能付擔利息。</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 text-green-400 mr-3">✓</div>
+                        <p class="text-sm text-stone-200"><strong>鎖定期分批解禁</strong>後，市場能否順利消化大量新增流通股賣壓。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-SpaceX上市股價與投資分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中SpaceX相關公開資料 (2026年6月24日)。</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* 1. Mobile Menu Toggle Logic */
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-item');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking a link
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            /* 2. Active Link State (Intersection Observer) */
+            const sections = document.querySelectorAll("section[id]");
+            const navLinks = document.querySelectorAll(".nav-item");
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Adjust triggers slightly above center
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.getAttribute('id');
+                        
+                        // Update Desktop Nav
+                        navLinks.forEach(link => {
+                            if (link.getAttribute("href") === `#${targetId}`) {
+                                link.classList.add("text-sky-400", "font-bold");
+                                link.classList.remove("text-stone-300");
+                            } else {
+                                link.classList.remove("text-sky-400", "font-bold");
+                                link.classList.add("text-stone-300");
+                            }
+                        });
+                        
+                        // Update Mobile Nav styling
+                        mobileLinks.forEach(link => {
+                            if (link.getAttribute("href") === `#${targetId}`) {
+                                link.classList.add("text-sky-400", "bg-stone-900");
+                                link.classList.remove("text-stone-300");
+                            } else {
+                                link.classList.remove("text-sky-400", "bg-stone-900");
+                                link.classList.add("text-stone-300");
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            /* 3. Chart.js Implementation */
+            const ctx = document.getElementById('profitChart').getContext('2d');
+            const profitChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Starlink (聯網業務)', '整體公司營運', 'AI 部門 (xAI)'],
+                    datasets: [{
+                        label: '營業利益 / 損失 (億美元)',
+                        data: [11.9, -19.4, -24.7],
+                        backgroundColor: [
+                            'rgba(34, 197, 94, 0.7)',  // Green for profit
+                            'rgba(239, 68, 68, 0.7)',  // Red for overall loss
+                            'rgba(220, 38, 38, 0.9)'   // Darker red for heavy AI loss
+                        ],
+                        borderColor: [
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(220, 38, 38, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                zeroLineColor: 'rgba(0, 0, 0, 0.2)'
+                            },
+                            title: {
+                                display: true,
+                                text: '金額 (億美元)',
+                                color: '#6b7280'
+                            }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            /* 4. Interactive Data Table Logic */
+            const productData = [
+                { business: "整體營收", period: "2025預估", metric: "年營收", value: "186.7 億美元", desc: "年成長33%，Starlink約占60%" },
+                { business: "整體淨利", period: "2025預估", metric: "淨損", value: "-49.4 億美元", desc: "主因併入xAI產生的高額虧損" },
+                { business: "整體淨利", period: "2024全年", metric: "淨利", value: "7.91 億美元", desc: "併入xAI業務前維持獲利狀態" },
+                { business: "Starlink", period: "2026 Q1", metric: "營業利益", value: "11.9 億美元", desc: "公司最主要的現金流引擎" },
+                { business: "AI部門 (xAI)", period: "2026 Q1", metric: "營業損失", value: "-24.7 億美元", desc: "占公司第一季資本支出約76%" },
+                { business: "AI部門 (xAI)", period: "2026 Q1", metric: "營收", value: "8.18 億美元", desc: "早期營收，尚無法覆蓋基礎建設開銷" },
+                { business: "Starlink", period: "最新現況", metric: "用戶數 / 衛星數", value: "1,030萬人 / 9,600顆", desc: "擁有全球最大的低軌衛星基建網路" },
+                { business: "公司舉債", period: "2026/06", metric: "目標募資", value: "250 億美元", desc: "取得投資級信評 (Baa1, BBB+, BBB)" },
+                { business: "公司舉債", period: "2026/06", metric: "市場認購額", value: "850 億美元", desc: "超額認購顯示機構融資意願仍強" }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const emptyState = document.getElementById('emptyState');
+
+            const renderTable = (data) => {
+                tableBody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+                emptyState.classList.add('hidden');
+
+                data.forEach((row, index) => {
+                    // Alternating background colors for rows
+                    const tr = document.createElement('tr');
+                    tr.className = index % 2 === 0 ? 'bg-white hover:bg-sky-50' : 'bg-gray-50 hover:bg-sky-50';
+                    tr.classList.add('transition-colors', 'duration-150');
+                    
+                    // Determine color for numbers
+                    let valClass = 'text-gray-900';
+                    if (row.value.includes('-')) valClass = 'text-red-600 font-medium';
+                    else if (row.metric.includes('利益') || row.metric.includes('獲利') || row.metric.includes('淨利')) valClass = 'text-green-600 font-medium';
+
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${row.business}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">${row.period}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">${row.metric}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm ${valClass}">${row.value}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600 max-w-xs truncate" title="${row.desc}">${row.desc}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            };
+
+            // Initial render
+            renderTable(productData);
+
+            // Filter logic
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = productData.filter(item => 
+                    item.business.toLowerCase().includes(term) ||
+                    item.period.toLowerCase().includes(term) ||
+                    item.metric.toLowerCase().includes(term) ||
+                    item.desc.toLowerCase().includes(term) ||
+                    item.value.toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+
+        });
+    </script>
+</body>
+</html>
