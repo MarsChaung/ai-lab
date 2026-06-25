@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI晶片戰與記憶體崛起</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* 自定義導航列作用中狀態樣式 */
+        .active-nav-link {
+            color: #0ea5e9 !important; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind stone-700 */
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+        /* 表格容器滾動條美化 */
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- 頂部導航列 (Sticky Header) -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="text-xl font-extrabold text-sky-700 tracking-tight">美光財報與AI晶片戰略解析</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-item inactive-nav-link pb-1 transition-colors hover:text-sky-500">趨勢轉折</a>
+                    <a href="#micron" class="nav-item inactive-nav-link pb-1 transition-colors hover:text-sky-500">美光霸氣</a>
+                    <a href="#broadcom" class="nav-item inactive-nav-link pb-1 transition-colors hover:text-sky-500">推論晶片戰</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link pb-1 transition-colors hover:text-sky-500">投資策略與總結</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-600 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 shadow-lg absolute w-full">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">趨勢轉折</a>
+                <a href="#micron" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">美光霸氣</a>
+                <a href="#broadcom" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">推論晶片戰</a>
+                <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">投資策略與總結</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-slate-800 to-sky-900 text-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-sky-500/20 text-sky-200 text-sm font-semibold tracking-wider mb-4 border border-sky-400/30">AI 晶片戰爭進入第二回合</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">Micron 記憶體霸氣 <br class="hidden md:block" />與 OpenAI、Broadcom 推論晶片挑戰</h1>
+            <p class="mt-4 max-w-2xl text-lg md:text-xl text-sky-100 mx-auto font-light">
+                AI 投資主線正發生重要轉折。不再只是 GPU 獨強，而是誰能掌握記憶體、推論成本、網路傳輸與資料中心的整體效率。
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+        
+        <!-- Section 1: 趨勢轉折 -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 投資主線的新轉折</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                <p class="text-lg text-stone-600 leading-relaxed">
+                    過去市場主要關注 NVIDIA GPU 銷量與雲端巨頭資本支出。但隨著 AI 產業邁向下一個階段，供應鏈將逐步形成 <strong class="text-sky-700">GPU、客製化晶片 (ASIC)、高頻寬記憶體 (HBM)、網路設備、伺服器與資料中心建設</strong> 共同成長的局面。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 資訊卡片 1 -->
+                <div class="bg-blue-50 rounded-lg p-6 shadow-sm border border-blue-100">
+                    <div class="text-blue-500 mb-4 flex justify-center">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-blue-900 mb-2">算力之外的瓶頸</h3>
+                    <p class="text-blue-800 text-sm text-center">AI 的發展不僅需要運算力，更迫切需要解決記憶體容量、頻寬及網路傳輸的瓶頸。</p>
+                </div>
+                <!-- 資訊卡片 2 -->
+                <div class="bg-emerald-50 rounded-lg p-6 shadow-sm border border-emerald-100">
+                    <div class="text-emerald-500 mb-4 flex justify-center">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-emerald-900 mb-2">推論成本成關鍵</h3>
+                    <p class="text-emerald-800 text-sm text-center">當 AI 模型面對大量終端使用者時，如何讓推論更快、更省電、更便宜，直接決定商業獲利。</p>
+                </div>
+                <!-- 資訊卡片 3 -->
+                <div class="bg-amber-50 rounded-lg p-6 shadow-sm border border-amber-100">
+                    <div class="text-amber-500 mb-4 flex justify-center">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-amber-900 mb-2">記憶體晉升戰略資源</h3>
+                    <p class="text-amber-800 text-sm text-center">高頻寬記憶體與伺服器 DRAM 需求呈現結構性爆發，擺脫傳統容易被替代的零組件地位。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 美光霸氣 -->
+        <section id="micron" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Micron 的記憶體霸氣與財報解析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 文字內容 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">打破傳統景氣循環的成長引擎</h3>
+                    <p class="text-stone-600 mb-4">
+                        Micron 財報展現驚人爆發力，第三季營收達 <strong class="text-sky-600">414.56億美元</strong>，EPS <strong class="text-sky-600">25.11美元</strong>。第四季預估更將挑戰營收 500億美元、EPS 31美元。
+                    </p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-stone-700"><strong>結構性需求轉變：</strong> AI 模型訓練與生成服務需大量 HBM、伺服器 DRAM 及企業級 SSD。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-stone-700"><strong>220億美元預先承諾：</strong> 取得大量現金訂金與不可取消訂單，保障未來數年供應，降低景氣波動風險。</span>
+                        </li>
+                    </ul>
+                    <div class="bg-stone-50 p-4 rounded border border-stone-200">
+                        <p class="text-sm text-stone-500 italic">投資人警訊：目前毛利與價格皆在歷史高位，未來需關注價格上漲是否放緩及 2027 年後的新產能影響。</p>
+                    </div>
+                </div>
+
+                <!-- 動態圖表 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-center text-stone-800 mb-4">Micron 營收與每股盈餘 (Q3實績 vs Q4預測)</h3>
+                    <!-- Canvas Chart Wrapper -->
+                    <div class="relative w-full h-72">
+                        <canvas id="micronChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 推論晶片戰 -->
+        <section id="broadcom" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Jalapeño 登場：推論成本成下一個戰場</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/3 flex justify-center">
+                        <!-- 象徵性圖示代替圖片 -->
+                        <div class="w-48 h-48 bg-gradient-to-tr from-orange-400 to-red-500 rounded-full flex items-center justify-center shadow-inner relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
+                            <span class="text-white font-extrabold text-2xl z-10 text-center leading-tight">Jalapeño<br><span class="text-base font-normal">ASIC 晶片</span></span>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <h3 class="text-2xl font-bold text-stone-800 mb-3">OpenAI 與 Broadcom 的聯手出擊</h3>
+                        <p class="text-stone-600 mb-4">
+                            <strong>Jalapeño</strong> 是一款專為大型語言模型推論設計的客製化晶片 (ASIC)。它的出現並非為了顛覆 NVIDIA 的訓練市場，而是為了解決 OpenAI 大規模提供服務時面臨的<strong class="text-red-600">巨額推論成本</strong>。
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                            <div class="bg-stone-50 p-4 rounded-md border-l-4 border-orange-400">
+                                <h4 class="font-bold text-stone-800 mb-1">OpenAI 的戰略</h4>
+                                <p class="text-sm text-stone-600">針對自家模型資料流設計晶片，降低對通用型 GPU 的依賴，以更省電、便宜的方式執行推論，掌握成本控制權。</p>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-md border-l-4 border-red-500">
+                                <h4 class="font-bold text-stone-800 mb-1">Broadcom 的角色</h4>
+                                <p class="text-sm text-stone-600">作為「AI 基礎建設整合商」，不只賣晶片實作，更包辦高速網路、交換器與機櫃系統整合，成為最大受惠者之一。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 對 NVIDIA 的影響 -->
+            <div class="bg-stone-800 text-stone-100 rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-sky-400 mb-3">對 NVIDIA 是威脅，但非結構性反轉</h3>
+                <p class="text-stone-300 mb-4">
+                    Jalapeño 證明了雲端巨頭正在建立自家晶片能力，走向「多種架構並存」。然而，NVIDIA 的核心優勢在於其<strong>完整生態系（軟硬體整合）</strong>，且在大型模型訓練上仍具霸主地位。這並非「NVIDIA 時代結束」，而是預算分配將變得更多元。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: 投資策略與總結 (含互動資料表格) -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總結與供應鏈投資策略分析</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg text-stone-700 font-medium mb-6">
+                    真正值得長期持有的公司，是能在晶片、記憶體、網路、軟體與資料中心支出之間，把技術優勢轉換成<span class="text-sky-600 border-b border-sky-600 pb-0.5">持續現金流與穩定獲利</span>的公司。
+                </p>
+
+                <!-- 表格控制區 (搜尋篩選) -->
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <h3 class="text-xl font-bold text-stone-800">核心供應鏈觀察指標</h3>
+                    <div class="relative w-full sm:w-64">
+                        <input type="text" id="searchInput" placeholder="搜尋公司或關鍵字..." class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-shadow">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 互動式表格 -->
+                <div class="table-container overflow-x-auto border border-stone-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-sm font-bold text-stone-700 uppercase tracking-wider whitespace-nowrap sticky left-0 bg-stone-50">公司 / 角色</th>
+                                <th scope="col" class="px-6 py-4 text-left text-sm font-bold text-stone-700 uppercase tracking-wider">戰略定位與亮點</th>
+                                <th scope="col" class="px-6 py-4 text-left text-sm font-bold text-stone-700 uppercase tracking-wider">投資人後續關注點 (風險/指標)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="strategyTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態生成內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 無結果提示 -->
+                <div id="noDataMessage" class="hidden text-center py-6 text-stone-500">
+                    找不到符合條件的資料
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI晶片戰第二波與記憶體崛起。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中AI晶片與記憶體產業相關公開資料 (2026年6月25日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 功能實作 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. 手機版選單切換 ---
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機選單項目後自動收合
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- 2. 導航列 Active 狀態追蹤 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-100px 0px -40% 0px', // 調整觸發範圍，避免過早或過晚切換
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 更新 Desktop 選單
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- 3. Chart.js 動態圖表繪製 ---
+            const ctx = document.getElementById('micronChart').getContext('2d');
+            
+            // 報告中的數據: Q3 營收 414.56, EPS 25.11 | Q4 預估 營收 500, EPS 31
+            const micronChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Q3 (第三季實績)', 'Q4 (第四季預估)'],
+                    datasets: [
+                        {
+                            label: '營收 (百億美元)',
+                            data: [41.456, 50.0], // 將414.56億簡化比例為百億單位，方便圖表呈現
+                            backgroundColor: 'rgba(14, 165, 233, 0.7)', // sky-500
+                            borderColor: 'rgba(14, 165, 233, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '調整後每股盈餘 (美元)',
+                            data: [25.11, 31.0],
+                            type: 'line',
+                            backgroundColor: 'rgba(245, 158, 11, 1)', // amber-500
+                            borderColor: 'rgba(245, 158, 11, 1)',
+                            borderWidth: 3,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#fff',
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: "'Noto Sans TC', sans-serif"
+                                }
+                            }
+                        },
+                        tooltip: {
+                            titleFont: { family: "'Noto Sans TC', sans-serif" },
+                            bodyFont: { family: "'Noto Sans TC', sans-serif" }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '營收規模',
+                                color: '#64748b'
+                            },
+                            grid: {
+                                color: '#f1f5f9'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'EPS (美元)',
+                                color: '#64748b'
+                            },
+                            grid: {
+                                drawOnChartArea: false // 避免與左側 Y 軸網格線重疊
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- 4. 互動資料表格與即時篩選 ---
+            const strategyData = [
+                { 
+                    company: "Micron (美光)", 
+                    role: "記憶體核心資源", 
+                    highlight: "打破景氣循環，高頻寬記憶體(HBM)、伺服器DRAM成為成長引擎。取得高達220億美元現金訂金與財務承諾。", 
+                    risk: "價格上漲速度是否放慢、擴產後能否維持高毛利，以及2027年後產能增加對價格的影響。" 
+                },
+                { 
+                    company: "OpenAI", 
+                    role: "AI 模型主導者", 
+                    highlight: "開發 Jalapeño 推論晶片 (ASIC)，針對自家模型與資料流設計，目標大幅降低推論成本與省電。", 
+                    risk: "客製晶片彈性較低，若模型架構快速改變，可能無法像通用 GPU 快速支援新工作負載。" 
+                },
+                { 
+                    company: "Broadcom (博通)", 
+                    role: "AI 基礎建設整合商", 
+                    highlight: "Jalapeño 背後最大受益者。提供晶片實作、高速網路及系統整合能力，從單一晶片銷售轉為系統級合作夥伴。", 
+                    risk: "HBM 價格昂貴且供給緊張，可能壓縮部分 ASIC 客製化專案的毛利率。需觀察整合銷售能力。" 
+                },
+                { 
+                    company: "NVIDIA (輝達)", 
+                    role: "AI 生態系霸主", 
+                    highlight: "主導大型 AI 模型訓練市場，擁有包括 GPU、軟體平台與網路系統的完整生態優勢。", 
+                    risk: "大型雲端客戶逐步發展自製晶片，未來 AI 資料中心新增預算可能部分流向客製 ASIC (推論市場)。" 
+                }
+            ];
+
+            const tableBody = document.getElementById('strategyTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            // 渲染表格函數
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    noDataMessage.classList.remove('hidden');
+                } else {
+                    noDataMessage.classList.add('hidden');
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.className = 'hover:bg-stone-50 transition-colors';
+                        row.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap sticky left-0 bg-white group-hover:bg-stone-50 border-r border-stone-100">
+                                <div class="text-base font-bold text-sky-700">${item.company}</div>
+                                <div class="text-sm text-stone-500">${item.role}</div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-stone-700">
+                                ${item.highlight}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-stone-600 bg-stone-50/50">
+                                ${item.risk}
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            }
+
+            // 初始化渲染
+            renderTable(strategyData);
+
+            // 搜尋過濾邏輯
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = strategyData.filter(item => {
+                    return item.company.toLowerCase().includes(searchTerm) || 
+                           item.role.toLowerCase().includes(searchTerm) || 
+                           item.highlight.toLowerCase().includes(searchTerm) ||
+                           item.risk.toLowerCase().includes(searchTerm);
+                });
+                renderTable(filteredData);
+            });
+        });
+    </script>
+</body>
+</html>
