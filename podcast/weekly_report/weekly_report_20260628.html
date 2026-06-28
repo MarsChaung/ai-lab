@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/6/22~6/26)</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- 自訂 CSS 變數與樣式 -->
+    <style>
+        /* 避免 Fixed Header 遮擋目標區塊 */
+        html {
+            scroll-padding-top: 5rem;
+        }
+        
+        .active-nav-link {
+            color: #0ea5e9; /* text-sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        
+        .inactive-nav-link {
+            color: #44403c; /* text-stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-extrabold text-sky-600">美股投資週報</span>
+                </div>
+
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#macro" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">總體經濟</a>
+                    <a href="#tech" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">巨頭重新定價</a>
+                    <a href="#semi" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">AI晶片與記憶體</a>
+                    <a href="#industry" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">其他產業動態</a>
+                    <a href="#data" class="nav-item inactive-nav-link px-1 py-5 text-sm font-medium transition-colors duration-200">數據圖表與結論</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單面板 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#macro" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">總體經濟</a>
+                <a href="#tech" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">巨頭重新定價</a>
+                <a href="#semi" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">AI晶片與記憶體</a>
+                <a href="#industry" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">其他產業動態</a>
+                <a href="#data" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">數據圖表與結論</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主頁面內容 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Header -->
+        <header class="mb-12 text-center md:text-left">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
+                AI 從「搶算力」走向「搶記憶體」
+            </h1>
+            <p class="text-xl text-stone-500">市場開始計算成長的真實成本 | 資料區間：2026/6/22 - 2026/6/26</p>
+        </header>
+
+        <!-- 區塊一：總體經濟 -->
+        <section id="macro" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總體經濟：通膨限制樂觀空間</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-blue-500">
+                    <h3 class="text-lg font-bold text-stone-700 mb-2">經濟與消費具韌性</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li>Q1經濟成長率上修至年化 <span class="font-bold text-blue-600">2.1%</span></li>
+                        <li>5月個人所得與消費支出增長 <span class="font-bold text-blue-600">0.7%</span></li>
+                        <li>實質消費增加 <span class="font-bold text-blue-600">0.3%</span></li>
+                    </ul>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-red-500">
+                    <h3 class="text-lg font-bold text-stone-700 mb-2">通膨與就業壓力並存</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li>5月PCE年增 <span class="font-bold text-red-600">4.1%</span>，核心PCE年增 <span class="font-bold text-red-600">3.4%</span></li>
+                        <li>初領失業金人數降至 21.5萬人</li>
+                        <li>持續請領失業金人數升至 <span class="font-bold text-red-600">182.1萬人</span></li>
+                        <li>密大消費者信心指數僅 49.5</li>
+                    </ul>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-sky-500 lg:col-span-1 md:col-span-2">
+                    <h3 class="text-lg font-bold text-stone-700 mb-2">市場環境解讀</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        這是一個「經濟有韌性、但資金成本未必快速下降」的環境。企業獲利有支撐，但高估值科技股仍會因利率與通膨數據劇烈波動。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊二：巨頭重新定價 -->
+        <section id="tech" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">巨頭遭遇重新定價：要求看見回收速度</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="text-stone-700 mb-4 text-lg leading-relaxed">
+                    6月22日，Alphabet 下跌約 5%，Meta、Amazon 與 Microsoft 也同步走弱。主因並非 AI 需求消失，而是投資人開始追問：大型平台投入巨額資料中心、晶片與電力成本後，何時能轉化為更高的獲利與現金流。
+                </p>
+                <div class="bg-stone-100 p-4 rounded-md border border-stone-200">
+                    <p class="font-semibold text-stone-800">重要投資啟示：</p>
+                    <p class="text-stone-600 mt-1">美股七巨頭不再是可用同一套邏輯看待的族群；未來股價分化將更取決於各家公司 AI 產品收入、資本支出規模與毛利率變化。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊三：AI晶片與記憶體 -->
+        <section id="semi" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">半導體鏈：從運算到記憶體的擴張</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Micron -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-bold mr-3">Micron</div>
+                        <h3 class="text-xl font-bold text-stone-800">AI資料中心需要高容量記憶體</h3>
+                    </div>
+                    <p class="text-stone-600 mb-3">
+                        Q3營收 <strong class="text-stone-800">414.6億美元</strong>，EPS <strong class="text-stone-800">25.11美元</strong>，大幅優於預期。已取得約220億美元客戶承諾。
+                    </p>
+                    <p class="text-sm text-stone-500">供給持續緊張，記憶體獲利槓桿顯著，需觀察價格走勢能否延續至2027年。</p>
+                </div>
+                
+                <!-- Qualcomm -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-bold mr-3">Qualcomm</div>
+                        <h3 class="text-xl font-bold text-stone-800">AI成長故事延伸至資料中心</h3>
+                    </div>
+                    <p class="text-stone-600 mb-3">
+                        目標2029年資料中心晶片營收提升至超過 <strong class="text-stone-800">150億美元</strong>，非手機業務上調至400億美元。
+                    </p>
+                    <p class="text-sm text-stone-500">顯示 AI 晶片供應鏈正在擴散，客製化與邊緣 AI 受惠者成為新焦點。</p>
+                </div>
+
+                <!-- OpenAI & Broadcom -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold mr-3">OpenAI / Broadcom</div>
+                        <h3 class="text-xl font-bold text-stone-800">強化客製化 AI 晶片趨勢</h3>
+                    </div>
+                    <p class="text-stone-600 mb-3">
+                        合作推出 <strong class="text-stone-800">Jalapeño AI 加速器</strong>，用於推論需求，年底開始部署。
+                    </p>
+                    <p class="text-sm text-stone-500">大型模型公司試圖降低對單一 GPU 的依賴，未來晶片市場將更分散。</p>
+                </div>
+
+                <!-- onsemi & Synaptics -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-bold mr-3">onsemi</div>
+                        <h3 class="text-xl font-bold text-stone-800">AI併購不一定立刻獲掌聲</h3>
+                    </div>
+                    <p class="text-stone-600 mb-3">
+                        斥資約 <strong class="text-stone-800">70億美元</strong> 收購 Synaptics，布局實體 AI。但股價下跌。
+                    </p>
+                    <p class="text-sm text-stone-500">掛上 AI 標籤不代表創造股東價值，市場嚴審成本、整合能力與實際獲利。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊四：其他產業動態 -->
+        <section id="industry" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">其他產業動態：蘋果定價、金融股與醫療物流</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Apple -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 border-l-4 border-stone-800 pl-2 mb-3">Apple (科技通膨)</h3>
+                    <p class="text-stone-600 text-sm mb-2">
+                        部分 MacBook Air 價格從 $1,099 上調至 $1,299，主因 DRAM 與 NAND 成本上升。
+                    </p>
+                    <p class="text-stone-500 text-xs">
+                        雙面訊號：展現定價能力，但恐壓抑換機需求。AI成本首次傳導至消費電子。
+                    </p>
+                </div>
+
+                <!-- Financials -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 border-l-4 border-stone-800 pl-2 mb-3">金融股 (壓力測試)</h3>
+                    <p class="text-stone-600 text-sm mb-2">
+                        32家大型銀行通過聯準會壓力測試，可吸收逾 7,080億美元損失。大行陸續提高股利或庫藏股。
+                    </p>
+                    <p class="text-stone-500 text-xs">
+                        提供穩定的資本回饋，但仍須留意壞帳變化。
+                    </p>
+                </div>
+
+                <!-- Healthcare & Logistics -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 border-l-4 border-stone-800 pl-2 mb-3">AbbVie & FedEx</h3>
+                    <ul class="text-sm text-stone-600 space-y-3">
+                        <li><strong>AbbVie:</strong> 斥資 109億美元收購 Apogee，布局免疫醫療下一階段，惟獲利貢獻需至2032年。</li>
+                        <li><strong>FedEx:</strong> EPS 6.31美元，營收成長12.6%，但核心營業利潤率由 8.4% 降至 7.7% (受限成本與政策)。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊五：數據圖表與結論 -->
+        <section id="data" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">數據探索與本週結論</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 動態圖表 (Chart.js) -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 text-center">本週主要指數與板塊表現 (至6/26)</h3>
+                    <div class="relative w-full h-64">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 text-center mt-4">註：科技巨頭與AI板塊本週面臨顯著的重新定價壓力。</p>
+                </div>
+
+                <!-- 互動資料表格 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">重點企業動態追蹤表</h3>
+                    <!-- 篩選輸入框 -->
+                    <div class="mb-4">
+                        <input type="text" id="searchInput" placeholder="搜尋公司名稱或關鍵字..." 
+                            class="w-full px-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 transition-shadow">
+                    </div>
+                    <!-- 表格容器 -->
+                    <div class="overflow-y-auto flex-grow h-64 border border-stone-200 rounded-md">
+                        <table class="min-w-full text-left text-sm whitespace-nowrap">
+                            <thead class="uppercase tracking-wider sticky top-0 bg-stone-100 text-stone-700 shadow-sm">
+                                <tr>
+                                    <th class="px-4 py-3 font-semibold border-b">公司名稱</th>
+                                    <th class="px-4 py-3 font-semibold border-b">關鍵事件 / 數據</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody" class="bg-white divide-y divide-stone-200">
+                                <!-- 內容由 JavaScript 動態生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 結論卡片 -->
+            <div class="bg-sky-50 rounded-lg shadow-lg p-8 border border-sky-100">
+                <h3 class="text-2xl font-bold text-sky-900 mb-4">總結：市場進入更嚴格的驗收階段</h3>
+                <p class="text-sky-800 leading-relaxed mb-4 text-lg">
+                    本週最重要的結論，不是 AI 熱潮結束，而是市場進入更嚴格的驗收階段。記憶體、客製化晶片與資料中心供應鏈仍有明確訂單與價格優勢；相對地，大型平台公司必須更具體證明，龐大資本支出能轉化為營收、毛利與自由現金流。
+                </p>
+                <div class="bg-white p-4 rounded-md shadow-sm">
+                    <p class="font-bold text-stone-800 mb-2">投資策略建議：</p>
+                    <p class="text-stone-700">
+                        投資組合不宜只押注少數高估值科技巨頭。金融股的股利與買回、醫療股的研發與併購、以及物流與消費需求的實體經濟訊號，都能提供較好的分散效果。在通膨仍偏高、利率未必快速下降的環境中，投資人更應優先觀察企業是否具備三種能力：<strong>定價能力、現金流能力，以及把 AI 支出變成獲利的能力。</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/6/22~6/26)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股與AI產業相關公開資料 (2026年6月28日)。</p>
+        </div>
+    </footer>
+
+    <!-- 互動邏輯腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // === 1. 手機版選單切換 (Mobile Menu Toggle) ===
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // 點擊手機選單項目後自動關閉
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // === 2. 導航列滾動監聽 (Intersection Observer API) ===
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -80% 0px', // 調整觸發區間
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 移除所有 active 狀態
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        // 替當前區塊加上 active 狀態
+                        const activeLink = document.querySelector(`.nav-item[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.remove('inactive-nav-link');
+                            activeLink.classList.add('active-nav-link');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(sec => observer.observe(sec));
+
+            // === 3. 互動資料表格 (Interactive Table) ===
+            // 資料來源自報告內容
+            const productData = [
+                { company: 'Alphabet / Meta', event: '6/22 股價下跌約 5%，投資人關注 AI 資本支出回收速度。' },
+                { company: 'Micron', event: 'Q3 營收 414.6 億美元，EPS 25.11 美元；獲 220 億美元客戶承諾。' },
+                { company: 'Qualcomm', event: '目標 2029 年前資料中心晶片營收提升至超過 150 億美元。' },
+                { company: 'OpenAI / Broadcom', event: '共同設計 Jalapeño AI 加速器，預計年底部署。' },
+                { company: 'Apple', event: '調高部分 MacBook Air 售價至 $1299，反映記憶體成本上升。' },
+                { company: 'AbbVie', event: '以約 109 億美元收購 Apogee Therapeutics 布局免疫醫療。' },
+                { company: 'FedEx', event: '調整後 EPS 6.31 美元，營收成長 12.6%，核心利潤率微降。' },
+                { company: 'onsemi', event: '以 70 億美元全股票收購 Synaptics 布局實體 AI，市場反應冷淡。' },
+                { company: '大型金融股', event: '通過聯準會壓力測試，多家銀行陸續提高股利或大額庫藏股。' }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="2" class="px-4 py-6 text-center text-stone-500">找不到符合的資料</td></tr>';
+                    return;
+                }
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-stone-50 transition-colors';
+                    tr.innerHTML = `
+                        <td class="px-4 py-3 font-medium text-stone-800">${item.company}</td>
+                        <td class="px-4 py-3 text-stone-600 whitespace-normal min-w-[250px]">${item.event}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            // 初始化表格
+            renderTable(productData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => 
+                    item.company.toLowerCase().includes(keyword) || 
+                    item.event.toLowerCase().includes(keyword)
+                );
+                renderTable(filteredData);
+            });
+
+            // === 4. 動態圖表 (Chart.js) ===
+            // 繪製該週標普、那斯達克、費半的跌幅圖表
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['S&P 500', 'Nasdaq', '費城半導體 (SOX)'],
+                    datasets: [{
+                        label: '單週跌幅 (%)',
+                        data: [-2.0, -4.7, -7.9],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)', // sky-500
+                            'rgba(59, 130, 246, 0.7)', // blue-500
+                            'rgba(239, 68, 68, 0.7)'   // red-500
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(59, 130, 246)',
+                            'rgb(239, 68, 68)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return '跌幅: ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '跌幅百分比 (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
