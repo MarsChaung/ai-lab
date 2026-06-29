@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Tesla雙軌商業路徑解析</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自定義 active 導航列樣式 */
+        .nav-active {
+            color: #0284c7 !important; /* sky-600 */
+            border-bottom: 2px solid #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / 網站標題 -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-bold text-xl text-sky-700 tracking-wider">Tesla 商業路徑解析</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#overview" class="desktop-nav-link text-stone-600 hover:text-sky-600 px-3 py-2 text-sm font-medium transition-colors h-full flex items-center">摘要</a>
+                    <a href="#fsd" class="desktop-nav-link text-stone-600 hover:text-sky-600 px-3 py-2 text-sm font-medium transition-colors h-full flex items-center">FSD v14 Lite</a>
+                    <a href="#cybercab" class="desktop-nav-link text-stone-600 hover:text-sky-600 px-3 py-2 text-sm font-medium transition-colors h-full flex items-center">Cybercab</a>
+                    <a href="#comparison" class="desktop-nav-link text-stone-600 hover:text-sky-600 px-3 py-2 text-sm font-medium transition-colors h-full flex items-center">商業模式比較</a>
+                    <a href="#financials" class="desktop-nav-link text-stone-600 hover:text-sky-600 px-3 py-2 text-sm font-medium transition-colors h-full flex items-center">財務與投資</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobileMenuBtn" type="button" class="text-stone-500 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單區塊 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">摘要</a>
+                <a href="#fsd" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">FSD v14 Lite</a>
+                <a href="#cybercab" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">Cybercab</a>
+                <a href="#comparison" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">商業模式比較</a>
+                <a href="#financials" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財務與投資</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主視覺 / Hero Section -->
+    <header class="bg-gradient-to-r from-sky-800 to-stone-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                FSD v14 Lite 與 Cybercab<br />正在重畫 Tesla 的商業路徑
+            </h1>
+            <p class="text-xl text-sky-100 max-w-3xl leading-relaxed">
+                一邊守住舊車主，一邊準備無方向盤車隊。<br />
+                截至 2026 年 6 月 29 日，這兩大進展的商業意義完全不同。前者是產品價值的兌現防守，後者則是長期估值押注的營運模式轉換。
+            </p>
+        </div>
+    </header>
+
+    <!-- 主要內容區塊 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- 摘要區塊 -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場解讀的兩大修正</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        FSD v14 Lite 的本質
+                    </h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        已開始推送給 HW3 (AI3) 舊車主（版本 2026.20.5.1 早期測試）。這<strong>不是無人駕駛突破</strong>，而是需要全程注意路況的 Level 2 輔助系統（FSD Supervised）。核心目的是守住既有車主與軟體收入。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Cybercab 救援計畫的訊號
+                    </h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        官網發布《First Responder Interaction Plan》v1.0 (2026.06.22)。為無人計程車營運鋪路。這證明 Tesla 正準備從單純的「賣車」轉向「自己營運車隊」的垂直整合商業模式。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FSD v14 Lite 區塊 -->
+        <section id="fsd" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">FSD v14 Lite：HW3 車主的「補課版」產品</h2>
+            <p class="mb-6 text-stone-600">將 HW4 的模型能力精簡移植到運算較弱的 HW3。這屬於溫和正面、不足以改變獲利預期的消息，其對 Tesla 的意義偏向三個防守層面：</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 卡片 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-600 font-bold text-2xl mb-2">01</div>
+                    <h4 class="font-bold text-lg text-stone-800 mb-2">維持產品價值與續訂意願</h4>
+                    <p class="text-stone-600 text-sm">
+                        在美國 FSD 月訂閱價為 99 美元。Lite 版讓舊車主重新獲得接近新平台部分功能的更新，防止訂閱意願與品牌忠誠度下降。
+                    </p>
+                </div>
+                <!-- 卡片 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-600 font-bold text-2xl mb-2">02</div>
+                    <h4 class="font-bold text-lg text-stone-800 mb-2">降低歷史承諾壓力</h4>
+                    <p class="text-stone-600 text-sm">
+                        Tesla 已承認 HW3 不具備執行無監督 FSD 能力。v14 Lite 透過軟體優化來延後硬體補償問題，但並非真正解決未來的法律與升級風險。
+                    </p>
+                </div>
+                <!-- 卡片 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-600 font-bold text-2xl mb-2">03</div>
+                    <h4 class="font-bold text-lg text-stone-800 mb-2">保護軟體收入的遞延價值</h4>
+                    <p class="text-stone-600 text-sm">
+                        截至 Q1，Tesla 相關遞延收入約 40 億美元。v14 Lite 有助於持續履行軟體交付義務，但不代表會立即帶來顯著新增收入。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cybercab 區塊 -->
+        <section id="cybercab" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Cybercab：從「賣車」轉向「自己營運車隊」</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-4">
+                    救援計畫文件中，Tesla 將 Cybercab 描述為可在 Autonomous Mode 下執行 <strong>SAE Level 4</strong> 自動駕駛的車輛（無方向盤與踏板）。更重要的是，文件明載：<br/>
+                    <span class="font-bold text-sky-700 bg-sky-50 px-2 py-1 rounded">目前 Robotaxi 車輛由 Tesla 自己持有與營運，並由 Mission Control 管理派車與支援。</span>
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div>
+                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="text-green-500 mr-2">▲</span>商業模式的優勢</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-stone-600">
+                            <li>掌控車輛規格、定價、行車資料。</li>
+                            <li>易於建立一致的安全標準。</li>
+                            <li>若單車製造成本低、使用率高，長期收入潛力遠高於一次性賣車。</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="text-red-500 mr-2">▼</span>伴隨的高昂代價</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-stone-600">
+                            <li>需承擔龐大資本支出（自買車、營運、保險）。</li>
+                            <li>營運成本增高（清潔、客服、充電維護）。</li>
+                            <li>天候限制：強風、積雪等極端氣候下能力有限。</li>
+                            <li>尚未取得大規模上路的監管核准。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 互動資料表格區塊 -->
+        <section id="comparison" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">雙軌路徑：商業模式比較分析</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="mb-4">
+                    <label for="tableSearch" class="block text-sm font-medium text-stone-700 mb-1">關鍵字篩選表格：</label>
+                    <input type="text" id="tableSearch" placeholder="例如輸入：目標、收入..." class="w-full md:w-1/3 px-4 py-2 border border-stone-300 rounded-md focus:ring-sky-500 focus:border-sky-500 transition-shadow">
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">比較維度</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">FSD v14 Lite</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Cybercab (Robotaxi)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- 互動資料由此產生 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 財務與投資驗證區塊 -->
+        <section id="financials" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務影響與投資驗證</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                
+                <!-- 動態圖表區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4">2026年第一季財報重點 (億美元)</h3>
+                    <p class="text-sm text-stone-500 mb-4">服務與其他業務成長 42%，研發支出大增 38% (主因 AI 與自動駕駛投入)，顯示營收結構尚未由 Robotaxi 主導。</p>
+                    <div class="relative h-64 w-full">
+                        <!-- Canvas 必須被包在 div 內 -->
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 投資人驗證點區塊 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-sky-700">投資人接下來應追蹤的五個驗證點</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm mr-3">1</span>
+                            <span class="text-stone-600 text-sm"><strong>FSD 數據驗證：</strong>v14 Lite 是否能擴大推送，及是否公布安全、接管率或訂閱轉換數據。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm mr-3">2</span>
+                            <span class="text-stone-600 text-sm"><strong>HW3 政策：</strong>Tesla 是否提出明確的 HW3 硬體升級、補償或資格政策。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm mr-3">3</span>
+                            <span class="text-stone-600 text-sm"><strong>Cybercab 營運化：</strong>是否轉為可量化的營運車隊（上路數量、服務城市、等待時間）。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm mr-3">4</span>
+                            <span class="text-stone-600 text-sm"><strong>監管落地：</strong>美國 NHTSA 及州政府對無方向盤/踏板車輛的規則是否正式生效。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm mr-3">5</span>
+                            <span class="text-stone-600 text-sm"><strong>單車經濟學：</strong>證明 Robotaxi 的利用率、充電維護、遠端客服等長期營運成本效益。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 結論區塊 -->
+        <section id="conclusion" class="scroll-mt-24">
+            <div class="bg-stone-800 text-white rounded-lg shadow-lg p-8 text-center">
+                <h2 class="text-2xl font-bold text-sky-400 mb-4">投資結論</h2>
+                <p class="text-lg text-stone-300 max-w-4xl mx-auto leading-relaxed font-light">
+                    這兩則消息應被定位為：<br/>
+                    <strong class="text-white text-xl">「策略方向正確、執行驗證仍早、短期財務影響有限」</strong>
+                </p>
+                <div class="mt-6 text-stone-400 text-sm max-w-3xl mx-auto">
+                    Tesla 的估值故事未來仍將由 Robotaxi 主導，但市場接下來不應只問 Tesla 能不能讓車自己開，而要問它能不能安全、合法、低成本地讓數十萬輛車每天持續接單。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Tesla雙軌商業路徑解析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Tesla相關公開資料 (2026年6月29日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 功能實作 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* --- 1. 手機版漢堡選單切換邏輯 --- */
+            const btn = document.getElementById('mobileMenuBtn');
+            const menu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                // 切換圖示 (漢堡 / X)
+                if (menu.classList.contains('hidden')) {
+                    menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                } else {
+                    menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                }
+            });
+
+            /* --- 2. 滾動監聽 (Active Link State) --- */
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.desktop-nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px', // 在畫面中間觸發
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 移除所有 active 狀態
+                        navLinks.forEach(link => {
+                            link.classList.remove('nav-active');
+                        });
+                        // 尋找對應的 link 加入 active 狀態
+                        const activeLink = document.querySelector(`.desktop-nav-link[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('nav-active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            /* --- 3. 互動資料表格 (資料載入與篩選) --- */
+            const tableData = [
+                {
+                    dimension: "核心目標",
+                    fsd: "守住既有舊車主，維持軟體收入 (防守型產品)。",
+                    cybercab: "實現真正的無人計程車營運網路 (營運型轉換)。"
+                },
+                {
+                    dimension: "系統層級",
+                    fsd: "Level 2 (FSD Supervised) 需駕駛全程注意路況並準備接手。",
+                    cybercab: "SAE Level 4 自動駕駛，無方向盤與油門踏板。"
+                },
+                {
+                    dimension: "商業模式",
+                    fsd: "一次性買斷選配或月訂閱制 (如美國 $99/月)。",
+                    cybercab: "由 Tesla 自持車隊、自行派車與管理的垂直整合服務。"
+                },
+                {
+                    dimension: "預期落地時間",
+                    fsd: "已於 2026 年中開始小規模推送早期存取版本。",
+                    cybercab: "預估 2026 量產，但較具意義的營收影響預計在 2027 年後。"
+                },
+                {
+                    dimension: "長期財務影響",
+                    fsd: "保護遞延收入與品牌價值，不改變獲利預期結構。",
+                    cybercab: "由輕資產轉向高資本支出的營運商，具長期高估值潛力。"
+                }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            
+            // 渲染表格內容函數
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-stone-50 transition-colors";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 text-sm font-medium text-stone-900 border-b border-stone-100">${row.dimension}</td>
+                        <td class="px-6 py-4 text-sm text-stone-600 border-b border-stone-100">${row.fsd}</td>
+                        <td class="px-6 py-4 text-sm text-stone-600 border-b border-stone-100">${row.cybercab}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            // 初始化載入表格
+            renderTable(tableData);
+
+            // 搜尋過濾功能
+            const searchInput = document.getElementById('tableSearch');
+            searchInput.addEventListener('keyup', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = tableData.filter(item => {
+                    return item.dimension.toLowerCase().includes(keyword) || 
+                           item.fsd.toLowerCase().includes(keyword) || 
+                           item.cybercab.toLowerCase().includes(keyword);
+                });
+                renderTable(filteredData);
+            });
+
+            /* --- 4. Chart.js 動態圖表 (2026 Q1 財報) --- */
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            const financialChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['總營收', '服務與其他業務', '研發支出'],
+                    datasets: [{
+                        label: '金額 (億美元)',
+                        data: [223.87, 37.45, 19.46],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)', // sky-500
+                            'rgba(245, 158, 11, 0.7)', // amber-500
+                            'rgba(168, 162, 158, 0.7)' // stone-400
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(245, 158, 11)',
+                            'rgb(168, 162, 158)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '億美元'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // 隱藏圖例以保持簡潔
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' 億美元';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
