@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Comcast分拆NBCU解析</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 平滑滾動與導航列偏移，避免錨點被 header 遮擋 */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5rem;
+        }
+        /* 導航列 Active 狀態樣式 */
+        .active-nav-link {
+            color: #0284c7; /* Tailwind sky-600 */
+            font-weight: 700;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* Tailwind stone-600 */
+            border-bottom: 2px solid transparent;
+        }
+        /* 表格固定表頭 */
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .table-container thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed tracking-wide">
+
+    <!-- 頂部導航列 (Sticky Header) -->
+    <nav id="navbar" class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / 網站標題 -->
+                <div class="flex items-center">
+                    <span class="text-xl font-extrabold text-sky-700 tracking-tight">Comcast 分拆公司分析</span>
+                </div>
+
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#core-logic" class="nav-item inactive-nav-link hover:text-sky-600 transition py-2 text-sm font-medium">拆分邏輯</a>
+                    <a href="#comcast-outlook" class="nav-item inactive-nav-link hover:text-sky-600 transition py-2 text-sm font-medium">Comcast 展望</a>
+                    <a href="#nbcu-potential" class="nav-item inactive-nav-link hover:text-sky-600 transition py-2 text-sm font-medium">NBCU 潛力</a>
+                    <a href="#financial-data" class="nav-item inactive-nav-link hover:text-sky-600 transition py-2 text-sm font-medium">財務數據表</a>
+                    <a href="#conclusion" class="nav-item inactive-nav-link hover:text-sky-600 transition py-2 text-sm font-medium">投資結論</a>
+                </div>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#core-logic" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">拆分邏輯</a>
+                <a href="#comcast-outlook" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">Comcast 展望</a>
+                <a href="#nbcu-potential" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">NBCU 潛力</a>
+                <a href="#financial-data" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財務數據表</a>
+                <a href="#conclusion" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資結論</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首 Hero Section -->
+    <header class="bg-stone-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">拆掉內容與管線的綁定：<br class="hidden md:block">Comcast 分拆 NBCUniversal</h1>
+            <p class="text-lg md:text-xl text-stone-300 max-w-3xl mx-auto">
+                投資人未來要買的是電信基礎建設的「穩定現金流」，還是全球娛樂巨頭的「高成長潛力」？
+            </p>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- 區塊 1: 拆分核心邏輯 -->
+        <section id="core-logic" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">這次拆分為什麼重要？</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-3">從「整合」走向「專注」</h3>
+                    <p class="mb-4 text-stone-600">過去十多年，媒體與電信公司流行把內容與通路綁在一起。然而，串流平台（如 Netflix、YouTube、Disney+）改變了邏輯，消費者不再依賴有線電視；同時，家庭寬頻也面臨光纖與衛星網路的競爭。</p>
+                    <p class="text-stone-600">寬頻網路與媒體娛樂不再以相同速度成長，也需要不同的資本配置方式。這是一次電信與媒體大整合時代的重要反轉。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- 資訊卡片 -->
+                    <div class="bg-sky-50 rounded-lg p-5 border border-sky-100 flex flex-col justify-center">
+                        <span class="text-sky-800 font-bold mb-1">新 Comcast</span>
+                        <span class="text-sm text-stone-600">專注寬頻、行動通訊與企業網路。成為強大現金流的通訊基礎建設公司。</span>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-5 border border-purple-100 flex flex-col justify-center">
+                        <span class="text-purple-800 font-bold mb-1">新 NBCUniversal</span>
+                        <span class="text-sm text-stone-600">包含環球影業、NBC、Peacock、Sky與主題樂園。成為複合型全球娛樂公司。</span>
+                    </div>
+                    <div class="bg-stone-100 md:col-span-2 rounded-lg p-5 border border-stone-200 flex flex-col justify-center">
+                        <span class="text-stone-800 font-bold mb-1">剝離非核心資產</span>
+                        <span class="text-sm text-stone-600">Comcast 已在 2026 年初完成 Versant 分拆（移除 CNBC, MSNBC, USA 等有線電視頻道），讓新 NBCUniversal 更集中於高價值 IP 成長。</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 2: Comcast 展望 (包含圖表) -->
+        <section id="comcast-outlook" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">留下來的 Comcast：強大現金流 vs. 寬頻挑戰</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-stone-800 mb-4">核心業務動能與防守壓力</h3>
+                    <p class="text-stone-600 mb-4">
+                        保留 Comcast 名稱的公司，投資價值來自高黏著度與穩定現金流。但美國家庭寬頻市場已進入激烈競爭階段（光纖、固定無線、衛星網路）。
+                    </p>
+                    <div class="mt-6">
+                        <!-- Chart.js 畫布容器 -->
+                        <div class="relative h-64 w-full">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-stone-400 mt-2">資料：第一季財報年增長率 (%)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-red-500">
+                        <h4 class="text-sm font-semibold text-stone-500 uppercase tracking-wider">住宅寬頻用戶</h4>
+                        <div class="text-2xl font-bold text-stone-800 mt-1">- 6.5 萬戶</div>
+                        <p class="text-sm text-red-600 mt-1">核心寬頻尚未回到明顯成長</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-emerald-500">
+                        <h4 class="text-sm font-semibold text-stone-500 uppercase tracking-wider">行動通訊門號淨增</h4>
+                        <div class="text-2xl font-bold text-stone-800 mt-1">+ 43.5 萬條</div>
+                        <p class="text-sm text-emerald-600 mt-1">總數逼近 974 萬條</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-blue-500">
+                        <h4 class="text-sm font-semibold text-stone-500 uppercase tracking-wider">網路資本支出</h4>
+                        <div class="text-2xl font-bold text-stone-800 mt-1">18 億美元</div>
+                        <p class="text-sm text-stone-600 mt-1">年增逾 13% (投資 DOCSIS 4.0 備戰)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 3: NBCU 潛力 -->
+        <section id="nbcu-potential" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">新 NBCUniversal：強大 IP 構成的複合媒體</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-6">
+                    它不是純粹的「串流成長股」，而是一家同時具有主題樂園成長、影視授權收入、體育內容成本、傳統電視收視下滑與串流長期投資壓力的「複合型媒體公司」。
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-stone-50 p-4 rounded text-center border border-stone-200 hover:shadow-md transition">
+                        <div class="text-3xl mb-2">🎢</div>
+                        <div class="font-bold text-stone-800 mb-1">主題樂園</div>
+                        <div class="text-green-600 font-semibold mb-1">獲利 +33%</div>
+                        <div class="text-xs text-stone-500">受 Epic Universe 帶動</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded text-center border border-stone-200 hover:shadow-md transition">
+                        <div class="text-3xl mb-2">🎬</div>
+                        <div class="font-bold text-stone-800 mb-1">影視工作室</div>
+                        <div class="text-green-600 font-semibold mb-1">獲利倍增</div>
+                        <div class="text-xs text-stone-500">內容授權收入大幅增加</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded text-center border border-stone-200 hover:shadow-md transition">
+                        <div class="text-3xl mb-2">🦚</div>
+                        <div class="font-bold text-stone-800 mb-1">Peacock 串流</div>
+                        <div class="text-green-600 font-semibold mb-1">訂戶 4,600萬</div>
+                        <div class="text-xs text-stone-500">收入年成長 71%</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded text-center border border-stone-200 hover:shadow-md transition">
+                        <div class="text-3xl mb-2">🏈</div>
+                        <div class="font-bold text-stone-800 mb-1">體育與媒體</div>
+                        <div class="text-red-500 font-semibold mb-1">成本上升虧損</div>
+                        <div class="text-xs text-stone-500">奧運與超級盃推高製作行銷成本</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 4: 財務數據表 (互動式) -->
+        <section id="financial-data" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">2026年第一季 關鍵營運與財務數據</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <!-- 搜尋/篩選列 -->
+                <div class="mb-4">
+                    <label for="searchInput" class="block text-sm font-medium text-stone-700 mb-1">搜尋數據：</label>
+                    <div class="relative rounded-md shadow-sm max-w-md">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="searchInput" class="focus:ring-sky-500 focus:border-sky-500 block w-full pl-10 sm:text-sm border-stone-300 rounded-md py-2 border" placeholder="輸入關鍵字 (如: 寬頻, Peacock, 營收...)">
+                    </div>
+                </div>
+
+                <!-- 響應式表格 -->
+                <div class="table-container border border-stone-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">歸屬實體</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">指標名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">數值</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">年增減 (YoY)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">備註說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態生成內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noDataMsg" class="hidden text-center py-4 text-stone-500 text-sm">找不到符合條件的數據。</div>
+            </div>
+        </section>
+
+        <!-- 區塊 5: 投資結論 -->
+        <section id="conclusion" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">投資結論與觀察重點</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg text-stone-700 font-semibold mb-4">分拆提高透明度，但不會自動創造價值。</p>
+                <p class="text-stone-600 mb-6">
+                    市場初期常把新 NBCU 視為併購標的，但這僅是額外選擇權，不應作為買進主因。真正要觀察的不是拆分題材，而是未來的債務分配與資本配置。
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-stone-50 p-6 rounded-lg">
+                    <div>
+                        <h4 class="font-bold text-stone-800 flex items-center mb-2">
+                            <svg class="h-5 w-5 text-sky-600 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            Comcast 投資人需關注
+                        </h4>
+                        <ul class="list-disc list-inside text-sm text-stone-600 space-y-1 ml-2">
+                            <li>寬頻客戶流失是否止跌</li>
+                            <li>行動門號與企業服務擴張速度</li>
+                            <li>對抗光纖與無線競爭下的利潤率防守</li>
+                            <li>未來資本支出 (Capex) 效率</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-stone-800 flex items-center mb-2">
+                            <svg class="h-5 w-5 text-purple-600 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            NBCUniversal 投資人需關注
+                        </h4>
+                        <ul class="list-disc list-inside text-sm text-stone-600 space-y-1 ml-2">
+                            <li>Peacock 獲利改善進度</li>
+                            <li>體育轉播等高昂內容成本控制</li>
+                            <li>影視與主題樂園創造穩定現金流能力</li>
+                            <li>Comcast 保留之 19.9% 股權未來釋出方式</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 border border-yellow-200 bg-yellow-50 rounded-lg text-sm text-yellow-800">
+                    <span class="font-bold">關鍵決策里程碑：</span> 在最終分拆文件公布前，應等待四項核心資訊以決定公司真實價值：(1) 各自承擔的債務 (目前合併債務達946億美元)、(2) 初始股利政策、(3) 未來資本支出目標、(4) 體育與串流獲利目標。
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Comcast分拆NBCU解析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Comcast分拆相關公開資料 (2026年6月30日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 手機版選單切換 (Mobile Menu Toggle)
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機選單項目後自動收合
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 2. 導航列滾動監聽 (Intersection Observer API for Active Link)
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px -60% 0px', // 調整觸發範圍
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 移除所有 active 狀態
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        // 找到對應的 nav link 並加上 active 狀態
+                        const activeId = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`.nav-item[href="#${activeId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active-nav-link');
+                            activeLink.classList.remove('inactive-nav-link');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 3. 互動資料表格 (Table Rendering and Filtering)
+            const financialData = [
+                { entity: 'Comcast', metric: '寬頻與平台部門營收', value: '199.6 億美元', yoy: '-1%', note: '住宅寬頻營收年減5.1%' },
+                { entity: 'Comcast', metric: '住宅寬頻用戶淨減', value: '6.5 萬戶', yoy: '流失放緩', note: '尚未回到明顯成長' },
+                { entity: 'Comcast', metric: '行動通訊門號增加', value: '43.5 萬條', yoy: '-', note: '總數接近974萬條' },
+                { entity: 'Comcast', metric: '企業服務營收', value: '-', yoy: '+5.8%', note: '提供部分緩衝' },
+                { entity: 'NBCUniversal', metric: '環球主題樂園營收', value: '-', yoy: '+24%', note: '奧蘭多新園區帶動' },
+                { entity: 'NBCUniversal', metric: '主題樂園營業利益', value: '-', yoy: '+33%', note: '獲利能力顯著提升' },
+                { entity: 'NBCUniversal', metric: '影視工作室營收', value: '-', yoy: '+21%', note: '內容授權收入增加' },
+                { entity: 'NBCUniversal', metric: '影視工作室營業利益', value: '-', yoy: '> +100%', note: '呈現倍增' },
+                { entity: 'NBCUniversal', metric: 'Peacock 付費訂戶', value: '4,600 萬戶', yoy: '+12%', note: '收入強勁成長71%' },
+                { entity: 'NBCUniversal', metric: '媒體部門營收(排一次性)', value: '-', yoy: '+12.7%', note: '排除奧運/超級盃效應' },
+                { entity: '集團財務', metric: '合併總債務', value: '946 億美元', yoy: '-', note: '分拆後負債分配未定' },
+                { entity: '集團財務', metric: '自由現金流', value: '39 億美元', yoy: '-', note: '回饋股東約25億美元' },
+                { entity: '集團財務', metric: '網路通訊資本支出', value: '18 億美元', yoy: '+13%', note: '持續投資網路升級' }
+            ];
+
+            const tbody = document.getElementById('dataTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMsg = document.getElementById('noDataMsg');
+
+            function renderTable(data) {
+                tbody.innerHTML = '';
+                if (data.length === 0) {
+                    noDataMsg.classList.remove('hidden');
+                } else {
+                    noDataMsg.classList.add('hidden');
+                    data.forEach((row, index) => {
+                        const tr = document.createElement('tr');
+                        tr.className = index % 2 === 0 ? 'bg-white' : 'bg-stone-50'; // 斑馬紋設計
+                        
+                        // 根據 YoY 判斷顏色
+                        let yoyColor = 'text-stone-900';
+                        if (row.yoy.includes('+')) yoyColor = 'text-emerald-600 font-semibold';
+                        if (row.yoy.includes('-') && row.yoy !== '-') yoyColor = 'text-red-600 font-semibold';
+
+                        // 實體標籤顏色
+                        let entityStyle = 'text-stone-500';
+                        if(row.entity === 'Comcast') entityStyle = 'bg-sky-100 text-sky-800 px-2 py-1 rounded text-xs font-semibold';
+                        if(row.entity === 'NBCUniversal') entityStyle = 'bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-semibold';
+                        if(row.entity === '集團財務') entityStyle = 'bg-stone-200 text-stone-800 px-2 py-1 rounded text-xs font-semibold';
+
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="${entityStyle}">${row.entity}</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${row.metric}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${row.value}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${yoyColor}">${row.yoy}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${row.note}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            }
+
+            // 初始化表格
+            renderTable(financialData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('keyup', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filteredData = financialData.filter(item => {
+                    return Object.values(item).some(val => 
+                        String(val).toLowerCase().includes(term)
+                    );
+                });
+                renderTable(filteredData);
+            });
+
+            // 4. Chart.js 動態圖表
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            // 由於文件主要提到成長率%，這裡繪製各事業體YoY Bar Chart
+            const chartData = {
+                labels: ['企業服務', '媒體部門(排除賽事)', '影視工作室', '主題樂園營收', 'Peacock 營收'],
+                datasets: [{
+                    label: '2026 第一季營收年增長率 (%)',
+                    data: [5.8, 12.7, 21, 24, 71],
+                    backgroundColor: [
+                        'rgba(2, 132, 199, 0.6)',   // sky-600
+                        'rgba(147, 51, 234, 0.6)',  // purple-600
+                        'rgba(168, 85, 247, 0.6)',  // purple-500
+                        'rgba(16, 185, 129, 0.6)',  // emerald-500
+                        'rgba(245, 158, 11, 0.6)'   // amber-500
+                    ],
+                    borderColor: [
+                        'rgb(2, 132, 199)',
+                        'rgb(147, 51, 234)',
+                        'rgb(168, 85, 247)',
+                        'rgb(16, 185, 129)',
+                        'rgb(245, 158, 11)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            };
+
+            const growthChart = new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { family: 'sans-serif' }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '年增率 (YoY %)'
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
