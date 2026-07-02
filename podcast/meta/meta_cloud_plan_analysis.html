@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Meta雲端計畫與AI算力市場震盪</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* 導航列高亮過渡效果 */
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* Tailwind gray-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        /* 調整錨點滾動偏移，避免被固定的 Header 遮擋 */
+        section {
+            scroll-margin-top: 5rem; 
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-700">Meta雲端計畫</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium">核心結論</a>
+                    <a href="#market-reaction" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium">市場反應</a>
+                    <a href="#company-analysis" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium">企業影響分析</a>
+                    <a href="#data-table" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium">產業數據</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium">投資策略</a>
+                </div>
+
+                <!-- 手機版選單按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 shadow-lg">
+                <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50">核心結論</a>
+                <a href="#market-reaction" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50">市場反應</a>
+                <a href="#company-analysis" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50">企業影響分析</a>
+                <a href="#data-table" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50">產業數據</a>
+                <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-sky-600 hover:bg-sky-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 頁首標題區 -->
+    <header class="bg-stone-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                從廣告巨頭到算力賣家：<br class="hidden md:block">
+                <span class="text-sky-400">Meta雲端計畫傳聞，為何震動CoreWeave與Nebius？</span>
+            </h1>
+            <p class="text-xl text-stone-300 max-w-3xl">深度解析 Meta 潛在雲端商業化選項，以及對 AI 算力租賃市場、企業合約與投資策略的關鍵影響。</p>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- Section: 核心結論與資訊卡片 -->
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心結論與關鍵數據</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-lg leading-relaxed text-gray-700 mb-4">
+                    這則消息的投資意義很大，但必須先把事實與推測分開。Meta 正在評估把部分 AI 運算資源與模型服務對外出售的說法，目前仍是一項被市場高度重視的<strong>策略選項</strong>，而非已落地的產品。
+                </p>
+                <p class="text-lg leading-relaxed text-gray-700">
+                    市場強烈反應的原因在於，Meta 若能將原僅供內部使用的 AI 資料中心轉為對外收費平台，將替龐大的資本支出找到新的收入出口。這讓依賴 Meta 為大客戶的 AI 雲端公司（如 CoreWeave、Nebius）面臨「客戶變成競爭者」的潛在風險重新估值。
+                </p>
+            </div>
+
+            <!-- 資訊卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-sky-50 rounded-lg shadow p-6 border-l-4 border-sky-500">
+                    <h3 class="text-lg font-bold text-sky-800 mb-2">Meta 財務壓力與轉機</h3>
+                    <p class="text-3xl font-extrabold text-sky-900 mb-2">$1,250億<span class="text-sm font-normal text-sky-700"> ~ 1,450億</span></p>
+                    <p class="text-sm text-sky-700">全年資本支出指引。龐大的 AI 資本支出促使 Meta 考慮閒置算力商業化，以降低對單一廣告營收的依賴。</p>
+                </div>
+                <div class="bg-rose-50 rounded-lg shadow p-6 border-l-4 border-rose-500">
+                    <h3 class="text-lg font-bold text-rose-800 mb-2">CoreWeave 高額合約</h3>
+                    <p class="text-3xl font-extrabold text-rose-900 mb-2">$210億<span class="text-sm font-normal text-rose-700"> 合約至 2032</span></p>
+                    <p class="text-sm text-rose-700">儘管股價下跌，但 CoreWeave 與 Meta 的長期合約未取消。風險在於未來 Meta 是否減少新增外包或壓低市場價格。</p>
+                </div>
+                <div class="bg-orange-50 rounded-lg shadow p-6 border-l-4 border-orange-500">
+                    <h3 class="text-lg font-bold text-orange-800 mb-2">Nebius 資本支出擴張</h3>
+                    <p class="text-3xl font-extrabold text-orange-900 mb-2">$24.7億<span class="text-sm font-normal text-orange-700"> Q1支出</span></p>
+                    <p class="text-sm text-orange-700">先建容量後等營收模式。雖然與 Meta 有 5 年 $120 億合約保護，但高資本支出使其對未來市場價格極度敏感。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 市場反應動態圖表 -->
+        <section id="market-reaction" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">傳聞當日 (7月1日) 股價市場反應</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-gray-600 mb-4">Meta 雲端計畫的風聲釋出後，市場迅速對供應鏈及算力租賃業者進行重新定價。下圖顯示 7 月 1 日相關企業的股價震盪幅度。</p>
+                
+                <!-- Chart.js 容器 -->
+                <div class="relative h-80 w-full">
+                    <canvas id="marketChart"></canvas>
+                </div>
+                <p class="text-xs text-gray-400 mt-4 text-center">*資料來源：報告內文提及之市場數據</p>
+            </div>
+        </section>
+
+        <!-- Section: 企業影響分析 -->
+        <section id="company-analysis" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">企業影響深度分析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Meta 卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Meta：尋求新故事與財務防禦
+                    </h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700 flex-grow">
+                        <li><strong>現狀：</strong>Q1 營收高達 $563.1億，幾乎全來自廣告。資本支出極高。</li>
+                        <li><strong>動機：</strong>將部分基礎設施用於模型 API 或算力租賃，不再讓 AI 晶片僅是成本中心。</li>
+                        <li><strong>挑戰：</strong>企業雲端需要資安、技術支援及銷售體系，Meta 在企業端仍屬後進者。</li>
+                        <li><strong>現實：</strong>可能只是為未來超額建置的可能性預作商業化安排，而非目前已有大量閒置算力（近期曾被報導內部資源受限）。</li>
+                    </ul>
+                </div>
+
+                <!-- CoreWeave 卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-rose-700 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        CoreWeave：合約未變，考驗長期議價權
+                    </h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700 flex-grow">
+                        <li><strong>現狀：</strong>Q1 營收大增至 $20.78億，與 Meta 擴大長期合作至 2032 年。</li>
+                        <li><strong>風險：</strong>高資本支出、高融資需求。只要 GPU 租賃價格或使用率有壓力，淨利流將受放大影響。</li>
+                        <li><strong>未來挑戰：</strong>Meta 未來是否會減少新增外包算力？是否會以自有容量壓低市場租賃價格？</li>
+                    </ul>
+                </div>
+
+                <!-- Nebius 卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-orange-700 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                        Nebius：合約有保護，但資金壓力更大
+                    </h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700 flex-grow">
+                        <li><strong>現狀：</strong>三月簽訂五年協議，2027年起提供 Meta $120億容量，外加 $150億其他容量選項。</li>
+                        <li><strong>風險：</strong>投資邏輯是「先建容量、後等營收」。Q1 營業核心仍虧損 $1.28億。</li>
+                        <li><strong>未來挑戰：</strong>面臨市場更嚴格檢查其融資能力與客戶組合，剩餘容量是否能順利出售給第三方客戶是關鍵。</li>
+                    </ul>
+                </div>
+
+                <!-- 雲端巨頭 卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-green-700 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        三大雲端 (AWS/Azure/GCP)：短期衝擊小
+                    </h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700 flex-grow">
+                        <li><strong>現狀：</strong>擁有完整的企業客戶網路、軟體服務與安全工具。</li>
+                        <li><strong>影響：</strong>短期內 Meta 較難直接取代其雲端生態系。</li>
+                        <li><strong>未來挑戰：</strong>Meta 更可能是壓低「高階 AI 運算價格」及爭奪開發者模型流量的競爭者。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 互動資料表格 -->
+        <section id="data-table" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業合約與財務數據追蹤</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <p class="text-gray-600 mb-4 md:mb-0">使用下方搜尋框篩選企業名稱或關鍵字：</p>
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="搜尋企業或關鍵字..." class="w-full md:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">企業名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">產業角色</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Q1 相關財務數據</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">與 Meta 合約 / 狀態</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">核心風險與挑戰</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- JS將動態渲染此處 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 投資策略 -->
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總結與投資策略</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-xl font-semibold text-gray-800 mb-4">判斷準則：不要把一天的股價反應，誤判為基本面結論</p>
+                <div class="space-y-6">
+                    <div class="pl-4 border-l-4 border-indigo-400">
+                        <h4 class="font-bold text-lg text-indigo-800">對 Meta 投資人</h4>
+                        <p class="text-gray-700">屬中長期正面選項，但尚不能納入營收模型。觀察重點：是否正式公布產品、計價模式與首批客戶，以及這項業務是否會將資本支出推得更高。若能「不大幅提高支出」創造收入，將大幅提振市場信心。</p>
+                    </div>
+                    <div class="pl-4 border-l-4 border-rose-400">
+                        <h4 class="font-bold text-lg text-rose-800">對 CoreWeave 與 Nebius 投資人</h4>
+                        <p class="text-gray-700">急跌不代表合約消失。評估指標需從「訂單金額」轉為「客戶是否自建、價格是否下滑、是否過度依賴融資」。當最大客戶轉為潛在競爭者，商業模式風險確實已上升。</p>
+                    </div>
+                    <div class="pl-4 border-l-4 border-emerald-400">
+                        <h4 class="font-bold text-lg text-emerald-800">對 硬體與資料中心供應鏈 (Nvidia, AMD 等)</h4>
+                        <p class="text-gray-700">AI 算力需求強勁，但市場焦點轉變。從「需要多少 GPU」，轉為關注「建成後由誰付費、使用率能否維持、雲端公司能否賺到合理回報」。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Meta雲端計畫與AI算力市場震盪。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Meta與AI算力市場相關公開資料 (2026年07月02日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. 手機版選單切換 ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機選單項目後自動關閉
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- 2. 導航列高亮狀態更新 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#desktop-menu .nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // 調整觸發範圍
+                threshold: 0
+            };
+
+            const observerCallback = (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 移除所有 active class
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        // 加上對應的 active class
+                        const activeLink = document.querySelector(`#desktop-menu a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.remove('inactive-nav-link');
+                            activeLink.classList.add('active-nav-link');
+                        }
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            sections.forEach(sec => observer.observe(sec));
+
+            // --- 3. 動態圖表 (Chart.js) ---
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Meta', 'CoreWeave', 'Nebius'],
+                    datasets: [{
+                        label: '7月1日 股價/估值波動 (%)',
+                        data: [8.8, -13.9, -17.0],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)',  // Meta: Sky
+                            'rgba(244, 63, 94, 0.7)',   // CoreWeave: Rose
+                            'rgba(249, 115, 22, 0.7)'   // Nebius: Orange
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(244, 63, 94)',
+                            'rgb(249, 115, 22)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '漲跌幅 (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- 4. 互動資料表格 ---
+            const productData = [
+                {
+                    name: 'Meta',
+                    role: '社群巨頭 / 潛在AI雲端供應商',
+                    financials: 'Q1營收 $563.1億美元 (廣告佔$550.2億) / 資本支出指引 $1,250-$1,450億',
+                    contract: '內部評估商業化中，尚未正式推出。',
+                    risk: '需建立企業級資安、銷售及技術支援體系。內部曾因需求過大遭限制算力。'
+                },
+                {
+                    name: 'CoreWeave',
+                    role: '專注AI算力租賃平台 (Neocloud)',
+                    financials: 'Q1營收 $20.78億美元 / 淨損 $7.4億美元 / 債務 $173億美元',
+                    contract: '與 Meta 擴大合約至2032年底，金額約 $210億美元。',
+                    risk: '高度依賴融資與建置。面臨客戶(Meta)轉為競爭者及潛在的算力市場降價壓力。'
+                },
+                {
+                    name: 'Nebius',
+                    role: 'AI算力基礎設施平台',
+                    financials: 'Q1營收 $3.99億美元 / 核心營業虧損 $1.28億美元 / 債務 $84.3億美元',
+                    contract: '五年期協議，2027年起 $120億專屬容量，外加 $150億其他容量剩餘購買承諾。',
+                    risk: '「先建容量、後等營收」模式。對未來第三方客戶擴張與市場算力價格極度敏感。'
+                },
+                {
+                    name: 'Amazon (AWS) / Microsoft (Azure) / Alphabet (GCP)',
+                    role: '大型公有雲巨頭',
+                    financials: '市場規模龐大，非單純算力租賃',
+                    contract: '提供全面企業雲端服務及資料庫。',
+                    risk: '短期內難被取代，但 Meta 可能壓低高階 AI 運算價格，爭奪模型開發者。'
+                }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+
+            // 渲染表格函數
+            const renderTable = (data) => {
+                tableBody.innerHTML = '';
+                if(data.length === 0){
+                    tableBody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">查無相關資料</td></tr>';
+                    return;
+                }
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-sky-50 transition-colors duration-150';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">${item.name}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${item.role}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${item.financials}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${item.contract}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${item.risk}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            };
+
+            // 初始渲染
+            renderTable(productData);
+
+            // 搜尋過濾功能
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => {
+                    return item.name.toLowerCase().includes(keyword) || 
+                           item.role.toLowerCase().includes(keyword) ||
+                           item.contract.toLowerCase().includes(keyword) ||
+                           item.risk.toLowerCase().includes(keyword);
+                });
+                renderTable(filteredData);
+            });
+
+        });
+    </script>
+</body>
+</html>
