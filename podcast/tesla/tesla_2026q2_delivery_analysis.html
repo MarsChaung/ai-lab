@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-解析Tesla交車勝估值跌</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles for active/inactive navigation links */
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* Tailwind stone-600 */
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- Sticky Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Brand -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-bold text-xl text-sky-600 tracking-wider">Tesla 2026Q2交車分析</span>
+                </div>
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8" id="desktop-nav">
+                    <a href="#summary" class="nav-item inactive-nav-link transition-colors duration-200 py-2">核心摘要</a>
+                    <a href="#data-chart" class="nav-item inactive-nav-link transition-colors duration-200 py-2">數據解析</a>
+                    <a href="#reasons" class="nav-item inactive-nav-link transition-colors duration-200 py-2">五大痛點</a>
+                    <a href="#table-data" class="nav-item inactive-nav-link transition-colors duration-200 py-2">重點指標</a>
+                    <a href="#conclusion" class="nav-item inactive-nav-link transition-colors duration-200 py-2">投資啟示</a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-inner">
+                <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">核心摘要</a>
+                <a href="#data-chart" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">數據解析</a>
+                <a href="#reasons" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">五大痛點</a>
+                <a href="#table-data" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">重點指標</a>
+                <a href="#conclusion" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資啟示</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Page Title -->
+        <div class="mb-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">交付量大勝，估值卻失速</h1>
+            <p class="text-xl text-stone-600">Tesla 不是輸在賣車，而是市場要看到 AI 與現金流的證明</p>
+        </div>
+
+        <!-- Section 1: Summary -->
+        <section id="summary" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心摘要</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">矛盾的市場反應</h3>
+                    <p class="text-stone-700 leading-relaxed">
+                        Tesla 第二季交付成績遠優於平均預期（48萬輛 vs 預期40.6萬輛），但公布後股價卻重挫 7.5%。市場並未否定其賣車成績，而是認為「交付量的驚喜」不足以證明其獲利能力與需求品質。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">估值邏輯的轉變</h3>
+                    <p class="text-stone-700 leading-relaxed">
+                        Tesla 的股價早已不是單純用汽車銷量來定價；它更像一張押注自動駕駛、機器人、儲能與人工智慧的長期期權。高達1.6兆美元的估值，需要大規模現金流與 AI 變現來支撐。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Data Visualization -->
+        <section id="data-chart" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">交付與儲能數據視覺化</h2>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Delivery Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">第二季車輛交付表現 (輛)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="deliveryChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 text-center">實際交付量比平均預期高出約 18%</p>
+                </div>
+                <!-- Energy Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">儲能產品部署 (GWh)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="energyChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-500 mt-4 text-center">成長強勁但略低於市場預期的 13.8 GWh</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 5 Reasons -->
+        <section id="reasons" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場拋售的五大核心原因</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold mb-4">1</div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">營收線索 ≠ 獲利保證</h3>
+                    <p class="text-stone-600 text-sm">
+                        交付量僅是營運指標，市場擔憂降價促銷與融資補貼會壓縮毛利率。投資人更關心「每賣一輛車能賺多少錢」，而非單純的數量。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold mb-4">2</div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">庫存去化效應</h3>
+                    <p class="text-stone-600 text-sm">
+                        第二季交付量比產量多出 2.8 萬輛，代表部分交付來自第一季庫存。這雖是正向修正，但不等同於全新需求的高速成長軌道。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold mb-4">3</div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">需求復甦具侷限性</h3>
+                    <p class="text-stone-600 text-sm">
+                        復甦主因來自歐洲（油價、補貼），但美國市場受補貼取消壓力，中國市場則面臨 BYD 等本土品牌的高強度競爭，長期動能待確認。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow">
+                    <div class="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold mb-4">4</div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">儲能表現略遜高標</h3>
+                    <p class="text-stone-600 text-sm">
+                        儲能業務毛利率高達 39.5%，是未來的現金流支柱。第二季部署 13.5 GWh 雖有進步，但略低於預期，無法完全抵銷汽車獲利的隱憂。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 hover:shadow-xl transition-shadow md:col-span-2 lg:col-span-1 border-2 border-stone-100">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold mb-4">5</div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">AI 估值的嚴格檢視</h3>
+                    <p class="text-stone-600 text-sm">
+                        Tesla 預計 2026 資本支出超 250 億美元投入 AI 與機器人。高昂估值反映的是 Robotaxi 等軟體收入期待，單靠賣車數據不足以支撐這份 AI 信仰。
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Table -->
+        <section id="table-data" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Q2 營運與財務重點數據</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="mb-4">
+                    <label for="searchInput" class="block text-sm font-medium text-stone-700 mb-1">快速搜尋：</label>
+                    <input type="text" id="searchInput" placeholder="輸入關鍵字 (如：儲能、交付、預期...)" class="w-full md:w-1/3 px-4 py-2 border border-stone-300 rounded-md focus:ring-sky-500 focus:border-sky-500 transition-colors">
+                </div>
+
+                <div class="overflow-x-auto h-96 relative rounded-md border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200 text-left">
+                        <thead class="bg-stone-50 sticky top-0 z-10 shadow-sm">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider">類別</th>
+                                <th scope="col" class="px-6 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider">指標項目</th>
+                                <th scope="col" class="px-6 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider">數據 / 數值</th>
+                                <th scope="col" class="px-6 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider">說明備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- 透過 JS 動態產生資料 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Conclusion -->
+        <section id="conclusion" class="mb-16 pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資人啟示：AI 平台混合體的考驗</h2>
+            
+            <div class="bg-stone-800 rounded-lg shadow-lg p-8 text-stone-100">
+                <p class="text-lg leading-relaxed mb-6">
+                    Tesla 已經不能單純用傳統車廠的「交付量優於預期就買進」邏輯來操作。市場目前將其視為 <strong>「電動車、儲能與 AI 平台」</strong> 的混合體。
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-stone-700 p-5 rounded-md">
+                        <h4 class="text-sky-400 font-bold mb-2 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                            看多者觀點
+                        </h4>
+                        <p class="text-stone-300 text-sm">
+                            認為車業本業觸底反彈，Model Y 更新維持競爭力，且自動駕駛與機器人最終能將龐大的車隊硬體與算力轉化為高毛利的軟體服務收入。
+                        </p>
+                    </div>
+                    <div class="bg-stone-700 p-5 rounded-md">
+                        <h4 class="text-amber-400 font-bold mb-2 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                            市場觀望焦點
+                        </h4>
+                        <p class="text-stone-300 text-sm">
+                            在等待下一次財報公布毛利率、自由現金流，以及 Robotaxi 擴張速度與 FSD 滲透率之前，投資人將謹慎衡量這些遠期承諾是否能支撐現有估值與巨額資本支出。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-解析Tesla交車勝估值跌。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Tesla相關公開資料 (2026年07月03日)。</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Intersection Observer for Active Nav State
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('#desktop-nav .nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // Trigger when section is in top part of viewport
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Remove active classes from all links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    });
+
+                    // Add active class to corresponding link
+                    const activeLink = document.querySelector(`#desktop-nav a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('inactive-nav-link');
+                        activeLink.classList.add('active-nav-link');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // 3. Interactive Data Table (Real Data)
+        const productData = [
+            { category: '汽車業務', metric: 'Q2 總生產量', value: '451,758 輛', note: '較交付量少約2.8萬輛' },
+            { category: '汽車業務', metric: 'Q2 總交付量', value: '480,126 輛', note: '優於平均預期約18%' },
+            { category: '汽車業務', metric: 'Model 3/Y 合計交付', value: '467,762 輛', note: '絕對主力產品' },
+            { category: '汽車業務', metric: 'Q1 總交付量', value: '358,023 輛', note: '前期基期' },
+            { category: '市場預期', metric: '交付平均預期(Tesla版)', value: '406,024 輛', note: '彙整22家分析師' },
+            { category: '市場預期', metric: '交付中位數', value: '408,609 輛', note: '官方彙整數據' },
+            { category: '市場預期', metric: '交付預期(Visible Alpha)', value: '402,776 輛', note: '路透社引用數據' },
+            { category: '儲能業務', metric: 'Q2 儲能部署', value: '13.5 GWh', note: '略低於預期13.8 GWh' },
+            { category: '儲能業務', metric: 'Q1 儲能部署', value: '8.8 GWh', note: '前期數據' },
+            { category: '儲能業務', metric: 'Q1 儲能事業毛利率', value: '39.5%', note: '顯著高於汽車本業' },
+            { category: '財務數據', metric: 'Q1 研發費用', value: '年增 38%', note: '反映AI與自動駕駛投入增加' },
+            { category: '財務數據', metric: '2026年預計資本支出', value: '> 250 億美元', note: '用於 AI、Robotaxi 等設施' },
+            { category: '產品動態', metric: 'Model Y L 起售價', value: '61,990 美元', note: '美國新推六人座/三排座椅' }
+        ];
+
+        const tableBody = document.getElementById('dataTableBody');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-sm text-stone-500">找不到符合的資料</td></tr>`;
+                return;
+            }
+            
+            data.forEach((item, index) => {
+                const rowClass = index % 2 === 0 ? 'bg-white' : 'bg-stone-50';
+                const html = `
+                    <tr class="${rowClass} hover:bg-sky-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.category}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-700">${item.metric}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-sky-600">${item.value}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${item.note}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        // Initial Render
+        renderTable(productData);
+
+        // Search Filter
+        searchInput.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = productData.filter(item => {
+                return item.category.toLowerCase().includes(searchTerm) ||
+                       item.metric.toLowerCase().includes(searchTerm) ||
+                       item.value.toLowerCase().includes(searchTerm) ||
+                       item.note.toLowerCase().includes(searchTerm);
+            });
+            renderTable(filteredData);
+        });
+
+        // 4. Chart.js Implementation
+        // Delivery Bar Chart
+        const ctxDelivery = document.getElementById('deliveryChart').getContext('2d');
+        new Chart(ctxDelivery, {
+            type: 'bar',
+            data: {
+                labels: ['Q2 生產量', 'Q2 交付量', '市場平均預期'],
+                datasets: [{
+                    label: '車輛數 (萬輛)',
+                    data: [45.17, 48.01, 40.60],
+                    backgroundColor: [
+                        'rgba(148, 163, 184, 0.8)', // slate-400
+                        'rgba(14, 165, 233, 0.9)',  // sky-500
+                        'rgba(203, 213, 225, 0.8)'  // slate-300
+                    ],
+                    borderColor: [
+                        'rgb(148, 163, 184)',
+                        'rgb(14, 165, 233)',
+                        'rgb(203, 213, 225)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' 萬輛';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: '萬輛' }
+                    }
+                }
+            }
+        });
+
+        // Energy Line/Bar Chart
+        const ctxEnergy = document.getElementById('energyChart').getContext('2d');
+        new Chart(ctxEnergy, {
+            type: 'bar',
+            data: {
+                labels: ['Q1 部署', 'Q2 部署', '市場平均預期'],
+                datasets: [{
+                    label: '部署量 (GWh)',
+                    data: [8.8, 13.5, 13.8],
+                    backgroundColor: [
+                        'rgba(168, 162, 158, 0.7)', // stone-400
+                        'rgba(16, 185, 129, 0.8)',  // emerald-500
+                        'rgba(214, 211, 209, 0.7)'  // stone-300
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'GWh' }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
