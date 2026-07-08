@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Vertex新成長曲線</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9', // sky-500
+                        secondary: '#1e293b', // slate-800
+                        accent: '#f59e0b', // amber-500
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for table container */
+        .table-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-scroll::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-stone-800 font-sans antialiased">
+
+    <!-- Navbar (Sticky) -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-black text-sky-600 tracking-tighter">Vertex <span class="text-stone-800 text-lg font-bold ml-1">投資報告</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-link text-stone-600 hover:text-sky-600 font-medium transition-colors text-sm py-2">核心策略</a>
+                    <a href="#financials" class="nav-link text-stone-600 hover:text-sky-600 font-medium transition-colors text-sm py-2">財務與現狀</a>
+                    <a href="#pipeline" class="nav-link text-stone-600 hover:text-sky-600 font-medium transition-colors text-sm py-2">產品與管線</a>
+                    <a href="#acquisition" class="nav-link text-stone-600 hover:text-sky-600 font-medium transition-colors text-sm py-2">併購與展望</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded p-1">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">核心策略</a>
+                <a href="#financials" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">財務與現狀</a>
+                <a href="#pipeline" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">產品與管線</a>
+                <a href="#acquisition" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">併購與展望</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-sky-800 to-slate-800 text-white py-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="md:w-3/4">
+                <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+                    Vertex 的下一個十年：<br>
+                    <span class="text-sky-400">從囊腫纖維化現金牛，到內分泌罕見病的新成長曲線</span>
+                </h1>
+                <p class="text-lg text-slate-300 mb-8 max-w-2xl">
+                    Vertex Pharmaceuticals (VRTX) 正在透過百億併購 Crinetics，將強大的 CF 產品線所產生的現金流，轉化為內分泌罕見病領域的新成長引擎。
+                </p>
+            </div>
+        </div>
+        <!-- Abstract BG elements -->
+        <div class="absolute -right-20 -top-20 w-96 h-96 bg-sky-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute right-40 -bottom-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- Section 1: Summary -->
+        <section id="summary" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">轉型策略：邁向多疾病領域平台</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-4 text-stone-600 leading-relaxed text-lg">
+                    <p>
+                        Vertex 的核心基本盤是囊腫纖維化（CF）的創新藥物，這些藥物針對疾病背後的 CFTR 蛋白功能問題進行治療。目前其調節劑在核心市場可治療接近 <strong>95%</strong> 的 CF 患者。
+                    </p>
+                    <p>
+                        公司近年最重要的任務是從「CF 單一強項公司」轉型為 <strong>「多疾病領域平台公司」</strong>。除了 CF 之外，公司已成功推出基因編輯療法 <span class="text-sky-700 font-semibold">CASGEVY</span>，以及進軍疼痛治療市場的新一類非鴉片止痛藥 <span class="text-sky-700 font-semibold">JOURNAVX</span>。
+                    </p>
+                    <p>
+                        從獲利模式來看，Vertex 不依靠大量低價藥品，而是專注於高價值、具專利保護且獲保險給付支持的創新療法，使其擁有堅不可摧的護城河。
+                    </p>
+                </div>
+                
+                <!-- Info Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-sky-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        投資亮點
+                    </h3>
+                    <ul class="space-y-3 text-sm text-stone-600">
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✓</span>
+                            <span>強大的 CF 現金牛提供財務穩定性</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✓</span>
+                            <span>CASGEVY 與 JOURNAVX 證明研發與商業化實力</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-500 mr-2">✓</span>
+                            <span>進軍內分泌罕見病市場打造新成長曲線</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Financials -->
+        <section id="financials" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">財務表現與強大現金流</h2>
+            
+            <!-- Metrics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border border-gray-100">
+                    <p class="text-sm font-medium text-stone-500 mb-1">2026 Q1 總營收</p>
+                    <p class="text-3xl font-bold text-stone-800">29.87 <span class="text-lg font-normal text-stone-500">億美元</span></p>
+                    <div class="mt-2 flex items-center text-sm text-emerald-600">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        年增 8%
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border border-gray-100">
+                    <p class="text-sm font-medium text-stone-500 mb-1">2026 Q1 CF 產品收入占比</p>
+                    <p class="text-3xl font-bold text-stone-800">97.5 <span class="text-lg font-normal text-stone-500">%</span></p>
+                    <p class="mt-2 text-sm text-stone-500">約 29.15 億美元，仍為核心金雞母</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border border-gray-100">
+                    <p class="text-sm font-medium text-stone-500 mb-1">期末現金與有價證券</p>
+                    <p class="text-3xl font-bold text-sky-600">130 <span class="text-lg font-normal text-stone-500">億美元</span></p>
+                    <p class="mt-2 text-sm text-stone-500">為百億併購提供堅實後盾</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border border-gray-100">
+                    <p class="text-sm font-medium text-stone-500 mb-1">2026 預期非 CF 收入</p>
+                    <p class="text-3xl font-bold text-emerald-600">&ge; 5 <span class="text-lg font-normal text-stone-500">億美元</span></p>
+                    <p class="mt-2 text-sm text-stone-500">新產品開始貢獻，初期成長階段</p>
+                </div>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
+                <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">營收與資產狀況 (2025 - 2026 Q1)</h3>
+                <div class="w-full h-80">
+                    <canvas id="financialChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Pipeline & Products -->
+        <section id="pipeline" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">核心產品與研發管線分析</h2>
+            <p class="text-stone-600 mb-6">利用下方的篩選功能，快速檢視 Vertex 現有主力產品以及透過併購獲得的潛力新星。</p>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
+                <!-- Search Input -->
+                <div class="mb-4 relative max-w-md">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <input type="text" id="searchInput" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm" placeholder="搜尋產品名稱、適應症或狀態...">
+                </div>
+
+                <!-- Interactive Table -->
+                <div class="table-scroll overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">產品名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">治療領域 / 適應症</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">產品特性</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">開發/上市狀態</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Table rows will be injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Empty State (hidden by default) -->
+                <div id="emptyState" class="hidden text-center py-8 text-gray-500">
+                    沒有找到符合的結果。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Acquisition & Outlook -->
+        <section id="acquisition" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">百億併購：Crinetics 與未來展望</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Details -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">併購交易細節</h3>
+                    <p class="text-stone-600 mb-4">Vertex 於 2026年7月6日 宣布以每股 <strong class="text-sky-600">85美元</strong> 現金收購 Crinetics，總股權價值約 100 億美元（淨交易價值約 88 億美元）。</p>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex"><span class="mr-2">📍</span> <strong>溢價幅度：</strong> 較前一交易日收盤價溢價約 102%。</li>
+                        <li class="flex"><span class="mr-2">📍</span> <strong>財務影響：</strong> 預期於 2029 年開始增厚 Non-GAAP 營業利益。</li>
+                        <li class="flex"><span class="mr-2">📍</span> <strong>資金來源：</strong> 現金與債務混合支付，取得 45 億美元承諾性過橋融資。</li>
+                        <li class="flex"><span class="mr-2">📍</span> <strong>最高潛力：</strong> PALSONIFY 與 atumelnant 在高峰期預計創造超過 50 億美元年收入。</li>
+                    </ul>
+                </div>
+
+                <!-- Analysis -->
+                <div class="space-y-4 text-stone-600 leading-relaxed text-lg">
+                    <p>
+                        <strong>為何選擇 Crinetics？</strong> 這筆交易比單純追逐熱門減重藥更符合 Vertex 的公司性格。Vertex 擅長罕見病、專科醫師市場、保險給付談判；而 Crinetics 的內分泌罕見病產品，完全切中這套既有的商業能力。
+                    </p>
+                    <p>
+                        <strong>市場反應與風險：</strong> 收購消息公布後，Vertex 股價微跌 2%。這反映了市場的擔憂：付出的價格偏高，且部分價值依賴未來幾年的臨床成功與商業推廣。
+                    </p>
+                    <p>
+                        <strong>投資結論：</strong> Vertex 目前本益比約 30 倍，被視為「高品質醫療成長股」。短期不宜因併購題材追高，但中長期來看，這是一次利用現金牛建立第五個治療領域（內分泌疾病）的優秀戰略佈局。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8 border-t-4 border-sky-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Vertex併購與新成長曲線。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-2 text-stone-400">資料來源：基於網路中 Vertex Pharmaceuticals (VRTX) 相關公開資料 (2026年07月08日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            const iconPath = document.getElementById('menu-icon-path');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    // Hamburger icon
+                    iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                } else {
+                    // Close (X) icon
+                    iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                }
+            }
+
+            mobileBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // 2. Active Link State on Scroll using Intersection Observer
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -80% 0px', // Adjust to trigger when section is in top view
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // Update desktop links
+                        navLinks.forEach(link => {
+                            link.classList.remove('text-sky-600', 'border-b-2', 'border-sky-600');
+                            link.classList.add('text-stone-600');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('text-sky-600', 'border-b-2', 'border-sky-600');
+                                link.classList.remove('text-stone-600');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 3. Dynamic Chart (Chart.js)
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            const financialChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2025 全年營收', '2026 Q1 總營收', '2026 Q1 期末現金', 'Crinetics 收購價'],
+                    datasets: [{
+                        label: '金額 (億美元)',
+                        data: [120, 29.87, 130, 88], // Net transaction value is 88
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.7)',  // Sky-500
+                            'rgba(14, 165, 233, 0.9)',
+                            'rgba(16, 185, 129, 0.7)',  // Emerald-500
+                            'rgba(245, 158, 11, 0.7)'   // Amber-500
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(14, 165, 233)',
+                            'rgb(16, 185, 129)',
+                            'rgb(245, 158, 11)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '十億美元 (Billion USD) 換算為 億美元'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 4. Interactive Data Table
+            const productData = [
+                {
+                    name: 'TRIKAFTA / KAFTRIO 等',
+                    domain: '囊腫纖維化 (CF)',
+                    feature: 'CFTR 蛋白調節劑',
+                    status: '已上市',
+                    statusColor: 'bg-green-100 text-green-800',
+                    note: '公司核心現金牛，2026 Q1 佔總營收 >97%'
+                },
+                {
+                    name: 'CASGEVY',
+                    domain: '鐮刀型細胞疾病 / 地中海貧血',
+                    feature: 'CRISPR/Cas9 基因編輯療法',
+                    status: '已上市 (FDA批准)',
+                    statusColor: 'bg-green-100 text-green-800',
+                    note: '第一個獲FDA核准的CRISPR療法'
+                },
+                {
+                    name: 'JOURNAVX',
+                    domain: '中度至重度急性疼痛',
+                    feature: '新一類非鴉片止痛藥',
+                    status: '已上市',
+                    statusColor: 'bg-green-100 text-green-800',
+                    note: '上市後累計處方破百萬張，面臨定價與競爭挑戰'
+                },
+                {
+                    name: 'PALSONIFY',
+                    domain: '成人肢端肥大症',
+                    feature: '每日一次口服藥',
+                    status: '已上市',
+                    statusColor: 'bg-blue-100 text-blue-800',
+                    note: '透過 Crinetics 併購取得，美國首個口服療法'
+                },
+                {
+                    name: 'atumelnant',
+                    domain: '先天性腎上腺增生症 (CAH) / Cushing\'s',
+                    feature: '每日一次口服 ACTH 拮抗劑',
+                    status: '後期開發中',
+                    statusColor: 'bg-purple-100 text-purple-800',
+                    note: '透過 Crinetics 併購取得，具備高成長潛力'
+                }
+            ];
+
+            const tbody = document.getElementById('productTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const emptyState = document.getElementById('emptyState');
+
+            function renderTable(data) {
+                tbody.innerHTML = ''; // Clear current
+                if (data.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+                
+                emptyState.classList.add('hidden');
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-gray-50 transition-colors';
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-bold text-gray-900">${item.name}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">${item.domain}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-500">${item.feature}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${item.statusColor}">
+                                ${item.status}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-gray-500 line-clamp-2" title="${item.note}">${item.note}</div>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Initial render
+            renderTable(productData);
+
+            // Filter logic
+            searchInput.addEventListener('keyup', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = productData.filter(item => {
+                    return item.name.toLowerCase().includes(term) ||
+                           item.domain.toLowerCase().includes(term) ||
+                           item.status.toLowerCase().includes(term) ||
+                           item.feature.toLowerCase().includes(term);
+                });
+                renderTable(filtered);
+            });
+        });
+    </script>
+</body>
+</html>
