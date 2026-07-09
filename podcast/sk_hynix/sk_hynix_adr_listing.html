@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-SK Hynix赴美掛牌與AI記憶體週期</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 客製化捲軸平滑效果與選單過渡 */
+        .nav-link {
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+        .active-nav-link {
+            color: #0284c7 !important; /* sky-600 */
+            font-weight: 700 !important;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 antialiased">
+
+    <!-- Sticky Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Site Name -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-xl font-bold text-sky-700">SK Hynix 赴美發行 ADR</a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#summary" class="nav-link inactive-nav-link px-1 py-5 text-sm">核心重點</a>
+                    <a href="#news" class="nav-link inactive-nav-link px-1 py-5 text-sm">新聞核實</a>
+                    <a href="#impact" class="nav-link inactive-nav-link px-1 py-5 text-sm">產業連動</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link px-1 py-5 text-sm">投資策略</a>
+                    <a href="#data" class="nav-link inactive-nav-link px-1 py-5 text-sm">數據圖表</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">核心重點</a>
+                <a href="#news" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">新聞核實</a>
+                <a href="#impact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">產業連動</a>
+                <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略</a>
+                <a href="#data" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">數據圖表</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+        
+        <!-- Section: 核心重點 (Summary) -->
+        <section id="summary" data-section class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">從GPU到HBM：記憶體超級週期</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Info Card 1 -->
+                <div class="bg-blue-50 rounded-lg shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition">
+                    <h3 class="text-lg font-bold text-blue-800 mb-2">事件核心</h3>
+                    <p class="text-stone-700">SK Hynix 赴美發行 ADR (代號 SKHY)，市場需求高達可供股份七倍以上，確認 AI 基礎建設的資金外溢效應。</p>
+                </div>
+                <!-- Info Card 2 -->
+                <div class="bg-emerald-50 rounded-lg shadow-md p-6 border-l-4 border-emerald-500 hover:shadow-lg transition">
+                    <h3 class="text-lg font-bold text-emerald-800 mb-2">產業意義</h3>
+                    <p class="text-stone-700">市場重新定價 AI 基礎建設全鏈條，證明稀缺資產已從單一 GPU (Nvidia) 擴散至 HBM 記憶體等系統級零組件。</p>
+                </div>
+                <!-- Info Card 3 -->
+                <div class="bg-amber-50 rounded-lg shadow-md p-6 border-l-4 border-amber-500 hover:shadow-lg transition">
+                    <h3 class="text-lg font-bold text-amber-800 mb-2">投資啟示</h3>
+                    <p class="text-stone-700">AI 擴散行情持續，重點關注 Micron 的估值重評與 Broadcom/Marvell 等連動供應鏈，但需留意景氣循環與產能紀律。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 新聞核實與事件意義 -->
+        <section id="news" data-section class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">新聞核實與事件意義</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                            <span class="w-2 h-2 bg-sky-500 rounded-full mr-2"></span> ADR 募資細節
+                        </h3>
+                        <p class="text-stone-600 leading-relaxed mb-4">
+                            SK Hynix 透過 ADR (American Depositary Receipts) 在 Nasdaq 掛牌。發行價擬定為每份 ADR <strong>149美元</strong>，實際募資規模約 <strong>265億美元</strong>。市場需求強勁，超額認購達7倍以上。預計發行 1.779 億份 ADS (代表 1779 萬股新普通股)。
+                        </p>
+                        <p class="text-stone-600 leading-relaxed">
+                            這不僅是半導體事件，更是大型 AI 基礎建設融資潮的一部分，可提高美國大型機構、ETF 與動能投資人直接持有 SK Hynix 的「可及性」。
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                            <span class="w-2 h-2 bg-sky-500 rounded-full mr-2"></span> 突破 GPU 單一思維
+                        </h3>
+                        <p class="text-stone-600 leading-relaxed mb-4">
+                            沒有足夠快、穩定、大容量的 HBM，Nvidia GPU 運算力再強也無法發揮。這筆交易象徵美股投資人正在重新定價包含 GPU、HBM、ASIC、先進封裝、電力與散熱等整條 AI 供應鏈。
+                        </p>
+                        <p class="text-stone-600 leading-relaxed">
+                            SK Hynix 與 Nvidia 的多年期技術合作也顯示，它不僅是搭上記憶體漲價順風車，更已深入 Vera Rubin AI 超級電腦等未來多代 AI 平台的供應鏈規劃。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 產業連動 (Micron, Broadcom, Nvidia) -->
+        <section id="impact" data-section class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">巨頭連動：AI基礎建設系統級競爭</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Micron Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">Micron 重新定價</h3>
+                    <p class="text-stone-600 mb-4 text-sm">從傳統 DRAM 循環股轉型「AI資料中心記憶體供應商」</p>
+                    <ul class="list-disc pl-5 text-stone-600 space-y-2">
+                        <li><strong>估值溢價：</strong> 受惠於美國上市地位，有望縮小與 SK Hynix 的估值差距。</li>
+                        <li><strong>強勁財報：</strong> 2026財年Q3營收達 414.6 億美元，預估下季達 500 億美元。</li>
+                        <li><strong>進度更新：</strong> HBM4 進入主要客戶平台大量出貨，HBM4E 預計 2027 年量產。</li>
+                        <li class="text-rose-600 text-sm mt-2">※ 警語：仍需關注 HBM 長約、產能紀律及未來資本支出。</li>
+                    </ul>
+                </div>
+                
+                <!-- Broadcom & Nvidia Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-2">Broadcom & Nvidia</h3>
+                    <p class="text-stone-600 mb-4 text-sm">AI 基礎建設進入嚴格檢視期</p>
+                    <ul class="list-disc pl-5 text-stone-600 space-y-2">
+                        <li><strong>Broadcom 檢視：</strong> Q2 AI 收入達 108 億美元(YoY +143%)，但市場標準極高，未達完美預期仍可能導致股價修正，說明「有AI就漲」已成過去式。</li>
+                        <li><strong>Nvidia 護城河：</strong> 不只是 GPU，而是整合 CPU、網路、架構與記憶體(HBM)的能力。下一階段瓶頸在於 HBM 供應、封裝、電力與交付速度。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 投資策略 -->
+        <section id="strategy" data-section class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略：AI鏈三層架構</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 mb-6">投資人應將美股 AI 鏈分層檢視，避免盲目追高，注重中長期產業結構變化與產能紀律。</p>
+                
+                <div class="space-y-4">
+                    <div class="p-4 border border-stone-200 rounded-lg hover:bg-stone-50 transition">
+                        <h4 class="font-bold text-stone-800 mb-1">第一層：核心層</h4>
+                        <p class="text-stone-600"><strong>Nvidia (NVDA)：</strong> 最稀缺的 AI 資產，與 HBM 供應鏈深度綁定的戰略價值持續強化。</p>
+                    </div>
+                    <div class="p-4 border border-stone-200 rounded-lg hover:bg-stone-50 transition">
+                        <h4 class="font-bold text-stone-800 mb-1">第二層：關鍵供應商</h4>
+                        <p class="text-stone-600"><strong>Micron, Broadcom, Marvell, TSMC (台積電), ASML：</strong> SK Hynix 熱潮直接支持此層長線敘事。客製化晶片與記憶體為核心瓶頸。</p>
+                    </div>
+                    <div class="p-4 border border-stone-200 rounded-lg hover:bg-stone-50 transition">
+                        <h4 class="font-bold text-stone-800 mb-1">第三層：系統與基礎設施</h4>
+                        <p class="text-stone-600"><strong>資料中心電力、散熱、網路設備與伺服器組裝：</strong> 擴散行情的最終受益者，需關注實際交付速度與資本支出持續性。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 數據圖表與互動表格 -->
+        <section id="data" data-section class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">數據圖表與產業清單</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
+                <!-- Chart Area -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 text-center">AI 巨頭近期指標性財務數據 (十億美元)</h3>
+                    <div class="relative w-full aspect-[4/3] max-h-96">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 text-center mt-4">*數據基於報告內文提及之財報或籌資估計</p>
+                </div>
+
+                <!-- Interactive Table Area -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col h-full">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">AI 供應鏈關鍵廠商篩選</h3>
+                    
+                    <!-- Search Input -->
+                    <div class="mb-4">
+                        <input type="text" id="searchInput" placeholder="搜尋公司名稱或領域 (例如: HBM, Nvidia, 網路)..." 
+                               class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition">
+                    </div>
+
+                    <!-- Table -->
+                    <div class="overflow-x-auto flex-grow relative border border-stone-200 rounded-lg max-h-96">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-stone-100 sticky top-0 z-10 shadow-sm">
+                                <tr>
+                                    <th class="p-3 border-b border-stone-200 font-semibold text-stone-700">公司名稱</th>
+                                    <th class="p-3 border-b border-stone-200 font-semibold text-stone-700">技術領域</th>
+                                    <th class="p-3 border-b border-stone-200 font-semibold text-stone-700">產業角色敘述</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody" class="divide-y divide-stone-200 text-stone-600">
+                                <!-- Data injected by JS -->
+                            </tbody>
+                        </table>
+                        <div id="noDataMessage" class="hidden text-center py-8 text-stone-500">
+                            找不到符合條件的資料
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-SK Hynix赴美掛牌與AI記憶體週期。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中SK Hynix、Micron、Nvidia、Broadcom相關公開資料 (2026年07月09日)。</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Active Link State (Intersection Observer)
+        const sections = document.querySelectorAll('section[data-section]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 3. Chart.js Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            // 根據報告內容擷取的數據
+            const chartData = {
+                labels: ['Nvidia 資料中心 (Q1)', 'Micron 預估 (Q4)', 'SK Hynix ADR募資', 'Broadcom AI晶片 (Q2)'],
+                datasets: [{
+                    label: '金額規模 (十億美元)',
+                    data: [75.2, 50.0, 26.5, 10.8],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.7)',  // Emerald
+                        'rgba(14, 165, 233, 0.7)',  // Sky
+                        'rgba(245, 158, 11, 0.7)',  // Amber
+                        'rgba(99, 102, 241, 0.7)'   // Indigo
+                    ],
+                    borderColor: [
+                        'rgb(16, 185, 129)',
+                        'rgb(14, 165, 233)',
+                        'rgb(245, 158, 11)',
+                        'rgb(99, 102, 241)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            };
+
+            const config = {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false // 隱藏圖例使畫面更簡潔
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' 十億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '十億美元 (Billion USD)',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                autoSkip: false,
+                                maxRotation: 45,
+                                minRotation: 0
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+
+        // 4. Interactive Data Table
+        const productData = [
+            { company: "SK Hynix", field: "HBM記憶體", desc: "HBM3E/HBM4量產主力，Nvidia關鍵供應商，ADR需求強勁" },
+            { company: "Micron", field: "HBM/DRAM", desc: "HBM4進入主要客戶平台出貨，估值受惠美國市場可及性" },
+            { company: "Nvidia", field: "GPU/系統架構", desc: "AI核心鏈，整合軟硬體與HBM，資料中心季營收破750億" },
+            { company: "Broadcom", field: "客製化晶片/網路", desc: "AI晶片年增達143%，市場給予極高成長預期檢視標準" },
+            { company: "TSMC (台積電)", field: "晶圓代工/封裝", desc: "AI硬體製造核心，關鍵第二層供應商" },
+            { company: "Marvell", field: "客製化晶片/光通訊", desc: "與Broadcom同屬高速運算連動概念股" },
+            { company: "Samsung", field: "HBM/DRAM", desc: "三大記憶體廠之一，產能擴張紀律影響未來週期走勢" },
+            { company: "散熱與電力供應鏈", field: "基礎建設設施", desc: "第三層受惠者，解決AI資料中心下一階段物理瓶頸" }
+        ];
+
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const noDataMessage = document.getElementById('noDataMessage');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                noDataMessage.classList.remove('hidden');
+                return;
+            }
+            
+            noDataMessage.classList.add('hidden');
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition duration-150';
+                row.innerHTML = `
+                    <td class="p-3 border-b border-stone-100 font-medium text-stone-800">${item.company}</td>
+                    <td class="p-3 border-b border-stone-100 text-sky-700">${item.field}</td>
+                    <td class="p-3 border-b border-stone-100">${item.desc}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 初始化表格
+        renderTable(productData);
+
+        // 搜尋篩選功能
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = productData.filter(item => 
+                item.company.toLowerCase().includes(searchTerm) || 
+                item.field.toLowerCase().includes(searchTerm) || 
+                item.desc.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filteredData);
+        });
+
+    </script>
+</body>
+</html>
