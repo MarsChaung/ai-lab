@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Meta 5GW能源新局</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif, 'Microsoft JhengHei';
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        
+        /* Navigation active states */
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .active-nav-link {
+            color: #0ea5e9; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #d6d3d1; /* stone-300 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #ffffff;
+        }
+
+        /* Mobile nav active states */
+        .mobile-active-nav-link {
+            background-color: #3f3f46; /* zinc-700 */
+            color: #38bdf8; /* sky-400 */
+            border-left: 4px solid #0ea5e9;
+        }
+        .mobile-inactive-nav-link {
+            color: #d6d3d1;
+            border-left: 4px solid transparent;
+        }
+
+        /* Custom scrollbar for table */
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-stone-800 antialiased">
+
+    <nav class="bg-stone-900 sticky top-0 z-50 shadow-lg" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo / Title -->
+                <div class="flex items-center">
+                    <a href="#home" class="flex-shrink-0 flex items-center cursor-pointer">
+                        <span class="text-white font-bold text-xl tracking-wider">AI基礎建設</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="#summary" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium" data-target="summary">專案摘要</a>
+                    <a href="#impact" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium" data-target="impact">資本與影響</a>
+                    <a href="#supply-chain" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium" data-target="supply-chain">受惠供應鏈</a>
+                    <a href="#risks" class="nav-link inactive-nav-link px-1 py-2 text-sm font-medium" data-target="risks">風險與策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-stone-400 hover:text-white hover:bg-stone-700 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">開啟主選單</span>
+                        <!-- Hamburger Icon -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:hidden hidden bg-stone-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-link mobile-inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="summary">專案摘要</a>
+                <a href="#impact" class="mobile-nav-link mobile-inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="impact">資本與影響</a>
+                <a href="#supply-chain" class="mobile-nav-link mobile-inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="supply-chain">受惠供應鏈</a>
+                <a href="#risks" class="mobile-nav-link mobile-inactive-nav-link block px-3 py-2 rounded-md text-base font-medium" data-target="risks">風險與策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="bg-gradient-to-br from-stone-900 to-sky-900 py-20 section-trigger">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                <span class="block">Meta 5GW Hyperion</span>
+                <span class="block text-sky-400 mt-2">揭開算力、能源與電網的新投資時代</span>
+            </h1>
+            <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-stone-300">
+                AI基礎建設的限制，正從晶片供應逐漸轉向電力供應與電網接入。一場以廣告現金流支持的AI軍備競賽已經展開。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        
+        <section id="summary" class="section-trigger pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">新聞核實與專案摘要</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <!-- Info Card 1 -->
+                <div class="bg-blue-50 border border-blue-100 rounded-lg shadow-sm p-6 transform transition hover:-translate-y-1">
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">規模升級</h3>
+                    <p class="text-3xl font-bold text-blue-900 mb-1">5GW</p>
+                    <p class="text-sm text-stone-600">運算容量規劃從 2GW 擴大至 5GW。相當於400萬戶美大家庭用電規模。</p>
+                </div>
+                <!-- Info Card 2 -->
+                <div class="bg-emerald-50 border border-emerald-100 rounded-lg shadow-sm p-6 transform transition hover:-translate-y-1">
+                    <h3 class="text-lg font-semibold text-emerald-800 mb-2">總投資額</h3>
+                    <p class="text-3xl font-bold text-emerald-900 mb-1">&gt; 500億<span class="text-xl">美元</span></p>
+                    <p class="text-sm text-stone-600">整體投資金額大幅提高。已發出逾16億美元合約，並投資公共設施。</p>
+                </div>
+                <!-- Info Card 3 -->
+                <div class="bg-amber-50 border border-amber-100 rounded-lg shadow-sm p-6 transform transition hover:-translate-y-1">
+                    <h3 class="text-lg font-semibold text-amber-800 mb-2">用電戶保護承諾</h3>
+                    <p class="text-3xl font-bold text-amber-900 mb-1">白宮政策</p>
+                    <p class="text-sm text-stone-600">科技巨頭需負擔新增發電與電網升級成本，避免一般用戶承擔AI擴張費用。</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">不再只是資料中心：一座「算力工業園區」</h3>
+                <p class="text-stone-600 leading-relaxed mb-4">
+                    為支援 Hyperion，Entergy 提出的建設內容涵蓋廣泛，代表 Meta 的 AI 投資已從 GPU 全面延伸至基礎設施。未來投資焦點不僅是 Nvidia，更在於能否取得穩定電力、變壓器、冷卻系統與輸電施工能力。
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-stone-600 font-medium">
+                    <li>7座天然氣複循環發電廠 (總容量 > 5,200 MW)</li>
+                    <li>約240英里的 500kV 高壓輸電線</li>
+                    <li>3處大型電池儲能設施與最多 2,500 MW 新增再生能源</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="impact" class="section-trigger pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">資本支出與白宮政策影響</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">Meta 2026 資本支出預估 (億美元)</h3>
+                    <p class="text-sm text-stone-500 mb-4">受零件價格與資料中心擴建影響，資本支出預測顯著上調。</p>
+                    <div class="relative flex-grow min-h-[300px] w-full">
+                        <canvas id="capexChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Text Content Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-4">財務挑戰與合作結構</h3>
+                        <p class="text-stone-600 mb-4 leading-relaxed">
+                            這是一場以廣告現金流支持的軍備競賽。Meta 股票的核心問題在於能否將龐大的算力投資轉換為可收費的產品或更高黏著度。
+                        </p>
+                        <h4 class="font-semibold text-stone-800 mt-4 mb-2">Blue Owl 合作案 (約270億美元設施)</h4>
+                        <ul class="list-disc pl-5 text-sm text-stone-600 space-y-1 mb-4">
+                            <li>基金持股 80%，Meta 持股 20%</li>
+                            <li>Meta 負責施工管理並承租園區</li>
+                            <li>分散一次性資金，但長期租賃責任仍在</li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-md border border-stone-200 mt-4">
+                        <h4 class="font-semibold text-stone-800 mb-1">政策影響 (成本轉移)</h4>
+                        <p class="text-sm text-stone-600">
+                            白宮政策將使資料中心實際建設成本變高，延長投資回收期。這也確保了發電商與設備廠的訂單能見度，將成本壓力從公用事業客戶轉回科技巨頭。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="supply-chain" class="section-trigger pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">受惠產業與供應鏈追蹤</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                    <p class="text-stone-600 text-sm max-w-2xl">
+                        AI資本支出已從半導體週期，進一步擴大為美國電力、工業設備與基礎建設的長期投資週期。使用下方輸入框搜尋特定公司或產業別。
+                    </p>
+                    <!-- Search Input -->
+                    <div class="relative w-full sm:w-72">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input type="text" id="searchInput" class="block w-full pl-10 pr-3 py-2 border border-stone-300 rounded-md leading-5 bg-white placeholder-stone-500 focus:outline-none focus:placeholder-stone-400 focus:ring-1 focus:ring-sky-500 focus:border-sky-500 sm:text-sm transition duration-150 ease-in-out" placeholder="搜尋公司名稱、領域或角色...">
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="table-container overflow-x-auto rounded-lg border border-stone-200 max-h-[400px]">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0 z-10">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">公司名稱</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">產業領域</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">主要角色與受惠產品</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- Table rows will be inserted here by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noDataMessage" class="hidden text-center py-8 text-stone-500">
+                    找不到符合搜尋條件的資料。
+                </div>
+            </div>
+        </section>
+
+        <section id="risks" class="section-trigger pt-16 -mt-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資風險與核心策略</h2>
+            
+            <p class="text-stone-700 font-medium mb-6">
+                最大風險不是AI需求消失，而是<span class="text-rose-600">建設速度與投資回報不匹配</span>。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                <!-- Risk Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">1. 設備與施工延誤</h3>
+                    <p class="text-sm text-stone-600">大型變壓器交期拉長至數年，高壓斷路器交期達125週。擁有資金不代表能準時取得電力與設備。</p>
+                </div>
+                <!-- Risk Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-orange-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">2. 成本通膨</h3>
+                    <p class="text-sm text-stone-600">變壓器價格持續上升，記憶體、光纖、冷卻設備與人力因科技公司同時擴建而面臨漲價壓力。</p>
+                </div>
+                <!-- Risk Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-yellow-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">3. 政策與社會反彈</h3>
+                    <p class="text-sm text-stone-600">電網容量價格飆升(如PJM兩年漲逾十倍)，製造商電費增加，促使政府要求科技巨頭承擔成本。</p>
+                </div>
+                <!-- Risk Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-green-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">4. 能源結構挑戰</h3>
+                    <p class="text-sm text-stone-600">高度依賴天然氣發電面臨環保與碳排放壓力。未來清潔能源的監管標準可能持續提高。</p>
+                </div>
+                <!-- Risk Card 5 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-purple-500 md:col-span-2 lg:col-span-1">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">5. 商業回報 (最重要)</h3>
+                    <p class="text-sm text-stone-600">若 AI 只改善既有廣告業務，無創造足夠新收入，龐大的折舊與營運費用將引發投資人要求縮減資本支出。</p>
+                </div>
+            </div>
+
+            <!-- Strategy Banner -->
+            <div class="bg-sky-900 rounded-lg shadow-lg p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">投資策略轉向</h3>
+                <p class="max-w-3xl mx-auto text-sky-100 leading-relaxed">
+                    從追逐單純的「AI題材」，轉向檢驗「訂單落實、現金流健康度與成本轉嫁能力」。能向所有大型科技公司出售電力設備、冷卻系統與輸電工程的企業，猶如AI基礎建設的「收費站」，具備更穩定的投資機會。但仍需確認估值是否已過度反映未來成長。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-900 text-stone-400 mt-12 py-10 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Meta 5GW能源新局。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-2 text-stone-500">資料來源：基於網路中 Meta Hyperion 資料中心及相關供應鏈公開資料 (2026年07月13日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+
+            // --- 2. Mobile Menu Toggle ---
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true' || false;
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+            });
+
+            // Close mobile menu when a link is clicked
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // --- 3. Intersection Observer for Active Navigation State ---
+            const sections = document.querySelectorAll('.section-trigger');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-100px 0px -40% 0px', // Adjust offsets for better triggering
+                threshold: 0
+            };
+
+            const observerCallback = (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.id;
+                        
+                        // Update Desktop Nav
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('data-target') === targetId || (targetId === 'home' && link.getAttribute('data-target') === null)) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+
+                        // Update Mobile Nav
+                        mobileNavLinks.forEach(link => {
+                            if (link.getAttribute('data-target') === targetId) {
+                                link.classList.remove('mobile-inactive-nav-link');
+                                link.classList.add('mobile-active-nav-link');
+                            } else {
+                                link.classList.remove('mobile-active-nav-link');
+                                link.classList.add('mobile-inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            sections.forEach(section => observer.observe(section));
+
+
+            // --- 4. Chart.js Implementation (Meta Capex) ---
+            const ctx = document.getElementById('capexChart').getContext('2d');
+            
+            // Setup gradients
+            const gradientOld = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientOld.addColorStop(0, 'rgba(148, 163, 184, 0.8)'); // slate-400
+            gradientOld.addColorStop(1, 'rgba(148, 163, 184, 0.2)');
+
+            const gradientNew = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientNew.addColorStop(0, 'rgba(14, 165, 233, 0.8)'); // sky-500
+            gradientNew.addColorStop(1, 'rgba(14, 165, 233, 0.2)');
+
+            const capexChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['前次預估區間', '最新預估區間 (因應擴建)'],
+                    datasets: [
+                        {
+                            label: '最低預估 (億美元)',
+                            data: [1150, 1250],
+                            backgroundColor: [gradientOld, gradientNew],
+                            borderColor: ['#64748b', '#0284c7'],
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            barPercentage: 0.8,
+                            categoryPercentage: 0.4
+                        },
+                        {
+                            label: '最高預估 (億美元)',
+                            data: [1350, 1450],
+                            backgroundColor: [
+                                'rgba(203, 213, 225, 0.8)', // slate-300
+                                'rgba(125, 211, 252, 0.8)'  // sky-300
+                            ],
+                            borderColor: ['#94a3b8', '#38bdf8'],
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            barPercentage: 0.8,
+                            categoryPercentage: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { family: "'Inter', sans-serif" }
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(28, 25, 23, 0.9)', // stone-900
+                            titleFont: { size: 14, family: "'Inter', sans-serif" },
+                            bodyFont: { size: 13, family: "'Inter', sans-serif" },
+                            padding: 12,
+                            cornerRadius: 8
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 1000,
+                            grid: {
+                                color: '#e7e5e4', // stone-200
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { family: "'Inter', sans-serif" },
+                                color: '#57534e'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { family: "'Inter', sans-serif", weight: 'bold' },
+                                color: '#44403c'
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+
+
+            // --- 5. Interactive Data Table (Supply Chain) ---
+            const productData = [
+                { company: "Nvidia / AMD", category: "AI半導體", role: "提供資料中心核心 GPU 與運算能力", highlight: true },
+                { company: "Broadcom", category: "AI半導體", role: "協助設計 Meta 自研晶片 (Iris) 及資料中心網路設備" },
+                { company: "Eaton", category: "電力與散熱", role: "配電、開關設備與電力管理 (交期已大幅拉長)" },
+                { company: "Vertiv", category: "電力與散熱", role: "直接提供資料中心供電、散熱與液冷系統" },
+                { company: "GE Vernova", category: "發電與電網", role: "提供大型天然氣渦輪、發電機與電網設備以因應激增電力" },
+                { company: "Quanta Services", category: "發電與電網", role: "承接輸電、變電與電力基礎設施工程" },
+                { company: "Entergy", category: "公用事業", role: "路易斯安那州電力供應商，處理 Hyperion 專用電廠合約" },
+                { company: "Samsung / Sandisk", category: "記憶體與儲存", role: "簽訂長約供應 HBM 記憶體與快閃儲存" },
+                { company: "Sumitomo Electric", category: "通訊基礎", role: "提供資料中心間所需之大量光纖設備" }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            // Function to render table rows
+            const renderTable = (data) => {
+                tableBody.innerHTML = ''; // Clear existing
+                
+                if (data.length === 0) {
+                    noDataMessage.classList.remove('hidden');
+                    return;
+                }
+                
+                noDataMessage.classList.add('hidden');
+
+                data.forEach((item, index) => {
+                    const tr = document.createElement('tr');
+                    // Add subtle stripe effect
+                    if (index % 2 === 0) tr.classList.add('bg-white');
+                    else tr.classList.add('bg-stone-50');
+                    
+                    tr.classList.add('hover:bg-sky-50', 'transition-colors', 'duration-150');
+
+                    // Determine badge color based on category
+                    let badgeColor = 'bg-stone-100 text-stone-800';
+                    if (item.category === 'AI半導體') badgeColor = 'bg-indigo-100 text-indigo-800';
+                    else if (item.category === '電力與散熱') badgeColor = 'bg-cyan-100 text-cyan-800';
+                    else if (item.category === '發電與電網' || item.category === '公用事業') badgeColor = 'bg-emerald-100 text-emerald-800';
+
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-bold text-stone-900">${item.company}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${badgeColor}">
+                                ${item.category}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-stone-600">
+                            ${item.role}
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            };
+
+            // Initial render
+            renderTable(productData);
+
+            // Filter logic
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => {
+                    return item.company.toLowerCase().includes(searchTerm) || 
+                           item.category.toLowerCase().includes(searchTerm) ||
+                           item.role.toLowerCase().includes(searchTerm);
+                });
+                renderTable(filteredData);
+            });
+        });
+    </script>
+</body>
+</html>
