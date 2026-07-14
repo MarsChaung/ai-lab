@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth" style="scroll-padding-top: 5rem;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-SpaceX星艦與星鏈商業分析</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind slate-50 */
+        }
+        
+        /* Navigation Active State Classes */
+        .active-nav-link {
+            color: #0ea5e9 !important; /* sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        
+        /* Table Scrollbar Customization */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="text-stone-800 antialiased">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-800">
+                        SpaceX星艦第13次試飛
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8" id="desktop-nav">
+                    <a href="#summary" class="nav-item inactive-nav-link text-sm font-medium hover:text-sky-500 transition-colors py-2">摘要與進度</a>
+                    <a href="#current-status" class="nav-item inactive-nav-link text-sm font-medium hover:text-sky-500 transition-colors py-2">營運現況</a>
+                    <a href="#direct-to-cell" class="nav-item inactive-nav-link text-sm font-medium hover:text-sky-500 transition-colors py-2">手機直連</a>
+                    <a href="#financials" class="nav-item inactive-nav-link text-sm font-medium hover:text-sky-500 transition-colors py-2">財務預測</a>
+                    <a href="#risks" class="nav-item inactive-nav-link text-sm font-medium hover:text-sky-500 transition-colors py-2">投資風險</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-900 focus:outline-none p-2 rounded-md">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">摘要與進度</a>
+                <a href="#current-status" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">營運現況</a>
+                <a href="#direct-to-cell" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">手機直連</a>
+                <a href="#financials" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">財務預測</a>
+                <a href="#risks" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-sky-50">投資風險</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-br from-slate-800 to-stone-900 rounded-2xl shadow-xl overflow-hidden mb-12 relative">
+            <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+            <div class="relative p-8 md:p-12 lg:p-16 text-center text-white">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                    從試飛倒數到通訊現金流：<br/>Starship能否打開SpaceX下一條營收曲線？
+                </h1>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-300 font-light">
+                    Starship第13飛的核心意義，在於驗證其作為Starlink V3衛星「太空物流生產線」的能力。從家庭寬頻到手機直連，SpaceX正逐步轉型為全球通訊基礎設施平台。
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 1: Summary & Flight Progress -->
+        <section id="summary" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">試飛進度與核心挑戰</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                <div class="bg-white rounded-xl shadow-md p-6 border border-slate-100 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-lg mr-4">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">FAA 結案與第13次試飛</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed mb-4">
+                        FAA已於2026年7月13日完成對第12次飛行的調查。確認無公眾損害，並接受SpaceX的四項改正措施（涉及推進系統高溫防護與引擎警報設定）。排除監管障礙後，第13次試飛最快將於7月16日進行。
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-lg border-l-4 border-sky-500">
+                        <strong class="text-sky-700 block mb-1">任務亮點：</strong>
+                        釋放20枚Starlink V3測試衛星，驗證側向艙門釋放與系統整合，但不會正式加入商業星座。
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 border border-slate-100 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-orange-100 p-3 rounded-lg mr-4">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800">為何依賴 Starship？</h3>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        現有Falcon 9可靠性高，但整流罩與載重受限。新一代 <strong>Starlink V3 衛星尺寸更大、功率更高</strong>。
+                    </p>
+                    <ul class="mt-4 space-y-2 text-stone-600">
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">✦</span> 每一次Starship發射增加的容量，可能超過Falcon 9的20倍。</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">✦</span> Starship是降低單位發射成本、提高現金流的「關鍵生產設備」。</li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-2">✦</span> 若無法高頻重複使用，V3部署進度與投資報酬率將延宕。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Current Operations -->
+        <section id="current-status" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">Starlink 營運現況 (截至2026 Q1)</h2>
+            
+            <p class="text-stone-600 mb-6 text-lg">SpaceX已不再只依賴政府合約與火箭發射，通訊業務成為最強獲利引擎，取得了類似電信業的每月訂閱收入。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Data Card 1 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-blue-500 flex flex-col justify-center items-center text-center">
+                    <p class="text-sm text-stone-500 uppercase tracking-wide font-semibold mb-2">2025年通訊營收佔比</p>
+                    <p class="text-4xl font-extrabold text-blue-600 mb-1">60%+</p>
+                    <p class="text-sm text-stone-600">總營收 $187億 / 通訊營收 $114億</p>
+                </div>
+                
+                <!-- Data Card 2 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-sky-500 flex flex-col justify-center items-center text-center">
+                    <p class="text-sm text-stone-500 uppercase tracking-wide font-semibold mb-2">全球活躍用戶數</p>
+                    <p class="text-4xl font-extrabold text-sky-600 mb-1">1,030萬</p>
+                    <p class="text-sm text-stone-600">2026年第一季達成里程碑</p>
+                </div>
+
+                <!-- Data Card 3 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-purple-500 flex flex-col justify-center items-center text-center">
+                    <p class="text-sm text-stone-500 uppercase tracking-wide font-semibold mb-2">每名用戶平均月收入 (ARPU)</p>
+                    <p class="text-4xl font-extrabold text-purple-600 mb-1">$66 <span class="text-lg text-stone-500 font-normal">美元</span></p>
+                    <p class="text-xs text-stone-500 mt-2">呈現下降趨勢 (2023年為$99)。主因：拓展至低收入國家與推出平價方案。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Direct to Cell Strategy -->
+        <section id="direct-to-cell" class="mb-16 scroll-mt-24">
+            <div class="bg-slate-800 rounded-2xl shadow-lg overflow-hidden text-white">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-8 md:p-10">
+                        <h2 class="text-3xl font-bold mb-4">手機直連 (Direct-to-Cell) 戰略</h2>
+                        <p class="text-slate-300 mb-6 leading-relaxed">
+                            讓衛星直接扮演太空行動通訊基地台。用戶無需購買專用天線，使用一般智慧型手機即可在通訊死角收發訊號。
+                        </p>
+                        <h4 class="text-lg font-semibold text-sky-400 mb-2">商業模式與合作夥伴</h4>
+                        <p class="text-slate-300 text-sm mb-4">
+                            SpaceX 不直接取代電信公司，而是作為「衛星漫遊合作夥伴」。<br>
+                            合作夥伴：T-Mobile (美), Rogers (加), One NZ (紐), KDDI (日), Optus & Telstra (澳)。
+                        </p>
+                        <h4 class="text-lg font-semibold text-sky-400 mb-2">營收的三層影響</h4>
+                        <ul class="space-y-2 text-sm text-slate-300">
+                            <li class="flex items-start"><span class="mr-2 text-sky-500">1.</span> 批發或分潤收入，無需建立銷售通路與客服。</li>
+                            <li class="flex items-start"><span class="mr-2 text-sky-500">2.</span> 突破家庭寬頻限制，接觸數十億潛在手機用戶市場。</li>
+                            <li class="flex items-start"><span class="mr-2 text-sky-500">3.</span> 透過自有頻譜(EchoStar)提升談判力與星座戰略價值。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900 p-8 md:p-10 flex flex-col justify-center">
+                        <div class="text-center">
+                            <svg class="w-16 h-16 text-sky-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            <h3 class="text-xl font-bold mb-2">定位：通訊保險而非取代5G</h3>
+                            <p class="text-slate-400 text-sm">
+                                填補山區、海岸、公路、農村與災害地區的通訊死角。「在沒有訊號的地方仍然能連線」，而非在市區看高畫質影片。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Financial Projections (Table & Chart) -->
+        <section id="financials" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">2030年財務情境預測</h2>
+            <p class="text-stone-600 mb-8">基於 Omdia 市場研究預測及公開資料推算，Starlink 未來營收將由傳統寬頻與手機直連共同驅動。</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Interactive Table -->
+                <div class="lg:col-span-7 bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden flex flex-col">
+                    <div class="p-5 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-stone-800">業務營收預測表 (單位: 億美元)</h3>
+                        <div class="relative">
+                            <input type="text" id="searchInput" placeholder="搜尋業務或情境..." class="pl-8 pr-4 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none w-48 transition-shadow">
+                            <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-stone-100 text-stone-600 text-sm">
+                                    <th class="p-4 border-b font-semibold whitespace-nowrap sticky left-0 bg-stone-100 z-10">業務區塊</th>
+                                    <th class="p-4 border-b font-semibold whitespace-nowrap">預測情境</th>
+                                    <th class="p-4 border-b font-semibold whitespace-nowrap text-right">預估營收下限</th>
+                                    <th class="p-4 border-b font-semibold whitespace-nowrap text-right">預估營收上限</th>
+                                    <th class="p-4 border-b font-semibold">情境假設條件</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody" class="text-sm text-stone-700 divide-y divide-slate-100">
+                                <!-- Data populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Empty state -->
+                    <div id="emptyState" class="hidden p-8 text-center text-stone-500">
+                        找不到符合的資料。
+                    </div>
+                </div>
+
+                <!-- Chart.js Visualization -->
+                <div class="lg:col-span-5 bg-white rounded-xl shadow-lg border border-slate-100 p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">2030年 Starlink 整體營收預測區間</h3>
+                    <div class="relative w-full" style="height: 300px;">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4 text-center">註：圖表數據取自各情境預估範圍之中位數。單位為十億美元 (Billions)。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Investment Risks & Conclusion -->
+        <section id="risks" class="mb-8 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 inline-block">投資人不能忽略的五項風險</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white rounded-lg shadow p-5 border-l-4 border-red-500">
+                    <h4 class="font-bold text-stone-800 mb-2">1. Starship 執行風險</h4>
+                    <p class="text-sm text-stone-600">FAA結案僅代表改正獲接受。仍需證明引擎、隔熱瓦、衛星釋放及回收能高頻率「重複成功」。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 border-l-4 border-orange-500">
+                    <h4 class="font-bold text-stone-800 mb-2">2. 技術與物理限制</h4>
+                    <p class="text-sm text-stone-600">手機直連的容量、延遲、室內穿透力仍低於地面基地台，單一區域無法同時容納極大量使用者。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 border-l-4 border-amber-500">
+                    <h4 class="font-bold text-stone-800 mb-2">3. 監管與頻譜風險</h4>
+                    <p class="text-sm text-stone-600">各國有獨立頻譜規則與國安考量，美國的許可不適用全球，部分政府偏好本地衛星系統。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 border-l-4 border-yellow-500">
+                    <h4 class="font-bold text-stone-800 mb-2">4. 市場競爭加劇</h4>
+                    <p class="text-sm text-stone-600">AST SpaceMobile、Apple、Globalstar 皆積極佈局。電信商可能採取雙供應商策略避免依賴。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 border-l-4 border-stone-500 lg:col-span-2">
+                    <h4 class="font-bold text-stone-800 mb-2">5. 估值與公司治理</h4>
+                    <p class="text-sm text-stone-600">SpaceX估值約1.75兆美元(近94倍市銷率)，已提前反映多項業務的多年成長。龐大資本支出與Elon Musk集中的投票權皆需留意。</p>
+                </div>
+            </div>
+
+            <!-- Conclusion Card -->
+            <div class="bg-sky-50 rounded-xl p-8 border border-sky-100 shadow-sm">
+                <h3 class="text-2xl font-bold text-sky-900 mb-4">投資結論：基本面偏多，估值安全邊際偏低</h3>
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    Starship第13次飛行是重要的技術里程碑，但<strong>一次成功試飛不等於收入立即爆發</strong>。真正影響財務模型的是：能否建立穩定軌道任務、提高發射頻率、以及網路容量是否足以支撐大量用戶。
+                </p>
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                    <p class="font-semibold text-stone-800 mb-2">建議分階段確認三項指標：</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-sm text-stone-600">
+                        <li>Starship 能否連續完成軌道任務與有效載荷部署。</li>
+                        <li>正式 V3 衛星的發射頻率與單次新增容量。</li>
+                        <li>SpaceX 是否開始揭露手機直連的付費門號、分潤收入及每名用戶貢獻。</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-SpaceX星艦與星鏈商業分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中 SpaceX 與 Starlink 相關公開資料 (2026年7月14日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Mobile Menu Toggle ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- 2. Sticky Nav Active State using Intersection Observer ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinksDesktop = document.querySelectorAll('#desktop-nav .nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px -60% 0px', // Adjust to trigger when section is near top
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // Update Desktop Nav
+                        navLinksDesktop.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+
+            // --- 3. Interactive Data Table Logic ---
+            // Data extracted from the report (Units in hundred millions / 億美元)
+            const productData = [
+                { segment: '傳統寬頻與企業通訊', scenario: '基本情境', min: 250, max: 350, assumption: '穩定成長，Starship建立規律發射節奏' },
+                { segment: '傳統寬頻與企業通訊', scenario: '保守情境', min: 160, max: 180, assumption: '進度延後，ARPU持續下降，競爭加劇' }, /* Derived roughly to fit total 170-200 */
+                { segment: '傳統寬頻與企業通訊', scenario: '樂觀情境', min: 390, max: 470, assumption: '高頻率發射，V3容量符合預期，跨國業務大增' }, /* Derived roughly to fit total 450-550 */
+                { segment: '手機直連 (Direct-to-Cell)', scenario: '基本情境', min: 30, max: 50, assumption: '取得全球市場合理市占，涵蓋批發與分潤' },
+                { segment: '手機直連 (Direct-to-Cell)', scenario: '保守情境', min: 10, max: 20, assumption: '僅限簡訊與緊急通訊，電信商支付低批發價' },
+                { segment: '手機直連 (Direct-to-Cell)', scenario: '樂觀情境', min: 60, max: 80, assumption: '支援語音與較高數據，跨國漫遊，自有頻譜優勢' },
+                { segment: 'Starlink 整體合計營收', scenario: '基本情境', min: 280, max: 400, assumption: '約為2025年(114億)的2.5至3.5倍' },
+                { segment: 'Starlink 整體合計營收', scenario: '保守情境', min: 170, max: 200, assumption: '成長受限' },
+                { segment: 'Starlink 整體合計營收', scenario: '樂觀情境', min: 450, max: 550, assumption: '各項業務拓展極度順利' }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const emptyState = document.getElementById('emptyState');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    data.forEach((row, index) => {
+                        const tr = document.createElement('tr');
+                        // Add alternating background colors
+                        tr.className = index % 2 === 0 ? 'bg-white hover:bg-sky-50 transition-colors' : 'bg-slate-50 hover:bg-sky-50 transition-colors';
+                        
+                        // Highlight Total rows
+                        const isTotal = row.segment.includes('整體合計');
+                        if(isTotal) tr.classList.add('font-semibold', 'text-stone-900', 'border-t-2', 'border-slate-200');
+
+                        tr.innerHTML = `
+                            <td class="p-4 border-b whitespace-nowrap sticky left-0 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50'} ${isTotal?'font-bold':''} group-hover:bg-sky-50">${row.segment}</td>
+                            <td class="p-4 border-b whitespace-nowrap">
+                                <span class="px-2 py-1 rounded-md text-xs ${
+                                    row.scenario === '樂觀情境' ? 'bg-green-100 text-green-700' :
+                                    row.scenario === '保守情境' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'
+                                }">${row.scenario}</span>
+                            </td>
+                            <td class="p-4 border-b whitespace-nowrap text-right">$${row.min}</td>
+                            <td class="p-4 border-b whitespace-nowrap text-right">$${row.max}</td>
+                            <td class="p-4 border-b text-xs text-stone-500 min-w-[200px]">${row.assumption}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                }
+            }
+
+            // Initial render
+            renderTable(productData);
+
+            // Search filtering
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => 
+                    item.segment.toLowerCase().includes(searchTerm) ||
+                    item.scenario.toLowerCase().includes(searchTerm) ||
+                    item.assumption.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+
+
+            // --- 4. Chart.js Dynamic Bar Chart ---
+            // We'll calculate the median of min/max for charting purposes, converted to Billions for readability (e.g. 280 億 = 28 Billion)
+            const getMedian = (min, max) => ((min + max) / 2) / 10; 
+
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            // Labels for X axis
+            const scenarios = ['保守情境', '基本情境', '樂觀情境'];
+            
+            // Data mapping based on productData arrays
+            const traditionalData = [
+                getMedian(160, 180), // 保守
+                getMedian(250, 350), // 基本
+                getMedian(390, 470)  // 樂觀
+            ];
+            
+            const directToCellData = [
+                getMedian(10, 20),   // 保守
+                getMedian(30, 50),   // 基本
+                getMedian(60, 80)    // 樂觀
+            ];
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: scenarios,
+                    datasets: [
+                        {
+                            label: '傳統寬頻與企業通訊 ($B)',
+                            data: traditionalData,
+                            backgroundColor: 'rgba(14, 165, 233, 0.8)', // sky-500
+                            borderColor: 'rgb(2, 132, 199)', // sky-600
+                            borderWidth: 1,
+                            borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4 }
+                        },
+                        {
+                            label: '手機直連 ($B)',
+                            data: directToCellData,
+                            backgroundColor: 'rgba(168, 85, 247, 0.8)', // purple-500
+                            borderColor: 'rgb(147, 51, 234)', // purple-600
+                            borderWidth: 1,
+                            borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 }
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { family: "'Inter', sans-serif" },
+                                color: '#44403c'
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(28, 25, 23, 0.9)',
+                            titleFont: { size: 14, family: "'Inter', sans-serif" },
+                            bodyFont: { size: 13, family: "'Inter', sans-serif" },
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += '$' + context.parsed.y.toFixed(1) + ' Billion';
+                                    }
+                                    return label;
+                                },
+                                footer: function(tooltipItems) {
+                                    let total = 0;
+                                    tooltipItems.forEach(function(tooltipItem) {
+                                        total += tooltipItem.parsed.y;
+                                    });
+                                    return '總計預估: $' + total.toFixed(1) + ' Billion';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: "'Inter', sans-serif", weight: 'bold' },
+                                color: '#44403c'
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { family: "'Inter', sans-serif" },
+                                color: '#78716c',
+                                callback: function(value) {
+                                    return '$' + value + 'B';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '十億美元 (Billions USD)',
+                                color: '#78716c',
+                                font: { size: 12 }
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
