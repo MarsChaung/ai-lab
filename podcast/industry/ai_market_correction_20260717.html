@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI半導體修正與財報分析</title>
+    
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 載入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f5f5f4; /* Tailwind stone-100 */
+        }
+        /* 隱藏捲軸但保留功能 (針對表格) */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-stone-800 antialiased">
+
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-700">AI半導體市場修正</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#market-status" class="nav-link text-stone-500 hover:text-sky-600 font-medium transition-colors duration-200" data-target="market-status">市場現況</a>
+                    <a href="#core-issue" class="nav-link text-stone-500 hover:text-sky-600 font-medium transition-colors duration-200" data-target="core-issue">核心問題</a>
+                    <a href="#capex-chart" class="nav-link text-stone-500 hover:text-sky-600 font-medium transition-colors duration-200" data-target="capex-chart">資本預估</a>
+                    <a href="#earnings-focus" class="nav-link text-stone-500 hover:text-sky-600 font-medium transition-colors duration-200" data-target="earnings-focus">財報焦點</a>
+                    <a href="#data-table" class="nav-link text-stone-500 hover:text-sky-600 font-medium transition-colors duration-200" data-target="data-table">關鍵數據</a>
+                    <a href="#strategy" class="nav-link text-stone-500 hover:text-sky-600 font-medium transition-colors duration-200" data-target="strategy">投資策略</a>
+                </div>
+
+                <!-- 手機版漢堡按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-700 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單面板 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#market-status" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">市場現況</a>
+                <a href="#core-issue" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">核心問題</a>
+                <a href="#capex-chart" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">資本預估</a>
+                <a href="#earnings-focus" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財報焦點</a>
+                <a href="#data-table" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">關鍵數據</a>
+                <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-br from-slate-800 to-stone-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                AI沒有退潮，只是不再容許失誤
+            </h1>
+            <p class="text-lg md:text-xl text-stone-300 max-w-3xl mx-auto">
+                Alphabet與Tesla財報將決定半導體修正的下一步。企業成長仍然強勁，但股票估值對任何失誤的容忍度已經非常低。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <section id="market-status" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場現況與資金流向</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Info Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500 flex flex-col justify-center transition-transform hover:-translate-y-1">
+                    <p class="text-sm text-stone-500 mb-1">費城半導體指數 (7/16)</p>
+                    <p class="text-3xl font-bold text-red-600">-4.3%</p>
+                    <p class="text-xs text-stone-400 mt-2">大型半導體與AI概念股拖累</p>
+                </div>
+                <!-- Info Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500 flex flex-col justify-center transition-transform hover:-translate-y-1">
+                    <p class="text-sm text-stone-500 mb-1">台灣股市 (7/17)</p>
+                    <p class="text-3xl font-bold text-red-600">-6.0%</p>
+                    <p class="text-xs text-stone-400 mt-2">亞洲半導體市場成跌勢中心</p>
+                </div>
+                <!-- Info Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 flex flex-col justify-center transition-transform hover:-translate-y-1">
+                    <p class="text-sm text-stone-500 mb-1">美股票型基金淨流出</p>
+                    <p class="text-3xl font-bold text-stone-700">48億<span class="text-lg">美元</span></p>
+                    <p class="text-xs text-stone-400 mt-2">三週來首次單週資金撤出</p>
+                </div>
+                <!-- Info Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500 flex flex-col justify-center transition-transform hover:-translate-y-1">
+                    <p class="text-sm text-stone-500 mb-1">美債券基金淨流入</p>
+                    <p class="text-3xl font-bold text-emerald-600">98.9億<span class="text-lg">美元</span></p>
+                    <p class="text-xs text-stone-400 mt-2">資金轉向價值股與債券避險</p>
+                </div>
+            </div>
+            <div class="mt-6 bg-white rounded-lg shadow-sm p-6 text-stone-600 leading-relaxed border border-stone-100">
+                <p>市場預估 S&P 500 第二季獲利年增約 <strong>24%至26%</strong>。然而，資金流向顯示部分資金並非完全離開市場，而是從高估值成長股轉向價值股與債券。</p>
+            </div>
+        </section>
+
+        <section id="core-issue" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財報好為何股價跌？半導體的靈魂拷問</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 text-sky-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        台積電財報亮眼但股價承壓
+                    </h3>
+                    <p class="text-stone-600 mb-4">台積電Q2營收402億美元，淨利大增77%，顯示先進製程與AI晶片需求仍然強勁。但市場不再只問「需求有沒有成長」，而是關注更深層的問題。</p>
+                    <ul class="space-y-3 mt-6">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-sm mr-3">1</span>
+                            <span class="text-stone-700">需求能以現在的速度成長多久？</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-sm mr-3">2</span>
+                            <span class="text-stone-700">資料中心數千億投資，能否產生足夠現金流？</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-sm mr-3">3</span>
+                            <span class="text-stone-700">供應商股價是否已提前透支未來數年成長？</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-stone-800 text-stone-100 rounded-lg shadow-lg p-6 mb-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-white mb-4">擁擠的交易與估值風險</h3>
+                    <p class="mb-4 text-stone-300 leading-relaxed">
+                        根據美銀7月調查，<strong class="text-sky-400 text-lg">82%</strong> 經理人認為半導體是市場最擁擠的交易。
+                    </p>
+                    <blockquote class="border-l-4 border-sky-500 pl-4 italic text-stone-200 mt-2">
+                        「當市場持倉過度集中，即使企業交出優秀財報，只要沒有超越最樂觀的預期，獲利了結與降低槓桿就可能造成劇烈下跌。」
+                    </blockquote>
+                    <div class="mt-6 p-4 bg-white/10 rounded-md">
+                        <p class="font-medium text-white text-center">真正的風險不是AI支出下降，<br>而是支出成長開始減速。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="capex-chart" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">主要雲端公司資本支出成長率預估</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-6 max-w-3xl">
+                    市場關心的是「增速」而非絕對金額。若雲端業者資本支出成長顯著放緩，即使採購規模龐大，晶片公司的營收成長率與估值倍數仍將面臨壓力。投資主線正從「誰負責建設AI」轉向「誰能用AI賺錢」。
+                </p>
+                
+                <!-- Chart.js 容器 -->
+                <div class="relative w-full h-80 md:h-96">
+                    <canvas id="capexChart"></canvas>
+                </div>
+                <p class="text-xs text-stone-400 mt-4 text-center">資料來源：Reuters引述UBS預估 (示意圖表)</p>
+            </div>
+        </section>
+
+        <section id="earnings-focus" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">下一階段測試：Alphabet與Tesla財報焦點</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Alphabet Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-600">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-bold text-stone-800">Alphabet</h3>
+                        <span class="px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-xs font-bold">7月22日公布</span>
+                    </div>
+                    <p class="text-stone-600 mb-4 text-sm">市場需要看到AI支出與收入之間的連結。最理想結果是支出、收入與獲利同時向上。</p>
+                    <div class="space-y-4">
+                        <div class="bg-stone-50 p-4 rounded-md">
+                            <h4 class="font-bold text-stone-700 text-sm mb-2">觀察重點</h4>
+                            <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                <li>Google Cloud能否維持高成長 (Q1為63%)</li>
+                                <li>雲端營業利益能否繼續成長</li>
+                                <li>資本支出是否再次上調及2027展望</li>
+                                <li>AI搜尋與Gemini能否實質增加收入</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tesla Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-stone-800">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-bold text-stone-800">Tesla</h3>
+                        <span class="px-3 py-1 bg-stone-200 text-stone-700 rounded-full text-xs font-bold">7月22日公布</span>
+                    </div>
+                    <p class="text-stone-600 mb-4 text-sm">交付量只是指標之一，真正的考驗在於傳統業務現金流能否支撐龐大的AI與自動駕駛投資。</p>
+                    <div class="space-y-4">
+                        <div class="bg-stone-50 p-4 rounded-md">
+                            <h4 class="font-bold text-stone-700 text-sm mb-2">觀察重點</h4>
+                            <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                <li>汽車平均售價與毛利率是否下降</li>
+                                <li>營業現金流能否支撐 >250億 資本支出</li>
+                                <li>Robotaxi 實際商業數據與監管進展</li>
+                                <li>Cybercab 量產時程與儲能獲利</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="data-table" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵企業數據總覽 (報告提及)</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
+                    <p class="text-sm text-stone-500">以下為本報告中提及之關鍵企業財務與營運數據摘要，可透過關鍵字進行篩選搜尋。</p>
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="searchInput" placeholder="搜尋企業或指標..." class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto no-scrollbar border border-stone-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky left-0 bg-stone-50">企業</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">時期 / 季度</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">關鍵指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">數據 / 預估值</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- 資料將由 JS 動態生成 -->
+                        </tbody>
+                    </table>
+                    <div id="noDataMessage" class="hidden text-center py-8 text-stone-500">
+                        找不到符合的資料
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略與結論</h2>
+            
+            <div class="bg-stone-50 rounded-lg p-6 mb-6 border border-stone-200">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">三個層次的投資判斷</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded shadow-sm border-t-4 border-sky-400">
+                        <h4 class="font-bold text-sky-700 mb-2">1. 需求依然真實</h4>
+                        <p class="text-sm text-stone-600">台積電展望與Google Cloud高速成長，證明企業確實在增加AI運算量，基礎建設需求真實存在。</p>
+                    </div>
+                    <div class="bg-white p-5 rounded shadow-sm border-t-4 border-amber-400">
+                        <h4 class="font-bold text-amber-600 mb-2">2. 估值容錯率極低</h4>
+                        <p class="text-sm text-stone-600">需求強勁不等於股價必漲。市場已將未來成長計入估值，財報或展望不夠完美即可能引發修正。</p>
+                    </div>
+                    <div class="bg-white p-5 rounded shadow-sm border-t-4 border-emerald-500">
+                        <h4 class="font-bold text-emerald-600 mb-2">3. 進入驗證階段</h4>
+                        <p class="text-sm text-stone-600">投資主線轉移，未來表現佳的企業將是能將AI轉化為實質收入、軟體訂閱或成本節省的實踐者。</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-sky-900 text-white rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        核心結論
+                    </h3>
+                    <p class="text-sky-100">
+                        這波下跌不是AI泡沫破裂，而是資本市場不再為單純的支出與願景買單。建議投資人避免過度集中單一晶片股，增加具穩定現金流的雲端、軟體或防禦性產業。準備加碼者，宜等待科技巨頭財報確認現金流方向後，再分批佈局。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI半導體修正與美股財報分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中科技巨頭及半導體產業相關公開資料 (2026年7月17日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. 手機版選單切換 ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機版連結後自動關閉選單
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // --- 2. 導航列 Active 狀態切換 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // 調整觸發區域
+                threshold: 0
+            };
+
+            const observerCallback = (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('text-sky-600', 'font-bold');
+                            link.classList.add('text-stone-500');
+                            if (link.dataset.target === currentId) {
+                                link.classList.remove('text-stone-500');
+                                link.classList.add('text-sky-600', 'font-bold');
+                            }
+                        });
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            sections.forEach(section => observer.observe(section));
+
+            // --- 3. Chart.js 動態圖表初始化 ---
+            const ctx = document.getElementById('capexChart').getContext('2d');
+            
+            // 漸層背景 (可選)
+            let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(14, 165, 233, 0.5)'); // sky-500
+            gradient.addColorStop(1, 'rgba(14, 165, 233, 0.05)');
+
+            const capexChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2026 預估', '2027 預估', '2028 預估'],
+                    datasets: [{
+                        label: '資本支出年增率 (%)',
+                        data: [76, 25, 6],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.8)', // sky-500
+                            'rgba(214, 211, 209, 0.8)', // stone-300
+                            'rgba(231, 229, 228, 0.8)'  // stone-200
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(168, 162, 158)',
+                            'rgb(214, 211, 209)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false // 隱藏圖例，因為只有一組資料
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(28, 25, 23, 0.9)', // stone-900
+                            titleFont: { family: 'Inter', size: 14 },
+                            bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(231, 229, 228, 0.5)', // stone-200
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                callback: function(value) { return value + '%' },
+                                color: '#78716c' // stone-500
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#57534e', // stone-600
+                                font: { weight: 'bold' }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+
+            // --- 4. 互動資料表格 (渲染與搜尋功能) ---
+            const reportData = [
+                { company: '台積電 (TSMC)', period: '2026 Q2', metric: '營收', value: '402億美元' },
+                { company: '台積電 (TSMC)', period: '2026 Q2', metric: '毛利率', value: '67.7%' },
+                { company: '台積電 (TSMC)', period: '2026 Q2', metric: '淨利年增率', value: '77% (7,066億台幣)' },
+                { company: '台積電 (TSMC)', period: '2026 Q3 (預估)', metric: '營收', value: '446億 - 458億美元' },
+                { company: 'Alphabet (Google)', period: '2026 Q1', metric: '總營收年增率', value: '22% (1,099億美元)' },
+                { company: 'Alphabet (Google)', period: '2026 Q1', metric: 'Cloud 營收', value: '200億美元 (年增63%)' },
+                { company: 'Alphabet (Google)', period: '2026 Q1', metric: '資本支出', value: '356.7億美元' },
+                { company: 'Alphabet (Google)', period: '2026 (預估)', metric: '年度資本支出', value: '1,800億 - 1,900億美元' },
+                { company: 'Tesla', period: '2026 Q2', metric: '汽車交付量', value: '480,126輛' },
+                { company: 'Tesla', period: '2026 Q1', metric: '資本支出', value: '24.9億美元' },
+                { company: 'Tesla', period: '2026 (預估)', metric: '年度資本支出', value: '超過250億美元' }
+            ];
+
+            const tbody = document.getElementById('dataTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMsg = document.getElementById('noDataMessage');
+
+            // 渲染表格函數
+            const renderTable = (data) => {
+                tbody.innerHTML = '';
+                if (data.length === 0) {
+                    noDataMsg.classList.remove('hidden');
+                    tbody.parentElement.classList.add('hidden');
+                } else {
+                    noDataMsg.classList.add('hidden');
+                    tbody.parentElement.classList.remove('hidden');
+                    
+                    data.forEach((row, index) => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'hover:bg-stone-50 transition-colors duration-150';
+                        
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900 sticky left-0 ${index % 2 === 0 ? 'bg-white' : 'bg-stone-50/50'}">${row.company}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${row.period}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-500">${row.metric}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-stone-700">${row.value}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            };
+
+            // 初始化渲染
+            renderTable(reportData);
+
+            // 搜尋過濾邏輯
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = reportData.filter(item => {
+                    return item.company.toLowerCase().includes(searchTerm) ||
+                           item.metric.toLowerCase().includes(searchTerm) ||
+                           item.period.toLowerCase().includes(searchTerm) ||
+                           item.value.toLowerCase().includes(searchTerm);
+                });
+                renderTable(filteredData);
+            });
+        });
+    </script>
+</body>
+</html>
