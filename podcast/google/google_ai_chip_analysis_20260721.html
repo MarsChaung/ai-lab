@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Google AI晶片與財報分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        /* Custom scrollbar for table */
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .active-nav-link {
+            color: #0284c7 !important; /* sky-600 */
+            font-weight: 700;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* stone-600 */
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+    </style>
+</head>
+<body class="text-stone-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-700">Google AI 投資</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#summary" class="nav-link inactive-nav-link hover:text-sky-600 px-1 py-2 text-sm transition-colors">核心重點</a>
+                    <a href="#news" class="nav-link inactive-nav-link hover:text-sky-600 px-1 py-2 text-sm transition-colors">新聞核實</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link hover:text-sky-600 px-1 py-2 text-sm transition-colors">晶片策略</a>
+                    <a href="#data" class="nav-link inactive-nav-link hover:text-sky-600 px-1 py-2 text-sm transition-colors">財務數據</a>
+                    <a href="#risks" class="nav-link inactive-nav-link hover:text-sky-600 px-1 py-2 text-sm transition-colors">風險與訊號</a>
+                    <a href="#conclusion" class="nav-link inactive-nav-link hover:text-sky-600 px-1 py-2 text-sm transition-colors">投資判斷</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-700 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 absolute w-full shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">核心重點</a>
+                <a href="#news" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">新聞核實</a>
+                <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">晶片策略</a>
+                <a href="#data" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">財務數據</a>
+                <a href="#risks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">風險與訊號</a>
+                <a href="#conclusion" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資判斷</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero -->
+    <header class="bg-gradient-to-r from-stone-800 to-sky-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">Google把Gemini寫進晶片：<br/><span class="text-sky-400">Alphabet的AI護城河，還是千億美元資本支出的豪賭？</span></h1>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Section: Summary Metrics -->
+        <section id="summary" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務與營運亮點 (Q1 2026)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-blue-50 rounded-xl shadow p-6 border border-blue-100 hover:shadow-md transition-shadow">
+                    <p class="text-sm font-semibold text-blue-600 mb-1">2026全年資本支出預估</p>
+                    <p class="text-3xl font-bold text-stone-800">1,800-1,900<span class="text-lg font-medium text-stone-500 ml-1">億美元</span></p>
+                    <p class="text-xs text-stone-500 mt-2">包含基礎設施與AI算力建置</p>
+                </div>
+                <div class="bg-emerald-50 rounded-xl shadow p-6 border border-emerald-100 hover:shadow-md transition-shadow">
+                    <p class="text-sm font-semibold text-emerald-600 mb-1">Google Cloud Q1 營收</p>
+                    <p class="text-3xl font-bold text-stone-800">200.28<span class="text-lg font-medium text-stone-500 ml-1">億美元</span></p>
+                    <p class="text-xs text-emerald-600 mt-2 font-medium">▲ 年增 63%</p>
+                </div>
+                <div class="bg-amber-50 rounded-xl shadow p-6 border border-amber-100 hover:shadow-md transition-shadow">
+                    <p class="text-sm font-semibold text-amber-600 mb-1">Cloud 營業利益</p>
+                    <p class="text-3xl font-bold text-stone-800">65.98<span class="text-lg font-medium text-stone-500 ml-1">億美元</span></p>
+                    <p class="text-xs text-stone-500 mt-2">去年同期為 21.77 億</p>
+                </div>
+                <div class="bg-purple-50 rounded-xl shadow p-6 border border-purple-100 hover:shadow-md transition-shadow">
+                    <p class="text-sm font-semibold text-purple-600 mb-1">Q1 自由現金流</p>
+                    <p class="text-3xl font-bold text-stone-800">101.16<span class="text-lg font-medium text-stone-500 ml-1">億美元</span></p>
+                    <p class="text-xs text-stone-500 mt-2">受資本支出翻倍影響受壓</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: News Verification -->
+        <section id="news" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、新聞內容核實與現況</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-4 leading-relaxed">截至2026年7月21日，綜合多家外媒與Google官方資料交叉比對，近期市場傳聞的核心內容大致正確，但需釐清官方聲明與市場傳言的界線：</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="border-l-4 border-amber-400 pl-4">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">⚠️ Gemini 3.5 Pro 延遲推出</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">據路透社及彭博社報導，原定6月推出的 Gemini 3.5 Pro 因內部程式設計能力測試未達標而延期。目前 Google DeepMind 官網旗艦模型仍為 3.1 Pro。此延期消息可信度高，但具體推出時間尚未官方發布。</p>
+                    </div>
+                    <div class="border-l-4 border-sky-500 pl-4">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">✅ 資本支出確切上調</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">Alphabet 官方已於 Q1 財報會議將全年資本支出上調至 1,800-1,900 億美元。Q1 實際支出達 356.74 億美元（近去年兩倍），AI 基礎建設正大量消耗自由現金流。</p>
+                    </div>
+                    <div class="border-l-4 border-purple-400 pl-4">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">📊 Cloud Q2 成長為市場預期</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">Q1 Cloud 營收年增 63%。目前媒體所稱「Q2 Cloud成長約64%」為 LSEG 與 FactSet 分析師的預估共識，並非公司已公布的實際財報數字。</p>
+                    </div>
+                    <div class="border-l-4 border-emerald-400 pl-4">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">🔬 Frozen v2 晶片仍處研發階段</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">The Information 報導的「Frozen v2」（將Gemini架構硬體化以提升6-10倍效率）為內部知情人士消息，最快2028年部署。Google 僅確認持續研發軟硬體協同設計，尚未正式確認此產品規格。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Chip Strategy & Impact -->
+        <section id="strategy" class="mb-12 scroll-mt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Why chip -->
+                <div>
+                    <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、為何將Gemini寫進晶片？</h2>
+                    <div class="bg-white rounded-lg shadow-lg p-6 h-full">
+                        <p class="text-stone-600 mb-4 leading-relaxed">AI 模型的主要成本已從「訓練」延伸至「推論」（每日回答數十億次問題）。隨著 Gemini 整合至搜尋、Workspace、Android 與 Cloud，推論成本將急遽上升。</p>
+                        <ul class="space-y-4 mt-4">
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm mt-0.5 mr-3">1</span>
+                                <div>
+                                    <h4 class="font-bold text-stone-800">降低資料傳輸耗能</h4>
+                                    <p class="text-sm text-stone-600">將常用的模型結構固化進硬體（Frozen v2概念），可減少晶片與記憶體間反覆傳輸資料的耗電與延遲。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 h-6 w-6 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm mt-0.5 mr-3">2</span>
+                                <div>
+                                    <h4 class="font-bold text-stone-800">晶片分工策略</h4>
+                                    <p class="text-sm text-stone-600">Google 策略轉向專用化：TPU 8t 用於訓練，TPU 8i 用於 AI 代理推論，未來的 Frozen 系列則可能是 Gemini 極致客製化推論晶片。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Impact -->
+                <div>
+                    <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、Frozen v2 的正面投資意義</h2>
+                    <div class="bg-white rounded-lg shadow-lg p-6 h-full">
+                        <ul class="space-y-5">
+                            <li class="border-b border-stone-100 pb-4">
+                                <h4 class="text-lg font-bold text-stone-800 flex items-center">
+                                    <svg class="w-5 h-5 text-emerald-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    大幅降低服務成本
+                                </h4>
+                                <p class="text-sm text-stone-600 mt-1">若能提升6-10倍效率，將確保生成式 AI 搜尋與 Workspace 功能普及時，不會壓垮 Google 的利潤率。</p>
+                            </li>
+                            <li class="border-b border-stone-100 pb-4">
+                                <h4 class="text-lg font-bold text-stone-800 flex items-center">
+                                    <svg class="w-5 h-5 text-emerald-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    緩解雲端算力瓶頸
+                                </h4>
+                                <p class="text-sm text-stone-600 mt-1">釋放資料中心資源，使 Google Cloud 能承接更多外部企業訂單，進一步提升雲端市占與獲利。</p>
+                            </li>
+                            <li>
+                                <h4 class="text-lg font-bold text-stone-800 flex items-center">
+                                    <svg class="w-5 h-5 text-emerald-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    強化全套 AI 垂直整合優勢
+                                </h4>
+                                <p class="text-sm text-stone-600 mt-1">具備同時優化模型、硬體、基礎設施與終端產品的能力。未來 TPU 甚至可出售/租賃給企業客戶，成為直接收入來源。</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Data Visualization -->
+        <section id="data" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、財務數據視覺化與明細</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-1">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">Q1 財務指標對比 (2025 vs 2026)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-500 mt-4">單位：億美元。顯示資本支出暴增的同時，雲端業務獲利亦大幅成長。</p>
+                </div>
+                
+                <!-- Interactive Table -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-2 flex flex-col">
+                    <div class="flex flex-col sm:flex-row justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2 sm:mb-0">核心財務數據表</h3>
+                        <div class="relative w-full sm:w-64">
+                            <input type="text" id="searchInput" placeholder="搜尋指標名稱或數值..." class="w-full border border-stone-300 rounded-md py-2 px-3 pl-9 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm">
+                            <svg class="w-4 h-4 text-stone-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto table-container flex-grow border border-stone-200 rounded-lg">
+                        <table class="w-full text-left border-collapse min-w-[600px]">
+                            <thead class="bg-stone-100 text-stone-700 sticky top-0 z-10 shadow-sm">
+                                <tr>
+                                    <th class="p-3 font-semibold border-b">指標名稱</th>
+                                    <th class="p-3 font-semibold border-b">數值 (億美元)</th>
+                                    <th class="p-3 font-semibold border-b">時期/備註</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody" class="text-stone-600 text-sm">
+                                <!-- Data populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="noResults" class="hidden text-center text-stone-500 py-4 text-sm mt-2">
+                        找不到符合的資料
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Risks -->
+        <section id="risks" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">五、不能忽略的風險與 Q2 觀察訊號</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Risks -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        三大結構性風險
+                    </h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-bold text-stone-800 text-sm">1. 模型能力決定一切</p>
+                            <p class="text-sm text-stone-600">晶片效率再高，若 Gemini 3.5 Pro 競爭力落後 OpenAI/Anthropic，企業客戶仍會流失。硬體解決的是成本，無法解決產品競爭力問題。</p>
+                        </li>
+                        <li>
+                            <p class="font-bold text-stone-800 text-sm">2. 晶片硬體化喪失彈性</p>
+                            <p class="text-sm text-stone-600">AI 架構迭代極快，將演算法固化至晶片可能導致模型更新時硬體報廢，這是工程設計上的巨大挑戰。</p>
+                        </li>
+                        <li>
+                            <p class="font-bold text-stone-800 text-sm">3. 資本支出吞噬現金流</p>
+                            <p class="text-sm text-stone-600">Q1 營運現金流 457.9 億，但龐大資本支出使自由現金流僅剩 101.1 億。若無法快速轉化為營收，折舊與電費將成為沉重包袱。</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Q2 Signals -->
+                <div class="bg-stone-800 rounded-lg shadow-lg p-6 text-stone-200">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <svg class="w-6 h-6 text-sky-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        即將公布 Q2 財報五大看點
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-sky-400 mr-2">📌</span>
+                            <span class="text-sm">Google Cloud 營收成長是否達標 (預期 ~64%)。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-400 mr-2">📌</span>
+                            <span class="text-sm">Cloud 營業利益率能否在電費與折舊攀升下持續擴張。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-400 mr-2">📌</span>
+                            <span class="text-sm">管理層是否進一步上調全年資本支出上限 (超過1,900億)。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-400 mr-2">📌</span>
+                            <span class="text-sm">Gemini 3.5 Pro 延期的官方說法及確切推出時間表。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-400 mr-2">📌</span>
+                            <span class="text-sm">外部 TPU 客戶部署進度與未來營收認列指引。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Conclusion -->
+        <section id="conclusion" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">六、投資策略判斷</h2>
+            <div class="bg-gradient-to-br from-white to-sky-50 rounded-lg shadow-lg p-8 border border-sky-100">
+                <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+                    <span class="bg-stone-200 text-stone-700 px-4 py-1 rounded-full text-sm font-semibold">評級：基本面中性偏多，短期事件風險偏高</span>
+                    <span class="text-sm text-stone-500">對 Nvidia 影響：短期有限，長期存在結構性替代風險</span>
+                </div>
+                
+                <p class="text-stone-700 mb-4 leading-relaxed text-lg">
+                    Gemini 3.5 Pro 延期屬於<strong>短期負面訊號</strong>，削弱市場對其模型領先的信心；而 Frozen v2 則是<strong>中長期正面但尚未證實的利多</strong>，距離影響獲利至少需兩年。
+                </p>
+                <p class="text-stone-700 leading-relaxed mb-6">
+                    在千億資本支出下，市場不再盲目買單「AI基礎建設」願景。接下來的股價取決於 Alphabet 能否證明每一分資料中心的投資，都能轉化為 Cloud 營收與可持續的自由現金流。
+                </p>
+                
+                <div class="bg-white p-4 rounded-md border-l-4 border-sky-600 shadow-sm">
+                    <p class="font-bold text-stone-800">💡 建議操作策略：</p>
+                    <p class="text-sm text-stone-600 mt-1">切勿將尚處設計階段的 Frozen v2 視為近期獲利催化劑。建議等待 Q2 財報公布，檢視 Cloud 實際成長率、資本支出指引與自由現金流狀況後，再行分批評估布局。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 mt-12 py-10 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Google AI晶片與財報分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-3 text-stone-500">資料來源：基於網路中 Alphabet/Google 相關公開資料 (2026年07月21日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Toggle ---
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // --- Scrollspy (Active Link State) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px', // Adjust trigger point
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        // Update desktop links
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            //            // --- Chart.js Initialization ---
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            const chartData = {
+                labels: ['Q1 2025 (去年同期)', 'Q1 2026 (今年)'],
+                datasets: [
+                    {
+                        label: '資本支出 (CapEx)',
+                        data: [171.97, 356.74],
+                        backgroundColor: 'rgba(14, 165, 233, 0.7)', // sky-500
+                        borderColor: 'rgb(14, 165, 233)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Cloud 營業利益',
+                        data: [21.77, 65.98],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)', // emerald-500
+                        borderColor: 'rgb(16, 185, 129)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }
+                ]
+            };
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { family: "'Inter', sans-serif" } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f5f5f4' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            //            // --- Interactive Table Logic ---
+            const productData = [
+                { metric: "2026 全年資本支出預估", value: "1,800 - 1,900", context: "Q1財報會議上調，含能源與資料中心" },
+                { metric: "Q1 實際資本支出", value: "356.74", context: "接近去年同期 (171.97億) 兩倍" },
+                { metric: "Q1 營運現金流", value: "457.90", context: "核心業務現金創造能力仍強" },
+                { metric: "Q1 自由現金流", value: "101.16", context: "受高昂資本支出壓縮" },
+                { metric: "Q1 Google Cloud 營收", value: "200.28", context: "年增 63%" },
+                { metric: "Q1 Cloud 營業利益", value: "65.98", context: "大幅優於去年同期 (21.77億)" },
+                { metric: "Cloud 未完成合約金額", value: "> 4,600.00", context: "顯示企業AI訂單需求強勁" },
+                { metric: "Q2 整體營收預估 (市場共識)", value: "1,169.30", context: "年增 21.3% (非官方數據)" }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noResults = document.getElementById('noResults');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b border-stone-200 hover:bg-stone-50 transition-colors';
+                        row.innerHTML = `
+                            <td class="p-3 font-medium text-stone-800">${item.metric}</td>
+                            <td class="p-3 font-bold text-sky-700">${item.value}</td>
+                            <td class="p-3 text-stone-500">${item.context}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            }
+
+            // Initial render
+            renderTable(productData);
+
+            // Search functionality
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => {
+                    return item.metric.toLowerCase().includes(searchTerm) || 
+                           item.value.toLowerCase().includes(searchTerm) ||
+                           item.context.toLowerCase().includes(searchTerm);
+                });
+                renderTable(filteredData);
+            });
+        });
+    </script>
+</body>
+</html>
