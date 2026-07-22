@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美國學名藥關稅衝擊與投資解析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 自訂導航列啟動狀態樣式 */
+        .active-nav-link {
+            color: #0284c7; /* Tailwind sky-600 */
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans text-stone-800 leading-relaxed">
+
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-700">學名藥關稅衝擊</span>
+                </div>
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-item inactive-nav-link py-2 transition-colors duration-300 font-medium text-sm">政策摘要</a>
+                    <a href="#impact" class="nav-item inactive-nav-link py-2 transition-colors duration-300 font-medium text-sm">市場衝擊</a>
+                    <a href="#companies" class="nav-item inactive-nav-link py-2 transition-colors duration-300 font-medium text-sm">藥企影響分析</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link py-2 transition-colors duration-300 font-medium text-sm">投資策略</a>
+                </div>
+                <!-- 手機版漢堡按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#summary" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">政策摘要</a>
+                <a href="#impact" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">市場衝擊</a>
+                <a href="#companies" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">藥企影響分析</a>
+                <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-sky-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">美國學名藥關稅政策衝擊解析</h1>
+            <p class="text-lg md:text-xl text-sky-100 max-w-3xl mx-auto">從零關稅到百分之二百：學名藥回流美國，還是缺藥與成本危機？深入探討 2026 年最新關稅政策對市場與企業的實質影響。</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <section id="summary" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">政策核心與供應鏈現況</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-4">事件核實：分階段關稅方案</h3>
+                    <ul class="list-disc pl-5 space-y-3 text-stone-600">
+                        <li><strong>2026年8月起：</strong> 維持現狀，學名藥繼續維持零關稅兩年。</li>
+                        <li><strong>2028年8月起：</strong> 關稅提高至 100%，維持一年。</li>
+                        <li><strong>2029年8月起：</strong> 關稅再升至 200%。</li>
+                        <li><span class="text-red-600 font-medium">注意：</span>正式實施細節（產品清單、豁免條件）仍待後續法律與行政文件確認，目前為「宣布政策」階段。</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-sky-700 mb-4">美國學名藥原料藥(API)來源分布 (2025)</h3>
+                    <!-- 必須包覆一層 div 以確保 Chart.js 響應式運作正常 -->
+                    <div class="relative h-64 w-full">
+                        <canvas id="apiChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">為什麼影響深遠？(市場衝擊)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 hover:shadow-xl transition-shadow">
+                    <div class="text-sky-600 mb-2">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">市佔極高，花費極低</h3>
+                    <p class="text-stone-600 text-sm">學名藥佔美國處方箋數量 <strong>>90%</strong>，卻僅佔處方藥支出 <strong><13%</strong>。它是控制醫療支出的核心，過去十年省下逾3兆美元。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500 hover:shadow-xl transition-shadow">
+                    <div class="text-amber-500 mb-2">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">高度依賴海外產能</h3>
+                    <p class="text-stone-600 text-sm">高達 <strong>69%</strong> 的學名藥產品在美國境外製造。這影響了降血壓藥、抗生素、癌症用藥等基礎醫療物資。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500 hover:shadow-xl transition-shadow">
+                    <div class="text-red-500 mb-2">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">極低利潤與缺藥風險</h3>
+                    <p class="text-stone-600 text-sm">約 1/3 短缺口服藥單價 <strong><1美元</strong>。面對200%關稅，藥廠更可能退出市場或大幅漲價，而非立刻赴美建廠。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="companies" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">上市藥企影響分析 (動態篩選)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                
+                <div class="mb-4">
+                    <label for="searchInput" class="block text-sm font-medium text-stone-700 mb-1">搜尋公司或關鍵字：</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <input type="text" id="searchInput" class="pl-10 block w-full sm:w-1/2 md:w-1/3 rounded-md border-stone-300 shadow-sm border p-2 focus:ring-sky-500 focus:border-sky-500 sm:text-sm" placeholder="例如: Teva, 創新藥, 受益...">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200 border border-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">公司/代號</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">受衝擊程度</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">影響細節與現況</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider sticky top-0 bg-stone-50">2025相關營收參考</th>
+                            </tr>
+                        </thead>
+                        <tbody id="companyTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態生成內容 -->
+                        </tbody>
+                    </table>
+                    <div id="noDataMessage" class="hidden text-center py-4 text-stone-500">找不到符合條件的資料。</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">政策情境與投資策略結論</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-stone-50 rounded-lg p-5 border border-stone-200">
+                    <h4 class="font-bold text-sky-800 mb-2">✅ 基準情境 (機率最高)</h4>
+                    <p class="text-sm text-stone-600">高關稅只是談判上限。政府提供廣泛豁免，藥企承諾部分投資。藥價溫和上升，不出現全面缺藥。</p>
+                </div>
+                <div class="bg-stone-50 rounded-lg p-5 border border-stone-200">
+                    <h4 class="font-bold text-red-800 mb-2">⚠️ 悲觀情境</h4>
+                    <p class="text-sm text-stone-600">豁免有限。海外藥廠停止供應低毛利產品，基礎藥物短缺加劇，醫療支出大幅上升，產業評價下降。</p>
+                </div>
+                <div class="bg-stone-50 rounded-lg p-5 border border-stone-200">
+                    <h4 class="font-bold text-green-800 mb-2">🚀 樂觀情境</h4>
+                    <p class="text-sm text-stone-600">關稅搭配保證採購、FDA快速審查及建廠補貼。真正提升供應鏈安全，有利已有美國產能及代工業者。</p>
+                </div>
+            </div>
+
+            <div class="bg-sky-50 rounded-lg p-6 border-l-4 border-sky-600">
+                <h3 class="text-xl font-bold text-stone-800 mb-3">投資觀點總結</h3>
+                <ul class="list-disc pl-5 space-y-2 text-stone-700">
+                    <li><strong>判斷關鍵：</strong> 優先檢查產品與「原料藥(API)」製造地，而非公司總部位置。</li>
+                    <li><strong>選股邏輯轉變：</strong> 中長期主線可能從「買進學名藥公司」轉為「投資美國製藥產能、製藥代工、自動化設備及供應鏈服務」。</li>
+                    <li><strong>財務體質：</strong> 需關注公司是否有足夠現金流承擔新工廠投資，高負債學名藥廠風險較高。</li>
+                    <li><strong>未來觀察點：</strong> 真正的贏家取決於未來官方文件中對「美國製造」、投資承諾及豁免資格的具體定義。</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美國學名藥關稅衝擊與投資解析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美國學名藥關稅相關公開資料 (2026年7月22日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. 手機版選單切換
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 點擊手機選單項目後自動收合
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 2. Chart.js 動態圖表初始化 (長條圖)
+            const ctx = document.getElementById('apiChart').getContext('2d');
+            const apiChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['印度 (India)', '中國 (China)', '美國 (US)', '其他 (Others)'],
+                    datasets: [{
+                        label: '供應美國市場原料藥(API)佔比 %',
+                        data: [44, 22, 9, 25],
+                        backgroundColor: [
+                            'rgba(2, 132, 199, 0.7)', // sky-600
+                            'rgba(14, 165, 233, 0.7)', // sky-500
+                            'rgba(245, 158, 11, 0.7)', // amber-500 (強調美國低佔比)
+                            'rgba(120, 113, 108, 0.7)'  // stone-500
+                        ],
+                        borderColor: [
+                            'rgb(2, 132, 199)',
+                            'rgb(14, 165, 233)',
+                            'rgb(245, 158, 11)',
+                            'rgb(120, 113, 108)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 50,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // 隱藏圖例以節省空間
+                        }
+                    }
+                }
+            });
+
+            // 3. 互動資料表格邏輯
+            const productData = [
+                { id: "TEVA", name: "Teva", impact: "<span class='text-amber-600 font-semibold'>中度至高度</span>", detail: "不再完全依賴學名藥，創新藥(營收逾30億)提供緩衝。需關注海外原料比例與能否取得豁免。", rev: "36.57億美元 (美國學名/生物相似藥)" },
+                { id: "VTRS", name: "Viatris", impact: "<span class='text-red-600 font-semibold'>較高不確定性</span>", detail: "全球化供應鏈廣，出售印度原料藥業務後透過協議採購，易受外部價格與關稅影響。", rev: "33.9億美元 (北美市場銷售)" },
+                { id: "AMRX", name: "Amneal", impact: "<span class='text-green-600 font-semibold'>相對受益者</span>", detail: "美國境內製造佔其部門營收46%。政策要求下具產能優勢，但仍需面對印度建廠及成本競爭考驗。", rev: "30.2億美元 (全年總營收)" },
+                { id: "BigPharma", name: "大型創新藥廠 (Pfizer/Merck等)", impact: "<span class='text-stone-600 font-semibold'>中性 / 影響小</span>", detail: "主要收入為專利保護品牌藥，受專利藥關稅政策影響較大。需留意整體醫療支出上升引發的藥價管制壓力。", rev: "N/A" }
+            ];
+
+            const tableBody = document.getElementById('companyTableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            // 渲染表格函數
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if(data.length === 0) {
+                    noDataMessage.classList.remove('hidden');
+                } else {
+                    noDataMessage.classList.add('hidden');
+                    data.forEach(item => {
+                        const row = `
+                            <tr class="hover:bg-sky-50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.name} <span class="text-xs text-stone-500">(${item.id})</span></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">${item.impact}</td>
+                                <td class="px-6 py-4 text-sm text-stone-600">${item.detail}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-600">${item.rev}</td>
+                            </tr>
+                        `;
+                        tableBody.insertAdjacentHTML('beforeend', row);
+                    });
+                }
+            }
+
+            // 初始渲染
+            renderTable(productData);
+
+            // 搜尋過濾事件監聽
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => {
+                    return item.name.toLowerCase().includes(searchTerm) || 
+                           item.id.toLowerCase().includes(searchTerm) ||
+                           item.detail.toLowerCase().includes(searchTerm) ||
+                           item.impact.toLowerCase().includes(searchTerm);
+                });
+                renderTable(filteredData);
+            });
+
+            // 4. ScrollSpy (使用 Intersection Observer 處理導航列 Active 狀態)
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#desktop-menu .nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px', // 調整觸發範圍
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 移除所有 active class
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        // 替當前區段加上 active class
+                        const activeLink = document.querySelector(`#desktop-menu a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.remove('inactive-nav-link');
+                            activeLink.classList.add('active-nav-link');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
