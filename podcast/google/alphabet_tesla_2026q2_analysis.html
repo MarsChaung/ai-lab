@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Alphabet與Tesla 2026 Q2財報分析</title>
+    <!-- 導入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 導入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 自訂樣式，主要用於導航列與隱藏滾動條 -->
+    <style>
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #44403c; /* Tailwind stone-700 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+        /* 隱藏原生滾動條以保持美觀 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- 導航列 -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-bold text-xl text-sky-700">Alphabet與Tesla 2026Q2財報分析</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#overview" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors" data-target="overview">財報摘要</a>
+                    <a href="#alphabet-analysis" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors" data-target="alphabet-analysis">Alphabet 解析</a>
+                    <a href="#tesla-analysis" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors" data-target="tesla-analysis">Tesla 解析</a>
+                    <a href="#data-viz" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors" data-target="data-viz">圖表與數據</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link px-1 py-2 text-sm font-medium transition-colors" data-target="strategy">投資策略</a>
+                </div>
+
+                <!-- 手機版漢堡按鈕 -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-500 hover:text-stone-700 focus:outline-none focus:text-stone-700 p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單 (預設隱藏) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 shadow-inner pb-4">
+            <a href="#overview" class="block px-4 py-3 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">財報摘要</a>
+            <a href="#alphabet-analysis" class="block px-4 py-3 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">Alphabet 解析</a>
+            <a href="#tesla-analysis" class="block px-4 py-3 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">Tesla 解析</a>
+            <a href="#data-viz" class="block px-4 py-3 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">圖表與數據</a>
+            <a href="#strategy" class="block px-4 py-3 text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">投資策略</a>
+        </div>
+    </nav>
+
+    <!-- 主視覺與標題 -->
+    <header class="bg-gradient-to-r from-stone-800 to-stone-700 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">營收創高，現金流轉負</h1>
+            <p class="text-xl md:text-2xl text-stone-300 font-light mb-6">Alphabet與Tesla的AI豪賭，誰的資本回報更可信？</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- 財報摘要區塊 -->
+        <section id="overview" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">兩份看似相似、實際完全不同的財報</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8 text-stone-600 text-lg leading-relaxed border-l-4 border-sky-500">
+                <p class="mb-4">Alphabet與Tesla第二季財報有一個非常相似的現象：<strong>營收強勁成長，但自由現金流都轉為負值。</strong></p>
+                <p>然而，兩家公司的負自由現金流，品質並不相同。簡單來說，Alphabet是在擴建一項已經證明能賺錢的AI業務；Tesla則是在利用現有汽車事業，支撐一個可能非常龐大、但仍須驗證的AI與機器人未來。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Alphabet 摘要卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-500 flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-blue-700">Alphabet</h3>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">AI 已變現</span>
+                    </div>
+                    <p class="text-stone-600 mb-4 flex-grow">因AI伺服器、TPU晶片、資料中心及網路設備投資快速增加，導致自由現金流轉負。但Google Cloud、搜尋廣告與企業AI服務中，已看到明確的營收及營業利益成長。</p>
+                    <div class="bg-stone-50 p-4 rounded-md mt-auto">
+                        <div class="text-sm text-stone-500 font-bold mb-1">關鍵現象</div>
+                        <div class="text-stone-700">擴建已印證獲利能力的AI引擎</div>
+                    </div>
+                </div>
+
+                <!-- Tesla 摘要卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500 flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-red-700">Tesla</h3>
+                        <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-semibold">願景投資中</span>
+                    </div>
+                    <p class="text-stone-600 mb-4 flex-grow">同時投入Robotaxi、Cybercab、Optimus機器人、AI訓練運算、電池、半導體製造及新產線。高獲利商業模式目前仍處於大量投資、尚未充分回收的階段。</p>
+                    <div class="bg-stone-50 p-4 rounded-md mt-auto">
+                        <div class="text-sm text-stone-500 font-bold mb-1">關鍵現象</div>
+                        <div class="text-stone-700">本業支撐高潛力但待驗證的AI未來</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alphabet 深度解析 -->
+        <section id="alphabet-analysis" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Alphabet：Cloud 開始大量獲利，但資本支出增加更快</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- 亮點 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-2">
+                    <h3 class="text-xl font-bold text-blue-700 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        強勁的營收與雲端獲利
+                    </h3>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2 mt-1">●</span>
+                            <span><strong>整體表現：</strong> 總營收 1,197.96 億美元 (YoY +24%)。營業利益 407.7 億美元 (YoY +30%)，營業利益率由 32% 提升至 34%。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2 mt-1">●</span>
+                            <span><strong>廣告無損：</strong> 搜尋與其他廣告成長 17%，YouTube 廣告成長 13%，AI 搜尋功能目前未破壞原有廣告模式。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">●</span>
+                            <span><strong>雲端大爆發：</strong> Google Cloud 營收 247.68 億美元 (YoY +82%)，營業利益由 28.26 億暴增至 88.14 億美元。利益率由 20.7% 躍升至 35.6%，形成明顯規模效益。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2 mt-1">●</span>
+                            <span><strong>企業採用：</strong> 近 90% 的《財富》100大企業已使用 Gemini Enterprise。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 隱憂與陷阱 -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-yellow-500">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">支出與現金流隱憂</h3>
+                        <p class="text-sm text-stone-600 mb-3">資本支出翻倍至 449.24 億美元，超過 390.69 億美元的營運現金流，導致自由現金流轉負 (-58.55 億美元)。全年支出預測上修至 1,950 億~2,050 億美元。</p>
+                        <p class="text-sm text-stone-500 font-medium">市場擔憂：未來折舊與資料中心租賃成本恐壓抑 Cloud 獲利率。</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">獲利數字陷阱</h3>
+                        <p class="text-sm text-stone-600">Q2 淨利 1,121.07 億美元 (EPS $9.11) 包含約 990 億美元的「股權證券評價利益」。</p>
+                        <p class="text-sm text-red-600 font-medium mt-2">扣除此未實現利益後，EPS 僅約 $2.85。不應以 $9.11 計算本益比。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tesla 深度解析 -->
+        <section id="tesla-analysis" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Tesla：本業承壓，資本支出跨越傳統車廠範疇</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- 挑戰 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-2">
+                    <h3 class="text-xl font-bold text-red-700 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                        多賣車卻少賺錢
+                    </h3>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2 mt-1">●</span>
+                            <span><strong>營收與交付：</strong> 總營收 282.36 億美元 (YoY +26%)，交付量 480,126 輛 (YoY +25%)。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 mr-2 mt-1">●</span>
+                            <span><strong>獲利銳減：</strong> 營業利益僅 3.98 億美元 (YoY -57%)，營業利益率從 4.1% 降至 1.4%。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2 mt-1">●</span>
+                            <span><strong>利空因素：</strong> 單車平均收入下滑 (約 $45,345 降至 $42,730)、監管積分收入大減 (4.39億降至1.46億)、研發費用大增 (15.89億增至23.71億)。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2 mt-1">●</span>
+                            <span><strong>淨利陷阱：</strong> GAAP淨利 11.14 億美元，但包含 10.05 億美元的 SpaceX 股權未實現利益支撐。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 亮點與投資 -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">真正的亮點：儲能與服務</h3>
+                        <p class="text-sm text-stone-600 mb-2">儲能部署量 13.5 GWh (YoY +41%)，營收 31.39 億美元。Megapack 成為最具潛力非汽車業務。</p>
+                        <p class="text-sm text-stone-600">服務及其他收入年增 50%，毛利率創高達 14%，漸成穩定經常性收入。</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-stone-800">
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">跨界資本支出</h3>
+                        <p class="text-sm text-stone-600">資本支出 57.89 億美元 (YoY +142%)，超越 46.97 億營運現金流，自由現金流轉負 (-10.92 億)。</p>
+                        <p class="text-sm text-stone-500 font-medium mt-2">資金大舉投入 Robotaxi、Optimus 與 AI 運算。FSD付費用戶約148萬，軟體收入增長尚無法抵銷本業衰退。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 數據與圖表區塊 -->
+        <section id="data-viz" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務數據探索與視覺化</h2>
+            
+            <!-- 圖表區塊 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold text-stone-700 mb-4 text-center">營業利益 vs 資本支出 (2026 Q2)</h3>
+                <div class="relative h-80 w-full">
+                    <canvas id="financeChart"></canvas>
+                </div>
+                <p class="text-xs text-stone-500 mt-4 text-center">單位：億美元。兩家公司皆出現資本支出大幅高於或接近營業利益的狀況，反映 AI 軍備競賽的資金消耗。</p>
+            </div>
+
+            <!-- 互動表格區塊 -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <h3 class="text-xl font-bold text-stone-700">核心財務數據總表</h3>
+                    <div class="relative w-full sm:w-72">
+                        <input type="text" id="searchInput" placeholder="搜尋指標 (例：現金流, 雲端)..." class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-stone-200 no-scrollbar">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">公司</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">指標</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">數據 (美元)</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">YoY</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">洞察說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- JS 動態生成 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden text-center py-6 text-stone-500">找不到符合條件的資料。</div>
+            </div>
+        </section>
+
+        <!-- 投資策略總結 -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略與總結</h2>
+            
+            <div class="bg-stone-800 text-stone-50 rounded-xl shadow-xl overflow-hidden">
+                <div class="p-8 border-b border-stone-700">
+                    <h3 class="text-2xl font-bold mb-3 text-sky-400">市場不再只為 AI 夢想買單</h3>
+                    <p class="text-lg leading-relaxed">
+                        真正重要的問題已經不是哪家公司投入更多AI，而是：<strong class="text-white bg-sky-600/30 px-2 py-1 rounded">哪家公司能用最少的新增資本，創造最多且最持久的自由現金流。</strong>
+                        現階段財報品質而言，Alphabet 的核心獲利與現金流基礎比 Tesla 穩健；Tesla 則擁有更大想像空間，但也承擔更高風險。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-stone-700">
+                    <div class="p-8 hover:bg-stone-750 transition-colors">
+                        <h4 class="font-bold text-xl text-blue-300 mb-4">Alphabet 策略建議</h4>
+                        <ul class="space-y-3 text-stone-300">
+                            <li class="flex"><svg class="w-5 h-5 text-blue-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> <span>中長期可視為 <strong>AI 核心持股候選</strong>，財報後股價回檔不代表策略失敗。</span></li>
+                            <li class="flex"><svg class="w-5 h-5 text-blue-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> <span><span class="text-sky-300">追蹤重點：</span>Cloud 獲利率是否受折舊壓抑、季度資本支出、TPU 對外收入、Gemini 模型競爭力。</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="p-8 hover:bg-stone-750 transition-colors">
+                        <h4 class="font-bold text-xl text-red-300 mb-4">Tesla 策略建議</h4>
+                        <ul class="space-y-3 text-stone-300">
+                            <li class="flex"><svg class="w-5 h-5 text-red-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> <span>適合視為 <strong>高波動、高潛在報酬的成長型部位</strong>，不宜單依汽車交付量判斷估值。</span></li>
+                            <li class="flex"><svg class="w-5 h-5 text-red-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> <span><span class="text-sky-300">追蹤重點：</span>扣除積分後汽車毛利率、FSD付費用戶成長、Robotaxi 變現進度、資本支出何時低於營運現金流。</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Alphabet與Tesla 2026 Q2財報分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-500">資料來源：基於網路中 Alphabet 與 Tesla 相關公開資料 (2026年7月23日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. 手機版選單切換 ---
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // --- 2. 導航列 Active 狀態偵測 (Intersection Observer) ---
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navItems.forEach(item => {
+                            if (item.getAttribute('data-target') === id) {
+                                item.classList.remove('inactive-nav-link');
+                                item.classList.add('active-nav-link');
+                            } else {
+                                item.classList.remove('active-nav-link');
+                                item.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // --- 3. 互動資料表格邏輯 ---
+            // 擷取文件中的真實數據
+            const reportData = [
+                { company: "Alphabet", metric: "總營收", value: "1,197.96 億", yoy: "+24%", note: "廣告收入未受 AI 搜尋明顯破壞" },
+                { company: "Alphabet", metric: "營業利益", value: "407.7 億", yoy: "+30%", note: "整體營業利益率提升至 34%" },
+                { company: "Alphabet", metric: "Google Cloud 營收", value: "247.68 億", yoy: "+82%", note: "近90% 財富百大企業使用 Gemini" },
+                { company: "Alphabet", metric: "Google Cloud 獲利", value: "88.14 億", yoy: "+211%", note: "利益率由 20.7% 躍升至 35.6%" },
+                { company: "Alphabet", metric: "資本支出", value: "449.24 億", yoy: "+100%", note: "預計全年上修至 1950-2050 億" },
+                { company: "Alphabet", metric: "自由現金流", value: "-58.55 億", yoy: "轉負", note: "上市首見季度轉負，因高額資本支出" },
+                { company: "Alphabet", metric: "GAAP 淨利", value: "1,121.07 億", yoy: "大增", note: "包含約 990 億美元股權評價利益(陷阱)" },
+                { company: "Tesla", metric: "總營收", value: "282.36 億", yoy: "+26%", note: "交付量達 480,126 輛 (+25%)" },
+                { company: "Tesla", metric: "營業利益", value: "3.98 億", yoy: "-57%", note: "營業利益率降至 1.4%，多賣少賺" },
+                { company: "Tesla", metric: "單車平均收入", value: "約 $42,730", yoy: "下滑", note: "受降價與低價車款比重提高影響" },
+                { company: "Tesla", metric: "儲能營收", value: "31.39 億", yoy: "+13%", note: "部署量 13.5 GWh (+41%)，為最大亮點" },
+                { company: "Tesla", metric: "資本支出", value: "57.89 億", yoy: "+142%", note: "投入 Robotaxi、AI 與運算，跨越車廠範疇" },
+                { company: "Tesla", metric: "自由現金流", value: "-10.92 億", yoy: "轉負", note: "營運現金流不足支應暴增的資本支出" }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noResults = document.getElementById('noResults');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                    data.forEach((row, index) => {
+                        const bgClass = index % 2 === 0 ? 'bg-white' : 'bg-stone-50';
+                        const companyColor = row.company === 'Alphabet' ? 'text-blue-600 font-bold' : 'text-red-600 font-bold';
+                        const isNegative = row.value.includes('-') || row.yoy.includes('-') || row.yoy === '轉負';
+                        const valueClass = isNegative ? 'text-red-500 font-semibold' : 'text-stone-800';
+
+                        const tr = document.createElement('tr');
+                        tr.className = `${bgClass} hover:bg-sky-50 transition-colors`;
+                        tr.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${companyColor}">${row.company}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-700">${row.metric}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${valueClass}">${row.value}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${isNegative ? 'text-red-500' : 'text-green-600 font-medium'}">${row.yoy}</td>
+                            <td class="px-6 py-4 text-sm text-stone-600 min-w-[200px]">${row.note}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                }
+            }
+
+            // 初始化表格
+            renderTable(reportData);
+
+            // 搜尋過濾
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = reportData.filter(item => 
+                    item.company.toLowerCase().includes(term) ||
+                    item.metric.toLowerCase().includes(term) ||
+                    item.value.toLowerCase().includes(term) ||
+                    item.note.toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+
+            // --- 4. Chart.js 動態圖表 ---
+            // 數據擷取自文件：
+            // Alphabet: 營業利益 407.7 億, 資本支出 449.24 億
+            // Tesla: 營業利益 3.98 億, 資本支出 57.89 億
+            const ctx = document.getElementById('financeChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Alphabet', 'Tesla'],
+                    datasets: [
+                        {
+                            label: 'Q2 營業利益 (億美元)',
+                            data: [407.7, 3.98],
+                            backgroundColor: 'rgba(56, 189, 248, 0.8)', // sky-400
+                            borderColor: 'rgb(14, 165, 233)', // sky-500
+                            borderWidth: 1,
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Q2 資本支出 (億美元)',
+                            data: [449.24, 57.89],
+                            backgroundColor: 'rgba(248, 113, 113, 0.8)', // red-400
+                            borderColor: 'rgb(239, 68, 68)', // red-500
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { family: "'Inter', sans-serif" }
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            },
+                            title: {
+                                display: true,
+                                text: '億美元'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
