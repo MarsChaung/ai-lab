@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI晶片戰：Nvidia與AMD最新佈局</title>
+    
+    <!-- 導入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 導入 Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- 自定義樣式設定 -->
+    <style>
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; }
+        .active-nav-link {
+            color: #0ea5e9; /* Tailwind sky-500 */
+            font-weight: 700;
+            border-bottom: 2px solid #0ea5e9;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* Tailwind stone-600 */
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0ea5e9;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased">
+
+    <!-- 導航列 (Sticky Header) -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-extrabold text-sky-600">Nvidia與AMD最新佈局</span>
+                </div>
+                
+                <!-- 桌面版選單 -->
+                <nav class="hidden md:flex space-x-8" id="desktop-nav">
+                    <a href="#summary" class="nav-item inactive-nav-link px-1 py-5 text-sm transition-colors duration-200">報告摘要</a>
+                    <a href="#metrics" class="nav-item inactive-nav-link px-1 py-5 text-sm transition-colors duration-200">核心數據</a>
+                    <a href="#chart-section" class="nav-item inactive-nav-link px-1 py-5 text-sm transition-colors duration-200">投資規模分析</a>
+                    <a href="#table-section" class="nav-item inactive-nav-link px-1 py-5 text-sm transition-colors duration-200">策略佈局比較</a>
+                    <a href="#details" class="nav-item inactive-nav-link px-1 py-5 text-sm transition-colors duration-200">詳細解析</a>
+                    <a href="#signals" class="nav-item inactive-nav-link px-1 py-5 text-sm transition-colors duration-200">投資追蹤訊號</a>
+                </nav>
+
+                <!-- 手機版選單按鈕 (Hamburger Menu) -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="text-stone-500 hover:text-sky-500 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單內容 (預設隱藏) -->
+        <div class="md:hidden hidden bg-white border-t border-stone-200" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 shadow-inner">
+                <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">報告摘要</a>
+                <a href="#metrics" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">核心數據</a>
+                <a href="#chart-section" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">投資規模分析</a>
+                <a href="#table-section" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">策略佈局比較</a>
+                <a href="#details" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">詳細解析</a>
+                <a href="#signals" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-500 hover:bg-stone-50">投資追蹤訊號</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- 頁面標題 -->
+        <div class="mb-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">AI晶片戰進入第二回合</h1>
+            <p class="text-xl text-stone-600">Nvidia搶封裝、AMD搶客戶，供應鏈護城河正在重畫</p>
+        </div>
+
+        <!-- Section 1: 報告摘要 -->
+        <section id="summary" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本期重點摘要</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                <p class="text-lg text-stone-700 leading-relaxed mb-4">
+                    截至2026年7月24日，AI半導體產業接連出現兩項重要合作：Nvidia與Amkor簽署15億美元的美國先進封裝協議；AMD則與Anthropic建立最高2 GW的AI運算合作，並承諾未來向Anthropic投資最高50億美元。
+                </p>
+                <p class="text-lg text-stone-700 leading-relaxed">
+                    這反映出AI競爭已經不再只是比較哪一家公司能設計出最快的晶片，而是<strong class="text-sky-600">比較誰能掌握完整供應鏈、建立大規模系統，並且提前鎖定最具成長潛力的AI客戶</strong>。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: 核心數據卡片 -->
+        <section id="metrics" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵合作數據</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-blue-50 rounded-lg shadow p-6 border border-blue-100 hover:shadow-lg transition-shadow">
+                    <div class="text-blue-500 mb-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-stone-500 text-sm font-semibold uppercase tracking-wider">Nvidia x Amkor 協議</h3>
+                    <p class="text-3xl font-extrabold text-stone-800 mt-2">15億 <span class="text-lg font-medium text-stone-500">美元</span></p>
+                    <p class="text-sm text-stone-600 mt-2">產能預付款與技術開發合作</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-emerald-50 rounded-lg shadow p-6 border border-emerald-100 hover:shadow-lg transition-shadow">
+                    <div class="text-emerald-500 mb-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <h3 class="text-stone-500 text-sm font-semibold uppercase tracking-wider">Amkor 亞利桑那新廠</h3>
+                    <p class="text-3xl font-extrabold text-stone-800 mt-2">20~70億 <span class="text-lg font-medium text-stone-500">美元</span></p>
+                    <p class="text-sm text-stone-600 mt-2">最高投資規模，2028年啟用</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-purple-50 rounded-lg shadow p-6 border border-purple-100 hover:shadow-lg transition-shadow">
+                    <div class="text-purple-500 mb-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-stone-500 text-sm font-semibold uppercase tracking-wider">AMD x Anthropic 運算</h3>
+                    <p class="text-3xl font-extrabold text-stone-800 mt-2">最高 2 <span class="text-lg font-medium text-stone-500">GW</span></p>
+                    <p class="text-sm text-stone-600 mt-2">AI運算系統部署容量</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-amber-50 rounded-lg shadow p-6 border border-amber-100 hover:shadow-lg transition-shadow">
+                    <div class="text-amber-500 mb-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    </div>
+                    <h3 class="text-stone-500 text-sm font-semibold uppercase tracking-wider">AMD 股權投資承諾</h3>
+                    <p class="text-3xl font-extrabold text-stone-800 mt-2">最高 50億 <span class="text-lg font-medium text-stone-500">美元</span></p>
+                    <p class="text-sm text-stone-600 mt-2">綁定特定部署里程碑</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 動態圖表 (Chart.js) -->
+        <section id="chart-section" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">相關投資與協議規模分析 (億美元)</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-600 mb-4 text-sm">此圖表展示近期AI產業佈局的資金與協議規模。請注意部分資金為「最高承諾」或「多年期規劃」，並非單次資本支出。</p>
+                <div class="relative w-full h-80">
+                    <canvas id="investmentChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 互動資料表格 (Vanila JS) -->
+        <section id="table-section" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">晶片雙雄策略佈局比較</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p class="text-stone-600 text-sm">透過輸入關鍵字即時篩選表格內容（例如：Nvidia、AMD、產能）：</p>
+                    <input type="text" id="searchInput" placeholder="搜尋公司或關鍵字..." class="px-4 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 w-full sm:w-64">
+                </div>
+                
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead class="bg-stone-100 text-stone-700 sticky top-0">
+                            <tr>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200">發動公司</th>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200">合作夥伴</th>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200">策略重點</th>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200">規模與投資</th>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200">長期影響與意義</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="text-stone-600 divide-y divide-stone-200">
+                            <!-- JS 動態生成內容 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noDataMessage" class="hidden text-center py-6 text-stone-500">
+                    找不到符合條件的資料。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 詳細解析 -->
+        <section id="details" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">深入解析：供給端與需求端的爭奪</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Nvidia 解析 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-sky-700 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        Nvidia與Amkor：先進封裝成為新護城河
+                    </h3>
+                    <p class="mb-4 text-stone-700 leading-relaxed">
+                        Amkor在7月23日宣布與Nvidia建立多年期策略合作，協議價值15億美元。Nvidia將提供預付款，支持Amkor擴充美國境內（亞利桑那州Peoria）的先進封裝與測試產能，雙方也將共同開發高密度互連、異質整合及下一代AI晶片封裝技術。
+                    </p>
+                    <p class="mb-4 text-stone-700 leading-relaxed">
+                        這項合作重要的原因在於，現代AI加速器不是單純的晶片。GPU、HBM、輸入輸出晶粒必須透過高階封裝整合。當GPU算力快速增加時，<strong class="text-stone-900">封裝良率、互連速度與散熱，可能成為出貨限制</strong>。Nvidia提供預付款，是為了降低未來新AI平台量產時的缺貨風險，這更接近一項「供應鏈保險」。
+                    </p>
+                    <p class="text-stone-700 leading-relaxed bg-stone-50 p-3 border-l-4 border-stone-300">
+                        * Amkor在6月已與台積電簽署十年合作，如今結合晶圓代工與IC設計雙霸天支持，穩固其美國AI供應鏈關鍵角色。
+                    </p>
+                </div>
+
+                <!-- AMD 解析 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-emerald-700 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        AMD與Anthropic：從賣晶片升級為賣系統
+                    </h3>
+                    <p class="mb-4 text-stone-700 leading-relaxed">
+                        AMD與Anthropic於7月22日宣布策略合作。Anthropic將部署最高2 GW的AMD Helios機櫃級系統（採用MI455X GPU、EPYC CPU、Pensando網路與ROCm軟體）。這顯示AMD不只是賣單一GPU，而是提供完整系統。
+                    </p>
+                    <p class="mb-4 text-stone-700 leading-relaxed">
+                        對AMD而言，Anthropic這個大型企業AI服務商願意承諾最高2 GW的系統，等於提供了一個大型客戶驗證案例，有助於強化AMD作為Nvidia第二供應來源的可信度。
+                    </p>
+                    <p class="text-stone-700 leading-relaxed bg-emerald-50 p-3 border-l-4 border-emerald-300">
+                        * AMD承諾最高50億美元股權投資。這種「晶片公司投資AI企業，AI企業再採購設備」的循環雖然能鞏固關係，但也存在實際部署與資金回收的風險。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">結論：兩強戰略對比</h3>
+                <p class="text-stone-700 leading-relaxed">
+                    Nvidia正在解決「有太多訂單，但能不能準時生產」的問題（固守供給面）；AMD正在解決「產品已經準備好，但能不能讓更多大型客戶採用」的問題（強攻需求面）。下一階段AI基礎建設的主要贏家，必須同時掌握封裝產能、完整系統、軟體生態及客戶融資能力。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 6: 投資追蹤訊號 -->
+        <section id="signals" class="mb-12 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資人後續必看的5大追蹤訊號</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-sky-100 text-sky-600 font-bold mr-3 mt-1">1</span>
+                        <p class="text-stone-700 text-lg"><strong>Amkor 的財務認列：</strong>觀察是否進一步揭露15億美元預付款的支付時程、會計處理與收入認列方式。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-sky-100 text-sky-600 font-bold mr-3 mt-1">2</span>
+                        <p class="text-stone-700 text-lg"><strong>Amkor 亞利桑那新廠進度：</strong>新工廠能否依計畫在2028年開始生產，以及建設成本是否持續增加。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-sky-100 text-sky-600 font-bold mr-3 mt-1">3</span>
+                        <p class="text-stone-700 text-lg"><strong>AMD x Anthropic 實際出貨：</strong>第一GW設備的實際出貨時間（預計2027H1）、GPU數量及雲端合作夥伴配合狀況。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-sky-100 text-sky-600 font-bold mr-3 mt-1">4</span>
+                        <p class="text-stone-700 text-lg"><strong>MI455X 實戰效能：</strong>AMD設備在Claude訓練與推論上的效能、穩定性及整體使用成本，能否接近或優於Nvidia平台。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-sky-100 text-sky-600 font-bold mr-3 mt-1">5</span>
+                        <p class="text-stone-700 text-lg"><strong>股權投資真實落地：</strong>AMD最高50億美元股權投資的估值、付款條件，以及Anthropic是否真正完成相對應的設備部署。</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI晶片戰：Nvidia與AMD最新佈局。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中AI晶片與半導體供應鏈相關公開資料 (2026年7月24日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 功能實作 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* =========================================
+               1. 手機版選單切換功能
+               ========================================= */
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            /* 點擊手機版選單項目後自動關閉選單 */
+            const mobileLinks = menu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            /* =========================================
+               2. 導航列滾動監聽 (Intersection Observer)
+               ========================================= */
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px -60% 0px', // 調整觸發範圍，確保標題過頂部即觸發
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // 移除所有 active 狀態
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        });
+                        // 加上當前 active 狀態
+                        const activeLink = document.querySelector(`.nav-item[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.remove('inactive-nav-link');
+                            activeLink.classList.add('active-nav-link');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+
+            /* =========================================
+               3. 互動資料表格 (資料與搜尋功能)
+               ========================================= */
+            const productData = [
+                { 
+                    company: "Nvidia", 
+                    partner: "Amkor", 
+                    focus: "確保先進封裝產能 (供給端佈局)", 
+                    scale: "15億美元 (預付款與技術開發協議)", 
+                    impact: "降低未來新AI平台(GPU+HBM)量產時因封裝造成的缺貨風險，建立美國在地產能保險。" 
+                },
+                { 
+                    company: "AMD", 
+                    partner: "Anthropic", 
+                    focus: "推廣系統級解決方案 (需求端佈局)", 
+                    scale: "最高2 GW系統部署 / 最高50億美元股權投資", 
+                    impact: "取得大型AI模型公司實績驗證，銷售整套Helios機櫃(含CPU/GPU/網路/軟體)，打破Nvidia生態壟斷。" 
+                },
+                { 
+                    company: "Amkor", 
+                    partner: "Nvidia, 台積電", 
+                    focus: "擴充高階測試與封裝業務", 
+                    scale: "亞利桑那廠計畫投資20億至70億美元", 
+                    impact: "轉型為美國AI半導體供應鏈關鍵節點，享產能利用率與長線技術開發紅利 (需留意建廠時程風險)。" 
+                },
+                { 
+                    company: "Anthropic", 
+                    partner: "AMD", 
+                    focus: "分散算力依賴，獲取營運資金", 
+                    scale: "部署數百億美元等級AI基礎設施", 
+                    impact: "降低對單一晶片商的依賴，藉由AMD股權投資獲取資金發展Claude模型。" 
+                }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const searchInput = document.getElementById('searchInput');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            // 渲染表格的函式
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    noDataMessage.classList.remove('hidden');
+                } else {
+                    noDataMessage.classList.add('hidden');
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.className = 'hover:bg-sky-50 transition-colors';
+                        row.innerHTML = `
+                            <td class="py-4 px-4 border-b border-stone-200 font-medium text-stone-900">${item.company}</td>
+                            <td class="py-4 px-4 border-b border-stone-200">${item.partner}</td>
+                            <td class="py-4 px-4 border-b border-stone-200">${item.focus}</td>
+                            <td class="py-4 px-4 border-b border-stone-200 font-semibold text-sky-700">${item.scale}</td>
+                            <td class="py-4 px-4 border-b border-stone-200 text-sm">${item.impact}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            }
+
+            // 初始化渲染
+            renderTable(productData);
+
+            // 搜尋事件監聽
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase();
+                const filteredData = productData.filter(item => {
+                    return Object.values(item).some(val => 
+                        String(val).toLowerCase().includes(keyword)
+                    );
+                });
+                renderTable(filteredData);
+            });
+
+
+            /* =========================================
+               4. 動態長條圖 (Chart.js)
+               ========================================= */
+            const ctx = document.getElementById('investmentChart').getContext('2d');
+            
+            // 圖表資料：投資規模比較 (單位: 億美元)
+            const chartData = {
+                labels: ['Nvidia x Amkor 協議', 'Amkor 美國新廠投資(最高)', 'AMD對Anthropic投資(最高)'],
+                datasets: [{
+                    label: '財務規模 (億美元)',
+                    data: [15, 70, 50],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.7)', // sky-500
+                        'rgba(16, 185, 129, 0.7)', // emerald-500
+                        'rgba(245, 158, 11, 0.7)'  // amber-500
+                    ],
+                    borderColor: [
+                        'rgb(14, 165, 233)',
+                        'rgb(16, 185, 129)',
+                        'rgb(245, 158, 11)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            };
+
+            const chartConfig = {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { family: "'Inter', 'Noto Sans TC', sans-serif" }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + ' 億';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '金額 (億美元)',
+                                font: { family: "'Inter', 'Noto Sans TC', sans-serif", weight: 'bold' }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: { family: "'Inter', 'Noto Sans TC', sans-serif" }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            };
+
+            new Chart(ctx, chartConfig);
+        });
+    </script>
+</body>
+</html>
