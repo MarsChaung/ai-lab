@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美伊和平紅利與美股贏家分析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .active-nav-link {
+            color: #0284c7; /* sky-600 */
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #4b5563; /* gray-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0369a1; /* sky-700 */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-sky-200">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Brand Title -->
+                <div class="flex items-center space-x-3">
+                    <span class="text-lg font-bold text-stone-900 tracking-tight block">美伊和談分析</span>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#summary" id="nav-summary" class="inactive-nav-link py-5 transition-colors">局勢現況</a>
+                    <a href="#hormuz" id="nav-hormuz" class="inactive-nav-link py-5 transition-colors">荷姆茲海峽</a>
+                    <a href="#winners-losers" id="nav-winners-losers" class="inactive-nav-link py-5 transition-colors">產業贏家與受害者</a>
+                    <a href="#table-section" id="nav-table-section" class="inactive-nav-link py-5 transition-colors">受惠個股總覽</a>
+                    <a href="#charts" id="nav-charts" class="inactive-nav-link py-5 transition-colors">數據圖表</a>
+                    <a href="#strategy" id="nav-strategy" class="inactive-nav-link py-5 transition-colors">投資策略</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md" aria-label="Toggle Menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <a href="#summary" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">局勢現況</a>
+            <a href="#hormuz" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">荷姆茲海峽</a>
+            <a href="#winners-losers" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">產業贏家與受害者</a>
+            <a href="#table-section" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">受惠個股總覽</a>
+            <a href="#charts" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">數據圖表</a>
+            <a href="#strategy" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section class="bg-gradient-to-b from-sky-900 to-stone-900 text-white py-12 md:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
+                    從百美元油價到和平紅利：美伊若真正停戰，誰會成為美股最大贏家？
+                </h1>
+                <p class="text-stone-300 text-base md:text-lg leading-relaxed">
+                    外交轉機引發原油價格大跌，市場正重新評估中東風險。本文深入分析荷姆茲海峽的關鍵數據、產業受惠順序與具體個股評估。
+                </p>
+            </div>
+
+            <!-- Key Metric Snapshot Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+                    <p class="text-xs text-stone-300 font-medium">布蘭特原油 (7/28)</p>
+                    <p class="text-2xl md:text-3xl font-bold text-emerald-400 mt-1">$86.32 <span class="text-xs text-emerald-300 font-normal">(-2.3%)</span></p>
+                    <p class="text-xs text-stone-400 mt-1">7/27 曾單日急挫 9.31%</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+                    <p class="text-xs text-stone-300 font-medium">西德州原油 WTI (7/28)</p>
+                    <p class="text-2xl md:text-3xl font-bold text-emerald-400 mt-1">$80.93 <span class="text-xs text-emerald-300 font-normal">(-2.0%)</span></p>
+                    <p class="text-xs text-stone-400 mt-1">7/27 下跌 8.21% 至 $81.98</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+                    <p class="text-xs text-stone-300 font-medium">荷姆茲海峽每日油量</p>
+                    <p class="text-2xl md:text-3xl font-bold text-sky-300 mt-1">~2,000萬桶</p>
+                    <p class="text-xs text-stone-400 mt-1">占全球海運石油約 25%</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+                    <p class="text-xs text-stone-300 font-medium">美國10年期公債殖利率</p>
+                    <p class="text-2xl md:text-3xl font-bold text-amber-300 mt-1">~4.64%</p>
+                    <p class="text-xs text-stone-400 mt-1">債市態度仍審慎未全面轉鬆</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Layout Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- Section 1: Summary & Situation Verification -->
+        <section id="summary" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                一、原始資訊核實：方向正確，但不是完整停火
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Situation Card Left -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 text-sky-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        談判現況與軍事衝突
+                    </h3>
+                    <ul class="space-y-3 text-stone-600 text-sm leading-relaxed">
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 bg-sky-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>美方態度：</strong> 2026年7月27日川普表示正與伊朗進行「良好談判」，暫停空襲行動，但警告若無結果可能恢復攻擊。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 bg-sky-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>伊方回應：</strong> 高層表示若美方維持暫停攻擊，伊朗將停止直接攻擊，但否認主動要求談判，僅透過第三方傳遞訊息。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 bg-sky-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>區域衝突持續：</strong> 沙烏地阿拉伯、約旦與伊拉克仍遭無人機攻擊，胡塞武裝亦聲稱攻擊紅海輸油管。目前僅算「暫停直接攻擊與間接斡旋」。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Situation Card Right -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-emerald-500">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3 flex items-center">
+                        <svg class="w-6 h-6 text-emerald-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        油價反應與市場心理
+                    </h3>
+                    <ul class="space-y-3 text-stone-600 text-sm leading-relaxed">
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 bg-emerald-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>7/27 油價下挫：</strong> WTI大跌8.21%至 $81.98/桶；布蘭特原油大跌9.31%至 $87.77/桶。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 bg-emerald-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>7/28 延續跌勢：</strong> 布蘭特降至 $86.32/桶，WTI降至 $80.93/桶，市場溢價持續釋放。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="inline-block w-2 h-2 bg-emerald-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                            <span><strong>德國商業銀行觀點：</strong> 當前跌幅主要由「期望」驅動，實際航運風險仍未完全消除。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Hormuz Strait Critical Role -->
+        <section id="hormuz" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                二、為什麼荷姆茲海峽比「和平協定」四個字更重要？
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-6">
+                    荷姆茲海峽是全球能源市場最重要的關鍵咽喉。即使沙烏地阿拉伯與阿聯擁有陸上替代管道，其每日替代能力僅約 <strong>350萬至550萬桶</strong>，遠遠無法補足平時近2,000萬桶的通行缺口。
+                </p>
+
+                <!-- Data Highlights Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 text-center">
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-100">
+                        <span class="block text-2xl font-bold text-sky-700">2,000 萬桶/日</span>
+                        <span class="text-xs text-sky-800">海運石油與石油產品流量 (占全球 25%)</span>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-100">
+                        <span class="block text-2xl font-bold text-sky-700">19% LNG 貿易</span>
+                        <span class="text-xs text-sky-800">卡達93%及阿聯96%的液化天然氣出口經此</span>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-100">
+                        <span class="block text-2xl font-bold text-sky-700">$80 美元/桶</span>
+                        <span class="text-xs text-sky-800">高盛預測若海峽Q4全通，年底油價目標</span>
+                    </div>
+                </div>
+
+                <!-- 5 Criteria for Real Peace -->
+                <h3 class="text-lg font-bold text-stone-900 mb-4">一份「真正具投資意義」的和平協定需具備 5 大實質條件：</h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                    <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs">
+                        <span class="font-bold text-sky-600 block mb-1">1. 航行自由</span>
+                        商船可自由且穩定通過荷姆茲海峽。
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs">
+                        <span class="font-bold text-sky-600 block mb-1">2. 停止攻擊設施</span>
+                        美伊雙方停止攻擊能源基礎設施。
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs">
+                        <span class="font-bold text-sky-600 block mb-1">3. 代理人停火</span>
+                        胡塞武裝等團體停止攻擊紅海與波斯灣。
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs">
+                        <span class="font-bold text-sky-600 block mb-1">4. 運費正常化</span>
+                        戰爭風險費與航運保險費回落。
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs">
+                        <span class="font-bold text-sky-600 block mb-1">5. 長期框架</span>
+                        就核計畫與經濟制裁形成多年期機制。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Industry Winners & Losers Breakdown -->
+        <section id="winners-losers" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                三、哪些產業與公司可能獲得最顯著利多或承受壓力？
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Beneficiaries Block -->
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-2 border-b border-emerald-200 pb-2">
+                        <span class="w-3 h-3 bg-emerald-500 rounded-full"></span>
+                        <h3 class="text-2xl font-bold text-emerald-800">明確受惠產業 (Winners)</h3>
+                    </div>
+
+                    <!-- Airline Card -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-lg font-bold text-stone-900">1. 航空公司 (Airlines)</h4>
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded">最直接受惠</span>
+                        </div>
+                        <p class="text-stone-600 text-sm mb-3">燃油為主要變動成本。Delta第二季調整後燃油支出達44.1億美元(+77%)。油價急跌將大幅修正成本預估。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Delta (DAL)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">United (UAL)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Southwest (LUV)</span>
+                        </div>
+                    </div>
+
+                    <!-- Travel Card -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-lg font-bold text-stone-900">2. 線上旅遊與預訂平台 (OTAs)</h4>
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded">需求提升</span>
+                        </div>
+                        <p class="text-stone-600 text-sm mb-3">7/27 股價已搶先上漲：Expedia +7.7%、Booking +5.4%、Airbnb +3.8%。受惠於機票降價與跨境旅遊風險下降。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Booking (BKNG)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Expedia (EXPE)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Airbnb (ABNB)</span>
+                        </div>
+                    </div>
+
+                    <!-- Logistics & Cruise Card -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-lg font-bold text-stone-900">3. 郵輪、休閒與物流運輸</h4>
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded">雙重利多</span>
+                        </div>
+                        <p class="text-stone-600 text-sm mb-3">郵輪業者同時受惠於燃料成本下降與融資利率壓力舒緩；物流業(UPS, FedEx)降低航空與車隊燃料支出。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Royal Caribbean (RCL)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Carnival (CCL)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">UPS / FedEx</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Losers Block -->
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-2 border-b border-rose-200 pb-2">
+                        <span class="w-3 h-3 bg-rose-500 rounded-full"></span>
+                        <h3 class="text-2xl font-bold text-rose-800">面臨壓力產業 (Negatively Impacted)</h3>
+                    </div>
+
+                    <!-- Oil Producers Card -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-500">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-lg font-bold text-stone-900">1. 上游石油生產與油服公司</h4>
+                            <span class="px-2 py-1 bg-rose-100 text-rose-800 text-xs font-semibold rounded">獲利承壓</span>
+                        </div>
+                        <p class="text-stone-600 text-sm mb-3">7/27 標普500能源類股下跌約2%。純上游業者(COP, OXY)利潤對油價最為敏感；SLB與Halliburton可能面臨資本支出縮減。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Exxon Mobil (XOM)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">ConocoPhillips (COP)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">SLB / Halliburton</span>
+                        </div>
+                    </div>
+
+                    <!-- Gold & Defense Card -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-500">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-lg font-bold text-stone-900">2. 避險資產(黃金)與國防軍工</h4>
+                            <span class="px-2 py-1 bg-rose-100 text-rose-800 text-xs font-semibold rounded">溢價消退</span>
+                        </div>
+                        <p class="text-stone-600 text-sm mb-3">地緣政治避險需求退潮；國防股短期題材降溫，惟美軍長期國防預算與飛彈補庫等多年期合約依然穩固。</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Newmont (NEM)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">Lockheed Martin (LMT)</span>
+                            <span class="px-2.5 py-1 bg-stone-100 text-stone-700 text-xs rounded font-medium">RTX / Northrop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Table -->
+        <section id="table-section" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                四、受惠與受害股票即時篩選表
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Filter & Search Control -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                    <p class="text-stone-600 text-sm">輸入代號、公司名稱、產業或影響類型進行快速篩選：</p>
+                    <div class="w-full md:w-72">
+                        <input type="text" id="tableSearchInput" placeholder="搜尋：例如 Delta, 航空, 負面..." 
+                               class="w-full px-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm">
+                    </div>
+                </div>
+
+                <!-- Scrollable Table Container -->
+                <div class="overflow-x-auto max-h-[450px] overflow-y-auto border border-stone-200 rounded-lg">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="sticky top-0 bg-stone-100 text-stone-700 font-semibold border-b border-stone-300 z-10">
+                            <tr>
+                                <th class="p-3">美股代號</th>
+                                <th class="p-3">公司名稱</th>
+                                <th class="p-3">所屬產業</th>
+                                <th class="p-3">和平紅利影響類型</th>
+                                <th class="p-3">核心邏輯與影響評估</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="divide-y divide-stone-200 text-stone-700">
+                            <!-- JS populated rows -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResultsMsg" class="hidden text-center text-stone-500 py-6">無符合搜尋條件的資料</div>
+            </div>
+        </section>
+
+        <!-- Section 5: Dynamic Charts -->
+        <section id="charts" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                五、市場反應與油價預測視覺化
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1 Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-4 text-center">原油價格演變與高盛預測 ($/桶)</h3>
+                    <div class="relative w-full h-72">
+                        <canvas id="oilPriceChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 text-center mt-3">資料來源：Reuters & Goldman Sachs 評估報告</p>
+                </div>
+
+                <!-- Chart 2 Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-4 text-center">7/27 談判消息公布當日各資產漲跌幅 (%)</h3>
+                    <div class="relative w-full h-72">
+                        <canvas id="marketReactionChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 text-center mt-3">反映市場搶先定價「停火希望」與利多類股輪動</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Investment Strategy -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                六、巴菲特AI價值投資策略：三層級佈局與五大觀察訊號
+            </h2>
+
+            <!-- Strategy Tiers -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">第一層級</span>
+                    <h3 class="text-lg font-bold text-stone-900 mt-2 mb-2">燃油成本直接受惠者</h3>
+                    <p class="text-xs text-stone-500 mb-3">例如：DAL, UAL, LUV, RCL, CCL</p>
+                    <p class="text-stone-600 text-sm">獲利改善最為直接且迅速，但股價短期波動度最高。不宜在單日大漲後暴躁追高。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded">第二層級</span>
+                    <h3 class="text-lg font-bold text-stone-900 mt-2 mb-2">旅遊與消費需求受惠者</h3>
+                    <p class="text-xs text-stone-500 mb-3">例如：BKNG, EXPE, ABNB, WMT, TGT</p>
+                    <p class="text-stone-600 text-sm">受惠於可支配所得增加與出行意願回升，基本面改善時間較長且具有可持續性。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-500">
+                    <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">第三層級</span>
+                    <h3 class="text-lg font-bold text-stone-900 mt-2 mb-2">高品質大型科技與金融</h3>
+                    <p class="text-xs text-stone-500 mb-3">例如：MSFT, GOOGL, AMZN, JPM</p>
+                    <p class="text-stone-600 text-sm">間接受惠於通膨壓降與整體總體經濟穩定，提供強健的現金流保護與資產安全墊。</p>
+                </div>
+            </div>
+
+            <!-- Key Signals Box -->
+            <div class="bg-stone-800 text-white rounded-lg p-6 shadow-lg">
+                <h3 class="text-xl font-bold mb-4 flex items-center text-sky-400">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    關鍵觀察與進場確認訊號 (Key Signals)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-stone-300">
+                    <div class="flex items-start">
+                        <span class="text-sky-400 font-bold mr-2">1.</span>
+                        <span>正式和平協議是否有明確簽署日期與國際監督執行機制。</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-sky-400 font-bold mr-2">2.</span>
+                        <span>荷姆茲海峽每日商船實質通行量是否恢復至正常水準。</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-sky-400 font-bold mr-2">3.</span>
+                        <span>布蘭特原油能否穩健守在每桶 80 美元附近或更低。</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-sky-400 font-bold mr-2">4.</span>
+                        <span>華爾街分析師是否開始普遍上調航空與旅遊消費股 EPS 預估。</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8 border-t border-stone-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美伊和平紅利與美股贏家分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-400">資料來源：基於網路中美伊外交與全球能源市場相關公開資料 (2026年07月28日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Authentic Data extracted from the document
+        const productData = [
+            { ticker: "DAL", name: "Delta Air Lines", sector: "航空公司", impact: "直接受惠", logic: "第二季燃油支出達44.1億美元(+77%)，油價回落直接大幅降低變動成本" },
+            { ticker: "UAL", name: "United Airlines", sector: "航空公司", impact: "直接受惠", logic: "燃油為主要支出，航空燃油價格下降帶來顯著獲利調升空間" },
+            { ticker: "LUV", name: "Southwest Airlines", sector: "航空公司", impact: "直接受惠", logic: "本土航線經營，燃油降價直接改善營業利益率" },
+            { ticker: "BKNG", name: "Booking Holdings", sector: "線上旅遊", impact: "需求受惠", logic: "7/27大漲5.4%，機票降價與跨境旅遊地緣風險消退刺激預訂量" },
+            { ticker: "EXPE", name: "Expedia", sector: "線上旅遊", impact: "需求受惠", logic: "7/27大漲7.7%，消費者旅遊意願回升與旅遊風險溢價降溫" },
+            { ticker: "ABNB", name: "Airbnb", sector: "線上旅遊", impact: "需求受惠", logic: "7/27上漲3.8%，全球出行需求改善帶動住房預訂成長" },
+            { ticker: "RCL", name: "Royal Caribbean", sector: "郵輪休閒", impact: "雙重受惠", logic: "船舶燃油成本降價，且市場通膨壓力降溫有利降息與利息負擔" },
+            { ticker: "CCL", name: "Carnival", sector: "郵輪休閒", impact: "雙重受惠", logic: "受惠燃油成本下降與機票便宜帶動的郵輪套裝行程需求" },
+            { ticker: "UPS", name: "UPS", sector: "物流運輸", impact: "間接受惠", logic: "Q1燃油費用達10.83億美元，燃料支出降低有助毛利率穩定" },
+            { ticker: "FDX", name: "FedEx", sector: "物流運輸", impact: "間接受惠", logic: "航空與陸運燃油成本節省，惟需注意燃油附加費調整速度" },
+            { ticker: "XOM", name: "Exxon Mobil", sector: "石油巨頭", impact: "負面衝擊", logic: "原油價格快速下挫壓抑上游開採利潤，惟下游煉油可抵銷部分衝擊" },
+            { ticker: "COP", name: "ConocoPhillips", sector: "上游採油", impact: "負面衝擊", logic: "純上游油氣開採業者，獲利對布蘭特油價下挫極為敏感" },
+            { ticker: "SLB", name: "SLB (斯倫貝謝)", sector: "油田服務", impact: "負面衝擊", logic: "若油價持續走低，能源業者可能縮減鑽探與資本支出" },
+            { ticker: "LMT", name: "Lockheed Martin", sector: "國防軍工", impact: "短期壓抑", logic: "戰爭地緣溢價消退，惟美國長期國防採購合約不受影響" },
+            { ticker: "NEM", name: "Newmont", sector: "金礦避險", impact: "短期壓抑", logic: "停火消息削弱黃金地緣避險需求，惟通膨與聯準會政策仍為關鍵" }
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('productTableBody');
+            const noResults = document.getElementById('noResultsMsg');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-stone-50 transition-colors";
+
+                let impactBadge = '';
+                if (item.impact.includes('直接受惠') || item.impact.includes('雙重受惠')) {
+                    impactBadge = `<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-semibold text-xs">${item.impact}</span>`;
+                } else if (item.impact.includes('需求受惠') || item.impact.includes('間接受惠')) {
+                    impactBadge = `<span class="px-2 py-0.5 bg-sky-100 text-sky-800 rounded font-semibold text-xs">${item.impact}</span>`;
+                } else {
+                    impactBadge = `<span class="px-2 py-0.5 bg-rose-100 text-rose-800 rounded font-semibold text-xs">${item.impact}</span>`;
+                }
+
+                tr.innerHTML = `
+                    <td class="p-3 font-bold text-stone-900">${item.ticker}</td>
+                    <td class="p-3 font-medium">${item.name}</td>
+                    <td class="p-3 text-stone-600">${item.sector}</td>
+                    <td class="p-3">${impactBadge}</td>
+                    <td class="p-3 text-stone-600 text-xs leading-relaxed">${item.logic}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('tableSearchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.ticker.toLowerCase().includes(query) ||
+                item.name.toLowerCase().includes(query) ||
+                item.sector.toLowerCase().includes(query) ||
+                item.impact.toLowerCase().includes(query) ||
+                item.logic.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        window.addEventListener('load', () => {
+            renderTable(productData);
+
+            // Chart 1: Oil Price Trends
+            const ctxOil = document.getElementById('oilPriceChart').getContext('2d');
+            new Chart(ctxOil, {
+                type: 'bar',
+                data: {
+                    labels: ['衝突期間高點', '7/27 盤中收盤', '7/28 最新報價', '高盛 Q4 目標'],
+                    datasets: [
+                        {
+                            label: '布蘭特原油 (Brent)',
+                            data: [96.50, 87.77, 86.32, 80.00],
+                            backgroundColor: 'rgba(2, 132, 199, 0.8)',
+                            borderColor: '#0284c7',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '西德州原油 (WTI)',
+                            data: [89.80, 81.98, 80.93, 75.00],
+                            backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                            borderColor: '#10b981',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 60,
+                            title: { display: true, text: '美元 / 桶' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Market Single Day Reactions
+            const ctxMarket = document.getElementById('marketReactionChart').getContext('2d');
+            new Chart(ctxMarket, {
+                type: 'bar',
+                data: {
+                    labels: ['Expedia (EXPE)', 'Booking (BKNG)', 'Airbnb (ABNB)', '標普500指數', '能源類股板塊', '布蘭特原油'],
+                    datasets: [{
+                        label: '7/27 單日漲跌幅 (%)',
+                        data: [7.7, 5.4, 3.8, 0.0, -2.0, -9.31],
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.85)',
+                            'rgba(16, 185, 129, 0.85)',
+                            'rgba(16, 185, 129, 0.85)',
+                            'rgba(156, 163, 175, 0.85)',
+                            'rgba(244, 63, 94, 0.85)',
+                            'rgba(225, 29, 72, 0.85)'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            title: { display: true, text: '漲跌幅 (%)' }
+                        }
+                    }
+                }
+            });
+
+            const sections = document.querySelectorAll('section[id]');
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        document.querySelectorAll('nav a').forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.className = 'active-nav-link py-5 transition-colors';
+                            } else {
+                                link.className = 'inactive-nav-link py-5 transition-colors';
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('menu-icon-open');
+            const iconClose = document.getElementById('menu-icon-close');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                iconOpen.classList.toggle('hidden');
+                iconClose.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Nvidia護城河與科技巨頭財報</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .active-nav-link { color: #0284c7; font-weight: 700; border-bottom: 2px solid #0284c7; }
+        .inactive-nav-link { color: #44403c; font-weight: 600; border-bottom: 2px solid transparent; }
+        .inactive-nav-link:hover { color: #0284c7; }
+        /* Custom scrollbar for table */
+        .table-container::-webkit-scrollbar { height: 8px; }
+        .table-container::-webkit-scrollbar-track { background: #f1f5f9; rounded: 4px;}
+        .table-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .table-container::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-sky-700">Nvidia的AI護城河</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6" id="desktop-menu">
+                    <a href="#nvidia-credit" class="nav-item inactive-nav-link transition-colors duration-200 py-2" data-target="nvidia-credit">Nvidia融資</a>
+                    <a href="#risk-cycle" class="nav-item inactive-nav-link transition-colors duration-200 py-2" data-target="risk-cycle">循環融資風險</a>
+                    <a href="#ai-alliance" class="nav-item inactive-nav-link transition-colors duration-200 py-2" data-target="ai-alliance">資安聯盟</a>
+                    <a href="#tech-giants" class="nav-item inactive-nav-link transition-colors duration-200 py-2" data-target="tech-giants">科技巨頭財報</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link transition-colors duration-200 py-2" data-target="strategy">投資策略</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-sky-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100 shadow-inner">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#nvidia-credit" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">Nvidia融資</a>
+                <a href="#risk-cycle" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">循環融資風險</a>
+                <a href="#ai-alliance" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">資安聯盟</a>
+                <a href="#tech-giants" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">科技巨頭財報</a>
+                <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header/Hero Section -->
+    <header class="bg-gradient-to-r from-sky-800 to-stone-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">當晶片商開始替客戶背書<br><span class="text-sky-300">Nvidia把AI護城河延伸到融資與資安</span></h1>
+            <p class="text-lg md:text-xl text-stone-300 max-w-3xl mx-auto">Nvidia正在從單純的晶片供應商，轉型為AI產業的基礎建設協調者。探討Nvidia的融資保證、資安聯盟策略，以及四大科技巨頭財報帶來的AI投資啟示。</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Section 1: Nvidia Credit -->
+        <section id="nvidia-credit" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nvidia不再只是賣GPU，而是開始替AI需求提供信用</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4 leading-relaxed">Nvidia與OpenAI討論的融資保證，代表AI產業正在進入一個新階段。過去Nvidia的商業模式相對單純：客戶籌集資金後採購設備。現在，由於單一資料中心計畫可能需要數千億美元，部分AI客戶的資本能力已跟不上運算需求，Nvidia可能必須利用自己的信用與資產負債表，協助客戶取得融資。</p>
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-4 mb-6 rounded-r-lg">
+                    <p class="font-semibold text-sky-800">焦點數據：</p>
+                    <p class="text-sm mt-1">二千五百億美元的保證主要涉及OpenAI租用資料中心及相關債務融資。另討論為採購最高約三千五百億美元晶片提供融資。（註：兩者仍在討論，不宜直接相加視為已承諾）</p>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-4 text-stone-700">此安排對Nvidia的三項直接利益：</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-stone-100 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="text-sky-600 mb-2">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <h4 class="font-bold mb-2">1. 鎖定長期需求</h4>
+                        <p class="text-sm text-stone-600">提前鎖定未來數年的GPU、網路設備與軟體需求，提高長期訂單可見度。</p>
+                    </div>
+                    <div class="bg-stone-100 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="text-emerald-600 mb-2">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <h4 class="font-bold mb-2">2. 降低延宕風險</h4>
+                        <p class="text-sm text-stone-600">協助客戶解決資金、電力或土地限制，使AI需求能更快轉化為實際出貨。</p>
+                    </div>
+                    <div class="bg-stone-100 p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="text-indigo-600 mb-2">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                        </div>
+                        <h4 class="font-bold mb-2">3. 延伸生態護城河</h4>
+                        <p class="text-sm text-stone-600">若同時提供硬體、軟體與資金支持，競爭者極難提供同樣完整的方案。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Circular Financing Risk -->
+        <section id="risk-cycle" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">最大風險：AI需求可能逐漸變成循環融資</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-amber-500">
+                <p class="mb-4">這項交易最需要注意的，是<strong>誰在承擔最終信用風險</strong>。OpenAI雖估值極高，但目前仍未實現獲利。若Nvidia提供融資保證，便可能同時扮演供應商、投資人、融資支持者及最大受益者，形成「循環融資」。</p>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center bg-stone-50 p-4 rounded-lg my-6 space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="bg-white p-3 rounded shadow text-center w-full md:w-1/3">
+                        <span class="font-bold text-sky-700 block">Nvidia</span>
+                        <span class="text-xs text-stone-500">提供信用支持</span>
+                    </div>
+                    <svg class="w-6 h-6 text-stone-400 rotate-90 md:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <div class="bg-white p-3 rounded shadow text-center w-full md:w-1/3">
+                        <span class="font-bold text-emerald-700 block">OpenAI</span>
+                        <span class="text-xs text-stone-500">租用中心/購買晶片</span>
+                    </div>
+                    <svg class="w-6 h-6 text-stone-400 rotate-90 md:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <div class="bg-white p-3 rounded shadow text-center w-full md:w-1/3">
+                        <span class="font-bold text-sky-700 block">Nvidia</span>
+                        <span class="text-xs text-stone-500">認列營收/證明需求</span>
+                    </div>
+                </div>
+
+                <p class="text-sm text-stone-600 bg-amber-50 p-3 rounded">
+                    <strong>對股東的關鍵問題：</strong> 只要OpenAI現金流成長，循環即可運作。但若收入不如預期，承擔風險的將包含Nvidia。投資人需關注：融資保證是否有抵押品？期限多長？違約承擔金額？以及是否能取得資產補償？
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Open Secure AI Alliance -->
+        <section id="ai-alliance" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Open Secure AI Alliance：Nvidia控制安全標準</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="mb-4">AI產業的下一個瓶頸可能不是算力，而是安全。因應Hugging Face等AI代理遭入侵事件，Nvidia成立了 Open Secure AI Alliance，主張企業不能完全依賴無法查看內部運作方式的封閉模型。</p>
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                        <h4 class="font-bold text-stone-800 border-b border-stone-200 pb-2 mb-3">聯盟工作重點</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>AI代理身分驗證與權限管理</li>
+                            <li>模型檔案安全與多模型漏洞掃描</li>
+                            <li>安全程式開發</li>
+                            <li>代理行為的測試、追蹤、稽核與治理</li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-sky-700 mb-2">三大策略價值</h4>
+                        <ol class="list-decimal list-inside text-stone-600 space-y-2 text-sm">
+                            <li><strong>提升企業信心：</strong> 減輕資料洩漏擔憂，釋放AI伺服器需求。</li>
+                            <li><strong>平台鎖定效應：</strong> 將安全工具整合進自家軟硬體，提高轉換成本。</li>
+                            <li><strong>影響產業政策：</strong> 從OpenAI、Google等未加入可看出，這涉及開放與封閉模型的政策競爭。</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Tech Giants Financial Reports -->
+        <section id="tech-giants" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四家科技巨頭財報：AI收入能否追上AI支出</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold text-center text-stone-700 mb-4">核心業務/總營收成長率比較 (%)</h3>
+                <!-- Dynamic Chart Container -->
+                <div class="w-full max-w-3xl mx-auto h-72">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <p class="text-center text-xs text-stone-500 mt-4">*註：Microsoft及Amazon為其雲端業務(Azure/AWS)成長率；Meta及Apple為總營收成長率。</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2 md:mb-0">巨頭財報關鍵數據追蹤</h3>
+                    <div class="w-full md:w-1/3">
+                        <input type="text" id="searchInput" placeholder="搜尋公司或關鍵字 (如: 現金流)..." class="w-full p-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-500 transition-shadow">
+                    </div>
+                </div>
+                
+                <div class="table-container overflow-x-auto">
+                    <table class="table-auto w-full text-left whitespace-nowrap text-sm border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="sticky top-0 bg-stone-200 p-3 font-semibold text-stone-700 border-b border-stone-300">公司</th>
+                                <th class="sticky top-0 bg-stone-200 p-3 font-semibold text-stone-700 border-b border-stone-300">發布日期</th>
+                                <th class="sticky top-0 bg-stone-200 p-3 font-semibold text-stone-700 border-b border-stone-300">營收/業務成長</th>
+                                <th class="sticky top-0 bg-stone-200 p-3 font-semibold text-stone-700 border-b border-stone-300">資本支出 (Capex)</th>
+                                <th class="sticky top-0 bg-stone-200 p-3 font-semibold text-stone-700 border-b border-stone-300">自由現金流 (FCF)</th>
+                                <th class="sticky top-0 bg-stone-200 p-3 font-semibold text-stone-700 border-b border-stone-300">關鍵指標與備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-stone-200">
+                            <!-- Table rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noDataMsg" class="hidden text-center text-stone-500 py-4">找不到符合的資料</div>
+            </div>
+        </section>
+
+        <!-- Section 5 & 6: Strategy & Conclusion -->
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總結與投資策略建議</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-3">對Nvidia投資人的真正意義</h3>
+                <p class="mb-4 text-stone-700">Nvidia正在轉型為AI基礎建設協調者。融資保證解決「資本瓶頸」，資安聯盟解決「信任瓶頸」。這改變了公司的風險結構。未來必須增加三項觀察：</p>
+                <ul class="list-disc list-inside text-stone-600 mb-6 space-y-1 bg-stone-50 p-4 rounded">
+                    <li>Nvidia是否開始大量承擔客戶信用風險。</li>
+                    <li>AI公司收入與現金流是否足以支付基礎設施成本。</li>
+                    <li>Nvidia與大型雲端客戶間，是否因OpenAI融資自建產生利益衝突。</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-stone-800 mb-3 border-t border-stone-200 pt-4">投資策略建議</h3>
+                <p class="mb-4 text-stone-700">二千五百億美元的報導是強烈需求訊號，但非單純利多。不宜盲目追價，應等待後續財報或SEC文件披露確切條款。</p>
+                <div class="bg-sky-50 p-5 rounded-lg border-l-4 border-sky-600">
+                    <p class="font-bold text-sky-900 mb-2">最終結論：</p>
+                    <p class="text-sky-800 leading-relaxed">Nvidia的長期護城河正在擴大，但它也開始承擔過去不屬於晶片公司的金融與信用風險。未來評估Nvidia，不能只看GPU出貨量，也必須開始像分析銀行或基礎建設公司一樣，檢查融資承諾、客戶品質與資本回收。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Nvidia護城河與科技巨頭財報。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Nvidia及科技巨頭相關公開資料 (2026年07月27日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on click
+        mobileNavItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // --- Active Link State using Intersection Observer ---
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // Adjust trigger area
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Reset all links
+                    navItems.forEach(link => {
+                        link.classList.remove('active-nav-link');
+                        link.classList.add('inactive-nav-link');
+                    });
+
+                    // Set active link
+                    const activeLink = document.querySelector(`.nav-item[data-target="${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('inactive-nav-link');
+                        activeLink.classList.add('active-nav-link');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Interactive Data Table ---
+        const productData = [
+            { company: "Microsoft", date: "7/29 盤後", growth: "Azure +40%", capex: "Q3 $319億 / Q4預估 >$400億", cashflow: "$158億", note: "AI年化收入超$370億" },
+            { company: "Meta", date: "7/29 盤後", growth: "營收 +33%", capex: "Q3近 $198.4億 / 全年估$1250-1450億", cashflow: "$123.9億", note: "廣告曝光+19%，價格+12%" },
+            { company: "Amazon", date: "7/30 盤後", growth: "AWS +28%", capex: "大幅增加 (AI與資料中心)", cashflow: "TTM降至 $12億 (原$259億)", note: "AWS營業利益 $142億" },
+            { company: "Apple", date: "7/30 盤後", growth: "營收 +17%", capex: "無龐大AI資料中心壓力", cashflow: "營業現金流 >$280億", note: "9/1 John Ternus接任CEO" }
+        ];
+
+        const tbody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const noDataMsg = document.getElementById('noDataMsg');
+
+        // Render Table Function
+        function renderTable(data) {
+            tbody.innerHTML = '';
+            if (data.length === 0) {
+                noDataMsg.classList.remove('hidden');
+            } else {
+                noDataMsg.classList.add('hidden');
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-sky-50 transition-colors duration-150";
+                    row.innerHTML = `
+                        <td class="p-3 border-b border-stone-200 font-medium text-stone-800">${item.company}</td>
+                        <td class="p-3 border-b border-stone-200 text-stone-600">${item.date}</td>
+                        <td class="p-3 border-b border-stone-200 text-emerald-600 font-semibold">${item.growth}</td>
+                        <td class="p-3 border-b border-stone-200 text-stone-600">${item.capex}</td>
+                        <td class="p-3 border-b border-stone-200 text-stone-600">${item.cashflow}</td>
+                        <td class="p-3 border-b border-stone-200 text-stone-500 text-xs whitespace-normal min-w-[150px]">${item.note}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+        }
+
+        // Initial Render
+        renderTable(productData);
+
+        // Search Filter Event
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filteredData = productData.filter(item => {
+                return Object.values(item).some(val => 
+                    String(val).toLowerCase().includes(term)
+                );
+            });
+            renderTable(filteredData);
+        });
+
+        // --- Chart.js Dynamic Chart ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            // Chart Data extracted from text
+            const chartData = {
+                labels: ['Microsoft (Azure)', 'Meta (總營收)', 'Amazon (AWS)', 'Apple (總營收)'],
+                datasets: [{
+                    label: '成長率 (%)',
+                    data: [40, 33, 28, 17],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.7)', // sky-500
+                        'rgba(59, 130, 246, 0.7)', // blue-500
+                        'rgba(245, 158, 11, 0.7)', // amber-500
+                        'rgba(100, 116, 139, 0.7)'  // slate-500
+                    ],
+                    borderColor: [
+                        'rgba(14, 165, 233, 1)',
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(245, 158, 11, 1)',
+                        'rgba(100, 116, 139, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            };
+
+            const config = {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
+</body>
+</html>
