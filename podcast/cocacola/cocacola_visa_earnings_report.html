@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-可樂與Visa財報：消費韌性與AI效率</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px dashed #0284c7;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed selection:bg-sky-100 selection:text-sky-900">
+
+    <!-- 1. Sticky Navigation Bar Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand Logo & Title -->
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <span class="text-xl font-extrabold text-stone-900 tracking-tight">可樂與Visa財報</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8 font-medium text-sm">
+                    <a href="#overview" class="nav-link active-nav-link py-5 transition-colors">核心總覽</a>
+                    <a href="#cocacola" class="nav-link inactive-nav-link py-5 transition-colors">Coca-Cola 財報解析</a>
+                    <a href="#visa" class="nav-link inactive-nav-link py-5 transition-colors">Visa 財報與AI裁員</a>
+                    <a href="#data-table" class="nav-link inactive-nav-link py-5 transition-colors">互動數據庫</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-5 transition-colors">投資策略矩陣</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none" aria-label="切換選單">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">核心總覽</a>
+            <a href="#cocacola" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">Coca-Cola 財報解析</a>
+            <a href="#visa" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">Visa 財報與AI裁員</a>
+            <a href="#data-table" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">互動數據庫</a>
+            <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">投資策略矩陣</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white py-12 px-4 sm:px-6 lg:px-8 shadow-inner">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="lg:w-2/3">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-black leading-tight tracking-tight mb-4">
+                        一杯可樂與一張Visa卡：<br><span class="text-sky-400">消費韌性仍在，企業已進入成本與AI效率競賽</span>
+                    </h1>
+                    <p class="text-stone-300 text-base md:text-lg leading-relaxed mb-6">
+                        二〇二六年第二季，Coca-Cola 與 Visa 雙雙交出優於預期的財報。全球消費未現全面衰退，但結構已顯著變化。兩家龍頭示範了防禦性現金流與結構性科技成長的雙軌優勢。
+                    </p>
+                </div>
+                <!-- Highlight Badges Card -->
+                <div class="lg:w-1/3 w-full bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/15 shadow-2xl">
+                    <h3 class="text-stone-200 font-bold text-sm tracking-wider uppercase mb-3 border-b border-white/20 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-400"></i> 本季核心亮點快覽
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <span><strong>Coca-Cola:</strong> 單箱銷量年增 5%，靠實質需求而非僅靠漲價驅動成長。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                            <span><strong>Visa:</strong> 全球支付金額突破 <strong>4 兆美元</strong>，跨境交易強勁成長 13%。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-1"></i>
+                            <span><strong>AI轉型效應:</strong> Visa 裁員 2,600 人（7%），全面優化組織與重劃 AI 代理支付布局。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Section 1: Executive Overview -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <i class="fa-solid fa-compass text-sky-600"></i> 一、宏觀趨勢與核心摘要
+            </h2>
+
+            <!-- Key Insight Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500 hover:shadow-xl transition-shadow">
+                    <p class="text-xs font-bold text-stone-400 uppercase tracking-wider">Coca-Cola 淨營收</p>
+                    <div class="flex items-baseline gap-2 mt-2">
+                        <span class="text-3xl font-extrabold text-stone-900">$134億</span>
+                        <span class="text-sm font-semibold text-emerald-600"><i class="fa-solid fa-arrow-up"></i> +7%</span>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-2">有機營收成長 +6%，單箱銷量顯著成長 5%</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 hover:shadow-xl transition-shadow">
+                    <p class="text-xs font-bold text-stone-400 uppercase tracking-wider">Coca-Cola 全年自由現金流</p>
+                    <div class="flex items-baseline gap-2 mt-2">
+                        <span class="text-3xl font-extrabold text-stone-900">$124億</span>
+                        <span class="text-sm font-semibold text-sky-600"><i class="fa-solid fa-angles-up"></i> 上調</span>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-2">由原預測 $122億美元調升，營運品質提升</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-600 hover:shadow-xl transition-shadow">
+                    <p class="text-xs font-bold text-stone-400 uppercase tracking-wider">Visa 淨營收 (FY26 Q3)</p>
+                    <div class="flex items-baseline gap-2 mt-2">
+                        <span class="text-3xl font-extrabold text-stone-900">$116.3億</span>
+                        <span class="text-sm font-semibold text-emerald-600"><i class="fa-solid fa-arrow-up"></i> +14%</span>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-2">調整後 EPS $3.32 美元，優於市場預期</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-purple-600 hover:shadow-xl transition-shadow">
+                    <p class="text-xs font-bold text-stone-400 uppercase tracking-wider">Visa 全球支付金額</p>
+                    <div class="flex items-baseline gap-2 mt-2">
+                        <span class="text-3xl font-extrabold text-stone-900">&gt; $4.0萬億</span>
+                        <span class="text-sm font-semibold text-purple-600"><i class="fa-solid fa-trophy"></i> 創紀錄</span>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-2">固定匯率年增 10%，跨境交易年增 13%</p>
+                </div>
+            </div>
+
+            <!-- Overview Text Content Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 leading-relaxed text-stone-700 space-y-4">
+                <p>
+                    二〇二六年第二季，Coca-Cola 與 Visa 交出的財報共同傳達一個重要訊號：<strong>全球消費並沒有全面衰退，但消費結構正在改變</strong>。消費者仍願意購買具有品牌力、便利性與體驗價值的產品，也仍持續旅行、用餐及使用電子支付；另一方面，企業面對能源、原物料、人力與科技投資成本上升，已開始更積極控制費用、導入 AI 並重新配置員工。
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 pt-4 border-t border-stone-200">
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <h4 class="font-bold text-stone-900 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-wine-bottle text-red-600"></i> Coca-Cola：防禦型現金流巨頭
+                        </h4>
+                        <p class="text-sm text-stone-600">
+                            受惠於實體通路、世界盃贊助與全方位銷售系統，單價低且具強大品牌黏性的飲料展現極佳的抗通膨與防禦性。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <h4 class="font-bold text-stone-900 mb-2 flex items-center gap-2">
+                            <i class="fa-regular fa-credit-card text-blue-600"></i> Visa：結構性數位成長引擎
+                        </h4>
+                        <p class="text-sm text-stone-600">
+                            不承擔直接信貸違約風險，純粹收取交易手續費。受惠於全球電子支付滲透率提升、跨境旅遊與金融數位化。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Coca-Cola Financial Analysis -->
+        <section id="cocacola" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <i class="fa-solid fa-wine-bottle text-red-600"></i> 二、Coca-Cola 財報深解析：銷量成長與展望上調
+            </h2>
+
+            <div class="grid lg:grid-cols-3 gap-6 mb-6">
+                <!-- Detailed Analysis Card -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-emerald-600"></i> 不是只靠漲價，實質銷量全面成長
+                    </h3>
+                    <p class="mb-4 text-stone-700">
+                        Coca-Cola 第二季淨營收年增 7% 達 134 億美元，有機營收成長 6%。全球單箱銷量成長 5%，價格與產品組合貢獻約 2%。這項數據極具意義，表明業績並非單靠提高售價，而是消費者實際購買量大幅增加。
+                    </p>
+                    <ul class="space-y-2 mb-6 text-sm text-stone-700">
+                        <li class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                            <strong>核心品牌銷量：</strong> 年增 5%
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-black"></span>
+                            <strong>Coca-Cola Zero Sugar：</strong> 表現極其強勁，銷量年增高達 16%
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                            <strong>氣泡飲料與運動飲料：</strong> 氣泡飲料整體成長 4%，運動飲料成長 5%
+                        </li>
+                    </ul>
+
+                    <h4 class="font-bold text-stone-800 mb-2 border-t border-stone-200 pt-4">世界盃行銷與利潤率拉升</h4>
+                    <p class="text-sm text-stone-600 mb-4">
+                        公司利用世界盃進行橫跨 180 多個市場的大型行銷，提升 Coca-Cola 與 Powerade 的曝光。調整後營業利益率由去年同期的 34.7% 提高至 35.6%。調整後 EPS 達 0.97 美元，超越市場預期的 0.92-0.93 美元。
+                    </p>
+
+                    <!-- Full year guidance table format -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                        <h5 class="font-bold text-amber-900 text-sm mb-2"><i class="fa-solid fa-bullseye"></i> 2026 全年展望調升對比</h5>
+                        <div class="grid grid-cols-3 gap-2 text-xs text-center font-medium">
+                            <div class="bg-white p-2 rounded border border-amber-100">
+                                <span class="block text-stone-500">有機營收成長</span>
+                                <span class="text-stone-900 font-bold">4%~5% &rarr; 約 5%</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-amber-100">
+                                <span class="block text-stone-500">調整後 EPS 成長</span>
+                                <span class="text-stone-900 font-bold">8%~9% &rarr; 9%~10%</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-amber-100">
+                                <span class="block text-stone-500">自由現金流</span>
+                                <span class="text-stone-900 font-bold">$122億 &rarr; 約 $124億</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Analysis Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-cat text-red-500"></i> 潛在風險與地區挑戰
+                    </h3>
+                    <div class="space-y-4 text-sm text-stone-700">
+                        <div>
+                            <h4 class="font-bold text-red-800"><i class="fa-solid fa-gas-pump"></i> 原物料與包裝成本上升</h4>
+                            <p class="text-xs text-stone-600 mt-1">
+                                鋁、PET 塑膠樹脂成本升幅高於預期，地緣政治與中東衝突引發運輸及能源不確定性，下半年毛利率承受壓力。
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-red-800"><i class="fa-solid fa-users"></i> 消費能力分化</h4>
+                            <p class="text-xs text-stone-600 mt-1">
+                                低收入家庭對價格轉趨敏感。公司推出較小包裝以維持銷量，但可能降低單次交易金額，限制未來調漲空間。
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-red-800"><i class="fa-solid fa-earth-asia"></i> 地區表現不一與供應鏈短缺</h4>
+                            <p class="text-xs text-stone-600 mt-1">
+                                北美單箱銷量 +3%，亞太銷量雖 +8% 但價格/組合下滑 9%；印度因鋁罐供應短缺失去部分市占率。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Container for Coca-Cola -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-bar text-sky-600"></i> Coca-Cola 各產品線與區域銷量年增率 (% YoY)
+                </h3>
+                <div class="w-full h-72">
+                    <canvas id="cocaColaSegmentChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Visa Financial & AI Analysis -->
+        <section id="visa" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <i class="fa-regular fa-credit-card text-blue-600"></i> 三、Visa 財報解析：支付突破4兆美元與 AI 裁員策略
+            </h2>
+
+            <div class="grid lg:grid-cols-2 gap-6 mb-6">
+                <!-- Financial Highlights -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-globe text-blue-600"></i> 跨境支付強勁，營收年增 14%
+                    </h3>
+                    <p class="text-stone-700 mb-4">
+                        Visa 公布 2026 會計年度第三季財報，淨營收年增 14% 達 116.3 億美元；調整後淨利 63 億美元，每股盈餘 3.32 美元（高於預估的 3.23 美元）。
+                    </p>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded-lg border border-blue-100 flex justify-between items-center">
+                            <span class="text-sm font-semibold text-stone-700">全球支付總額 (Payment Volume)</span>
+                            <span class="text-base font-extrabold text-blue-700">&gt; $4.0 萬億美元 (+10%)</span>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg border border-blue-100 flex justify-between items-center">
+                            <span class="text-sm font-semibold text-stone-700">跨境交易總額 (Cross-Border)</span>
+                            <span class="text-base font-extrabold text-blue-700">+13% (排除歐洲內 +12%)</span>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg border border-blue-100 flex justify-between items-center">
+                            <span class="text-sm font-semibold text-stone-700">處理交易總筆數 (Processed Transactions)</span>
+                            <span class="text-base font-extrabold text-blue-700">+10% YoY</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4">
+                        跨境交易具備更高手續費貢獻率。世界盃期間主辦城市旅遊、娛樂及餐飲刷卡金額顯著激增，部分比賽日實體刷卡量最高成長 20%。
+                    </p>
+                </div>
+
+                <!-- Layoff & AI Strategy Analysis -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-600">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-user-slash text-indigo-600"></i> 獲利亮眼為何裁員 2,600 人？
+                    </h3>
+                    <p class="text-stone-700 text-sm mb-3">
+                        Visa 宣布裁減約 2,600 名員工（相當於全球人力的 7%），主要集中於科技與產品團隊。背後核心邏輯在於<strong>費用控制與 AI 效率重組</strong>。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded-md mb-4 border border-stone-200 text-xs space-y-2">
+                        <p class="text-rose-700 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> 費用增速高於營收：</p>
+                        <p class="text-stone-600">本季營業費用大增 19% 達 48 億美元，若不積極控管人力與研發成本，利潤率將遭遇壓制。</p>
+                    </div>
+                    <h4 class="font-bold text-stone-800 text-sm mb-2">穩定幣與 AI 代理支付：威脅亦是機會</h4>
+                    <p class="text-xs text-stone-600 leading-relaxed mb-3">
+                        推出 <strong>Visa Intelligent Commerce</strong>，讓 AI 代理機能在授權與消費限制下代辦購物；同時將穩定幣納入結算與資金移動工具。只要 Visa 仍能扮演提供信任、資安、身份驗證與全球清算的中樞，AI 與穩定幣將持續擴大其可處理的市場規模。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Financial Comparison Chart -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-column text-indigo-600"></i> Coca-Cola vs Visa 核心成長指標對比 (% YoY)
+                </h3>
+                <div class="w-full h-72">
+                    <canvas id="companyComparisonChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Data Table -->
+        <section id="data-table" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <i class="fa-solid fa-table text-sky-600"></i> 四、2026 Q2 財報核心數據互動數據庫
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Search and Filter Controls -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div class="relative w-full md:w-80">
+                        <input type="text" id="tableSearch" placeholder="搜尋指標、公司或關鍵字..." 
+                               class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent text-sm">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-stone-400"></i>
+                    </div>
+                    <div class="flex flex-wrap gap-2" id="filterBadges">
+                        <button class="filter-btn active px-3 py-1.5 rounded-full text-xs font-semibold bg-sky-600 text-white transition-all" data-category="ALL">全部項目</button>
+                        <button class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-600 hover:bg-stone-200 transition-all" data-category="Coca-Cola">Coca-Cola</button>
+                        <button class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-600 hover:bg-stone-200 transition-all" data-category="Visa">Visa</button>
+                        <button class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-600 hover:bg-stone-200 transition-all" data-category="財務獲利">財務獲利</button>
+                        <button class="filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-600 hover:bg-stone-200 transition-all" data-category="營運銷量">營運銷量</button>
+                    </div>
+                </div>
+
+                <!-- Table Container with Sticky Header -->
+                <div class="overflow-x-auto max-h-[480px] rounded-lg border border-stone-200">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-stone-100 sticky top-0 z-10 border-b border-stone-200 shadow-sm">
+                            <tr>
+                                <th class="p-3 font-bold text-stone-700">公司名稱</th>
+                                <th class="p-3 font-bold text-stone-700">指標項目</th>
+                                <th class="p-3 font-bold text-stone-700">最新公布數據</th>
+                                <th class="p-3 font-bold text-stone-700">年增率 / 市場預期</th>
+                                <th class="p-3 font-bold text-stone-700">類別</th>
+                                <th class="p-3 font-bold text-stone-700">戰略影響與解析</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialTableBody" class="divide-y divide-stone-200 bg-white">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-stone-500 mt-3 text-right">* 註：數據源自 2026年第二季（Visa為FY26 Q3）公開財報與分析報告。</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Comparative Matrix & Investment Strategy -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <i class="fa-solid fa-chess-king text-amber-600"></i> 五、雙雄投資策略與宏觀情境比較
+            </h2>
+
+            <!-- Matrix Comparison Cards -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <!-- Coca Cola Strategy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-600">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3 flex items-center justify-between">
+                        <span><i class="fa-solid fa-wine-bottle text-red-600"></i> Coca-Cola 投資定位</span>
+                        <span class="text-xs bg-red-100 text-red-700 px-2.5 py-1 rounded-full font-semibold">防禦收益型</span>
+                    </h3>
+                    <div class="space-y-3 text-sm text-stone-700">
+                        <p><strong>適合對象：</strong> 重視穩定現金流、股息收益與低景氣波動風險的保守型投資人。</p>
+                        <p><strong>優勢護城河：</strong> 全球極具彈性的裝瓶與通路網絡，即使面對大環境景氣放緩，飲料需求亦難被完全取消。</p>
+                        <p><strong>後續觀察指標：</strong> 世界盃效應消退後單箱銷量能否維持、鋁及塑膠/能源成本壓力、低收入戶小包裝策略成效。</p>
+                    </div>
+                </div>
+
+                <!-- Visa Strategy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-600">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3 flex items-center justify-between">
+                        <span><i class="fa-regular fa-credit-card text-blue-600"></i> Visa 投資定位</span>
+                        <span class="text-xs bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full font-semibold">長期成長型</span>
+                    </h3>
+                    <div class="space-y-3 text-sm text-stone-700">
+                        <p><strong>適合對象：</strong> 願意承受市場波動、追求全球無現金化與跨境交易長遠成長的投資人。</p>
+                        <p><strong>優勢護城河：</strong> 不承擔信貸違約風險，全球清算網路極具規模效益；整合 AI 代理與穩定幣轉化競爭為機會。</p>
+                        <p><strong>後續觀察指標：</strong> 裁員 2,600 人後營業費用率是否下降、AI 與穩定幣新服務能否貢獻明確收入。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Macro Scenario Matrix -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-network-wired text-sky-600"></i> 宏觀經濟情境模擬與受惠程度
+                </h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <span class="text-xs font-bold text-sky-600 uppercase tracking-wider block mb-1">情境一</span>
+                        <h4 class="font-bold text-stone-900 mb-2">美國經濟溫和軟著陸</h4>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-2">旅遊與餐飲強勁，消費總金額穩步向上。</p>
+                        <div class="text-xs font-semibold text-emerald-700 bg-emerald-50 p-2 rounded border border-emerald-200">
+                            <strong>較有利：Visa</strong> (跨境支付與高額刷卡彈性高)
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">情境二</span>
+                        <h4 class="font-bold text-stone-900 mb-2">全球經濟顯著放緩</h4>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-2">大型消費支出減少，消費者轉向剛性民生必需品。</p>
+                        <div class="text-xs font-semibold text-red-700 bg-red-50 p-2 rounded border border-red-200">
+                            <strong>較有利：Coca-Cola</strong> (平價消費防禦價值凸顯)
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <span class="text-xs font-bold text-rose-600 uppercase tracking-wider block mb-1">情境三</span>
+                        <h4 class="font-bold text-stone-900 mb-2">油價與通膨二次飆升</h4>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-2">地緣衝突推升能源與包裝成本，壓抑消費信心。</p>
+                        <div class="text-xs font-semibold text-stone-700 bg-stone-200 p-2 rounded">
+                            <strong>兩者皆受壓：</strong> 可樂面臨包裝物流高成本，Visa 受消費金額放緩拖累。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8 border-t border-stone-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-可樂與Visa財報：消費韌性與AI效率。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-400">資料來源：基於網路中Coca-Cola與Visa 2026年Q2財報公開資料 (2026年07月29日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Financial Dataset JS Array
+        const productData = [
+            {
+                company: "Coca-Cola",
+                metric: "淨營收 (Net Revenue)",
+                value: "$134.0 億美元",
+                growth: "+7% YoY (有機 +6%)",
+                category: "財務獲利",
+                impact: "有機營收成長亮眼，打破僅靠漲價驅動疑慮。"
+            },
+            {
+                company: "Coca-Cola",
+                metric: "全球單箱銷量 (Unit Case)",
+                value: "+5%",
+                growth: "銷量彈性勁升",
+                category: "營運銷量",
+                impact: "實體需求顯著增加，世界盃賽事成功帶動銷量。"
+            },
+            {
+                company: "Coca-Cola",
+                metric: "Zero Sugar 銷量",
+                value: "+16%",
+                growth: "無糖雙位數爆發",
+                category: "營運銷量",
+                impact: "健康無糖產品線持續為核心營運第二成長引擎。"
+            },
+            {
+                company: "Coca-Cola",
+                metric: "調整後每股盈餘 (EPS)",
+                value: "$0.97 美元",
+                growth: "+11% YoY (優於預期$0.92)",
+                category: "財務獲利",
+                impact: "獲利表現超預期，帶動股價創歷史新高。"
+            },
+            {
+                company: "Coca-Cola",
+                metric: "調整後營業利益率",
+                value: "35.6%",
+                growth: "+90 bps (去年同期 34.7%)",
+                category: "財務獲利",
+                impact: "經營效率提升，有效消化原物料成本挑戰。"
+            },
+            {
+                company: "Coca-Cola",
+                metric: "全年自由現金流預估",
+                value: "$124.0 億美元",
+                growth: "上調 $2 億美元",
+                category: "財務獲利",
+                impact: "現金產生能力極佳，提供強大配息與實力支撐。"
+            },
+            {
+                company: "Visa",
+                metric: "淨營收 (Net Revenue)",
+                value: "$116.3 億美元",
+                growth: "+14% YoY",
+                category: "財務獲利",
+                impact: "無現金化趨勢穩健，雙位數營收高增長。"
+            },
+            {
+                company: "Visa",
+                metric: "調整後每股盈餘 (EPS)",
+                value: "$3.32 美元",
+                growth: "+11% YoY (預期 $3.23)",
+                category: "財務獲利",
+                impact: "獲利超預期，受惠於高毛利跨境交易拉升。"
+            },
+            {
+                company: "Visa",
+                metric: "全球支付總額 (Payment Volume)",
+                value: "> $4.0 萬億美元",
+                growth: "+10% YoY (固定匯率)",
+                category: "營運銷量",
+                impact: "歷史性突破 4 兆美元大關，展現全球消費韌性。"
+            },
+            {
+                company: "Visa",
+                metric: "跨境交易總額 (Cross-Border)",
+                value: "+13%",
+                growth: "排除歐洲內 +12%",
+                category: "營運銷量",
+                impact: "國際旅遊與娛樂需求強勁，手續費貢獻顯著。"
+            },
+            {
+                company: "Visa",
+                metric: "營業費用 (OpEx)",
+                value: "$48.0 億美元",
+                growth: "+19% YoY",
+                category: "財務獲利",
+                impact: "費用增速高於營收，為促成組織重組裁員主因。"
+            },
+            {
+                company: "Visa",
+                metric: "人力組織優化 (裁員)",
+                value: "2,600 人",
+                growth: "約全球人力 7%",
+                category: "營運銷量",
+                impact: "削減科技產品重複人力，資源轉向 AI 與穩定幣。"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle logic
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Intersection Observer for Active Nav Link Switching
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${activeId}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // Chart 1: Coca-Cola Category/Segment Growth Chart
+            const ccCtx = document.getElementById('cocaColaSegmentChart').getContext('2d');
+            new Chart(ccCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Zero Sugar 可樂', '亞太地區銷量', '核心品牌銷量', '運動飲料銷量', '全球單箱總銷量', '氣泡飲料', '北美銷量'],
+                    datasets: [{
+                        label: '銷量年增率 (% YoY)',
+                        data: [16, 8, 5, 5, 5, 4, 3],
+                        backgroundColor: [
+                            'rgba(17, 24, 39, 0.85)',
+                            'rgba(14, 165, 233, 0.85)',
+                            'rgba(239, 68, 68, 0.85)',
+                            'rgba(59, 130, 246, 0.85)',
+                            'rgba(16, 185, 129, 0.85)',
+                            'rgba(245, 158, 11, 0.85)',
+                            'rgba(107, 114, 128, 0.85)'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` 成長率: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Comparative Financial Metrics Chart (Coca-Cola vs Visa)
+            const compCtx = document.getElementById('companyComparisonChart').getContext('2d');
+            new Chart(compCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['淨營收年增率', '調整後 EPS 年增率', '核心業務總量年增率', '最高速增長分項'],
+                    datasets: [
+                        {
+                            label: 'Coca-Cola (可口可樂)',
+                            data: [7, 11, 5, 16], // Revenue +7%, EPS +11%, Unit Case +5%, Zero Sugar +16%
+                            backgroundColor: 'rgba(220, 38, 38, 0.8)',
+                            borderColor: 'rgb(185, 28, 28)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Visa (維薩)',
+                            data: [14, 11, 10, 13], // Revenue +14%, EPS +11%, Payment Vol +10%, Cross-border +13%
+                            backgroundColor: 'rgba(37, 99, 235, 0.8)',
+                            borderColor: 'rgb(29, 78, 216)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+
+            // Render Table Function
+            const tableBody = document.getElementById('financialTableBody');
+            const searchInput = document.getElementById('tableSearch');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            let currentCategory = 'ALL';
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-stone-400">無符合條件的數據資料</td></tr>`;
+                    return;
+                }
+
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-stone-50 transition-colors';
+
+                    const companyBadge = item.company === 'Coca-Cola' 
+                        ? `<span class="inline-block px-2 py-0.5 text-xs font-bold bg-red-100 text-red-700 rounded">Coca-Cola</span>`
+                        : `<span class="inline-block px-2 py-0.5 text-xs font-bold bg-blue-100 text-blue-700 rounded">Visa</span>`;
+
+                    tr.innerHTML = `
+                        <td class="p-3">${companyBadge}</td>
+                        <td class="p-3 font-semibold text-stone-900">${item.metric}</td>
+                        <td class="p-3 font-bold text-sky-700">${item.value}</td>
+                        <td class="p-3 font-medium text-emerald-600">${item.growth}</td>
+                        <td class="p-3 text-stone-500 text-xs">${item.category}</td>
+                        <td class="p-3 text-stone-600 text-xs">${item.impact}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            function filterData() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                const filtered = productData.filter(item => {
+                    const matchesCategory = (currentCategory === 'ALL') || 
+                                           (currentCategory === 'Coca-Cola' && item.company === 'Coca-Cola') ||
+                                           (currentCategory === 'Visa' && item.company === 'Visa') ||
+                                           (item.category === currentCategory);
+
+                    const matchesSearch = item.company.toLowerCase().includes(searchTerm) ||
+                                          item.metric.toLowerCase().includes(searchTerm) ||
+                                          item.value.toLowerCase().includes(searchTerm) ||
+                                          item.impact.toLowerCase().includes(searchTerm);
+
+                    return matchesCategory && matchesSearch;
+                });
+                renderTable(filtered);
+            }
+
+            // Search listener
+            searchInput.addEventListener('input', filterData);
+
+            // Category Button Listener
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-sky-600', 'text-white', 'active');
+                        b.classList.add('bg-stone-100', 'text-stone-600');
+                    });
+                    btn.classList.add('bg-sky-600', 'text-white', 'active');
+                    btn.classList.remove('bg-stone-100', 'text-stone-600');
+
+                    currentCategory = btn.getAttribute('data-category');
+                    filterData();
+                });
+            });
+
+            // Initial render
+            renderTable(productData);
+        });
+    </script>
+</body>
+</html>
