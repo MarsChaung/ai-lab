@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-同樣豪擲AI：微軟與Meta財報解析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0369a1;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-sky-100 selection:text-sky-900">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo / Title -->
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <span class="text-lg font-bold text-stone-900 block leading-tight">微軟與Meta財報解析</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8 h-full items-center" id="desktop-menu">
+                    <a href="#overview" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">核心結論</a>
+                    <a href="#comparison" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">動態圖表與數據</a>
+                    <a href="#table-section" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">指標對照表</a>
+                    <a href="#microsoft" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">微軟剖析</a>
+                    <a href="#meta" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">Meta剖析</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">投資策略與供應鏈</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button" class="p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none" aria-label="Toggle Menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon-open" class="block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">核心結論</a>
+            <a href="#comparison" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">動態圖表與數據</a>
+            <a href="#table-section" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">指標對照表</a>
+            <a href="#microsoft" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">微軟剖析</a>
+            <a href="#meta" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">Meta剖析</a>
+            <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">投資策略與供應鏈</a>
+        </div>
+    </header>
+
+    <!-- Hero & Executive Summary Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section id="overview" class="mb-12">
+            <div class="bg-gradient-to-r from-slate-900 via-stone-800 to-sky-950 rounded-2xl p-6 sm:p-10 text-white shadow-xl mb-8">
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                    同樣豪擲AI，為何Microsoft被獎勵、Meta被懲罰？
+                </h1>
+                <p class="text-stone-300 text-base sm:text-lg max-w-4xl leading-relaxed">
+                    Microsoft與Meta在同一天公布財報，呈現當前AI投資市場最重要的分水嶺。市場不再僅看「誰花得多」，而是嚴格檢視「誰證明得快」。Microsoft靠雲端與Copilot打造雙層收費閉環，Meta則面臨資本支出幾乎吃光營運現金流的考驗。
+                </p>
+            </div>
+
+            <!-- Key Financial Highlights Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500 hover:shadow-xl transition-shadow">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Microsoft 盤前表現</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">+9.0%</span>
+                    </div>
+                    <div class="text-3xl font-bold text-stone-900 mb-1">$900 億</div>
+                    <p class="text-xs text-stone-600">單季營收 (年增 18%)，Azure與雲端成長達 43%</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-500 hover:shadow-xl transition-shadow">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Meta 盤前表現</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-rose-100 text-rose-800">-8.5%</span>
+                    </div>
+                    <div class="text-3xl font-bold text-stone-900 mb-1">$7.84 億</div>
+                    <p class="text-xs text-stone-600">單季自由現金流 (暴跌 91%)，巨額CapEx吞噬現金</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 hover:shadow-xl transition-shadow">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">合計單季AI支出</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-sky-100 text-sky-800">> $700 億</span>
+                    </div>
+                    <div class="text-3xl font-bold text-stone-900 mb-1">硬體大爆發</div>
+                    <p class="text-xs text-stone-600">投入晶片、伺服器、網路與資料中心基礎建設</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500 hover:shadow-xl transition-shadow">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">微軟RPO待履行義務</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">+84% YoY</span>
+                    </div>
+                    <div class="text-3xl font-bold text-stone-900 mb-1">$6,780 億</div>
+                    <p class="text-xs text-stone-600">非頂尖AI巨頭客戶貢獻強勁，收入能見度高</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visualizations / Chart Section -->
+        <section id="comparison" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">動態圖表與財務數據對比</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Cash Flow & CapEx Comparison -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">現金流與資本支出對比 (億美元)</h3>
+                    <p class="text-xs text-stone-500 mb-4">呈現兩家公司營運現金流、資本支出與最終剩餘自由現金流的巨大落差</p>
+                    <div class="relative w-full h-72">
+                        <canvas id="cashFlowChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Key Growth & Margin Comparison -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">營收成長率與營業利益率 (%)</h3>
+                    <p class="text-xs text-stone-500 mb-4">比較總營收成長、核心業務成長率與營業利益率變化</p>
+                    <div class="relative w-full h-72">
+                        <canvas id="growthMarginChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table Section -->
+        <section id="table-section" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">重點指標動態搜尋與比較表</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Table Search Filter Input -->
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="relative w-full sm:w-80">
+                        <input type="text" id="tableSearchInput" placeholder="即時搜尋指標名稱、微軟或Meta數據..." 
+                            class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <div class="text-xs text-stone-500">
+                        顯示 <span id="filtered-count" class="font-bold text-stone-800">0</span> 項關鍵財務比較指標
+                    </div>
+                </div>
+
+                <!-- Responsive Table Wrapper -->
+                <div class="overflow-x-auto max-h-96">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 text-stone-700 uppercase text-xs sticky top-0 z-10">
+                            <tr>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200">財務與營運指標</th>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200 text-sky-700">Microsoft (微軟)</th>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200 text-blue-700">Meta</th>
+                                <th class="py-3 px-4 font-semibold border-b border-stone-200">市場含義與評估</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="divide-y divide-stone-200 text-sm">
+                            <!-- Populated dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Microsoft Deep Dive Section -->
+        <section id="microsoft" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Microsoft：AI資本支出開始形成收入閉環</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-600">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">1. 雙層收費機制與雲端暴增</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        Microsoft Cloud單季收入達593億美元，全年Azure收入首度突破1,000億美元。Azure成長43%超越預期的40%。這代表微軟不僅購買GPU，更成功將運算能力出租給企業與開發者。
+                    </p>
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-100 text-xs text-sky-900">
+                        <strong>關鍵亮點：</strong> Copilot 付費席次突破 3,000 萬個（高於上季 2,000 萬個），單季新增席次翻倍。在基礎建設層（Azure）與應用層（Copilot）同步收費。
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-600">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">2. 6,780 億美元巨額訂單解析</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        商業合約待履行義務（RPO）年增84%達到6,780億美元。本季新增約500億美元合約承諾全部來自頂尖AI模型公司以外的一般企業客戶（銀行、製造、零售、政府）。
+                    </p>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200 text-xs text-stone-700">
+                        <strong>提醒：</strong> 合約加權平均期限約2.3年，未來12個月預計僅認列約30%為收入。提供的是收入能見度而非單季獲利。
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">3. 現金流下滑與 3,291 億長租風險</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        單季資本支出達410億美元，導致自由現金流下降23%至196億美元。此外，尚未開始的資料中心租約承諾達3,291億美元（2027-2033會計年度生效）。
+                    </p>
+                    <div class="bg-amber-50 p-4 rounded-lg border border-amber-100 text-xs text-amber-900">
+                        <strong>會計調整：</strong> 將資料中心年限由15年延長至25年，部分改為營業租賃不列入CapEx，但實質投資承諾並未縮減。
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-600">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">4. 一次性收益與本業獲利</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        一般會計準則（GAAP）淨利達358億美元（年增31%），其中包含Anthropic投資價值增加產生的32億美元收益。
+                    </p>
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-100 text-xs text-sky-900">
+                        <strong>扣除投資影響：</strong> 每股盈餘（EPS）為 4.74 美元，仍高於市場預期的 4.24 美元，證明本業表現確實亮眼。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meta Deep Dive Section -->
+        <section id="meta" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta：廣告業務很強，問題是現金幾乎全部投入資料中心</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-600">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">廣告本業依然無懈可擊</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        第二季營收達608億美元（年增28%），廣告收入593.6億美元。廣告曝光量增長14%，平均價格提升12%。每日活躍用戶（DAP）達36億人。已有超900萬家小企業使用Meta的AI廣告工具。
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-600">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">自由現金流暴跌 91%</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        單季營運現金流為318.6億美元，但設備與資料中心資本支出（含融資租賃）高達310.8億美元，幾乎吞噬所有現金，導致自由現金流由去年同期的85.5億美元驟降至僅7.84億美元。
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-600">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">費用暴增與一次性訴訟成本</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        成本與費用由277億增至420.3億美元（+55%），營業利益率降至31%。但其中含24億美元訴訟費用與11.8億裁員費。若排除此兩項，營業利益實質年增9%。
+                    </p>
+                </div>
+
+                <!-- Card 4 col-span-full -->
+                <div class="md:col-span-2 lg:col-span-3 bg-blue-50 rounded-lg p-6 border border-blue-200">
+                    <h4 class="font-bold text-blue-900 text-base mb-2">Meta AI 貨幣化痛點：缺乏明確的新收入計算公式</h4>
+                    <p class="text-blue-800 text-sm leading-relaxed">
+                        Meta的AI效益目前主要體現在「優化既有廣告推薦與轉換」，很難獨立計算AI創造了多少額外收入。雖然公司規劃了個人AI代理、企業API、商務代理與運算能力轉售等新業務，但尚未提供達到規模運營的明確時間表。因此市場暫時無法給予高估值溢價。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Strategy & Supply Chain Section -->
+        <section id="strategy" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略與 AI 供應鏈啟示</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Microsoft Strategy -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="w-3 h-3 bg-sky-600 rounded-full"></span>
+                        <h3 class="text-xl font-bold text-stone-800">微軟（MSFT）投資策略</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-stone-600">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 font-bold mr-2">•</span>
+                            <span><strong>定位：</strong> 適合作為核心科技持股，Azure與Copilot已展現強勁商業化落地。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 font-bold mr-2">•</span>
+                            <span><strong>關鍵追蹤指標：</strong> Azure營收成長率（須保持>40%）、Microsoft Cloud毛利率（本季65%）與資料中心長租承諾。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 font-bold mr-2">•</span>
+                            <span><strong>潛在風險：</strong> 若收入增速放緩而折舊、租金與電力成本持續擴大，估值可能面臨修整。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Meta Strategy -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="w-3 h-3 bg-blue-600 rounded-full"></span>
+                        <h3 class="text-xl font-bold text-stone-800">Meta（META）投資策略</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-stone-600">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 font-bold mr-2">•</span>
+                            <span><strong>定位：</strong> 廣告本業極為強健，持有903億美元現金，無財務危機，適合高風險偏好者分批布局。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 font-bold mr-2">•</span>
+                            <span><strong>關鍵改善訊號：</strong> 自由現金流回升至數十億美元、CapEx增速低於營收增速、企業代理/API帶來可量化新收入。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 font-bold mr-2">•</span>
+                            <span><strong>潛在風險：</strong> 長期債務已增加至837億美元，CapEx上修易引起股價短期大幅波動。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Supply Chain & Conclusion Box -->
+            <div class="bg-stone-900 text-stone-200 rounded-xl p-6 sm:p-8 shadow-xl">
+                <h3 class="text-xl font-bold text-white mb-3">AI 基礎建設供應鏈：中期利多與週期性警號</h3>
+                <p class="text-stone-300 text-sm leading-relaxed mb-4">
+                    微軟與Meta單季合計砸下超過 <strong class="text-sky-400">700 億美元</strong> 於硬體設施，對 GPU、CPU、高頻寬記憶體（HBM）、光通訊、散熱技術與資料中心電力備援設備供應商提供強勁的中期支撐。
+                </p>
+                <div class="p-4 bg-stone-800/90 rounded-lg border border-stone-700 text-xs text-stone-300">
+                    <strong class="text-amber-400">總結提示：</strong> 供應鏈廠商承受更高的景氣循環風險。若四大雲端巨頭（Microsoft, Meta, Alphabet, Amazon）未來放緩擴產速度，設備供應商將面臨訂單修正。投資人應選擇具備長期合約與客戶分散優勢的供應鏈企業。
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mandatory Page Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-同樣豪擲AI：微軟與Meta財報解析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中微軟與Meta財報相關公開資料 (2026年07月30日)。</p>
+        </div>
+    </footer>
+
+    <!-- Native JavaScript for Interactive Functions -->
+    <script>
+        // Financial Metrics Data Array for Interactive Table
+        const productData = [
+            {
+                metric: "單季總營收 (Revenue)",
+                msft: "$900 億美元 (+18%)",
+                meta: "$608 億美元 (+28%)",
+                impact: "兩者營收皆呈雙位數成長，Meta在數位廣告帶動下增速更快。"
+            },
+            {
+                metric: "資本支出與租賃 (CapEx)",
+                msft: "$410 億美元",
+                meta: "$310.8 億美元 (含融資租賃)",
+                impact: "兩巨頭合計單季投入超$700億美元於AI基礎設施與晶片採購。"
+            },
+            {
+                metric: "營運現金流 (Op Cash Flow)",
+                msft: "$554 億美元 (+30%)",
+                meta: "$318.6 億美元",
+                impact: "微軟營運現金流極度強勁，足夠支應其龐大的基礎建設支出。"
+            },
+            {
+                metric: "自由現金流 (Free Cash Flow)",
+                msft: "$196 億美元 (-23%)",
+                meta: "$7.84 億美元 (-91%)",
+                impact: "Meta CapEx幾乎吞噬全部營運現金流，自由現金流近乎歸零引起市場憂慮。"
+            },
+            {
+                metric: "核心AI貨幣化指標",
+                msft: "Azure成長43%, Copilot席次>3,000萬",
+                meta: "廣告曝光+14%, 價格+12%, 900萬+小企業用AI工具",
+                impact: "微軟已展現軟體+雲端的雙層收費閉環；Meta AI效益仍隱含於既有廣告。"
+            },
+            {
+                metric: "未來支出與訂單承諾",
+                msft: "RPO $6,780億 (+84%), 未來租約 $3,291億",
+                meta: "全年 CapEx 指引上修至 $1,300億~$1,450億",
+                impact: "微軟擁有極高收入能見度；Meta則持續承諾龐大最低支出金額。"
+            },
+            {
+                metric: "營業利益率 (Op Margin)",
+                msft: "約 45% (營業利益 $406億)",
+                meta: "31% (去年43%, 受訴訟與裁員費拖累)",
+                impact: "Meta本季受到24億美元法律訴訟與11.8億裁員費用短暫放大了利潤降幅。"
+            }
+        ];
+
+        // Populate and Filter Interactive Table
+        function renderTable(data) {
+            const tbody = document.getElementById('productTableBody');
+            const countSpan = document.getElementById('filtered-count');
+            tbody.innerHTML = '';
+            countSpan.textContent = data.length;
+
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-stone-400">未找到符合條件的指標數據</td></tr>`;
+                return;
+            }
+
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white hover:bg-stone-50' : 'bg-stone-50/50 hover:bg-stone-100/50';
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-semibold text-stone-800">${row.metric}</td>
+                    <td class="py-3 px-4 font-medium text-sky-700">${row.msft}</td>
+                    <td class="py-3 px-4 font-medium text-blue-700">${row.meta}</td>
+                    <td class="py-3 px-4 text-xs text-stone-600 leading-relaxed">${row.impact}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Search Input Filter Listener
+        document.getElementById('tableSearchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.metric.toLowerCase().includes(query) ||
+                item.msft.toLowerCase().includes(query) ||
+                item.meta.toLowerCase().includes(query) ||
+                item.impact.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        // Render Dynamic Chart.js Visualizations
+        window.addEventListener('load', function() {
+            // Initial Table Render
+            renderTable(productData);
+
+            // Chart 1: Cash Flow & CapEx Comparison
+            const ctx1 = document.getElementById('cashFlowChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['營運現金流', '資本支出 (CapEx)', '自由現金流 (FCF)'],
+                    datasets: [
+                        {
+                            label: 'Microsoft (微軟)',
+                            data: [554, 410, 196],
+                            backgroundColor: 'rgba(2, 132, 199, 0.8)',
+                            borderColor: 'rgb(2, 132, 199)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Meta',
+                            data: [318.6, 310.8, 7.84],
+                            backgroundColor: 'rgba(225, 29, 72, 0.8)',
+                            borderColor: 'rgb(225, 29, 72)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': $' + context.raw + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '億美元 ($B)' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Growth and Margin Comparison
+            const ctx2 = document.getElementById('growthMarginChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['總營收成長率 (%)', '核心業務成長率 (%)', '營業利益率 (%)'],
+                    datasets: [
+                        {
+                            label: 'Microsoft (微軟)',
+                            data: [18, 43, 45], // Azure 43%, Op Margin ~45%
+                            backgroundColor: 'rgba(14, 165, 233, 0.8)',
+                            borderColor: 'rgb(14, 165, 233)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Meta',
+                            data: [28, 27, 31], // Ad Revenue 27%, Op Margin 31%
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                            borderColor: 'rgb(59, 130, 246)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '百分比 (%)' }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Mobile Navigation Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isExpanded = mobileMenu.classList.contains('hidden');
+            if (isExpanded) {
+                mobileMenu.classList.remove('hidden');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            }
+        });
+
+        // Close Mobile Menu when clicking items
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Active Navigation Link Highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        const href = item.getAttribute('href').substring(1);
+                        if (href === currentId) {
+                            item.classList.remove('inactive-nav-link');
+                            item.classList.add('active-nav-link');
+                        } else {
+                            item.classList.remove('active-nav-link');
+                            item.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
