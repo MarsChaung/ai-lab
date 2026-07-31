@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Amazon大漲與Apple重挫：AI變現分水嶺</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Inter Font & FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .active-nav-link {
+            color: #0284c7 !important; /* sky-600 */
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* stone-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-sky-100 selection:text-sky-800">
+
+    <!-- Navigation Bar Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <span class="font-bold text-lg sm:text-xl text-stone-800 tracking-tight">Amazon與Apple財報分析</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">核心摘要</a>
+                    <a href="#data-table" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">數據對比</a>
+                    <a href="#amazon-analysis" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">Amazon 變現</a>
+                    <a href="#apple-analysis" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">Apple 瓶頸</a>
+                    <a href="#supply-chain" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">供應鏈衝擊</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link py-5 text-sm transition-all duration-200">投資策略</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-sky-500" aria-label="切換選單">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div class="md:hidden hidden bg-white border-b border-stone-200 shadow-lg px-4 pt-2 pb-4 space-y-2" id="mobile-menu">
+            <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">核心摘要</a>
+            <a href="#data-table" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">數據對比</a>
+            <a href="#amazon-analysis" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">Amazon 變現</a>
+            <a href="#apple-analysis" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">Apple 瓶頸</a>
+            <a href="#supply-chain" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">供應鏈衝擊</a>
+            <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-sky-600 hover:bg-stone-50">投資策略</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero Banner Section -->
+        <section id="summary" class="scroll-mt-24">
+            <div class="bg-gradient-to-r from-stone-900 via-stone-800 to-stone-900 rounded-2xl shadow-xl p-6 sm:p-10 text-white relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 max-w-4xl">
+                    <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+                        同樣卡在AI供應鏈，為何 Amazon 大漲、Apple 重挫？
+                    </h1>
+                    <p class="text-stone-300 text-base sm:text-lg leading-relaxed mb-6">
+                        Amazon 與 Apple 同一天公布優於市場預期的財報，股價反應卻走入極端：Amazon 早盤大漲 <span class="text-emerald-400 font-bold">+13.7%</span>，Apple 則重挫 <span class="text-rose-400 font-bold">-9.8%</span>。市場正以全新標準檢視科技巨頭：誰能將 AI 投資直接變現，誰又淪為 AI 基礎建設排擠供應鏈的受害者？
+                    </p>
+                </div>
+
+                <!-- Highlight KPI Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 pt-6 border-t border-stone-700/60">
+                    <div class="bg-stone-800/80 border border-stone-700 rounded-xl p-4">
+                        <div class="text-xs text-stone-400 mb-1 flex items-center justify-between">
+                            <span>Amazon 盤初走勢</span>
+                            <i class="fa-solid fa-arrow-trend-up text-emerald-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-emerald-400">+13.7%</div>
+                        <div class="text-xs text-stone-400 mt-1">AWS 營收年增 36.7% 突破預期</div>
+                    </div>
+
+                    <div class="bg-stone-800/80 border border-stone-700 rounded-xl p-4">
+                        <div class="text-xs text-stone-400 mb-1 flex items-center justify-between">
+                            <span>Apple 盤初走勢</span>
+                            <i class="fa-solid fa-arrow-trend-down text-rose-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-rose-400">-9.8%</div>
+                        <div class="text-xs text-stone-400 mt-1">下一季財測保守 & 供應鏈受限</div>
+                    </div>
+
+                    <div class="bg-stone-800/80 border border-stone-700 rounded-xl p-4">
+                        <div class="text-xs text-stone-400 mb-1 flex items-center justify-between">
+                            <span>AWS 待履行合約</span>
+                            <i class="fa-solid fa-file-contract text-sky-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-sky-400">$4,960 億</div>
+                        <div class="text-xs text-stone-400 mt-1">約合 4,960 億美元（上一季 3,640 億）</div>
+                    </div>
+
+                    <div class="bg-stone-800/80 border border-stone-700 rounded-xl p-4">
+                        <div class="text-xs text-stone-400 mb-1 flex items-center justify-between">
+                            <span>Apple 服務收入</span>
+                            <i class="fa-solid fa-cloud-arrow-down text-amber-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-amber-400">$307.39 億</div>
+                        <div class="text-xs text-stone-400 mt-1">年增 12.1%（低於預期 $312.2億）</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Data & Dynamic Table Section -->
+        <section id="data-table" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                兩大巨頭財報核心數據比較與動態探索
+            </h2>
+
+            <!-- Cards Container for Data Visualization Charts -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- Revenue & Segment Growth Chart Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-bar text-sky-600"></i> 核心業務營收年增率 Comparison (%)
+                    </h3>
+                    <div class="w-full relative h-64 sm:h-72">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-3">資料來源：Amazon Q2 與 Apple FY26 Q3 官方財報，AWS 營收創 18 季以來最快增速。</p>
+                </div>
+
+                <!-- Capex vs Operating Profit Chart Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced text-amber-600"></i> 資本支出與獲利能力對比 (十億美元)
+                    </h3>
+                    <div class="w-full relative h-64 sm:h-72">
+                        <canvas id="financeChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-3">Amazon 2026年資本支出上看2200億美元；Apple 單季淨利 $297.89 億包含一次性關稅退款。</p>
+                </div>
+            </div>
+
+            <!-- Interactive Table Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800">財報重點數據檢索表</h3>
+                        <p class="text-sm text-stone-500">可搜尋公司名稱、部門業務或財務指標，進行動態資料比對</p>
+                    </div>
+                    <!-- Search Input Box -->
+                    <div class="relative w-full sm:w-72">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-stone-400"></i>
+                        <input type="text" id="tableSearchInput" placeholder="搜尋業務/數據（例：AWS、iPhone）..." 
+                            class="w-full pl-9 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                    </div>
+                </div>
+
+                <!-- Responsive Table Wrapper -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-stone-100 text-stone-700 sticky top-0 z-10 border-b border-stone-200">
+                            <tr>
+                                <th class="p-3.5 font-semibold">公司</th>
+                                <th class="p-3.5 font-semibold">業務 / 財務指標</th>
+                                <th class="p-3.5 font-semibold">當季金額 (億美元)</th>
+                                <th class="p-3.5 font-semibold">年增率 (YoY)</th>
+                                <th class="p-3.5 font-semibold">市場預估 / 備註差異</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialTableBody" class="divide-y divide-stone-200 bg-white">
+                            <!-- Rows will be injected via JS productData -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noDataMessage" class="hidden text-center py-6 text-stone-500">
+                    無符合條件的數據，請嘗試其他搜尋關鍵字。
+                </div>
+            </div>
+        </section>
+
+        <!-- Amazon Deep Dive Section -->
+        <section id="amazon-analysis" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Amazon 財報：市場終於看到 AI 支出的收入回報
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: AWS Engine -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-600">
+                    <div class="w-10 h-10 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-lg mb-4">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">AWS 成長重新加速</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        AWS 第二季營收達 <span class="font-semibold text-stone-800">$422.32 億美元</span>（年增 36.7%），大幅超越市場預期（31%），創 18 季以來最快成長。AWS 僅佔總營收約 1/5，卻貢獻了公司近 6 成的營業利益（$166.21 億美元，營業利益率達 39.4%）。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded-md border border-stone-200 text-xs text-stone-600">
+                        <strong class="text-stone-800">關鍵數據：</strong>AI 業務與自研晶片業務年化收入規模均已突破 <strong class="text-sky-600">$250 億美元</strong>。合約待履行金額高達 <strong class="text-sky-600">$4,960 億美元</strong>。
+                    </div>
+                </div>
+
+                <!-- Card 2: Ad Business -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-600">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg mb-4">
+                        <i class="fa-solid fa-rectangle-ad"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">廣告成為第二引擎</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        廣告服務收入成長 26% 至 <span class="font-semibold text-stone-800">$198.09 億美元</span>。Amazon 廣告直接鎖定具備強烈購買意圖的消費者，廣告主易於衡量轉化率，並順利延伸至 Prime Video 與第三方賣家服務。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded-md border border-stone-200 text-xs text-stone-600">
+                        <strong class="text-stone-800">戰略優勢：</strong>廣告業務毛利率高且成長速度遠超傳統零售，大幅優化 Amazon 複合商業模式的獲利結構。
+                    </div>
+                </div>
+
+                <!-- Card 3: Free Cash Flow & Capex -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-600">
+                    <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg mb-4">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">自由現金流轉負的背後</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        過去12個月自由現金流由去年同期流入 $182 億轉為<span class="text-rose-600 font-semibold">流出 $76 億美元</span>，主因 2026 資本支出提高至 <span class="font-semibold text-stone-800">$2,200 億美元</span>（包含資料中心、晶片、記憶體漲價與物流設施）。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded-md border border-stone-200 text-xs text-stone-600">
+                        <strong class="text-stone-800">管理層回應：</strong>資料中心需提前 2 年投資，回收期不到 3 年。營業現金流年增 33% 至 $1,614 億，證明核心業務造血能力極強。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notice Cards for Non-operating items & Guidance -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-5">
+                    <h4 class="font-bold text-amber-900 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> 提醒：帳面淨利包含一次性投資收益
+                    </h4>
+                    <p class="text-sm text-amber-800 leading-relaxed">
+                        Amazon 第二季帳面淨利高達 <strong class="text-amber-950">$626.5 億美元</strong>（EPS $5.75），但其中包含約 <strong class="text-amber-950">$534 億美元</strong> 的稅前非營業利益（主因 Anthropic 投資評價調升）。評估 Amazon 本業應聚焦 AWS 營收、營業利益與自由現金流，而非單季 EPS。
+                    </p>
+                </div>
+
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-5">
+                    <h4 class="font-bold text-sky-900 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-circle-info text-sky-600"></i> 第三季財測細節解析
+                    </h4>
+                    <p class="text-sm text-sky-800 leading-relaxed">
+                        Amazon 預估 Q3 營收為 $1,970億~$2,020億 美元，看似略低於市場預期（$2,039億）。然而主因係 Prime Day 大促由去年 Q3 移至今年 Q2；扣除 Prime Day 時間移動因素後，Q3 實質成長率將高出接近 4 個百分點。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apple Deep Dive Section -->
+        <section id="apple-analysis" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Apple 財報：硬體需求強勁，市場為何仍不買單？
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: Guidance Shortfall -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-500">
+                    <div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-lg mb-4">
+                        <i class="fa-solid fa-chart-line-down"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">下一季財測低於預期</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        Apple 預估 9 月季度營收年增 9%~11%，低於市場預期（12%）；iPhone 營收預估成長約 15%（低於市場預期的 17.6%）。投資人擔憂強勁的換機潮部分來自消費者預期短缺而「提前拉貨」。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded-md border border-stone-200 text-xs text-stone-600">
+                        <strong class="text-stone-800">毛利率回落：</strong>預估下一季毛利率為 47%~48%，不再延續本季 50.1% 的高水準。
+                    </div>
+                </div>
+
+                <!-- Card 2: Service Revenue Lag -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg mb-4">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">服務收入放緩與監管風險</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        服務收入年增 12.1% 至 <span class="font-semibold text-stone-800">$307.39 億美元</span>，低於預估的 $312.2 億。當 iPhone 營收大增 21.7% 時，高毛利的服務收入未能同步擴張，引發高價值用戶轉化疑慮。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded-md border border-stone-200 text-xs text-stone-600">
+                        <strong class="text-stone-800">結構性挑戰：</strong>歐盟反壟斷要求開放第三方應用商店，加上 Epic Games 訴訟開放外部支付，削弱 App Store 分潤壁壘。
+                    </div>
+                </div>
+
+                <!-- Card 3: One-off Benefit -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-500">
+                    <div class="w-10 h-10 rounded-lg bg-stone-100 text-stone-600 flex items-center justify-center font-bold text-lg mb-4">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">毛利率含一次性關稅退款</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        本季毛利率高達 50.1%，但其中有約 <span class="font-semibold text-stone-800">2 個百分點</span> 來自關稅退款，貢獻每股盈餘約 $0.11 美元。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded-md border border-stone-200 text-xs text-stone-600">
+                        <strong class="text-stone-800">真實利潤率：</strong>排除關稅退款後常態毛利率約為 48.1%，加上記憶體成本上升，未來獲利空間受壓。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Supply Chain Impact Section -->
+        <section id="supply-chain" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                商業模式分水嶺：AI 供應鏈的受惠者 vs 受害者
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Amazon Tollgate Model -->
+                    <div class="bg-sky-50/50 p-6 rounded-xl border border-sky-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-sm">A</span>
+                            <h3 class="text-xl font-bold text-sky-900">Amazon：AI 基礎建設的收費站</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm text-stone-700">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-sky-600 mt-1"></i>
+                                <span><strong>變現路徑清晰：</strong>資本支出 ➔ 雲端運算產能 ➔ 企業簽署長約 ➔ 營收與利潤展現。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-sky-600 mt-1"></i>
+                                <span><strong>訂單能見度極高：</strong>AWS 待履行合約接近 5,000 億美元，2026-2027 年產能依舊供不應求。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-sky-600 mt-1"></i>
+                                <span><strong>轉嫁能力：</strong>上游元件漲價（如記憶體）可透過雲端算力服務價值順利傳導至企業端。</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Apple Squeezed Model -->
+                    <div class="bg-rose-50/50 p-6 rounded-xl border border-rose-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-sm">B</span>
+                            <h3 class="text-xl font-bold text-rose-900">Apple：受到 AI 膨脹擠壓的消費電子品牌</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm text-stone-700">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-xmark text-rose-600 mt-1"></i>
+                                <span><strong>先進製程產能受限：</strong>雲端巨頭大舉搶購 AI 晶片，嚴重排擠 Apple Silicon 所需的晶圓代工產能。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-xmark text-rose-600 mt-1"></i>
+                                <span><strong>記憶體成本飆升：</strong>AI 伺服器對高頻寬記憶體（HBM）與高階 DRAM 需求爆發，提高智慧型手機成本。</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-xmark text-rose-600 mt-1"></i>
+                                <span><strong>變現仍不明朗：</strong>Apple Intelligence 與新版 Siri 尚未轉化為顯著的硬體溢價或訂閱服務收入。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Strategy Section -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                巴菲特 AI 價值投資策略建議
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Amazon Strategy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-600">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-sky-600"></i> Amazon 投資研判：偏向樂觀，但避免盲目追高
+                    </h3>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                        AWS 營收重新加速至 36.7%、營業利益率接近 40% 且訂單能見度極高，中長期基本面極佳。然而單日大漲逾 13% 已迅速反映財報利多。
+                    </p>
+                    <div class="space-y-2 text-xs text-stone-700 bg-stone-50 p-4 rounded-lg">
+                        <div class="font-bold text-stone-800 text-sm mb-1">後續四大核心觀察指標：</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-chevron-right text-sky-500"></i> AWS 季度成長率能否維持在 30% 以上</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-chevron-right text-sky-500"></i> AWS 營業利益率是否持續穩定於高檔（~39%）</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-chevron-right text-sky-500"></i> 待履行合約（RPO）規模是否持續擴增</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-chevron-right text-sky-500"></i> 自由现金流（FCF）何時重新轉正</div>
+                    </div>
+                </div>
+
+                <!-- Apple Strategy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-600">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-cat text-rose-600"></i> Apple 投資研判：不宜僅因單日重挫就急於搶進
+                    </h3>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                        近 10% 的跌幅不代表 iPhone 需求崩潰，反而證明部分終端需求高於公司原先調配能力。但 Apple 需先證明供應瓶頸改善與服務業務重回高成長。
+                    </p>
+                    <div class="space-y-2 text-xs text-stone-700 bg-stone-50 p-4 rounded-lg">
+                        <div class="font-bold text-stone-800 text-sm mb-1">操作策略建議：</div>
+                        <div class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-rose-500 mt-0.5"></i> <span><strong>保守型投資人：</strong>觀望下一季財測是否落實，確認先進製程與記憶體缺料為單季延後出貨。</span></div>
+                        <div class="flex items-start gap-2"><i class="fa-solid fa-chevron-right text-rose-500 mt-0.5"></i> <span><strong>積極型長期投資人：</strong>採取嚴格分批建倉策略，切忌單日大跌時一次性投入全部資金。</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Evaluation Matrix Box -->
+            <div class="bg-stone-900 text-stone-200 rounded-xl p-6 sm:p-8 shadow-xl">
+                <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-sky-400"></i> 結語：科技巨頭的三大新估值法則
+                </h3>
+                <p class="text-sm sm:text-base leading-relaxed text-stone-300">
+                    未來評估大型科技公司時，不能僅憑「擁有 AI 題材」給予溢價，必須同步檢查三項核心指標：
+                    <strong class="text-sky-400">1. AI 收入與訂單的實際變現速度</strong>、
+                    <strong class="text-amber-400">2. 扣除龐大資本支出後的自由現金流品質</strong>，以及
+                    <strong class="text-rose-400">3. 面對上游供應鏈成本上升時的定價轉嫁能力</strong>。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mandatory Footer Standard Format -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Amazon大漲與Apple重挫：AI變現分水嶺。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Amazon與Apple財報分析相關公開資料 (2026年07月31日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Real financial metric data from report
+        const productData = [
+            { company: "Amazon", metric: "Q2 總營收", value: "2,006.06", yoy: "+20.0%", note: "首次單季突破二千億美元" },
+            { company: "Amazon", metric: "AWS 雲端營收", value: "422.32", yoy: "+36.7%", note: "遠高於預期 31%，18季以來最快成長" },
+            { company: "Amazon", metric: "AWS 營業利益", value: "166.21", yoy: "+64.0%", note: "營業利益率高達 39.4%" },
+            { company: "Amazon", metric: "廣告服務營收", value: "198.09", yoy: "+26.0%", note: "高品質第二成長引擎" },
+            { company: "Amazon", metric: "AWS 合約待履行額 (RPO)", value: "4,960.00", yoy: "+36.3%", note: "上一季為 3,640 億美元" },
+            { company: "Amazon", metric: "2026 資本支出預估", value: "2,200.00", yoy: "上修", note: "包含 AI 資料中心、晶片與記憶體成本" },
+            { company: "Amazon", metric: "過去12個月自由現金流", value: "-76.00", yoy: "轉負", note: "去年同期為流入 +182 億美元" },
+            { company: "Apple", metric: "FY26 Q3 總營收", value: "1,094.17", yoy: "+16.4%", note: "高於市場預期" },
+            { company: "Apple", metric: "iPhone 營收", value: "542.52", yoy: "+21.7%", note: "表現強勁，高於分析師預期" },
+            { company: "Apple", metric: "Mac 營收", value: "103.52", yoy: "+28.7%", note: "大幅超過預期" },
+            { company: "Apple", metric: "服務業務收入", value: "307.39", yoy: "+12.1%", note: "略低於市場預期的 $312.2億" },
+            { company: "Apple", metric: "iPad 營收", value: "61.91", yoy: "-5.9%", note: "主要硬體中唯一衰退部門" },
+            { company: "Apple", metric: "Q3 淨利", value: "297.89", yoy: "+27.0%", note: "包含約 2% 一次性關稅退款效益" },
+            { company: "Apple", metric: "Q4 營收財測預估", value: "年增 9%~11%", yoy: "放緩", note: "華爾街原先預估約 12%" }
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('financialTableBody');
+            const noData = document.getElementById('noDataMessage');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                noData.classList.remove('hidden');
+                return;
+            } else {
+                noData.classList.add('hidden');
+            }
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-stone-50 transition-colors";
+
+                const isAmazon = item.company === "Amazon";
+                const badgeColor = isAmazon ? "bg-sky-100 text-sky-800" : "bg-stone-200 text-stone-800";
+                
+                tr.innerHTML = `
+                    <td class="p-3.5"><span class="px-2.5 py-1 rounded-full text-xs font-semibold ${badgeColor}">${item.company}</span></td>
+                    <td class="p-3.5 font-medium text-stone-900">${item.metric}</td>
+                    <td class="p-3.5 font-semibold ${item.value.includes('-') ? 'text-rose-600' : 'text-stone-800'}">${item.value}</td>
+                    <td class="p-3.5 font-medium ${item.yoy.includes('+') ? 'text-emerald-600' : (item.yoy.includes('-') ? 'text-rose-600' : 'text-stone-600')}">${item.yoy}</td>
+                    <td class="p-3.5 text-stone-600 text-xs sm:text-sm">${item.note}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Search Filter Event
+        document.getElementById('tableSearchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.company.toLowerCase().includes(query) ||
+                item.metric.toLowerCase().includes(query) ||
+                item.note.toLowerCase().includes(query) ||
+                item.value.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        function initCharts() {
+            // Chart 1: Growth Rates
+            const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctxGrowth, {
+                type: 'bar',
+                data: {
+                    labels: ['Amazon 總營收', 'AWS 雲端', 'Amazon 廣告', 'Apple 總營收', 'iPhone', 'Mac', 'Apple 服務'],
+                    datasets: [{
+                        label: '年增率 YoY (%)',
+                        data: [20.0, 36.7, 26.0, 16.4, 21.7, 28.7, 12.1],
+                        backgroundColor: [
+                            'rgba(2, 132, 199, 0.85)',
+                            'rgba(14, 165, 233, 0.95)',
+                            'rgba(99, 102, 241, 0.85)',
+                            'rgba(120, 113, 108, 0.85)',
+                            'rgba(168, 162, 158, 0.85)',
+                            'rgba(214, 211, 209, 0.85)',
+                            'rgba(245, 158, 11, 0.85)'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Capex & Operating Profit
+            const ctxFinance = document.getElementById('financeChart').getContext('2d');
+            new Chart(ctxFinance, {
+                type: 'bar',
+                data: {
+                    labels: ['Amazon Q2 營業利益', 'AWS Q2 營業利益', 'Amazon 2026預估Capex', 'Apple Q3 淨利'],
+                    datasets: [{
+                        label: '金額 (十億美元)',
+                        data: [27.46, 16.62, 220.0, 29.79],
+                        backgroundColor: [
+                            'rgba(2, 132, 199, 0.8)',
+                            'rgba(14, 165, 233, 0.8)',
+                            'rgba(217, 119, 6, 0.85)',
+                            'rgba(87, 83, 78, 0.8)'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: value => '$' + value + 'B' }
+                        }
+                    }
+                }
+            });
+        }
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile menu when clicking any nav link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('#desktop-menu .nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        const href = item.getAttribute('href').substring(1);
+                        if (href === currentId) {
+                            item.classList.remove('inactive-nav-link');
+                            item.classList.add('active-nav-link');
+                        } else {
+                            item.classList.remove('active-nav-link');
+                            item.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // On Window Load
+        window.onload = function() {
+            renderTable(productData);
+            initCharts();
+        };
+    </script>
+</body>
+</html>
