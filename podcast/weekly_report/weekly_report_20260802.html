@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/7/27~7/31)</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Tailwind Configuration & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            900: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            font-weight: 700;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #0369a1;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased leading-relaxed">
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-200 border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand Logo & Title -->
+                <div class="flex items-center space-x-3">
+                    <div class="bg-sky-600 text-white p-2 rounded-lg shadow">
+                        <i class="fa-solid me-0 fa-chart-line text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold text-stone-900 tracking-tight">美股市場週報</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-6 text-sm">
+                    <a href="#overview" class="nav-link active-nav-link py-2 transition duration-150">大盤總覽</a>
+                    <a href="#macro" class="nav-link inactive-nav-link py-2 transition duration-150">總經與地緣風險</a>
+                    <a href="#charts" class="nav-link inactive-nav-link py-2 transition duration-150">AI財報數據</a>
+                    <a href="#highlights" class="nav-link inactive-nav-link py-2 transition duration-150">十大投資訊息</a>
+                    <a href="#table-section" class="nav-link inactive-nav-link py-2 transition duration-150">重點企業比較</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-2 transition duration-150">投資策略</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-sky-600 bg-sky-50">大盤總覽</a>
+            <a href="#macro" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">總經與地緣風險</a>
+            <a href="#charts" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">AI財報數據</a>
+            <a href="#highlights" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">十大投資訊息</a>
+            <a href="#table-section" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">重點企業比較</a>
+            <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">投資策略</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero Banner & Overview Section -->
+        <section id="overview" class="scroll-mt-20">
+            <div class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 rounded-2xl text-white p-6 md:p-10 shadow-xl relative overflow-hidden">
+                <div class="relative z-10 max-w-3xl">
+                    <div class="inline-block bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs font-bold px-3 py-1 rounded-full mb-4">
+                        資料區間：2026年7月27日 — 7月31日
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                        AI開始分出勝負：<br><span class="text-sky-400">雲端變現</span>、<span class="text-amber-400">現金流</span>與<span class="text-rose-400">油價風險</span>主導美股
+                    </h1>
+                    <p class="text-stone-300 text-base md:text-lg mb-6 leading-relaxed">
+                        上週美股劇烈震盪後收紅，市場表面延續 AI 行情，內部卻劇烈分化。能證明 AI 轉化為雲端收入與合約的巨頭大漲，而現金流下滑或受供應限制者則面臨懲罰。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Market Performance KPI Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-6">
+                <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-emerald-500">
+                    <span class="text-xs text-stone-500 font-semibold block">標普五百 (S&P 500)</span>
+                    <span class="text-xl font-bold text-emerald-600 mt-1 block">+1.1% <i class="fa-solid fa-arrow-trend-up text-xs"></i></span>
+                    <span class="text-xs text-stone-400">全週表現</span>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-emerald-500">
+                    <span class="text-xs text-stone-500 font-semibold block">納斯達克 (Nasdaq)</span>
+                    <span class="text-xl font-bold text-emerald-600 mt-1 block">+1.6% <i class="fa-solid fa-arrow-trend-up text-xs"></i></span>
+                    <span class="text-xs text-stone-400">全週表現</span>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-emerald-500">
+                    <span class="text-xs text-stone-500 font-semibold block">道瓊工業 (Dow Jones)</span>
+                    <span class="text-xl font-bold text-emerald-600 mt-1 block">+1.0% <i class="fa-solid fa-arrow-trend-up text-xs"></i></span>
+                    <span class="text-xs text-stone-400">全週表現</span>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-rose-500">
+                    <span class="text-xs text-stone-500 font-semibold block">布蘭特原油 (Brent Crude)</span>
+                    <span class="text-xl font-bold text-rose-600 mt-1 block">$90.74 <i class="fa-solid fa-fire text-xs"></i></span>
+                    <span class="text-xs text-stone-400">地緣衝突劇烈波擺</span>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-4 border-l-4 border-amber-500 col-span-2 md:col-span-1">
+                    <span class="text-xs text-stone-500 font-semibold block">聯邦基金利率</span>
+                    <span class="text-xl font-bold text-amber-600 mt-1 block">3.5% - 3.75%</span>
+                    <span class="text-xs text-amber-700 bg-amber-50 px-1 rounded">鷹派按兵不動 (3票支持升息)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Macro & Geopolitics Section -->
+        <section id="macro" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="fa-solid fa-globe text-sky-600 mr-3"></i> 總體經濟與地緣政治綜合報告
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Oil & Geopolitics Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-t-4 border-rose-500">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="p-3 bg-rose-100 text-rose-600 rounded-lg">
+                                <i class="fa-solid fa-oil-well text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-stone-800">美伊衝突與荷姆茲海峽</h3>
+                        </div>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            7/27 雙方一度和談促使油價暴跌 9%，但 7/29 軍事衝突升溫，單日反彈近 8% 至每桶 90.74 美元。伊朗宣稱攔阻多艘船舶，能源供應威脅尚未解除。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded-lg text-xs text-stone-500">
+                        <strong class="text-stone-700">受惠：</strong> 能源、軍工類股<br>
+                        <strong class="text-stone-700">受壓：</strong> 航空、郵輪、物流與零售
+                    </div>
+                </div>
+
+                <!-- Fed Policy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-t-4 border-amber-500">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="p-3 bg-amber-100 text-amber-600 rounded-lg">
+                                <i class="fa-solid fa-landmark text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-stone-800">聯準會「偏鷹派按兵不動」</h3>
+                        </div>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            利率維持在 3.5%-3.75%，但 12 名官員中高達 3 人支持升息，顯示內部對通膨分歧加劇。長天期美債殖利率上升，美股短期難單靠「降息預期」拉抬估值。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded-lg text-xs text-stone-500">
+                        <strong class="text-stone-700">重點：</strong> 6月核心 PCE 年增 3.3%，遠高於 2% 目標。負債比高的企業風險升高。
+                    </div>
+                </div>
+
+                <!-- Economic Growth Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-t-4 border-sky-500">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="p-3 bg-sky-100 text-sky-600 rounded-lg">
+                                <i class="fa-solid fa-chart-pie text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-stone-800">GDP 增長放緩但結構堅韌</h3>
+                        </div>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            美國第二季 GDP 年化成長率僅 1.5%（低於 Q1 的 2.1%），但消費支出仍強勁成長 3.2%，企業設備投資更暴增 15.2%，顯示 AI 資料中心與自動化設備投資極其強勁。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded-lg text-xs text-stone-500">
+                        <strong class="text-stone-700">結論：</strong> 呈現「軟著陸/緩步成長」，防禦型與巨頭科技資本支出支撐整體經濟。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Charts Section (Chart.js) -->
+        <section id="charts" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="fa-solid fa-chart-column text-sky-600 mr-3"></i> AI 巨頭 Q2 財報與雲端營收動能對比
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Chart 1: Revenue & Cloud Growth -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">主要科技巨頭整體營收 vs 雲端業務年增率 (%)</h3>
+                    <p class="text-xs text-stone-500 mb-4">顯示雲端與 AI 強勁需求顯著超越總體業務成長</p>
+                    <div class="relative w-full h-64">
+                        <canvas id="cloudGrowthChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: CapEx and Cash Flow Impact -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">AI 資本支出劇增對單季自由現金流的影響 (億美元)</h3>
+                    <p class="text-xs text-stone-500 mb-4">Microsoft 依然保持堅實 FCF，Meta 與 Amazon 自由現金流明顯受到沉重壓力</p>
+                    <div class="relative w-full h-64">
+                        <canvas id="fcfChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ten Key Investment Highlights -->
+        <section id="highlights" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="fa-solid fa-list-check text-sky-600 mr-3"></i> 上週最值得關注的十項投資訊息
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Highlight 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-rose-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-1 rounded">1. 地緣政治風險</span>
+                            <i class="fa-solid fa-gas-pump text-rose-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">伊朗局勢使油價成最大短期風險</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            荷姆茲海峽運輸受阻使油價震盪高企。燃料成本上升可能再次推高通膨，對高估值科技股帶來壓制，同時支撐能源與國防類股。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-amber-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">2. 聯準會態度</span>
+                            <i class="fa-solid fa-scale-balanced text-amber-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">並未轉向寬鬆 估值靠基本面說話</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            3 名官員主張升息，市場降息預期降溫。企業必須展現真實的營收、獲利與現金流，資產負債表脆弱企業風險顯著提高。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-sky-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded">3. 經濟韌性</span>
+                            <i class="fa-solid fa-microchip text-sky-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">企業設備投資暴增 15.2%</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            儘管 Q2 GDP 放緩至 1.5%，但 AI 資料中心、伺服器、電力與自動化設備投資強勁，撐起經濟底座，暫無衰退風險。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-purple-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded">4. NVDA 轉型</span>
+                            <i class="fa-solid fa-handshake text-purple-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">Nvidia 扮演 AI 基礎建設擔保者</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            洽談為 OpenAI 提供數千億美元融資保障，並聯合各大巨頭創立 Open Secure AI Alliance。需留意生態系擴張背後的信用循環風險。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 5 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-emerald-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">5. MSFT 領先</span>
+                            <i class="fa-solid fa-cloud text-emerald-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">Microsoft 證明 AI 支出轉化為收入</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            Azure 大增 43%，商業合約待履行金額暴增 84% 至 6,780 億美元，單日市值猛增約 4,500 億美元，展現最佳變現能力。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 6 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-rose-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-1 rounded">6. META 警訊</span>
+                            <i class="fa-solid fa-wallet text-rose-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">Meta 廣告強勁 但自由現金流暴跌</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            營收成長 28% 表現亮眼，但成本激增 55%，自由現金流從 85.5 億驟降至 7.84 億美元，全升 CapEx 至 1,300-1,450 億美元侵蝕獲利。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 7 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-emerald-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">7. AMZN 加速</span>
+                            <i class="fa-solid fa-server text-emerald-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">AWS 成長創 18 季最快 市場買單</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            AWS 營收大增 37% 至 422 億美元，營業利益暴增 64%。儘管 FCF 轉負，但營收與獲利雙加速證實需求真實存在。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 8 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-amber-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">8. AAPL 挑戰</span>
+                            <i class="fa-solid fa-mobile-screen text-amber-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">Apple 硬體強勁 惟受 AI 供應鏈成本夾擊</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            iPhone 營收成長 22%，但受記憶體與晶片漲價影響毛利，加上 AI 搶奪產能，下季營收指引 9-11% 遜於預期。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 9 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-sky-500">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-1 rounded">9. 支付與 AI 效益</span>
+                            <i class="fa-solid fa-credit-card text-sky-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">Visa/Mastercard 展現消費韌性與 AI 裁員</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            跨境交易成長 12-13% 顯現全球消費力。Visa 裁員 7% 精簡人力，象徵 AI 應用逐步轉化為企業營運成本縮減。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Highlight 10 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-indigo-500 col-span-1 md:col-span-2 lg:col-span-1">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">10. 醫療防禦</span>
+                            <i class="fa-solid fa-capsules text-indigo-400"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">AbbVie 新藥跨越專利崖 防禦首選</h3>
+                        <p class="text-stone-600 text-xs leading-relaxed">
+                            Skyrizi 與 Rinvoq 各大增 24%，成功彌補 Humira 衰退。計畫以 109 億美元收購 Apogee 擴大布局，現金流強勁。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table Section -->
+        <section id="table-section" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="fa-solid fa-table text-sky-600 mr-3"></i> 重點企業 Q2 財報與 AI 策略比較表
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Search Input Box -->
+                <div class="mb-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-sm text-stone-500">可搜尋公司名稱、股票代號或關鍵字進行即時動態篩選：</p>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="搜尋：例如 Microsoft, 雲端, 裁員..." class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table Wrapper for Responsive Scrolling -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200 text-sm text-left">
+                        <thead class="bg-stone-100 text-stone-700 font-bold sticky top-0">
+                            <tr>
+                                <th class="px-4 py-3">企業 (代號)</th>
+                                <th class="px-4 py-3">最新營收/獲利表現</th>
+                                <th class="px-4 py-3">AI 與雲端核心亮點</th>
+                                <th class="px-4 py-3">資本支出 / 自由現金流</th>
+                                <th class="px-4 py-3">市場評註與影響</th>
+                            </tr>
+                        </thead>
+                        <tbody id="companyTableBody" class="divide-y divide-stone-200 text-stone-700 bg-white">
+                            <!-- Dynamically populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Strategy Section -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center">
+                <i class="fa-solid fa-chess-knight text-sky-600 mr-3"></i> 投資策略總結與未來追蹤指標
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 space-y-6">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-sky-50 p-5 rounded-xl border border-sky-100">
+                        <div class="text-sky-700 font-bold text-base mb-2 flex items-center">
+                            <span class="w-6 h-6 bg-sky-600 text-white rounded-full inline-flex items-center justify-center text-xs mr-2">1</span>
+                            AI 評價標準已轉變
+                        </div>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            市場不再無條件獎勵大幅提高 CapEx 的公司，轉而嚴格審視能否轉換為雲端收入、合約與實際營業利益。Microsoft與Amazon暫居領先，Meta則面臨現金流檢驗。
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50 p-5 rounded-xl border border-amber-100">
+                        <div class="text-amber-700 font-bold text-base mb-2 flex items-center">
+                            <span class="w-6 h-6 bg-amber-600 text-white rounded-full inline-flex items-center justify-center text-xs mr-2">2</span>
+                            利率與油價上限壓力
+                        </div>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            經濟放緩不等於降息保證。核心通膨仍高於 3%，加上地緣衝突推升油價風險，限制了美股高估值科技股的向上擴展空間。
+                        </p>
+                    </div>
+
+                    <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-100">
+                        <div class="text-emerald-700 font-bold text-base mb-2 flex items-center">
+                            <span class="w-6 h-6 bg-emerald-600 text-white rounded-full inline-flex items-center justify-center text-xs mr-2">3</span>
+                            重視跨產業防禦配置
+                        </div>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            支付（Visa/MA）、醫療（AbbVie）展示優異現金流與抗風險能力。建議核心保留高變現 AI 巨頭，搭配防禦型龍頭以分散波動。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Next Focus Metrics Checklist -->
+                <div class="border-t border-stone-200 pt-4">
+                    <h3 class="font-bold text-stone-800 text-sm mb-3">未來 1-2 個月四大核心觀察指標：</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-stone-600">
+                        <div class="flex items-center space-x-2 bg-stone-50 p-2 rounded">
+                            <i class="fa-solid fa-square-check text-sky-500"></i>
+                            <span>7月非農就業報告數據</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-stone-50 p-2 rounded">
+                            <i class="fa-solid fa-square-check text-sky-500"></i>
+                            <span>9月聯準會降息機率變動</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-stone-50 p-2 rounded">
+                            <i class="fa-solid fa-square-check text-sky-500"></i>
+                            <span>荷姆茲海峽實際航行流量</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-stone-50 p-2 rounded">
+                            <i class="fa-solid fa-square-check text-sky-500"></i>
+                            <span>巨頭 CapEx 對 FCF 後續影響</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mandatory Footer Section -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/7/27~7/31)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股市場與重點企業財報相關公開資料 (2026年8月2日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        const productData = [
+            {
+                name: "Microsoft (MSFT)",
+                performance: "營收 900 億美元 (+18% YoY)",
+                aiCloud: "Azure 年增 +43%，M365 Copilot 付費席次 >3,000萬，商業合約未履行金額 6,780 億 (+84%)",
+                capexFcf: "單季 FCF 196 億美元 (-23% YoY，但高於市場預期)",
+                comment: "市值單日增加近 4,500 億美元，展現最清晰的 AI 變現能力。"
+            },
+            {
+                name: "Amazon (AMZN)",
+                performance: "營收 2,006 億美元 (+20% YoY)，營業利益 275 億",
+                aiCloud: "AWS 營收 422 億美元 (+37% YoY，18季最快)，AWS 營業利益 166 億 (+64%)",
+                capexFcf: "2026 CapEx 升至 2,200 億美元；近12個月 FCF 由正轉負 (-76億)",
+                comment: "AWS 營收與獲利同步加速，市場暫時容忍負現金流。"
+            },
+            {
+                name: "Meta (META)",
+                performance: "營收 608 億美元 (+28% YoY)，營業利益率由 43% 降至 31%",
+                aiCloud: "廣告展示量 +14%、均價 +12%；AI推薦與廣告工具持續投入",
+                capexFcf: "CapEx 上調至 1,300-1,450 億美元；FCF 由 85.5 億驟降至 7.84 億美元",
+                comment: "廣告業務強勁，但成本增加 55% 嚴重侵蝕自由現金流。"
+            },
+            {
+                name: "Apple (AAPL)",
+                performance: "營收 1,094 億美元 (+16% YoY)，iPhone 營收 +22%",
+                aiCloud: "新 Siri 與端側 AI 刺激換機；惟受晶片與記憶體被 AI 資料中心搶購影響",
+                capexFcf: "輕資產模式面臨零組件成本上漲壓力",
+                comment: "下季營收預測 +9%~11% 略遜預期，AI 供應鏈成本夾擊毛利。"
+            },
+            {
+                name: "Nvidia (NVDA)",
+                performance: "晶片需求極度旺盛",
+                aiCloud: "洽談為 OpenAI 提供最高 2,500-3,500 億美元融資保障；成立 Open Secure AI Alliance",
+                capexFcf: "生態系控制力強，但面臨客戶融資擔保之信用風險",
+                comment: "擴大 AI 生態系影響力，但需注意客戶循環融資與產能過熱風險。"
+            },
+            {
+                name: "Visa (V)",
+                performance: "淨營收 116 億美元 (+14% YoY)",
+                aiCloud: "跨境交易量 +13%；利用 AI 優化人力，裁員約 7% (2,600人)",
+                capexFcf: "現金流維持高度極佳狀態",
+                comment: "高收入消費強勁，且展示 AI 帶來的實質人力成本控制。"
+            },
+            {
+                name: "Mastercard (MA)",
+                performance: "營收 93 億美元 (+14% YoY)，EPS $5.04 超預期",
+                aiCloud: "跨境交易量年增 +12%，擴大資安與 AI 代理購物布局",
+                capexFcf: "極強的營運現金流與資本回報率",
+                comment: "全球旅遊與消費韌性支撐，防禦屬性佳。"
+            },
+            {
+                name: "AbbVie (ABBV)",
+                performance: "營收 169.9 億美元 (+10.2% YoY)",
+                aiCloud: "Skyrizi 與 Rinvoq 各大增 24%，成功彌補 Humira 衰退 (-36%)",
+                capexFcf: "計畫以 109 億美元收購 Apogee Therapeutics",
+                comment: "成功跨越專利崖，具高現金流與醫療防禦吸引力。"
+            }
+        ];
+
+        function renderTable(data) {
+            const tableBody = document.getElementById('companyTableBody');
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-stone-400">查無符合關鍵字的資料</td></tr>`;
+                return;
+            }
+
+            data.forEach((row, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = idx % 2 === 0 ? 'bg-white hover:bg-stone-50' : 'bg-stone-50/50 hover:bg-stone-100/50';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-bold text-stone-900 whitespace-nowrap">${row.name}</td>
+                    <td class="px-4 py-3">${row.performance}</td>
+                    <td class="px-4 py-3">${row.aiCloud}</td>
+                    <td class="px-4 py-3 text-stone-600">${row.capexFcf}</td>
+                    <td class="px-4 py-3 text-sky-800 font-medium">${row.comment}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function filterTable() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const filtered = productData.filter(item => {
+                return item.name.toLowerCase().includes(query) ||
+                       item.performance.toLowerCase().includes(query) ||
+                       item.aiCloud.toLowerCase().includes(query) ||
+                       item.comment.toLowerCase().includes(query);
+            });
+            renderTable(filtered);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render Table
+            renderTable(productData);
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking links
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Chart 1: Cloud Growth
+            const ctx1 = document.getElementById('cloudGrowthChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Microsoft', 'Amazon (AWS)', 'Meta (整體)', 'Apple (整體)'],
+                    datasets: [
+                        {
+                            label: '整體營收年增率 (%)',
+                            data: [18, 20, 28, 16],
+                            backgroundColor: 'rgba(14, 165, 233, 0.6)',
+                            borderColor: 'rgba(14, 165, 233, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '雲端/核心部門成長率 (%)',
+                            data: [43, 37, 28, 22], // MSFT Azure +43%, AWS +37%, Meta ad +28%, iPhone +22%
+                            backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: CapEx & Cash Flow Impact
+            const ctx2 = document.getElementById('fcfChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Microsoft', 'Meta', 'Amazon'],
+                    datasets: [
+                        {
+                            label: 'Q2 自由現金流 (億美元)',
+                            data: [196, 7.84, -76],
+                            backgroundColor: [
+                                'rgba(16, 185, 129, 0.7)',
+                                'rgba(244, 63, 94, 0.7)',
+                                'rgba(244, 63, 94, 0.7)'
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { callback: value => '$' + value + '億' }
+                        }
+                    }
+                }
+            });
+
+            // Intersection Observer for Nav Highlighting
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${activeId}`) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
