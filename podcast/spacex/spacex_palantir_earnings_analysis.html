@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-SpaceX與Palantir財報壓力測試</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0369a1;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased leading-relaxed">
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid me-1 fa-chart-line text-sky-600 text-2xl"></i>
+                    <span class="font-bold text-lg sm:text-xl text-stone-900 tracking-tight">SpaceX與Palantir財報看點</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8 text-sm">
+                    <a href="#overview" class="nav-link inactive-nav-link py-5 transition-colors duration-200">報告總覽</a>
+                    <a href="#spacex" class="nav-link inactive-nav-link py-5 transition-colors duration-200">SpaceX 分析</a>
+                    <a href="#palantir" class="nav-link inactive-nav-link py-5 transition-colors duration-200">Palantir 分析</a>
+                    <a href="#charts" class="nav-link inactive-nav-link py-5 transition-colors duration-200">數據視覺化</a>
+                    <a href="#table" class="nav-link inactive-nav-link py-5 transition-colors duration-200">財務指標明細</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-5 transition-colors duration-200">投資策略</a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-md p-2">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-sky-600">報告總覽</a>
+            <a href="#spacex" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-sky-600">SpaceX 分析</a>
+            <a href="#palantir" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-sky-600">Palantir 分析</a>
+            <a href="#charts" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-sky-600">數據視覺化</a>
+            <a href="#table" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-sky-600">財務指標明細</a>
+            <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100 hover:text-sky-600">投資策略</a>
+        </div>
+    </header>
+
+    <section class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4">
+                    一邊燒錢造未來，一邊把AI變成現金
+                </h1>
+                <p class="text-base sm:text-lg text-stone-300 mb-6">
+                    SpaceX與Palantir即將公布的財報，代表兩種截然不同的AI投資模式：極高資本支出的基礎建設硬體 vs 高毛利的商業化軟體現金流。
+                </p>
+                <div class="flex flex-wrap gap-4 text-sm text-stone-300">
+                    <div class="flex items-center"><i class="fa-regular fa-clock text-sky-400 mr-2"></i>資料截止時間：2026年8月3日</div>
+                    <div class="flex items-center"><i class="fa-solid fa-microchip text-sky-400 mr-2"></i>核心議題：AI資本支出與獲利能力轉換</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <section id="overview" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-compass text-sky-600 mr-2"></i>報告總覽與核心對比
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-600 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-900"><i class="fa-solid fa-rocket text-sky-600 mr-2"></i>SpaceX</h3>
+                        <span class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded text-xs font-bold">高資本支出 / 重資產</span>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        結合衛星網路(Starlink)、火箭發射與大型AI資料中心。收入成長迅速，但資本支出與運營成本極高，亟需 Starlink 提供穩定現金流。
+                    </p>
+                    <ul class="text-sm space-y-2 text-stone-700">
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-emerald-500 mt-1 mr-2 text-xs"></i><span><strong>核心動力：</strong>Starlink 用戶數達 1,030 萬名。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-triangle-exclamation text-amber-500 mt-1 mr-2 text-xs"></i><span><strong>最大風險：</strong>Q2 AI資本支出預估高達 102 億美元，單用戶平均收入下滑。</span></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-600 hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-900"><i class="fa-solid fa-brain text-indigo-600 mr-2"></i>Palantir</h3>
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded text-xs font-bold">高毛利軟體 / 高現金流</span>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        高毛利的軟體平台，展現強勁獲利與自由現金流，受惠於美國企業對 AIP 訓練營與 AI 正式部署的需求爆發。
+                    </p>
+                    <ul class="text-sm space-y-2 text-stone-700">
+                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-emerald-500 mt-1 mr-2 text-xs"></i><span><strong>核心動力：</strong>Q1 美國企業收入年增 133%，調整後自由現金流率 57%。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-triangle-exclamation text-amber-500 mt-1 mr-2 text-xs"></i><span><strong>最大風險：</strong>本益比約 141 倍（市值 3,232 億美元），「僅符合預期」可能引發修正。</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="spacex" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-satellite-dish text-sky-600 mr-2"></i>SpaceX：誰在替 AI 燒錢？
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-lg font-semibold text-stone-900 mb-4 border-l-4 border-sky-500 pl-3">第一季財務總覽 (Q1)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <span class="text-xs text-stone-500 uppercase block font-semibold">合併營收</span>
+                        <span class="text-2xl font-bold text-stone-800">46.94 億美元</span>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <span class="text-xs text-stone-500 uppercase block font-semibold">營業虧損</span>
+                        <span class="text-2xl font-bold text-rose-600">-19.43 億美元</span>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <span class="text-xs text-stone-500 uppercase block font-semibold">調整後 EBITDA</span>
+                        <span class="text-2xl font-bold text-emerald-600">+11.27 億美元</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Highlight 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="w-10 h-10 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center font-bold mb-3">1</div>
+                    <h4 class="font-bold text-stone-900 text-base mb-2">Starlink 獲利與用戶品質</h4>
+                    <p class="text-xs text-stone-600 mb-3">Q1 營收 32.57 億美元，營業利益 11.88 億美元，用戶達 1,030 萬。Q2 預估營收達 38.2 億美元。</p>
+                    <div class="bg-amber-50 p-2.5 rounded border border-amber-200 text-xs text-amber-800">
+                        <strong>隱憂：</strong> Q1 每名用戶平均收入(ARPU)年減近 25%，反映促銷與低價市場擴張侵蝕利潤。
+                    </div>
+                </div>
+
+                <!-- Highlight 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="w-10 h-10 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center font-bold mb-3">2</div>
+                    <h4 class="font-bold text-stone-900 text-base mb-2">AI 資料中心資本消耗</h4>
+                    <p class="text-xs text-stone-600 mb-3">Q1 AI 資本支出高達 77.23 億美元，Q2 預估更將高達 102 億美元（營收預估僅 23.3 億美元）。</p>
+                    <div class="bg-sky-50 p-2.5 rounded border border-sky-200 text-xs text-sky-800">
+                        <strong>合約：</strong> 與 Anthropic、Google 等簽定合約，全面啟用後年化收入或超 280 億美元，但含終止條款。
+                    </div>
+                </div>
+
+                <!-- Highlight 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="w-10 h-10 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center font-bold mb-3">3</div>
+                    <h4 class="font-bold text-stone-900 text-base mb-2">現金流與 Starship 轉型</h4>
+                    <p class="text-xs text-stone-600 mb-3">三部門 Q2 總資本支出預估增至 140 億美元。Starship 是否能穩定、高頻率部署 V3 衛星成為降本關鍵。</p>
+                    <div class="bg-emerald-50 p-2.5 rounded border border-emerald-200 text-xs text-emerald-800">
+                        <strong>遠景：</strong> 軌道資料中心仍屬於長期選擇權，短期仍以地面資料中心為評價基礎。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="palantir" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-server text-indigo-600 mr-2"></i>Palantir：「符合預期」可能還不夠
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-lg font-semibold text-stone-900 mb-4 border-l-4 border-indigo-500 pl-3">第一季強勁表現 (Q1)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="bg-stone-50 p-3.5 rounded-lg border border-stone-200">
+                        <span class="text-xs text-stone-500 uppercase block font-semibold">總營收</span>
+                        <span class="text-xl font-bold text-stone-800">16.33 億美元 <span class="text-xs text-emerald-600">(+85%)</span></span>
+                    </div>
+                    <div class="bg-stone-50 p-3.5 rounded-lg border border-stone-200">
+                        <span class="text-xs text-stone-500 uppercase block font-semibold">美國企業收入</span>
+                        <span class="text-xl font-bold text-indigo-600">5.95 億美元 <span class="text-xs text-emerald-600">(+133%)</span></span>
+                    </div>
+                    <div class="bg-stone-50 p-3.5 rounded-lg border border-stone-200">
+                        <span class="text-xs text-stone-500 uppercase block font-semibold">美國政府收入</span>
+                        <span class="text-xl font-bold text-stone-800">6.87 億美元 <span class="text-xs text-emerald-600">(+84%)</span></span>
+                    </div>
+                    <div class="bg-stone-50 p-3.5 rounded-lg border border-stone-200">
+                        <span class="text-xs text-stone-500 uppercase block font-semibold">調整自由現金流</span>
+                        <span class="text-xl font-bold text-emerald-600">9.25 億美元 <span class="text-xs text-stone-500">(57%)</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="font-bold text-stone-900 text-lg mb-3 flex items-center">
+                        <i class="fa-solid fa-bullseye text-indigo-500 mr-2"></i>Q2 財報關注重點
+                    </h4>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-chevron-right text-indigo-500 mt-1 mr-2 text-xs"></i>
+                            <span><strong>營收門檻：</strong>市場共識預估 18.1 億美元（高於公司指引上限 18.01 億美元），必須超標。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-chevron-right text-indigo-500 mt-1 mr-2 text-xs"></i>
+                            <span><strong>企業端引擎：</strong>美國企業 Q2 預估收入 7.16 億美元 (+134%)，觀察 AIP 訓練營轉付費效率。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-chevron-right text-indigo-500 mt-1 mr-2 text-xs"></i>
+                            <span><strong>合約品質 (TCV/RPO)：</strong>剩餘合約價值 Q1 達 49.2 億美元，須辨識是否含有可取消條款。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h4 class="font-bold text-stone-900 text-lg mb-3 flex items-center">
+                        <i class="fa-solid fa-shield-halved text-indigo-500 mr-2"></i>政府業務與獲利品質
+                    </h4>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-chevron-right text-indigo-500 mt-1 mr-2 text-xs"></i>
+                            <span><strong>Maven 計畫：</strong>成為美國國防部正式指揮與資料分析系統，鎖定長期高黏著需求。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-chevron-right text-indigo-500 mt-1 mr-2 text-xs"></i>
+                            <span><strong>利潤率維持：</strong>Q1 調整後營業利潤率 60%，Q2 指引約 59%，關注人才投資是否拉低利潤。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-chevron-right text-indigo-500 mt-1 mr-2 text-xs"></i>
+                            <span><strong>全年展望：</strong>目前預估 2026 全年營收 76.5~76.62 億美元，市場期待管理層再次大幅調升。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="charts" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-chart-bar text-sky-600 mr-2"></i>動態數據視覺化分析
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: SpaceX Financials -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">SpaceX 季度數據比較 (億美元)</h3>
+                    <p class="text-xs text-stone-500 mb-4">顯示高額 AI 資本支出對比 Starlink 與 AI 營收</p>
+                    <div class="relative w-full h-72">
+                        <canvas id="spacexChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Palantir Financials -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">Palantir 美國業務營收趨勢 (億美元)</h3>
+                    <p class="text-xs text-stone-500 mb-4">企業端 AI 需求快速崛起，大幅推升營收成長</p>
+                    <div class="relative w-full h-72">
+                        <canvas id="palantirChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="table" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-table text-sky-600 mr-2"></i>財報重點數據互動查詢表
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Search Bar -->
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="relative w-full sm:w-72">
+                        <input type="text" id="searchInput" placeholder="搜尋公司、部門或指標..." class="w-full pl-9 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-stone-400 text-sm"></i>
+                    </div>
+                    <span class="text-xs text-stone-500">即時篩選真實數據資料</span>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-stone-100 text-stone-700 border-b border-stone-200">
+                                <th class="py-3 px-4 font-semibold sticky top-0 bg-stone-100">公司</th>
+                                <th class="py-3 px-4 font-semibold sticky top-0 bg-stone-100">部門 / 指標</th>
+                                <th class="py-3 px-4 font-semibold sticky top-0 bg-stone-100">期間</th>
+                                <th class="py-3 px-4 font-semibold sticky top-0 bg-stone-100">數值</th>
+                                <th class="py-3 px-4 font-semibold sticky top-0 bg-stone-100">重點說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-stone-200 text-stone-700">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="mb-16 scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-lightbulb text-amber-500 mr-2"></i>兩家公司財報後的投資策略
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">SpaceX：先看資本支出，再看營收</h3>
+                    <p class="text-stone-600 text-sm mb-3">
+                        不宜因營收高成長就直接追價。最重要的評估優先順序為：
+                    </p>
+                    <ol class="list-decimal list-inside text-sm text-stone-700 space-y-1 font-medium">
+                        <li>自由現金流 (Free Cash Flow)</li>
+                        <li>AI 資本支出 (CapEx) 是否過度失控</li>
+                        <li>Starlink 獲利與 ARPU 止跌訊號</li>
+                        <li>AI 合約實質使用率與啟用速度</li>
+                    </ol>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">Palantir：需要「超預期 + 上調 + 高利潤」</h3>
+                    <p class="text-stone-600 text-sm mb-3">
+                        基本面極強但估值嚴格。投資人應注意：
+                    </p>
+                    <ul class="list-disc list-inside text-sm text-stone-700 space-y-1 font-medium">
+                        <li>等待財報與電話會議結束後的市場第一輪反應。</li>
+                        <li>把「全年指引與企業合約品質」作為續抱依據。</li>
+                        <li>留意高估值下股票薪酬 (SBC) 對股東股數的稀釋效應。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Conclusion Card -->
+            <div class="mt-8 bg-gradient-to-r from-sky-900 to-stone-900 text-white rounded-lg shadow-xl p-6 sm:p-8">
+                <h3 class="text-2xl font-bold mb-3"><i class="fa-solid fa-flag text-sky-400 mr-2"></i>總結看法</h3>
+                <p class="text-stone-200 text-base leading-relaxed">
+                    SpaceX 正在用 Starlink 的獲利支撐 AI 資料中心與 Starship 兩個巨型計畫；Palantir 則證明了 AI 軟體能同時創造成長與現金流。這兩份財報將共同回答：<strong>AI 產業下一階段的勝負，究竟取決於投入最多資本，還是最快把 AI 轉化為可持續的現金流。</strong>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-SpaceX與Palantir財報壓力測試。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-400">資料來源：基於網絡中 SpaceX 與 Palantir 相關公開資料 (2026年8月3日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Product Data for Interactive Table ---
+        const productData = [
+            { company: "SpaceX", metric: "合併營收", period: "2026 Q1", value: "46.94 億美元", note: "季度營業虧損 19.43 億美元" },
+            { company: "SpaceX", metric: "Starlink 營收", period: "2026 Q1", value: "32.57 億美元", note: "營業利益 11.88 億美元" },
+            { company: "SpaceX", metric: "Starlink 預估營收", period: "2026 Q2(E)", value: "38.20 億美元", note: "預估營業利益 14.20 億美元" },
+            { company: "SpaceX", metric: "Starlink 用戶數", period: "2026 Q1", value: "1,030 萬名", note: "高於去年同期約 500 萬名" },
+            { company: "SpaceX", metric: "AI 資本支出", period: "2026 Q1", value: "77.23 億美元", note: "部門營收 8.18 億美元" },
+            { company: "SpaceX", metric: "AI 預估資本支出", period: "2026 Q2(E)", value: "102.00 億美元", note: "部門預估營收 23.30 億美元" },
+            { company: "SpaceX", metric: "三部門總資本支出", period: "2026 Q2(E)", value: "約 140 億美元", note: "含設備、資料中心、衛星與火箭" },
+            { company: "Palantir", metric: "總營收", period: "2026 Q1", value: "16.33 億美元", note: "年增長 85%" },
+            { company: "Palantir", metric: "美國企業收入", period: "2026 Q1", value: "5.95 億美元", note: "年增長 133%" },
+            { company: "Palantir", metric: "美國政府收入", period: "2026 Q1", value: "6.87 億美元", note: "受惠國防與 Maven AI 系統" },
+            { company: "Palantir", metric: "調整後自由現金流", period: "2026 Q1", value: "9.25 億美元", note: "現金流率高達 57%" },
+            { company: "Palantir", metric: "預估營收上限/共識", period: "2026 Q2(E)", value: "18.10 億美元", note: "公司指引上限為 18.01 億美元" },
+            { company: "Palantir", metric: "美國企業剩餘合約(RPO)", period: "2026 Q1", value: "49.20 億美元", note: "年增長 112%" },
+            { company: "Palantir", metric: "全年營收指引", period: "2026 全年", value: "76.5~76.62 億美元", note: "調整自由現金流預估 42~44 億美元" }
+        ];
+
+        // Render Table Rows
+        function renderTable(data) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            if(data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-stone-500">未找到符合條件的資料</td></tr>`;
+                return;
+            }
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-stone-50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-medium text-stone-900">${item.company}</td>
+                    <td class="py-3 px-4">${item.metric}</td>
+                    <td class="py-3 px-4"><span class="px-2 py-0.5 bg-stone-100 text-stone-600 rounded text-xs font-mono">${item.period}</span></td>
+                    <td class="py-3 px-4 font-semibold ${item.company === 'Palantir' ? 'text-indigo-600' : 'text-sky-600'}">${item.value}</td>
+                    <td class="py-3 px-4 text-xs text-stone-500">${item.note}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Search Filter
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.company.toLowerCase().includes(keyword) ||
+                item.metric.toLowerCase().includes(keyword) ||
+                item.period.toLowerCase().includes(keyword) ||
+                item.note.toLowerCase().includes(keyword)
+            );
+            renderTable(filtered);
+        });
+
+        // Initialize Table
+        renderTable(productData);
+
+        // --- 2. Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 3. Intersection Observer for Active Navigation State ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${activeId}`) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // --- 4. Chart.js Implementation ---
+        window.onload = function() {
+            // SpaceX Chart
+            const ctxSpaceX = document.getElementById('spacexChart').getContext('2d');
+            new Chart(ctxSpaceX, {
+                type: 'bar',
+                data: {
+                    labels: ['Starlink 營收', 'AI 部門營收', 'AI 資本支出'],
+                    datasets: [
+                        {
+                            label: '2026 Q1',
+                            data: [32.57, 8.18, 77.23],
+                            backgroundColor: 'rgba(2, 132, 199, 0.7)',
+                            borderColor: 'rgba(2, 132, 199, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '2026 Q2 (預估)',
+                            data: [38.20, 23.30, 102.00],
+                            backgroundColor: 'rgba(245, 158, 11, 0.7)',
+                            borderColor: 'rgba(245, 158, 11, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => `${ctx.dataset.label}: ${ctx.raw} 億美元`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '億美元' }
+                        }
+                    }
+                }
+            });
+
+            // Palantir Chart
+            const ctxPalantir = document.getElementById('palantirChart').getContext('2d');
+            new Chart(ctxPalantir, {
+                type: 'bar',
+                data: {
+                    labels: ['美國企業收入', '美國政府收入', '調整後自由現金流'],
+                    datasets: [
+                        {
+                            label: '2026 Q1 (實際)',
+                            data: [5.95, 6.87, 9.25],
+                            backgroundColor: 'rgba(79, 70, 229, 0.7)',
+                            borderColor: 'rgba(79, 70, 229, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '2026 Q2 (預估/目標)',
+                            data: [7.16, 7.31, null], // null for FCF if not guided
+                            backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => `${ctx.dataset.label}: ${ctx.raw !== null ? ctx.raw + ' 億美元' : '無數據'}`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '億美元' }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
