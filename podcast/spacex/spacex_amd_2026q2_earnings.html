@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-SpaceX與AMD財報剖析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #38bdf8 !important;
+            font-weight: 700;
+            border-bottom: 2px solid #38bdf8;
+        }
+        .inactive-nav-link {
+            color: #d6d3d1;
+        }
+        .inactive-nav-link:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800 font-sans antialiased">
+
+    <!-- Sticky Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-stone-900 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="font-bold text-lg tracking-wide">SpaceX與AMD財報剖析</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#overview" class="nav-link inactive-nav-link py-2 transition-colors">市場開盤與焦點</a>
+                    <a href="#spacex" class="nav-link inactive-nav-link py-2 transition-colors">SpaceX 資本剖析</a>
+                    <a href="#amd" class="nav-link inactive-nav-link py-2 transition-colors">AMD 財報困境</a>
+                    <a href="#nvidia" class="nav-link inactive-nav-link py-2 transition-colors">Nvidia 平台優勢</a>
+                    <a href="#data-center" class="nav-link inactive-nav-link py-2 transition-colors">數據中心表格</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-2 transition-colors">投資策略結論</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-stone-800 border-t border-stone-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#overview" class="block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">市場開盤與焦點</a>
+                <a href="#spacex" class="block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">SpaceX 資本剖析</a>
+                <a href="#amd" class="block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">AMD 財報困境</a>
+                <a href="#nvidia" class="block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">Nvidia 平台優勢</a>
+                <a href="#data-center" class="block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">數據中心表格</a>
+                <a href="#strategy" class="block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">投資策略結論</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <div class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                開盤後的真實投票：SpaceX重挫逾一成，AMD下跌近7%，Nvidia為何成為AI資本戰贏家？
+            </h1>
+            <p class="mt-4 text-stone-300 text-base sm:text-lg max-w-3xl">
+                2026年8月5日美股開盤，大盤整體走高，科技巨頭卻呈現大幅分化。市場開始追問：AI龐大支出究竟能否轉化為可持續的自由現金流？
+            </p>
+        </div>
+    </div>
+
+    <!-- Key Metrics Highlight Cards -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500 hover:shadow-xl transition-shadow">
+                <p class="text-xs font-bold text-stone-400 uppercase tracking-wider">SpaceX 8/5 開盤變動</p>
+                <p class="text-3xl font-extrabold text-red-600 mt-2">-12.3%</p>
+                <p class="text-sm text-stone-500 mt-1">開盤價 $109.86 (跌破 IPO 價 $135)</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-orange-500 hover:shadow-xl transition-shadow">
+                <p class="text-xs font-bold text-stone-400 uppercase tracking-wider">AMD 8/5 開盤變動</p>
+                <p class="text-3xl font-extrabold text-orange-500 mt-2">-6.9%</p>
+                <p class="text-sm text-stone-500 mt-1">股價降至 $482.86 (未超越市場極高期待)</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500 hover:shadow-xl transition-shadow">
+                <p class="text-xs font-bold text-stone-400 uppercase tracking-wider">Nvidia 8/5 開盤變動</p>
+                <p class="text-3xl font-extrabold text-emerald-600 mt-2">+3.3%</p>
+                <p class="text-sm text-stone-500 mt-1">獲 SpaceX 核心基礎設施獨家採用</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 hover:shadow-xl transition-shadow">
+                <p class="text-xs font-bold text-stone-400 uppercase tracking-wider">SpaceX Q2 AI CapEx 占比</p>
+                <p class="text-3xl font-extrabold text-sky-600 mt-2">86%</p>
+                <p class="text-sm text-stone-500 mt-1">單季 AI 資本支出高達 $158.28 億美元</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Market Overview -->
+        <section id="overview" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                1. 8月5日美股開盤走勢與市場重估
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">8/5 開盤主要指數與個股漲跌幅 (%)</h3>
+                    <div class="relative h-72">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-4">核心觀察焦點</h3>
+                        <p class="text-stone-600 leading-relaxed mb-4">
+                            八月五日開盤時，道瓊、標普五百與Nasdaq分別上漲 0.33%、0.45% 與 0.43%。
+                        </p>
+                        <p class="text-stone-600 leading-relaxed">
+                            大盤走高，SpaceX 與 AMD 卻逆勢重挫，代表下跌主要來自公司財報、資本支出與競爭地位遭到市場重新評價，而非總體經濟系統性風險。
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-lg border border-amber-200 mt-4">
+                        <p class="text-xs text-amber-800 font-medium">
+                            💡 **關鍵訊號**：市場已從單純「看重營收成長」轉向「嚴格審視資本回收效率 (ROI)」。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: SpaceX Deep Dive -->
+        <section id="spacex" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                2. SpaceX 高速成長背後的巨額帳單
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-stone-200">
+                    <div class="p-4">
+                        <p class="text-stone-500 text-sm">Q2 總營收</p>
+                        <p class="text-2xl font-bold text-stone-800 mt-1">$78.14 億美元</p>
+                        <p class="text-xs text-emerald-600 font-semibold mt-1">年增 +92%</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-stone-500 text-sm">Q2 總資本支出 (CapEx)</p>
+                        <p class="text-2xl font-bold text-red-600 mt-1">$183.69 億美元</p>
+                        <p class="text-xs text-red-500 font-semibold mt-1">單季營收的 2.35 倍</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-stone-500 text-sm">Q2 調整後 EBITDA</p>
+                        <p class="text-2xl font-bold text-emerald-600 mt-1">$35.38 億美元</p>
+                        <p class="text-xs text-stone-500 mt-1">去年同期為 12.14 億</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- SpaceX Segment Chart -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">SpaceX 三大業務 Q2 營收與 EBITDA 比較</h3>
+                    <div class="relative h-72">
+                        <canvas id="spacexChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Analysis Cards -->
+                <div class="space-y-4">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h4 class="font-bold text-lg text-stone-800 mb-2 flex items-center">
+                            <span class="w-3 h-3 bg-sky-500 rounded-full mr-2"></span>
+                            Starlink：最可靠的獲利引擎
+                        </h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            連線業務 Q2 營收達 42.91 億美元（占總營收 55%），營業利益達 16.56 億美元。全球用戶增至 1,200 萬人。但每戶平均收入 (ARPU) 從去年 $85 降至 $66，顯示未來需仰賴企業與手機直連等高價值服務提升利潤。
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h4 class="font-bold text-lg text-stone-800 mb-2 flex items-center">
+                            <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                            AI 業務：變現快速但折舊與營業虧損龐大
+                        </h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            AI 業務營收 25.61 億美元（年增 247%），累積獲 141 億已簽約雲端訂單。儘管調整後 EBITDA 轉正至 11.46 億美元，但算上設備折舊與研發成本後，第二季仍有 12.57 億美元營業虧損。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: AMD Analysis -->
+        <section id="amd" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                3. AMD：亮眼財報難抵高估值壓力
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-sky-50 p-4 rounded-lg">
+                        <p class="text-xs text-sky-700 font-bold uppercase">Q2 總營收</p>
+                        <p class="text-2xl font-bold text-sky-900 mt-1">$115.36 億美元</p>
+                        <p class="text-xs text-sky-600 mt-1">年增 50% | 每股盈餘 $1.66</p>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg">
+                        <p class="text-xs text-sky-700 font-bold uppercase">資料中心收入</p>
+                        <p class="text-2xl font-bold text-sky-900 mt-1">$67.00 億美元</p>
+                        <p class="text-xs text-sky-600 mt-1">年增 107% | 占總營收 58%</p>
+                    </div>
+                    <div class="bg-sky-50 p-4 rounded-lg">
+                        <p class="text-xs text-sky-700 font-bold uppercase">Q3 營收展望</p>
+                        <p class="text-2xl font-bold text-sky-900 mt-1">約 $130 億美元</p>
+                        <p class="text-xs text-sky-600 mt-1">高於原預期的 125 億美元</p>
+                    </div>
+                </div>
+                <div class="mt-6 text-stone-600 leading-relaxed">
+                    <p class="mb-3">
+                        AMD 從基本面來看交出了一份強勁的成績單，但開盤仍下跌近 7%。主因是財報前股價已大幅上漲，市場期待的是「大幅超越預期」並證明能快速侵蝕 Nvidia 的壟斷地位。
+                    </p>
+                    <p>
+                        此外，大客戶 SpaceX 宣布 AI 基礎設施將全面選擇 Nvidia 平台的訊息，也為 AMD 的 short-term 樂觀預期帶來了一定壓力。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Nvidia Advantage -->
+        <section id="nvidia" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                4. Nvidia：AI 資本戰的最終硬體贏家
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-4">為什麼巨頭 CapEx 最終流向 Nvidia？</h3>
+                        <p class="text-stone-600 leading-relaxed mb-4">
+                            SpaceX 雖然單季在 AI 領域花費近 160 億美元，但硬體全面鎖定 Nvidia 的 Vera Rubin 架構。這向市場確立了一個事實：大型 AI 資料中心購買的不只是單顆 GPU，而是包含 NVLink、高速網絡、軟體與 CUDA 生態系組成的完整平台。
+                        </p>
+                        <ul class="space-y-2 text-sm text-stone-700">
+                            <li class="flex items-center">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span> 完整軟硬體一體化平台壁壘
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span> 超大型 AI 資料中心的可預測性與穩定部署
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span> 科技巨頭龐大 CapEx 的實質變現對象
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-900 text-white p-6 rounded-lg shadow">
+                        <h4 class="text-sky-400 font-bold text-lg mb-2">巴菲特價值投資視角分析</h4>
+                        <p class="text-stone-300 text-sm leading-relaxed mb-4">
+                            「護城河」在 AI 領域體現為軟體與生態系的綁定。SpaceX 的採購選擇說明，即使對手擁有高性價比晶片，要替換整個數據中心架構的轉移成本（Switching Cost）依然極高。
+                        </p>
+                        <div class="text-xs text-stone-400 border-t border-stone-700 pt-3">
+                            警語：Nvidia 的風險在於下游客戶若因自由現金流惡化而縮減 CapEx，訂單亦可能面臨調整。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Interactive Data Table -->
+        <section id="data-center" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                5. 互動式數據中心：核心財務與市場指標
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Table Search & Filter Controls -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                    <div class="w-full md:w-1/2">
+                        <label for="searchInput" class="sr-only">搜尋數據</label>
+                        <div class="relative">
+                            <input type="text" id="searchInput" placeholder="搜尋公司、指標或關鍵字..." 
+                                class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/4">
+                        <select id="categorySelect" class="w-full py-2 px-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none bg-white">
+                            <option value="ALL">所有公司 (All)</option>
+                            <option value="SpaceX">SpaceX</option>
+                            <option value="AMD">AMD</option>
+                            <option value="Nvidia">Nvidia</option>
+                            <option value="整體美股">整體美股市場</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Table Container with Sticky Header -->
+                <div class="overflow-x-auto max-h-96">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0 z-10 text-xs font-bold text-stone-600 uppercase tracking-wider border-b border-stone-200">
+                            <tr>
+                                <th class="px-6 py-3">公司/主體</th>
+                                <th class="px-6 py-3">財務/營運指標</th>
+                                <th class="px-6 py-3">最新數據 (Q2 2026 / 8/5)</th>
+                                <th class="px-6 py-3">年增率 / 變動率</th>
+                                <th class="px-6 py-3">市場評價與狀態</th>
+                                <th class="px-6 py-3">備註說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="divide-y divide-stone-200 text-sm">
+                            <!-- JS Dynmaic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Investment Strategy -->
+        <section id="strategy" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                6. 投資策略總結：AI 投資進入回報驗證期
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <h3 class="font-bold text-lg text-stone-800 mb-2">SpaceX 評估準則</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        不宜僅因單日大跌急於搶反彈。應觀察：1. AI 資本支出是否在未來 2-3 季見頂；2. AI 部門營業損益何時轉正；3. IPO 解禁賣壓消化情況。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-orange-500">
+                    <h3 class="font-bold text-lg text-stone-800 mb-2">AMD 評估準則</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        成長故事並未消失，但市場已將估值調回常態。未來需持續追蹤 MI450 與 Helios 機櫃在大客戶中的實際出貨狀況與資料中心毛利率。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <h3 class="font-bold text-lg text-stone-800 mb-2">Nvidia 評估準則</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        穩坐大型 AI 資料中心標準平台地位。後續關鍵在於確保幾大雲端巨頭與 SpaceX 的自由現金流，不至因過度負擔而大幅削減 CapEx。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-SpaceX與AMD財報剖析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中SpaceX, AMD, Nvidia相關公開資料 (2026年08月05日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactivity Code -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Mobile Menu Toggle
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // 2. Active Link State via Intersection Observer
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-80px 0px -50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // 3. Interactive Product / Metric Table Data
+            const productData = [
+                { company: "SpaceX", metric: "2026 Q2 總營收", value: "$78.14 億美元", yoy: "+92%", status: "優於預期", note: "連線業務占 55%" },
+                { company: "SpaceX", metric: "2026 Q2 資本支出 (CapEx)", value: "$183.69 億美元", yoy: "+550%", status: "極高風險", note: "AI部門占 $158.28 億 (86%)" },
+                { company: "SpaceX", metric: "2026 Q2 淨虧損", value: "$5.41 億美元", yoy: "-46.3% (大幅收窄)", status: "持續改善", note: "去年同期虧損 $10.08 億" },
+                { company: "SpaceX", metric: "2026 Q2 調整後 EBITDA", value: "$35.38 億美元", yoy: "+191.4%", status: "營運良好", note: "去年同期為 $12.14 億" },
+                { company: "SpaceX", metric: "Starlink 用戶數", value: "1,200 萬人", yoy: "+100%", status: "高速成長", note: "ARPU 降至 $66 (去年 $85)" },
+                { company: "SpaceX", metric: "AI 業務 Q2 營收", value: "$25.61 億美元", yoy: "+247%", status: "快速變現", note: "已簽約雲端訂單達 $141 億" },
+                { company: "SpaceX", metric: "AI 部門營業損益", value: "-$12.57 億美元", yoy: "N/A", status: "龐大虧損", note: "調整後 EBITDA 為 +$11.46 億" },
+                { company: "SpaceX", metric: "8/5 開盤股價表現", value: "$109.86 美元", yoy: "-12.3%", status: "開盤大跌", note: "IPO 價格為 $135 美元" },
+                { company: "AMD", metric: "2026 Q2 總營收", value: "$115.36 億美元", yoy: "+50%", status: "優於預期", note: "調整後 EPS $1.66" },
+                { company: "AMD", metric: "資料中心部門營收", value: "$67.00 億美元", yoy: "+107%", status: "強勁成長", note: "占總營收約 58%" },
+                { company: "AMD", metric: "Non-GAAP 毛利率", value: "56.0%", yoy: "持平", status: "符合預期", note: "保持穩定獲利結構" },
+                { company: "AMD", metric: "2026 Q3 營收展望", value: "$130 億美元 (±3億)", yoy: "高於預期的125億", status: "未及極高期待", note: "市場期待大規模侵蝕 NV 份額" },
+                { company: "AMD", metric: "8/5 開盤股價表現", value: "$482.86 美元", yoy: "-6.9%", status: "開盤下挫", note: "受 SpaceX 硬體選擇影響" },
+                { company: "Nvidia", metric: "SpaceX AI 硬體採購", value: "全面採用 Vera Rubin", yoy: "N/A", status: "重大利多", note: "鞏固超大型數據中心地位" },
+                { company: "Nvidia", metric: "8/5 開盤股價表現", value: "上漲約 +3.3%", yoy: "N/A", status: "逆勢上漲", note: "AI CapEx 資本戰主要受益者" },
+                { company: "整體美股", metric: "標普 500 指數 (S&P 500)", value: "開盤小幅走高", yoy: "+0.45%", status: "整體平穩", note: "市場個股分化明顯" },
+                { company: "整體美股", metric: "Nasdaq 指數", value: "開盤小幅走高", yoy: "+0.43%", status: "整體平穩", note: "科技股焦點轉向 ROI 驗證" },
+                { company: "整體美股", metric: "道瓊工業指數", value: "開盤小幅走高", yoy: "+0.33%", status: "整體平穩", note: "傳統產業保持穩定" }
+            ];
+
+            function renderTable(data) {
+                const tbody = document.getElementById('table-body');
+                if (!tbody) return;
+                tbody.innerHTML = '';
+                if (data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-4 text-center text-stone-500">無符合搜尋條件的數據</td></tr>`;
+                    return;
+                }
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-stone-50 border-b border-stone-200 transition-colors";
+                    
+                    let statusColor = "bg-stone-100 text-stone-700";
+                    if (item.status.includes("大跌") || item.status.includes("風險") || item.status.includes("虧損") || item.status.includes("下挫") || item.status.includes("未及")) {
+                        statusColor = "bg-red-100 text-red-700";
+                    } else if (item.status.includes("優") || item.status.includes("強勁") || item.status.includes("利多") || item.status.includes("良好") || item.status.includes("高速") || item.status.includes("成長")) {
+                        statusColor = "bg-emerald-100 text-emerald-700";
+                    } else if (item.status.includes("平穩") || item.status.includes("變現") || item.status.includes("改善") || item.status.includes("符合")) {
+                        statusColor = "bg-sky-100 text-sky-700";
+                    }
+
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 font-semibold text-stone-900">${item.company}</td>
+                        <td class="px-6 py-4 text-stone-800">${item.metric}</td>
+                        <td class="px-6 py-4 font-mono font-bold text-stone-900">${item.value}</td>
+                        <td class="px-6 py-4 font-mono text-stone-600">${item.yoy}</td>
+                        <td class="px-6 py-4"><span class="px-2.5 py-1 rounded-full text-xs font-semibold ${statusColor}">${item.status}</span></td>
+                        <td class="px-6 py-4 text-sm text-stone-600">${item.note}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            renderTable(productData);
+
+            const searchInput = document.getElementById('searchInput');
+            const categorySelect = document.getElementById('categorySelect');
+
+            function filterData() {
+                const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                const category = categorySelect ? categorySelect.value : 'ALL';
+
+                const filtered = productData.filter(item => {
+                    const matchSearch = item.company.toLowerCase().includes(query) ||
+                                        item.metric.toLowerCase().includes(query) ||
+                                        item.note.toLowerCase().includes(query);
+                    const matchCategory = category === 'ALL' || item.company === category;
+                    return matchSearch && matchCategory;
+                });
+
+                renderTable(filtered);
+            }
+
+            if (searchInput) searchInput.addEventListener('input', filterData);
+            if (categorySelect) categorySelect.addEventListener('change', filterData);
+
+            // 4. Chart.js 1: Market Performance Chart
+            const ctxMarket = document.getElementById('marketChart');
+            if (ctxMarket) {
+                new Chart(ctxMarket, {
+                    type: 'bar',
+                    data: {
+                        labels: ['SpaceX', 'AMD', 'Nvidia', '標普500', 'Nasdaq', '道瓊指數'],
+                        datasets: [{
+                            label: '8/5 開盤漲跌幅 (%)',
+                            data: [-12.3, -6.9, 3.3, 0.45, 0.43, 0.33],
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.85)',
+                                'rgba(249, 115, 22, 0.85)',
+                                'rgba(16, 185, 129, 0.85)',
+                                'rgba(14, 165, 233, 0.7)',
+                                'rgba(14, 165, 233, 0.7)',
+                                'rgba(14, 165, 233, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgb(220, 38, 38)',
+                                'rgb(234, 88, 12)',
+                                'rgb(5, 150, 105)',
+                                'rgb(2, 132, 199)',
+                                'rgb(2, 132, 199)',
+                                'rgb(2, 132, 199)'
+                            ],
+                            borderWidth: 1.5,
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` 漲跌幅: ${context.parsed.y > 0 ? '+' : ''}${context.parsed.y}%`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: function(value) { return value + '%'; }
+                                },
+                                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                            },
+                            x: {
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 5. Chart.js 2: SpaceX Business Segment Performance
+            const ctxSpaceX = document.getElementById('spacexChart');
+            if (ctxSpaceX) {
+                new Chart(ctxSpaceX, {
+                    type: 'bar',
+                    data: {
+                        labels: ['連線業務 (Starlink)', 'AI 業務部門', '太空發射業務'],
+                        datasets: [
+                            {
+                                label: 'Q2 營收 (億美元)',
+                                data: [42.91, 25.61, 9.62],
+                                backgroundColor: 'rgba(14, 165, 233, 0.8)',
+                                borderColor: 'rgb(2, 132, 199)',
+                                borderWidth: 1,
+                                borderRadius: 4
+                            },
+                            {
+                                label: 'Q2 調整後 EBITDA (億美元)',
+                                data: [25.97, 11.46, 2.15],
+                                backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                                borderColor: 'rgb(5, 150, 105)',
+                                borderWidth: 1,
+                                borderRadius: 4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` ${context.dataset.label}: $${context.parsed.y} 億`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) { return '$' + value + 'B'; }
+                                },
+                                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                            },
+                            x: {
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
