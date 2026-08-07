@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Disney IP飛輪重轉 股價能否走出低估</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            font-weight: 700;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #44403c;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased font-sans">
+
+    <!-- 導航列 Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-black text-sky-600">Disney 2026財年Q3財報解析</span>
+                </div>
+                
+                <!-- 桌面版導航選項 -->
+                <nav class="hidden md:flex space-x-8 text-sm">
+                    <a href="#overview" class="nav-link inactive-nav-link py-5 px-1 transition duration-150">財報總覽</a>
+                    <a href="#ip-flywheel" class="nav-link inactive-nav-link py-5 px-1 transition duration-150">IP飛輪效應</a>
+                    <a href="#segments" class="nav-link inactive-nav-link py-5 px-1 transition duration-150">樂園與串流</a>
+                    <a href="#espn-risks" class="nav-link inactive-nav-link py-5 px-1 transition duration-150">ESPN與現金流</a>
+                    <a href="#data-center" class="nav-link inactive-nav-link py-5 px-1 transition duration-150">數據與圖表</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-5 px-1 transition duration-150">投資策略</a>
+                </nav>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="block py-2 text-stone-700 hover:text-sky-600 font-medium">財報總覽</a>
+            <a href="#ip-flywheel" class="block py-2 text-stone-700 hover:text-sky-600 font-medium">IP飛輪效應</a>
+            <a href="#segments" class="block py-2 text-stone-700 hover:text-sky-600 font-medium">樂園與串流</a>
+            <a href="#espn-risks" class="block py-2 text-stone-700 hover:text-sky-600 font-medium">ESPN與現金流</a>
+            <a href="#data-center" class="block py-2 text-stone-700 hover:text-sky-600 font-medium">數據與圖表</a>
+            <a href="#strategy" class="block py-2 text-stone-700 hover:text-sky-600 font-medium">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Hero Header -->
+    <section class="bg-gradient-to-r from-sky-900 to-stone-900 text-white py-12 px-4 sm:px-6 lg:px-8 shadow-inner">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                一部電影撬動四條收入曲線：Disney的IP飛輪重新轉動，股價能否走出低估？
+            </h1>
+            <p class="mt-4 text-stone-300 max-w-3xl text-base md:text-lg">
+                《玩具總動員5》全球票房突破10億美元，帶動Disney+觀看數與消費產品銷售。解析最新財報，看核心體驗事業、串流獲利轉正與90億美元股票回購背後的真實投資價值。
+            </p>
+            
+            <!-- 核心指標亮點卡片區 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10">
+                    <div class="text-xs text-stone-300">總營收 (YoY)</div>
+                    <div class="text-xl md:text-2xl font-bold text-white">$252.48億 <span class="text-xs text-emerald-400 font-normal">+7%</span></div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10">
+                    <div class="text-xs text-stone-300">調整後 EPS</div>
+                    <div class="text-xl md:text-2xl font-bold text-white">$2.06 <span class="text-xs text-emerald-400 font-normal">+28%</span></div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10">
+                    <div class="text-xs text-stone-300">串流營業利益</div>
+                    <div class="text-xl md:text-2xl font-bold text-white">$7.12億 <span class="text-xs text-emerald-400 font-normal">+116%</span></div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10">
+                    <div class="text-xs text-stone-300">股票回購目標</div>
+                    <div class="text-xl md:text-2xl font-bold text-sky-300">至少 $90億</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要內容區域 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- 區塊一：財報總覽 -->
+        <section id="overview" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                財報總覽：營收小幅低於預期，獲利品質明顯改善
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                        <span class="w-3 h-3 bg-sky-500 rounded-full inline-block mr-2"></span>
+                        營收與利益雙增長
+                    </h3>
+                    <p class="text-stone-600 leading-relaxed mb-4">
+                        Disney本季總營收為 <strong>252.48 億美元</strong>（年增 7%），略低於市場預期的 253.9 億美元；但調整後每股盈餘（EPS）由 1.61 美元躍升至 <strong>2.06 美元</strong>（年增 28%），顯著超越市場預期的 1.86 美元。總部門營業利益增長 21% 至 <strong>55.55 億美元</strong>。
+                    </p>
+                    <div class="bg-sky-50 p-4 rounded-md border-l-4 border-sky-500 text-sm text-sky-900">
+                        <strong>核心觀察：</strong> 獲利結構正逐漸從「有營收但缺乏現金」轉向「多個事業同時產生利潤」。
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                        <span class="w-3 h-3 bg-amber-500 rounded-full inline-block mr-2"></span>
+                        解讀帳面淨利下降主因
+                    </h3>
+                    <p class="text-stone-600 leading-relaxed mb-3">
+                        帳面 EPS 由 2.92 美元降至 1.51 美元，主因並非本業惡化：
+                    </p>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm">
+                        <li><strong>去年高基期：</strong> 去年同期因 Hulu 稅務分類改變，認列約 32.77 億美元非現金稅務利益。</li>
+                        <li><strong>本季一次性減損：</strong> 本季包含 9 億美元重整及資產減損費用（含 A+E Global Media 投資減損）。</li>
+                    </ul>
+                    <p class="text-stone-600 text-sm mt-3">
+                        排除一次性項目後，樂園、電影、消費產品與串流業務之實際營運品質皆在顯著提升。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊二：IP飛輪效應 -->
+        <section id="ip-flywheel" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                《玩具總動員五》證明Disney真正的護城河是IP循環
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 text-base leading-relaxed mb-6">
+                    《玩具總動員五》突破 10 億美元票房（系列累計破 40 億美元），關鍵在於單一熱門 IP 能夠同時啟動 Disney 的<strong>四條收入變現曲線</strong>，呈現與純串流巨頭（如 Netflix）截然不同的商業護城河：
+                </p>
+                
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <div class="text-sky-600 font-bold mb-1">1. 院線與影音</div>
+                        <div class="text-sm text-stone-600">全球院線票房分潤、家庭影音發行與數位購買收入。</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <div class="text-sky-600 font-bold mb-1">2. 串流平台帶動</div>
+                        <div class="text-sm text-stone-600">Disney+ 舊作觀看數爆發（系列累計觀看逾20億小時），提高訂戶黏著度。</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <div class="text-sky-600 font-bold mb-1">3. 實體周邊授權</div>
+                        <div class="text-sm text-stone-600">玩具、服飾與商品授權，推動消費產品事業部創20個季度最強年度成長（+7%）。</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <div class="text-sky-600 font-bold mb-1">4. 實體體驗延伸</div>
+                        <div class="text-sm text-stone-600">樂園主題設施、遊行、餐飲消費與迪士尼郵輪主題活動整體提振。</div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-amber-50 border-l-4 border-amber-500 p-4 rounded-md text-sm text-amber-900">
+                    <strong>需要注意的內容風險：</strong> 飛輪模式高度依賴內容品質。Disney 承認《星際大戰：曼達洛人與古古》與真人版《海洋奇緣》票房低於預期，顯示續集與改編作品並非全無失敗風險。
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊三：事業核心拆解（樂園與串流） -->
+        <section id="segments" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                樂園郵輪與串流：兩大現金引擎與成長動能
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- 體驗事業 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">體驗事業 (Experiences)</h3>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-0.5 rounded-full font-bold">穩定現金流</span>
+                    </div>
+                    <ul class="space-y-3 text-stone-600 text-sm">
+                        <li class="flex justify-between border-b pb-2">
+                            <span>體驗事業總營收：</span>
+                            <span class="font-semibold text-stone-900">$99.68億 (+10%)</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>體驗事業營業利益：</span>
+                            <span class="font-semibold text-stone-900">$30.17億 (+20%)</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>美國樂園營業利益：</span>
+                            <span class="font-semibold text-stone-900">$20.88億 (+27%)</span>
+                        </li>
+                    </ul>
+                    <p class="text-xs text-stone-500 mt-4 leading-relaxed">
+                        * 美國樂園人數年增 3%、人均消費年增 4%。需留意約 1 億美元來自一次性關稅退稅。國際樂園營業利益下降 13%（亞洲需求偏弱）。郵輪 Disney Destiny 與 Adventure 投入後，客房容量年增 50%。
+                    </p>
+                </div>
+
+                <!-- 串流業務 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">串流業務 (DTC Streaming)</h3>
+                        <span class="bg-sky-100 text-sky-800 text-xs px-2.5 py-0.5 rounded-full font-bold">規模化獲利</span>
+                    </div>
+                    <ul class="space-y-3 text-stone-600 text-sm">
+                        <li class="flex justify-between border-b pb-2">
+                            <span>訂閱隨選影音營收：</span>
+                            <span class="font-semibold text-stone-900">$55.30億 (+11%)</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>串流營業利益：</span>
+                            <span class="font-semibold text-stone-900">$7.12億 (+116%)</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>營業利益率：</span>
+                            <span class="font-semibold text-stone-900">約 13%</span>
+                        </li>
+                    </ul>
+                    <p class="text-xs text-stone-500 mt-4 leading-relaxed">
+                        * 告別燒錢擴張，進入高利潤收割期。訂閱收入增長 15%（來自調漲價格與訂戶增加），廣告收入微增 3%（反映市場競爭激烈）。正評估推出免費廣告版內容以擴大觸及。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊四：弱點與資本配置 -->
+        <section id="espn-risks" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                弱點體檢：ESPN體育事業與自由現金流結構
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">ESPN 與傳統電視的挑戰</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        體育事業本季營收 45 億美元（+4%），但營業利益下降 17% 至 <strong>8.58 億美元</strong>。
+                    </p>
+                    <div class="space-y-2 text-xs text-stone-600">
+                        <div class="p-3 bg-stone-50 rounded">
+                            <strong>逆風因素：</strong> NBA 季後賽部分系列賽過早結束、昂貴的轉播權成本，以及有線電視退訂潮與頻道授權爭議。
+                        </div>
+                        <div class="p-3 bg-stone-50 rounded">
+                            <strong>轉型策略：</strong> 將更多 ESPN 內容整合至 Disney+ 交叉銷售，但成本負擔仍需持續觀察。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">90億美元股票回購的現金來源</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        迪士尼將全年度股票回購目標調高至<strong>至少 90 億美元</strong>（先前為 80 億美元）：
+                    </p>
+                    <ul class="list-disc list-inside text-xs text-stone-600 space-y-2">
+                        <li>單季自由現金流為 30.72 億美元（年增 63%），但前9個月累計為 57.35 億美元（年減 24%）。</li>
+                        <li>部分回購資金來自<strong>處分非核心資產</strong>（出售 A+E Global Media 50% 股權獲約 12 億美元）。</li>
+                        <li>未來仍需大量資本支出用於郵輪擴張與樂園設施更新。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊五：數據與圖表 (Chart.js & Dynamic Table) -->
+        <section id="data-center" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心數據視覺化與互動探索
+            </h2>
+
+            <!-- 動態圖表 Chart.js -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">Disney 各大事業部門營收與營業利益對比 (億美元)</h3>
+                <div class="relative w-full h-[350px] md:h-[400px]">
+                    <canvas id="disneySegmentChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 互動資料表格 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+                    <h3 class="text-xl font-bold text-stone-800">財報核心指標資料明細</h3>
+                    <div class="w-full md:w-72">
+                        <input type="text" id="tableSearchInput" placeholder="搜尋指標名稱或關鍵字..." 
+                            class="w-full px-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200 text-sm text-left">
+                        <thead class="bg-stone-100 text-stone-700 font-bold sticky top-0">
+                            <tr>
+                                <th class="px-4 py-3">事業類別</th>
+                                <th class="px-4 py-3">指標名稱</th>
+                                <th class="px-4 py-3">最新數據</th>
+                                <th class="px-4 py-3">年增率/變動</th>
+                                <th class="px-4 py-3">摘要說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-200 text-stone-600">
+                            <!-- 由 JS 動態繪製 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊六：投資策略與結論 -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                估值判斷與投資策略結論
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 space-y-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between bg-stone-50 p-4 rounded-lg">
+                    <div>
+                        <span class="text-xs text-stone-500 block">當前估值狀態 (2026/08/06)</span>
+                        <span class="text-2xl font-bold text-stone-800">追蹤本益比 (TTM P/E) ~21倍</span>
+                        <span class="text-sm text-stone-600 block mt-1">股價區間：$101.76 - $103.00 美元</span>
+                    </div>
+                    <div class="mt-2 md:mt-0">
+                        <span class="inline-block bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded text-sm">
+                            定位：恢復成長能力中的優質娛樂企業
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-emerald-50/50 p-4 rounded-lg border border-emerald-200">
+                        <h4 class="font-bold text-emerald-900 mb-2">偏多支持條件 (Bullish)</h4>
+                        <ul class="text-sm text-emerald-800 space-y-1.5 list-disc list-inside">
+                            <li>樂園與郵輪需求具備定價權與韌性</li>
+                            <li>串流事業成功規模化，營業利益率達 13%</li>
+                            <li>IP 飛輪實現跨平台多重變現</li>
+                            <li>大規模股票回購（90億美元）支撐 EPS</li>
+                            <li>指引 2026/2027 會計年度 EPS 維持雙位數增長</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-rose-50/50 p-4 rounded-lg border border-rose-200">
+                        <h4 class="font-bold text-rose-900 mb-2">保留風險與逆風 (Risks)</h4>
+                        <ul class="text-sm text-rose-800 space-y-1.5 list-disc list-inside">
+                            <li>電影製作成果不確定性高（如海洋奇緣票房不如預期）</li>
+                            <li>國際樂園與海外旅遊需求持續偏弱</li>
+                            <li>ESPN 面臨昂貴體育轉播權成本與剪線潮</li>
+                            <li>樂園郵輪擴張帶動折舊與營運固定成本上升</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-sky-50 text-sky-900 rounded-lg text-sm leading-relaxed border border-sky-200">
+                    <strong>投資策略總結：</strong> Disney 適合採取<strong>分批布局策略</strong>，而非追高。決定未來股價續航力的關鍵，在於串流利益率能否穩定保持雙位數、樂園人均消費成長，以及自由現金流是否足以兼顧資本支出與高額回購。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾規範 -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Disney IP飛輪重轉 股價能否走出低估。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Disney相關公開資料 (2026年8月6日)。</p>
+        </div>
+    </footer>
+
+    <!-- 原生 JavaScript 功能 -->
+    <script>
+        // 1. 手機版選單切換
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊手機選單連結後自動收起
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Intersection Observer 實現 Sticky Header Active State 切換
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 3. Chart.js 動態長條圖
+        const ctx = document.getElementById('disneySegmentChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['體驗事業 (Experiences)', '訂閱隨選影音 (DTC Streaming)', '體育事業 (Sports/ESPN)'],
+                datasets: [
+                    {
+                        label: '營收 (億美元)',
+                        data: [99.68, 55.30, 45.00],
+                        backgroundColor: 'rgba(14, 165, 233, 0.85)', // Sky blue
+                        borderColor: 'rgba(14, 165, 233, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    },
+                    {
+                        label: '營業利益 (億美元)',
+                        data: [30.17, 7.12, 8.58],
+                        backgroundColor: 'rgba(234, 88, 12, 0.85)', // Orange
+                        borderColor: 'rgba(234, 88, 12, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw + ' 億美元';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '億美元 ($ Billion)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // 4. 互動數據表格邏輯 (真實資料)
+        const productData = [
+            { category: '整體財報', metric: '總營收', value: '252.48 億美元', change: '+7% YoY', note: '略低於預期 253.9 億美元' },
+            { category: '整體財報', metric: '調整後每股盈餘 (EPS)', value: '2.06 美元', change: '+28% YoY', note: '高於市場預期 1.86 美元' },
+            { category: '整體財報', metric: '總部門營業利益', value: '55.55 億美元', change: '+21% YoY', note: '多個事業同時產生利潤' },
+            { category: '體驗事業', metric: '體驗事業營收', value: '99.68 億美元', change: '+10% YoY', note: '樂園、郵輪及消費產品' },
+            { category: '體驗事業', metric: '體驗事業營業利益', value: '30.17 億美元', change: '+20% YoY', note: '含 1 億美元一次性關稅退稅' },
+            { category: '體驗事業', metric: '美國樂園營業利益', value: '20.88 億美元', change: '+27% YoY', note: '人數增 3%、人均消費增 4%' },
+            { category: '串流業務', metric: '訂閱隨選影音營收', value: '55.30 億美元', change: '+11% YoY', note: 'Disney+ 與 Hulu 訂閱收入增15%' },
+            { category: '串流業務', metric: '串流營業利益', value: '7.12 億美元', change: '+116% YoY', note: '營業利益率拉升至 13%' },
+            { category: '體育事業', metric: '體育事業 (ESPN) 營收', value: '45.00 億美元', change: '+4% YoY', note: '受電視退訂與賽事期程影響' },
+            { category: '體育事業', metric: '體育事業營業利益', value: '8.58 億美元', change: '-17% YoY', note: 'NBA過早結束與頻道授權爭議' },
+            { category: '資本配置', metric: '單季自由現金流', value: '30.72 億美元', change: '+63% YoY', note: '前9個月累計為 57.35 億美元' },
+            { category: '資本配置', metric: '股票回購目標', value: '至少 90 億美元', change: '目標上調', note: '含出售 A+E Media 股權 12 億美元' },
+            { category: 'IP資產', metric: '《玩具總動員》系列票房', value: '逾 40 億美元', change: '累計數據', note: '單季帶動 20 億小時串流觀看' }
+        ];
+
+        const tableBody = document.getElementById('dataTableBody');
+        const searchInput = document.getElementById('tableSearchInput');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="px-4 py-6 text-center text-stone-400">未找到符合條件的數據資料</td></tr>`;
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition duration-150';
+                row.innerHTML = `
+                    <td class="px-4 py-3 font-semibold text-stone-700">${item.category}</td>
+                    <td class="px-4 py-3 font-medium text-stone-900">${item.metric}</td>
+                    <td class="px-4 py-3 font-bold text-sky-700">${item.value}</td>
+                    <td class="px-4 py-3">
+                        <span class="px-2 py-1 rounded text-xs font-bold ${item.change.includes('+') ? 'bg-emerald-100 text-emerald-800' : (item.change.includes('-') ? 'bg-rose-100 text-rose-800' : 'bg-stone-100 text-stone-700')}">
+                            ${item.change}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-stone-500">${item.note}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // 初始繪製
+        renderTable(productData);
+
+        // 動態即時搜尋過濾
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.category.toLowerCase().includes(query) ||
+                item.metric.toLowerCase().includes(query) ||
+                item.value.toLowerCase().includes(query) ||
+                item.note.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+    </script>
+</body>
+</html>
