@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-SpaceX Terafab豪賭與內部人股票解禁分析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            background-color: #0284c7;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #d6d3d1;
+        }
+        .inactive-nav-link:hover {
+            color: #ffffff;
+            background-color: #44403c;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-stone-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <span class="font-bold text-lg sm:text-xl tracking-tight">SpaceX 啟動 Terafab</span>
+                </div>
+                <!-- Desktop Nav Navigation -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-2">
+                    <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 inactive-nav-link">概覽與核心矛盾</a>
+                    <a href="#terafab" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 inactive-nav-link">Terafab 豪賭</a>
+                    <a href="#financials" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 inactive-nav-link">財務實況與圖表</a>
+                    <a href="#lockup" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 inactive-nav-link">股票解禁里程碑</a>
+                    <a href="#ecosystem" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 inactive-nav-link">巨頭生態圈</a>
+                    <a href="#checklist" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 inactive-nav-link">投資追蹤指標</a>
+                </nav>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="text-stone-300 hover:text-white focus:outline-none p-2 rounded-md">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-stone-800 border-t border-stone-700 px-2 pt-2 pb-3 space-y-1">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">概覽與核心矛盾</a>
+            <a href="#terafab" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">Terafab 豪賭</a>
+            <a href="#financials" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">財務實況與圖表</a>
+            <a href="#lockup" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">股票解禁里程碑</a>
+            <a href="#ecosystem" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">巨頭生態圈</a>
+            <a href="#checklist" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-300 hover:text-white hover:bg-stone-700">投資追蹤指標</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- Hero Title Banner -->
+        <div class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-900 text-white rounded-xl shadow-2xl p-6 sm:p-10 mb-8">
+            <div class="max-w-4xl">
+                <h1 class="text-2xl sm:text-4xl font-extrabold mt-3 mb-4 leading-tight">從火箭公司到晶片巨獸：SpaceX 的 Terafab 豪賭與解禁逆襲剖析</h1>
+                <p class="text-stone-300 text-sm sm:text-base leading-relaxed">
+                    2026年8月6日，SpaceX 宣布與 Tesla 打造 $168B 超級半導體園區 Terafab，同日迎來 9.115 億股解禁壓力。為何股價反而逆勢大漲 6.1%？這背後代表了怎樣的 AI 垂直整合野心與財務風險？
+                </p>
+            </div>
+        </div>
+
+        <!-- Key Metrics Cards (Information Cards) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="bg-sky-50 border-l-4 border-sky-500 rounded-lg shadow p-5">
+                <div class="text-xs text-sky-700 font-semibold uppercase">Terafab 起始投資</div>
+                <div class="text-2xl font-bold text-sky-900 mt-1">$168 億美元</div>
+                <p class="text-xs text-stone-600 mt-1">德州 1 億平方英尺 / 潛在規模達 $1,190 億</p>
+            </div>
+            <div class="bg-amber-50 border-l-4 border-amber-500 rounded-lg shadow p-5">
+                <div class="text-xs text-amber-700 font-semibold uppercase">Q2 AI 資本支出</div>
+                <div class="text-2xl font-bold text-amber-900 mt-1">$158 億美元</div>
+                <p class="text-xs text-stone-600 mt-1">單季總 CapEx $184 億 (營收 $78 億)</p>
+            </div>
+            <div class="bg-emerald-50 border-l-4 border-emerald-500 rounded-lg shadow p-5">
+                <div class="text-xs text-emerald-700 font-semibold uppercase">8/6 解禁市場表現</div>
+                <div class="text-2xl font-bold text-emerald-900 mt-1">+6.1% ($114.92)</div>
+                <p class="text-xs text-stone-600 mt-1">解禁 9.115 億股，半日成交超 $230 億</p>
+            </div>
+            <div class="bg-purple-50 border-l-4 border-purple-500 rounded-lg shadow p-5">
+                <div class="text-xs text-purple-700 font-semibold uppercase">IPO 募集資金規模</div>
+                <div class="text-2xl font-bold text-purple-900 mt-1">$857 億美元</div>
+                <p class="text-xs text-stone-600 mt-1">2026年6月上市，每股定價 $135 美元</p>
+            </div>
+        </div>
+
+        <!-- SECTION 1: 概覽與核心矛盾 -->
+        <section id="overview" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、SpaceX 的轉型與投資矛盾</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    SpaceX 正在發生一個非常重要的身份轉變。過去投資人談論 SpaceX，核心是火箭（Starship）、衛星通訊（Starlink）與太空運輸；上市之後，公司正快速增加另一個身分——<strong class="text-sky-700">全球最大規模的 AI 基礎建設投資者之一</strong>。
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200">
+                        <h3 class="font-bold text-lg text-stone-800 mb-2 flex items-center">
+                            <span class="w-3 h-3 bg-sky-500 rounded-full mr-2"></span>多頭信念：無可複製的帝國
+                        </h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            市場相信 Elon Musk 正在建立前所未見的「太空 + AI + 晶片」垂直整合帝國。掌控晶片製造、AI 訓練、機器人、自駕車與太空資料中心，形成極深的企業護城河。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200">
+                        <h3 class="font-bold text-lg text-stone-800 mb-2 flex items-center">
+                            <span class="w-3 h-3 bg-rose-500 rounded-full mr-2"></span>空頭疑慮：超級資本密集燒錢
+                        </h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            投資人開始懷疑完成這個帝國究竟需要燒掉多少錢。單季 AI 資本支出已達營收的兩倍，若現金流無法及時跟上資本消耗速度，將面臨巨大的融資與估值修正壓力。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Terafab 豪賭 -->
+        <section id="terafab" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、Terafab 半導體園區：規模與戰略野心</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-4">1. 三種層次的資本規模評估</h3>
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    2026年8月6日，SpaceX 與 Tesla 正式宣布將在德州 Grimes County 推動 Terafab 大型半導體園區。對於投資人而言，精確理解不同文件中的「資本數字」至關重要：
+                </p>
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="p-4 rounded-lg bg-sky-50 border border-sky-200">
+                        <div class="text-xs font-bold text-sky-600 uppercase">最新宣布起始投入</div>
+                        <div class="text-2xl font-bold text-sky-900 my-1">$168 億美元</div>
+                        <p class="text-xs text-stone-600">與 Tesla 共同發起，規劃 1 億平方英尺，創造 3,000+ 職缺。</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-stone-50 border border-stone-200">
+                        <div class="text-xs font-bold text-stone-500 uppercase">早期文件初始規模</div>
+                        <div class="text-2xl font-bold text-stone-800 my-1">~$550 億美元</div>
+                        <p class="text-xs text-stone-600">2026年5月提出的較廣義初始資本框架。</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-amber-50 border border-amber-200">
+                        <div class="text-xs font-bold text-amber-600 uppercase">最高潛在總規模 (4階段)</div>
+                        <div class="text-2xl font-bold text-amber-900 my-1">$1,190 億美元</div>
+                        <p class="text-xs text-stone-600">當地政府稅務優惠評估之最大可能規模（附帶 30 天書面退出條款）。</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-stone-800 mb-3 border-t pt-4 border-stone-100">2. 自建晶片供應鏈的核心動機</h3>
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    Terafab 的本質是解決 AI 時代運算能力不再只是「買不買得到 GPU」的問題。Tesla (Optimus, Cybercab) 與 SpaceX (Starlink, 太空資料中心) 預計長期運算需求將**超過 1 TW**。將邏輯晶片、記憶體、先進封裝與測試整合於同一基地，是防範外部供應鏈瓶頸的策略。
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: 財務實況與動態圖表 -->
+        <section id="financials" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、財務真實面貌：資本支出 vs 營收</h2>
+            
+            <div class="grid lg:grid-cols-3 gap-6 mb-6">
+                <!-- Left: Chart visualization (takes 2 cols on lg) -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">SpaceX 2026 Q2 財務與資本數據對比 (億美元)</h3>
+                    <p class="text-xs text-stone-500 mb-4">資料來源：公司公開財報與 AP 報導數據</p>
+                    <!-- Chart Canvas must be inside a div -->
+                    <div class="relative h-72 sm:h-80 w-full">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Right: Financial Analysis Text (takes 1 col) -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-800 mb-3">超級資本密集型考驗</h3>
+                        <ul class="space-y-3 text-sm text-stone-600">
+                            <li class="flex items-start">
+                                <span class="text-rose-500 font-bold mr-2">•</span>
+                                <span><strong>營收倍增：</strong> Q2 營收約 $78 億美元，接近去年同期的 2 倍，表現亮眼。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-rose-500 font-bold mr-2">•</span>
+                                <span><strong>CapEx 壓倒營收：</strong> 單季總 CapEx 達 $184 億，其中 AI 支出高達 $158 億，超過營收的 2 倍。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-rose-500 font-bold mr-2">•</span>
+                                <span><strong>單季虧損：</strong> Q2 淨虧損約 $5.41 億美元。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-100 p-4 rounded-lg mt-4 border border-stone-200">
+                        <div class="text-xs font-semibold text-stone-500">評價邏輯轉變</div>
+                        <p class="text-xs text-stone-700 mt-1 font-medium">
+                            投資邏輯已從「Starlink 會賺很多錢」轉變為「Starlink 與 AI 產生的現金流，能否追上新建設燒錢的速度？」
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: 9.115 億股解禁與互動資料表格 -->
+        <section id="lockup" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、股票解禁時程與籌碼壓力測試</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800">解禁里程碑與關鍵事件互動表格</h3>
+                        <p class="text-sm text-stone-500">搜尋或篩選事件名稱、日期或影響評估</p>
+                    </div>
+                    <!-- Search Input Box -->
+                    <div class="w-full md:w-72">
+                        <input type="text" id="table-search" placeholder="搜尋表格內容 (如: 解禁, Q2...)" class="w-full px-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    </div>
+                </div>
+
+                <!-- Interactive Data Table Container -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-left text-sm text-stone-600">
+                        <thead class="bg-stone-100 text-stone-800 font-bold uppercase text-xs sticky top-0 z-10 border-b border-stone-200">
+                            <tr>
+                                <th class="py-3 px-4">時間 / 日期</th>
+                                <th class="py-3 px-4">事件名稱</th>
+                                <th class="py-3 px-4">股份 / 資金規模</th>
+                                <th class="py-3 px-4">市場影響與解讀</th>
+                                <th class="py-3 px-4">狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-table-body" class="divide-y divide-stone-200">
+                            <!-- Populated dynamically via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: 巨頭生態圈受惠與挑戰 -->
+        <section id="ecosystem" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">五、Terafab 對四大科技巨頭之戰略影響</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <!-- SpaceX -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-lg text-stone-800">SpaceX</span>
+                            <span class="px-2 py-0.5 text-xs font-semibold bg-sky-100 text-sky-800 rounded">主體</span>
+                        </div>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            故事想像空間變大（AI+太空基礎設施），但財務與現金流風險同步上升。股價需靠自由現金流（FCF）改善來支撐。
+                        </p>
+                    </div>
+                    <div class="text-xs text-stone-500 border-t pt-2 border-stone-100">
+                        關鍵：資本支出是否見頂
+                    </div>
+                </div>
+
+                <!-- Tesla -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-lg text-stone-800">Tesla</span>
+                            <span class="px-2 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-800 rounded">長線利多</span>
+                        </div>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            為 Optimus 與 Cybercab 確保自有 AI 晶片供應；但 Tesla 本身亦需承擔龐大研發費用，市場將檢視 Robotaxi 變現速度。
+                        </p>
+                    </div>
+                    <div class="text-xs text-stone-500 border-t pt-2 border-stone-100">
+                        關鍵：Robotaxi 與機器人量產
+                    </div>
+                </div>
+
+                <!-- Intel -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-600 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-lg text-stone-800">Intel</span>
+                            <span class="px-2 py-0.5 text-xs font-semibold bg-blue-100 text-blue-800 rounded">直接受惠</span>
+                        </div>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            計畫採用 Intel 14A 製程。若順利執行，將成為 Intel 晶圓代工重建中最關鍵的外部客戶突破，提振稼動率與信心。
+                        </p>
+                    </div>
+                    <div class="text-xs text-stone-500 border-t pt-2 border-stone-100">
+                        關鍵：14A 量產良率與交付
+                    </div>
+                </div>
+
+                <!-- Nvidia -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-lg text-stone-800">Nvidia</span>
+                            <span class="px-2 py-0.5 text-xs font-semibold bg-amber-100 text-amber-800 rounded">短中中性</span>
+                        </div>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            Musk 表態將繼續採購 Nvidia GPU。Terafab 現階段是「第二供應源」，而非即刻取代。需關注 2028 年後自研 ASIC 的分流。
+                        </p>
+                    </div>
+                    <div class="text-xs text-stone-500 border-t pt-2 border-stone-100">
+                        關鍵：2028 年後 AI 總支出占比
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: 投資人核心追蹤指標 -->
+        <section id="checklist" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">六、美股投資人 5 大核心追蹤指標</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-stone-50 rounded-lg flex items-start space-x-3">
+                        <span class="flex-shrink-0 w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center font-bold">1</span>
+                        <div>
+                            <h4 class="font-bold text-stone-800">資本支出與營收增速比率</h4>
+                            <p class="text-xs text-stone-600 mt-1">觀察未來數季 CapEx 是否繼續以超過營收的增速擴大，或逐漸趨於平穩。</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-stone-50 rounded-lg flex items-start space-x-3">
+                        <span class="flex-shrink-0 w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center font-bold">2</span>
+                        <div>
+                            <h4 class="font-bold text-stone-800">自由現金流 (FCF) 增長能力</h4>
+                            <p class="text-xs text-stone-600 mt-1">Starlink 與 AI 運算服務的收入能否迅速放大，帶動自由現金流轉正，蓋過 CapEx。</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-stone-50 rounded-lg flex items-start space-x-3">
+                        <span class="flex-shrink-0 w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center font-bold">3</span>
+                        <div>
+                            <h4 class="font-bold text-stone-800">Terafab 與 Intel 14A 實質進展</h4>
+                            <p class="text-xs text-stone-600 mt-1">留意是否開始出現設備採購訂單、建廠實質里程碑以及 Intel 14A 試產狀況。</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-stone-50 rounded-lg flex items-start space-x-3">
+                        <span class="flex-shrink-0 w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center font-bold">4</span>
+                        <div>
+                            <h4 class="font-bold text-stone-800">再融資或增資需求</h4>
+                            <p class="text-xs text-stone-600 mt-1">檢視公司是否需要發行新公司債、額外增資或尋求政府/合作夥伴資金注入。</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-stone-50 rounded-lg flex items-start space-x-3 md:col-span-2">
+                        <span class="flex-shrink-0 w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center font-bold">5</span>
+                        <div>
+                            <h4 class="font-bold text-stone-800">2026 年 12 月 8 日第二波解禁壓力測試</h4>
+                            <p class="text-xs text-stone-600 mt-1">屆時將有高達 40% 股權取得交易資格，觀察市場買盤能否再次順利吸收籌碼賣壓。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mandatory Footer Structure -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-SpaceX Terafab豪賭與內部人股票解禁分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中SpaceX與Terafab相關公開資料 (2026年8月7日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Table Real Data Array from Report
+        const productData = [
+            {
+                date: '2026年6月',
+                event: 'SpaceX 首次公開發行 (IPO)',
+                amount: '募資 $857 億美元 (6.39 億股)',
+                impact: '定價每股 $135 美元，創下歷史性公開融資規模',
+                status: '已完成'
+            },
+            {
+                date: '2026年8月6日',
+                event: 'Terafab 半導體園區官宣',
+                amount: '起始投入 $168 億美元',
+                impact: '與 Tesla 在德州合作，最高潛在計畫達 $1,190 億美元',
+                status: '已啟動'
+            },
+            {
+                date: '2026年8月6日',
+                event: '第一波內部人股票解禁',
+                amount: '9.115 億股釋出',
+                impact: '市場可交易量翻倍，半日成交 $230 億，股價逆勢上漲 6.1%',
+                status: '已完成'
+            },
+            {
+                date: '2026年 Q2',
+                event: 'Q2 財務數據發布',
+                amount: '營收 $78 億 / CapEx $184 億',
+                impact: 'AI CapEx 達 $158 億（為營收兩倍），單季虧損 $5.41 億',
+                status: '已發布'
+            },
+            {
+                date: '2026年12月8日',
+                event: '第二階段限制股解禁',
+                amount: '累計最高達 40% 股權',
+                impact: '第二次重大籌碼供給測試，考驗市場長期買盤承接力',
+                status: '預計執行'
+            },
+            {
+                date: '2027年年中',
+                event: ' Musk 及創辦團隊股權解禁',
+                amount: '剩餘約 60% 股權',
+                impact: '包含 Musk 個人持股解禁，考驗公司 FCF 實質盈利支撐',
+                status: '遠期規劃'
+            }
+        ];
+
+        // Function to render table
+        function renderTable(data) {
+            const tbody = document.getElementById('product-table-body');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-stone-400">查無符合條件的資料</td></tr>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors';
+                
+                let statusColor = 'bg-stone-100 text-stone-700';
+                if (item.status === '已完成' || item.status === '已發布') {
+                    statusColor = 'bg-emerald-100 text-emerald-800';
+                } else if (item.status === '已啟動') {
+                    statusColor = 'bg-sky-100 text-sky-800';
+                } else if (item.status === '預計執行') {
+                    statusColor = 'bg-amber-100 text-amber-800';
+                }
+
+                row.innerHTML = `
+                    <td class="py-3 px-4 font-medium text-stone-900">${item.date}</td>
+                    <td class="py-3 px-4 font-semibold text-stone-800">${item.event}</td>
+                    <td class="py-3 px-4 text-sky-700 font-medium">${item.amount}</td>
+                    <td class="py-3 px-4 text-stone-600">${item.impact}</td>
+                    <td class="py-3 px-4"><span class="px-2 py-1 text-xs font-semibold rounded-full ${statusColor}">${item.status}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Table Search Filter Logic
+        document.getElementById('table-search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.event.toLowerCase().includes(query) ||
+                item.date.toLowerCase().includes(query) ||
+                item.amount.toLowerCase().includes(query) ||
+                item.impact.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        // Chart.js Setup
+        function initChart() {
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Q2 單季營收', 'Q2 AI 資本支出', 'Q2 總資本支出', 'IPO 募集總資金'],
+                    datasets: [{
+                        label: '金額 (億美元)',
+                        data: [78, 158, 184, 857],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.85)', // Sky blue (Revenue)
+                            'rgba(245, 158, 11, 0.85)', // Amber (AI CapEx)
+                            'rgba(225, 29, 72, 0.85)',  // Rose (Total CapEx)
+                            'rgba(147, 51, 234, 0.85)'  // Purple (IPO Fund)
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(245, 158, 11)',
+                            'rgb(225, 29, 72)',
+                            'rgb(147, 51, 234)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` 金額: $${context.raw} 億美元`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '億美元 (USD Billion)',
+                                font: { size: 12 }
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking nav link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Active Navigation States
+        function setupNavigationObserver() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // Window Load Initialization
+        window.onload = function() {
+            renderTable(productData);
+            initChart();
+            setupNavigationObserver();
+        };
+    </script>
+</body>
+</html>
