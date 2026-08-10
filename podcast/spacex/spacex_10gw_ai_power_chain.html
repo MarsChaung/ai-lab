@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-SpaceX十GW算力與AI電力供應鏈分析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom styling for smooth transitions and navigation active state -->
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #4b5563;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased leading-relaxed">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo & Site Name -->
+                <div class="flex items-center space-x-3">
+                        <div class="text-lg text-stone-500 font-semibold tracking-wider">SpaceX 10GW 算力與電力戰略</div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#hero" class="nav-link active-nav-link py-5 transition-colors">報告總覽</a>
+                    <a href="#time-to-compute" class="nav-link inactive-nav-link py-5 transition-colors">Time-to-Compute</a>
+                    <a href="#gw-economics" class="nav-link inactive-nav-link py-5 transition-colors">GW經濟學</a>
+                    <a href="#msft-role" class="nav-link inactive-nav-link py-5 transition-colors">微軟需求</a>
+                    <a href="#stock-analysis" class="nav-link inactive-nav-link py-5 transition-colors">受惠概念股</a>
+                    <a href="#data-charts" class="nav-link inactive-nav-link py-5 transition-colors">動態圖表</a>
+                    <a href="#interactive-table" class="nav-link inactive-nav-link py-5 transition-colors">投資組合清單</a>
+                    <a href="#risks" class="nav-link inactive-nav-link py-5 transition-colors">風險分析</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
+            <a href="#hero" class="mobile-nav-link block py-2 text-sky-600 font-semibold">報告總覽</a>
+            <a href="#time-to-compute" class="mobile-nav-link block py-2 text-stone-600 hover:text-sky-600">Time-to-Compute</a>
+            <a href="#gw-economics" class="mobile-nav-link block py-2 text-stone-600 hover:text-sky-600">GW經濟學</a>
+            <a href="#msft-role" class="mobile-nav-link block py-2 text-stone-600 hover:text-sky-600">微軟需求</a>
+            <a href="#stock-analysis" class="mobile-nav-link block py-2 text-stone-600 hover:text-sky-600">受惠概念股</a>
+            <a href="#data-charts" class="mobile-nav-link block py-2 text-stone-600 hover:text-sky-600">動態圖表</a>
+            <a href="#interactive-table" class="mobile-nav-link block py-2 text-stone-600 hover:text-sky-600">投資組合清單</a>
+            <a href="#risks" class="mobile-nav-link block py-2 text-stone-600 hover:text-sky-600">風險分析</a>
+        </div>
+    </header>
+
+    <!-- Hero / Summary Banner Section -->
+    <section id="hero" class="pt-8 pb-12 bg-gradient-to-b from-sky-900 to-stone-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div class="md:w-2/3">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
+                        SpaceX 要蓋十座核電廠等級 AI 算力：下一波真正賺錢的是電力？
+                    </h1>
+                    <p class="text-stone-300 text-base sm:text-lg mb-6">
+                        未來一到兩年 AI 產業最大的稀缺資源，正在從「GPU」進一步轉變成「可以立刻供電、立刻上線、立刻產生 Token 的 GW 級算力」。
+                    </p>
+                </div>
+
+                <!-- Highlight Cards -->
+                <div class="md:w-1/3 grid grid-cols-2 gap-4">
+                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                        <div class="text-xs text-sky-300 font-medium">2027年預估算力</div>
+                        <div class="text-2xl sm:text-3xl font-black text-white mt-1">10 GW</div>
+                        <div class="text-xs text-stone-400 mt-1">相當於10座核反應爐</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                        <div class="text-xs text-sky-300 font-medium">總設施設備資本投入</div>
+                        <div class="text-2xl sm:text-3xl font-black text-white mt-1">$300B+</div>
+                        <div class="text-xs text-stone-400 mt-1">三千億至五千億美元規模</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                        <div class="text-xs text-sky-300 font-medium">每GW每年推理營收</div>
+                        <div class="text-2xl sm:text-3xl font-black text-white mt-1">$100B</div>
+                        <div class="text-xs text-stone-400 mt-1">Frontier AI Model 潛力</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                        <div class="text-xs text-sky-300 font-medium">Colossus 一期建造速</div>
+                        <div class="text-2xl sm:text-3xl font-black text-white mt-1">122 天</div>
+                        <div class="text-xs text-stone-400 mt-1">約 300 MW 規模紀錄</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- Section 1: Time-to-Compute Paradigm Shift -->
+        <section id="time-to-compute" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                一、為什麼十 GW 不是完全不可能？—— Time-to-Compute 範式轉移
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-sky-800 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        傳統雲端巨頭 vs. SpaceX / xAI 策略
+                    </h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        傳統超大型雲端業者（Microsoft, Google, Amazon）打造資料中心時考慮的是長達 20 年的使用壽命，包含能源效率、極致可靠性、變電設備、電力備援、PUE 標準與長時間電網接入審查。
+                    </p>
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-200">
+                        <div class="font-bold text-sky-900 text-sm mb-1">SpaceX / xAI 的極致速度法則 (Speed First)</div>
+                        <p class="text-xs text-sky-800">
+                            只要能提前 3 個月取得 500 MW 算力上線產生 Token，他們寧可犧牲部分能源效率與傳統建設標準。「你能多快把 1 MW 電力轉換成可出售的 AI Token」成為決定價值的唯一核心。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                        繞過傳統電網：Onsite Power 現場發電崛起
+                    </h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        傳統路徑：電廠 → 輸電網 → 區域變電站 → 資料中心（流程長達 2 ~ 5 年）。<br>
+                        <strong>新模式：天然氣管線 → 現場燃氣輪機/燃料電池發電 → AI Factory</strong>。
+                    </p>
+                    <ul class="text-xs text-stone-700 space-y-2 bg-stone-100 p-3 rounded-md border border-stone-200">
+                        <li class="flex items-start"><span class="text-sky-500 font-bold mr-2">✓</span><strong>Colossus 算力中心：</strong>第一階段 300 MW 僅耗時約 122 天建成。</li>
+                        <li class="flex items-start"><span class="text-sky-500 font-bold mr-2">✓</span><strong>現場發電擴建速度：</strong>燃氣發電從 2026 年 2 月約 27 台（495 MW），急速擴張至 7 月約 69 台（1.7 GW）。</li>
+                        <li class="flex items-start"><span class="text-sky-500 font-bold mr-2">✓</span><strong>Bloom Energy 產業報告：</strong>預計至 2030 年，約 1/3 資料中心將完全仰賴現場獨立發電，傳統併網供電時程延宕達 1.5 至 2 年。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Economics per GW -->
+        <section id="gw-economics" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                二、每 GW 可以賺多少錢？—— 顛覆市場的 Value-Based Pricing
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="p-4 bg-sky-50 rounded-lg border border-sky-100">
+                        <div class="text-stone-500 text-xs font-semibold uppercase">單一 GW AI 算力產出</div>
+                        <div class="text-3xl font-black text-sky-700 my-2">＞ $1,000 億美元</div>
+                        <div class="text-xs text-stone-600">OpenAI/Anthropic 前沿模型每年 Inference Revenue 估算</div>
+                    </div>
+                    <div class="p-4 bg-emerald-50 rounded-lg border border-emerald-100">
+                        <div class="text-stone-500 text-xs font-semibold uppercase">傳統基礎建設租用成本</div>
+                        <div class="text-3xl font-black text-emerald-700 my-2">約 $120 億美元</div>
+                        <div class="text-xs text-stone-600">每 GW / 年 GPU Infrastructure 基準租賃成本</div>
+                    </div>
+                    <div class="p-4 bg-amber-50 rounded-lg border border-amber-100">
+                        <div class="text-stone-500 text-xs font-semibold uppercase">SpaceX 溢價定價潛力</div>
+                        <div class="text-3xl font-black text-amber-700 my-2">$300B~$500B</div>
+                        <div class="text-xs text-stone-600">利用極致稀缺性採用「以價值為導向 (Value-based)」定價</div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-stone-700 text-sm leading-relaxed bg-stone-50 p-4 rounded-lg border border-stone-200">
+                    <h4 class="font-bold text-stone-900 mb-2">為什麼前沿模型公司願意支付高額租金？</h4>
+                    <p>
+                        SemiAnalysis 採用 GB300 Cluster、Token 生成速度、API 價格與輸入/輸出 Token 比例建模，計算得出 1 GW 的算力在當前 Token 需求爆發下可創造逾千億美元收入。在極度缺乏算力的當下，SpaceX 不需要問「成本多少」，而是問「客戶能多賺多少」。這就像 Super Bowl 當天飯店房間價格可翻漲十倍，<strong>稀缺的不是房間（伺服器機櫃），而是「時間（Time-to-Market）」</strong>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Microsoft's Demand & Azure Monetization -->
+        <section id="msft-role" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                三、為什麼 Microsoft 可能是最大買家？
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4">微軟財報實體數據印證（2026 Q4）</h3>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="p-3 bg-stone-50 rounded border-l-4 border-sky-500">
+                            <span class="font-bold text-stone-900">容量極限瓶頸：</span>
+                            官方明言 "Customer demand continues to exceed available capacity"，所有新增 Azure 容量一上線即被立刻貨幣化。
+                        </li>
+                        <li class="p-3 bg-stone-50 rounded border-l-4 border-sky-500">
+                            <span class="font-bold text-stone-900">Azure 營收強勁：</span>
+                            Azure 最新季度年增長率達 <strong>43%</strong>；Microsoft Cloud 單季營收衝上 <strong>593 億美元</strong>。
+                        </li>
+                        <li class="p-3 bg-stone-50 rounded border-l-4 border-sky-500">
+                            <span class="font-bold text-stone-900">未履約訂單 (RPO)：</span>
+                            Commercial RPO 累計高達 <strong>6,780 億美元</strong>；Microsoft AI 業務 ARR 已突破 <strong>370 億美元</strong>（年增 +123%）。
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-sky-900 mb-4">SemiAnalysis 大膽假設：3 GW 租賃合約</h3>
+                        <p class="text-stone-600 text-sm mb-4">
+                            假設微軟向 SpaceX 承租約 3 GW 算力容量，即使年租金高達 <strong>每 GW 500 億美元</strong>，只要這 3 GW 能透過 OpenAI API、Azure AI Foundry、Copilot 及 AI Agent 創造超過千億美元收入，財務上便具備高度合理性。
+                        </p>
+                        <div class="p-4 bg-sky-50 rounded-lg border border-sky-200">
+                            <div class="text-xs font-bold text-sky-900 uppercase">估算顛覆點</div>
+                            <div class="text-sm font-semibold text-sky-800 mt-1">
+                                AI Inference 的收入密度已大幅超越 Infrastructure 成本。算力增加越快，獲利速度越快！
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Key Stocks & Beneficiaries Analysis -->
+        <section id="stock-analysis" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                四、受惠概念股與產業鏈三層架構
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <!-- NVDA Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-black text-stone-900">NVIDIA</h3>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">NVDA • 第一級核心</span>
+                        </div>
+                        <p class="text-xs font-bold text-emerald-600 mb-3">算力引擎 (Compute)</p>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            不論哪家 Model 勝出，只要整體 AI GW 增加，NVDA 都在收錢。Vera Rubin 進入全面量產；僅 SpaceX 單一擴張計畫即可帶來逾 1,600 億美元增量營收。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-stone-200 flex justify-between text-xs text-stone-500">
+                        <span>預估 P/E: ~34x</span>
+                        <span class="font-semibold text-emerald-700">無可取代龍頭</span>
+                    </div>
+                </div>
+
+                <!-- GEV Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-black text-stone-900">GE Vernova</h3>
+                            <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded">GEV • 第一級核心</span>
+                        </div>
+                        <p class="text-xs font-bold text-sky-600 mb-3">發電與電網 (Power Generation)</p>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            控制燃氣輪機與 Electrification。2026 Q2 握有 1,760 億美元手頭訂單 (Backlog)，資料中心電氣化訂單年初至今超 50 億美元，2030 年燃氣輪機產能拉至 30 GW。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-stone-200 flex justify-between text-xs text-stone-500">
+                        <span>預估 P/E: ~28x</span>
+                        <span class="font-semibold text-sky-700">Time-to-Power 最直接受惠者</span>
+                    </div>
+                </div>
+
+                <!-- VRT Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-black text-stone-900">Vertiv</h3>
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded">VRT • 第一級核心</span>
+                        </div>
+                        <p class="text-xs font-bold text-indigo-600 mb-3">生命維持系統 (Cooling & Power Dist.)</p>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            液冷、UPS、熱管理與配電系統。Q2 營收 32.74 億美元 (+24%)，調整後 EPS 年增 +60%，Backlog 達 150 億美元 (+109%)。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-stone-200 flex justify-between text-xs text-stone-500">
+                        <span>預估 P/E: ~62x</span>
+                        <span class="font-semibold text-indigo-700">高成長 / 高估值監控</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Tier & Satellites -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow p-5 border border-stone-200">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-stone-900">Microsoft (MSFT)</h4>
+                        <span class="text-xs bg-stone-100 text-stone-700 px-2 py-0.5 rounded">第二級核心</span>
+                    </div>
+                    <p class="text-xs text-stone-500 mb-2">P/E: ~30x</p>
+                    <p class="text-xs text-stone-600">將大量 AI 模型透過 Copilot 與 Azure 轉化成極高 Margin 的 Inference Revenue。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 border border-stone-200">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-stone-900">Eaton (ETN)</h4>
+                        <span class="text-xs bg-stone-100 text-stone-700 px-2 py-0.5 rounded">第二級核心</span>
+                    </div>
+                    <p class="text-xs text-stone-500 mb-2">P/E: ~46x</p>
+                    <p class="text-xs text-stone-600">配電盤 Switchgear、變壓器與 Power Management，直接吃下 GW 級建設需求。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-5 border border-stone-200">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-stone-900">Bloom Energy (BE)</h4>
+                        <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded">衛星高 Beta</span>
+                    </div>
+                    <p class="text-xs text-stone-500 mb-2">Onsite Power 飆高股</p>
+                    <p class="text-xs text-stone-600">與 Oracle 簽署 2.8 GW 燃料電池合約，最快約 90 天部署，現場發電關鍵標的。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Dynamic Visualizations (Chart.js) -->
+        <section id="data-charts" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                五、數據視覺化分析 (Chart.js)
+            </h2>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Chart 1: GW Growth & Capex Projection -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">SpaceX 算力規模 (GW) 與 CapEx 預測</h3>
+                    <p class="text-xs text-stone-500 mb-4">預估 2025 年至 2027 年算力激增與對應基礎建設投資金額</p>
+                    <div class="relative h-72 w-full">
+                        <!-- MANDATORY: canvas wrapped inside div -->
+                        <canvas id="gwGrowthChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Beneficiary Company Metrics Comparison -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">核心供應鏈公司 在手訂單 (Backlog) 與 估值 P/E</h3>
+                    <p class="text-xs text-stone-500 mb-4">分析巨頭手頭訂單規模與目前市場評價本益比</p>
+                    <div class="relative h-72 w-full">
+                        <!-- MANDATORY: canvas wrapped inside div -->
+                        <canvas id="backlogPeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Interactive Data Table -->
+        <section id="interactive-table" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                六、AI 電力與算力供應鏈受惠公司對照表
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Filter & Search Box -->
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                    <div class="w-full sm:w-1/2">
+                        <label for="table-search" class="sr-only">搜尋公司或關鍵字</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <input type="text" id="table-search" class="block w-full pl-10 pr-3 py-2 border border-stone-300 rounded-lg text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="即時搜尋：公司名稱、代號、戰略定位、關鍵數據...">
+                        </div>
+                    </div>
+                    <div class="text-xs text-stone-500 flex items-center space-x-2">
+                        <span class="inline-block w-3 h-3 bg-emerald-500 rounded-full"></span><span>核心推薦</span>
+                        <span class="inline-block w-3 h-3 bg-sky-500 rounded-full ml-2"></span><span>次要推薦</span>
+                        <span class="inline-block w-3 h-3 bg-amber-500 rounded-full ml-2"></span><span>高風險衛星</span>
+                    </div>
+                </div>
+
+                <!-- Table Wrapper with Sticky Header -->
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table class="min-w-full divide-y divide-stone-200 text-left text-sm">
+                        <thead class="bg-stone-100 text-stone-700 font-bold sticky top-0 z-10">
+                            <tr>
+                                <th class="py-3 px-4">公司名稱 (Ticker)</th>
+                                <th class="py-3 px-4">優先順位</th>
+                                <th class="py-3 px-4">生態系核心角色</th>
+                                <th class="py-3 px-4">最新財報數據 / 手頭訂單 (Backlog)</th>
+                                <th class="py-3 px-4">估值本益比 (P/E)</th>
+                                <th class="py-3 px-4">主要風險與觀察指標</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="divide-y divide-stone-200 bg-white text-stone-800">
+                            <!-- JS will populate rows dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Strategic Lessons & Major Risks -->
+        <section id="risks" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                七、三大核心風險與美股投資啟示
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-rose-50 rounded-lg p-5 border border-rose-200">
+                    <h3 class="font-bold text-rose-900 text-base mb-2">1. ARR ≠ 自由現金流 (FCF)</h3>
+                    <p class="text-xs text-rose-800 leading-relaxed">
+                        SpaceX 最新財報顯示單季營收約 78 億美元，但 AI CapEx 高達約 158 億美元。大量購置 GPU 與電氣設備在營收爆發前會造成現金流極度吃緊。
+                    </p>
+                </div>
+                <div class="bg-amber-50 rounded-lg p-5 border border-amber-200">
+                    <h3 class="font-bold text-amber-900 text-base mb-2">2. 每 GW $500億 租金難永久維持</h3>
+                    <p class="text-xs text-amber-800 leading-relaxed">
+                        當前極高租金源自 GPU 與電力雙重短缺。當 2028-2029 年超大巨頭數十 GW 容量集中上線，算力租賃價格極可能面臨修正。
+                    </p>
+                </div>
+                <div class="bg-stone-100 rounded-lg p-5 border border-stone-300">
+                    <h3 class="font-bold text-stone-900 text-base mb-2">3. Token 單位價格下降趨勢</h3>
+                    <p class="text-xs text-stone-700 leading-relaxed">
+                        AI 模型每百萬 Token 售價長期持續下滑。AI 牛市能否延續至 2028 年，關鍵在於「Token 使用總量成長速度」是否能壓倒「價格降幅」。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Investment Strategy Summary Card -->
+            <div class="bg-gradient-to-r from-stone-900 to-sky-950 text-white rounded-lg p-6 shadow-xl">
+                <h3 class="text-xl font-bold text-sky-400 mb-3">巴菲特 AI 價值投資總結排序</h3>
+                <div class="text-2xl font-black mb-4 text-sky-200 tracking-wide">
+                    NVDA ＞ GEV ≈ VRT ＞ MSFT ＞ ETN ＞ BE （獨立關注 SPCX）
+                </div>
+                <p class="text-stone-300 text-sm leading-relaxed mb-4">
+                    最穩健的獲利方式是：<strong>買進「不論誰蓋十 GW 算力，都會賺錢」的公司</strong>，亦即由 NVIDIA (Compute)、GE Vernova (Power)、Vertiv (Cooling/Infra) 組成的三大防禦兼攻擊支柱。留意部分「鏟子股」估值已反映高成長預期，後續應嚴格監控接單量 (Backlog) 與產能擴張速度。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mandatory Footer Component -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-SpaceX十GW算力與AI電力供應鏈分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中SpaceX與AI電力供應鏈相關公開資料 (2026年8月10日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Real Data array based on document content
+        const productData = [
+            {
+                ticker: "NVDA",
+                name: "NVIDIA 輝達",
+                priority: "第一級核心",
+                badgeClass: "bg-emerald-100 text-emerald-800",
+                role: "算力晶片與超算架構 (GB300 / Vera Rubin)",
+                metrics: "Vera Rubin 全面量產；SpaceX 擴張對應逾 $1,600億 增量商機",
+                pe: "~34x",
+                risk: "晶片世代交替節奏與供應鏈封裝產能瓶頸"
+            },
+            {
+                ticker: "GEV",
+                name: "GE Vernova",
+                priority: "第一級核心",
+                badgeClass: "bg-emerald-100 text-emerald-800",
+                role: "燃氣輪機與電網設備 (Electrification)",
+                metrics: "2026 Q2 在手訂單 $1,760億；資料中心電氣化訂單 YTD > $50億",
+                pe: "~28x",
+                risk: "燃氣輪機交貨排程與原材料成本"
+            },
+            {
+                ticker: "VRT",
+                name: "Vertiv 威諦廣晟",
+                priority: "第一級核心",
+                badgeClass: "bg-emerald-100 text-emerald-800",
+                role: "機房液冷、熱管理、UPS 配電系統",
+                metrics: "Q2 營收 $32.74億 (+24%)；在手訂單達 $150億 (+109%)",
+                pe: "~62x",
+                risk: "估值偏高，若接單增長放緩易引發股價修整"
+            },
+            {
+                ticker: "MSFT",
+                name: "Microsoft 微軟",
+                priority: "第二級核心",
+                badgeClass: "bg-sky-100 text-sky-800",
+                role: "超大型雲端 (Azure AI Foundry / Copilot)",
+                metrics: "Commercial RPO $6,780億；AI ARR > $370億 (+123%)",
+                pe: "~30x",
+                risk: "CapEx 高額折舊壓力與 AI 應用端 payback 週期"
+            },
+            {
+                ticker: "ETN",
+                name: "Eaton 伊頓",
+                priority: "第二級核心",
+                badgeClass: "bg-sky-100 text-sky-800",
+                role: "配電盤 (Switchgear)、變壓器、電源管理",
+                metrics: "GW 級資料中心硬體剛性需求，訂單能見度高",
+                pe: "~46x",
+                risk: "傳統工業景氣週期波動"
+            },
+            {
+                ticker: "BE",
+                name: "Bloom Energy",
+                priority: "衛星高 Beta",
+                badgeClass: "bg-amber-100 text-amber-800",
+                role: "現場獨立發電 (Onsite Fuel Cells)",
+                metrics: "與 Oracle 簽訂 2.8 GW 合約；宣稱 90 天極速部署",
+                pe: "高動態/轉盈中",
+                risk: "天然氣原料價格與設備安裝執行力"
+            },
+            {
+                ticker: "SPCX",
+                name: "SpaceX (非公開/追蹤)",
+                priority: "特殊高風險",
+                badgeClass: "bg-rose-100 text-rose-800",
+                role: "超大算力中心建設與算力出租 (Colossus)",
+                metrics: "單季營收 $78億，AI CapEx $158億；目標 2027 年 10 GW",
+                pe: "未上市高估值",
+                risk: "巨額 CapEx 現金消耗流失與算力降價風險"
+            }
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-stone-400">沒有找到符合條件的資料</td></tr>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-stone-50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3.5 px-4 font-bold text-stone-900 whitespace-nowrap">
+                        ${item.name} <span class="text-xs font-normal text-stone-500">(${item.ticker})</span>
+                    </td>
+                    <td class="py-3.5 px-4 whitespace-nowrap">
+                        <span class="text-xs px-2.5 py-1 rounded-full font-bold ${item.badgeClass}">${item.priority}</span>
+                    </td>
+                    <td class="py-3.5 px-4 text-xs font-medium text-stone-700">${item.role}</td>
+                    <td class="py-3.5 px-4 text-xs text-stone-700">${item.metrics}</td>
+                    <td class="py-3.5 px-4 text-xs font-bold text-stone-900 whitespace-nowrap">${item.pe}</td>
+                    <td class="py-3.5 px-4 text-xs text-stone-500">${item.risk}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('table-search').addEventListener('input', function(e) {
+            const keyword = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(keyword) ||
+                item.ticker.toLowerCase().includes(keyword) ||
+                item.role.toLowerCase().includes(keyword) ||
+                item.priority.toLowerCase().includes(keyword) ||
+                item.metrics.toLowerCase().includes(keyword)
+            );
+            renderTable(filtered);
+        });
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on clicking any link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        window.onload = function() {
+            // Initial Table Render
+            renderTable(productData);
+
+            // Chart 1: GW Capacity & CapEx Projection
+            const ctxGw = document.getElementById('gwGrowthChart').getContext('2d');
+            new Chart(ctxGw, {
+                type: 'bar',
+                data: {
+                    labels: ['2025年 (Colossus一期)', '2026年底預估', '2027年底目標'],
+                    datasets: [
+                        {
+                            label: 'SpaceX AI 算力規模 (GW)',
+                            data: [0.3, 2.0, 10.0],
+                            backgroundColor: 'rgba(2, 132, 199, 0.85)',
+                            borderColor: 'rgba(2, 132, 199, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '累積基礎建設金額估算 (十億美元 $B)',
+                            data: [15, 100, 400],
+                            type: 'line',
+                            borderColor: 'rgba(245, 158, 11, 1)',
+                            backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                            borderWidth: 3,
+                            pointRadius: 5,
+                            fill: false,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: '容量 (GW)' },
+                            beginAtZero: true
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: '投資額 ($B USD)' },
+                            grid: { drawOnChartArea: false },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Supply Chain Backlog & Valuation Comparison
+            const ctxBacklog = document.getElementById('backlogPeChart').getContext('2d');
+            new Chart(ctxBacklog, {
+                type: 'bar',
+                data: {
+                    labels: ['GE Vernova (GEV)', 'Vertiv (VRT)', 'Microsoft (MSFT-RPO)'],
+                    datasets: [
+                        {
+                            label: '在手訂單 / 未履約金額 (十億美元 $B)',
+                            data: [176, 15, 678],
+                            backgroundColor: [
+                                'rgba(14, 165, 233, 0.8)',
+                                'rgba(99, 102, 241, 0.8)',
+                                'rgba(16, 185, 129, 0.8)'
+                            ],
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': $' + context.raw + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '金額 (億美元 $B)' }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
