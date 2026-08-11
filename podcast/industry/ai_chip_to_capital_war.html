@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI從晶片戰走向資本戰：Nvidia與Intel</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .active-nav-link {
+            color: #0284c7; /* sky-600 */
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #57534e; /* stone-600 */
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="bg-sky-600 text-white font-black px-2.5 py-1 rounded text-lg tracking-wider">AI</span>
+                    <span class="font-bold text-lg sm:text-xl text-stone-800">Nvidia與Intel的資本戰</span>
+                </div>
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#summary" class="nav-link inactive-nav-link py-5 transition-colors">核心轉折</a>
+                    <a href="#nvidia" class="nav-link inactive-nav-link py-5 transition-colors">Nvidia 融資平台</a>
+                    <a href="#intel" class="nav-link inactive-nav-link py-5 transition-colors">Intel 200億增資</a>
+                    <a href="#alliance" class="nav-link inactive-nav-link py-5 transition-colors">NVDA×INTC 聯盟</a>
+                    <a href="#visuals" class="nav-link inactive-nav-link py-5 transition-colors">圖表與數據表</a>
+                    <a href="#takeaways" class="nav-link inactive-nav-link py-5 transition-colors">投資啟示</a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md" aria-label="切換選單">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#summary" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">核心轉折</a>
+            <a href="#nvidia" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">Nvidia 融資平台</a>
+            <a href="#intel" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">Intel 200億增資</a>
+            <a href="#alliance" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">NVDA×INTC 聯盟</a>
+            <a href="#visuals" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">圖表與數據表</a>
+            <a href="#takeaways" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">投資啟示</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <div class="bg-gradient-to-br from-stone-900 via-stone-800 to-sky-950 text-white py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                    AI從晶片戰走向資本戰：Nvidia用華爾街放大5,000億，Intel用200億買回製造競爭力
+                </h1>
+                <p class="mt-4 text-stone-300 text-base sm:text-lg leading-relaxed">
+                    AI產業競爭瓶頸已從「單純晶片供給」擴大至資本、土地、電力、資料中心與先進封裝。透視兩大巨頭完全不同的資本戰術與商業模式大洗牌。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12 flex-grow">
+
+        <!-- SECTION 1: 核心轉折與四大指標 -->
+        <section id="summary" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心轉折：AI競賽的維度轉變
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    過去三年市場關注「誰能做最快的GPU」，但到了2026年，限制AI產業成長的關鍵逐漸擴大到<strong>資本、土地、電力、資料中心、先進封裝與基礎建設建設速度</strong>。
+                    8月10日至11日的兩則重磅新聞，正宣告AI競爭已全面升級為<strong>資本取得能力的競爭</strong>。
+                </p>
+            </div>
+
+            <!-- Highlights Metrics Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-sky-50 border-l-4 border-sky-600 rounded-lg shadow p-5">
+                    <div class="text-xs font-bold text-sky-800 uppercase tracking-wider mb-1">Nvidia 算力平台目標</div>
+                    <div class="text-3xl font-black text-sky-900 mb-1">$5,000億</div>
+                    <p class="text-xs text-stone-600">與Apollo、BlackRock、KKR等六大機構合作籌集第三方資本</p>
+                </div>
+                <div class="bg-blue-50 border-l-4 border-blue-600 rounded-lg shadow p-5">
+                    <div class="text-xs font-bold text-blue-800 uppercase tracking-wider mb-1">Intel 股權融資定案</div>
+                    <div class="text-3xl font-black text-blue-900 mb-1">$200億</div>
+                    <p class="text-xs text-stone-600">每股 $95 發行2.105億新股，因需求強勁自 150億 上修</p>
+                </div>
+                <div class="bg-emerald-50 border-l-4 border-emerald-600 rounded-lg shadow p-5">
+                    <div class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1">2026 科技巨頭支出</div>
+                    <div class="text-3xl font-black text-emerald-900 mb-1">$7,300億+</div>
+                    <p class="text-xs text-stone-600">路透社預估全產業基礎設施CAPEX，迫使業者提升資本效率</p>
+                </div>
+                <div class="bg-purple-50 border-l-4 border-purple-600 rounded-lg shadow p-5">
+                    <div class="text-xs font-bold text-purple-800 uppercase tracking-wider mb-1">Intel Q2 DCAI 營收</div>
+                    <div class="text-3xl font-black text-purple-900 mb-1">$63億</div>
+                    <p class="text-xs text-stone-600">年增 59%，顯示GPU叢集強烈帶動相關CPU與基礎架構需求</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Nvidia 融資平台剖析 -->
+        <section id="nvidia" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Nvidia：資本外部化與「AI Factory」金融化
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 space-y-4 text-stone-700">
+                        <h3 class="text-xl font-bold text-stone-900">非直接出資，而是將算力轉化為「基礎建設資產」</h3>
+                        <p class="leading-relaxed">
+                            Nvidia 宣布與 Apollo、BlackRock、Blackstone、Brookfield、Goldman Sachs 及 KKR 簽署 MOU，建立獨立 AI 運算融資平台。目標動員超過 5,000 億美元第三方資本。創辦人黃仁勳表示，Nvidia 可對部分交易提供最高約 1,250 億美元（約交易 25%）的後盾支持。
+                        </p>
+                        <p class="leading-relaxed">
+                            <strong>運作機制：</strong>由華爾街機構向退休基金、保險公司籌資買硬體建廠，AI 公司則透過長期租約或算力合約使用。這將原本一次性百億美元的 CAPEX 轉化為多年期「算力使用費」，類似飛機租賃或電廠融資模式。
+                        </p>
+                    </div>
+                    <div class="bg-stone-100 p-5 rounded-lg border border-stone-200 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-stone-800 mb-2 border-b border-stone-300 pb-1">Nvidia 的關鍵轉型：</h4>
+                            <ul class="text-sm space-y-2 text-stone-600">
+                                <li class="flex items-start">
+                                    <span class="text-sky-600 mr-2">✔</span> 不只賣 GPU，更成為 AI 金融體系的核心平台。
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-sky-600 mr-2">✔</span> 幫礦工找銀行，大幅擴大潛在可服務市場 (TAM)。
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-amber-600 mr-2">⚠</span> <strong>潛在風險：</strong>須注意最高 $1,250 億後盾的信用風險、舊 GPU 的經濟壽命與殘值折舊。
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-stone-300 text-xs text-stone-500 font-semibold">
+                            策略本質：資本外部化 (Capital Externalization)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Intel 200億美元增資剖析 -->
+        <section id="intel" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Intel：資產負債表強化與 200 億美元豪賭
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 space-y-4 text-stone-700">
+                        <h3 class="text-xl font-bold text-stone-900">抓住股價上漲契機，以低稀釋代價籌集轉型真金白銀</h3>
+                        <p class="leading-relaxed">
+                            Intel 8月11日定案將增資額由 150 億提高至 200 億美元，以每股 $95 發行 2.105 億股，扣除費用後預估取得 197 億美元淨資金。股數稀釋僅約 4.2%~4.8%，係利用 2026 年股價近三倍大漲時獲得高效率融資。
+                        </p>
+                        <p class="leading-relaxed">
+                            <strong>AI帶動伺服器需求：</strong>Intel Q2 營收 161 億美元（年增 25%），其中 Data Center & AI (DCAI) 營收 63 億美元（年增 59%）。因大型 GPU 叢集仍需要 Xeon CPU 處理作業系統與儲存控制，需求持續強勁。
+                        </p>
+                    </div>
+                    <div class="bg-stone-100 p-5 rounded-lg border border-stone-200 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-stone-800 mb-2 border-b border-stone-300 pb-1">Intel 的關鍵試金石：</h4>
+                            <ul class="text-sm space-y-2 text-stone-600">
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-2">✔</span> 資產負債表大躍進，充實晶圓廠與先進封裝資本。
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-2">✔</span> Q2 Foundry 營收 $58 億，但營業虧損達 $21 億。
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-amber-600 mr-2">⚠</span> <strong>勝負關鍵：</strong>14A 製程將於 2028 年量產（Tesla 已加入成為客戶），資本回報率 (ROIC) 為最大風險。
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-stone-300 text-xs text-stone-500 font-semibold">
+                            策略本質：資產負債表強化 (Balance Sheet Reinforcement)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Nvidia × Intel 策略聯盟 -->
+        <section id="alliance" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                競爭兼合作：NVDA × INTC 的 AI 供應鏈新聯盟
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-6">
+                    市場常將兩家公司放在對立面，但兩者其實已形成深刻的策略共生關係：2025年9月 Nvidia 宣布以每股 $23.28 投入 50 億美元購買 Intel 股票，雙方建立長期技術合作。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-stone-50 p-5 rounded-lg border-t-4 border-emerald-500">
+                        <h3 class="font-bold text-stone-900 mb-2">資料中心端合作 (Data Center)</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            Intel 替 Nvidia 客製化設計 x86 CPU，並透過 Nvidia NVLink 與 GPU 高速連接，最後由 Nvidia 整合進 AI 基礎設施平台。Nvidia 動員的 5,000 億美元算力平台，將同時帶動 Intel 伺服器 CPU 及先進封裝需求。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-5 rounded-lg border-t-4 border-sky-500">
+                        <h3 class="font-bold text-stone-900 mb-2">個人電腦端合作 (Client PC)</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            Intel 開發整合 Nvidia RTX GPU Chiplet 的新一代 x86 SoC，結合 Intel x86 生態與 Nvidia 強大圖形與 AI 算力，共同鎖定下一代 Copilot+ / AI PC 市場。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: 動態圖表與互動資料表格 -->
+        <section id="visuals" class="scroll-mt-20 space-y-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-2 border-b-2 border-sky-500 pb-2">
+                動態數據視覺化與資料探索
+            </h2>
+
+            <!-- Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Chart 1 Container -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4">2026年 AI 資本戰相關財務規模 (十億美元)</h3>
+                    <div class="relative w-full h-72">
+                        <canvas id="capitalScaleChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-2 text-center">數據來源：報告公開數據與路透社估算</p>
+                </div>
+
+                <!-- Chart 2 Container -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4">Intel Q2 關鍵財務亮點 (十億美元)</h3>
+                    <div class="relative w-full h-72">
+                        <canvas id="intelQ2Chart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-2 text-center">展現 DCAI 成長動能與 Foundry 營業現狀</p>
+                </div>
+            </div>
+
+            <!-- Interactive Searchable Data Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800">Nvidia 與 Intel 資本與財務指標一覽表</h3>
+                        <p class="text-xs text-stone-500">可搜尋公司名稱、事件類型、金額或戰略目的</p>
+                    </div>
+                    <!-- Search Input Box -->
+                    <div class="w-full sm:w-64">
+                        <input type="text" id="table-search" placeholder="輸入關鍵字篩選..." class="w-full px-3 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </div>
+                </div>
+
+                <!-- Table Container with horizontal overflow -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">公司/主體</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">事件 / 指標</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">規模 / 金額</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">合作方 / 詳細條款</th>
+                                <th scope="col" class="px-4 py-3 text-left text-xs font-bold text-stone-600 uppercase tracking-wider">核心戰略影響</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="bg-white divide-y divide-stone-200 text-sm">
+                            <!-- JS Dynamically Populates Row Here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: 投資啟示與未來三問 -->
+        <section id="takeaways" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                投資人啟示：資產定位與 AI 投資三問
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="p-5 rounded-lg border border-sky-200 bg-sky-50/50">
+                        <div class="text-sky-800 font-bold text-lg mb-2">NVDA：高品質 AI 核心資產</div>
+                        <ul class="text-sm text-stone-700 space-y-2">
+                            <li>• <strong>護城河：</strong>CUDA + GPU + NVLink + 金融資本平台。</li>
+                            <li>• <strong>優勢：</strong>幫客戶找錢，顯著降低買家門檻，擴大 TAM。</li>
+                            <li>• <strong>監控指標：</strong>AI 資料中心投資回報率 (ROI) 及潛在信用保證風險。</li>
+                        </ul>
+                    </div>
+                    <div class="p-5 rounded-lg border border-blue-200 bg-blue-50/50">
+                        <div class="text-blue-800 font-bold text-lg mb-2">INTC：高 Beta AI 轉型標的</div>
+                        <ul class="text-sm text-stone-700 space-y-2">
+                            <li>• <strong>護城河：</strong>x86 生態 + 晶圓製造與先進封裝 (Foundry)。</li>
+                            <li>• <strong>優勢：</strong>充實資產負債表，股價回升帶來高效募資。</li>
+                            <li>• <strong>監控指標：</strong>200 億美元資本產生的實際自由現金流與 14A 客戶採購情況。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-stone-800 text-stone-100 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-3 text-sky-400">下一階段 AI 投資關鍵「三問」：</h3>
+                    <p class="text-sm text-stone-300 mb-4 leading-relaxed">
+                        AI 第一階段贏家是晶片，第二階段瓶頸是資本、電力、土地與先進封裝，第三階段則是將算力轉化為穩定現金流金融資產。未來評估 AI 企業請務必多問三個問題：
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                        <div class="bg-stone-700/80 p-4 rounded-lg border border-stone-600">
+                            <span class="text-sky-300 font-extrabold text-lg block mb-1">問題 一</span>
+                            <span class="text-stone-200 font-medium text-sm">誰能拿得到最便宜的資金？</span>
+                        </div>
+                        <div class="bg-stone-700/80 p-4 rounded-lg border border-stone-600">
+                            <span class="text-sky-300 font-extrabold text-lg block mb-1">問題 二</span>
+                            <span class="text-stone-200 font-medium text-sm">誰最快取得電力與資料中心？</span>
+                        </div>
+                        <div class="bg-stone-700/80 p-4 rounded-lg border border-stone-600">
+                            <span class="text-sky-300 font-extrabold text-lg block mb-1">問題 三</span>
+                            <span class="text-stone-200 font-medium text-sm">誰能讓每1美元CAPEX創造最高收入？</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Required Format -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI從晶片戰走向資本戰：Nvidia與Intel。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-400">資料來源：基於網路中Nvidia與Intel相關公開資料 (2026年08月11日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Authentic Data Array based on report
+        const productData = [
+            {
+                company: "Nvidia",
+                event: "AI 運算融資平台",
+                amount: "$5,000 億美元",
+                detail: "Apollo, BlackRock, KKR, Blackstone, Brookfield, Goldman Sachs",
+                impact: "第三方資本建置資料中心，實現資本外部化"
+            },
+            {
+                company: "Nvidia",
+                event: "潛在交易後盾支持",
+                amount: "最高 $1,250 億美元",
+                detail: "最多約 25% 的後盾支持或信用增強",
+                impact: "降低 AI 客戶融資門檻，擴大潛在可服務市場 (TAM)"
+            },
+            {
+                company: "Intel",
+                event: "定價股權增資",
+                amount: "$200 億美元",
+                detail: "每股 $95，發行 2.105 億新股 (淨籌約 $197 億)",
+                impact: "充實資產負債表，用於資本支出與晶圓廠建置"
+            },
+            {
+                company: "Intel",
+                event: "Q2 Data Center & AI",
+                amount: "$63 億美元 (年增 59%)",
+                detail: "伺服器銷量增 9%，平均售價 (ASP) 大幅提升",
+                impact: "證明 GPU 叢集需求同步帶動 Xeon CPU 需求"
+            },
+            {
+                company: "Intel",
+                event: "Q2 Foundry 代工業務",
+                amount: "營收 $58 億 / 虧損 $21 億",
+                detail: "主要來自內部交易；14A 預計 2028 量產",
+                impact: "Tesla 已成為 14A 客戶，等待外部規模轉虧為盈"
+            },
+            {
+                company: "Nvidia × Intel",
+                event: "策略股權投資與合作",
+                amount: "$50 億美元",
+                detail: "NVDA 每股 $23.28 入股 INTC；開發客製 CPU/SoC",
+                impact: "打造 x86 CPU + NVLink + GPU 整合體系"
+            },
+            {
+                company: "科技巨頭產業合集",
+                event: "2026 AI 基礎設施總 CAPEX",
+                amount: "超過 $7,300 億美元",
+                detail: "Microsoft, Meta, Amazon, Google 等路透社估算",
+                impact: "資金規模過龐大，倒逼產業加速「算力金融化」"
+            }
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="px-4 py-6 text-center text-stone-500">無符合的搜尋結果</td></tr>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-stone-50 transition-colors";
+                row.innerHTML = `
+                    <td class="px-4 py-3 font-semibold text-stone-900">${item.company}</td>
+                    <td class="px-4 py-3 text-stone-800">${item.event}</td>
+                    <td class="px-4 py-3 font-bold text-sky-700">${item.amount}</td>
+                    <td class="px-4 py-3 text-stone-600 text-xs">${item.detail}</td>
+                    <td class="px-4 py-3 text-stone-700 text-xs">${item.impact}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Initialize table
+        renderTable(productData);
+
+        // Search Filter Event
+        document.getElementById('table-search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.company.toLowerCase().includes(query) ||
+                item.event.toLowerCase().includes(query) ||
+                item.amount.toLowerCase().includes(query) ||
+                item.detail.toLowerCase().includes(query) ||
+                item.impact.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href').substring(1);
+                        if (href === activeId) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: Capital Scale Bar Chart
+            const ctx1 = document.getElementById('capitalScaleChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['科技巨頭CAPEX總額', 'NVDA融資平台目標', 'NVDA最高後盾金額', 'Intel股權融資金額', 'NVDA入股Intel'],
+                    datasets: [{
+                        label: '金額 (十億美元 USD)',
+                        data: [730, 500, 125, 20, 5],
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(2, 132, 199, 0.8)',
+                            'rgba(56, 189, 248, 0.6)',
+                            'rgba(37, 99, 235, 0.8)',
+                            'rgba(147, 51, 234, 0.7)'
+                        ],
+                        borderColor: [
+                            '#059669',
+                            '#0284c7',
+                            '#0284c7',
+                            '#1d4ed8',
+                            '#7e22ce'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '十億美元 ($B)' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Intel Q2 Metrics
+            const ctx2 = document.getElementById('intelQ2Chart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['DCAI 業務營收', 'Foundry 代工營收', 'Foundry 營業虧損'],
+                    datasets: [{
+                        label: 'Q2金額 (十億美元)',
+                        data: [6.3, 5.8, -2.1],
+                        backgroundColor: [
+                            'rgba(2, 132, 199, 0.8)',
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(239, 68, 68, 0.7)'
+                        ],
+                        borderColor: [
+                            '#0284c7',
+                            '#2563eb',
+                            '#dc2626'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            title: { display: true, text: '十億美元 ($B)' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
