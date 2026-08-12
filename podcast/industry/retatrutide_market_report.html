@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Retatrutide與減重藥千億戰爭</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-sky-500 selection:text-white">
+
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-extrabold text-stone-900 tracking-tight flex items-center gap-2">
+                        <span class="inline-block w-3 h-3 rounded-full bg-sky-500"></span>
+                        減重藥市場戰爭
+                    </span>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <a href="#summary" class="nav-item inactive-nav-link py-5 text-sm transition-colors">事件總覽</a>
+                    <a href="#efficacy" class="nav-item inactive-nav-link py-5 text-sm transition-colors">療效與風險</a>
+                    <a href="#market-tiers" class="nav-item inactive-nav-link py-5 text-sm transition-colors">三大競爭梯隊</a>
+                    <a href="#charts-section" class="nav-item inactive-nav-link py-5 text-sm transition-colors">數據視覺化</a>
+                    <a href="#interactive-table" class="nav-item inactive-nav-link py-5 text-sm transition-colors">藥物資料庫</a>
+                    <a href="#investment-strategy" class="nav-item inactive-nav-link py-5 text-sm transition-colors">投資策略</a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex md:hidden items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2" id="mobile-menu">
+            <a href="#summary" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">事件總覽</a>
+            <a href="#efficacy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">療效與風險</a>
+            <a href="#market-tiers" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">三大競爭梯隊</a>
+            <a href="#charts-section" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">數據視覺化</a>
+            <a href="#interactive-table" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">藥物資料庫</a>
+            <a href="#investment-strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">投資策略</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+        
+        <!-- Hero Section -->
+        <header id="summary" class="scroll-mt-24">
+            <div class="bg-gradient-to-br from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl p-8 md:p-12 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                    藥還沒上市，黑市已經搶著賣：<br>
+                    <span class="text-sky-400">Retatrutide</span> 揭開下一場減重藥千億美元戰爭
+                </h1>
+                <p class="text-stone-300 text-base md:text-lg max-w-3xl leading-relaxed mb-6">
+                    8月12日 Eli Lilly (禮來) 對 6 家美國企業提起訴訟，指控其非法銷售未獲 FDA 核准的實驗性減重藥 Retatrutide。未上市即引爆黑市熱潮，背後反映全球減重藥競爭已跨入「逼近減重手術」的全新世代。
+                </p>
+                <div class="flex flex-wrap gap-4 text-xs font-medium text-stone-300">
+                    <span class="bg-stone-800/80 px-3 py-1.5 rounded-lg border border-stone-700">訴訟企業：6 家</span>
+                    <span class="bg-stone-800/80 px-3 py-1.5 rounded-lg border border-stone-700">通報執法機構：200+ 人/企</span>
+                    <span class="bg-stone-800/80 px-3 py-1.5 rounded-lg border border-stone-700">下架非法網頁：14,000+ 頁</span>
+                    <span class="bg-stone-800/80 px-3 py-1.5 rounded-lg border border-stone-700">FDA現狀：嚴禁製作複方藥</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Key Metrics Highlights -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Retatrutide 最強減重率</p>
+                <p class="text-3xl font-extrabold text-stone-900 mt-2">-28.3%</p>
+                <p class="text-xs text-stone-600 mt-1">TRIUMPH-1 試驗最高劑量 (80週平均減70.3磅)</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Eli Lilly Q2 總營收</p>
+                <p class="text-3xl font-extrabold text-stone-900 mt-2">$230 億美元</p>
+                <p class="text-xs text-stone-600 mt-1">同比增長 48% (Mounjaro & Zepbound 佔近2/3)</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
+                <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">Lilly 美國 Incretin 市占率</p>
+                <p class="text-3xl font-extrabold text-stone-900 mt-2">60.9%</p>
+                <p class="text-xs text-stone-600 mt-1">處方量大幅領先 Novo Nordisk 的 38.8%</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">預計 FDA 申請時間</p>
+                <p class="text-3xl font-extrabold text-stone-900 mt-2">2027 Q1</p>
+                <p class="text-xs text-stone-600 mt-1">Eli Lilly 計畫向監管機構提出核准申請</p>
+            </div>
+        </section>
+
+        <!-- Section 1: Efficacy & Clinical Risks -->
+        <section id="efficacy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                一、Retatrutide 核心優勢與臨床風險
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Efficacy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2 bg-sky-100 text-sky-600 rounded-lg font-bold">3G</div>
+                        <h3 class="text-xl font-bold text-stone-900">三重受體作用機制 (GLP-1 / GIP / Glucagon)</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        相較於 Wegovy 的單一 GLP-1，以及 Zepbound 的 GLP-1/GIP 雙重受體，Retatrutide 再引入 Glucagon (胰高血糖素受體)，將減重競賽拉推升至逼近外科減重手術效果的世代。
+                    </p>
+                    <ul class="space-y-2 text-sm text-stone-700">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 font-bold mr-2">•</span>
+                            <span><strong>無糖尿病肥胖患者：</strong> 80週平均體重下降 <strong>28.3%</strong>，45.3%受試者減重 ≥30%。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 font-bold mr-2">•</span>
+                            <span><strong>第二型糖尿病肥胖患者：</strong> 平均減重約 <strong>20.8%</strong>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 font-bold mr-2">•</span>
+                            <span><strong>重度心血管疾病肥胖患者：</strong> 平均減重約 <strong>22.6%</strong>。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Risk Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2 bg-amber-100 text-amber-600 rounded-lg font-bold">⚠️</div>
+                        <h3 class="text-xl font-bold text-stone-900">投資人不可忽視的心血管風險訊號</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        高高在上的減重數據不等於直接的商業成功。7月公布的心血管數據中發現尚需密切追蹤的安全警訊：
+                    </p>
+                    <div class="bg-amber-50 border border-amber-200 rounded-md p-4 mb-4">
+                        <p class="text-xs text-amber-800 font-medium leading-normal">
+                            在心血管疾病族群研究中，儘管整體重大心血管事件減少，但單獨觀察「心肌梗塞、中風及死亡」三項最嚴重事件時，Retatrutide 組呈現 <strong>12% 較高的相對風險</strong>。
+                        </p>
+                    </div>
+                    <p class="text-xs text-stone-500">
+                        *註：目前事件數極少不足以定論，但將是未來 FDA 審查、長期安全性、停藥率及保險給付的關鍵指標。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Market Tiers -->
+        <section id="market-tiers" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                二、減重藥市場三層競爭格局
+            </h2>
+            
+            <div class="space-y-6">
+                <!-- Tier 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-600">
+                    <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+                        <h3 class="text-xl font-bold text-stone-900">第一梯隊：Eli Lilly 與 Novo Nordisk 的現金流巨頭戰</h3>
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded">絕對主導</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-sky-700">Eli Lilly (禮來) - 完整梯隊佈局</h4>
+                            <p class="text-stone-600 leading-relaxed">
+                                擁有 Mounjaro (Q2營收 $99億，+91%) 與 Zepbound (Q2營收 $49億，+46%)。2026年4月推出口服 Foundayo，搭配研發中的 Retatrutide，形成「注射主力 + 口服 + 下一代三重作用藥」的完美產品階梯。
+                            </p>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-stone-700">Novo Nordisk (諾和諾德) - 面臨價格與競爭壓力</h4>
+                            <p class="text-stone-600 leading-relaxed">
+                                Q2肥胖治療營收達 231.5 億丹麥克朗 (+16%)，但美國營收僅增長 4%，遠落後美國整體市場使用量 (+87%) 的成長。主要原因為價格壓力、折扣與 Lilly 的強勢搶市。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+                        <h3 class="text-xl font-bold text-stone-900">第二戰場：進入「口服藥時代」(Expanded Market)</h3>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">增量市場開拓</span>
+                    </div>
+                    <p class="text-stone-600 text-sm mb-4">
+                        2026年口服減重藥崛起，擴大了不願每週自行打針的全新客群。
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                        <div class="p-4 bg-stone-50 rounded-lg">
+                            <span class="font-bold text-emerald-700">Novo Nordisk - Wegovy Pill</span>
+                            <p class="text-stone-600 mt-1">2026年1月上市，截至7月中每週處方高達 26.7 萬張，累積超 500 萬張。其中 <strong>80% 使用者從未用過 GLP-1 藥物</strong>，展現極強擴市效益。</p>
+                        </div>
+                        <div class="p-4 bg-stone-50 rounded-lg">
+                            <span class="font-bold text-sky-700">Eli Lilly - Foundayo (Orforglipron)</span>
+                            <p class="text-stone-600 mt-1">2026年4月獲美核准、8月獲英國核准。賣點為服藥限制少（無需空腹及嚴格飲食限制）。Q2收入 9800 萬美元，追趕中。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-500">
+                    <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+                        <h3 class="text-xl font-bold text-stone-900">第三梯隊：特色潛力追趕者 (Challengers)</h3>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded">創新差異化</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                        <div class="p-3 border rounded-lg hover:border-indigo-400 transition-colors">
+                            <p class="font-bold text-stone-900 text-sm">Amgen (MariTide)</p>
+                            <p class="text-stone-500 mt-1">主打低施藥頻率，月針或季針，1年平均減重約 20%。</p>
+                        </div>
+                        <div class="p-3 border rounded-lg hover:border-indigo-400 transition-colors">
+                            <p class="font-bold text-stone-900 text-sm">Pfizer (Berobenatide)</p>
+                            <p class="text-stone-500 mt-1">併購 Metsera 取得長效 GLP-1，計畫2026推進逾20項研究。</p>
+                        </div>
+                        <div class="p-3 border rounded-lg hover:border-indigo-400 transition-colors">
+                            <p class="font-bold text-stone-900 text-sm">Viking Tx (VK2735)</p>
+                            <p class="text-stone-500 mt-1">雙重受體針劑/口服，13週減重 12.2%，高潛力併購標的。</p>
+                        </div>
+                        <div class="p-3 border rounded-lg hover:border-indigo-400 transition-colors">
+                            <p class="font-bold text-stone-900 text-sm">Structure (Aleniglipron)</p>
+                            <p class="text-stone-500 mt-1">口服黑馬，44週減重 16.3%，兼具方便性與優異療效。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Charts Section -->
+        <section id="charts-section" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                三、關鍵數據視覺化分析
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Weight Loss Comparison -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">主要減重藥物/候選藥物平均減重百分比 (%)</h3>
+                    <p class="text-xs text-stone-500 mb-4">資料來源：臨床試驗數據整理 (以最高劑量/主要療效點為準)</p>
+                    <div class="relative w-full h-72">
+                        <canvas id="weightLossChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Revenue & Market Share -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">2026年 Q2 Eli Lilly 旗艦減重/控糖藥物營收 (億美元)</h3>
+                    <p class="text-xs text-stone-500 mb-4">Eli Lilly Q2總營收達230億美元，年增48%</p>
+                    <div class="relative w-full h-72">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Table -->
+        <section id="interactive-table" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                四、全景減重藥物互動式數據庫
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Search Filter Input -->
+                <div class="mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <p class="text-sm text-stone-600">即時篩選主要藥廠、藥物名稱或作用機制：</p>
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="tableSearchInput" placeholder="搜尋公司、藥名、劑型..." 
+                               class="w-full px-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <!-- Table Container -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-stone-100 text-stone-700 sticky top-0">
+                            <tr>
+                                <th class="p-3 border-b font-bold">藥廠</th>
+                                <th class="p-3 border-b font-bold">藥物名稱</th>
+                                <th class="p-3 border-b font-bold">作用機制</th>
+                                <th class="p-3 border-b font-bold">給藥途徑 / 頻率</th>
+                                <th class="p-3 border-b font-bold">臨床狀態</th>
+                                <th class="p-3 border-b font-bold">核心減重效果</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-stone-200 text-stone-800">
+                            <!-- JS Dynamically Injected Rows -->
+                        </tbody>
+                    </table>
+                </div>
+                <p id="noResults" class="hidden text-center text-stone-500 text-sm py-4">未找到符合條件的藥物資料</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Investment Strategy -->
+        <section id="investment-strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                五、投資策略與商業勝負關鍵
+            </h2>
+
+            <!-- Investment Logic Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-600">
+                    <h3 class="font-bold text-lg text-stone-900 mb-2">Eli Lilly (LLY)：產業核心龍頭標的</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        基本面最完整，具備強勁現金流 (Mounjaro + Zepbound) 與完備的產品梯隊。但目前市場預期極高，未來股價能否持續大幅上升，取決於 Retatrutide 能否順利通過 FDA、取得保險給付及克服價格競爭。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <h3 class="font-bold text-lg text-stone-900 mb-2">Novo Nordisk (NVO)：轉機型投資標的</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        已從純成長股轉為轉機股。Wegovy pill 成功驗證擴市能力，但面臨美國價格下滑紅利被吃掉的問題，亟需證明 CagriSema 或下一代藥物能重新追上禮來。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Winning Factors -->
+            <div class="bg-stone-900 text-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4 text-sky-400">未來決定勝負的 5 大核心指標</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-xs">
+                    <div class="bg-stone-800 p-4 rounded-lg">
+                        <p class="font-bold text-stone-200 text-sm mb-1">1. 療效標竿</p>
+                        <p class="text-stone-400">25%~30% 將成為下一代產品比較新門檻。</p>
+                    </div>
+                    <div class="bg-stone-800 p-4 rounded-lg">
+                        <p class="font-bold text-stone-200 text-sm mb-1">2. 給藥方便性</p>
+                        <p class="text-stone-400">口服、月針或季針，鎖定差異化客群。</p>
+                    </div>
+                    <div class="bg-stone-800 p-4 rounded-lg">
+                        <p class="font-bold text-stone-200 text-sm mb-1">3. 淨價格壓力</p>
+                        <p class="text-stone-400">處方量增加不等於營收同比例增加。</p>
+                    </div>
+                    <div class="bg-stone-800 p-4 rounded-lg">
+                        <p class="font-bold text-stone-200 text-sm mb-1">4. 保險覆蓋</p>
+                        <p class="text-stone-400">Medicare 與商業保險給付決定量能。</p>
+                    </div>
+                    <div class="bg-stone-800 p-4 rounded-lg">
+                        <p class="font-bold text-stone-200 text-sm mb-1">5. 額外醫療價值</p>
+                        <p class="text-stone-400">心血管、睡眠呼吸中止症、脂肪肝等多重適應症。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Retatrutide與減重藥千億戰爭。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中減重藥市場與Eli Lilly相關公開資料 (2026年8月12日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Real Data Source extracted from report
+        const productData = [
+            { company: "Eli Lilly", drug: "Retatrutide", mechanism: "GLP-1/GIP/Glucagon 三重受體", route: "週施打針劑", status: "三期 (預計2027Q1遞交)", efficacy: "-28.3% (80週)" },
+            { company: "Eli Lilly", drug: "Zepbound / Mounjaro", mechanism: "GLP-1/GIP 雙重受體", route: "週施打針劑", status: "已核准上市", efficacy: "-20.0% ~ -25.5%" },
+            { company: "Eli Lilly", drug: "Foundayo (Orforglipron)", mechanism: "口服小分子 GLP-1", route: "每日口服錠劑", status: "美/英已核准上市", efficacy: "方便性優 (無空腹限制)" },
+            { company: "Novo Nordisk", drug: "Wegovy / Ozempic", mechanism: "GLP-1 單一受體", route: "週施打針劑", status: "已核准上市", efficacy: "-15.0% ~ -20.0%" },
+            { company: "Novo Nordisk", drug: "Wegovy Pill", mechanism: "口服 GLP-1 劑型", route: "每日口服錠劑", status: "已核准上市", efficacy: "市占領先 (週處方26.7萬)" },
+            { company: "Novo Nordisk", drug: "CagriSema", mechanism: "Cagrilintide/Semaglutide 雙作用", route: "週施打針劑", status: "臨床三期", efficacy: "-23.0%" },
+            { company: "Amgen", drug: "MariTide", mechanism: "GLP-1R/GIPR 雙特異性", route: "月針劑 / 季針劑", status: "臨床三期 (MARITIME)", efficacy: "-20.0% (長效持效)" },
+            { company: "Pfizer", drug: "Berobenatide", mechanism: "長效型 GLP-1 (Metsera)", route: "週針劑 / 月針劑", status: "多項三期進行中", efficacy: "長效維持" },
+            { company: "Viking Tx", drug: "VK2735", mechanism: "GLP-1/GIP 雙重受體", route: "針劑 / 口服", status: "三期準備階段", efficacy: "-12.2% (口服13週)" },
+            { company: "Structure Tx", drug: "Aleniglipron", mechanism: "口服小分子 GLP-1", route: "每日口服錠劑", status: "三期 (ACCOMPLISH)", efficacy: "-16.3% (44週)" }
+        ];
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Table Render Function
+        function renderTable(data) {
+            const tableBody = document.getElementById('tableBody');
+            const noResults = document.getElementById('noResults');
+            tableBody.innerHTML = '';
+
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white hover:bg-stone-50' : 'bg-stone-50/50 hover:bg-stone-50';
+                
+                row.innerHTML = `
+                    <td class="p-3 font-semibold text-stone-900">${item.company}</td>
+                    <td class="p-3 font-bold text-sky-600">${item.drug}</td>
+                    <td class="p-3 text-stone-600">${item.mechanism}</td>
+                    <td class="p-3 text-stone-600">${item.route}</td>
+                    <td class="p-3"><span class="bg-stone-200 text-stone-800 text-xs px-2 py-1 rounded">${item.status}</span></td>
+                    <td class="p-3 font-bold text-emerald-600">${item.efficacy}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Table Search Filter
+        const tableSearchInput = document.getElementById('tableSearchInput');
+        tableSearchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filteredData = productData.filter(item => 
+                item.company.toLowerCase().includes(query) ||
+                item.drug.toLowerCase().includes(query) ||
+                item.mechanism.toLowerCase().includes(query) ||
+                item.route.toLowerCase().includes(query) ||
+                item.status.toLowerCase().includes(query)
+            );
+            renderTable(filteredData);
+        });
+
+        // Initialize Table
+        renderTable(productData);
+
+        // Intersection Observer for Active Nav Link Switching
+        const sections = document.querySelectorAll('header, section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        if (item.getAttribute('href') === `#${id}`) {
+                            item.classList.add('active-nav-link');
+                            item.classList.remove('inactive-nav-link');
+                        } else {
+                            item.classList.remove('active-nav-link');
+                            item.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Initialize Chart.js Charts
+        window.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: Weight Loss Percentage
+            const ctx1 = document.getElementById('weightLossChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Retatrutide (Lilly)', 'Tirzepatide (Lilly)', 'CagriSema (Novo)', 'MariTide (Amgen)', 'Wegovy (Novo)', 'Aleniglipron (Structure)'],
+                    datasets: [{
+                        label: '平均減重體重百分比 (%)',
+                        data: [28.3, 25.5, 23.0, 20.0, 18.0, 16.3],
+                        backgroundColor: [
+                            '#0284c7', // Sky blue for Retatrutide
+                            '#38bdf8',
+                            '#64748b',
+                            '#818cf8',
+                            '#94a3b8',
+                            '#34d399'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '減重比例 (%)' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Eli Lilly Revenue Breakdown
+            const ctx2 = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Mounjaro 營收', 'Zepbound 營收', 'Foundayo 營收', 'Novo 肥胖藥Q2營收 (約)'],
+                    datasets: [{
+                        label: '營收 (億美元)',
+                        data: [99.0, 49.0, 0.98, 33.5],
+                        backgroundColor: [
+                            '#0369a1',
+                            '#0284c7',
+                            '#38bdf8',
+                            '#cbd5e1'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '金額 (億美元)' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
