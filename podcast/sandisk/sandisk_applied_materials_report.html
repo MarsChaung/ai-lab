@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI供應鏈重新定價：Sandisk與應用材料對照分析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom styling tweaks for navigation and fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #475569;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-sky-100 selection:text-sky-900">
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo / Title Branding -->
+                <div class="flex items-center space-x-3">
+                    <span class="text-lg font-bold text-stone-900 block leading-tight">Sandisk與應用材料財報解析</span>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#hero" class="nav-link active-nav-link py-5 transition-colors">核心主題</a>
+                    <a href="#sandisk" class="nav-link inactive-nav-link py-5 transition-colors">Sandisk 爆發分析</a>
+                    <a href="#amat" class="nav-link inactive-nav-link py-5 transition-colors">應材財報解析</a>
+                    <a href="#table-section" class="nav-link inactive-nav-link py-5 transition-colors">數據指標庫</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-5 transition-colors">2026 投資策略</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="menuToggle" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2" aria-label="Toggle Menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="hamburgerIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2 text-sm">
+            <a href="#hero" class="mobile-nav-link block py-2 text-stone-700 hover:text-sky-600 font-medium">核心主題</a>
+            <a href="#sandisk" class="mobile-nav-link block py-2 text-stone-700 hover:text-sky-600 font-medium">Sandisk 爆發分析</a>
+            <a href="#amat" class="mobile-nav-link block py-2 text-stone-700 hover:text-sky-600 font-medium">應材財報解析</a>
+            <a href="#table-section" class="mobile-nav-link block py-2 text-stone-700 hover:text-sky-600 font-medium">數據指標庫</a>
+            <a href="#strategy" class="mobile-nav-link block py-2 text-stone-700 hover:text-sky-600 font-medium">2026 投資策略</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section id="hero" class="pt-8 pb-12 bg-gradient-to-b from-stone-100 to-stone-50 border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight mb-4">
+                    AI供應鏈開始重新定價：Sandisk為何大漲，Applied Materials財報超標卻下跌？
+                </h1>
+                <p class="text-lg text-stone-600 leading-relaxed mb-6">
+                    二〇二六年 AI 行情出現重大轉折。市場不再只盲目追逐「營收成長率」，而是轉向嚴格評估**「成長品質」**與**「自由現金流轉化能力」**。
+                </p>
+            </div>
+
+            <!-- Executive Summary Highlight Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-5 border-l-4 border-sky-500">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-stone-500">Sandisk 暴漲關鍵</p>
+                    <p class="text-2xl font-bold text-stone-900 mt-1">毛利率 ~80%</p>
+                    <p class="text-xs text-stone-600 mt-2">2028-2030目標；透過 NBM 鎖定 939 億美元合約翻轉週期。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-5 border-l-4 border-amber-500">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-stone-500">應材 (AMAT) 財報與回檔</p>
+                    <p class="text-2xl font-bold text-stone-900 mt-1">102.5 億美元</p>
+                    <p class="text-xs text-stone-600 mt-2">Q4 指引超標，但毛利率持平且擴產 CAPEX 壓抑短線表現。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-5 border-l-4 border-emerald-500">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-stone-500">先進封裝成長爆發</p>
+                    <p class="text-2xl font-bold text-stone-900 mt-1">&gt; 70% 年增</p>
+                    <p class="text-xs text-stone-600 mt-2">應材將 2026 先進封裝預測由 50% 大幅調升至 70% 以上。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-5 border-l-4 border-purple-500">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-stone-500">2026 投資核心法則</p>
+                    <p class="text-2xl font-bold text-stone-900 mt-1">現金流與毛利</p>
+                    <p class="text-xs text-stone-600 mt-2">從「AI 營收增幅」進化至「誰能將資本支出轉化為股東回報」。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- SECTION 1: Sandisk Analysis -->
+        <section id="sandisk" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                一、Sandisk：從景氣循環股到「鎖定未來四年獲利」的極致翻轉
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Text Narrative Card -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 border border-stone-100 space-y-4">
+                    <h3 class="text-xl font-bold text-stone-900 flex items-center">
+                        <span class="w-3 h-3 bg-sky-500 rounded-full inline-block mr-2"></span>
+                        NBM (New Business Model) 改變記憶體產業遊戲規則
+                    </h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        記憶體產業過去最大的痛點是<strong>「景氣高峰擴產 ➔ 供給過剩價格崩潰 ➔ 砍 CAPEX 調整庫存」</strong>。Sandisk 於 2026 年 8 月 13 日投資人日提出的多年期客戶協議（NBM），截至 8 月初已簽署 8 份長期協議（涵蓋 6 家客戶），最低合約價值達 <strong>939 億美元</strong>，中位數年期長達 4 年。
+                    </p>
+                    <div class="bg-sky-50 p-4 rounded-md border-l-4 border-sky-600 text-stone-700 text-sm">
+                        <strong>財務承諾明確：</strong>預計 2027 會計年度約 50% 產量透過長約出售，2028 年提升至 66%。公司指引 2028-2030 年毛利率維持在 <strong>~80%</strong>，營業利益率 <strong>~75%</strong>，自由現金流率 <strong>~50%</strong>，且完成營運資本投資後將 <strong>100% 多餘現金回饋股東</strong>。
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        此外，Sandisk 推動的 <strong>High-Bandwidth Flash (HBF)</strong> 正與 SK Hynix 合作制定標準，獲得 Google 與 Meta 等巨頭支持，讓 Flash 離 AI 算力核心更近，不再僅是傳統儲存。
+                    </p>
+                </div>
+
+                <!-- Financial Targets Card -->
+                <div class="bg-stone-900 text-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="text-sky-400 font-mono text-xs uppercase tracking-widest">Sandisk 財務藍圖 (2028-2030)</span>
+                        <h4 class="text-2xl font-bold mt-2 text-white">高品質獲利架構</h4>
+                        <ul class="mt-6 space-y-4 text-sm">
+                            <li class="flex justify-between border-b border-stone-700 pb-2">
+                                <span class="text-stone-400">營收年成長率</span>
+                                <span class="font-bold text-sky-300">中至高十幾個 %</span>
+                            </li>
+                            <li class="flex justify-between border-b border-stone-700 pb-2">
+                                <span class="text-stone-400">調整後毛利率</span>
+                                <span class="font-bold text-emerald-400">~ 80%</span>
+                            </li>
+                            <li class="flex justify-between border-b border-stone-700 pb-2">
+                                <span class="text-stone-400">調整後營業利益率</span>
+                                <span class="font-bold text-emerald-400">~ 75%</span>
+                            </li>
+                            <li class="flex justify-between border-b border-stone-700 pb-2">
+                                <span class="text-stone-400">自由現金流率 (FCF)</span>
+                                <span class="font-bold text-amber-400">~ 50%</span>
+                            </li>
+                            <li class="flex justify-between pb-1">
+                                <span class="text-stone-400">多餘現金處置</span>
+                                <span class="font-bold text-sky-300">100% 回饋股東</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-stone-800 text-xs text-stone-400">
+                        *六月季度調整後毛利率已達 84.6%（一年前僅 26.4%）。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Container 1: Sandisk Gross Margin Evolution -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-lg font-bold text-stone-800 mb-2">圖表 1：Sandisk 毛利率轉變歷程與長期目標 (%)</h3>
+                <p class="text-xs text-stone-500 mb-4">顯示 AI 資料中心需求與 NBM 長期協議如何推升毛利率自傳統景氣低谷大幅躍升。</p>
+                <div class="relative h-64 md:h-80 w-full">
+                    <canvas id="sandiskMarginChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Applied Materials Analysis -->
+        <section id="amat" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                二、Applied Materials (應材)：成績單亮眼，股價卻下跌的真相
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- AMAT Financial Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border border-stone-100">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-stone-900">Q3 業績與 Q4 指引雙超標</h3>
+                        <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded font-semibold">Good is not enough</span>
+                    </div>
+                    <div class="space-y-3 text-stone-600 text-sm">
+                        <div class="flex justify-between items-center p-2 bg-stone-50 rounded">
+                            <span>Q3 會計年度營收</span>
+                            <span class="font-bold text-stone-900">91.2 億美元 (年增 25% / 高於預期)</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-stone-50 rounded">
+                            <span>Q3 調整後每股盈餘 (EPS)</span>
+                            <span class="font-bold text-stone-900">$3.50 美元 (預期 $3.40)</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-stone-50 rounded">
+                            <span>Q4 營收指引</span>
+                            <span class="font-bold text-sky-700">102.5 億美元 (預期 $95.4 億)</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-stone-50 rounded">
+                            <span>Q4 EPS 指引</span>
+                            <span class="font-bold text-sky-700">$4.02 美元 (預期 $3.69-$3.71)</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4 leading-relaxed">
+                        基本面極為強勁，客戶對設備需求討論已延續至 **2030 年**，公司規劃於 2028 年將半導體系統產能擴充至目前 **2 倍**。
+                    </p>
+                </div>
+
+                <!-- AMAT Why Stock Fell Analysis -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border border-stone-100 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3 text-rose-700">為什麼利多出盡跌 4~5%？</h3>
+                        <ul class="space-y-3 text-sm text-stone-600">
+                            <li class="flex items-start">
+                                <span class="text-rose-500 font-bold mr-2">1.</span>
+                                <span><strong>高預期的基期效應：</strong>市場股價已提前反映，分析師要求「強上加強」，相較 Lam、KLA，應材無進一步拉開大幅差距。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-rose-500 font-bold mr-2">2.</span>
+                                <span><strong>毛利率未出現爆發：</strong>Q4 指引毛利率約 50.4%，與本季持平。不像 Sandisk 結構性飆升。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-rose-500 font-bold mr-2">3.</span>
+                                <span><strong>擴產帶來資本負擔：</strong>擴充產能與廠房設備需要重資本投入，短線資金解讀為成本增加而非即時現金分配。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 p-3 bg-emerald-50 text-emerald-800 rounded text-xs font-medium">
+                        <strong>關鍵訊號：</strong>應材將 2026 先進封裝營收成長預估從 &gt;50% 大幅提升至 <strong>&gt;70%</strong>，證明 AI 晶片封裝瓶頸仍是半導體資本支出的重中之重。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Container 2: AMAT Guidance vs Market Expectations -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-lg font-bold text-stone-800 mb-2">圖表 2：Applied Materials Q3 實際表現與 Q4 指引 vs 市場預期 (億美元)</h3>
+                <p class="text-xs text-stone-500 mb-4">呈現 AMAT 營收雖大幅超標，但因短線毛利率未爆發且屬擴產期而遭遇預期修正。</p>
+                <div class="relative h-64 md:h-80 w-full">
+                    <canvas id="amatBeatChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Interactive Data Table -->
+        <section id="table-section" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-4 border-b-2 border-sky-500 pb-2">
+                三、關鍵營運數據與指標互動比對庫
+            </h2>
+            <p class="text-stone-600 text-sm mb-6">
+                利用下方即時搜尋框，輸入公司名稱 (如 Sandisk、AMAT) 或關鍵字 (如 毛利率、封裝、長約) 快速篩選關鍵財報與展望數據。
+            </p>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-stone-100">
+                <!-- Search Filter Input -->
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="relative w-full sm:w-72">
+                        <input type="text" id="tableSearch" placeholder="搜尋數據、公司或指標..." 
+                            class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                        <svg class="w-4 h-4 text-stone-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <span id="rowCount" class="text-xs text-stone-500 font-medium">顯示 10 筆資料中的 10 筆</span>
+                </div>
+
+                <!-- Table Container with Horizontal Scroll & Sticky Header -->
+                <div class="overflow-x-auto max-h-[420px]">
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead class="sticky top-0 bg-stone-100 text-stone-700 font-semibold border-b border-stone-200 uppercase text-xs">
+                            <tr>
+                                <th class="p-3">公司/主題</th>
+                                <th class="p-3">指標/項目</th>
+                                <th class="p-3">數據細節 / 官方指引</th>
+                                <th class="p-3">華爾街預期 / 歷史對比</th>
+                                <th class="p-3">商業與戰略意義</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="divide-y divide-stone-100">
+                            <!-- Dynamically injected via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Strategic Takeaways -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                四、2026 下半年 AI 投資範式轉移與風險評估
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Sandisk & Micron Takeaways -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-600">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">記憶體族群估值重評 (Re-rating)</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        Sandisk 上漲帶動美光 (Micron) 等同步起飛。若記憶體產業能透過 NBM 年期協議擺脫暴漲暴跌，過去因循環性獲得的低本益比（P/E）將大幅提升：
+                    </p>
+                    <div class="p-3 bg-sky-50 rounded border border-sky-100 text-xs text-sky-900 font-mono mb-4">
+                        股價彈性 = EPS 增長幅度 × 本益比 (P/E) 結構性提高
+                    </div>
+                    <p class="text-xs text-stone-500">
+                        <strong>潛在風險：</strong>股價已快速反應利多。若未來其他大廠（三星、SK Hynix）大幅擴產破壞供給紀律，或毛利率自 84.6% 高峰滑落，仍需留意回檔壓力。
+                    </p>
+                </div>
+
+                <!-- AMAT & Capex Takeaways -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-600">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">設備股：短線修正不等於週期結束</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        應材的回檔屬於「高估值與高預期的修正」，基本面顯示 AI 資本支出週期遠未結束。摩根士丹利、JPMorgan 等大型券商仍看好長線趨勢（JPMorgan 將目標價調升至 $660）。
+                    </p>
+                    <div class="p-3 bg-amber-50 rounded border border-amber-100 text-xs text-amber-900 font-mono mb-4">
+                        重點追蹤：2028 年產能翻倍進度、先進封裝訂單覆蓋率與競爭對手動向
+                    </div>
+                    <p class="text-xs text-stone-500">
+                        <strong>潛在風險：</strong>同業 Lam Research、KLA 與 ASML 的競爭加劇；營收增加但短期毛利率未同步躍升的成本消化期。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Core Principles Card -->
+            <div class="mt-8 bg-gradient-to-r from-stone-800 to-stone-900 text-white rounded-xl p-8 shadow-xl">
+                <h3 class="text-2xl font-bold text-sky-400 mb-3">巴菲特 AI 價值投資總結法則</h3>
+                <blockquote class="text-lg italic text-stone-200 border-l-4 border-sky-500 pl-4 py-1 mb-4">
+                    「不要只尋找 AI 營收成長最快的公司，而要尋找 AI 成長最後能轉化成最高毛利率、最大自由現金流與最穩定股東報酬的公司。」
+                </blockquote>
+                <p class="text-sm text-stone-400">
+                    2023-2025 年市場拼的是 AI 營收的絕對數字；到了 2026 年，市場嚴格檢視資本回報效率。Sandisk 憑藉 80% 毛利與 100% 現金回饋贏得追捧，而應材則提醒我們：基本面再強，股價仍取決於超越市場預期的能力。
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mandatory Footer Component -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI供應鏈重新定價：Sandisk與應用材料對照分析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Sandisk與Applied Materials相關公開資料 (2026年08月14日)。</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Client JavaScript -->
+    <script>
+        // Authentic Data extracted from report text
+        const productData = [
+            { company: "Sandisk", metric: "長約協議 (NBM) 價值", value: "$939 億美元", benchmark: "涵蓋 6 家客戶 / 8 份協議", note: "中位數期限 4 年，鎖定獲利穩定度" },
+            { company: "Sandisk", metric: "2028-2030 毛利率目標", value: "~ 80%", benchmark: "2026 Q2 實際為 84.6%", note: "由 AI 資料中心及高階 SSD 需求驅動" },
+            { company: "Sandisk", metric: "2028-2030 自由現金流率", value: "~ 50%", benchmark: "資本支出後 100% 現金回饋", note: "極高的現金流轉化能力" },
+            { company: "Sandisk", metric: "長約銷售產量佔比", value: "2027: 50% / 2028: 66%", benchmark: "傳統記憶體皆為現貨/短約", note: "平滑景氣循環巨幅波動" },
+            { company: "Sandisk", metric: "資料中心營收爆發", value: "2026 較 2025 年增 > 400%", benchmark: "單季曾創 233% 年成長", note: "AI 推論需求刺激 NAND / SSD 升級" },
+            { company: "Applied Materials", metric: "Q3 會計年度營收", value: "$91.2 億美元 (年增 25%)", benchmark: "市場預期 $89.9-$90 億", note: "優於華爾街預期" },
+            { company: "Applied Materials", metric: "Q3 調整後 EPS", value: "$3.50 美元", benchmark: "市場預期 $3.40 美元", note: "獲利表現亮眼" },
+            { company: "Applied Materials", metric: "Q4 營收指引", value: "$102.5 億美元 (±5億)", benchmark: "市場預期 $95.4 億美元", note: "營收指引顯著高於預期" },
+            { company: "Applied Materials", metric: "先進封裝成長預估", value: "2026 年增 > 70%", benchmark: "原預估為 > 50%", note: "AI 晶片整合瓶頸帶動上游設備需求" },
+            { company: "Applied Materials", metric: "半導體系統擴產目標", value: "2028 年產能提高至 2 倍", benchmark: "客戶討論延長至 2030 年", note: "積極擴產，資本支出短期拉低毛利率爆發力" }
+        ];
+
+        function renderTable(data) {
+            const tbody = document.getElementById('productTableBody');
+            const rowCount = document.getElementById('rowCount');
+            tbody.innerHTML = '';
+
+            data.forEach((item) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-stone-50 transition-colors border-b border-stone-100";
+                
+                const companyBadge = item.company === "Sandisk" 
+                    ? '<span class="px-2 py-1 bg-sky-100 text-sky-800 text-xs font-semibold rounded">Sandisk</span>'
+                    : '<span class="px-2 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded">Applied Materials</span>';
+
+                tr.innerHTML = `
+                    <td class="p-3 font-medium text-stone-900">${companyBadge}</td>
+                    <td class="p-3 font-medium text-stone-800">${item.metric}</td>
+                    <td class="p-3 font-bold text-stone-900">${item.value}</td>
+                    <td class="p-3 text-stone-600">${item.benchmark}</td>
+                    <td class="p-3 text-stone-500 text-xs">${item.note}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            rowCount.textContent = `顯示 ${data.length} 筆資料中的 ${data.length} 筆`;
+        }
+
+        // Live Search Filter Functionality
+        document.getElementById('tableSearch').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const filtered = productData.filter(item => 
+                item.company.toLowerCase().includes(query) ||
+                item.metric.toLowerCase().includes(query) ||
+                item.value.toLowerCase().includes(query) ||
+                item.note.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on anchor click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        window.onload = function() {
+            renderTable(productData);
+
+            // Chart 1: Sandisk Gross Margin Evolution
+            const ctxSandisk = document.getElementById('sandiskMarginChart').getContext('2d');
+            new Chart(ctxSandisk, {
+                type: 'bar',
+                data: {
+                    labels: ['2025年 歷史低點', '2026 Q2 實際表現', '2026 Q3 官方指引', '2028-2030 長期目標'],
+                    datasets: [{
+                        label: '調整後毛利率 (%)',
+                        data: [26.4, 84.6, 84.0, 80.0],
+                        backgroundColor: [
+                            'rgba(156, 163, 175, 0.7)',
+                            'rgba(2, 132, 199, 0.85)',
+                            'rgba(14, 165, 233, 0.7)',
+                            'rgba(16, 185, 129, 0.85)'
+                        ],
+                        borderColor: [
+                            'rgb(107, 114, 128)',
+                            'rgb(2, 132, 199)',
+                            'rgb(14, 165, 233)',
+                            'rgb(16, 185, 129)'
+                        ],
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` 毛利率: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { callback: function(value) { return value + '%'; } }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Applied Materials Actual/Guidance vs Market Expectation
+            const ctxAMAT = document.getElementById('amatBeatChart').getContext('2d');
+            new Chart(ctxAMAT, {
+                type: 'bar',
+                data: {
+                    labels: ['Q3 營收 (億美元)', 'Q4 營收指引 (億美元)', 'Q3 每股盈餘 ($)', 'Q4 EPS 指引 ($)'],
+                    datasets: [
+                        {
+                            label: '華爾街市場預估',
+                            data: [89.9, 95.4, 3.40, 3.70],
+                            backgroundColor: 'rgba(203, 213, 225, 0.8)',
+                            borderColor: 'rgb(148, 163, 184)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'AMAT 實際/指引高點',
+                            data: [91.2, 102.5, 3.50, 4.02],
+                            backgroundColor: 'rgba(217, 119, 6, 0.85)',
+                            borderColor: 'rgb(180, 83, 9)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const unit = context.dataIndex < 2 ? '億美元' : '美元';
+                                    return ` ${context.dataset.label}: ${context.raw} ${unit}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
