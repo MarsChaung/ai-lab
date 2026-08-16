@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/8/10~8/14)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .active-nav-link {
+            color: #0284c7;
+            font-weight: 600;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl font-bold text-stone-800 hidden sm:inline-block">美股市場週報</span>
+                </div>
+                
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8 h-full items-center" id="desktop-nav">
+                    <a href="#hero" class="nav-link inactive-nav-link transition-colors py-5 px-1 text-sm">週報總覽</a>
+                    <a href="#macro" class="nav-link inactive-nav-link transition-colors py-5 px-1 text-sm">總經與地緣</a>
+                    <a href="#data" class="nav-link inactive-nav-link transition-colors py-5 px-1 text-sm">數據與圖表</a>
+                    <a href="#signals" class="nav-link inactive-nav-link transition-colors py-5 px-1 text-sm">十大關鍵訊號</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link transition-colors py-5 px-1 text-sm">投資策略</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md" aria-label="切換選單">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#hero" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">週報總覽</a>
+            <a href="#macro" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">總經與地緣</a>
+            <a href="#data" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">數據與圖表</a>
+            <a href="#signals" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">十大關鍵訊號</a>
+            <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">投資策略</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+
+        <!-- Hero Summary Section -->
+        <section id="hero" class="scroll-mt-24 mb-10">
+            <div class="bg-gradient-to-br from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
+                <div class="inline-flex items-center space-x-2 bg-sky-500/20 text-sky-300 text-xs sm:text-sm font-semibold px-3 py-1 rounded-full border border-sky-400/30 mb-4">
+                    <span>資料區間：2026年8月10日至8月14日</span>
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                    通膨降溫、消費降速，AI開始借錢擴張：美股正在重新定價「獲利品質」
+                </h1>
+                <p class="text-stone-300 text-base sm:text-lg max-w-4xl leading-relaxed mb-6">
+                    S&P 500全週上漲約0.4%，創下歷史收盤新高後隨消費數據回落。投資人風險偏好改變，市場目光從「成長故事」全面轉向「獲利品質與自由現金流」。
+                </p>
+
+                <!-- Key Metric Highlights -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-stone-700/80">
+                    <div class="bg-stone-800/60 p-4 rounded-xl border border-stone-700">
+                        <span class="text-xs text-stone-400 block">S&P 500 (週漲幅)</span>
+                        <span class="text-xl sm:text-2xl font-bold text-emerald-400">+0.4%</span>
+                        <span class="text-xs text-stone-400 block mt-1">曾創歷史新高 7,798.99</span>
+                    </div>
+                    <div class="bg-stone-800/60 p-4 rounded-xl border border-stone-700">
+                        <span class="text-xs text-stone-400 block">美國 7月 CPI (年增)</span>
+                        <span class="text-xl sm:text-2xl font-bold text-sky-400">3.4%</span>
+                        <span class="text-xs text-stone-400 block mt-1">核心 CPI 降至 2.5%</span>
+                    </div>
+                    <div class="bg-stone-800/60 p-4 rounded-xl border border-stone-700">
+                        <span class="text-xs text-stone-400 block">7月零售銷售 (月增)</span>
+                        <span class="text-xl sm:text-2xl font-bold text-rose-400">-0.6%</span>
+                        <span class="text-xs text-stone-400 block mt-1">14個月以來最大跌幅</span>
+                    </div>
+                    <div class="bg-stone-800/60 p-4 rounded-xl border border-stone-700">
+                        <span class="text-xs text-stone-400 block">Nvidia AI 融資平台</span>
+                        <span class="text-xl sm:text-2xl font-bold text-amber-400">$500B</span>
+                        <span class="text-xs text-stone-400 block mt-1">第三方資本轉向金融戰</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Macroeconomics Section -->
+        <section id="macro" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                總體經濟與地緣政治：通膨在降溫，但消費也開始踩煞車
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Card 1: Inflation vs Consumption -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border border-stone-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="w-3 h-3 rounded-full bg-sky-500"></span>
+                            <h3 class="text-xl font-bold text-stone-800">通膨降溫與消費降速併存</h3>
+                        </div>
+                        <p class="text-stone-600 leading-relaxed mb-4">
+                            美國7月CPI月增0.1%、年增3.4%，核心CPI降至2.5%。PPI月增零成長、年增由5.5%大幅降至4.7%，大幅降低9月再升息的疑慮。然而，7月零售銷售月減0.6%（創14個月最大跌幅），核心零售銷售亦下降0.4%。
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-md border-l-4 border-amber-500 text-stone-700 text-sm">
+                        <strong>核心關注：</strong>通膨降溫固然是利多，但降溫的原因部分來自消費活動本身的減速，美股「軟著陸」面臨考驗。
+                    </div>
+                </div>
+
+                <!-- Card 2: Geopolitics & Energy -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border border-stone-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                            <h3 class="text-xl font-bold text-stone-800">地緣政治與原油風險</h3>
+                        </div>
+                        <p class="text-stone-600 leading-relaxed mb-4">
+                            美國與伊朗談判卡關，荷姆茲海峽通行量低於正常水準。阿聯甚至指控伊朗攻擊兩艘ADNOC油輪，推升8月14日原油價格重新大漲，為市場帶來變數。
+                        </p>
+                    </div>
+                    <div class="bg-rose-50 p-4 rounded-md border-l-4 border-rose-500 text-stone-700 text-sm">
+                        <strong>風險傳導：</strong>油價波動直接影響通膨預期與聯準會轉向寬鬆的節奏，是目前科技股估值最重要的外部變數。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization & Interactive Table Section -->
+        <section id="data" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                動態資料分析與個股反應比對
+            </h2>
+
+            <!-- Visual Chart Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border border-stone-100">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800">市場重點指標與個股週波動/反應比對 (%)</h3>
+                        <p class="text-sm text-stone-500">呈現上週美股大盤、經濟指標與代表性個股之市場定價反應</p>
+                    </div>
+                    <div class="mt-2 md:mt-0 text-xs bg-stone-100 text-stone-600 px-3 py-1 rounded">
+                        單位：百分比 (%)
+                    </div>
+                </div>
+                <!-- Chart canvas MUST be inside a wrapper div -->
+                <div class="relative w-full h-80 sm:h-96">
+                    <canvas id="marketChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Interactive Table Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-stone-100">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800">上週十大重點企業與宏觀訊號數據表</h3>
+                        <p class="text-sm text-stone-500">可搜尋公司名稱、關鍵數據或事件內容</p>
+                    </div>
+                    <!-- Search Input -->
+                    <div class="w-full sm:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司或訊號..." class="w-full px-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    </div>
+                </div>
+
+                <!-- Table Wrapper with overflow -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-stone-100 border-b border-stone-200 text-xs sm:text-sm font-semibold text-stone-700 sticky top-0">
+                                <th class="p-3">主題/公司</th>
+                                <th class="p-3">事件與指標內容</th>
+                                <th class="p-3">核心關鍵數據</th>
+                                <th class="p-3">市場影響與解讀</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-stone-200 text-xs sm:text-sm text-stone-600">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ten Key Signals Section -->
+        <section id="signals" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                上週最值得投資人研究的十大訊號
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+                <!-- Signal 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-sky-600 uppercase tracking-wider block mb-1">訊號 一</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">CPI/PPI同步降溫，暫停升息條件成熟</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            7月CPI年增3.4%、核心CPI 2.5%；PPI零成長。S&P 500創歷史新高，反映聯準會9月維持利率不變可能性提升。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>估值壓力減輕，但3.4%仍高於2%目標，屬「停止升息」非「大幅降息」。
+                    </div>
+                </div>
+
+                <!-- Signal 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-rose-600 uppercase tracking-wider block mb-1">訊號 二</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">零售銷售月減0.6%考驗軟著陸</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            零售銷售創14個月最大跌幅，網路零售降2.2%。若未來數月持續疲弱，市場將從「通膨降溫」轉為「需求轉弱」。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>觀察重點為零售企業的同店銷售、促銷幅度與消費者降級消費傾向。
+                    </div>
+                </div>
+
+                <!-- Signal 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">訊號 三</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">荷姆茲海峽談判卡關，油價為外部變數</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            美伊談判無進展，阿聯指控油輪遭擊。原油上漲直接牽動通膨與利率走勢，與Nvidia財報同為美股上限關鍵。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>油價若回落利好科技估值；局勢惡化則引發通膨擔憂，限制寬鬆空間。
+                    </div>
+                </div>
+
+                <!-- Signal 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block mb-1">訊號 四</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">Nvidia發起 $500B AI基礎建設融資平台</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            攜手BlackRock、Goldman Sachs等動員第三方資本，將算力資產化。AI戰場從「晶片戰」推向「金融戰」。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>建設加速，但債務比例升高，需警惕資料中心未來的現金流償債能力與信用風險。
+                    </div>
+                </div>
+
+                <!-- Signal 5 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">訊號 五</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">Meta 推 Muse Glimmer 主打普及終端</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            開放權重模型能在單一GPU上執行代理工作，推動AI進入個人電腦與終端設備，非僅集中於昂貴雲端。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>利好端點硬體與Nvidia，但對昂貴雲端AI服務的單位價格形成長期壓力。
+                    </div>
+                </div>
+
+                <!-- Signal 6 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-purple-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider block mb-1">訊號 六</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">Google降價與Apple經營中國AI市場</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            Google推出Gemini 3.7 Flash，價格降半；Apple則在阿里巴巴協助下訓練中國專用大型語言模型。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>AI競爭進入「價格、通路與監管」階段；Apple需藉此開啟iPhone在中國的換機週期。
+                    </div>
+                </div>
+
+                <!-- Signal 7 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-teal-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-teal-600 uppercase tracking-wider block mb-1">訊號 七</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">Sandisk透過長期合約改變記憶體循環</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            展望毛利率80%、營業利益率75%，並簽署長約涵蓋未來產能，宣佈100%多餘現金回饋，股價兩天大漲近20%。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>多年期訂單與最低承諾重塑產業估值模式，但激進目標仍需實績驗證。
+                    </div>
+                </div>
+
+                <!-- Signal 8 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-orange-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-orange-600 uppercase tracking-wider block mb-1">訊號 八</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">Cisco與應材業績好卻下跌：Beat已不夠</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            Cisco AI訂單亮眼但毛利率下滑；應材財測超預期但成長不夠突出。兩者財報後股價均重挫。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>評價標準轉為「營收 → 毛利率 → 自由現金流」，好消息已被股價提前反映。
+                    </div>
+                </div>
+
+                <!-- Signal 9 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-yellow-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-yellow-600 uppercase tracking-wider block mb-1">訊號 九</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">Tapestry暴跌：美國消費顯著分化</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            Coach營收成長15%，但Kate Spade下滑7%，公司展望未達高標致股價重跌16.9%。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>消費非全面衰退，而是集中於強勢品牌。選股應檢視品牌市占與打折促銷頻率。
+                    </div>
+                </div>
+
+                <!-- Signal 10 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-cyan-500 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-cyan-600 uppercase tracking-wider block mb-1">訊號 十</span>
+                        <h3 class="text-lg font-bold text-stone-800 mb-2">Eli Lilly狀告黑市提早防禦減重藥市場</h3>
+                        <p class="text-sm text-stone-600 mb-4">
+                            對非法銷售未批准實驗藥retatrutide之企業提告。上市前黑市即現，顯示市場需求極度強勁。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <strong>投資解讀：</strong>Retatrutide為下一代重磅產品，展現強大需求，但需注意審查與臨床風險。
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="scroll-mt-24 mb-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心投資主線與三層次策略建議
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+                <h3 class="text-xl font-bold text-stone-800 mb-3">投資主線：從「成長故事」轉向「成長品質」</h3>
+                <p class="text-stone-600 leading-relaxed mb-4">
+                    2026年8月美股發生明確轉變。過去問「有沒有AI？」，現在問「AI能幫公司賺多少現金？」。隨著Nvidia推動資本槓桿、Sandisk展示長約模式，市場已進入第二階段的**財務驗證期**。投資人需特別追蹤三個指標：<span class="font-bold text-sky-700">AI算力利用率</span>、<span class="font-bold text-sky-700">AI投資報酬率</span>、<span class="font-bold text-sky-700">自由現金流</span>。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Tier 1 -->
+                <div class="bg-sky-50 rounded-lg p-6 border border-sky-200">
+                    <div class="text-sky-800 font-bold text-lg mb-2">第一層：核心 AI 基礎建設</div>
+                    <p class="text-sm text-stone-700 leading-relaxed">
+                        標準提高。優先選擇具長期訂單、高定價能力與強勁自由現金流的公司（如Sandisk展現的能見度），避免僅靠營收數字追高。
+                    </p>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="bg-amber-50 rounded-lg p-6 border border-amber-200">
+                    <div class="text-amber-800 font-bold text-lg mb-2">第二層：消費數據觀察與擇優</div>
+                    <p class="text-sm text-stone-700 leading-relaxed">
+                        零售銷售下滑0.6%為警訊。若消費與就業續降，市場將轉為擔心獲利下修。重點關注品牌力強、無需降價即可保持成長之龍頭。
+                    </p>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-rose-50 rounded-lg p-6 border border-rose-200">
+                    <div class="text-rose-800 font-bold text-lg mb-2">第三層：地緣風險避險佈局</div>
+                    <p class="text-sm text-stone-700 leading-relaxed">
+                        保留對中東能源風險的警覺。若荷姆茲航運恢復利多科技估值；若局勢惡化，原油、軍工及防禦性資產將重新獲得青睞。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/8/10~8/14)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股市場與科技巨頭財報相關公開資料 (2026年08月16日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data Source array for Interactive Table (productData)
+        const productData = [
+            { category: "總體經濟", company: "CPI & PPI 數據", signal: "通膨持續降溫", metric: "CPI 3.4%, 核心 2.5%, PPI 0.0%", impact: "9月暫停升息機率提升，帶動S&P 500創新高" },
+            { category: "總體經濟", company: "美國零售銷售", signal: "消費動能轉弱", metric: "月減 0.6% (14個月最大跌幅)", impact: "引發美國經濟軟著陸及需求疲弱的憂慮" },
+            { category: "AI 算力", company: "Nvidia", signal: "成立 $500B 融資平台", metric: "動員第三方資本，選擇權至多 $125B", impact: "AI進入金融槓桿期，需提防信用與債務風險" },
+            { category: "軟體/模型", company: "Meta", signal: "發表 Muse Glimmer", metric: "單一 GPU 可執行代理工作", impact: "推動 AI 走向邊緣與個人裝置，分散雲端壓力" },
+            { category: "軟體/模型", company: "Google", signal: "發佈 Gemini 3.7 Flash", metric: "價格降至前代 50%", impact: "降低企業導入門檻，用價格優勢搶攻工作負載" },
+            { category: "軟體/模型", company: "Apple", signal: "中國版 AI 模型", metric: "阿里協助訓練自有 LLM", impact: "取得監管與主導權，開啟中國 iPhone 換機週期" },
+            { category: "記憶體", company: "Sandisk", signal: "資本市場日財務目標", metric: "毛利率 80%, 100% 現金回饋", impact: "長約降低景氣循環影響，股價兩日大漲近 20%" },
+            { category: "網路硬體", company: "Cisco", signal: "Q4 財報 Beat 但下跌", metric: "營收 $17.3B, 毛利率降至 66.3%", impact: "毛利率下滑引發關注，股價單日重挫 8.4%" },
+            { category: "半導體設備", company: "Applied Materials", signal: "Q3 創紀錄財報", metric: "營收 $9.12B, 下季預測 $10.25B", impact: "高預期已提前反映，財報後股價下跌 4~5%" },
+            { category: "精品消費", company: "Tapestry / Coach", signal: "品牌表現強烈分化", metric: "Coach +15%, Kate Spade -7%", impact: "消費者集中強勢品牌，展望未達高標致股價 -16.9%" },
+            { category: "生技醫療", company: "Eli Lilly", signal: "控告 Retatrutide 黑市", metric: "三期試驗中，尚未經 FDA 核准", impact: "未上市先有黑市，凸顯下一代減重藥極高需求" }
+        ];
+
+        // Function to render table
+        function renderTable(filterText = '') {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            const filteredData = productData.filter(item => {
+                const searchLower = filterText.toLowerCase();
+                return item.company.toLowerCase().includes(searchLower) ||
+                       item.category.toLowerCase().includes(searchLower) ||
+                       item.signal.toLowerCase().includes(searchLower) ||
+                       item.metric.toLowerCase().includes(searchLower) ||
+                       item.impact.toLowerCase().includes(searchLower);
+            });
+
+            if (filteredData.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-stone-500">未找到符合條件的資料</td></tr>`;
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors';
+                row.innerHTML = `
+                    <td class="p-3 font-semibold text-stone-800">
+                        <div>${item.company}</div>
+                        <span class="inline-block text-[10px] bg-stone-200 text-stone-700 px-1.5 py-0.5 rounded mt-0.5">${item.category}</span>
+                    </td>
+                    <td class="p-3">${item.signal}</td>
+                    <td class="p-3 font-mono font-medium text-sky-700">${item.metric}</td>
+                    <td class="p-3 text-stone-600">${item.impact}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initialize Page Interactions on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initial Render Table
+            renderTable();
+
+            // Table Search Input Listener
+            document.getElementById('tableSearch').addEventListener('input', (e) => {
+                renderTable(e.target.value);
+            });
+
+            // 2. Mobile Menu Toggle
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 3. Chart.js Initialization
+            const ctx = document.getElementById('marketChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sandisk (兩日漲幅)', 'S&P 500 (週漲幅)', 'Nasdaq (週漲幅)', 'Dow Jones (週跌幅)', '零售銷售 (月增)', 'Applied Materials', 'Cisco (財報後)', 'Tapestry (盤中跌幅)'],
+                    datasets: [{
+                        label: '波動/幅度 (%)',
+                        data: [20.2, 0.4, 0.1, -0.6, -0.6, -4.5, -8.4, -16.9],
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.85)', // Sandisk (Green)
+                            'rgba(14, 165, 233, 0.85)', // S&P 500 (Sky)
+                            'rgba(59, 130, 246, 0.85)', // Nasdaq (Blue)
+                            'rgba(244, 63, 94, 0.85)',  // Dow (Rose)
+                            'rgba(245, 158, 11, 0.85)', // Retail Sales (Amber)
+                            'rgba(239, 68, 68, 0.85)',  // AMAT (Red)
+                            'rgba(225, 29, 72, 0.85)',  // Cisco (Dark Red)
+                            'rgba(153, 27, 27, 0.85)'   // Tapestry (Deep Red)
+                        ],
+                        borderRadius: 6,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` 數據幅度: ${context.parsed.y}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            grid: { color: '#e7e5e4' },
+                            ticks: {
+                                callback: function(value) { return value + '%'; }
+                            }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // 4. Intersection Observer for Active Link State in Header Nav
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('#desktop-nav .nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentId = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${currentId}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
