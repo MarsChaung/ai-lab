@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-5.33%利率撞上AI燒錢潮</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            font-weight: 700;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #1c1917;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="font-bold text-xl text-stone-900 tracking-tight">5.33%利率撞上AI</span>
+                </div>
+                
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex space-x-6 h-full items-center">
+                    <a href="#overview" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">總覽與宏觀</a>
+                    <a href="#homedepot" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">Home Depot 財報</a>
+                    <a href="#alphabet" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">Alphabet 轉折</a>
+                    <a href="#charts" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">圖表分析</a>
+                    <a href="#table" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">關鍵數據表</a>
+                    <a href="#summary" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">策略總結</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-stone-600 hover:text-stone-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Nav Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="block py-2 text-stone-700 font-medium hover:text-sky-600">總覽與宏觀</a>
+            <a href="#homedepot" class="block py-2 text-stone-700 font-medium hover:text-sky-600">Home Depot 財報</a>
+            <a href="#alphabet" class="block py-2 text-stone-700 font-medium hover:text-sky-600">Alphabet 轉折</a>
+            <a href="#charts" class="block py-2 text-stone-700 font-medium hover:text-sky-600">圖表分析</a>
+            <a href="#table" class="block py-2 text-stone-700 font-medium hover:text-sky-600">關鍵數據表</a>
+            <a href="#summary" class="block py-2 text-stone-700 font-medium hover:text-sky-600">策略總結</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Banner Header -->
+        <div class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-900 text-white rounded-2xl p-8 shadow-xl">
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                5.33％利率撞上AI燒錢潮：Home Depot與Alphabet正在揭露美股下一個估值風險
+            </h1>
+            <p class="text-stone-300 text-base md:text-lg max-w-4xl">
+                美國三十年期公債殖利率突破 5.327% 創二〇〇七年來新高。「錢變貴了」正在透過兩條路徑衝擊美股：一方面讓消費者不敢舉債修繕房子，另一方面大幅提高科技巨頭興建 AI 資料中心所需的資本成本。
+            </p>
+        </div>
+
+        <!-- Metric Highlight Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                <p class="text-sm font-semibold text-stone-500">30年期美債殖利率</p>
+                <p class="text-3xl font-extrabold text-stone-900 mt-2">5.327%</p>
+                <p class="text-xs text-amber-600 font-medium mt-1">創 2007 年以來 19 年最高點</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-500">
+                <p class="text-sm font-semibold text-stone-500">Alphabet Q2 自由現金流</p>
+                <p class="text-3xl font-extrabold text-rose-600 mt-2">-$59 億</p>
+                <p class="text-xs text-rose-500 font-medium mt-1">CapEx 達 449億，首次轉為負值</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                <p class="text-sm font-semibold text-stone-500">Home Depot Q2 營收</p>
+                <p class="text-3xl font-extrabold text-stone-900 mt-2">$478.61 億</p>
+                <p class="text-xs text-sky-600 font-medium mt-1">年增 5.7%，優於市場預期</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
+                <p class="text-sm font-semibold text-stone-500">科技四巨頭發債規模</p>
+                <p class="text-3xl font-extrabold text-stone-900 mt-2">$1,940 億</p>
+                <p class="text-xs text-indigo-600 font-medium mt-1">2026截至7月，較去年同期暴增 79%</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Overview & Macro Trend -->
+        <section id="overview" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                一、高利率雙重衝擊美股新舊經濟
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    八月十八日的美股出現了一個值得深入思考的現象：Home Depot（賣建材與修繕）與 Alphabet（掌握搜尋與AI雲端）是兩家完全不同的公司，但現在它們其實都受到同一個因素影響——<strong class="text-sky-700">錢變貴了</strong>。
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="w-3 h-3 bg-amber-500 rounded-full"></span>
+                            <h3 class="font-bold text-lg text-stone-800">傳統經濟衝擊：Home Depot</h3>
+                        </div>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            三十年房貸利率居高不下，使美國屋主陷入「房貸鎖定效應」（Mortgage Lock-in Effect），成屋交易量持續低迷，消費者避免舉債進行大型廚房與浴室翻修，轉向小型維護工程。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 rounded-xl p-5 border border-stone-200">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <span class="w-3 h-3 bg-sky-500 rounded-full"></span>
+                            <h3 class="font-bold text-lg text-stone-800">AI 新經濟衝擊：Alphabet</h3>
+                        </div>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            AI 基礎建設與資料中心興建速度極快，單靠本業強勁的營業現金流已不足以支付巨額 CapEx，迫使科技巨頭進軍債券與股票市場融資，提高資本成本。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Home Depot Analysis -->
+        <section id="homedepot" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                二、Home Depot 財報：消費者「只做小修，不願大改」
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <div class="p-4 bg-sky-50 rounded-lg border border-sky-100 text-center">
+                        <p class="text-xs text-sky-600 font-semibold uppercase">Q2 營收</p>
+                        <p class="text-2xl font-bold text-sky-900 mt-1">$478.61 億</p>
+                        <p class="text-xs text-stone-500 mt-1">年增 +5.7% (市場預估 $472.7億)</p>
+                    </div>
+                    <div class="p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-center">
+                        <p class="text-xs text-emerald-600 font-semibold uppercase">調整後 EPS</p>
+                        <p class="text-2xl font-bold text-emerald-900 mt-1">$4.92</p>
+                        <p class="text-xs text-stone-500 mt-1">高於預期 $4.73 (獲利超預期)</p>
+                    </div>
+                    <div class="p-4 bg-indigo-50 rounded-lg border border-indigo-100 text-center">
+                        <p class="text-xs text-indigo-600 font-semibold uppercase">同店銷售增長</p>
+                        <p class="text-2xl font-bold text-indigo-900 mt-1">+1.7%</p>
+                        <p class="text-xs text-stone-500 mt-1">全球 +1.7% / 美國 +1.3%</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-stone-700">
+                    <h3 class="font-bold text-lg text-stone-900">核心細節分析：高利率下的消費防禦模式</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-stone-600">
+                        <li><strong>工程類型消長：</strong>小型工程（油漆、庭院整理、季節性維護）數量年增 <strong>+1.5%</strong>；需高額貸款的大型工程（廚房、浴室大翻修）則年減 <strong>-2.1%</strong>。</li>
+                        <li><strong>成屋市場被鎖住：</strong>7 月美國成屋銷售再降 1.7%，房價中位數仍年增 2% 至 43.41 萬美元。高房價與高房貸利率並存導致搬家率創新低，抑制大型修繕。</li>
+                        <li><strong>關稅退款紅利：</strong>第二季取得關稅退款約 <strong>6.85 億美元</strong> 降低商品銷售成本（COGS），對本季獲利有顯著幫助。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Alphabet Pivot -->
+        <section id="alphabet" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                三、Alphabet 轉折：從「現金牛」到「資本市場融資大戶」
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-6">
+                    Alphabet 第二季營收成長 24% 達 1,198 億美元，Google Cloud 收入大增 82% 至 248 億美元，展現極強本業能力。然而，<strong>建置 AI 資料中心花錢的速度，已暫時快過本業產生自由現金流的速度。</strong>
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="border border-stone-200 rounded-xl p-5 bg-gradient-to-br from-white to-rose-50">
+                        <h4 class="font-bold text-rose-800 text-lg mb-2">Q2 自由現金流首度轉負</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between py-1 border-b border-rose-100">
+                                <span class="text-stone-600">營業現金流 (OCF)</span>
+                                <span class="font-semibold text-stone-800">$391 億美元</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-rose-100">
+                                <span class="text-stone-600">資本支出 (CapEx)</span>
+                                <span class="font-semibold text-rose-700">$449 億美元</span>
+                            </div>
+                            <div class="flex justify-between py-1 font-bold text-base">
+                                <span class="text-rose-900">自由現金流 (FCF)</span>
+                                <span class="text-rose-600">-$59 億美元</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-stone-200 rounded-xl p-5 bg-stone-50">
+                        <h4 class="font-bold text-stone-800 text-lg mb-2">多元融資佈局</h4>
+                        <ul class="text-sm text-stone-600 space-y-2">
+                            <li>• <strong>全年 CapEx 上調：</strong> 預估達 $1,950 億 ~ $2,050 億美元。</li>
+                            <li>• <strong>股權融資擴大：</strong> 規模提升至 $847.5 億美元。</li>
+                            <li>• <strong>美債發行計畫：</strong> 擬發行 $200 億 ~ $250 億美債（最長 40 年期）。</li>
+                            <li>• <strong>首度發行澳幣債：</strong> 包含 3年、5年、10年與 20年期產品。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Dynamic Charts Section -->
+        <section id="charts" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                四、動態圖表分析：資本開支與債券融資暴增
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <!-- Chart Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-stone-800 text-lg mb-4 text-center">Alphabet 2026 Q2 現金流與支出結構 (億美元)</h3>
+                    <div class="relative w-full h-72">
+                        <canvas id="alphabetCashChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-stone-800 text-lg mb-4 text-center">四大科技巨頭發債與AI支出規模 (億美元)</h3>
+                    <div class="relative w-full h-72">
+                        <canvas id="bigTechDebtChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Interactive Data Table -->
+        <section id="table" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                五、核心數據與指標互動總覽表
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <!-- Filter and Search Bar Controls -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <!-- Search Input -->
+                    <div class="relative flex-1">
+                        <input type="text" id="table-search" placeholder="搜尋指標、類別或關鍵字 (如：FCF, 殖利率, Home Depot)..." 
+                               class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <!-- Category Filter Quick Buttons -->
+                    <div class="flex flex-wrap gap-2" id="category-filters">
+                        <button class="filter-btn active bg-sky-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium" data-cat="ALL">全部</button>
+                        <button class="filter-btn bg-stone-100 text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg text-sm font-medium" data-cat="美股總體與美債">總體美債</button>
+                        <button class="filter-btn bg-stone-100 text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg text-sm font-medium" data-cat="Home Depot 財報">Home Depot</button>
+                        <button class="filter-btn bg-stone-100 text-stone-600 hover:bg-stone-200 px-3 py-1.5 rounded-lg text-sm font-medium" data-cat="Alphabet 財報">Alphabet</button>
+                    </div>
+                </div>
+
+                <!-- Table Wrapper -->
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="sticky top-0 bg-stone-100 text-stone-700 shadow-sm">
+                            <tr>
+                                <th class="p-3 font-semibold border-b border-stone-200">項目 / 指標</th>
+                                <th class="p-3 font-semibold border-b border-stone-200">類別</th>
+                                <th class="p-3 font-semibold border-b border-stone-200 text-sky-700">最新數值/現況</th>
+                                <th class="p-3 font-semibold border-b border-stone-200">市場預期 / 歷史比較</th>
+                                <th class="p-3 font-semibold border-b border-stone-200">核心影響與策略註解</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body" class="divide-y divide-stone-200 text-sm">
+                            <!-- JS Will Render Rows Dynamic Here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Investment Summary & Strategy -->
+        <section id="summary" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                六、策略總結：美股遊戲規則改變
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded-r-lg">
+                    <p class="text-amber-900 font-bold text-base">
+                        核心訊號：2026上半年問題是「誰能拿到最多AI算力」；下半年問題變成「誰付得起這些算力與利息成本」。
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-3 border border-stone-200 rounded-lg p-5">
+                        <h3 class="font-bold text-lg text-stone-900 border-b pb-2">1. Home Depot：等待利率與成交量轉折</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            Q2 財報證明基本修繕需求仍具韌性。真正讓公司邁入強勁復甦的關鍵並非油漆賣多少，而是 <strong>10年期美債殖利率、30年房貸利率與美國成屋交易量</strong> 何時開始回升。
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 border border-stone-200 rounded-lg p-5">
+                        <h3 class="font-bold text-lg text-stone-900 border-b pb-2">2. Alphabet & 科技七巨頭：比拚資本效率</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            Google Cloud 82% 增長驗證需求強勁，但自由現金流轉負顯示進入「驗證投資報酬率（ROI）」階段。未來關鍵在於：<strong>誰能用最少的資本支出，創造最多的 AI 營收與自由現金流</strong>。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-5.33%利率撞上AI燒錢潮。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-400">資料來源：基於網絡中 Home Depot 與 Alphabet 及美股市場相關公開資料 (2026年08月18日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Dataset for Interactive Table (Real data extracted from text)
+        const productData = [
+            { name: "30年期美國公債殖利率", category: "美股總體與美債", value: "5.327%", baseline: "創2007年以來新高", note: "全面提高全市場融資資本成本，無風險利率上升壓抑科技股估值" },
+            { name: "10年期美國公債殖利率", category: "美股總體與美債", value: "4.740%", baseline: "長天期賣壓顯著", note: "基準無風險利率升高，帶動房貸利率與企業發債成本走高" },
+            { name: "Home Depot Q2 營收", category: "Home Depot 財報", value: "$478.61 億", baseline: "預估 $472.7 億 (年增 5.7%)", note: "營收表現優異，但動能集中於塗料維護等小工程" },
+            { name: "Home Depot Q2 調整後EPS", category: "Home Depot 財報", value: "$4.92", baseline: "預估 $4.73", note: "受益於 6.85 億美元關稅退款降低 COGS 支撐獲利" },
+            { name: "Home Depot 小型工程需求", category: "Home Depot 財報", value: "年增 +1.5%", baseline: "大型工程 年減 -2.1%", note: "消費者避免貸款大修（如廚衛翻修），轉向防禦型小工程" },
+            { name: "美國7月成屋銷售與房價", category: "美股總體與美債", value: "銷量 -1.7%", baseline: "房價中位數 $434,100 (+2%)", note: "高房價與高利率鎖住屋主，成屋交易量低迷抑制搬家修繕" },
+            { name: "Alphabet Q2 總營收", category: "Alphabet 財報", value: "$1,198 億", baseline: "年增 24%", note: "搜尋廣告與 YouTube 本業產生現金流能力依然非常強勁" },
+            { name: "Google Cloud 營收", category: "Alphabet 財報", value: "$248 億", baseline: "年增 82%", note: "AI 算力需求強勁轉化為實質雲端服務營收" },
+            { name: "Alphabet Q2 自由現金流", category: "Alphabet 財報", value: "-$59 億", baseline: "歷史首度轉負 (CapEx $449億)", note: "建置 AI 資料中心花錢速度快過本業自由現金流產生速度" },
+            { name: "Alphabet 全年 CapEx 預估", category: "Alphabet 財報", value: "$1,950億 - $2,050億", baseline: "大幅上調資本支出", note: "迫使公司進入債券與股票市場進行發債與融資" },
+            { name: "四大科技巨頭美債發行額", category: "美股總體與美債", value: "$1,940 億", baseline: "去年同期 $1,080億 (+79%)", note: "Amazon、Alphabet、Meta、Oracle 大舉發債搶資金" },
+            { name: "科技巨頭全年 AI 相關支出", category: "美股總體與美債", value: "> $7,300 億", baseline: "歷史新高", note: "與美國政府國債同步發行，資本本身成為稀缺資源" }
+        ];
+
+        // Render Interactive Table Rows
+        function renderTable(data) {
+            const tbody = document.getElementById('data-table-body');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-stone-500">查無符合條件的數據資料</td></tr>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-stone-50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3 font-semibold text-stone-900">${item.name}</td>
+                    <td class="p-3"><span class="px-2 py-1 text-xs rounded bg-stone-200 text-stone-700">${item.category}</span></td>
+                    <td class="p-3 font-bold text-sky-700">${item.value}</td>
+                    <td class="p-3 text-stone-600">${item.baseline}</td>
+                    <td class="p-3 text-stone-600">${item.note}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Table Filtering Setup
+        let currentCategory = 'ALL';
+        const searchInput = document.getElementById('table-search');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function filterData() {
+            const query = searchInput.value.toLowerCase().trim();
+            const filtered = productData.filter(item => {
+                const matchCat = (currentCategory === 'ALL' || item.category === currentCategory);
+                const matchQuery = item.name.toLowerCase().includes(query) ||
+                                   item.category.toLowerCase().includes(query) ||
+                                   item.value.toLowerCase().includes(query) ||
+                                   item.note.toLowerCase().includes(query);
+                return matchCat && matchQuery;
+            });
+            renderTable(filtered);
+        }
+
+        searchInput.addEventListener('input', filterData);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-sky-600', 'text-white');
+                    b.classList.add('bg-stone-100', 'text-stone-600');
+                });
+                btn.classList.add('active', 'bg-sky-600', 'text-white');
+                btn.classList.remove('bg-stone-100', 'text-stone-600');
+                currentCategory = btn.getAttribute('data-cat');
+                filterData();
+            });
+        });
+
+        // Initial Render
+        renderTable(productData);
+
+        // 2. Chart.js Renderings
+        // Chart 1: Alphabet Cash Flow vs CapEx
+        const ctxAlphabet = document.getElementById('alphabetCashChart').getContext('2d');
+        new Chart(ctxAlphabet, {
+            type: 'bar',
+            data: {
+                labels: ['營業現金流 (OCF)', '資本支出 (CapEx)', '自由現金流 (FCF)', 'Google Cloud 營收'],
+                datasets: [{
+                    label: '金額 (億美元)',
+                    data: [391, 449, -59, 248],
+                    backgroundColor: [
+                        'rgba(56, 189, 248, 0.85)', // Sky
+                        'rgba(244, 63, 94, 0.85)',  // Rose (CapEx)
+                        'rgba(239, 68, 68, 0.95)',  // Red (Negative FCF)
+                        'rgba(99, 102, 241, 0.85)'  // Indigo
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        title: { display: true, text: '億美元' }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Big Tech Debt Issuance
+        const ctxDebt = document.getElementById('bigTechDebtChart').getContext('2d');
+        new Chart(ctxDebt, {
+            type: 'bar',
+            data: {
+                labels: ['2025同期四大科技債發行', '2026同期四大科技債發行', '2026全年預估AI支出'],
+                datasets: [{
+                    label: '億美元',
+                    data: [1080, 1940, 7300],
+                    backgroundColor: [
+                        'rgba(156, 163, 175, 0.8)',
+                        'rgba(14, 165, 233, 0.85)',
+                        'rgba(245, 158, 11, 0.85)'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        title: { display: true, text: '億美元' }
+                    }
+                }
+            }
+        });
+
+        // 3. Navigation Smooth Active State Observer
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 4. Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
