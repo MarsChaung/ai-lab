@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Moderna疫苗與Target財報解析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom scrollbar and dynamic active nav link styling */
+        .active-nav-link {
+            color: #38bdf8 !important;
+            border-bottom: 2px solid #38bdf8;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #d6d3d1;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-stone-900 text-stone-100 shadow-md transition-all duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand Title -->
+                <div class="flex items-center space-x-3">
+                    <span class="font-bold text-lg hidden sm:inline-block">Moderna疫苗與Target財報解析</span>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#summary" class="nav-item active-nav-link py-2 transition-colors">核心摘要</a>
+                    <a href="#moderna-merck" class="nav-item inactive-nav-link py-2 transition-colors">Moderna & Merck</a>
+                    <a href="#target" class="nav-item inactive-nav-link py-2 transition-colors">Target 財報拆解</a>
+                    <a href="#visuals" class="nav-item inactive-nav-link py-2 transition-colors">圖表與數據表</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link py-2 transition-colors">策略與觀點</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-300 hover:text-white focus:outline-none p-2 rounded-md" aria-label="Toggle Menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-stone-800 px-4 pt-2 pb-4 space-y-2 border-t border-stone-700">
+            <a href="#summary" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">核心摘要</a>
+            <a href="#moderna-merck" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">Moderna & Merck</a>
+            <a href="#target" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">Target 財報拆解</a>
+            <a href="#visuals" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">圖表與數據表</a>
+            <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-200 hover:bg-stone-700">策略與觀點</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero Header -->
+        <section class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl p-8 shadow-xl">
+            <div class="max-w-4xl">
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                    一支癌症疫苗讓 Moderna 重新定價，一筆十億美元退款讓 Target 獲利翻倍
+                </h1>
+                <p class="text-stone-300 text-base sm:text-lg leading-relaxed mb-6">
+                    兩種看似同樣漂亮的「超預期」好消息，其含金量與背後商業本質完全不同：一家迎來翻轉未來十年的平台突破，另一家則是營運改善加上非經常性大額收益。
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-stone-700/60 text-sm">
+                    <div class="flex items-start space-x-3">
+                        <span class="text-sky-400 font-bold text-lg">💡</span>
+                        <div>
+                            <span class="font-semibold text-sky-200">Moderna 核心契機：</span>
+                            <span class="text-stone-300">mRNA 個人化癌症治療 III 期成功，從「疫苗公司」轉型「癌症平台」。</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-amber-400 font-bold text-lg">📊</span>
+                        <div>
+                            <span class="font-semibold text-amber-200">Target 核心關鍵：</span>
+                            <span class="text-stone-300">客流量與同店銷售實質回升，但需拆解 $1.65 關稅退款對 EPS 的放大效應。</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Summary Section -->
+        <section id="summary" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心數據與指標速覽
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-xs font-bold text-stone-500 uppercase tracking-wider">Moderna Q2 營收</p>
+                    <p class="text-3xl font-extrabold text-stone-900 mt-2">1.45 億美元</p>
+                    <p class="text-xs text-emerald-600 mt-1 font-medium">↑ 優於預期的 1.03 億美元</p>
+                    <p class="text-xs text-stone-500 mt-3 border-t pt-2">單季每股虧損 $1.97，但 Intismeran III 期正面結果帶動股價飆漲。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                    <p class="text-xs font-bold text-stone-500 uppercase tracking-wider">Target Q2 營收</p>
+                    <p class="text-3xl font-extrabold text-stone-900 mt-2">265 億美元</p>
+                    <p class="text-xs text-emerald-600 mt-1 font-medium">↑ 年增長 5.3% / 同店 +3.8%</p>
+                    <p class="text-xs text-stone-500 mt-3 border-t pt-2">客流量增加 3.6%，數位銷售強勁成長 8.7%。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <p class="text-xs font-bold text-stone-500 uppercase tracking-wider">Target 關稅退款利益</p>
+                    <p class="text-3xl font-extrabold text-stone-900 mt-2">9.94 億美元</p>
+                    <p class="text-xs text-amber-600 mt-1 font-medium">⚡ 非經常性稅前利益</p>
+                    <p class="text-xs text-stone-500 mt-3 border-t pt-2">貢獻稅後淨利 7.52 億美元，相當於 EPS 增加 $1.65。</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-purple-500">
+                    <p class="text-xs font-bold text-stone-500 uppercase tracking-wider">Keytruda Q2 營收</p>
+                    <p class="text-3xl font-extrabold text-stone-900 mt-2">83.7 億美元</p>
+                    <p class="text-xs text-emerald-600 mt-1 font-medium">↑ 年增長 5%</p>
+                    <p class="text-xs text-stone-500 mt-3 border-t pt-2">佔 Merck 總營收逾一半，個人化療法組合可延續專利生命週期。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Moderna & Merck -->
+        <section id="moderna-merck" class="scroll-mt-24 space-y-6">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Moderna & Merck：mRNA 個人化癌症療法重大突破
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Intismeran Highlights -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs">INTerpath-001 試驗</span>
+                        <h3 class="text-xl font-bold text-stone-800">證明 mRNA 可成為商業規模癌症治療平台</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        8月19日，Merck 與 Moderna 宣布第三期大型試驗（1,137名高復發風險黑色素瘤患者）取得正面結果。聯合療法（Keytruda + Intismeran）在「無復發存活期 (RFS)」與「無遠端轉移存活期 (DMFS)」均達到統計顯著且具臨床意義的改善。
+                    </p>
+
+                    <!-- Mechanism Explanation Card -->
+                    <div class="bg-stone-50 rounded-lg p-4 border border-stone-200">
+                        <h4 class="font-bold text-stone-800 text-sm mb-2 flex items-center">
+                            <svg class="w-4 h-4 text-sky-500 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            治療機制：精準打擊癌症「指紋」
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-stone-600 mt-2">
+                            <div class="bg-white p-3 rounded shadow-sm border border-stone-100">
+                                <span class="font-bold text-sky-600 block mb-1">1. Intismeran (Moderna)</span>
+                                根據患者腫瘤基因定序，包含最多 34 個特有新抗原資訊，精準告訴免疫系統：「敵人長什麼樣子」。
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm border border-stone-100">
+                                <span class="font-bold text-purple-600 block mb-1">2. Keytruda (Merck)</span>
+                                解除癌細胞對免疫系統的抑制機制，把免疫系統的煞車放掉，協同摧毀殘留癌細胞。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 Retrospective Data -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="bg-sky-50 rounded-lg p-3 text-center border border-sky-100">
+                            <p class="text-xs text-sky-700 font-medium">II 期五年追蹤：復發或死亡風險</p>
+                            <p class="text-2xl font-black text-sky-800 mt-1">降低 ~49%</p>
+                        </div>
+                        <div class="bg-sky-50 rounded-lg p-3 text-center border border-sky-100">
+                            <p class="text-xs text-sky-700 font-medium">II 期五年追蹤：遠端轉移或死亡風險</p>
+                            <p class="text-2xl font-black text-sky-800 mt-1">降低 ~59%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Implications & Risks -->
+                <div class="bg-white rounded-lg shadow-lg p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-stone-800 border-b pb-2">雙方戰略價值與風險評估</h3>
+                    
+                    <div class="space-y-3">
+                        <div class="p-3 bg-amber-50 rounded-lg border border-amber-200">
+                            <h4 class="font-bold text-amber-900 text-xs uppercase tracking-wide">Merck (默克) 的戰略防禦</h4>
+                            <p class="text-xs text-amber-800 mt-1">
+                                Keytruda Q2 營收高達 $83.7億（佔 Merck 逾半營收）。因其核心專利將於 2028 年陸續到期，與 Intismeran 的組合能形成全新專利生態圈，延長生命週期。
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-rose-50 rounded-lg border border-rose-200">
+                            <h4 class="font-bold text-rose-900 text-xs uppercase tracking-wide">Moderna 追高前必看 4 大風險</h4>
+                            <ul class="text-xs text-rose-800 space-y-1 mt-1 list-disc list-inside">
+                                <li>III 期數據未公布完整風險降低百分比。</li>
+                                <li>整體存活率 (OS) 仍需長期追蹤。</li>
+                                <li>個體化製造（定序、物流、定製）成本與產能挑戰。</li>
+                                <li>定價策略與保險給付尚未確定。</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-100 p-3 rounded-lg text-xs text-stone-600">
+                        <span class="font-bold text-stone-800">潛在市場：</span> Barclays 估計單是黑色素瘤適應症，至 2035 年年銷售可達 <span class="font-bold text-sky-700">30 億美元</span>。若推廣至肺癌、膀胱癌，上行空間巨大。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Target Financial Deep Dive -->
+        <section id="target" class="scroll-mt-24 space-y-6">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Target 財報拆解：營運實質改善 vs 關稅退款放大鏡
+            </h2>
+
+            <!-- Main Breakdown Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-3">
+                            看似獲利翻倍的真相：拆解 $4.11 每股盈餘 (EPS)
+                        </h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            Target 第二季每股盈餘看似由去年 $2.05 暴增至 $4.11 (成長 100%)。但背後認列了由最高法院判決帶來的 <span class="font-bold text-amber-600">9.94 億美元關稅退款</span>（稅後 7.52 億美元，貢獻 EPS $1.65）。
+                        </p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between p-2 bg-stone-50 rounded">
+                                <span class="text-stone-600">帳面公布 EPS:</span>
+                                <span class="font-bold text-stone-900">$4.11</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-amber-50 rounded border border-amber-200">
+                                <span class="text-amber-800">扣除關稅退款利益 (-$1.65):</span>
+                                <span class="font-bold text-amber-900">非經常性獲利</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-emerald-50 rounded border border-emerald-200">
+                                <span class="text-emerald-800 font-semibold">本業調整後 EPS:</span>
+                                <span class="font-bold text-emerald-900">$2.46 (市場預期 $2.33)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operational Strengths -->
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 space-y-4">
+                        <h4 class="font-bold text-stone-800 text-base border-b pb-2">排除退款後，本業依然亮眼之細節：</h4>
+                        <ul class="space-y-3 text-xs text-stone-700">
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span>
+                                <div><span class="font-bold text-stone-900">客流量微幅增長 3.6%：</span> 客人回流而非僅靠單價提高，此為零售業極健康的正向訊號。</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span>
+                                <div><span class="font-bold text-stone-900">全品類增長與數位轉型：</span> 玩具、電子產品等 Fun 101 類別雙位數成長；當日配送業務成長超過 25%。</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span>
+                                <div><span class="font-bold text-stone-900">毛利率實質提升：</span> 總毛利率 33.7%，扣除退款貢獻的 3.7 個百分點後，本業毛利率仍年增約 1 個百分點。</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span>
+                                <div><span class="font-bold text-stone-900">全年指引中點實質上調：</span> 全年 EPS 指引 raised 至 $9.9~$10.9（扣除退款後中點仍提升 $0.75）。</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Visuals & Dynamic Interactive Table -->
+        <section id="visuals" class="scroll-mt-24 space-y-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                動態資料視覺化與指標庫
+            </h2>
+
+            <!-- Chart Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Target EPS Structure -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-800 mb-1">Target Q2 EPS 結構與市場預期拆解 ($)</h3>
+                        <p class="text-xs text-stone-500 mb-4">清楚呈現關稅退款前後之營運本質差異</p>
+                    </div>
+                    <!-- Chart Canvas Container -->
+                    <div class="relative w-full h-64 sm:h-80">
+                        <canvas id="targetEpsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Revenue Comparison -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-800 mb-1">重點公司 Q2 關鍵財務規模與核心產品對比 (億美元)</h3>
+                        <p class="text-xs text-stone-500 mb-4">分析巨型體量公司與生技平台公司之規模結構</p>
+                    </div>
+                    <!-- Chart Canvas Container -->
+                    <div class="relative w-full h-64 sm:h-80">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Searchable Data Table -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800">焦點個股總覽與風險對照表</h3>
+                        <p class="text-xs text-stone-500 mt-1">輸入關鍵字（如：Moderna, 退款, Keytruda, 黑色素瘤）可即時篩選表格</p>
+                    </div>
+                    <!-- Real-time Filter Input -->
+                    <div class="w-full sm:w-72">
+                        <input type="text" id="tableSearchInput" placeholder="🔍 搜尋公司/指標/關鍵字..." 
+                               class="w-full px-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
+                    </div>
+                </div>
+
+                <!-- Table Wrapper -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200 text-sm">
+                        <thead class="bg-stone-900 text-stone-100 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-4 py-3.5 text-left font-semibold">公司名稱 (代碼)</th>
+                                <th scope="col" class="px-4 py-3.5 text-left font-semibold">Q2 營收</th>
+                                <th scope="col" class="px-4 py-3.5 text-left font-semibold">Q2 獲利表現</th>
+                                <th scope="col" class="px-4 py-3.5 text-left font-semibold">關鍵驅動因子 / 新聞重點</th>
+                                <th scope="col" class="px-4 py-3.5 text-left font-semibold">主要風險 / 觀察重點</th>
+                            </tr>
+                        </thead>
+                        <tbody id="companyTableBody" class="bg-white divide-y divide-stone-200">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Investment Strategy Logic -->
+        <section id="strategy" class="scroll-mt-24 space-y-6">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                商業策略與三種投資邏輯對比
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Moderna Strategy -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-t-4 border-sky-500">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-stone-800">Moderna (MRNA)</h3>
+                            <span class="text-xs px-2 py-1 bg-sky-100 text-sky-800 font-bold rounded">高風險/高報酬</span>
+                        </div>
+                        <p class="text-xs font-bold text-sky-600 mb-2">臨床事件型股票</p>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            已成功從單一 COVID 疫苗公司跨入癌症平台公司。在股價單日翻倍後，追高風險高。未來報酬取決於黑色素瘤完整數據、OS 存活期與肺癌/膀胱癌等第二/三期適應症能否複製成功。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <span class="font-bold">投資結論：</span>關注「未來還沒有出現在財報上的結構性獲利」。
+                    </div>
+                </div>
+
+                <!-- Merck Strategy -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-t-4 border-purple-500">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-stone-800">Merck (MRK)</h3>
+                            <span class="text-xs px-2 py-1 bg-purple-100 text-purple-800 font-bold rounded">風險報酬平衡</span>
+                        </div>
+                        <p class="text-xs font-bold text-purple-600 mb-2">平台防禦與延伸型</p>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            Keytruda 創造強大現金流，與 Intismeran 結合可鞏固並延伸 2028 年專利到期後的癌症治療生態系。上行爆發力低於 Moderna，但基本面保護力遠高。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <span class="font-bold">投資結論：</span>保護龐大藥王現金流，對抗專利懸崖。
+                    </div>
+                </div>
+
+                <!-- Target Strategy -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-t-4 border-emerald-500">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-stone-800">Target (TGT)</h3>
+                            <span class="text-xs px-2 py-1 bg-emerald-100 text-emerald-800 font-bold rounded">營運轉型修復</span>
+                        </div>
+                        <p class="text-xs font-bold text-emerald-600 mb-2">營運轉型型股票</p>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            客流量回升與同店銷售增長證明轉型有效，但年初至今累積漲幅巨大。未來股價續航力取決於不靠退款的本業毛利率能否持續改善以及服飾/家居品類復甦。
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded text-xs text-stone-700">
+                        <span class="font-bold">投資結論：</span>關注「把一次性獲利拿掉後，還剩下多少成長」。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Takeaway Banner -->
+            <div class="bg-stone-900 text-stone-100 p-6 rounded-xl shadow-lg border border-stone-800">
+                <h3 class="text-lg font-bold text-sky-400 mb-2 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    基本面投資核心精髓：不要只看獲利成長多少，而要看獲利從哪裡來
+                </h3>
+                <p class="text-stone-300 text-xs sm:text-sm leading-relaxed">
+                    閱讀財報時，區分「未來獲利能力的結構性改變」與「當期獲利被非經常性收益放大」至關重要。Moderna 提供的是前者，Target 則是後者（營運本業改善＋關稅退款放大鏡）。理解兩者的本質差異，才能在面對「超預期」新聞時做出理性的配置決策。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mandatory Footer Component -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Moderna疫苗與Target財報解析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Moderna、Merck與Target相關公開資料 (2026年08月19日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data Array for Interactive Table
+        const productData = [
+            {
+                company: "Moderna (MRNA)",
+                revenue: "$1.45 億",
+                earnings: "每股虧損 $1.97",
+                drivers: "Intismeran + Keytruda  melanoma III 期試驗取得正面結果；從 COVID 疫苗向個人化癌症治療平台跨越。",
+                risks: "數據尚未完整公開、整體存活期(OS)追蹤中、個人化製造/物流考量、定價與股價短線極高波動。"
+            },
+            {
+                company: "Merck (MRK)",
+                revenue: "$166.1 億",
+                earnings: "Keytruda Q2 達 $83.7 億",
+                drivers: "Keytruda 銷售年增 5%；聯合 Intismeran 能拓展新適應症並延續專利生命週期。",
+                risks: "2028 年起 Keytruda 面臨專利懸崖與生物相似藥競爭壓力。"
+            },
+            {
+                company: "Target (TGT)",
+                revenue: "$265.0 億",
+                earnings: "公布 EPS $4.11 / 本業調整後 $2.46",
+                drivers: "同店銷售 +3.8%、客流量 +3.6%、數位 +8.7%；獲得 $9.94 億關稅退款利益 ($1.65 EPS)。",
+                risks: "股價已提前反映轉機估值、服飾與家居等類別仍待復甦、需觀察排除退款後毛利率可持續性。"
+            }
+        ];
+
+        // JavaScript Interaction Logic
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu on clicking links
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentId = entry.target.getAttribute('id');
+                        navItems.forEach(item => {
+                            if (item.getAttribute('href') === `#${currentId}`) {
+                                item.classList.add('active-nav-link');
+                                item.classList.remove('inactive-nav-link');
+                            } else {
+                                item.classList.remove('active-nav-link');
+                                item.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            const tableBody = document.getElementById('companyTableBody');
+            const searchInput = document.getElementById('tableSearchInput');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="px-4 py-8 text-center text-stone-500">
+                                無符合「${searchInput.value}」之資料
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-stone-50 transition-colors';
+                    row.innerHTML = `
+                        <td class="px-4 py-3.5 font-bold text-stone-900 whitespace-nowrap">${item.company}</td>
+                        <td class="px-4 py-3.5 text-stone-700 whitespace-nowrap">${item.revenue}</td>
+                        <td class="px-4 py-3.5 text-stone-700 font-medium whitespace-nowrap">${item.earnings}</td>
+                        <td class="px-4 py-3.5 text-stone-600 max-w-xs sm:max-w-md">${item.drivers}</td>
+                        <td class="px-4 py-3.5 text-stone-600 max-w-xs">${item.risks}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // Initial Render
+            renderTable(productData);
+
+            // Filter functionality
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                const filtered = productData.filter(item => 
+                    item.company.toLowerCase().includes(query) ||
+                    item.drivers.toLowerCase().includes(query) ||
+                    item.risks.toLowerCase().includes(query) ||
+                    item.earnings.toLowerCase().includes(query)
+                );
+                renderTable(filtered);
+            });
+
+            // Chart 1: Target EPS Structure
+            const ctx1 = document.getElementById('targetEpsChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['去年 Q2 EPS', '市場預期 EPS', '本業調整後 EPS', '帳面總 EPS (含退款)'],
+                    datasets: [{
+                        label: '美元 ($)',
+                        data: [2.05, 2.33, 2.46, 4.11],
+                        backgroundColor: [
+                            '#94a3b8',
+                            '#38bdf8',
+                            '#10b981',
+                            '#f59e0b'
+                        ],
+                        borderRadius: 6,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` EPS: $${context.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '每股盈餘 ($)' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Revenue Comparison
+            const ctx2 = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Target 總營收', 'Merck 總營收', 'Keytruda 單品營收', 'Moderna 總營收'],
+                    datasets: [{
+                        label: 'Q2 營收 (億美元)',
+                        data: [265.0, 166.1, 83.7, 1.45],
+                        backgroundColor: [
+                            '#10b981',
+                            '#a855f7',
+                            '#c084fc',
+                            '#0284c7'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` 營收: $${context.raw} 億美元`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '億美元 ($)' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
