@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Broadcom與Coinbase基建戰</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased">
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo & Site Title -->
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <span class="text-xl font-bold text-stone-900 tracking-tight">Broadcom與Coinbase基建戰</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#overview" class="nav-link active-nav-link py-5 px-1 inline-flex items-center transition">核心總覽</a>
+                    <a href="#broadcom" class="nav-link inactive-nav-link py-5 px-1 inline-flex items-center transition">Broadcom與晶片金融化</a>
+                    <a href="#nvidia-compare" class="nav-link inactive-nav-link py-5 px-1 inline-flex items-center transition">Nvidia vs Broadcom</a>
+                    <a href="#coinbase" class="nav-link inactive-nav-link py-5 px-1 inline-flex items-center transition">Coinbase與法規護城河</a>
+                    <a href="#data-table" class="nav-link inactive-nav-link py-5 px-1 inline-flex items-center transition">數據探索表</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-5 px-1 inline-flex items-center transition">投資策略</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md" aria-label="切換選單">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-sky-700 bg-sky-50">核心總覽</a>
+            <a href="#broadcom" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">Broadcom與晶片金融化</a>
+            <a href="#nvidia-compare" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">Nvidia vs Broadcom</a>
+            <a href="#coinbase" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">Coinbase與法規護城河</a>
+            <a href="#data-table" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">數據探索表</a>
+            <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero / Report Banner -->
+        <section id="overview" class="bg-gradient-to-br from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
+            <div class="relative z-10 max-w-4xl space-y-4">
+                <h1 class="text-2xl sm:text-4xl font-extrabold leading-tight tracking-tight">
+                    AI開始把晶片變成金融資產，加密貨幣把法規變成護城河：Broadcom與Coinbase背後的兩場基礎建設戰
+                </h1>
+                <p class="text-stone-300 text-base sm:text-lg leading-relaxed">
+                    二〇二六年八月二十日至二十一日，美股市場呈現兩則重要趨勢：下一階段科技股競爭，正從單純比較產品與營收，轉向「誰能把科技轉化成可被金融體系長期支持的基礎建設」。
+                </p>
+                
+                <!-- Metrics Highlights Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-stone-700/80">
+                    <div class="bg-white/5 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+                        <div class="text-xs text-stone-400">Broadcom潛在融資</div>
+                        <div class="text-xl sm:text-2xl font-bold text-sky-400">$1,000 億</div>
+                        <div class="text-xs text-stone-400 mt-1">SPV架構算力平台</div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+                        <div class="text-xs text-stone-400">Broadcom Q3 AI營收預估</div>
+                        <div class="text-xl sm:text-2xl font-bold text-emerald-400">~$160 億</div>
+                        <div class="text-xs text-stone-400 mt-1">年增超過 200%</div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+                        <div class="text-xs text-stone-400">Nvidia融資平台目標</div>
+                        <div class="text-xl sm:text-2xl font-bold text-amber-400">$5,000 億</div>
+                        <div class="text-xs text-stone-400 mt-1">第三方資本動員</div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+                        <div class="text-xs text-stone-400">Coinbase非BTC現貨營收</div>
+                        <div class="text-xl sm:text-2xl font-bold text-indigo-400">88 %</div>
+                        <div class="text-xs text-stone-400 mt-1">收入結構多元化轉型</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Broadcom AI 晶片融資與算力金融化 -->
+        <section id="broadcom" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-server text-sky-600 mr-2"></i>Broadcom 的六百億至千億美元融資與算力金融化
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- SPV Structure Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center">
+                        <i class="fa-solid fa-file-contract text-sky-600 mr-2"></i>融資案真實架構拆解 (SPV機制)
+                    </h3>
+                    <p class="text-stone-600 mb-4 leading-relaxed">
+                        根據 Reuters 援引 Bloomberg 報導，Broadcom 正在與貸款機構討論超過 <strong>600 億美元</strong> 的 AI 晶片融資交易。若各層級資金到位，總規模最高可接近 <strong>1,000 億美元</strong>。
+                    </p>
+                    <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <div class="flex items-start">
+                            <span class="bg-sky-100 text-sky-800 font-bold px-2 py-1 rounded text-xs mr-3 mt-0.5">結構 A</span>
+                            <div class="text-sm text-stone-700"><strong>次順位債務：</strong>約 300 億美元</div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="bg-sky-100 text-sky-800 font-bold px-2 py-1 rounded text-xs mr-3 mt-0.5">結構 B</span>
+                            <div class="text-sm text-stone-700"><strong>優先擔保融資：</strong>約 600 億至 700 億美元（Broadcom 可能對部分提供信用保證）</div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="bg-amber-100 text-amber-800 font-bold px-2 py-1 rounded text-xs mr-3 mt-0.5">重要澄清</span>
+                            <div class="text-sm text-stone-700">債務透過<strong>特殊目的載體（SPV）</strong>發行，非 Broadcom 直接公司債，避免單純直接負擔近千億美元債務。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anthropic Case & Business Model Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-800 mb-4 flex items-center">
+                        <i class="fa-solid fa-network-wired text-sky-600 mr-2"></i>Anthropic 測試案例與「AI XPV」
+                    </h3>
+                    <p class="text-stone-600 mb-3 leading-relaxed">
+                        今年6月，Broadcom 已與 Apollo、Blackstone 建立「AI XPV Platform」，首筆 <strong>350 億美元</strong> 交易協助 Anthropic 擴充超過 1GW 算力。
+                    </p>
+                    <ul class="list-disc list-inside text-stone-600 space-y-2 text-sm mb-4">
+                        <li><strong>長期目標：</strong> 2028 年前協助前沿 AI 公司建立超過 <strong>20 GW</strong> 的運算能力。</li>
+                        <li><strong>客戶覆蓋：</strong> 除了 Alphabet 與 Meta 外，已延伸至 Anthropic 與 OpenAI。</li>
+                        <li><strong>商業模式演進：</strong> 晶片公司不只賣晶片，更開始替客戶解決「怎麼買得起晶片」的問題。</li>
+                    </ul>
+                    <div class="p-3 bg-sky-50 rounded border-l-4 border-sky-500 text-xs text-sky-900">
+                        <strong>金融資產化邏輯：</strong> GPU、客製化加速器與資料中心租約被轉化為類似飛機租賃、電廠或電信基地台的金融資產，以長期租約現金流支持債務。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Nvidia vs Broadcom 金融生態系與動態圖表 -->
+        <section id="nvidia-compare" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-chart-pie text-sky-600 mr-2"></i>Nvidia vs Broadcom 金融生態系與數據對比
+            </h2>
+
+            <div class="grid lg:grid-cols-2 gap-6 mb-6">
+                <!-- Comparison Cards -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-stone-800">Nvidia 算力融資生態系</h3>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full">GPU + CUDA + 融資</span>
+                        </div>
+                        <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                            8月10日宣布與 Apollo、BlackRock、Blackstone、Brookfield、Goldman Sachs 及 KKR 合作，建立 AI Compute Infrastructure Financing Platforms。
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 text-center mb-4">
+                            <div class="bg-stone-50 p-3 rounded">
+                                <span class="block text-xs text-stone-500">長期動員資本</span>
+                                <span class="text-lg font-bold text-stone-800">&gt; 5,000 億美元</span>
+                            </div>
+                            <div class="bg-stone-50 p-3 rounded">
+                                <span class="block text-xs text-stone-500">可能信用支持上限</span>
+                                <span class="text-lg font-bold text-emerald-600">最高 1,250 億美元</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-500 italic">競賽維度升級：CUDA 軟體護城河外，疊加金融融資護城河。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-stone-800">Broadcom 客製化晶片生態系</h3>
+                            <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded-full">XPU + 網路晶片 + SPV</span>
+                        </div>
+                        <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                            聯合 Apollo 與 Blackstone，利用客製化 AI 加速器（XPU）與先進網路晶片能力，為大型客戶打造租賃型算力資產平台。
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 text-center mb-4">
+                            <div class="bg-stone-50 p-3 rounded">
+                                <span class="block text-xs text-stone-500">Q2 AI半導體營收</span>
+                                <span class="text-lg font-bold text-stone-800">$108 億 (年增143%)</span>
+                            </div>
+                            <div class="bg-stone-50 p-3 rounded">
+                                <span class="block text-xs text-stone-500">Q2 自由現金流</span>
+                                <span class="text-lg font-bold text-sky-600">&gt; $102 億美元</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-500 italic">市場高度期待：Q3預估 $160 億美元，若成長稍低於預期可能引發股價波動。</p>
+                </div>
+            </div>
+
+            <!-- Dynamic Chart.js Visualization Containers -->
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Chart Container 1 (Wrapped in div as specified) -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center">
+                        <i class="fa-solid fa-chart-column text-sky-600 mr-2"></i>大型 AI 算力融資平台規模對比 (十億美元)
+                    </h3>
+                    <div class="h-64 relative">
+                        <canvas id="financingChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart Container 2 (Wrapped in div as specified) -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center">
+                        <i class="fa-solid fa-chart-line text-sky-600 mr-2"></i>Broadcom 營收與現金流指標 ($B USD)
+                    </h3>
+                    <div class="h-64 relative">
+                        <canvas id="broadcomChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Coinbase、CLARITY Act 與數位資產重估 -->
+        <section id="coinbase" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-coins text-sky-600 mr-2"></i>Bitcoin 重回七萬與 Coinbase 法規護城河
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid lg:grid-cols-3 gap-6">
+                    <!-- Liquidity Catalyst -->
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-amber-500 text-white p-2 rounded-md"><i class="fa-bold fa-bitcoin"></i></span>
+                            <h3 class="text-lg font-bold text-stone-800">行情與流動性催化劑</h3>
+                        </div>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            8月20日 Bitcoin 上漲 3.48% 至 $71,505（6月以來首次突破7萬美元），Coinbase 上漲 6.05%。
+                        </p>
+                        <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs text-stone-700">
+                            <strong>美債買回：</strong> 8月19日財政部將長債流動性支持買回規模由每季 $20B 提至至少 $40B（9/9實施）。此舉舒緩短期殖利率，但非聯準會 QE，無法消除長期財政赤字壓力。
+                        </div>
+                    </div>
+
+                    <!-- CLARITY Act -->
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-sky-600 text-white p-2 rounded-md"><i class="fa-solid fa-gavel"></i></span>
+                            <h3 class="text-lg font-bold text-stone-800">CLARITY Act 法案推進</h3>
+                        </div>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            8月19日川普總統於白宮會見 Brian Armstrong (Coinbase) 及 Vlad Tenev (Robinhood) 等高層，施壓國會通過公平版 CLARITY Act。
+                        </p>
+                        <div class="bg-sky-50 p-3 rounded border border-sky-200 text-xs text-sky-900">
+                            <strong>法案核心：</strong> 建立數位資產分類制度（區分證券與商品），明確劃分 SEC 與 CFTC 權責。參議院銀行委員會以 15:9 通過，目前待院會審議。
+                        </div>
+                    </div>
+
+                    <!-- Coinbase Valuation Shift -->
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-indigo-600 text-white p-2 rounded-md"><i class="fa-solid fa-building-columns"></i></span>
+                            <h3 class="text-lg font-bold text-stone-800">Coinbase 估值重塑</h3>
+                        </div>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            Coinbase 正從純粹「高波動交易所」轉型為「數位資產金融基礎設施」。
+                        </p>
+                        <ul class="text-xs text-stone-600 space-y-1.5 list-disc list-inside">
+                            <li>Q2 交易收入 $5.99 億 (年減 21%)</li>
+                            <li>Q2 訂閱與服務收入 $5.55 億 (占淨營收 48%)</li>
+                            <li><strong>88% 淨營收已非來自 BTC 現貨交易</strong></li>
+                            <li>平台 USDC 持倉達 <strong>$200 億美元</strong> 創歷史新高</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 互動資料表格 -->
+        <section id="data-table" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-table text-sky-600 mr-2"></i>報告重點指標與數據互動探索
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <!-- Table Search Filter Bar -->
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                    <p class="text-sm text-stone-500">即時檢索報告中記載之核心財務、數據與事件：</p>
+                    <div class="relative w-full sm:w-72">
+                        <input type="text" id="table-search" placeholder="輸入關鍵字 (如: Broadcom, Coinbase)..." 
+                            class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-stone-400"></i>
+                    </div>
+                </div>
+
+                <!-- Table Wrapper -->
+                <div class="overflow-x-auto max-h-96 overflow-y-auto border border-stone-200 rounded-lg">
+                    <table class="w-full text-left border-collapse min-w-[640px]">
+                        <thead class="sticky top-0 bg-stone-100 border-b border-stone-300 text-stone-700 text-xs font-semibold uppercase tracking-wider">
+                            <tr>
+                                <th class="py-3 px-4">公司 / 實體</th>
+                                <th class="py-3 px-4">分類</th>
+                                <th class="py-3 px-4">關鍵指標 / 事件</th>
+                                <th class="py-3 px-4">數據 / 規模</th>
+                                <th class="py-3 px-4">戰略意義與影響</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body" class="divide-y divide-stone-200 text-sm text-stone-700">
+                            <!-- Dynamically populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="no-results" class="hidden text-center py-6 text-stone-500 text-sm">
+                    未找到符合條件的數據
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 信用風險與核心投資策略 -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                <i class="fa-solid fa-chess text-sky-600 mr-2"></i>核心風險分析與追蹤策略
+            </h2>
+
+            <!-- Risk Warning Box -->
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg mb-6 shadow-sm">
+                <h3 class="text-red-800 font-bold text-base flex items-center mb-1">
+                    <i class="fa-solid fa-triangle-exclamation mr-2"></i>核心風險警訊：AI 債務槓桿與信用風險
+                </h3>
+                <p class="text-red-700 text-sm leading-relaxed">
+                    四大雲端巨頭今年 AI 支出預計超過 <strong>7,300 億美元</strong>。當算力大量依賴債務融資，市場的核心提問將從「AI需求有多少？」變成「AI產生的收入能否支付這些債務？」。若算力價格快速下降或晶片折舊加速，資產殘值與融資安全性將直接受衝擊。
+                </p>
+            </div>
+
+            <!-- 4 Pillars Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-lg p-5 border-t-4 border-sky-600">
+                    <div class="font-bold text-stone-800 text-base mb-1">Broadcom (AVGO)</div>
+                    <div class="text-xs text-sky-600 font-semibold mb-2">算力融資平台技術核心</div>
+                    <p class="text-stone-600 text-xs leading-relaxed">
+                        追蹤焦點：SPV債務擔保比例、Anthropic算力合約期限，以及9月2日第三季財報發布內容。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-5 border-t-4 border-emerald-600">
+                    <div class="font-bold text-stone-800 text-base mb-1">Nvidia (NVDA)</div>
+                    <div class="text-xs text-emerald-600 font-semibold mb-2">晶片+軟體+資本霸主</div>
+                    <p class="text-stone-600 text-xs leading-relaxed">
+                        追蹤焦點：5,000億融資平台進展及8月26日財報，關注AI資本支出成長力道。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-5 border-t-4 border-amber-500">
+                    <div class="font-bold text-stone-800 text-base mb-1">Apollo & Blackstone</div>
+                    <div class="text-xs text-amber-600 font-semibold mb-2">私人信貸與AI基礎建設</div>
+                    <p class="text-stone-600 text-xs leading-relaxed">
+                        追蹤焦點：資產管理規模(AUM)與手續費收入成長，兼顧資產集中度信用風險。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-5 border-t-4 border-indigo-600">
+                    <div class="font-bold text-stone-800 text-base mb-1">Coinbase (COIN)</div>
+                    <div class="text-xs text-indigo-600 font-semibold mb-2">監管合規與鏈上入口</div>
+                    <p class="text-stone-600 text-xs leading-relaxed">
+                        追蹤焦點：CLARITY Act 國會表決進度、USDC 發行量及機構託管服務營收佔比。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strategic Takeaway Box -->
+            <div class="bg-gradient-to-r from-sky-900 to-stone-900 text-white rounded-xl p-6 shadow-lg">
+                <h3 class="text-xl font-bold mb-3 flex items-center text-sky-400">
+                    <i class="fa-solid fa-lightbulb mr-2"></i>結論：科技投資的三個終極提問
+                </h3>
+                <p class="text-sm text-stone-300 mb-4 leading-relaxed">
+                    AI 產業下一個護城河是<strong>融資能力</strong>；加密貨幣產業下一個護城河則是<strong>監管合法性</strong>。未來的科技股選股，除了技術實力，必須評估：
+                </p>
+                <div class="grid sm:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-white/10 p-3 rounded border border-white/10">
+                        <span class="text-sky-300 font-bold block mb-1">Q1. 資本取得</span>
+                        誰可以取得最便宜、最長期的資本？
+                    </div>
+                    <div class="bg-white/10 p-3 rounded border border-white/10">
+                        <span class="text-sky-300 font-bold block mb-1">Q2. 現金流轉化</span>
+                        誰可以把科技資產轉化成穩定現金流？
+                    </div>
+                    <div class="bg-white/10 p-3 rounded border border-white/10">
+                        <span class="text-sky-300 font-bold block mb-1">Q3. 基建認可</span>
+                        誰最有能力成為金融體系認可的基礎建設？
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Required Footer Structure -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Broadcom與Coinbase基建戰。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Broadcom與Coinbase相關公開資料 (2026年08月21日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactivity Code -->
+    <script>
+        // Real Data Source Array for Interactive Table based on document facts
+        const productData = [
+            { company: "Broadcom (AVGO)", category: "AI半導體", metric: "2026 Q2 AI營收", value: "$10.8 Billion", impact: "年增 143%，自由現金流達 $10.2B，客製化加速器需求強勁" },
+            { company: "Broadcom (AVGO)", category: "AI半導體", metric: "2026 Q3 AI營收預估", value: "$16.0 Billion", impact: "預估年增 >200%，市場高期待下若有些微偏差易引發股價波動" },
+            { company: "Broadcom / Apollo", category: "AI金融化", metric: "AI XPV 融資平台", value: "$35B - $1,000B", impact: "首案支持Anthropic擴建1GW算力，目標2028年前建置>20GW" },
+            { company: "Nvidia (NVDA)", category: "AI半導體", metric: "算力融資平台計畫", value: "$5,000 Billion", impact: "動員第三方資本，Nvidia提供最高$1,250億信用支持" },
+            { company: "Coinbase (COIN)", category: "數位資產", metric: "2026 Q2 交易收入", value: "$5.99 Billion", impact: "年減 21%，受現貨交易量波動影響，單季淨虧損 $3.6B" },
+            { company: "Coinbase (COIN)", category: "數位資產", metric: "2026 Q2 訂閱與服務收入", value: "$5.55 Billion", impact: "占淨營收 48%，88%淨營收已非來自BTC現貨交易" },
+            { company: "Coinbase (COIN)", category: "穩定幣基建", metric: "平台 USDC 持倉", value: "$200 Billion", impact: "創歷史新高，穩定幣收入達 $2.92 億，大幅改善收入結構" },
+            { company: "比特幣 (Bitcoin)", category: "加密貨幣", metric: "市場突破價格", value: "$71,505 USD", impact: "單日上漲 3.48%，自6月以來首次重新站上7萬美元" },
+            { company: "美國財政部", category: "總體經濟", metric: "公債流動性買回", value: "每次最高 $4 Billion", impact: "自9月9日起實施，短期緩解美債殖利率（一度達5.34%）壓力" },
+            { company: "美國國會 / 白宮", category: "法規監管", metric: "CLARITY Act 立法進度", value: "15:9 票通過委員會", impact: "明確SEC與CFTC監管權責，為數位資產提供法規護城河" }
+        ];
+
+        // Render Dynamic Interactive Table
+        function renderTable(data) {
+            const tbody = document.getElementById('data-table-body');
+            const noResults = document.getElementById('no-results');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            data.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white hover:bg-stone-50' : 'bg-stone-50/50 hover:bg-stone-50';
+                
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-semibold text-stone-900">${item.company}</td>
+                    <td class="py-3 px-4"><span class="bg-stone-100 text-stone-700 text-xs px-2 py-0.5 rounded border border-stone-200">${item.category}</span></td>
+                    <td class="py-3 px-4 text-stone-700">${item.metric}</td>
+                    <td class="py-3 px-4 font-bold text-sky-700">${item.value}</td>
+                    <td class="py-3 px-4 text-xs text-stone-600">${item.impact}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Search Filter Event Handler
+        document.getElementById('table-search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const filteredData = productData.filter(item => 
+                item.company.toLowerCase().includes(query) ||
+                item.category.toLowerCase().includes(query) ||
+                item.metric.toLowerCase().includes(query) ||
+                item.impact.toLowerCase().includes(query)
+            );
+            renderTable(filteredData);
+        });
+
+        // Initialize Table on load
+        renderTable(productData);
+
+        // Mobile Navigation Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking any nav link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Scroll Active Navigation Link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href').substring(1);
+                        if (href === activeId) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Initialize Chart.js Visualization Charts on DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: AI Financing Platform Sizes ($B USD)
+            const ctxFinancing = document.getElementById('financingChart').getContext('2d');
+            new Chart(ctxFinancing, {
+                type: 'bar',
+                data: {
+                    labels: ['Anthropic XPV首案', 'Broadcom潛在SPV案', 'Nvidia融資平台目標', '四大雲端巨頭今年支出'],
+                    datasets: [{
+                        label: '金額規模 (十億美元 B)',
+                        data: [35, 100, 500, 730],
+                        backgroundColor: [
+                            'rgba(2, 132, 199, 0.8)',
+                            'rgba(14, 165, 233, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(245, 158, 11, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgb(2, 132, 199)',
+                            'rgb(14, 165, 233)',
+                            'rgb(16, 185, 129)',
+                            'rgb(245, 158, 11)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `$${context.raw} Billion USD`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '十億美元 ($B)' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Broadcom Financial & Cash Flow Indicators ($B USD)
+            const ctxBroadcom = document.getElementById('broadcomChart').getContext('2d');
+            new Chart(ctxBroadcom, {
+                type: 'bar',
+                data: {
+                    labels: ['2026 Q2 AI營收', '2026 Q3 AI營收預估', '2026 Q2 自由現金流'],
+                    datasets: [{
+                        label: '金額 ($B USD)',
+                        data: [10.8, 16.0, 10.2],
+                        backgroundColor: 'rgba(2, 132, 199, 0.8)',
+                        borderColor: 'rgb(2, 132, 199)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '十億美元 ($B)' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
