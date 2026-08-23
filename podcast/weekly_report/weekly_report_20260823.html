@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/8/17~8/21)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed">
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <div class="text-lg font-bold text-stone-900 leading-tight">美股市場週報</div>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-item inactive-nav-link py-5 text-sm transition-colors">市場總覽</a>
+                    <a href="#signals" class="nav-item inactive-nav-link py-5 text-sm transition-colors">10大核心訊號</a>
+                    <a href="#charts" class="nav-item inactive-nav-link py-5 text-sm transition-colors">數據圖表</a>
+                    <a href="#table" class="nav-item inactive-nav-link py-5 text-sm transition-colors">企業動態彙整</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link py-5 text-sm transition-colors">投資策略結論</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">市場總覽</a>
+            <a href="#signals" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">10大核心訊號</a>
+            <a href="#charts" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">數據圖表</a>
+            <a href="#table" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">企業動態彙整</a>
+            <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">投資策略結論</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="inline-block bg-sky-500/20 text-sky-300 text-xs font-semibold px-3 py-1 rounded-full border border-sky-400/30 mb-4">
+                資料期間：2026年8月17日至8月21日
+            </div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                債券壓力遇上AI融資狂潮：美股開始重新計算「成長的資金成本」
+            </h1>
+            <p class="text-stone-300 text-base md:text-lg max-w-4xl leading-relaxed">
+                當利率維持高檔、長期債券殖利率持續上升，企業究竟要付出多少成本才能支撐下一階段成長？
+                本週市場核心不在於單一財報超預期，而是AI投資、消費動能、利率與能源價格之間產生的深刻連動。
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Section 1: 市場總覽 -->
+        <section id="overview" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總體經濟與地緣政治：油價、利率與債券市場壓制</h2>
+            
+            <!-- Highlight Summary Card -->
+            <div class="bg-sky-50 border-l-4 border-sky-600 p-6 rounded-r-lg shadow-sm mb-8">
+                <h3 class="text-lg font-bold text-sky-900 mb-2">週核心摘要</h3>
+                <p class="text-stone-700">
+                    經濟有降溫跡象，但通膨與利率未跟著下降。美國7月零售銷售意外下滑、工業生產放慢；美國與伊朗戰事受限荷姆茲海峽帶動油價上漲。加上美國政府債務接近40兆美元與科技巨頭發債潮，30年期美債殖利率一度升破5.3%（創2007年以來新高）。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Stat Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <div class="text-sm font-semibold text-stone-500 uppercase">S&P 500</div>
+                    <div class="text-3xl font-bold text-stone-900 my-2">-1.43%</div>
+                    <p class="text-xs text-stone-600">全週震盪走低，星期五反彈仍無法扭轉週跌勢。</p>
+                </div>
+                <!-- Stat Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-500">
+                    <div class="text-sm font-semibold text-stone-500 uppercase">Nasdaq 綜合指數</div>
+                    <div class="text-3xl font-bold text-stone-900 my-2">-2.05%</div>
+                    <p class="text-xs text-stone-600">受長天期殖利率高檔影響，高估值科技股承受重壓。</p>
+                </div>
+                <!-- Stat Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <div class="text-sm font-semibold text-stone-500 uppercase">30年期美債殖利率</div>
+                    <div class="text-3xl font-bold text-stone-900 my-2">> 5.3%</div>
+                    <p class="text-xs text-stone-600">升至2007年以來最高水準，大幅提高市場整體融資成本。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 10大關鍵訊號 -->
+        <section id="signals" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">十個值得關注的美股市場關鍵訊號</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Signal 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-stone-800">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-stone-200 text-stone-800 text-xs font-bold px-2.5 py-1 rounded">訊號 01</span>
+                        <span class="text-xs text-stone-500">總體貨幣政策</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Fed 內部討論轉轉向：有人主張再次升息</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        7月FOMC會議紀錄顯示，雖維持利率在 3.50%~3.75%，但12位投票官員中有3位主張升息1碼。「數名」官員主張更緊縮，「許多」官員表示通膨若不退將需升息。市場由期待持續降息轉為擔憂估值修正風險。
+                    </p>
+                </div>
+
+                <!-- Signal 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-stone-800">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-stone-200 text-stone-800 text-xs font-bold px-2.5 py-1 rounded">訊號 02</span>
+                        <span class="text-xs text-stone-500">債券與資金池</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">美債殖利率飆高：AI開始與政府競爭資金</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        30年期美債殖利率一度升破5.3%。除了美國龐大財政赤字外，大型科技公司發行大量投資等級債籌措算力與資料中心資金，造成全球資金供給偏緊，殖利率成為科技股估值新天花板。
+                    </p>
+                </div>
+
+                <!-- Signal 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-sky-600">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded">訊號 03</span>
+                        <span class="text-xs text-stone-500">巨頭融資</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Alphabet 借 39 億美元：進入「全球發債蓋AI」階段</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        Alphabet 首次發行澳幣公司債募得 55 億澳幣（約 39 億美元），超額認購破 180 億澳幣。今年已跨美元、英鎊、日圓等市場發債。巨頭競爭已延伸至「低成本全球融資能力」。
+                    </p>
+                </div>
+
+                <!-- Signal 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-sky-600">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded">訊號 04</span>
+                        <span class="text-xs text-stone-500">AI新創</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Anthropic 營收飆升，建立百億美元銀行信用體系</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        Claude 開發商 Anthropic 年化營收（ARR）衝破 650 億美元，並建立逾 100 億美元循環信用額度為 IPO 鋪路，預估 2028 年營收上看 2,000 億美元。直接強化 Amazon AWS 的策略價值。
+                    </p>
+                </div>
+
+                <!-- Signal 5 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-sky-600">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-1 rounded">訊號 05</span>
+                        <span class="text-xs text-stone-500">晶片與金融</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Broadcom 升級資本戰：推動千億美元晶片融資</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        博通與 Blackstone、Apollo 等機構洽談高達 600 億至 1,000 億美元的 AI 晶片融資結構。AI 競爭正從「Nvidia 晶片生態系」演變為「Broadcom + 客製化晶片 + 私人資本生態系」。
+                    </p>
+                </div>
+
+                <!-- Signal 6 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-emerald-600">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">訊號 06</span>
+                        <span class="text-xs text-stone-500">半導體供應鏈</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Analog Devices 財報亮眼：AI擴散至第二層供應鏈</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        ADI 第三季營收 40.2 億美元（年增約 40%），EPS $3.45 雙超預期。顯示資料中心對電源管理、類比晶片、感測與散熱元件的需求爆炸性擴張，投資機會向次產業擴散。
+                    </p>
+                </div>
+
+                <!-- Signal 7 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-amber-500">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded">訊號 07</span>
+                        <span class="text-xs text-stone-500">自動駕駛</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Tesla Cybercab 德州上路：高估值面臨商業化考驗</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        無方向盤踏板的 Cybercab 將於 Austin 供員工搭乘。市場對 Tesla 的估值已轉向 Robotaxi 與 AI。後續核心觀察為：車隊規模、單車收益與去安全員運營能力。
+                    </p>
+                </div>
+
+                <!-- Signal 8 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-indigo-600">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded">訊號 08</span>
+                        <span class="text-xs text-stone-500">生技醫療</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Merck & Moderna mRNA 癌症疫苗取得三期重大突破</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        個人化疫苗 Intismeran 結合 Keytruda 於黑色素瘤三期臨床達標，顯著降低復發率。此舉不僅有助延長 Keytruda 專利到期前的商業價值，更開啟 mRNA 癌症平台新里程碑。
+                    </p>
+                </div>
+
+                <!-- Signal 9 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-amber-600">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded">訊號 09</span>
+                        <span class="text-xs text-stone-500">消費趨勢</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Home Depot / Target：美消費者轉向「選擇性支出」</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        Home Depot 小型修繕支撐營收（$478.6億），但高利率壓抑大型翻修；Target 同店增長 3.8% 但獲利受關稅退款挹注。消費者未崩潰，但極度挑剔價格與必要性。
+                    </p>
+                </div>
+
+                <!-- Signal 10 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-red-600">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1 rounded">訊號 10</span>
+                        <span class="text-xs text-stone-500">零售警訊</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Walmart 同店銷售低於預期：高油價帶來錢包壓力</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        Q2營收 $1,879億，電商成長 23%，但美同店銷售僅增 2.6% 低於預期，股價單日重挫約 9%。高油價開始迫使中低收入家庭縮減非必要支出，為大眾消費警訊。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 動態圖表視覺化 -->
+        <section id="charts" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">動態數據視覺化分析</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Chart 1: 主要指數週表現 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border border-stone-100">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">主要美股指數週漲跌幅 (%)</h3>
+                    <div class="relative h-64">
+                        <canvas id="indexChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4 text-center">數據期間：2026/08/17 - 2026/08/21</p>
+                </div>
+
+                <!-- Chart 2: 焦點企業最新季度營收年增率 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border border-stone-100">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">重點企業財報營收年增率 (%)</h3>
+                    <div class="relative h-64">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-4 text-center">數據來源：各公司2026年最新季報公開資訊</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 互動資料表格 -->
+        <section id="table" class="scroll-mt-20">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 border-b-2 border-sky-500 pb-2">
+                <h2 class="text-3xl font-bold text-stone-800">焦點企業與市場關鍵數據彙整</h2>
+                
+                <!-- Table Search Filter -->
+                <div class="mt-4 md:mt-0 relative">
+                    <input type="text" id="tableSearch" placeholder="搜尋公司、關鍵字或事件..." 
+                           class="w-full md:w-72 pl-10 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <svg class="w-5 h-5 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-stone-200">
+                <div class="overflow-x-auto max-h-[500px]">
+                    <table class="min-w-full text-left text-sm text-stone-700">
+                        <thead class="bg-stone-100 text-stone-900 sticky top-0 z-10 font-bold border-b border-stone-300">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">公司 / 項目</th>
+                                <th scope="col" class="px-6 py-4">關鍵數據 / 指標</th>
+                                <th scope="col" class="px-6 py-4">核心事件與動態</th>
+                                <th scope="col" class="px-6 py-4">投資解讀與影響</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody" class="divide-y divide-stone-200">
+                            <!-- Populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden p-8 text-center text-stone-500">
+                    未找到符合搜尋條件的資料。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 投資結論 -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週投資結論：AI未結束，但投資邏輯已改變</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Card Left: 評價邏輯轉變 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-600">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">從「擴大投資」轉向「計算資金成本」</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        過去兩年，企業只要宣佈增加 AI 投資市場即給予溢價。現在投資人開問：<br>
+                        <strong>要花多少錢？資金從哪裡來？發多少債？利息多少？何時產生自由現金流？</strong>
+                    </p>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        下一階段 AI 股票的分水嶺，不再只是誰的模型更大，而是<strong>誰能用最低的資金成本，把 AI 需求轉化為持續成長的現金流。</strong>
+                    </p>
+                </div>
+
+                <!-- Card Right: 梯隊戰略佈局 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-stone-800">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">梯隊觀察與核心選股法</h3>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-start">
+                            <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2 py-0.5 rounded mr-2 mt-0.5">第一梯隊</span>
+                            <span>具備龐大自由現金流與低成本融資能力的巨頭：<strong>Microsoft、Alphabet、Amazon</strong>，以及核心供應鏈 <strong>Nvidia、Broadcom</strong>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-0.5 rounded mr-2 mt-0.5">第二梯隊</span>
+                            <span>受惠於資料中心電力、訊號與基礎建設擴張的次產業鏈，如 <strong>Analog Devices (ADI)</strong>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded mr-2 mt-0.5">選股標準</span>
+                            <span>必須同時具備：<strong>成長性、穩定現金流、低融資成本與產品定價能力</strong>。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/8/17~8/21)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股市場與重點企業財報相關公開資料 (2026年08月23日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Real Data Source Array
+        const productData = [
+            { company: "Alphabet (GOOGL)", metric: "募資 39 億美元", event: "發行55億澳幣債券，超額認購超180億", impact: "展現優異全球低成本融資能力，為大規模AI資料中心建設準備" },
+            { company: "Anthropic", metric: "ARR > 650 億美元", event: "年化營收高速成長，籌備 >100億美元循環信用額度", impact: "企業級AI需求強勁，同時顯著拉動 Amazon AWS 與算力資源需求" },
+            { company: "Broadcom (AVGO)", metric: "融資 600億~1000億美元", event: "與貸款機構及私人資本(Blackstone/Apollo)洽談晶片融資", impact: "推動AI競爭從晶片規格升級至「晶片+資本」的產業生態系戰" },
+            { company: "Analog Devices (ADI)", metric: "Q3營收 40.2 億美元 (+40%)", event: "每股盈餘 $3.45 超預期，下季展望持續強勁", impact: "證明AI資料中心需求正向電源管理、類比晶片等第二層供應鏈擴散" },
+            { company: "Tesla (TSLA)", metric: "Cybercab 測試上路", event: "8月底於德州Austin試營運無方向盤/踏板 Robotaxi", impact: "高估值焦點由車輛銷量轉向 Robotaxi 商業營運與AI服務能力驗證" },
+            { company: "Merck & Moderna", metric: "Phase 3 試驗達標", event: "mRNA疫苗 Intismeran + Keytruda 顯著降低黑色素瘤復發風險", impact: "個人化mRNA平台取得商業突破，有助緩解 Keytruda 專利到期衝擊" },
+            { company: "Home Depot (HD)", metric: "Q2營收 478.6 億美元 (+5.7%)", event: "小型修繕需求有撐，大型住宅翻修受高房貸利率壓制", impact: "反映消費市場未崩潰，但民眾高額非必要支出轉趨謹慎" },
+            { company: "Target (TGT)", metric: "淨銷售 +5.3% / 同店 +3.8%", event: "EPS $4.11 (含$1.65關稅退款)，調升全年展望", impact: "價值型零售優勢顯現，唯本業獲利成長需扣除一次性退款影響" },
+            { company: "Walmart (WMT)", metric: "Q2營收 1879 億美元 (+5.9%)", event: "美國同店銷售增2.6%低於預期，股價單日跌約9%", impact: "油價居高不下開始逼迫中低收入族群縮減非必要開支，為消費警訊" },
+            { company: "美國聯準會 (Fed)", metric: "基準利率 3.50%~3.75%", event: "7月會議紀錄顯示3位官員主張升息，多數憂心通膨黏性", impact: "降息預期大幅延後，高資金成本環境壓制高本益比股票估值" },
+            { company: "美國 30 年期國債", metric: "殖利率 > 5.3%", event: "創2007年新高，受美赤字與AI巨頭大量發債雙重推升", impact: "市場整體無風險利率上升，對權值科技股估值帶來直接壓力" }
+        ];
+
+        // 2. Populate Interactive Data Table
+        function renderTable(data) {
+            const tbody = document.getElementById('productTableBody');
+            const noResults = document.getElementById('noResults');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition-colors';
+                row.innerHTML = `
+                    <td class="px-6 py-4 font-bold text-stone-900 whitespace-nowrap">${item.company}</td>
+                    <td class="px-6 py-4"><span class="bg-sky-50 text-sky-700 font-semibold px-2 py-1 rounded border border-sky-200 text-xs">${item.metric}</span></td>
+                    <td class="px-6 py-4 text-stone-700">${item.event}</td>
+                    <td class="px-6 py-4 text-stone-600 text-xs leading-relaxed">${item.impact}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Initialize Table & Search Filter
+        renderTable(productData);
+
+        document.getElementById('tableSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const filteredData = productData.filter(item => 
+                item.company.toLowerCase().includes(searchTerm) ||
+                item.metric.toLowerCase().includes(searchTerm) ||
+                item.event.toLowerCase().includes(searchTerm) ||
+                item.impact.toLowerCase().includes(searchTerm)
+            );
+            renderTable(filteredData);
+        });
+
+        // 3. Chart.js Dynamic Charts Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: Major Indices Performance Bar Chart
+            const ctxIndex = document.getElementById('indexChart').getContext('2d');
+            new Chart(ctxIndex, {
+                type: 'bar',
+                data: {
+                    labels: ['S&P 500', 'Nasdaq 綜合指數', '道瓊工業指數'],
+                    datasets: [{
+                        label: '全週漲跌幅 (%)',
+                        data: [-1.43, -2.05, -0.85],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.7)',
+                            'rgba(225, 29, 72, 0.8)',
+                            'rgba(245, 158, 11, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(239, 68, 68)',
+                            'rgb(225, 29, 72)',
+                            'rgb(245, 158, 11)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) { return value + '%'; }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Key Corporate YoY Growth Bar Chart
+            const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctxGrowth, {
+                type: 'bar',
+                data: {
+                    labels: ['Analog Devices', 'Walmart', 'Home Depot', 'Target'],
+                    datasets: [{
+                        label: '最新季度營收年增率 (%)',
+                        data: [40.0, 5.9, 5.7, 5.3],
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(2, 132, 199, 0.7)',
+                            'rgba(2, 132, 199, 0.7)',
+                            'rgba(2, 132, 199, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(16, 185, 129)',
+                            'rgb(2, 132, 199)',
+                            'rgb(2, 132, 199)',
+                            'rgb(2, 132, 199)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) { return value + '%'; }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // 4. Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on clicking a link
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 5. Intersection Observer for Active Navigation State
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${currentId}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
