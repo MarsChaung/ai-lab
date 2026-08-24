@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Nvidia財報與AI資本循環解析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #1c1917;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased leading-relaxed">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="font-bold text-lg sm:text-xl text-stone-900">NvidiaAI資本循環解析</span>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-6 text-sm">
+                    <a href="#overview" class="nav-item inactive-nav-link py-5 transition">戰略轉型</a>
+                    <a href="#earnings" class="nav-item inactive-nav-link py-5 transition">Q2財報關卡</a>
+                    <a href="#supply-chain" class="nav-item inactive-nav-link py-5 transition">供應鏈與漲價</a>
+                    <a href="#capital-loop" class="nav-item inactive-nav-link py-5 transition">資本循環</a>
+                    <a href="#six-metrics" class="nav-item inactive-nav-link py-5 transition">必看6指標</a>
+                    <a href="#data-center" class="nav-item inactive-nav-link py-5 transition">互動圖表與數據</a>
+                    <a href="#strategy" class="nav-item inactive-nav-link py-5 transition">投資策略</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2 text-base">
+            <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md font-medium text-stone-700 hover:bg-stone-100">戰略轉型</a>
+            <a href="#earnings" class="mobile-nav-item block px-3 py-2 rounded-md font-medium text-stone-700 hover:bg-stone-100">Q2財報關卡</a>
+            <a href="#supply-chain" class="mobile-nav-item block px-3 py-2 rounded-md font-medium text-stone-700 hover:bg-stone-100">供應鏈與漲價</a>
+            <a href="#capital-loop" class="mobile-nav-item block px-3 py-2 rounded-md font-medium text-stone-700 hover:bg-stone-100">資本循環</a>
+            <a href="#six-metrics" class="mobile-nav-item block px-3 py-2 rounded-md font-medium text-stone-700 hover:bg-stone-100">必看6指標</a>
+            <a href="#data-center" class="mobile-nav-item block px-3 py-2 rounded-md font-medium text-stone-700 hover:bg-stone-100">互動圖表與數據</a>
+            <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md font-medium text-stone-700 hover:bg-stone-100">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero Header -->
+        <section class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl p-8 sm:p-12 shadow-xl">
+            <div class="max-w-4xl space-y-4">
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                    從賣 GPU 到掌控 AI 資本循環：Nvidia 財報前，真正的考題已不是營收能不能翻倍
+                </h1>
+                <p class="text-stone-300 text-lg sm:text-xl leading-relaxed">
+                    Nvidia 正在經歷一次比財報數字更重要的轉型：它正從一家 sell-side 晶片製造商，逐漸變成整個 AI 產業的資本提供者、基礎建設協調者與生態系投資者。
+                </p>
+            </div>
+            
+            <!-- Quick Key Metrics Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-stone-700/60">
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 text-center">
+                    <p class="text-xs text-stone-300">Q2 預期營收</p>
+                    <p class="text-2xl sm:text-3xl font-bold text-sky-400 mt-1">$920億</p>
+                    <p class="text-xs text-stone-400 mt-1">年增約 96%</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 text-center">
+                    <p class="text-xs text-stone-300">資料中心預期營收</p>
+                    <p class="text-2xl sm:text-3xl font-bold text-emerald-400 mt-1">$854億</p>
+                    <p class="text-xs text-stone-400 mt-1">年增約 107%</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 text-center">
+                    <p class="text-xs text-stone-300">AI 融資平台規模</p>
+                    <p class="text-2xl sm:text-3xl font-bold text-amber-400 mt-1">>$5,000億</p>
+                    <p class="text-xs text-stone-400 mt-1">聯合 BlackRock/Apollo</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 text-center">
+                    <p class="text-xs text-stone-300">AI 伺服器漲價幅度</p>
+                    <p class="text-2xl sm:text-3xl font-bold text-rose-400 mt-1">>15%</p>
+                    <p class="text-xs text-stone-400 mt-1">明年初交付預估</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Overview & Strategic Pivot -->
+        <section id="overview" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心觀點：從「賣晶片」到「AI 世界的中央銀行」
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3 flex items-center">
+                        <span class="w-3 h-3 bg-sky-500 rounded-full mr-2"></span>舊有的單向銷售模式
+                    </h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        過去 Nvidia 的商業模式非常簡潔直接：客戶（如雲端巨頭 Hyperscalers）需要算力，向 Nvidia 下單購買 GPU，Nvidia 交付硬體並收取現金。然而這種模式會直接受限於終端客戶的資本支出（CapEx）預算上限。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3 flex items-center">
+                        <span class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></span>全新的資本生態閉環
+                    </h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        如今 Nvidia 主動協助客戶尋找資本、投資 AI 新創、協調電力與土地，再讓這些企業購買 Nvidia 設備。Nvidia 正在掌控 AI 產業每增加一美元投資時，自己可以在哪幾個環節取得收入。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-sky-50 rounded-lg p-6 border border-sky-200 mt-2">
+                <h4 class="font-bold text-sky-900 text-lg mb-2">關鍵考題：終端 AI 需求 vs. 資本循環Self-Feeding</h4>
+                <p class="text-sky-800">
+                    華爾街目前最關注的焦點在於：未來 Nvidia 的高速成長，究竟有多少來自於真正的終端 AI 應用付費需求？又有多少來自 Nvidia 本身協助客戶融資、投資客戶，再讓客戶回購設備所形成的「資本循環」？
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Earnings Expectation -->
+        <section id="earnings" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Q2 財報預期：營收翻倍已成基本門檻
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <div class="border-l-4 border-stone-800 pl-4 py-1">
+                        <p class="text-sm text-stone-500">華爾街 Q2 共識預估</p>
+                        <p class="text-2xl font-bold text-stone-900">920 億美元</p>
+                        <p class="text-xs text-stone-600">年增長率近 96% (去年同期 $467億)</p>
+                    </div>
+                    <div class="border-l-4 border-sky-600 pl-4 py-1">
+                        <p class="text-sm text-stone-500">官方 Q2 財測中間值</p>
+                        <p class="text-2xl font-bold text-sky-600">910 億美元</p>
+                        <p class="text-xs text-stone-600">±2% 浮動，未假設中國業務貢獻</p>
+                    </div>
+                    <div class="border-l-4 border-amber-500 pl-4 py-1">
+                        <p class="text-sm text-stone-500">Q3 華爾街高標期望</p>
+                        <p class="text-2xl font-bold text-amber-600">1,070 ~ 1,100 億美元</p>
+                        <p class="text-xs text-stone-600">BofA / UBS 分析師高標準期待</p>
+                    </div>
+                </div>
+
+                <div class="prose max-w-none text-stone-700 space-y-4 border-t border-stone-100 pt-4">
+                    <p>
+                        Nvidia 官方已確認將於美東時間 <strong>8 月 26 日盤後</strong>（約美東時間下午 4:20）公布二〇二七會計年度第二季財報。
+                    </p>
+                    <p>
+                        <strong>危險之處在於高預期風險：</strong> 華爾街目前預期的 920 億美元僅比公司原先財測中間值高出 10 億美元，這代表 920 億美元已不是「驚喜」，而僅是「最低要求」。若第三季展望無法達到 1,070 億美元以上的樂觀高標，極可能出現「財報極佳但股價重挫」的現象。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Supply Chain & HBM Memory Bottleneck -->
+        <section id="supply-chain" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                AI 伺服器漲價 15% 與記憶體定價權轉移
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">伺服器系統漲價脈絡</h3>
+                    <ul class="space-y-3 text-stone-600">
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">►</span>
+                            <span>代工供應商已通知 Microsoft、Google、Oracle 等客戶，明年初交付之伺服器將調漲超過 15%。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">►</span>
+                            <span>涵蓋系統包括當前的 Grace Blackwell 與下一代 Vera Rubin 架構。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-500 mr-2">►</span>
+                            <span>漲價主因非單純 GPU 提價，而是系統級組件（特別是記憶體與封裝）成本劇增。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">獲利重心向記憶體轉移</h3>
+                    <p class="text-stone-600 mb-4">
+                        DRAM 與 HBM 高頻寬記憶體持續短缺，使得 <strong>Samsung、SK Hynix 與 Micron（美光）</strong> 掌握極強議價權。
+                    </p>
+                    <div class="bg-amber-50 p-4 rounded border-l-4 border-amber-500 text-sm text-amber-900">
+                        <strong>重點觀察指標：毛利率 (Gross Margin)</strong><br>
+                        Nvidia 官方預估 Q2 調整後毛利率約為 75%。若營收大超預期但毛利率下滑，即證明記憶體與封裝成本正在蠶食 Nvidia 的溢價能力。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Ecosystem & Capital Loop -->
+        <section id="capital-loop" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Nvidia 資本閉環：全產業鏈縱深布局
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 mb-6">
+                    Nvidia 正在建構一條完整的控制路線：<br>
+                    <strong class="text-sky-600">能源與土地 ➔ 資料中心 ➔ GPU與網路 ➔ AI模型 ➔ AI Agent ➔ AI應用 ➔ 金融融資平台</strong>
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="border border-stone-200 p-5 rounded-lg hover:shadow-md transition">
+                        <div class="text-xs font-bold text-sky-600 uppercase tracking-wider mb-1">應用與 Agent 布局</div>
+                        <h4 class="font-bold text-lg text-stone-900 mb-2">Perplexity 融資</h4>
+                        <p class="text-sm text-stone-600">
+                            洽談新一輪融資，估值衝破 <strong>300 億美元</strong>。其年化營收（ARR）從年初不足 2.5 億美元暴增至超 <strong>7.5 億美元</strong>，核心產品為 Perplexity Computer Agent。
+                        </p>
+                    </div>
+
+                    <div class="border border-stone-200 p-5 rounded-lg hover:shadow-md transition">
+                        <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">模型與人才引進</div>
+                        <h4 class="font-bold text-lg text-stone-900 mb-2">Poolside 授權案</h4>
+                        <p class="text-sm text-stone-600">
+                            擬支付約 <strong>60 億美元</strong> 取得 AI 模型技術授權，並投資 <strong>10 億美元</strong> 股權吸收團隊，強化 Nemotron 開放模型體系。
+                        </p>
+                    </div>
+
+                    <div class="border border-stone-200 p-5 rounded-lg hover:shadow-md transition">
+                        <div class="text-xs font-bold text-purple-600 uppercase tracking-wider mb-1">基礎建設與金融</div>
+                        <h4 class="font-bold text-lg text-stone-900 mb-2">Cloverleaf & 5000億融資</h4>
+                        <p class="text-sm text-stone-600">
+                            入股 Cloverleaf 解決資料中心土地與電力瓶頸；並與 BlackRock、Apollo、KKR 合作打造超 <strong>5,000 億美元</strong> 的 AI 融資平台。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 6 Key Metrics -->
+        <section id="six-metrics" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                八月二十六日財報必看六大關鍵指標
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-2xl font-black text-sky-500 mb-2">01</div>
+                    <h3 class="font-bold text-lg text-stone-900 mb-2">Q3 營收指引 (Guidance)</h3>
+                    <p class="text-sm text-stone-600">市場共識為 $1,040 億，但高標預期在 $1,070 ~ $1,080 億美元，能否達到將決定股價續漲力道。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-2xl font-black text-sky-500 mb-2">02</div>
+                    <h3 class="font-bold text-lg text-stone-900 mb-2">毛利率 (Gross Margin)</h3>
+                    <p class="text-sm text-stone-600">觀察能否持續維持在 75% 左右，檢驗記憶體及封裝成本上漲是否侵蝕公司定價利潤。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-2xl font-black text-sky-500 mb-2">03</div>
+                    <h3 class="font-bold text-lg text-stone-900 mb-2">Vera Rubin 量產進度</h3>
+                    <p class="text-sm text-stone-600">確認下一代架構產品切換平順，未發生供應鏈瓶頸或客戶訂單遞延狀況。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-2xl font-black text-sky-500 mb-2">04</div>
+                    <h3 class="font-bold text-lg text-stone-900 mb-2">Hyperscaler 資本支出</h3>
+                    <p class="text-sm text-stone-600">微軟、亞馬遜、Google、Meta 是否持續維持巨額 CapEx，決定 2027 年的基礎動能。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-2xl font-black text-sky-500 mb-2">05</div>
+                    <h3 class="font-bold text-lg text-stone-900 mb-2">非雲端客戶（Enterprise/Sovereign）</h3>
+                    <p class="text-sm text-stone-600">各國政府主權 AI、企業級客戶與 AI Cloud 新創購買量，是第二波成長關鍵。</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-2xl font-black text-sky-500 mb-2">06</div>
+                    <h3 class="font-bold text-lg text-stone-900 mb-2">AI 融資與信用曝險</h3>
+                    <p class="text-sm text-stone-600">追蹤未上市股權投資（達 $420 億美元）、信用擔保與殘值承諾，評估財務鏈風險。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Interactive Charts & Data Center -->
+        <section id="data-center" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                互動圖表與生態系數據探索
+            </h2>
+
+            <!-- Charts Grid -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- Chart 1: Revenue & Forecasts -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-4">Nvidia 季度營收與市場期待關卡 (十億美元)</h3>
+                    <div class="relative w-full h-72">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: CapEx vs Cash Flow Gap -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-4">科技巨頭 2027 年 CapEx 增加額 vs 營運現金流增額</h3>
+                    <div class="relative w-full h-72">
+                        <canvas id="capexChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Table Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-900">Nvidia 關鍵數據與生態系投資明細</h3>
+                        <p class="text-sm text-stone-500 mt-1">即時搜尋並篩選報告中提及之財務指標、投資標的與合作夥伴</p>
+                    </div>
+                    <div class="w-full sm:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋項目、數據或類別..." 
+                               class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none text-sm">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto max-h-96">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-stone-100 sticky top-0 border-b border-stone-200">
+                            <tr>
+                                <th class="p-3 text-sm font-semibold text-stone-700">類別 / 項目</th>
+                                <th class="p-3 text-sm font-semibold text-stone-700">對象 / 平台</th>
+                                <th class="p-3 text-sm font-semibold text-stone-700">金額 / 數據</th>
+                                <th class="p-3 text-sm font-semibold text-stone-700">戰略意義與備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-200 text-sm">
+                            <!-- JS populate rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Investment Strategy -->
+        <section id="strategy" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                美股投資策略：買進 AI 的「議價能力」
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500">
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">第一類：平台控制者</span>
+                    <h3 class="text-xl font-bold text-stone-900 mt-1 mb-3">Nvidia (NVDA)</h3>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                        優勢在於 CUDA、網路、系統與金融生態高度整合。最大風險在於市場期待過高與估值位於高位，好消息不必然直接轉換為股價上漲。
+                    </p>
+                    <span class="inline-block bg-sky-100 text-sky-800 text-xs px-2.5 py-1 rounded-full font-semibold">評級：核心持有 / 關注高標</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">第二類：瓶頸型供應商</span>
+                    <h3 class="text-xl font-bold text-stone-900 mt-1 mb-3">Micron (MU) / 記憶體與電力</h3>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                        當限制算力的因素轉向 HBM、DRAM、電力、散熱與土地時，第二層供應商的議價權大幅提升，獲利成長空間擴大。
+                    </p>
+                    <span class="inline-block bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold">評級：戰略布局重心地帶</span>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-rose-500">
+                    <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">第三類：高燒錢新創</span>
+                    <h3 class="text-xl font-bold text-stone-900 mt-1 mb-3">高度依賴外部融資之 AI 公司</h3>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                        雖然營收大幅成長（如年增3倍），但若需要 5 倍 CapEx 才能維持，當自由現金流無法轉正時，將面臨極大淘汰風險。
+                    </p>
+                    <span class="inline-block bg-rose-100 text-rose-800 text-xs px-2.5 py-1 rounded-full font-semibold">評級：高風險 / 謹慎檢視現金流</span>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Required Format -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Nvidia財報與AI資本循環解析。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Nvidia與美股AI產業相關公開資料 (2026年08月24日)。</p>
+        </div>
+    </footer>
+
+    <!-- Vanilla JavaScript for Interactive Features -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIconOpen.classList.toggle('hidden');
+            menuIconClose.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on item click
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            });
+        });
+
+        // 2. Intersection Observer for Active Nav Link State
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active-nav-link');
+                            link.classList.remove('inactive-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 3. Data Source for Interactive Table (Real data from text)
+        const productData = [
+            { category: '財務預測', target: 'Nvidia Q2 總營收共識', amount: '$920 億美元', note: '年增約 96%，去年同期為 $467 億美元' },
+            { category: '財務預測', target: 'Nvidia Q2 資料中心營收', amount: '$854 億美元', note: '年增約 107%，大型雲端商占 $435 億美元' },
+            { category: '財務預測', target: 'Nvidia Q2 官方指引中間值', amount: '$910 億美元', note: '±2% 浮動，未假設中國市場運算收入' },
+            { category: '財務預測', target: 'Q3 營收高標期望 (UBS/BofA)', amount: '$1,070 ~ $1,100 億美元', note: '市場平均共識為 $1,040 億美元' },
+            { category: '生態系投資', target: 'Perplexity 股權融資', amount: '估值 >$300 億美元', note: 'ARR年化營收自<2.5億暴增至>7.5億美元' },
+            { category: '生態系投資', target: 'Poolside 技術授權與股權', amount: '$60億授權 + $10億股權', note: '吸收100+名團隊，強化 Nemotron 開放模型' },
+            { category: '生態系投資', target: '未上市企業股權投資總額', amount: '約 $420 億美元', note: '截至4月底數據，含 OpenAI、Anthropic 等' },
+            { category: '基礎建設', target: 'Cloverleaf Infrastructure', amount: '未公開（股權投資）', note: '取得土地與電力開發權，解決資料中心瓶頸' },
+            { category: '金融平台', target: '大型 AI 運算融資平台', amount: '>$5,000 億美元', note: '攜手 BlackRock, Apollo, KKR, Blackstone 等' },
+            { category: '產業數據', target: 'AI 伺服器漲價幅度', amount: '> 15%', note: '2027年初交付之 Grace Blackwell / Vera Rubin' },
+            { category: '產業數據', target: '科技巨頭 CapEx 增額 (至2027)', amount: '$5,340 億美元', note: '同期營運現金流僅增加 $3,400 億美元' }
+        ];
+
+        const tableBody = document.getElementById('dataTableBody');
+        const searchInput = document.getElementById('tableSearch');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-stone-500">未找到符合的資料</td></tr>`;
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-stone-50 transition';
+                row.innerHTML = `
+                    <td class="p-3 font-medium text-stone-900"><span class="bg-stone-100 text-stone-700 px-2 py-0.5 rounded text-xs border border-stone-200 mr-2">${item.category}</span></td>
+                    <td class="p-3 font-semibold text-stone-800">${item.target}</td>
+                    <td class="p-3 text-sky-700 font-bold">${item.amount}</td>
+                    <td class="p-3 text-stone-600 text-xs">${item.note}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Search Filter Event
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = productData.filter(d => 
+                d.category.toLowerCase().includes(query) ||
+                d.target.toLowerCase().includes(query) ||
+                d.amount.toLowerCase().includes(query) ||
+                d.note.toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        // Initial Table Render
+        renderTable(productData);
+
+        // 4. Render Chart.js
+        window.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: Revenue Expectations
+            const ctx1 = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['去年同期(Q2)', '官方Q2指引', 'Q2華爾街共識', 'Q3市場均值', 'Q3高標期待(BofA/UBS)'],
+                    datasets: [{
+                        label: '營收金額 (十億美元)',
+                        data: [46.7, 91.0, 92.0, 104.0, 108.0],
+                        backgroundColor: [
+                            'rgba(120, 113, 108, 0.6)',
+                            'rgba(14, 165, 233, 0.6)',
+                            'rgba(2, 132, 199, 0.8)',
+                            'rgba(245, 158, 11, 0.6)',
+                            'rgba(16, 185, 129, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgb(120, 113, 108)',
+                            'rgb(14, 165, 233)',
+                            'rgb(2, 132, 199)',
+                            'rgb(245, 158, 11)',
+                            'rgb(16, 185, 129)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '十億美元 ($B)' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: CapEx vs Cash Flow
+            const ctx2 = document.getElementById('capexChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['AI 資本支出 (CapEx) 增加額', '營運現金流 (Op. Cash Flow) 增加額'],
+                    datasets: [{
+                        label: '至 2027 年累積增加金額 ($B)',
+                        data: [534, 340],
+                        backgroundColor: [
+                            'rgba(225, 29, 72, 0.7)',
+                            'rgba(14, 165, 233, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(225, 29, 72)',
+                            'rgb(14, 165, 233)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' 十億美元 (每一美元現金流需投入 $1.57 CapEx)';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '十億美元 ($B)' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
