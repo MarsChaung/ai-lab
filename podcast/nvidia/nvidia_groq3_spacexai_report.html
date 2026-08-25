@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Groq3與SpaceXAI揭開NVIDIA推理戰</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom scrollbar and active navigation state styling */
+        .active-nav-link {
+            color: #38bdf8 !important;
+            font-weight: 700;
+            border-bottom: 2px solid #38bdf8;
+        }
+        .inactive-nav-link {
+            color: #d6d3d1;
+            font-weight: 500;
+        }
+        .inactive-nav-link:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800 font-sans leading-relaxed antialiased">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-stone-900/95 backdrop-blur text-stone-100 shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Title -->
+                <div class="flex items-center space-x-3">
+                    <span class="font-bold text-lg hidden sm:inline text-stone-100">AI推理戰爭與架構戰略</span>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-6 text-sm" id="desktop-nav">
+                    <a href="#overview" class="nav-item inactive-nav-link transition-colors py-1">戰略轉型</a>
+                    <a href="#groq3" class="nav-item inactive-nav-link transition-colors py-1">Groq 3 LPX</a>
+                    <a href="#architecture" class="nav-item inactive-nav-link transition-colors py-1">AI分工生態</a>
+                    <a href="#deployment" class="nav-item inactive-nav-link transition-colors py-1">商業落地</a>
+                    <a href="#financials" class="nav-item inactive-nav-link transition-colors py-1">財務與圖表</a>
+                    <a href="#databank" class="nav-item inactive-nav-link transition-colors py-1">互動資料庫</a>
+                    <a href="#risks" class="nav-item inactive-nav-link transition-colors py-1">投資風險</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-stone-300 hover:text-white focus:outline-none p-2 rounded-lg" aria-label="Toggle menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-stone-800 border-t border-stone-700 px-4 pt-2 pb-4 space-y-2 text-sm">
+            <a href="#overview" class="mobile-nav-item block py-2 px-3 rounded hover:bg-stone-700 text-stone-200">戰略轉型</a>
+            <a href="#groq3" class="mobile-nav-item block py-2 px-3 rounded hover:bg-stone-700 text-stone-200">Groq 3 LPX</a>
+            <a href="#architecture" class="mobile-nav-item block py-2 px-3 rounded hover:bg-stone-700 text-stone-200">AI分工生態</a>
+            <a href="#deployment" class="mobile-nav-item block py-2 px-3 rounded hover:bg-stone-700 text-stone-200">商業落地</a>
+            <a href="#financials" class="mobile-nav-item block py-2 px-3 rounded hover:bg-stone-700 text-stone-200">財務與圖表</a>
+            <a href="#databank" class="mobile-nav-item block py-2 px-3 rounded hover:bg-stone-700 text-stone-200">互動資料庫</a>
+            <a href="#risks" class="mobile-nav-item block py-2 px-3 rounded hover:bg-stone-700 text-stone-200">投資風險</a>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center sm:text-left">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                從 GPU 霸主到 AI 工廠總包商
+            </h1>
+            <p class="text-stone-300 text-base sm:text-lg max-w-3xl leading-relaxed mb-6">
+                Groq 3 LPX 與 SpaceXAI 攜手登場，揭開 Nvidia 下一場「推理戰爭」。Nvidia 正在將競爭核心從純單顆晶片速度，推向控制全套 AI 代理運算流程。
+            </p>
+            
+            <!-- Quick Highlight Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 border border-white/10">
+                    <p class="text-stone-400 text-xs font-medium">Groq 3 極速推理</p>
+                    <p class="text-2xl font-bold text-sky-400 mt-1">~3,400 <span class="text-xs text-stone-300 font-normal">token/s</span></p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 border border-white/10">
+                    <p class="text-stone-400 text-xs font-medium">FY2027 Q2 營收預估</p>
+                    <p class="text-2xl font-bold text-emerald-400 mt-1">$921.8億 <span class="text-xs text-stone-300 font-normal">USD</span></p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 border border-white/10">
+                    <p class="text-stone-400 text-xs font-medium">巨頭 AI 資本支出</p>
+                    <p class="text-2xl font-bold text-amber-400 mt-1">$7,300億+ <span class="text-xs text-stone-300 font-normal">USD</span></p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 border border-white/10">
+                    <p class="text-stone-400 text-xs font-medium">Vera CPU 運算核心</p>
+                    <p class="text-2xl font-bold text-indigo-400 mt-1">88 <span class="text-xs text-stone-300 font-normal">Olympus Cores</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- Section 1: 戰略轉型 -->
+        <section id="overview" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-chess text-sky-600"></i> 1. 戰略轉型：從 GPU 到 AI 工廠總包商
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed text-base mb-4">
+                    Nvidia 將在 2026 年 8 月 26 日美股盤後公布二〇二七會計年度第二季財報。但在財報前兩天，Nvidia 選擇在 Hot Chips 大會拋出兩項重要訊號：<span class="font-semibold text-sky-700">Groq 3 LPX 正式進入全面量產</span>，以及 <span class="font-semibold text-sky-700">SpaceXAI 決定採用 Nvidia Vera CPU 與 Vera Rubin 架構</span>。
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-stone-50 border border-stone-200 rounded-lg p-5">
+                        <h3 class="font-bold text-stone-800 text-lg mb-2 text-sky-800 flex items-center gap-2">
+                            <i class="fa-solid fa-microchip"></i> 傳統硬體思維
+                        </h3>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            單純聚焦於比較 GPU 的運算吞吐量（例如 Rubin 比 Blackwell 快多少），試圖用單一強大 GPU 解決所有 AI 計算難題。
+                        </p>
+                    </div>
+                    <div class="bg-sky-50 border border-sky-200 rounded-lg p-5">
+                        <h3 class="font-bold text-sky-900 text-lg mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-industry"></i> AI 工廠總包商戰略
+                        </h3>
+                        <p class="text-stone-700 text-sm leading-relaxed">
+                            掌控從 AI 思考、回答、呼叫工具到真正執行工作的完整流程。針對不同任務搭配專用晶片，確保最昂貴的 GPU 資產隨時維持最高利用率。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Groq 3 LPX -->
+        <section id="groq3" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-bolt text-sky-600"></i> 2. Groq 3 LPX 深度解析：極速推理加速
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-6">
+                    AI 工作主要分為兩大階段：<strong>Prefill（讀懂上下文）</strong>與 <strong>Decode（連續產生 Token）</strong>。GPU 極擅長前者，而 Groq 3 LPX 則是針對後者打造的「互動式 AI 推理加速器（interactive AI inference accelerator）」，放置於 Vera Rubin 平台旁邊專門降低延遲。
+                </p>
+
+                <!-- Comparative Cards -->
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-stone-50 rounded-lg p-5 border border-stone-200">
+                        <div class="text-xs font-bold text-stone-500 uppercase">測得極速 (Gemma 4 31B)</div>
+                        <div class="text-3xl font-extrabold text-sky-600 my-2">3,431 <span class="text-sm font-normal text-stone-600">token/s</span></div>
+                        <p class="text-xs text-stone-600">Artificial Analysis 於私人部署環境測試長上下文 (10萬token) 數據。</p>
+                    </div>
+                    <div class="bg-stone-50 rounded-lg p-5 border border-stone-200">
+                        <div class="text-xs font-bold text-stone-500 uppercase">AI 代理執行時間比對</div>
+                        <div class="text-3xl font-extrabold text-emerald-600 my-2">1.5秒 vs 50秒</div>
+                        <p class="text-xs text-stone-600">生成 5,000 token 時，3,400 token/s 能將生成耗時從近 1 分鐘降至約 1.5 秒。</p>
+                    </div>
+                    <div class="bg-stone-50 rounded-lg p-5 border border-stone-200">
+                        <div class="text-xs font-bold text-stone-500 uppercase">授權與人才整合</div>
+                        <div class="text-3xl font-extrabold text-indigo-600 my-2">LPU 技術</div>
+                        <p class="text-xs text-stone-600">2025/12 簽署非獨家授權，聘用創辦人 Jonathan Ross，消弭潛在競業威脅。</p>
+                    </div>
+                </div>
+
+                <!-- Testing Limitations Callout -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600 text-lg"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-bold text-amber-800">投資人不可忽視的測試限制</h3>
+                            <p class="text-xs text-amber-700 mt-1">
+                                每秒 3,400 個 token 來自特定 Gemma 4 31B 模型與依序執行的單一並行請求。公開雲端多人同時使用時的實際速度、耗電量、每百萬 token 成本及大模型支援度，才是決定商業價值的真實指標。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: AI 分工生態 -->
+        <section id="architecture" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-sitemap text-sky-600"></i> 3. Vera Rubin 陣容：「AI 分工團隊」架構
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-6">
+                    Nvidia 正在推動從單純賣 GPU 到銷售整座「AI 工廠」。一套大型 AI 代理系統將由三大元件形成完美的算力分工，避免昂貴的 GPU 資源因「等待 CPU 準備資料」而浪費。
+                </p>
+
+                <div class="grid lg:grid-cols-3 gap-6">
+                    <!-- Rubin GPU -->
+                    <div class="border border-stone-200 rounded-lg p-5 bg-gradient-to-b from-stone-50 to-white hover:shadow-md transition">
+                        <div class="w-10 h-10 bg-sky-100 text-sky-700 rounded-lg flex items-center justify-center font-bold text-xl mb-3">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-800 mb-1">Rubin GPU</h3>
+                        <p class="text-xs font-semibold text-sky-600 mb-3">重型模型計算與龐大上下文</p>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            負責極龐大的模型矩陣計算、深度思考與預先載入上下文（Prefill）。
+                        </p>
+                    </div>
+
+                    <!-- Groq 3 LPX -->
+                    <div class="border border-stone-200 rounded-lg p-5 bg-gradient-to-b from-stone-50 to-white hover:shadow-md transition">
+                        <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center font-bold text-xl mb-3">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-800 mb-1">Groq 3 LPX</h3>
+                        <p class="text-xs font-semibold text-emerald-600 mb-3">極速 Token 解碼（Decode）</p>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            負責快速將計算結果轉換成 Token 輸出，讓 AI 代理能夠毫無延遲地「快速對話與思考」。
+                        </p>
+                    </div>
+
+                    <!-- Vera CPU -->
+                    <div class="border border-stone-200 rounded-lg p-5 bg-gradient-to-b from-stone-50 to-white hover:shadow-md transition">
+                        <div class="w-10 h-10 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center font-bold text-xl mb-3">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-800 mb-1">Vera CPU</h3>
+                        <p class="text-xs font-semibold text-indigo-600 mb-3">流程控制與工具呼叫</p>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            搭載 88 個 Olympus 自研核心、1.2 TB/s 記憶體頻寬，負責程式執行、資料排程與協調工作。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 商業落地案例 -->
+        <section id="deployment" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-rocket text-sky-600"></i> 4. 商業落地案例：SpaceXAI 與 Nebius
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <!-- SpaceXAI Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold text-stone-800">SpaceXAI：GW 級算力與太空 AI</h3>
+                        <span class="bg-sky-100 text-sky-800 text-xs px-2.5 py-1 rounded-full font-semibold">旗艦標竿</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-stone-600">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-sky-500 mt-1"></i>
+                            <span><strong>採用 Vera CPU：</strong>全面導入運算架構支援 Grok AI 代理工具呼叫與程式執行，減少 GPU 等待耗時。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-sky-500 mt-1"></i>
+                            <span><strong>GW 級算力計畫：</strong>擴張基礎設施朝 GW (十億瓦) 級運算容量發展。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-sky-500 mt-1"></i>
+                            <span><strong>Starmind 太空衛星：</strong>預計採用 Vera Rubin NVL72 架構延伸軌道算力。<em>(註：屬前瞻工程探索，暫不宜計入近期營收)</em>。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Nebius Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold text-stone-800">Nebius：商業驗證第一槍</h3>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-semibold">首發雲端</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-stone-600">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                            <span><strong>第一家採用業者：</strong>Nebius 成為首家採納 Groq 3 LPX 的 AI 雲端服務廠商。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                            <span><strong>Token Factory 整合：</strong>加入 Nebius Token Factory，預計 2026 年稍後正式上線。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                            <span><strong>商業價值試驗場：</strong>用於驗證企業客戶是否願意買單，以及能否實質降低推理成本。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 財務預測與動態圖表 -->
+        <section id="financials" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-chart-column text-sky-600"></i> 5. 財務預測與資本動態 (Chart.js 視覺化)
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-6 mb-6">
+                <!-- Revenue Chart Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-sky-500"></i> Nvidia 季度營收預估與指引比較 ($B USD)
+                    </h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-3 text-center">
+                        數據來源：LSEG 彙整華爾街預估與 Nvidia 官方指引 (FY2027 Q2/Q3)
+                    </p>
+                </div>
+
+                <!-- Capital Capex Chart Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-coins text-amber-500"></i> AI 基礎建設資本規模與金融融資 ($B USD)
+                    </h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="capexChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 mt-3 text-center">
+                        包含巨頭 Capex 預估、第三方私募基金聯盟及 OpenAI 專案擔保
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: 互動資料數據庫 -->
+        <section id="databank" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-database text-sky-600"></i> 6. 核心關鍵數據資料庫 (即時互動篩選)
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <!-- Table Search Control -->
+                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <p class="text-sm text-stone-600">輸入關鍵字（如：營收、CPU、SpaceX、毛利率）進行即時搜尋：</p>
+                    <div class="relative w-full sm:w-72">
+                        <input type="text" id="table-search" placeholder="搜尋表格資料..." class="w-full pl-9 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-stone-400 text-sm"></i>
+                    </div>
+                </div>
+
+                <!-- Interactive Data Table -->
+                <div class="overflow-x-auto max-h-96 rounded-lg border border-stone-200">
+                    <table class="w-full text-sm text-left text-stone-700">
+                        <thead class="text-xs text-stone-100 uppercase bg-stone-800 sticky top-0 z-10">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">指標/專案名稱</th>
+                                <th scope="col" class="px-6 py-3">類別</th>
+                                <th scope="col" class="px-6 py-3">關鍵數據 / 規格內容</th>
+                                <th scope="col" class="px-6 py-3">戰略影響與商業意涵</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-table-body" class="divide-y divide-stone-200 bg-white">
+                            <!-- Table rows populated dynamically by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: 投資人關注指標 -->
+        <section id="risks" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-clipboard-check text-sky-600"></i> 7. 財報公布前夕：五大核心觀察指標
+            </h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-lg bg-stone-50 border-l-4 border-sky-500">
+                        <span class="font-bold text-stone-800">1. Q2 營收超預期幅度</span>
+                        <p class="text-xs text-stone-600 mt-1">華爾街預估 921.8 億美元，能否顯著超越而非僅微幅達標。</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-stone-50 border-l-4 border-sky-500">
+                        <span class="font-bold text-stone-800">2. Q3 營收展望指引</span>
+                        <p class="text-xs text-stone-600 mt-1">市場期待 Q3 達 1,042 億美元 (年增 82.8%)，需維持高速動能。</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-stone-50 border-l-4 border-sky-500">
+                        <span class="font-bold text-stone-800">3. 毛利率表現 (75% 防線)</span>
+                        <p class="text-xs text-stone-600 mt-1">系統複雜度提升下，毛利率能否穩定在 75% 附近，彰顯獲利品質。</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-stone-50 border-l-4 border-sky-500">
+                        <span class="font-bold text-stone-800">4. Rubin 出貨對 Blackwell 影響</span>
+                        <p class="text-xs text-stone-600 mt-1">Rubin Q3 貢獻近 90 億美元營收時，是否會排擠 Blackwell 需求。</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-stone-50 border-l-4 border-amber-500 md:col-span-2">
+                        <span class="font-bold text-amber-900">5. 算力融資與 ROI 永續性 (最大潛在風險)</span>
+                        <p class="text-xs text-stone-700 mt-1">黃仁勳如何解釋高達 5,000 億美元的第三方融資與 1,050 億美元專案擔保，晶片需求有多少來自終端真實收益。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Groq3與SpaceXAI揭開NVIDIA推理戰。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中NVIDIA與AI算力市場相關公開資料 (2026年08月25日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Real Data Source extracted directly from the document
+        const productData = [
+            { name: "Groq 3 LPX 推理速度", category: "晶片效能", value: "3,431 token/s", note: "Gemma 4 31B 測試，極速 Decode 生成" },
+            { name: "Vera CPU 運算核心", category: "架構規格", value: "88個 Olympus 核心 / 1.2 TB/s 頻寬", note: "負責控制工作流、工具呼叫與程式執行" },
+            { name: "FY2027 Q2 營收預估 (華爾街)", category: "財務預測", value: "921.8 億美元", note: "接近去年同期兩倍，七季以來最快成長" },
+            { name: "FY2027 Q2 官方指引", category: "財務預測", value: "910 億美元 (±2%)", note: "上一季給出的 Q2 營收指引區間" },
+            { name: "FY2027 Q3 營收預估 (華爾街)", category: "財務預測", value: "1,042 億美元", note: "預估年增 82.8%" },
+            { name: "Vera Rubin Q3 營收貢獻", category: "財務預測", value: "約 90 億美元", note: "摩根士丹利預估，Blackwell週期中新貢獻" },
+            { name: "預期調整後毛利率", category: "財務指標", value: "75% 附近", note: "檢驗複雜系統下是否具備高附加價值" },
+            { name: "2026 科技巨頭 AI Capex", category: "市場規模", value: "超過 7,300 億美元", note: "Microsoft, Amazon, Alphabet 等巨頭資料中心支出" },
+            { name: "第三方 AI 基礎建設資本", category: "金融資助", value: "超過 5,000 億美元", note: "與 Apollo, BlackRock, Blackstone 等合作動員" },
+            { name: "OpenAI 俄亥俄州專案擔保", category: "金融資助", value: "最高約 1,050 億美元", note: "Nvidia 提供之相關融資保證金額" },
+            { name: "SpaceXAI 算力建設", category: "客戶應用", value: "GW (十億瓦) 級運算容量", note: "採用 Vera CPU 與 Vera Rubin 平台" },
+            { name: "Starmind 太空 AI 衛星", category: "前瞻佈局", value: "Vera Rubin NVL72 架構", note: "延伸地面 Grok 資料中心算力至軌道" },
+            { name: "Nebius Token Factory", category: "商業落地", value: "2026年稍後正式上線", note: "第一家採納 Groq 3 LPX 的 AI 雲端業者" }
+        ];
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // 1. Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close mobile menu on clicking any link
+                document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            // 2. Render Data Table & Filter Function
+            const tableBody = document.getElementById('product-table-body');
+            const searchInput = document.getElementById('table-search');
+
+            function renderTable(data) {
+                if (!tableBody) return;
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-stone-500">查無符合的資料數據</td></tr>`;
+                    return;
+                }
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-stone-50 transition-colors';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 font-semibold text-stone-800">${item.name}</td>
+                        <td class="px-6 py-4"><span class="bg-stone-100 text-stone-700 px-2 py-0.5 rounded border text-xs">${item.category}</span></td>
+                        <td class="px-6 py-4 font-bold text-sky-700">${item.value}</td>
+                        <td class="px-6 py-4 text-xs text-stone-600">${item.note}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            renderTable(productData);
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    const filtered = productData.filter(item => 
+                        item.name.toLowerCase().includes(query) ||
+                        item.category.toLowerCase().includes(query) ||
+                        item.value.toLowerCase().includes(query) ||
+                        item.note.toLowerCase().includes(query)
+                    );
+                    renderTable(filtered);
+                });
+            }
+
+            // 3. Navigation Active Link State via Intersection Observer
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('#desktop-nav .nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // 4. Initialize Revenue Chart (Chart.js)
+            const revenueCtx = document.getElementById('revenueChart')?.getContext('2d');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['FY27 Q2 指引底線', 'FY27 Q2 指引頂線', 'FY27 Q2 華爾街預估', 'FY27 Q3 華爾街預估', 'Vera Rubin Q3預估貢獻'],
+                        datasets: [{
+                            label: '營收預估 (十億美元 $B)',
+                            data: [89.18, 92.82, 92.18, 104.2, 9.0],
+                            backgroundColor: [
+                                'rgba(148, 163, 184, 0.7)',
+                                'rgba(148, 163, 184, 0.7)',
+                                'rgba(14, 165, 233, 0.8)',
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(99, 102, 241, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgb(148, 163, 184)',
+                                'rgb(148, 163, 184)',
+                                'rgb(14, 165, 233)',
+                                'rgb(16, 185, 129)',
+                                'rgb(99, 102, 241)'
+                            ],
+                            borderWidth: 1,
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: '十億美元 ($B USD)' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 5. Initialize Capex Chart (Chart.js)
+            const capexCtx = document.getElementById('capexChart')?.getContext('2d');
+            if (capexCtx) {
+                new Chart(capexCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['2026 巨頭 AI Capex', '第三方聯盟預備資本', 'OpenAI 俄亥俄專案擔保'],
+                        datasets: [{
+                            label: '資本金額 (十億美元 $B)',
+                            data: [730, 500, 105],
+                            backgroundColor: [
+                                'rgba(245, 158, 11, 0.8)',
+                                'rgba(59, 130, 246, 0.8)',
+                                'rgba(239, 68, 68, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgb(245, 158, 11)',
+                                'rgb(59, 130, 246)',
+                                'rgb(239, 68, 68)'
+                            ],
+                            borderWidth: 1,
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: { display: true, text: '十億美元 ($B USD)' }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
