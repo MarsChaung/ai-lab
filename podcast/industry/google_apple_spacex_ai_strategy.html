@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI離開聊天視窗：三大巨頭戰略佈局</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        /* Navigation active state styles */
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #475569;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Brand / Title -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div>
+                        <span class="text-lg font-bold text-slate-900 block leading-tight">科技巨頭戰略解析</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium h-full items-center">
+                    <a href="#overview" class="nav-link inactive-nav-link py-5 transition-colors">趨勢總覽</a>
+                    <a href="#google" class="nav-link inactive-nav-link py-5 transition-colors">Google 工作流入口</a>
+                    <a href="#apple" class="nav-link inactive-nav-link py-5 transition-colors">Apple 桌面代理</a>
+                    <a href="#spacex" class="nav-link inactive-nav-link py-5 transition-colors">SpaceX 軌道物流</a>
+                    <a href="#data-table" class="nav-link inactive-nav-link py-5 transition-colors">數據與對比表</a>
+                    <a href="#strategy" class="nav-link inactive-nav-link py-5 transition-colors">投資策略指南</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-md" aria-label="Toggle menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 text-base font-medium shadow-lg">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">趨勢總覽</a>
+            <a href="#google" class="mobile-nav-link block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">Google 工作流入口</a>
+            <a href="#apple" class="mobile-nav-link block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">Apple 桌面代理</a>
+            <a href="#spacex" class="mobile-nav-link block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">SpaceX 軌道物流</a>
+            <a href="#data-table" class="mobile-nav-link block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">數據與對比表</a>
+            <a href="#strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">投資策略指南</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero & Overview Section -->
+        <section id="overview" class="scroll-mt-20">
+            <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 rounded-2xl shadow-xl text-white p-6 sm:p-10 mb-8 border border-slate-800">
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                    AI 開始離開聊天視窗：<br class="hidden sm:inline">Google 搶下專業工作流、Apple 把代理搬上桌面、SpaceX 把算力送進軌道
+                </h1>
+                <p class="text-slate-300 text-base sm:text-lg max-w-4xl leading-relaxed mb-6">
+                    二〇二六年八月二十五日同一天，三大巨頭公布了看似全然不同的計畫。然而背後傳達出相同的 AI 產業關鍵轉折：<strong class="text-sky-300 font-semibold">AI 正在從「模型會回答什麼」，轉向「AI 實際在哪裡工作、控制哪些流程，以及需要多少實體基礎建設」。</strong>
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-800 text-sm">
+                    <div class="flex items-start space-x-3">
+                        <div class="p-2 bg-sky-500/10 rounded-lg text-sky-400 font-bold">01</div>
+                        <div>
+                            <span class="font-bold text-white block">Google 搶攻企業工作流</span>
+                            <span class="text-slate-400 text-xs">推出 Gemini Enterprise for Legal/Finance，打造產業 AI 作業系統。</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="p-2 bg-sky-500/10 rounded-lg text-sky-400 font-bold">02</div>
+                        <div>
+                            <span class="font-bold text-white block">Apple 實現邊緣常時代理</span>
+                            <span class="text-slate-400 text-xs">全新 M6 Mac mini (2nm) 與 Mac Studio 登陸，定義 24/7 常時運作代理式運算。</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="p-2 bg-sky-500/10 rounded-lg text-sky-400 font-bold">03</div>
+                        <div>
+                            <span class="font-bold text-white block">SpaceX 構建軌道物流</span>
+                            <span class="text-slate-400 text-xs">斥資 1,000 億美元打造 Starbase Louisiana，為大規模 AI 衛星與軌道運算鋪路。</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highlights Metrics Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Google Cloud 待履行合約</p>
+                    <p class="text-3xl font-extrabold text-slate-900 mt-2">$5,140 億</p>
+                    <p class="text-xs text-emerald-600 mt-1 font-medium">Q2 營收達 $248 億 (+82% YoY)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Apple M6 AI 效能提升</p>
+                    <p class="text-3xl font-extrabold text-slate-900 mt-2">4.0 倍</p>
+                    <p class="text-xs text-slate-500 mt-1">首款 2nm 晶片 / Mac 營收 +29%</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-purple-500">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">SpaceX 太空港長期投資</p>
+                    <p class="text-3xl font-extrabold text-slate-900 mt-2">$1,000 億</p>
+                    <p class="text-xs text-slate-500 mt-1">占地 12.5 萬英畝 / 年飛行數千次</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">SpaceX 上市市值估值</p>
+                    <p class="text-3xl font-extrabold text-slate-900 mt-2">$1.77 兆</p>
+                    <p class="text-xs text-slate-500 mt-1">IPO 每股 $135 / 募資 $750 億</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Google -->
+        <section id="google" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Google 正在做的不是法律版 ChatGPT，而是搶企業的「工作流程入口」
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Text Detail Card -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <span class="w-3 h-3 bg-sky-500 rounded-full inline-block"></span>
+                        將 Gemini 打造為垂直產業的 AI 作業系統
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        8 月 25 日，Google Cloud 正式推出 <strong>Gemini Enterprise for Legal</strong>（法律企業版），並首度提供給 Cleary Gottlieb、Freshfields、Weil 與 Williams & Connolly 等國際頂尖律師事務所預覽。
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        這套平台設計成可直接處理合約審查、盡職調查、法規監控、法律文件起草、引用驗證及隱私合規等完整工作流。律師不再需要登入數個獨立系統進行繁瑣的操作，而是由 AI 代理取得授權，在單一環境中完成搜尋、比對、起草與行政流程。
+                    </p>
+                    
+                    <div class="bg-sky-50 p-4 rounded-lg border border-sky-100 text-sm space-y-2">
+                        <p class="font-semibold text-sky-900">對 Alphabet 投資人的核心意義：從出租算力轉向高黏著度軟體</p>
+                        <p class="text-sky-800">
+                            最新第二季財報顯示，Google Cloud 營收年增 82% 達到 248 億美元，待履行合約金額（Backlog）高達 5,140 億美元。出租 GPU 本質是基礎建設生意，但若核心流程皆建立於 Gemini Enterprise 之上，客戶更換平台的轉移成本將變得極高。同一天推出的 Gemini Enterprise for Financial Services 更證明其將商業模式拓展至金融等全產業的野心。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ecosystem / Thomson Reuters Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-t-4 border-sky-600">
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-3">生態系策略：Thomson Reuters 不是輸家</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Google 並未消滅傳統法律軟體公司，而是拉攏 Thomson Reuters、Harvey、Legora、Docusign、iManage、NetDocuments、RelativityOne 與 Everlaw。
+                        </p>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Thomson Reuters 旗下的 HighQ 已透過 MCP (Model Context Protocol) 與 Gemini Enterprise 串接。AI 模型可能商品化，但法院判決與法律法規等權威資料庫無法複製。
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
+                        <span class="text-xs font-bold text-amber-800 block">投資護城河觀點：</span>
+                        <span class="text-xs text-amber-700">Thomson Reuters (TRI) 與 RELX (LexisNexis) 轉型為 AI 時代不可或缺的「權威數據收費站」。</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Apple -->
+        <section id="apple" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Apple 正在把 AI 代理從雲端搬到你的桌上
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Mac Specifications Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-600">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">新款 Mac mini / Studio 登場</h3>
+                    <p class="text-xs font-semibold text-indigo-600 mb-4">定位：常時運作的代理式運算 (24/7 Agentic Computing)</p>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>全新 M6 晶片：</strong>首款 2nm 製程，12 核心 CPU + 12 核心 GPU，整合 Neural Accelerator 與雙 16 核 Neural Engine，頻寬達 170GB/s。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>AI 效能翻倍：</strong>M6 Mac mini 在特定 AI 負載下達 M4 的 <strong>4 倍效能</strong>；Mac Studio (M5 Ultra) 高達 <strong>4.3 倍效能</strong>。</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-500 font-bold">•</span>
+                            <span><strong>極致大記憶體：</strong>Mac Studio 配置最高達 <strong>512GB 統一記憶體</strong>，可直接在單一桌機上運行大型 LLM。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Strategic Meaning Card -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-slate-900">六年來最重要的新換機理由：本機 AI 與隱私</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        真正的 AI 代理需要 24 小時不間斷運作：監控郵件、執行程式、管理行程與處理文件。耗電低、安靜且長開的 Mac mini 成為最佳硬體載體。Apple 專注於將 AI 推理從資料中心轉移至使用者裝置端（Edge AI）。
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Apple 最新一季總營收成長 16% 至 1,094 億美元，Mac 營收大幅年增 29%。過去換機理由是「舊電腦變慢」，未來理由則是「舊電腦無法在本地運行 AI 代理」。
+                    </p>
+
+                    <div class="p-4 bg-slate-100 rounded-lg border border-slate-200">
+                        <h4 class="font-semibold text-slate-800 text-sm mb-1">會威脅 Nvidia 嗎？兩層運算架構的形成</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            短期內不會直接取代。Nvidia 主導雲端大型模型訓練與大規模推理；Apple 則控制邊緣端與個人代理。未來 AI 市場將分化為：<strong>雲端重型算力（Nvidia/Google/AMD）</strong> 與 <strong>終端個人代理（Apple Silicon/Qualcomm）</strong> 並存共榮。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: SpaceX -->
+        <section id="spacex" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                SpaceX 把事情推到極端：AI 最終需要太空物流
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full">Starbase Louisiana 計畫</span>
+                        <h3 class="text-2xl font-bold text-slate-900">建構全球規模最大的 Starship 太空港</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            SpaceX 於 Vermilion Parish（Pecan Island）規劃占地 125,000 英畝的新基地，投資高達 1,000 億美元。設有 5 個發射區與 10 個發射台，設計目標為<strong>每年進行數千次 Starship 飛行</strong>，工程預計 2027 年啟動，目標 2029~2030 年進行首飛。
+                        </p>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            這絕非僅為發射 Starlink 衛星，而是將太空運輸轉化為類似航空貨運的大規模產業。這與 SpaceX 部署軌道 AI 運算衛星與超巨型天線星系的願景深度結合。
+                        </p>
+                    </div>
+
+                    <!-- Risk Warning Card -->
+                    <div class="bg-purple-50 p-6 rounded-xl border border-purple-200 space-y-3">
+                        <h4 class="text-lg font-bold text-purple-900 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                            1,000 億美元背後的資本風險
+                        </h4>
+                        <p class="text-xs text-purple-800 leading-relaxed">
+                            SpaceX 於 2026 年 6 月上市（每股 $135、募資 $750 億、估值 $1.77 兆）。但單一太空港長期計畫即需千億美元，顯示 SpaceX 仍屬極度資本密集企業。
+                        </p>
+                        <div class="text-xs font-medium text-purple-900 pt-2 border-t border-purple-200">
+                            關鍵指標：Starlink 現金流能否支撐 Starship 的研發與太空港擴張，將是估值最大的多空分水嶺。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Visualizations & Interactive Table -->
+        <section id="data-table" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                動態數據視覺化與產業競爭比較
+            </h2>
+
+            <!-- Charts Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Chart 1 Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-base font-bold text-slate-800 mb-4 flex items-center justify-between">
+                        <span>三大巨頭財務與資本支出對比 (億美元)</span>
+                        <span class="text-xs text-slate-400 font-normal">公開數據統計</span>
+                    </h3>
+                    <div class="relative w-full h-64">
+                        <canvas id="financialsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2 Container -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-base font-bold text-slate-800 mb-4 flex items-center justify-between">
+                        <span>Apple Mac 晶片本機 AI 推理性能提升倍率</span>
+                        <span class="text-xs text-slate-400 font-normal">以 M4 為基準 (1.0x)</span>
+                    </h3>
+                    <div class="relative w-full h-64">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Table Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">核心標的戰略地位與財務數據對比表</h3>
+                        <p class="text-xs text-slate-500 mt-1">即時動態搜尋與篩選相關美股企業與生態系關鍵成員</p>
+                    </div>
+                    <!-- Search Input Filter -->
+                    <div class="relative w-full md:w-72">
+                        <input type="text" id="table-search" placeholder="搜尋公司、股票代碼或核心戰略..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                        <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Responsive Scrollable Table Container -->
+                <div class="overflow-x-auto rounded-lg border border-slate-200">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-slate-100 text-slate-700 font-semibold sticky top-0 z-10 border-b border-slate-200">
+                            <tr>
+                                <th class="p-3.5 whitespace-nowrap">公司名稱</th>
+                                <th class="p-3.5 whitespace-nowrap">代號 / 類型</th>
+                                <th class="p-3.5 whitespace-nowrap">核心 AI 戰略定位</th>
+                                <th class="p-3.5 whitespace-nowrap">關鍵財務 / 運營數據</th>
+                                <th class="p-3.5 whitespace-nowrap">護城河評級</th>
+                                <th class="p-3.5 whitespace-nowrap">主要投資風險</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-table-body" class="divide-y divide-slate-200 bg-white">
+                            <!-- JS populated rows -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="no-results" class="hidden text-center py-8 text-slate-500 text-sm">
+                    未找到符合搜尋條件的資料。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Investment Strategy -->
+        <section id="strategy" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                巴菲特式價值投資策略：評估四大風險層級
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Tier 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <div class="text-emerald-600 text-xs font-bold uppercase tracking-wider mb-2">層級一：高可驗證性</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Alphabet (GOOGL)</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                        商業模式最容易立即驗證。Google Cloud 具備 5,140 億美元高合約存量，且已轉化為高速營收成長。
+                    </p>
+                    <div class="text-xs font-semibold text-slate-700 bg-emerald-50 p-2 rounded border border-emerald-100">
+                        追蹤指標：Cloud 軟體收入與營業利益率
+                    </div>
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="text-sky-600 text-xs font-bold uppercase tracking-wider mb-2">層級二：硬體升級週期</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Apple (AAPL)</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                        若 M6 / M5 晶片帶動個人常時代理運算需求，將開創由 AI 驅動的第二種硬體換機潮。
+                    </p>
+                    <div class="text-xs font-semibold text-slate-700 bg-sky-50 p-2 rounded border border-sky-100">
+                        追蹤指標：Mac 銷售量、ASP 及雙位數成長續航
+                    </div>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <div class="text-amber-600 text-xs font-bold uppercase tracking-wider mb-2">層級三：資料護城河</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Thomson Reuters / RELX</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                        模型商品化後，權威法律、法規與歷史數據變得極其昂貴。作為「AI 數據收費站」具備天然避風港屬性。
+                    </p>
+                    <div class="text-xs font-semibold text-slate-700 bg-amber-50 p-2 rounded border border-amber-100">
+                        追蹤指標：數據授權費用與平台 API 訂閱量
+                    </div>
+                </div>
+
+                <!-- Tier 4 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-purple-500">
+                    <div class="text-purple-600 text-xs font-bold uppercase tracking-wider mb-2">層級四：高想像與高資本風險</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">SpaceX (未上市/上市)</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                        千億美元太空港構築極高的實體競爭壁壘，但極度依賴 Starship 發射頻率與成本下降表現。
+                    </p>
+                    <div class="text-xs font-semibold text-slate-700 bg-purple-50 p-2 rounded border border-purple-100">
+                        追蹤指標：Starship 年飛行次數與 Starlink 自由現金流
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 text-white rounded-xl p-6 sm:p-8 shadow-xl">
+                <h3 class="text-xl font-bold mb-3 text-sky-400">總結：下一階段 AI 投資核心護城河</h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                    未來 3~5 年，AI 投資策略必須從<strong class="text-white">「哪一家模型最強？」</strong>轉換為<strong class="text-sky-300">「哪家公司控制 AI 每天真正工作的地方？」</strong>。
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-slate-400 pt-2 border-t border-slate-800">
+                    <div>• <strong>Alphabet：</strong>控制企業資料與工作流程入口</div>
+                    <div>• <strong>Apple：</strong>控制全球數十億台個人終端設備</div>
+                    <div>• <strong>SpaceX：</strong>控制太空經濟最難複製的高頻軌道運輸能力</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI離開聊天視窗：三大巨頭戰略佈局。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股AI三大巨頭與科技產業相關公開資料 (2026年08月26日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle Logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Smooth Scroll active nav link with Intersection Observer
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            const href = link.getAttribute('href').replace('#', '');
+                            if (href === activeId) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // Product / Company Data Array (Real Data from report)
+            const productData = [
+                {
+                    name: "Alphabet (Google Cloud)",
+                    ticker: "NASDAQ: GOOGL",
+                    strategy: "Gemini Enterprise for Legal/Finance 工作流程入口",
+                    metrics: "Q2 營收 $248 億 (+82%), 合約存量 $5,140 億",
+                    moat: "極高 (高轉換成本)",
+                    risk: "模型競爭商品化、基礎建設資本支出龐大"
+                },
+                {
+                    name: "Apple Inc.",
+                    ticker: "NASDAQ: AAPL",
+                    strategy: "2nm M6 晶片與 Mac 24/7 常時運作代理式運算",
+                    metrics: "Q2 營收 $1,094 億, Mac 營收 +29%, M6 效能 4x",
+                    moat: "極高 (軟硬體生態系與用戶隱私)",
+                    risk: "AI 代理軟體功能落地進度不如預期"
+                },
+                {
+                    name: "SpaceX",
+                    ticker: "Unlisted (上市估值)",
+                    strategy: "Starbase Louisiana 太空港與軌道 AI 物流",
+                    metrics: "估值 $1.77 兆, 太空港投資 $1,000 億 (12.5萬英畝)",
+                    moat: "極高 (極難複製之實體物流壁壘)",
+                    risk: "極度資本密集、監管延誤、自由現金流壓力"
+                },
+                {
+                    name: "Thomson Reuters",
+                    ticker: "NYSE: TRI",
+                    strategy: "HighQ MCP 介面串接 AI，擔當權威法律資料庫收費站",
+                    metrics: "HighQ 平台廣泛整合 Gemini Enterprise",
+                    moat: "高 (獨家權威判例法規數據)",
+                    risk: "AI 原生法律新創軟體之競爭削價"
+                },
+                {
+                    name: "RELX (LexisNexis)",
+                    ticker: "NYSE: RELX",
+                    strategy: "權威學術與法律資料庫授權與 AI 檢索服務",
+                    metrics: "全球專業法律與學術機構訂閱穩定成長",
+                    moat: "高 (不可替代之獨家權威資料)",
+                    risk: "企業客戶調降傳統檢索服務預算"
+                }
+            ];
+
+            const tableBody = document.getElementById('product-table-body');
+            const searchInput = document.getElementById('table-search');
+            const noResults = document.getElementById('no-results');
+
+            function renderTable(data) {
+                tableBody.innerHTML = '';
+                if (data.length === 0) {
+                    noResults.classList.remove('hidden');
+                    return;
+                }
+                noResults.classList.add('hidden');
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-slate-50 transition-colors';
+                    row.innerHTML = `
+                        <td class="p-3.5 font-bold text-slate-900 whitespace-nowrap">${item.name}</td>
+                        <td class="p-3.5 text-xs text-slate-500 whitespace-nowrap font-mono">${item.ticker}</td>
+                        <td class="p-3.5 text-slate-700">${item.strategy}</td>
+                        <td class="p-3.5 font-semibold text-sky-700 whitespace-nowrap">${item.metrics}</td>
+                        <td class="p-3.5 whitespace-nowrap">
+                            <span class="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800">${item.moat}</span>
+                        </td>
+                        <td class="p-3.5 text-xs text-slate-500">${item.risk}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            renderTable(productData);
+
+            // Table Search Dynamic Filter Event
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                const filtered = productData.filter(item => 
+                    item.name.toLowerCase().includes(query) ||
+                    item.ticker.toLowerCase().includes(query) ||
+                    item.strategy.toLowerCase().includes(query) ||
+                    item.metrics.toLowerCase().includes(query)
+                );
+                renderTable(filtered);
+            });
+
+            // Chart 1: Financials & Investment Comparison
+            const ctxFinancials = document.getElementById('financialsChart').getContext('2d');
+            new Chart(ctxFinancials, {
+                type: 'bar',
+                data: {
+                    labels: ['Google Cloud Q2營收', 'Google Cloud 待履行合約', 'Apple Q2總營收', 'SpaceX IPO募資', 'SpaceX 太空港投資'],
+                    datasets: [{
+                        label: '金額 (億美元 USD)',
+                        data: [248, 5140, 1094, 750, 1000],
+                        backgroundColor: [
+                            'rgba(2, 132, 199, 0.85)',
+                            'rgba(14, 165, 233, 0.65)',
+                            'rgba(79, 70, 229, 0.85)',
+                            'rgba(168, 85, 247, 0.65)',
+                            'rgba(147, 51, 234, 0.85)'
+                        ],
+                        borderColor: [
+                            '#0284c7',
+                            '#0ea5e9',
+                            '#4f46e5',
+                            '#a855f7',
+                            '#9333ea'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` $${context.raw.toLocaleString()} 億美元`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) { return '$' + value; }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Apple Mac Chip Performance Multipliers
+            const ctxPerf = document.getElementById('performanceChart').getContext('2d');
+            new Chart(ctxPerf, {
+                type: 'line',
+                data: {
+                    labels: ['M4 基線', 'M5 Pro / Max', 'M6 (2nm Mini)', 'M5 Ultra (Studio)'],
+                    datasets: [{
+                        label: 'AI 推理效能倍率 (x)',
+                        data: [1.0, 2.2, 4.0, 4.3],
+                        borderColor: '#4f46e5',
+                        backgroundColor: 'rgba(79, 70, 229, 0.15)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#4f46e5'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: 5,
+                            ticks: {
+                                callback: function(value) { return value + 'x'; }
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
