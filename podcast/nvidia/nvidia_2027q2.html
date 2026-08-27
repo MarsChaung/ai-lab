@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-Nvidia財報剖析與AI景氣展望</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            font-weight: 700;
+            border-bottom: 2px solid #0284c7;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased leading-relaxed">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold bg-gradient-to-r from-sky-600 to-indigo-700 bg-clip-text text-transparent">
+                        Nvidia 2027財年Q2 財報解析
+                    </span>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#overview" class="nav-link active-nav-link transition py-2">總覽與核心</a>
+                    <a href="#financials" class="nav-link inactive-nav-link transition py-2">財報核實</a>
+                    <a href="#catalysts" class="nav-link inactive-nav-link transition py-2">戰略催化劑</a>
+                    <a href="#supply-chain" class="nav-link inactive-nav-link transition py-2">第二層供應鏈</a>
+                    <a href="#charts" class="nav-link inactive-nav-link transition py-2">數據圖表</a>
+                    <a href="#table-section" class="nav-link inactive-nav-link transition py-2">關鍵清單</a>
+                    <a href="#risks" class="nav-link inactive-nav-link transition py-2">風險與展望</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button" class="text-stone-600 hover:text-sky-600 focus:outline-none p-2" aria-label="Toggle Menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-stone-700 font-medium hover:bg-sky-50 hover:text-sky-600">總覽與核心</a>
+            <a href="#financials" class="mobile-nav-link block px-3 py-2 rounded-md text-stone-700 font-medium hover:bg-sky-50 hover:text-sky-600">財報核實</a>
+            <a href="#catalysts" class="mobile-nav-link block px-3 py-2 rounded-md text-stone-700 font-medium hover:bg-sky-50 hover:text-sky-600">戰略催化劑</a>
+            <a href="#supply-chain" class="mobile-nav-link block px-3 py-2 rounded-md text-stone-700 font-medium hover:bg-sky-50 hover:text-sky-600">第二層供應鏈</a>
+            <a href="#charts" class="mobile-nav-link block px-3 py-2 rounded-md text-stone-700 font-medium hover:bg-sky-50 hover:text-sky-600">數據圖表</a>
+            <a href="#table-section" class="mobile-nav-link block px-3 py-2 rounded-md text-stone-700 font-medium hover:bg-sky-50 hover:text-sky-600">關鍵清單</a>
+            <a href="#risks" class="mobile-nav-link block px-3 py-2 rounded-md text-stone-700 font-medium hover:bg-sky-50 hover:text-sky-600">風險與展望</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero Title Banner -->
+        <section class="bg-gradient-to-br from-slate-900 via-sky-950 to-stone-900 text-white rounded-2xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="relative z-10">
+                <h1 class="text-3xl md:text-4xl font-extrabold mt-4 mb-6 leading-tight">
+                    不是九百六十二億，而是「百分之七十」：<br class="hidden sm:inline"/>Nvidia把AI景氣高峰推向二〇二八年
+                </h1>
+                <p class="text-stone-300 text-base md:text-lg max-w-3xl leading-relaxed">
+                    Nvidia第二季財報交出全方位超預期成績，但華爾街真正重估AI價值的核心在於管理層將視線延展至2028會計年度，預估營收仍保持約 70% 的高速成長，直接破解市場對 2027 年 AI 資本支出見頂的擔憂。
+                </p>
+            </div>
+            <div class="absolute -bottom-10 -right-10 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        </section>
+
+        <!-- Section 1: Overview & Highlights -->
+        <section id="overview" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">報告重點與核心指標</h2>
+            
+            <!-- Highlight KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500 hover:shadow-xl transition">
+                    <p class="text-xs text-stone-500 font-bold uppercase tracking-wider">Q2 總營收</p>
+                    <p class="text-3xl font-extrabold text-stone-800 my-1">$962.21 億</p>
+                    <p class="text-sm text-emerald-600 font-semibold">↑ 年增 106% / 季增 18%</p>
+                    <p class="text-xs text-stone-400 mt-2">高於市場預期的 $922.7億</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500 hover:shadow-xl transition">
+                    <p class="text-xs text-stone-500 font-bold uppercase tracking-wider">資料中心營收</p>
+                    <p class="text-3xl font-extrabold text-stone-800 my-1">$890.00 億</p>
+                    <p class="text-sm text-emerald-600 font-semibold">↑ 年增 117%</p>
+                    <p class="text-xs text-stone-400 mt-2">佔整體營收比重超過 92%</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500 hover:shadow-xl transition">
+                    <p class="text-xs text-stone-500 font-bold uppercase tracking-wider">FY2028 營收指引成長率</p>
+                    <p class="text-3xl font-extrabold text-amber-600 my-1">~70%</p>
+                    <p class="text-sm text-stone-600 font-semibold">遠高於華爾街預期的 44~45%</p>
+                    <p class="text-xs text-stone-400 mt-2">將 AI 景氣高峰延後至 2028 年</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500 hover:shadow-xl transition">
+                    <p class="text-xs text-stone-500 font-bold uppercase tracking-wider">AWS 合作升級</p>
+                    <p class="text-3xl font-extrabold text-emerald-700 my-1">200 萬顆</p>
+                    <p class="text-sm text-stone-600 font-semibold">2027-2028年部署 GPU</p>
+                    <p class="text-xs text-stone-400 mt-2">含 Blackwell Ultra / Rubin 晶片</p>
+                </div>
+            </div>
+
+            <!-- Card Overview Context -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-bold text-stone-800 mb-3">AI 投資第三階段的全面展開</h3>
+                <p class="text-stone-600 leading-relaxed mb-4">
+                    市場對全球 AI 資本支出是否會在 2027 年開始見頂的疑慮，在 Nvidia 宣布下個會計年度（至 2028 年 1 月）預估營收仍可成長約 70% 後獲得正面解答。從第一階段的「模型訓練」、第二階段的「推理應用」，AI 正進入第三階段：<strong class="text-stone-800">AI 代理、企業自動化、政府 AI、機器人與 Physical AI</strong>。
+                </p>
+                <div class="p-4 bg-sky-50 rounded-md border border-sky-200">
+                    <p class="text-sm text-sky-900 font-medium">
+                        💡 <strong>市場開盤反應：</strong> 8月27日美股開盤後，Nvidia 股價上漲約 7%，單日市值增加約 3,400 億美元，帶動 Nasdaq 指數上漲近 1%，成為科技股與整體 market 的「估值錨」。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Financial Audit -->
+        <section id="financials" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nvidia 財報核實：核心數據深度解析</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center">
+                        <span class="w-3 h-3 bg-sky-500 rounded-full mr-2"></span>第二季（截至7月26日）成績單
+                    </h3>
+                    <ul class="space-y-3 text-stone-600 text-sm">
+                        <li class="flex justify-between border-b pb-2">
+                            <span>實際營收 (Revenue):</span>
+                            <span class="font-bold text-stone-900">$962.21 億 (季增 18%, 年增 106%)</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>市場共識營收預估:</span>
+                            <span class="text-stone-500">$922.70 億 (超預估約 $39.51億)</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>調整後每股盈餘 (EPS):</span>
+                            <span class="font-bold text-stone-900">$2.22 (市場預估 $2.09)</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>第二季調整後毛利率:</span>
+                            <span class="font-bold text-stone-900">75.0%</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center">
+                        <span class="w-3 h-3 bg-amber-500 rounded-full mr-2"></span>第三季展望與「無中國算力」強韌度
+                    </h3>
+                    <ul class="space-y-3 text-stone-600 text-sm">
+                        <li class="flex justify-between border-b pb-2">
+                            <span>第三季營收指引:</span>
+                            <span class="font-bold text-amber-600">$1,080 億 (±2%)</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>市場原先第三季預估:</span>
+                            <span class="text-stone-500">~$1,040 億</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>中國資料中心算力貢獻:</span>
+                            <span class="font-bold text-rose-600">指引中完全計為 $0</span>
+                        </li>
+                        <li class="flex justify-between border-b pb-2">
+                            <span>第三季預估毛利率:</span>
+                            <span class="font-bold text-stone-900">~74.0% (受零組件成本略升影響)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-stone-100 rounded-lg p-5 border border-stone-300">
+                <p class="text-sm text-stone-700 leading-relaxed">
+                    <strong>戰略解讀：</strong> Nvidia 在第三季指引中完全未計入中國高階 AI 晶片收入，這證明依靠美系大型雲端服務商 (CSP)、AI 實驗室、政府與新型 AI 雲端公司 (CoreWeave、Nebius)，就足以支撐單季千億美元規模。若未來中國市場管制放寬，將成為純粹的「額外上行空間」。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Strategic Catalysts -->
+        <section id="catalysts" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">戰略催化劑：AWS 合作與 Hugging Face 併購報導</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- AWS Deal Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">AWS 擴大部署 200 萬顆 GPU</h3>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded font-semibold">官方正式公告</span>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        AWS 與 Nvidia 宣布在 2027 至 2028 年間部署兩百萬顆 GPU，產品線涵蓋 Blackwell Ultra、Rubin 及 Rubin Ultra。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded text-xs space-y-1 text-stone-700">
+                        <p>🔹 <strong>多元產品範疇：</strong> 包含 Vera CPU、Spectrum 網路與 Nemotron 開源模型。</p>
+                        <p>🔹 <strong>政府與特種 AI 領域：</strong> 規畫約 10 萬顆 GPU 用於美國政府安全隔離環境。</p>
+                        <p>🔹 <strong>擴充生態圈：</strong> 合作擴及機器人 (Physical AI) 與企業自動化部署。</p>
+                    </div>
+                </div>
+
+                <!-- Hugging Face Acquisition Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-800">Hugging Face 併購傳聞分析</h3>
+                        <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-1 rounded font-semibold">媒體報導待官方確認</span>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        The Information 報導 Nvidia 同意以約 $129 億美元收購 Hugging Face（年化營收約 $1.5 億）。雖然代價昂貴，但其核心目的在於掌控「AI 開發者入口」。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded text-xs space-y-1 text-stone-700">
+                        <p>🔹 <strong>戰略意圖：</strong> 應對客戶自研晶片 (Google TPU, Amazon Trainium) 風險，掌握開源模型平台。</p>
+                        <p>🔹 <strong>護城河轉型：</strong> 從單純「晶片速度」延伸至「晶片 + CUDA + 開發者生態系」。</p>
+                        <p>⚠️ <strong>潛在挑戰：</strong> 中立性疑慮與反壟斷監管審查壓力可能成為交易變數。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Second-Tier Supply Chain -->
+        <section id="supply-chain" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">資金擴散：第二層 AI 供應鏈機遇</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 leading-relaxed mb-4">
+                    Nvidia 目前最大的瓶頸已經不是「需求不足」，而是<strong class="text-sky-700">「供應受限」</strong>。高頻寬記憶體 (HBM)、儲存設備與高速網絡短缺限制了產能交付，這使得供應鏈廠商開始具備更強的定價權，資金開始顯著向第二層供應鏈擴散。
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <p class="font-bold text-stone-800 text-lg">Micron (MU)</p>
+                        <p class="text-xs text-sky-600 font-semibold">盤前 +4.0%</p>
+                        <p class="text-xs text-stone-500 mt-1">HBM 記憶體短缺受益</p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <p class="font-bold text-stone-800 text-lg">WDC / Sandisk</p>
+                        <p class="text-xs text-sky-600 font-semibold">盤前 > +4.0%</p>
+                        <p class="text-xs text-stone-500 mt-1">企業級數據儲存需求升</p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <p class="font-bold text-stone-800 text-lg">Marvell / AVGO</p>
+                        <p class="text-xs text-sky-600 font-semibold">盤前 +4.0%</p>
+                        <p class="text-xs text-stone-500 mt-1">高速光通訊與客製 ASIC</p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <p class="font-bold text-stone-800 text-lg">CoreWeave / Nebius</p>
+                        <p class="text-xs text-sky-600 font-semibold">漲幅 +5.8%~7.2%</p>
+                        <p class="text-xs text-stone-500 mt-1">新型 AI 雲端服務提供者</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Interactive Charts -->
+        <section id="charts" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">動態視覺化數據分析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Q2 Performance comparison -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">Nvidia Q2 實際業績 vs 市場預估 (億美元/美元)</h3>
+                    <div class="relative w-full h-64 md:h-80">
+                        <canvas id="q2ComparisonChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: FY2028 Revenue Growth Forecast -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">FY2028 營收成長率預測對比 (%)</h3>
+                    <div class="relative w-full h-64 md:h-80">
+                        <canvas id="fy28GrowthChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3: Brokerage Target Price Wall Street -->
+                <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-2">
+                    <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">財報發布後華爾街主要機構最高目標價 (美元)</h3>
+                    <div class="relative w-full h-64 md:h-80">
+                        <canvas id="targetPriceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Interactive Search Table -->
+        <section id="table-section" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">互動資料表格：重點概念與受惠企業清單</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Search Box -->
+                <div class="mb-4">
+                    <label for="searchInput" class="block text-sm font-medium text-stone-700 mb-1">搜尋與即時篩選（可輸入公司名、類別或關鍵字）：</label>
+                    <input type="text" id="searchInput" placeholder="搜尋例如：Nvidia, 記憶體, AWS, 目標價..." class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition outline-none">
+                </div>
+
+                <!-- Table Wrapper for Scroll -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-stone-700">
+                        <thead class="bg-stone-100 text-stone-800 font-bold sticky top-0 border-b border-stone-300">
+                            <tr>
+                                <th class="p-3">公司 / 項目名稱</th>
+                                <th class="p-3">產業類別</th>
+                                <th class="p-3">最新關鍵數據 / 變動</th>
+                                <th class="p-3">戰略角色與市場影響</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-200">
+                            <!-- JS dynamically inserts rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Investment Risks & Strategy -->
+        <section id="risks" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四大核心投資風險與後續觀察指標</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">1. 供應鏈產能瓶頸 (Supply Bottlenecks)</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        記憶體 (HBM)、先進封裝、電力設施與資料中心建置速度跟不上客戶需求，限制營收最大化成長。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">2. 毛利率防禦壓力 (Gross Margin)</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        第三季毛利率指引降至 74.0%（前季 75%），反映複雜封裝與記憶體零組件成本上升對利潤率的壓制。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">3. 客戶自研晶片競爭 (Custom ASICs)</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        CSP 巨頭（Amazon Trainium, Google TPU, Microsoft）積極發展自研晶片以降低對單一供應商的依賴。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">4. 70% 成長指引的兌現度</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        市場不再滿意單純「超預期」，未來重點落在 Vera Rubin 出貨速度、記憶體供應改善及毛利率能否維持。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Nvidia財報剖析與AI景氣展望。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Nvidia財報與AI產業發展相關公開資料 (2026年08月27日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // Real Data extracted from the provided text report
+        const productData = [
+            { name: "Nvidia (NVDA)", category: "核心運算 / GPU", metric: "Q2營收 $962.21億, FY28估 +70%", role: "AI基礎設施核心，延伸護城河至生態系與軟體" },
+            { name: "AWS (Amazon)", category: "雲端巨頭 (CSP)", metric: "部署 200萬顆 GPU (2027-28)", role: "涵蓋 Blackwell Ultra, Rubin, 政府安全基礎設施" },
+            { name: "Micron (MU)", category: "記憶體 (HBM)", metric: "盤前漲約 +4.0%", role: "記憶體短缺限制產能，享受高定價權" },
+            { name: "Western Digital / Sandisk", category: "數據儲存 (Storage)", metric: "盤前漲逾 +4.0%", role: "企業級大容量數據儲存需求暴增" },
+            { name: "Marvell / Broadcom", category: "高速網路 / 客製ASIC", metric: "盤前漲約 +4.0%", role: "AI資料中心高速互聯與交換器剛性需求" },
+            { name: "CoreWeave / Nebius", category: "新型 AI 雲端", metric: "漲幅 +5.8% ~ +7.2%", role: "AI 算力需求從 CSP 巨頭向外擴散" },
+            { name: "Hugging Face", category: "AI 模型與開發者平台", metric: "報導併購額 ~$129億美元", role: "AI開源平台，掌握開發者入口與 CUDA 生態系" },
+            { name: "Goldman Sachs", category: "投資機構 / 分析師", metric: "目標價調升至 $300 美元", role: "調升目標價，肯定 FY28 +70% 成長前景" },
+            { name: "Citigroup", category: "投資機構 / 分析師", metric: "目標價調升至 $315 美元", role: "調升目標價，看好第二層供應鏈帶動性" },
+            { name: "Cantor Fitzgerald", category: "投資機構 / 分析師", metric: "目標價維持 $350 美元", role: "市場最積極目標價，認定週期大幅延長" }
+        ];
+
+        // Populate Table dynamically
+        function renderTable(data) {
+            const tableBody = document.getElementById("dataTableBody");
+            tableBody.innerHTML = "";
+
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="text-center p-4 text-stone-500">找不到符合條件的資料</td></tr>`;
+                return;
+            }
+
+            data.forEach(item => {
+                const row = document.createElement("tr");
+                row.className = "hover:bg-stone-50 transition";
+                row.innerHTML = `
+                    <td class="p-3 font-semibold text-stone-900">${item.name}</td>
+                    <td class="p-3"><span class="bg-sky-100 text-sky-800 text-xs font-semibold px-2 py-0.5 rounded">${item.category}</span></td>
+                    <td class="p-3 font-medium text-emerald-700">${item.metric}</td>
+                    <td class="p-3 text-stone-600">${item.role}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Search Filter Interaction
+        document.getElementById("searchInput").addEventListener("input", function(e) {
+            const keyword = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.name.toLowerCase().includes(keyword) ||
+                item.category.toLowerCase().includes(keyword) ||
+                item.metric.toLowerCase().includes(keyword) ||
+                item.role.toLowerCase().includes(keyword)
+            );
+            renderTable(filtered);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        // Close mobile menu on clicking link
+        document.querySelectorAll(".mobile-nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+            });
+        });
+
+        // Scroll Active Link Observer
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll("nav a.nav-link");
+
+        const observerOptions = {
+            root: null,
+            rootMargin: "-20% 0px -60% 0px",
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+                    navLinks.forEach(link => {
+                        if (link.getAttribute("href") === `#${id}`) {
+                            link.classList.add("active-nav-link");
+                            link.classList.remove("inactive-nav-link");
+                        } else {
+                            link.classList.remove("active-nav-link");
+                            link.classList.add("inactive-nav-link");
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Chart.js Implementations
+        window.addEventListener('DOMContentLoaded', () => {
+            // Initial Table Render
+            renderTable(productData);
+
+            // Chart 1: Q2 Metrics vs Consensus
+            const ctx1 = document.getElementById('q2ComparisonChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['營收 Revenue (億美元)', '調整後 EPS (美元)'],
+                    datasets: [
+                        {
+                            label: '實際發布數字',
+                            data: [962.21, 2.22],
+                            backgroundColor: 'rgba(2, 132, 199, 0.85)',
+                            borderColor: 'rgba(2, 132, 199, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '華爾街市場預估',
+                            data: [922.70, 2.09],
+                            backgroundColor: 'rgba(156, 163, 175, 0.7)',
+                            borderColor: 'rgba(156, 163, 175, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Chart 2: FY2028 Growth Comparison
+            const ctx2 = document.getElementById('fy28GrowthChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['華爾街原先預估', 'FactSet 統計數據', 'Nvidia 管理層最新指引'],
+                    datasets: [{
+                        label: 'FY2028 預估營收成長率 (%)',
+                        data: [44, 45, 70],
+                        backgroundColor: [
+                            'rgba(156, 163, 175, 0.7)',
+                            'rgba(156, 163, 175, 0.7)',
+                            'rgba(217, 119, 6, 0.9)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 3: Brokerage Target Prices
+            const ctx3 = document.getElementById('targetPriceChart').getContext('2d');
+            new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['Goldman Sachs', 'Citigroup', 'Cantor Fitzgerald'],
+                    datasets: [{
+                        label: '調升後目標價 ($ USD)',
+                        data: [300, 315, 350],
+                        backgroundColor: 'rgba(16, 185, 129, 0.85)',
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        x: { beginAtZero: false, min: 200 }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
