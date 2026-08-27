@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI資安崛起與Meta監管護城河</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- 頂部固定導航列 (Sticky Header) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- 品牌標識 -->
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <span class="font-bold text-lg text-stone-900 tracking-tight">CrowdStrike財報及Meta訴訟和解</span>
+                    </div>
+                </div>
+
+                <!-- 桌面版導航連結 -->
+                <nav class="hidden lg:flex space-x-6">
+                    <a href="#overview" class="nav-item py-5 text-sm transition duration-150 inactive-nav-link" data-section="overview">趨勢概述</a>
+                    <a href="#crowdstrike" class="nav-item py-5 text-sm transition duration-150 inactive-nav-link" data-section="crowdstrike">CrowdStrike 財報</a>
+                    <a href="#ai-layers" class="nav-item py-5 text-sm transition duration-150 inactive-nav-link" data-section="ai-layers">AI 三層架構</a>
+                    <a href="#meta" class="nav-item py-5 text-sm transition duration-150 inactive-nav-link" data-section="meta">Meta 和解與護城河</a>
+                    <a href="#data-table" class="nav-item py-5 text-sm transition duration-150 inactive-nav-link" data-section="data-table">核心數據庫</a>
+                    <a href="#strategy" class="nav-item py-5 text-sm transition duration-150 inactive-nav-link" data-section="strategy">投資策略</a>
+                </nav>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobileMenuBtn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md" aria-label="切換選單">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">趨勢概述</a>
+            <a href="#crowdstrike" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">CrowdStrike 財報</a>
+            <a href="#ai-layers" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">AI 三層架構</a>
+            <a href="#meta" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">Meta 和解與護城河</a>
+            <a href="#data-table" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">核心數據庫</a>
+            <a href="#strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">投資策略</a>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- 頂部重點 Banner -->
+        <div class="bg-gradient-to-r from-stone-900 via-sky-950 to-stone-900 text-white rounded-2xl p-6 sm:p-10 mb-10 shadow-xl relative overflow-hidden">
+            <div class="relative z-10">
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 leading-tight">
+                    AI 從擴張走向防禦：<br class="hidden sm:inline">資安受惠加速，Meta 用 180 億美元確立監管護城河
+                </h1>
+                <p class="text-stone-300 text-sm sm:text-base max-w-3xl leading-relaxed">
+                    過去三年 AI 投資的核心是「誰能提供算力」；進入 2026 年，投資主線正式擴展至「誰來保護、管理並承擔 AI 帶來的全新風險」。資安、身分驗證與法規遵循已成為科技巨頭與企業必不可少的剛性支出。
+                </p>
+            </div>
+        </div>
+
+        <!-- 關鍵數據快速卡片 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+            <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-sky-500 hover:shadow-lg transition">
+                <div class="text-xs font-semibold uppercase tracking-wider text-stone-500">CrowdStrike 新增 ARR</div>
+                <div class="text-2xl sm:text-3xl font-bold text-stone-900 mt-1">$3.33 億</div>
+                <div class="text-xs font-medium text-emerald-600 mt-2 flex items-center">
+                    <span>▲ 年增 +51%（創歷史新高）</span>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-emerald-500 hover:shadow-lg transition">
+                <div class="text-xs font-semibold uppercase tracking-wider text-stone-500">Falcon Flex 貢獻 ARR</div>
+                <div class="text-2xl sm:text-3xl font-bold text-stone-900 mt-1">$22.9 億+</div>
+                <div class="text-xs font-medium text-emerald-600 mt-2 flex items-center">
+                    <span>▲ 年增 +101%（平台化成效顯著）</span>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-amber-500 hover:shadow-lg transition">
+                <div class="text-xs font-semibold uppercase tracking-wider text-stone-500">Meta 青少年訴訟和解上限</div>
+                <div class="text-2xl sm:text-3xl font-bold text-stone-900 mt-1">$180 億</div>
+                <div class="text-xs font-medium text-stone-600 mt-2">
+                    分 10 年支付（70% 確定、30% 連動同行）
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-indigo-500 hover:shadow-lg transition">
+                <div class="text-xs font-semibold uppercase tracking-wider text-stone-500">Meta 全年資本支出 (CapEx)</div>
+                <div class="text-2xl sm:text-3xl font-bold text-stone-900 mt-1">$1,300-1,450 億</div>
+                <div class="text-xs font-medium text-amber-600 mt-2">
+                    AI 基礎建設加速中，考驗投資回報率
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: 趨勢概述 -->
+        <section id="overview" class="mb-14 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">趨勢概述：從算力擴張到安全防禦</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 text-base leading-relaxed mb-4">
+                    如果說過去三年的人工智慧投資主線，是「誰能提供更多算力」，那麼 2026 年正在逐漸出現另一條更值得投資人注意的支線：<strong>當 AI 真正進入企業與消費者生活之後，誰來負責保護它、管理它，以及承擔它帶來的新風險？</strong>
+                </p>
+                <p class="text-stone-700 text-base leading-relaxed mb-4">
+                    CrowdStrike 最新財報與 Meta 高達 180 億美元的青少年社群媒體和解，看似完全不同的兩件事情，其實共同揭露了 AI 產業下一階段的重要變化：
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-sky-50 border border-sky-200 rounded-lg p-4">
+                        <div class="font-bold text-sky-900 mb-1">1. AI 投資重心外溢</div>
+                        <p class="text-xs text-sky-800 leading-normal">
+                            資金從單純的晶片與伺服器，逐步擴張至資安防禦、身分驗證、資料治理與法規遵循。
+                        </p>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                        <div class="font-bold text-emerald-900 mb-1">2. 代理型 AI 風險擴大</div>
+                        <p class="text-xs text-emerald-800 leading-normal">
+                            AI 代理獲取企業資料庫、API、程式碼與支付權限，被劫持的潛在危害遠超傳統帳號被盜。
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                        <div class="font-bold text-amber-900 mb-1">3. 監管合規轉為護城河</div>
+                        <p class="text-xs text-amber-800 leading-normal">
+                            巨頭透過承擔已知罰款並推動全行業高法遵標準，將監管成本轉化為排擠小型競爭對手的護城河。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CrowdStrike 財報 -->
+        <section id="crowdstrike" class="mb-14 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">CrowdStrike 財報深析：資安需求重啟加速</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- 財務亮點分析卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3 flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-sky-500"></span>
+                            營運爆發：新增 ARR 創歷史新高
+                        </h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            CrowdStrike 公布 2027 會計年度 Q2 財報（截至 2026/7/31）。真正讓市場振奮的不是單季營收 14.7 億美元，而是<strong>新增 ARR 年增達 51%</strong>（達 3.33 億美元），顯示企業客戶正大規模加購多項安全模組。
+                        </p>
+
+                        <ul class="space-y-2.5 text-sm text-stone-700">
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span>
+                                <div><strong>Falcon Flex 平台化策略大獲全勝：</strong>客戶貢獻 ARR 超過 22.9 億美元（年增 101%），企業從「單點採購」升級為「整合式安全架構」。</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span>
+                                <div><strong>高質量現金流轉換：</strong>單季自由現金流達 3.77 億美元（利潤率達 26%），帳上現金及約當現金突破 50.1 億美元。</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-500 font-bold mr-2">✓</span>
+                                <div><strong>全年財務指引調升：</strong>全年度營收預測由原先 59.1-59.6 億美元上修至 59.91-60.11 億美元。</div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-stone-100 text-xs text-stone-500">
+                        * 風險提示：估值持續處於高位，2024 年全球系統當機之訴訟與商譽風險仍被列為監控因子。
+                    </div>
+                </div>
+
+                <!-- Chart 1: CrowdStrike 關鍵財務走勢圖 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">CrowdStrike 財務與 ARR 關鍵指標 (億美元)</h3>
+                    <div class="relative w-full h-64 sm:h-72">
+                        <canvas id="crowdstrikeChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 text-center mt-2">
+                        數據來源：CrowdStrike 2027 會計年度 Q2 官方財報 (2026/08)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: AI 投資三層架構 -->
+        <section id="ai-layers" class="mb-14 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 投資的第三層：不可或缺的「AI 安全稅」</h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 text-base leading-relaxed mb-6">
+                    執行長 George Kurtz 明確表示：「企業未來都會使用 AI，而保護 AI 將成為 CrowdStrike 歷史上最大的市場機會。」AI 投資可清晰劃分為三個層次：
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 第一層 -->
+                    <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-sky-300 transition">
+                        <div class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-1">第一層</div>
+                        <h4 class="text-lg font-bold text-stone-900 mb-2">算力基礎層</h4>
+                        <div class="text-xs font-semibold text-sky-700 bg-sky-100 inline-block px-2 py-0.5 rounded mb-3">運算核心</div>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            <strong>代表企業：</strong>Nvidia、AMD、客製化 ASIC 晶片廠商。<br>
+                            <strong>核心角色：</strong>負責提供龐大的模型訓練與推論運算能力。
+                        </p>
+                    </div>
+
+                    <!-- 第二層 -->
+                    <div class="bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-sky-300 transition">
+                        <div class="text-xs font-bold text-stone-500 uppercase tracking-wider mb-1">第二層</div>
+                        <h4 class="text-lg font-bold text-stone-900 mb-2">資料中心與實體設施</h4>
+                        <div class="text-xs font-semibold text-emerald-700 bg-emerald-100 inline-block px-2 py-0.5 rounded mb-3">基礎硬體</div>
+                        <p class="text-xs text-stone-600 leading-relaxed">
+                            <strong>代表企業：</strong>伺服器、電力設備、先進散熱、高頻寬記憶體與儲存。<br>
+                            <strong>核心角色：</strong>維持龐大算力運轉所需的實體工程與能源支撐。
+                        </p>
+                    </div>
+
+                    <!-- 第三層 -->
+                    <div class="bg-sky-50 rounded-xl p-5 border-2 border-sky-500 shadow-sm relative">
+                        <span class="absolute -top-3 right-3 bg-sky-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">當前焦點</span>
+                        <div class="text-xs font-bold text-sky-700 uppercase tracking-wider mb-1">第三層</div>
+                        <h4 class="text-lg font-bold text-sky-950 mb-2">基礎軟體、資安與治理</h4>
+                        <div class="text-xs font-semibold text-indigo-700 bg-indigo-100 inline-block px-2 py-0.5 rounded mb-3">剛性防禦</div>
+                        <p class="text-xs text-stone-700 leading-relaxed">
+                            <strong>代表企業：</strong>CrowdStrike、Palo Alto Networks、Okta。<br>
+                            <strong>核心角色：</strong>企業不能延後的「剛性支出」，保護資料庫、權限、API 與模型免受劫持。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-stone-100 rounded-lg p-4 text-xs text-stone-700 leading-relaxed">
+                    <strong>💡 投資洞察：</strong>全球網路保險市場規模預計從現階段約 150 億美元於 2030 年擴大至 280 億美元，保險公司已開始將「AI 代理自主造成的資安事件」納入精算體系，標誌著 AI 安全已正式進入企業風險管理標配。
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Meta 和解與護城河 -->
+        <section id="meta" class="mb-14 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta 180 億美元和解案：確定性與監管護城河</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- 和解機制與護城河說明 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3 flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                            消除尾部風險：將未知罰款變為已知成本
+                        </h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            Meta 與 48 個美國州及司法轄區就青少年成癮訴訟達成最高 180 億美元和解。市場不跌反漲的關鍵在於：<strong>化解了原先可能高達 2,000 億美元的民事索賠不確定性</strong>，且採 10 年分期付款。
+                        </p>
+
+                        <div class="space-y-3 text-xs text-stone-700 bg-stone-50 p-4 rounded-lg border border-stone-200">
+                            <div class="font-semibold text-stone-900 text-sm border-b border-stone-200 pb-1 mb-2">和解條款細部拆解：</div>
+                            <p><strong>• 確定支付：</strong>約 70%（127 億美元），Q3 2026 預估認列 100 億美元法律費用。</p>
+                            <p><strong>• 行業連動：</strong>剩餘 30%（約 53 億美元）視 YouTube 與 TikTok 是否跟進同等嚴格限制而定。</p>
+                            <p><strong>• 產品新規：</strong>18 歲以下預設每日 2 小時限制、深夜 0-6 點關閉主要功能、隱藏按讚數。</p>
+                            <p><strong>• 監管護城河效應：</strong>巨頭有充裕資本負擔高昂合規系統，小平台將面臨更高的合規成本壓力。</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-xs font-semibold text-amber-700 bg-amber-50 p-2 rounded">
+                        ⚠️ 核心財務挑戰：Q2 自由現金流降至 7.84 億美元（去年同期 85.5 億），全年資本支出高達 1,300-1,450 億美元。
+                    </div>
+                </div>
+
+                <!-- Chart 2: Meta 營收 vs 資本支出 vs 現金流 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">Meta Q2 財務與年度資本支出對比 (億美元)</h3>
+                    <div class="relative w-full h-64 sm:h-72">
+                        <canvas id="metaChart"></canvas>
+                    </div>
+                    <p class="text-xs text-stone-500 text-center mt-2">
+                        數據來源：Meta Q2 財報與和解公告分析 (2026/08)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: 核心數據庫 (Interactive Table) -->
+        <section id="data-table" class="mb-14 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心營運與監管指標資料庫</h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-5">
+                    <p class="text-sm text-stone-600">
+                        即時檢索報告中所有真實財務指標、和解條款與產業預測數據。
+                    </p>
+                    <div class="w-full sm:w-72">
+                        <input type="text" id="tableSearch" placeholder="搜尋公司、指標或項目..." class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    </div>
+                </div>
+
+                <!-- 表格容器 -->
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200 text-left text-sm">
+                        <thead class="bg-stone-100 text-stone-700 font-semibold sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">標的企業 / 領域</th>
+                                <th scope="col" class="px-4 py-3">財務 / 營運指標</th>
+                                <th scope="col" class="px-4 py-3">數值 / 狀態</th>
+                                <th scope="col" class="px-4 py-3">年增率 / 變動趨勢</th>
+                                <th scope="col" class="px-4 py-3">投資戰略意涵</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-stone-200 bg-white text-stone-800">
+                            <!-- 由 JS 動態注入 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden text-center py-6 text-stone-400 text-sm">
+                    未找到符合搜尋條件的數據項目
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: 投資策略與總結 -->
+        <section id="strategy" class="mb-14 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略：從「建造 AI」走向「使用 AI」</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- CrowdStrike 策略觀點 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-600">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">CrowdStrike：AI 時代的「安全稅」</h3>
+                    <p class="text-stone-700 text-sm leading-relaxed mb-3">
+                        如果 Nvidia 代表 AI 時代的「運算稅」，資安龍頭則扮演不可或缺的「安全稅」。每多部署一個具備自主權限的 AI 代理，企業就必須多採購一組身分防禦與監控模組。
+                    </p>
+                    <div class="bg-sky-50 p-3 rounded text-xs text-sky-900 space-y-1">
+                        <div><strong>定位：</strong>AI 高成長資安核心標的（非低估值防禦股）。</div>
+                        <div><strong>觀察指標：</strong>Falcon Flex ARR 擴張斜率、自由現金流轉換率。</div>
+                    </div>
+                </div>
+
+                <!-- Meta 策略觀點 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-600">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">Meta：監管確定性 vs AI 投資回報</h3>
+                    <p class="text-stone-700 text-sm leading-relaxed mb-3">
+                        180 億美元和解消除了最令華爾街恐懼的未知訴訟風險，並建立了小型競爭對手難以跨越的合規障礙。未來 1-2 年決定 Meta 估值的核心不是和解金，而是高達千億美元的 AI 資本支出能否帶動廣告變現與營收同步提速。
+                    </p>
+                    <div class="bg-amber-50 p-3 rounded text-xs text-amber-900 space-y-1">
+                        <div><strong>定位：</strong>維持中長期正面看法，需密切追蹤資本配置。</div>
+                        <div><strong>觀察指標：</strong>AI 推薦轉換率提升、自由現金流何時觸底回升。</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 總結卡片 -->
+            <div class="bg-stone-900 text-white rounded-xl p-6 sm:p-8 shadow-xl">
+                <h4 class="text-lg sm:text-xl font-bold text-sky-400 mb-3">結語：下一階段美股 AI 投資核心提問</h4>
+                <p class="text-stone-300 text-sm sm:text-base leading-relaxed mb-4">
+                    Nvidia 證明了 AI 基礎算力建設仍在持續；CrowdStrike 則證明當 AI 開始承接企業工作時，安全需求才剛進入爆發期；Meta 則提醒市場，技術普及後的監管與合規責任是巨頭必付的代價。
+                </p>
+                <div class="border-l-2 border-sky-400 pl-4 text-stone-200 text-sm font-medium italic">
+                    「當全球企業部署數以百萬計的 AI 代理之後，哪些產品是企業不得不買的？」——資安與治理軟體正是最明確的答案。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 (符合規格要求) -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI資安崛起與Meta監管護城河。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中CrowdStrike與Meta相關公開資料 (2026年08月28日)。</p>
+        </div>
+    </footer>
+
+    <!-- 原生 JavaScript 邏輯 -->
+    <script>
+        // 1. 互動資料庫來源數據 (真實數據)
+        const productData = [
+            {
+                company: "CrowdStrike (CRWD)",
+                metric: "2027 會計年度 Q2 營收",
+                value: "$14.7 億美元",
+                growth: "+26% YoY (超預期 $14.4 億)",
+                implication: "企業對端點與雲端防護需求持續超越華爾街預期"
+            },
+            {
+                company: "CrowdStrike (CRWD)",
+                metric: "年度經常性收入 (ARR)",
+                value: "$58.4 億美元",
+                growth: "+25% YoY",
+                implication: "高黏著度訂閱制收入提供長期穩健基本盤"
+            },
+            {
+                company: "CrowdStrike (CRWD)",
+                metric: "單季新增 ARR (Net New ARR)",
+                value: "$3.33 億美元",
+                growth: "+51% YoY (歷史新高)",
+                implication: "客戶加購多模組產品步伐顯著加速"
+            },
+            {
+                company: "CrowdStrike (CRWD)",
+                metric: "Falcon Flex 貢獻 ARR",
+                value: "$22.9 億美元",
+                growth: "+101% YoY",
+                implication: "平台化彈性訂閱架構成功拉高單一客戶生命週期價值"
+            },
+            {
+                company: "CrowdStrike (CRWD)",
+                metric: "單季自由現金流 (FCF)",
+                value: "$3.77 億美元",
+                growth: "利潤率 26% (創 Q2 歷史新高)",
+                implication: "公司已進入將成長實質轉換為高額自由現金流的健康階段"
+            },
+            {
+                company: "CrowdStrike (CRWD)",
+                metric: "全年度營收財測指引",
+                value: "$59.91 - $60.11 億美元",
+                growth: "較原先區間上修約 $8,000 萬",
+                implication: "下半年企業資安訂單能見度維持高檔"
+            },
+            {
+                company: "Meta Platforms",
+                metric: "青少年社群訴訟和解上限",
+                value: "$180 億美元",
+                growth: "分 10 年支付 ($127 億確定)",
+                implication: "消除可能高達 $2,000 億的民事裁罰尾部風險，鎖定已知成本"
+            },
+            {
+                company: "Meta Platforms",
+                metric: "Q2 季度營收",
+                value: "$608 億美元",
+                growth: "+28% YoY",
+                implication: "核心數位廣告變現能力在 AI 推薦賦能下依舊強勁"
+            },
+            {
+                company: "Meta Platforms",
+                metric: "Q2 自由現金流",
+                value: "$7.84 億美元",
+                growth: "較去年同期 $85.5 億驟降",
+                implication: "龐大 AI 基礎設施採購顯著壓低短期自由現金流"
+            },
+            {
+                company: "Meta Platforms",
+                metric: "全年資本支出 (CapEx)",
+                value: "$1,300 - $1,450 億美元",
+                growth: "高水位擴張",
+                implication: "未來 1-2 年市場將檢驗千億級 AI 資本支出的實質投資回報率 (ROI)"
+            },
+            {
+                company: "全球產業趨勢",
+                metric: "全球網路保險市場規模",
+                value: "$150 億 -> $280 億美元",
+                growth: "預計至 2030 年高速擴張",
+                implication: "AI 代理自主造成的意外納入精算，資安成為全球企業剛性風控標配"
+            }
+        ];
+
+        // 2. 表格渲染與即時篩選
+        const tableBody = document.getElementById('tableBody');
+        const tableSearch = document.getElementById('tableSearch');
+        const noResults = document.getElementById('noResults');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            data.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white hover:bg-sky-50/40 transition' : 'bg-stone-50/70 hover:bg-sky-50/40 transition';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-semibold text-stone-900 whitespace-nowrap">${item.company}</td>
+                    <td class="px-4 py-3 text-stone-700">${item.metric}</td>
+                    <td class="px-4 py-3 font-bold text-sky-700">${item.value}</td>
+                    <td class="px-4 py-3 text-emerald-700 font-medium">${item.growth}</td>
+                    <td class="px-4 py-3 text-stone-600 text-xs leading-normal">${item.implication}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // 初始渲染表格
+        renderTable(productData);
+
+        // 搜尋篩選事件
+        tableSearch.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.company.toLowerCase().includes(term) ||
+                item.metric.toLowerCase().includes(term) ||
+                item.value.toLowerCase().includes(term) ||
+                item.implication.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. 手機版選單切換
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊手機選單項目後自動關閉選單
+        document.querySelectorAll('.mobile-nav-item').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 4. Intersection Observer 動態更新導航列 Active 狀態
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    navItems.forEach(link => {
+                        if (link.getAttribute('data-section') === activeId) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(sec => observer.observe(sec));
+
+        // 5. Chart.js 資料圖表初始化 (在 DOM 載入後執行)
+        window.addEventListener('load', () => {
+            // 圖表 1: CrowdStrike 財務關鍵指標
+            const ctx1 = document.getElementById('crowdstrikeChart');
+            if (ctx1) {
+                new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['單季營收', '自由現金流 (FCF)', '新增 ARR', 'Falcon Flex ARR', '總 ARR'],
+                        datasets: [{
+                            label: '金額 (億美元)',
+                            data: [14.7, 3.77, 3.33, 22.9, 58.4],
+                            backgroundColor: [
+                                'rgba(2, 132, 199, 0.85)',
+                                'rgba(16, 185, 129, 0.85)',
+                                'rgba(245, 158, 11, 0.85)',
+                                'rgba(99, 102, 241, 0.85)',
+                                'rgba(71, 85, 105, 0.85)'
+                            ],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y + ' 億美元';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '億美元 ($B)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 圖表 2: Meta 營收 vs 資本支出 vs 自由現金流
+            const ctx2 = document.getElementById('metaChart');
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Q2 營收', '去年同期 FCF', '本季 FCF', '全年 CapEx 低標', '全年 CapEx 高標'],
+                        datasets: [{
+                            label: '金額 (億美元)',
+                            data: [608.0, 85.5, 7.84, 1300.0, 1450.0],
+                            backgroundColor: [
+                                'rgba(2, 132, 199, 0.85)',
+                                'rgba(16, 185, 129, 0.75)',
+                                'rgba(239, 68, 68, 0.85)',
+                                'rgba(245, 158, 11, 0.85)',
+                                'rgba(217, 119, 6, 0.85)'
+                            ],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y + ' 億美元';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '億美元 ($B)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
