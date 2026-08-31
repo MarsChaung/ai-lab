@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-從晶片到AI工廠生態系競爭</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7 !important;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased font-sans">
+
+    <!-- 頂部導航列 (Sticky Header) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <span class="font-bold text-lg text-stone-900 tracking-tight">從晶片到AI工廠生態系競爭</span>
+                    </div>
+                </div>
+
+                <!-- 桌面版導航項目 -->
+                <nav class="hidden md:flex space-x-6 text-sm">
+                    <a href="#overview" class="nav-link inactive-nav-link pb-1 transition-colors">趨勢總覽</a>
+                    <a href="#nvidia-mediatek" class="nav-link inactive-nav-link pb-1 transition-colors">Nvidia × 聯發科</a>
+                    <a href="#slb-kelvion" class="nav-link inactive-nav-link pb-1 transition-colors">SLB × Kelvion</a>
+                    <a href="#capex-chain" class="nav-link inactive-nav-link pb-1 transition-colors">三階資本因果鏈</a>
+                    <a href="#financial-data" class="nav-link inactive-nav-link pb-1 transition-colors">財務數據表</a>
+                    <a href="#investment-risks" class="nav-link inactive-nav-link pb-1 transition-colors">風險與決策</a>
+                </nav>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" type="button" class="p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none" aria-label="開啟選單">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">趨勢總覽</a>
+            <a href="#nvidia-mediatek" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">Nvidia × 聯發科：NVLink Fusion</a>
+            <a href="#slb-kelvion" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">SLB × Kelvion：散熱工程佈局</a>
+            <a href="#capex-chain" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">三階資本因果鏈</a>
+            <a href="#financial-data" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">財務數據與交易互動表</a>
+            <a href="#investment-risks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-100">風險檢視與投資策略</a>
+        </div>
+    </header>
+
+    <!-- 主內容區 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Hero 標題區 -->
+        <div class="mb-10 text-center md:text-left bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
+            <div class="relative z-10">
+                <h1 class="text-3xl sm:text-3xl lg:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                    當AI戰爭不再只比GPU：<br class="hidden sm:inline">
+                    <span class="text-sky-400">Nvidia</span> 用 NVLink 收編客製化晶片，<span class="text-emerald-400">SLB</span> 用散熱搶進AI基建
+                </h1>
+                <p class="text-stone-300 text-base sm:text-lg max-w-3xl leading-relaxed">
+                    AI產業競爭正式從「誰擁有最強晶片」演進至「誰能控制整座AI工廠」。從半導體架構標準化到能源與散熱物理極限，深度解析兩筆關鍵交易背後的結構性轉變。
+                </p>
+            </div>
+            <div class="absolute -right-16 -bottom-16 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+
+        <!-- 區塊 1: 趨勢總覽 (Overview) -->
+        <section id="overview" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">趨勢總覽：AI競爭維度的範式轉移</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="text-xs font-bold text-sky-600 uppercase tracking-wider mb-1">交易一：半導體架構</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">Nvidia 投資聯發科 35 億美元 CB</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        聯發科加入 NVLink Fusion 體系，開發客製化 XPU 並對接 Nvidia 機櫃級運算平台。Nvidia 將護城河自 GPU 晶片向上躍升為 AI 基礎建設標準。
+                    </p>
+                    <div class="bg-sky-50 rounded p-3 text-xs text-sky-800 font-medium">
+                        核心本質：生態系控制權（CUDA + NVLink + AI Factory）
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">交易二：物理基礎建設</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">SLB 41 億美元收購 Kelvion</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        能源工程巨頭 SLB 以 34 億美元現金加承接 7 億美元債務收購德國熱管理龍頭 Kelvion，目標將資料中心方案營收在 2028 年推升至 45~50 億美元。
+                    </p>
+                    <div class="bg-emerald-50 rounded p-3 text-xs text-emerald-800 font-medium">
+                        核心本質：補齊高密度 AI 資料中心最稀缺的「散熱與流體工程」
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500 md:col-span-2 lg:col-span-1">
+                    <div class="text-xs font-bold text-amber-600 uppercase tracking-wider mb-1">產業底層邏輯</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">從晶片競爭到 AI 工廠控制權</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        算力瓶頸外移：GPU $\rightarrow$ HBM / 互連網路 $\rightarrow$ 電力、變壓器、冷卻散熱與模組化工程。AI 投資週期已向傳統高難度工業工程全面擴散。
+                    </p>
+                    <div class="bg-amber-50 rounded p-3 text-xs text-amber-800 font-medium">
+                        商業轉折：最有價值的公司是控制整座工廠運轉效率的整合者
+                    </div>
+                </div>
+            </div>
+
+            <!-- 圖表區：兩筆交易與戰略定位規模比較 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-sky-500"></span>
+                    2026年8月31日 兩大重磅併購與投資案規模視覺化（單位：億美元）
+                </h3>
+                <div class="h-72 w-full">
+                    <canvas id="dealsComparisonChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 2: Nvidia x 聯發科 (Nvidia & MediaTek) -->
+        <section id="nvidia-mediatek" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nvidia × 聯發科：以 NVLink 收編客製化晶片</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3 text-sky-800">Nvidia 策略轉向：客製化晶片不再是敵人</h3>
+                    <p class="text-stone-700 text-sm leading-relaxed mb-4">
+                        過去市場擔憂 CSP（Google TPU, Amazon Trainium, Meta, Microsoft）積極研發客製化 ASIC 會蠶食 Nvidia 份額。Nvidia 如今的回應策略並非防堵，而是：
+                    </p>
+                    <blockquote class="border-l-4 border-sky-500 pl-4 py-2 italic text-stone-800 bg-sky-50/50 rounded-r text-sm mb-4 font-medium">
+                        「你可以不用我的 GPU，但是最好仍然使用我的高速互連（NVLink）、記憶體架構（NVHBM）、網路（Quantum/Spectrum）、機櫃設計與軟體系統。」
+                    </blockquote>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        這讓客製化 XPU 能直接「生活在 Nvidia 的世界裡」。即使部分工作負載失去 GPU 佔有率，Nvidia 依舊能透過系統級硬體與網路規格持續收取生態系溢價。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3 text-sky-800">聯發科戰略躍升：從手機端邁向雲端 AI 核心</h3>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-sky-500 font-bold">✓</span>
+                            <div><strong>取得頂級入場券：</strong>透過 NVLink Fusion，聯發科無須自行從零建立機櫃、互連與 AI 軟體生態，即可替雲端巨頭開發客製化 AI 晶片。</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-sky-500 font-bold">✓</span>
+                            <div><strong>品牌定位升級：</strong>正式從邊緣裝置（Edge SoC）延伸至大型雲端（Cloud AI）資料中心高階客製化運算。</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-sky-500 font-bold">✓</span>
+                            <div><strong>巨頭資本加持：</strong>聯發科約 50 億美元融資計畫中，除 Nvidia 認購 35 億美元可轉債外，Alphabet 亦參與投資，驗證其晶片設計實力。</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-600">
+                <h4 class="text-base font-bold text-stone-900 mb-2">Nvidia 護城河演進軌跡</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mt-4">
+                    <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                        <div class="text-xs text-stone-500 font-semibold mb-1">第一代護城河</div>
+                        <div class="text-base font-bold text-stone-800">CUDA 軟體生態</div>
+                        <div class="text-xs text-stone-600 mt-1">開發者黏著度與算子支援</div>
+                    </div>
+                    <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                        <div class="text-xs text-stone-500 font-semibold mb-1">第二代護城河</div>
+                        <div class="text-base font-bold text-indigo-700">CUDA + NVLink 互連</div>
+                        <div class="text-xs text-stone-600 mt-1">Scale-up 超高速晶片互聯</div>
+                    </div>
+                    <div class="p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+                        <div class="text-xs text-indigo-600 font-semibold mb-1">第三代終極護城河</div>
+                        <div class="text-base font-bold text-indigo-900">AI Factory 機櫃系統標準</div>
+                        <div class="text-xs text-indigo-700 mt-1">收編 XPU、網路、散熱與整廠架構</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 3: SLB x Kelvion (SLB & Kelvion) -->
+        <section id="slb-kelvion" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">SLB × Kelvion：百年能源巨頭搶進 AI 散熱基建</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-2xl font-black text-emerald-600 mb-1">$41 億美元</div>
+                    <div class="text-xs text-stone-500 font-semibold uppercase mb-3">整體收購價值 (EV)</div>
+                    <p class="text-stone-600 text-sm">
+                        SLB 以 34 億美元現金 + 承接約 7 億美元債務收購德國 Kelvion。約當 Kelvion 2026E EBITDA 之 11 倍（計入 1.2 億美元協同效益後約 8.5 倍）。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-2xl font-black text-emerald-600 mb-1">&gt; 50%</div>
+                    <div class="text-xs text-stone-500 font-semibold uppercase mb-3">Kelvion 資料中心營收佔比</div>
+                    <p class="text-stone-600 text-sm">
+                        Kelvion 2026 年預估營收 23~24 億美元，其中資料中心業務達 12~13 億美元，成為其最大且成長最迅猛的核心動能。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-2xl font-black text-emerald-600 mb-1">$45 ~ 50 億</div>
+                    <div class="text-xs text-stone-500 font-semibold uppercase mb-3">SLB 2028 資料中心營收目標</div>
+                    <p class="text-stone-600 text-sm">
+                        整合 Kelvion 後，2026 資料中心營收突破 20 億美元；目標 2028 年達 45~50 億美元營收，調整後 EBITDA 達 7~8 億美元。
+                    </p>
+                </div>
+            </div>
+
+            <!-- SLB 成長軌跡圖表 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                    SLB 資料中心解決方案 (Data Center Solutions) 爆發性成長與 2028 目標（單位：億美元）
+                </h3>
+                <div class="h-72 w-full">
+                    <canvas id="slbGrowthChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-3 text-emerald-800">為何油田工程巨頭能夠跨足 AI 資料中心？</h3>
+                    <p class="text-stone-700 text-sm leading-relaxed mb-3">
+                        SLB 擁有逾百年歷史，2025 年營收達 357 億美元。油田與超大規模 AI 資料中心在物理層面共享極為相似的極限工程挑戰：
+                    </p>
+                    <div class="space-y-2 text-xs text-stone-600">
+                        <div class="p-2 bg-stone-50 rounded border border-stone-200"><strong>高可靠性與連續運轉：</strong>均要求 24/7/365 不中斷的嚴苛環境運行標準。</div>
+                        <div class="p-2 bg-stone-50 rounded border border-stone-200"><strong>流體力學與熱管理：</strong>地下高壓流體控制與資料中心液冷循環原理相通。</div>
+                        <div class="p-2 bg-stone-50 rounded border border-stone-200"><strong>模組化異地預製：</strong>在工廠完成預製模組，現場快速拼裝，縮短 GW 級交付週期。</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-3 text-emerald-800">強強聯手：翻倍 GW 級資本產出潛力</h3>
+                    <p class="text-stone-700 text-sm leading-relaxed mb-4">
+                        SLB 原已具備大型工程整合能力並取得 Meta 加拿大 1GW 資料中心專案；Kelvion 則補足了高密度熱交換器與冷卻核心元件。
+                    </p>
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4 text-xs text-emerald-900 leading-relaxed">
+                        <p class="font-bold mb-1">💡 雙倍營收機會（Double Revenue Potential）：</p>
+                        SLB 估計，在納入 Kelvion 散熱技術後，每 1GW 資料中心容量所能對應的潛在合約營收價值將超過原來的 <strong>2 倍以上</strong>，實現「設計 + 製造 + 散熱 + 工程整合」一站式統包。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 4: 三階資本因果鏈 (Capex Chain) -->
+        <section id="capex-chain" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 資本支出三階因果鏈：瓶頸外移路徑</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <!-- 第一階段 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-blue-500 flex flex-col justify-between">
+                    <div>
+                        <div class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-800 mb-3">第一階段</div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">算力爭奪 (Compute)</h3>
+                        <p class="text-xs text-stone-500 mb-4">驅動力：模型參數量指數級爆發</p>
+                        <ul class="text-sm text-stone-600 space-y-2 mb-4">
+                            <li>• 核心瓶頸：先進製程晶圓、GPU 供應</li>
+                            <li>• 代表產品：Nvidia H100/B200、客製 XPU</li>
+                            <li>• 商業模式：單純算力卡銷售與市占爭奪</li>
+                        </ul>
+                    </div>
+                    <div class="text-xs font-medium text-blue-700 bg-blue-50 p-2.5 rounded">
+                        受惠者：半導體晶圓廠、AI晶片設計商
+                    </div>
+                </div>
+
+                <!-- 第二階段 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-indigo-500 flex flex-col justify-between">
+                    <div>
+                        <div class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-indigo-100 text-indigo-800 mb-3">第二階段</div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">系統與互連 (Systems)</h3>
+                        <p class="text-xs text-stone-500 mb-4">驅動力：分散式叢集 Scale-up 瓶頸</p>
+                        <ul class="text-sm text-stone-600 space-y-2 mb-4">
+                            <li>• 核心瓶頸：記憶體頻寬、晶片間延遲</li>
+                            <li>• 代表產品：NVLink、HBM3e/4、光通訊</li>
+                            <li>• 商業模式：機櫃級平台標準（NVL72）</li>
+                        </ul>
+                    </div>
+                    <div class="text-xs font-medium text-indigo-700 bg-indigo-50 p-2.5 rounded">
+                        受惠者：互連網路架構商、HBM大廠
+                    </div>
+                </div>
+
+                <!-- 第三階段 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500 flex flex-col justify-between">
+                    <div>
+                        <div class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800 mb-3">第三階段</div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">物理基建 (Infrastructure)</h3>
+                        <p class="text-xs text-stone-500 mb-4">驅動力：高密度熱耗與 GW 級電力極限</p>
+                        <ul class="text-sm text-stone-600 space-y-2 mb-4">
+                            <li>• 核心瓶頸：電力併網、熱交換器、模組化建造</li>
+                            <li>• 代表產品：CDU、液冷散熱、變壓設備</li>
+                            <li>• 商業模式：全生命週期工程與能源管理</li>
+                        </ul>
+                    </div>
+                    <div class="text-xs font-medium text-emerald-700 bg-emerald-50 p-2.5 rounded">
+                        受惠者：SLB、Kelvion 等能源工業整合者
+                    </div>
+                </div>
+            </div>
+
+            <!-- 產業觀點卡片 -->
+            <div class="bg-gradient-to-r from-stone-800 to-stone-900 text-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="text-lg font-bold text-sky-400 mb-1">產業結論：GPU 對 GPU $\longrightarrow$ AI 工廠對 AI 工廠</h4>
+                        <p class="text-stone-300 text-sm">
+                            Nvidia 企圖透過 NVLink Fusion 一路控制第一至第二階段；而 SLB 則重兵佈局第三階段物理瓶頸。
+                        </p>
+                    </div>
+                    <div class="text-right whitespace-nowrap">
+                        <span class="inline-block px-3 py-1.5 bg-sky-500/30 text-sky-200 rounded border border-sky-400/40 text-xs font-semibold">
+                            系統效率高於單晶片算力
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 5: 財務數據與關鍵指標互動表 (Interactive Data Table) -->
+        <section id="financial-data" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵財務數據與交易指標互動檢視</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-800">真實財務與營運指標明細</h3>
+                        <p class="text-xs text-stone-500">即時篩選報告中提及的關鍵營收、估值倍數與交易細節</p>
+                    </div>
+                    <!-- 搜尋過濾框 -->
+                    <div class="w-full sm:w-72">
+                        <label for="tableSearchInput" class="sr-only">搜尋數據</label>
+                        <div class="relative">
+                            <input type="text" id="tableSearchInput" placeholder="搜尋公司、指標或項目..." class="w-full pl-9 pr-4 py-2 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 資料表格 -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-left text-sm divide-y divide-stone-200">
+                        <thead class="bg-stone-100 text-stone-700 sticky top-0">
+                            <tr>
+                                <th scope="col" class="py-3 px-4 font-semibold">主體公司</th>
+                                <th scope="col" class="py-3 px-4 font-semibold">指標項目 / 交易內容</th>
+                                <th scope="col" class="py-3 px-4 font-semibold">數據 / 金額</th>
+                                <th scope="col" class="py-3 px-4 font-semibold">時間維度 / 備註</th>
+                                <th scope="col" class="py-3 px-4 font-semibold">戰略意義</th>
+                            </tr>
+                        </thead>
+                        <tbody id="metricsTableBody" class="divide-y divide-stone-100">
+                            <!-- 由 JavaScript 動態生成 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResultsMsg" class="hidden text-center py-8 text-stone-400 text-sm">
+                    未找到相符的財務或交易數據。
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 6: 風險檢視與投資決策 (Investment Risks & Strategy) -->
+        <section id="investment-risks" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略評估與核心風險監控</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- 風險 1: Nvidia 循環融資 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-500">
+                    <div class="flex items-center gap-2 text-rose-600 font-bold text-sm mb-2">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        風險檢驗一：Nvidia 與「循環融資」疑慮
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">供應商出錢，合作夥伴再購買設備？</h3>
+                    <p class="text-stone-700 text-sm leading-relaxed mb-3">
+                        華爾街正嚴格檢視 AI 晶片需求的純粹度。投資人需區分聯發科具備真實晶片設計實力，但仍須監控：
+                    </p>
+                    <ul class="text-xs text-stone-600 space-y-2 bg-stone-50 p-3 rounded border border-stone-200 mb-3">
+                        <li>• <strong>營收來源真實性：</strong>多少來自終端客戶真實自由現金流，多少依賴 Nvidia 自身投資與信用支持？</li>
+                        <li>• <strong>生態系資本承諾：</strong>若融資性支持比重上升，市場將給予更高的風險折價（Discount）。</li>
+                    </ul>
+                    <div class="text-xs font-semibold text-rose-800">
+                        監控指標：客戶 FCF 覆蓋率、非現金營收比重、生態系投資承諾規模
+                    </div>
+                </div>
+
+                <!-- 風險 2: SLB 併購週期 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+                    <div class="flex items-center gap-2 text-amber-600 font-bold text-sm mb-2">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        風險檢驗二：SLB 2028 目標能否兌現？
+                    </div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">是否在 AI 資本支出高點進行昂貴併購？</h3>
+                    <p class="text-stone-700 text-sm leading-relaxed mb-3">
+                        11 倍 EBITDA 估值有實質業務支撐，但核心風險在於 2027~2028 年 AI 基礎建設的擴建節奏：
+                    </p>
+                    <ul class="text-xs text-stone-600 space-y-2 bg-stone-50 p-3 rounded border border-stone-200 mb-3">
+                        <li>• <strong>Capex 減速風險：</strong>若 2027 年後資料中心建置急遽降溫，Kelvion 將成為週期頂部負擔。</li>
+                        <li>• <strong>高槓桿開發商違約：</strong>大量借債建置資料中心卻缺乏長期長約的營運商可能面臨資產回報率下滑。</li>
+                    </ul>
+                    <div class="text-xs font-semibold text-amber-800">
+                        監控指標：Data Center Solutions 新增訂單、EBITDA 達成率、長期合約比重
+                    </div>
+                </div>
+            </div>
+
+            <!-- 投資總結判斷 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-600">
+                <h3 class="text-xl font-bold text-stone-900 mb-3">美股投資人策略指引總結</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <div>
+                        <h4 class="font-bold text-sky-700 mb-1">針對 Nvidia (長期偏多，關注品質)：</h4>
+                        <p class="text-stone-600 leading-relaxed">
+                            主動將 ASIC 威脅轉化為 NVLink 生態系夥伴，從 GPU 供應商升級為 AI 基礎建設平台。只要架構標準牢固，獲利持久力將顯著優於單純晶片週期。
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-emerald-700 mb-1">針對 SLB (第二曲線開啟，等待重估值)：</h4>
+                        <p class="text-stone-600 leading-relaxed">
+                            擺脫單一油氣循環股限制，轉型為高密度能源與冷卻基礎設施巨頭。若 2028 年 50 億美元目標達標，市場估值體系（Multiple）將迎來結構性上調。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 (Footer) -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-從晶片到AI工廠生態系競爭。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1 text-stone-400">資料來源：基於網路中Nvidia與SLB相關公開資料 (2026年8月31日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯實作 -->
+    <script>
+        // 1. 財務與指標真實數據集 (依據報告內容)
+        const productData = [
+            {
+                company: "Nvidia",
+                item: "聯發科海外可轉債 (CB) 投資",
+                value: "$35 億美元",
+                period: "2026年8月31日",
+                strategicSignificance: "結盟客製化晶片，將 ASIC 納入 NVLink Fusion 與機櫃運算體系"
+            },
+            {
+                company: "SLB (Schlumberger)",
+                item: "收購 Kelvion 企業價值 (EV)",
+                value: "$41 億美元",
+                period: "2026年8月31日 (預計2027H1完成)",
+                strategicSignificance: "34億現金+7億債務，獲取資料中心高密度熱交換與散熱工程能力"
+            },
+            {
+                company: "Kelvion",
+                item: "2026年預估全年營收",
+                value: "$23 ~ 24 億美元",
+                period: "2026E 全年",
+                strategicSignificance: "調整後 EBITDA 約 3.5~4 億美元；收購估值約 11x EBITDA"
+            },
+            {
+                company: "Kelvion",
+                item: "資料中心終端市場營收",
+                value: "$12 ~ 13 億美元",
+                period: "2026E (佔比 > 50%)",
+                strategicSignificance: "資料中心成為 Kelvion 最大且成長最快的業務板塊"
+            },
+            {
+                company: "SLB",
+                item: "2025 全年營收總額",
+                value: "$357 億美元",
+                period: "2025 全年",
+                strategicSignificance: "油田與能源工程基礎雄厚，為 AI 基建提供製造與專案整合底氣"
+            },
+            {
+                company: "SLB",
+                item: "2025 資料中心方案營收年增率",
+                value: "+121% YoY",
+                period: "2025 全年",
+                strategicSignificance: "驗證能源工程跨界至資料中心具備實質需求與爆發力"
+            },
+            {
+                company: "SLB",
+                item: "2026 Q2 資料中心單季營收",
+                value: "$1.86 億美元 (+80% YoY)",
+                period: "2026 Q2 (上半年 +63%)",
+                strategicSignificance: "2026年底年化營收速度預計突破 10 億美元"
+            },
+            {
+                company: "SLB (合併後)",
+                item: "2026 資料中心合併預估營收",
+                value: "> $20 億美元",
+                period: "2026E 合併後",
+                strategicSignificance: "預估調整後 EBITDA 約 3 億美元，躋身大型資料中心解決方案商"
+            },
+            {
+                company: "SLB (目標)",
+                item: "2028 資料中心營收目標",
+                value: "$45 ~ 50 億美元",
+                period: "2028 目標",
+                strategicSignificance: "EBITDA 目標 7~8 億美元，創造第二成長曲線並推動估值體系重估"
+            },
+            {
+                company: "SLB & Kelvion",
+                item: "預期年度 EBITDA 協同效益",
+                value: "~ $1.2 億美元",
+                period: "交易完成後 3 年內",
+                strategicSignificance: "計入協同效益後收購估值降至約 8.5x EBITDA"
+            },
+            {
+                company: "聯發科技 (MediaTek)",
+                item: "海外融資總額與合作夥伴",
+                value: "~ $50 億美元",
+                period: "2026年8月",
+                strategicSignificance: "Alphabet 亦參與認購，加速從邊緣手機邁向大型雲端 ASIC 領域"
+            },
+            {
+                company: "Meta / SLB",
+                item: "加拿大大型資料中心專案",
+                value: "1 GW (Gigawatt)",
+                period: "已取得專案工程",
+                strategicSignificance: "實質落地大規模 AI 資料中心模組化製造與工程交付"
+            }
+        ];
+
+        // 渲染表格函式
+        function renderTable(data) {
+            const tbody = document.getElementById('metricsTableBody');
+            const noResultsMsg = document.getElementById('noResultsMsg');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                noResultsMsg.classList.remove('hidden');
+                return;
+            }
+            noResultsMsg.classList.add('hidden');
+
+            data.forEach((row) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-stone-50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-semibold text-stone-900">${row.company}</td>
+                    <td class="py-3 px-4 text-stone-800">${row.item}</td>
+                    <td class="py-3 px-4 font-bold text-sky-700">${row.value}</td>
+                    <td class="py-3 px-4 text-stone-600 text-xs">${row.period}</td>
+                    <td class="py-3 px-4 text-stone-600 text-xs">${row.strategicSignificance}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // 即時搜尋過濾
+        document.getElementById('tableSearchInput').addEventListener('input', function (e) {
+            const query = e.target.value.trim().toLowerCase();
+            const filtered = productData.filter(item => {
+                return item.company.toLowerCase().includes(query) ||
+                       item.item.toLowerCase().includes(query) ||
+                       item.value.toLowerCase().includes(query) ||
+                       item.period.toLowerCase().includes(query) ||
+                       item.strategicSignificance.toLowerCase().includes(query);
+            });
+            renderTable(filtered);
+        });
+
+        // 2. 初始化 Chart.js 圖表
+        function initCharts() {
+            // 圖表 1: 交易規模與營收比較
+            const ctxDeals = document.getElementById('dealsComparisonChart').getContext('2d');
+            new Chart(ctxDeals, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Nvidia 投資聯發科CB',
+                        'SLB 收購 Kelvion 總額',
+                        'Kelvion 2026E 資料中心營收',
+                        'SLB 2026E 合併資料中心營收',
+                        'SLB 2028 資料中心目標營收'
+                    ],
+                    datasets: [{
+                        label: '金額 / 規模 (億美元)',
+                        data: [35, 41, 12.5, 20, 47.5],
+                        backgroundColor: [
+                            'rgba(2, 132, 199, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(99, 102, 241, 0.8)',
+                            'rgba(16, 185, 129, 0.95)'
+                        ],
+                        borderColor: [
+                            '#0284c7',
+                            '#10b981',
+                            '#f59e0b',
+                            '#6366f1',
+                            '#047857'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '億美元 ($B)'
+                            },
+                            grid: { color: '#f3f4f6' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                maxRotation: 25,
+                                minRotation: 0,
+                                font: { size: 11 }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 圖表 2: SLB 資料中心營收成長趨勢與目標
+            const ctxSLB = document.getElementById('slbGrowthChart').getContext('2d');
+            new Chart(ctxSLB, {
+                type: 'bar',
+                data: {
+                    labels: ['2025 全年營收', '2026 年化運行速率', '2026E 合併後營收', '2028E 營收目標(中位數)'],
+                    datasets: [
+                        {
+                            type: 'bar',
+                            label: '資料中心方案營收 ($B)',
+                            data: [4.5, 10, 20, 47.5], // 2025估算基期, 2026年化10億, 合併後>20億, 2028中位數47.5億
+                            backgroundColor: 'rgba(16, 185, 129, 0.75)',
+                            borderColor: '#10b981',
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            order: 2
+                        },
+                        {
+                            type: 'line',
+                            label: '營收跳躍軌跡 ($B)',
+                            data: [4.5, 10, 20, 47.5],
+                            borderColor: '#0284c7',
+                            backgroundColor: 'rgba(2, 132, 199, 0.2)',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.3,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#0284c7',
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { boxWidth: 12 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '億美元 ($B)'
+                            },
+                            grid: { color: '#f3f4f6' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 3. 導航列與滾動監聽 (Intersection Observer & Mobile Menu)
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初次渲染表格
+            renderTable(productData);
+            // 初始化圖表
+            initCharts();
+
+            // 手機版選單切換
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Intersection Observer 動態更新導航列 active 狀態
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.remove('inactive-nav-link');
+                                link.classList.add('active-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
