@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AMD搶攻主權AI與Apple新時代</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .active-nav-link {
+            color: #0284c7 !important;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #1c1917;
+            border-bottom: 2px solid #cbd5e1;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased selection:bg-sky-100 selection:text-sky-900">
+
+    <!-- 頂部固定導航列 (Sticky Navigation) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <span class="text-lg font-bold text-stone-900 tracking-tight">AMD搶攻主權AI與Apple新時代</span>
+                    </div>
+                </div>
+
+                <!-- 桌面版選單 -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#overview" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">趨勢概覽</a>
+                    <a href="#amd-sovereign" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">AMD主權AI突破</a>
+                    <a href="#financial-analytics" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">數據與圖表</a>
+                    <a href="#apple-hardware" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">Apple新時代</a>
+                    <a href="#investor-playbook" class="nav-item inactive-nav-link py-5 text-sm transition-colors duration-200">投資策略維度</a>
+                </nav>
+
+                <!-- 行動版漢堡按鈕 -->
+                <div class="flex md:hidden">
+                    <button id="mobileMenuBtn" type="button" class="p-2 rounded-md text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none" aria-label="Toggle Menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版展開選單 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+            <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">趨勢概覽</a>
+            <a href="#amd-sovereign" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">AMD主權AI突破</a>
+            <a href="#financial-analytics" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">數據與圖表</a>
+            <a href="#apple-hardware" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">Apple新時代</a>
+            <a href="#investor-playbook" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-700">投資策略維度</a>
+        </div>
+    </header>
+
+    <!-- 主標題區 (Hero Section) -->
+    <section class="bg-gradient-to-b from-sky-900 via-stone-900 to-stone-900 text-white py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
+                    從晶片算力到平台主權：<br class="hidden sm:inline">AMD、Cisco與Apple的新博弈
+                </h1>
+                <p class="text-stone-300 text-base sm:text-lg leading-relaxed mb-6">
+                    二〇二六年八月底至九月初，AMD在沙烏地商用AI工廠上線並奪下歐洲下一代LUMI-AI超級電腦；同日Apple正式完成交接由硬體背景的John Ternus掌舵。AI競爭已跨越單純晶片速度，轉向「第二生態系基礎建設」與「25億終端裝置入口」的全面爭奪。
+                </p>
+                <div class="flex flex-wrap gap-4 text-xs sm:text-sm text-stone-300">
+                    <div class="flex items-center space-x-1.5 bg-stone-800/80 px-3 py-1.5 rounded-lg border border-stone-700">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>AMD 資料中心營收年增 +107%</span>
+                    </div>
+                    <div class="flex items-center space-x-1.5 bg-stone-800/80 px-3 py-1.5 rounded-lg border border-stone-700">
+                        <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                        <span>Cisco FY26 AI 訂單 93億美元</span>
+                    </div>
+                    <div class="flex items-center space-x-1.5 bg-stone-800/80 px-3 py-1.5 rounded-lg border border-stone-700">
+                        <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                        <span>Apple 活躍裝置基數 > 25億台</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主體內容區塊 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- 區塊一：核心趨勢概覽 -->
+        <section id="overview" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心趨勢概覽：AI 競爭邁入平台控制權時代
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+                    <div class="text-sky-600 font-bold text-sm tracking-wider uppercase mb-1">典範移轉 01</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">超越單顆 GPU 競賽</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        勝負已從單顆晶片最高算力，演變成涵蓋 CPU、GPU、高速網路交換機、ROCm軟體、光通訊及資料中心電力的「完整替代性架構」。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <div class="text-emerald-600 font-bold text-sm tracking-wider uppercase mb-1">典範移轉 02</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">各國「主權AI」興起</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        國家與科研機構不願完全依賴外國公有雲與單一供應商，歐洲與中東以開放標準、供應鏈自主為核心，積極打造自身主權算力。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-purple-500">
+                    <div class="text-purple-600 font-bold text-sm tracking-wider uppercase mb-1">典範移轉 03</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2">全天候裝置入口掌控</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed">
+                        生成式AI走向隨身代理人（Agent），掌控iPhone、手錶、智慧眼鏡等硬體入口的公司，將握有最後落地給25億用戶的關鍵控制權。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊二：AMD 主權AI 雙重突破 -->
+        <section id="amd-sovereign" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                AMD 雙重突破：從沙烏地阿拉伯到歐洲超級電腦
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- 沙烏地阿拉伯專案卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-amber-500">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded">商用 AI 工廠正式營運</span>
+                            <span class="text-xs text-stone-500">2026年8月31日發布</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3">沙烏地阿拉伯 HUMAIN × Cisco × AMD</h3>
+                        <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                            AMD Instinct MI355X GPU + EPYC CPU 搭配 Cisco Silicon One 網路技術，已正式在沙烏地阿拉伯投入商業運營。
+                        </p>
+                        <ul class="space-y-2 text-sm text-stone-700 mb-4">
+                            <li class="flex items-start">
+                                <span class="text-amber-500 mr-2 font-bold">✓</span>
+                                <span><strong>即時商用交付：</strong>非概念計畫，已正式為 HUMAIN 客戶（含生成式影片大廠 Luma AI）提供算力。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-amber-500 mr-2 font-bold">✓</span>
+                                <span><strong>擴建時程：</strong>2027年起再部署最高 250MW（升級 MI400 系列及 ROCm），長期目標 2030 年達 1GW。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-amber-500 mr-2 font-bold">✓</span>
+                                <span><strong>戰略價值：</strong>提供非 Nvidia 封閉體系以外的商用大型 AI 工廠完整替代架構。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 歐洲 LUMI-AI 超級電腦卡片 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between border-l-4 border-blue-600">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded">歐盟國家級算力平台</span>
+                            <span class="text-xs text-stone-500">芬蘭 Kajaani 基地</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-3">歐盟 EuroHPC LUMI-AI 超級電腦標案</h3>
+                        <p class="text-stone-600 text-sm mb-4 leading-relaxed">
+                            歐盟選定法國國營 Bull 打造下一代系統，合約總額約 3.878 億歐元（約 4.49 億美元），預計 2027 下半年啟用。
+                        </p>
+                        <ul class="space-y-2 text-sm text-stone-700 mb-4">
+                            <li class="flex items-start">
+                                <span class="text-blue-600 mr-2 font-bold">✓</span>
+                                <span><strong>次世代核心運算：</strong>採用 AMD Instinct MI430X GPU 與第六代最高 256 核心 EPYC 處理器。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 mr-2 font-bold">✓</span>
+                                <span><strong>運算躍進：</strong>AI 運算效能提升約 10 倍，科學 HPC 效能提升接近 2 倍。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 mr-2 font-bold">✓</span>
+                                <span><strong>多方生態整合：</strong>結合 IBM 儲存與 Nokia 網路設備，貫徹歐盟開放供應鏈自主原則。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 主權AI戰略分析卡片 -->
+            <div class="bg-stone-900 text-stone-100 rounded-lg shadow-lg p-6">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-stone-700 pb-4 mb-4">
+                    <div>
+                        <h4 class="text-lg font-bold text-sky-400">為什麼「主權AI」是 AMD 破局的最佳戰略通道？</h4>
+                        <p class="text-stone-400 text-xs mt-1">相較於已被 CUDA 深度綁定之大型美系雲端巨頭，政府與科研機構有不同的考量。</p>
+                    </div>
+                    <span class="mt-2 md:mt-0 px-3 py-1 bg-sky-900 text-sky-200 text-xs rounded-full border border-sky-700">EuroHPC 總預算達 82 億歐元 (19座 AI 工廠)</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-stone-800 p-4 rounded-lg">
+                        <div class="text-amber-400 font-bold mb-1">避免單一廠商鎖定</div>
+                        <p class="text-stone-300 text-xs leading-relaxed">國家戰略資料不容許受制於特定封閉軟硬體，開放架構與多供應商成為國家級採購的核心首選。</p>
+                    </div>
+                    <div class="bg-stone-800 p-4 rounded-lg">
+                        <div class="text-emerald-400 font-bold mb-1">第二平台規模經濟</div>
+                        <p class="text-stone-300 text-xs leading-relaxed">全球AI市場擴張速度極快，AMD 無需全面擊敗 Nvidia，只要拿下各國主權基礎建設即可建立具備規模經濟的第二生態系。</p>
+                    </div>
+                    <div class="bg-stone-800 p-4 rounded-lg">
+                        <div class="text-sky-400 font-bold mb-1">Cisco 網路生態聯盟</div>
+                        <p class="text-stone-300 text-xs leading-relaxed">Cisco Silicon One 網路搭配 AMD 晶片，打破 Nvidia NVLink 與全套網路壟斷，為非 Nvidia 陣營建立標準典範。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊三：財務分析、動態圖表與資料篩選表格 -->
+        <section id="financial-analytics" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                關鍵營運數據與跨企業財務視覺化
+            </h2>
+
+            <!-- 圖表展示區 (Chart.js) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- AMD 營收與資料中心倍增狀況 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">AMD 2026年第二季營運結構 (單位: 億美元)</h3>
+                    <p class="text-xs text-stone-500 mb-4">資料中心年增率達 107%，已成獲利核心引擎</p>
+                    <div class="relative h-64 sm:h-72 w-full">
+                        <canvas id="amdRevenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 各巨頭 AI 業務動能與規模對比 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">AI 生態系關鍵企業指標對比 (2026)</h3>
+                    <p class="text-xs text-stone-500 mb-4">涵蓋晶片成長、網路基建訂單與終端裝置覆蓋規模</p>
+                    <div class="relative h-64 sm:h-72 w-full">
+                        <canvas id="ecosystemChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 互動式資料表格 (Interactive Table) -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-900">關鍵專案、財務指標與戰略里程碑資料庫</h3>
+                        <p class="text-xs text-stone-500">即時搜尋篩選 AMD、Cisco、Apple、EuroHPC 與 Nvidia 相關公開資料</p>
+                    </div>
+                    <div class="w-full sm:w-72">
+                        <input type="text" id="tableSearchInput" placeholder="搜尋公司、專案、晶片型號..." class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto border border-stone-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200 text-sm">
+                        <thead class="bg-stone-100 sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 text-left font-semibold text-stone-700">主體 / 公司</th>
+                                <th scope="col" class="px-4 py-3 text-left font-semibold text-stone-700">專案 / 財務項目</th>
+                                <th scope="col" class="px-4 py-3 text-left font-semibold text-stone-700">核心規格與技術</th>
+                                <th scope="col" class="px-4 py-3 text-left font-semibold text-stone-700">規模與財務數據</th>
+                                <th scope="col" class="px-4 py-3 text-left font-semibold text-stone-700">時程 / 意義</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-100 bg-white">
+                            <!-- 由 JavaScript 動態渲染真實資料 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResultsMessage" class="hidden text-center py-6 text-sm text-stone-500">
+                    查無符合關鍵字的資料項目。
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊四：Apple 換帥與硬體 AI 戰略 -->
+        <section id="apple-hardware" class="scroll-mt-24 mb-16">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Apple 進入 John Ternus 時代：硬體工程引領 AI 裝置新戰局
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="w-3 h-3 rounded-full bg-purple-600"></span>
+                        <h3 class="text-lg font-bold text-stone-900">執行長交接佈局</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        2026年9月1日正式交接。硬體工程副總裁 <strong>John Ternus</strong> 出任 CEO，<strong>Tim Cook</strong> 轉任執行主席（Executive Chairman）。
+                    </p>
+                    <div class="bg-purple-50 p-3 rounded text-xs text-purple-900 leading-normal">
+                        <strong>戰略意涵：</strong> Cook時代主打供應鏈與營運效率；Ternus時代將重心轉回硬體技術與全新AI裝置形態的研發整合。
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                        <h3 class="text-lg font-bold text-stone-900">堅實財務底氣</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        最新 2026 會計年度 Q3 營收達 <strong>1,094 億美元</strong>（年增 16%），每股盈餘（EPS）為 <strong>$2.02</strong>（年增 29%）。
+                    </p>
+                    <div class="bg-emerald-50 p-3 rounded text-xs text-emerald-900 leading-normal">
+                        <strong>各業務創高：</strong> iPhone、Mac 及服務業務均刷新六月季度歷史紀錄，為AI裝置研發提供巨大現金流支撐。
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <span class="w-3 h-3 rounded-full bg-sky-600"></span>
+                        <h3 class="text-lg font-bold text-stone-900">25 億裝置入口優勢</h3>
+                    </div>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        全球有效活躍裝置突破 <strong>25 億台</strong>。生成式AI若從「網頁聊天框」演化為隨身「AI代理人」，裝置入口便具有不可替代的戰略護城河。
+                    </p>
+                    <div class="bg-sky-50 p-3 rounded text-xs text-sky-900 leading-normal">
+                        <strong>下階段焦點：</strong> iPhone、AirPods、Apple Watch、智慧眼鏡等終端硬體整合原生智慧。
+                    </div>
+                </div>
+            </div>
+
+            <!-- AMD 與 Apple 面臨之同構問題比較卡片 -->
+            <div class="bg-gradient-to-r from-stone-800 to-stone-900 text-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-bold text-sky-400 mb-3">深度對比：看似不同的商業模式，實則面對相同的戰略挑戰</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <div class="border-l-2 border-sky-500 pl-4">
+                        <h4 class="font-bold text-white mb-1">AMD 的入口重構戰</h4>
+                        <p class="text-stone-300 text-xs leading-relaxed">
+                            面對 Nvidia CUDA 與 AI Factory 壟斷，AMD 聯合 Cisco 及開放主權國家，以「開放架構算力平台」重構企業與政府採購入口。
+                        </p>
+                    </div>
+                    <div class="border-l-2 border-purple-500 pl-4">
+                        <h4 class="font-bold text-white mb-1">Apple 的入口防衛戰</h4>
+                        <p class="text-stone-300 text-xs leading-relaxed">
+                            面對 OpenAI、Google Gemini 等雲端大模型平台，Apple 利用 25 億台硬體與操作系統（OS）深度綁定，將 AI 融入裝置底層成為唯一直接接觸用戶的介面。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊五：投資策略與未來12個月觀察維度 -->
+        <section id="investor-playbook" class="scroll-mt-24 mb-6">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                投資策略與未來 12 個月追蹤指南
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- AMD 觀察指標 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xl font-bold text-stone-900">AMD (超微)</span>
+                            <span class="text-xs bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded">算力基礎設施</span>
+                        </div>
+                        <h4 class="text-sm font-semibold text-stone-700 mb-2">關鍵跟蹤核心：大型專案變現速度</h4>
+                        <ul class="text-xs text-stone-600 space-y-2 mb-4 leading-relaxed">
+                            <li>• <strong>MI400 / MI450 量產交付：</strong> 次世代 GPU 能否按時程大規模出貨並認列營收。</li>
+                            <li>• <strong>ROCm 軟體生態滲透：</strong> 開發者使用量與開源社群工具鏈成熟度。</li>
+                            <li>• <strong>估值邏輯轉化：</strong> 市場能否從單純「Nvidia替代品」重新評估為「全球第二AI標準平台」。</li>
+                        </ul>
+                    </div>
+                    <div class="pt-3 border-t border-stone-100 text-xs text-stone-500 italic">
+                        邏輯：不需完全取代 Nvidia，形成第二生態系即有龐大增長空間。
+                    </div>
+                </div>
+
+                <!-- Cisco 觀察指標 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xl font-bold text-stone-900">Cisco (思科)</span>
+                            <span class="text-xs bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded">高速網絡基建</span>
+                        </div>
+                        <h4 class="text-sm font-semibold text-stone-700 mb-2">關鍵跟蹤核心：非 Nvidia AI 叢集市占</h4>
+                        <ul class="text-xs text-stone-600 space-y-2 mb-4 leading-relaxed">
+                            <li>• <strong>AI 訂單延續性：</strong> FY26 達 93 億美元基礎上，FY27 能否達成 75 億營收預測。</li>
+                            <li>• <strong>Silicon One 滲透：</strong> 證明大型 AI 叢集不必然採用 Nvidia 網路交換器。</li>
+                            <li>• <strong>主權合資案擴張：</strong> 如沙烏地 HUMAIN 模式能否複製到其他國家。</li>
+                        </ul>
+                    </div>
+                    <div class="pt-3 border-t border-stone-100 text-xs text-stone-500 italic">
+                        邏輯：AI 基礎建設第二層網路核心供應商，具備重估值潛力。
+                    </div>
+                </div>
+
+                <!-- Apple 觀察指標 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xl font-bold text-stone-900">Apple (蘋果)</span>
+                            <span class="text-xs bg-purple-100 text-purple-700 font-bold px-2 py-0.5 rounded">終端硬體生態</span>
+                        </div>
+                        <h4 class="text-sm font-semibold text-stone-700 mb-2">關鍵跟蹤核心：硬體換機潮與入口控制</h4>
+                        <ul class="text-xs text-stone-600 space-y-2 mb-4 leading-relaxed">
+                            <li>• <strong>新型態 AI 硬體推出：</strong> Ternus 帶領下的智慧眼鏡、AI耳機或全新穿戴式設備。</li>
+                            <li>• <strong>Siri / Agent 體驗落地：</strong> 是否具備殺手級功能促使用戶啟動大規模硬體升級。</li>
+                            <li>• <strong>生態話語權：</strong> 確保下一個十年依然由 Apple 控制消費者第一接觸點。</li>
+                        </ul>
+                    </div>
+                    <div class="pt-3 border-t border-stone-100 text-xs text-stone-500 italic">
+                        邏輯：不缺現金流與獲利，缺的是證明自己仍是 AI 終端入口霸主的敘事。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 (Footer) -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AMD搶攻主權AI與Apple新時代。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中AMD、Apple、Cisco相關公開資料 (2026年9月1日)。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯：選單控制、導航高亮、動態表格篩選與 Chart.js 圖表 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 手機版選單切換
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                mobileNavItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            // 2. 導航列滾動偵測與 Active 狀態切換 (Intersection Observer)
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a.nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${activeId}`) {
+                                link.classList.add('active-nav-link');
+                                link.classList.remove('inactive-nav-link');
+                            } else {
+                                link.classList.remove('active-nav-link');
+                                link.classList.add('inactive-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(sec => observer.observe(sec));
+
+            // 3. 互動資料表格真實資料庫
+            const productData = [
+                {
+                    entity: "AMD",
+                    project: "沙烏地阿拉伯商用 AI 工廠",
+                    spec: "Instinct MI355X GPU + EPYC CPU + Cisco Silicon One",
+                    metrics: "首期 100MW，次階段 250MW，長期目標 1GW (2030)",
+                    significance: "已投入營運，Luma AI 簽約使用，驗證非 Nvidia 整合架構"
+                },
+                {
+                    entity: "AMD",
+                    project: "歐盟 LUMI-AI 超級電腦標案",
+                    spec: "Instinct MI430X GPU + 第六代 256核 EPYC",
+                    metrics: "標案總額 3.878 億歐元 (~4.49 億美元)",
+                    significance: "預計 2027 下半年啟用，AI 算力提升 10 倍，奠定歐洲主權 AI 基礎"
+                },
+                {
+                    entity: "AMD",
+                    project: "2026年第二季財報表現",
+                    spec: "資料中心 (EPYC + Instinct + ROCm)",
+                    metrics: "總營收 115.36 億美元 (+50%)，資料中心 67.18 億美元 (+107%)",
+                    significance: "資料中心單季營業利益達 21 億美元，高成長印證替代需求"
+                },
+                {
+                    entity: "Cisco",
+                    project: "AI 雲端與資料中心高速網路",
+                    spec: "Silicon One 晶片、高速交換機架構",
+                    metrics: "FY26 雲端 AI 訂單 93 億美元 (Q4佔40億)，FY27 預估收入 75 億美元",
+                    significance: "成為大型非 Nvidia 叢集最主要網路夥伴，打破整機綁定局限"
+                },
+                {
+                    entity: "Apple",
+                    project: "最高管理層重大換帥交接",
+                    spec: "John Ternus (CEO) / Tim Cook (執行主席)",
+                    metrics: "全球活躍有效裝置超過 25 億台",
+                    significance: "由硬體工程主管掌舵，全面推進 AI Agent 與邊緣穿戴終端落地"
+                },
+                {
+                    entity: "Apple",
+                    project: "2026會計年度第三季財報",
+                    spec: "iPhone、Mac、穿戴與服務生態",
+                    metrics: "單季營收 1,094 億美元 (+16%)，EPS $2.02 (+29%)",
+                    significance: "創下6月季度歷史新高，為新一代 AI 裝置研發提供充沛現金流"
+                },
+                {
+                    entity: "EuroHPC",
+                    project: "歐洲主權 AI 與超級運算建設",
+                    spec: "LUMI-AI (芬蘭) + 歐盟各國 19 座 AI Factory",
+                    metrics: "至 2027 年總預算規模達 82 億歐元",
+                    significance: "算力需求遠超供給，以自主供應鏈與多供應商開放架構為綱領"
+                },
+                {
+                    entity: "Nvidia",
+                    project: "生態系護城河與市場指引",
+                    spec: "CUDA、NVLink、整機 AI Factory",
+                    metrics: "FY28 預期營收成長率 ~70% (原市場預期 44%)",
+                    significance: "龍頭成長動能依然強勁，市場空間足夠容納第二套規模化平台"
+                }
+            ];
+
+            const dataTableBody = document.getElementById('dataTableBody');
+            const searchInput = document.getElementById('tableSearchInput');
+            const noResultsMessage = document.getElementById('noResultsMessage');
+
+            function renderTable(data) {
+                dataTableBody.innerHTML = '';
+                if (data.length === 0) {
+                    noResultsMessage.classList.remove('hidden');
+                    return;
+                }
+                noResultsMessage.classList.add('hidden');
+
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-stone-50 transition-colors border-b border-stone-100";
+
+                    let badgeColor = "bg-stone-100 text-stone-800";
+                    if (item.entity === "AMD") badgeColor = "bg-red-100 text-red-800 font-semibold";
+                    if (item.entity === "Apple") badgeColor = "bg-purple-100 text-purple-800 font-semibold";
+                    if (item.entity === "Cisco") badgeColor = "bg-blue-100 text-blue-800 font-semibold";
+                    if (item.entity === "EuroHPC") badgeColor = "bg-amber-100 text-amber-800 font-semibold";
+                    if (item.entity === "Nvidia") badgeColor = "bg-emerald-100 text-emerald-800 font-semibold";
+
+                    tr.innerHTML = `
+                        <td class="px-4 py-3 whitespace-nowrap">
+                            <span class="inline-block px-2 py-0.5 rounded text-xs ${badgeColor}">${item.entity}</span>
+                        </td>
+                        <td class="px-4 py-3 font-medium text-stone-900">${item.project}</td>
+                        <td class="px-4 py-3 text-stone-600 text-xs">${item.spec}</td>
+                        <td class="px-4 py-3 text-stone-800 font-semibold text-xs">${item.metrics}</td>
+                        <td class="px-4 py-3 text-stone-600 text-xs leading-relaxed">${item.significance}</td>
+                    `;
+                    dataTableBody.appendChild(tr);
+                });
+            }
+
+            // 初始化渲染表格
+            renderTable(productData);
+
+            // 搜尋即時篩選
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.trim().toLowerCase();
+                    const filtered = productData.filter(row => 
+                        row.entity.toLowerCase().includes(query) ||
+                        row.project.toLowerCase().includes(query) ||
+                        row.spec.toLowerCase().includes(query) ||
+                        row.metrics.toLowerCase().includes(query) ||
+                        row.significance.toLowerCase().includes(query)
+                    );
+                    renderTable(filtered);
+                });
+            }
+
+            // 4. 動態圖表繪製 (Chart.js)
+            // 圖表一：AMD 營收結構
+            const ctxAmd = document.getElementById('amdRevenueChart');
+            if (ctxAmd) {
+                new Chart(ctxAmd, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Q2 總營收', '資料中心營收', '資料中心營業利益'],
+                        datasets: [{
+                            label: '金額 (億美元)',
+                            data: [115.36, 67.18, 21.00],
+                            backgroundColor: [
+                                'rgba(14, 165, 233, 0.85)',
+                                'rgba(239, 68, 68, 0.85)',
+                                'rgba(16, 185, 129, 0.85)'
+                            ],
+                            borderColor: [
+                                'rgb(14, 165, 233)',
+                                'rgb(239, 68, 68)',
+                                'rgb(16, 185, 129)'
+                            ],
+                            borderWidth: 1.5,
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    afterLabel: function(context) {
+                                        if (context.dataIndex === 0) return '年成長率: +50%';
+                                        if (context.dataIndex === 1) return '年成長率: +107% (主要成長引擎)';
+                                        return '';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(0,0,0,0.05)' },
+                                ticks: { font: { size: 11 } }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { size: 12, weight: 'bold' } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 圖表二：生態系業務動能對比
+            const ctxEco = document.getElementById('ecosystemChart');
+            if (ctxEco) {
+                new Chart(ctxEco, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            'AMD資料中心(年增%)', 
+                            'Nvidia下財年指引(年增%)', 
+                            'Cisco FY26 AI訂單(億$)', 
+                            'Apple Q3營收(億$)',
+                            'Apple 活躍裝置(億台)'
+                        ],
+                        datasets: [{
+                            label: '數值指標',
+                            data: [107, 70, 93, 1094, 25],
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.8)',
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(2, 132, 199, 0.8)',
+                                'rgba(147, 51, 234, 0.8)',
+                                'rgba(217, 119, 6, 0.8)'
+                            ],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const idx = context.dataIndex;
+                                        if (idx === 0 || idx === 1) return `${context.raw}% 年增成長`;
+                                        if (idx === 2 || idx === 3) return `${context.raw} 億美元`;
+                                        return `${context.raw} 億台活躍裝置`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                type: 'logarithmic',
+                                grid: { color: 'rgba(0,0,0,0.05)' },
+                                ticks: {
+                                    callback: function(value) {
+                                        if (value === 10 || value === 50 || value === 100 || value === 500 || value === 1000) {
+                                            return value;
+                                        }
+                                        return null;
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { size: 10 } }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
