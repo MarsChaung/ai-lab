@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-AI投資進入實體化第二階段</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0284c7', // sky-600
+                        brandDark: '#1c1917', // stone-900
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 600;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div>
+                        <span class="font-bold text-lg text-stone-900 tracking-tight">AI投資進入實體化</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#overview" class="nav-link inactive-nav-link py-2">核心綜述</a>
+                    <a href="#dell-analysis" class="nav-link inactive-nav-link py-2">Dell 數據驗證</a>
+                    <a href="#energy-berkshire" class="nav-link inactive-nav-link py-2">能源瓶頸與波克夏</a>
+                    <a href="#tesla-robotaxi" class="nav-link inactive-nav-link py-2">Tesla 商業化</a>
+                    <a href="#three-phases" class="nav-link inactive-nav-link py-2">產業鏈三階段</a>
+                    <a href="#data-table-section" class="nav-link inactive-nav-link py-2">關鍵數據表</a>
+                    <a href="#investment-strategy" class="nav-link inactive-nav-link py-2">投資策略</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md" aria-label="切換選單">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+            <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">核心綜述</a>
+            <a href="#dell-analysis" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">Dell 數據驗證</a>
+            <a href="#energy-berkshire" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">能源瓶頸與波克夏</a>
+            <a href="#tesla-robotaxi" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">Tesla 商業化</a>
+            <a href="#three-phases" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">產業鏈三階段</a>
+            <a href="#data-table-section" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">關鍵數據表</a>
+            <a href="#investment-strategy" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-sky-50 hover:text-sky-600">投資策略</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- Hero Section -->
+        <section id="overview" class="mb-12">
+            <div class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
+                <div class="relative z-10 max-w-4xl">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                        從 GPU 到電網，再到無人計程車：<br class="hidden sm:inline">AI 投資正在進入「實體化」第二階段
+                    </h1>
+                    <p class="text-stone-300 text-base sm:text-lg leading-relaxed mb-6">
+                        AI 資本支出並未降溫，而是迅速從單純的晶片採購擴散至整座資料中心的電力、散熱、網路與伺服器整合。當運算需求激增遭遇能源與電網瓶頸，誰能解決限制條件，誰就能獲得下一輪的定價能力。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Dell 財報與 AI 訂單爆發 -->
+        <section id="dell-analysis" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Dell 財報解讀：AI 資本支出從晶片採購走向整座資料中心
+            </h2>
+
+            <!-- Key Metric Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-sky-500">
+                    <p class="text-xs font-semibold text-stone-500 uppercase">FY27 Q2 實際營收</p>
+                    <h3 class="text-2xl font-bold text-stone-900 mt-1">$469.71 億</h3>
+                    <p class="text-xs text-emerald-600 font-medium mt-1">年增 +58%</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-emerald-500">
+                    <p class="text-xs font-semibold text-stone-500 uppercase">調整後每股盈餘 (EPS)</p>
+                    <h3 class="text-2xl font-bold text-stone-900 mt-1">$7.04 美元</h3>
+                    <p class="text-xs text-emerald-600 font-medium mt-1">年增 +203% (預期 $4.91)</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-indigo-500">
+                    <p class="text-xs font-semibold text-stone-500 uppercase">單季 AI 伺服器新訂單</p>
+                    <h3 class="text-2xl font-bold text-stone-900 mt-1">$609 億</h3>
+                    <p class="text-xs text-stone-500 font-medium mt-1">累積 12 個月達 $1,317 億</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-5 border-l-4 border-amber-500">
+                    <p class="text-xs font-semibold text-stone-500 uppercase">季末尚未交付訂單 (Backlog)</p>
+                    <h3 class="text-2xl font-bold text-amber-700 mt-1">$950 億</h3>
+                    <p class="text-xs text-stone-500 font-medium mt-1">AI 客戶突破 6,500 家</p>
+                </div>
+            </div>
+
+            <!-- Content & Visual Chart Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-6 bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-900 mb-3 flex items-center">
+                            <span class="w-2 h-2 bg-sky-500 rounded-full mr-2"></span>
+                            需求驗證與周邊基礎設施拉動
+                        </h3>
+                        <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                            Dell 不僅單季認列 <strong>164 億美元</strong> AI 伺服器營收，更將全年總營收目標自 1,670 億大幅上調至 <strong>1,920 億美元</strong>，AI 最佳化伺服器目標提高至 <strong>740 億美元</strong>。這證明大型 AI 客戶已開始規劃未來數季的資料中心容量。
+                        </p>
+                        <div class="bg-stone-50 p-4 rounded-lg border border-stone-200 mb-4 space-y-2">
+                            <div class="flex justify-between text-xs sm:text-sm">
+                                <span class="text-stone-600">傳統伺服器與網路營收：</span>
+                                <span class="font-bold text-emerald-600">年增 +122%</span>
+                            </div>
+                            <div class="flex justify-between text-xs sm:text-sm">
+                                <span class="text-stone-600">儲存業務營收：</span>
+                                <span class="font-bold text-emerald-600">年增 +26%</span>
+                            </div>
+                            <div class="flex justify-between text-xs sm:text-sm">
+                                <span class="text-stone-600">架構複雜度：</span>
+                                <span class="font-bold text-stone-800">大型專案需 >50 種客製設計</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-amber-50 border border-amber-200 rounded-md">
+                            <p class="text-xs text-amber-900 leading-relaxed font-medium">
+                                ⚠️ <strong>設備端供應瓶頸：</strong>Dell 指出 DRAM、NAND、部分 CPU、硬碟、光學元件、電源 IC、ABF 載板、CDU 液冷設備與 power rack 均面臨供不應求。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Box -->
+                <div class="lg:col-span-6 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">Dell 營收財測與 AI 伺服器訂單結構 (單位：十億美元)</h3>
+                    <p class="text-xs text-stone-500 mb-4">展示財測上調幅度及強勁的待交付積壓訂單</p>
+                    <div class="relative h-64 sm:h-72 w-full">
+                        <canvas id="dellChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 能源限制與 Berkshire 的雙向投資法 -->
+        <section id="energy-berkshire" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Berkshire 佈局：Greg Abel 的「能源限制論」與雙重曝險
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200">
+                        <div class="text-sky-600 font-bold text-sm mb-1">上游：AI 平台與運算需求</div>
+                        <h4 class="text-xl font-bold text-stone-900">Alphabet 私募與持股</h4>
+                        <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                            波克夏持有約 1.06 億股 Alphabet (市值約 $378 億，第三大普通股)。6月更直接私募 100 億美元（Class A 與 C 各 1,400 萬股），資金指明用於擴充 AI 基礎建設。
+                        </p>
+                    </div>
+
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200">
+                        <div class="text-amber-600 font-bold text-sm mb-1">瓶頸：電力與電網接入</div>
+                        <h4 class="text-xl font-bold text-stone-900">愛荷華州 8% 電力負載</h4>
+                        <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                            BHE 所在地去年已有 8% 電力來自資料中心。McKinsey 指出部分成熟市場電網接入等待期<strong>超過 8 年</strong>，發電機與變壓器交期嚴重拉長。
+                        </p>
+                    </div>
+
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200">
+                        <div class="text-emerald-600 font-bold text-sm mb-1">下游：公用事業與能源供應</div>
+                        <h4 class="text-xl font-bold text-stone-900">Berkshire Hathaway Energy</h4>
+                        <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                            不必預測 Gemini 或 ChatGPT 誰勝出。只要 AI 運算量持續膨脹，資料中心的電力需求就不會消失，形成長生命週期的穩定現金流資產。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Power Density Comparison Card -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center bg-stone-900 text-white p-6 rounded-xl">
+                    <div class="lg:col-span-7">
+                        <h4 class="text-lg font-bold text-sky-400 mb-2">高階 AI 機櫃耗電量激增 100 倍</h4>
+                        <p class="text-stone-300 text-sm leading-relaxed mb-3">
+                            根據美銀（BofA）與 McKinsey 預測，到 2030 年全球資料中心總投資將接近 <strong>7 兆美元</strong>。單一高階 AI 機櫃耗電量將突破 <strong>1.5 MW</strong>（約為傳統機櫃的 100 倍），推動液冷技術滲透率從現今約 30% 躍升至 <strong>70%</strong>。
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="text-xs bg-stone-800 text-stone-300 px-3 py-1 rounded-full border border-stone-700">冷卻設備 CDU 短缺</span>
+                            <span class="text-xs bg-stone-800 text-stone-300 px-3 py-1 rounded-full border border-stone-700">變壓器長交期</span>
+                            <span class="text-xs bg-stone-800 text-stone-300 px-3 py-1 rounded-full border border-stone-700">Power Rack 供給受限</span>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 w-full">
+                        <div class="bg-stone-800/90 p-4 rounded-lg border border-stone-700">
+                            <canvas id="energyRackChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Tesla Cybercab 與商業化考驗 -->
+        <section id="tesla-robotaxi" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                Tesla Cybercab：從算力基礎建設走向實體「收費服務」
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-7 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-stone-900 mb-3">
+                        9月3日 Austin 活動核心：不是看外型，而是追蹤「商業化時間表」
+                    </h3>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                        Tesla 真正想證明的是「AI 能否自主在實體世界工作並收費」。然而，<strong>開始生產不等於商業化完成</strong>。Cybercab 捨棄了方向盤與踏板，面臨比 Model Y Robotaxi 更嚴苛的聯邦安全審查與監管許可。
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-sky-50 border border-sky-200 p-4 rounded-lg">
+                            <h4 class="font-bold text-sky-900 text-sm mb-1">Tesla Robotaxi 營運中城市</h4>
+                            <p class="text-xs text-sky-800">德州：Austin, Dallas, Houston<br>佛州：Miami, Orlando, Tampa<br><span class="text-stone-500 text-[11px]">(目前均以 Model Y 為基礎測試)</span></p>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 p-4 rounded-lg">
+                            <h4 class="font-bold text-amber-900 text-sm mb-1">主要競爭對手擴張現狀</h4>
+                            <p class="text-xs text-amber-800"><strong>Waymo</strong>：擴大至 14 個城市 (增 Denver、San Diego、Tampa)<br><strong>Zoox</strong>：拉斯維加斯正式推出付費服務</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-100 p-4 rounded-lg">
+                        <h4 class="font-bold text-stone-900 text-xs uppercase tracking-wider mb-2">投資人應追蹤的 4 大關鍵指標：</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                            <div class="bg-white p-2 rounded shadow-sm">
+                                <span class="block text-xs font-bold text-stone-800">單車製造成本</span>
+                                <span class="text-[11px] text-stone-500">BOM 成本控制</span>
+                            </div>
+                            <div class="bg-white p-2 rounded shadow-sm">
+                                <span class="block text-xs font-bold text-stone-800">產能爬坡速度</span>
+                                <span class="text-[11px] text-stone-500">出廠規模</span>
+                            </div>
+                            <div class="bg-white p-2 rounded shadow-sm">
+                                <span class="block text-xs font-bold text-stone-800">全無人監管許可</span>
+                                <span class="text-[11px] text-amber-600 font-semibold">關鍵瓶頸</span>
+                            </div>
+                            <div class="bg-white p-2 rounded shadow-sm">
+                                <span class="block text-xs font-bold text-stone-800">每英里收費規模</span>
+                                <span class="text-[11px] text-stone-500">實質現金流</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-900 mb-3">估值邏輯的典範轉移</h3>
+                        <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                            Tesla 已不能單純用汽車銷量與毛利估值。華爾街部分機構（如 Morgan Stanley）給予自駕事業近 <strong>1 兆美元</strong> 的潛在估值。但 100 台測試車與 10 萬台商業載客車隊在財務模型上完全是兩回事。
+                        </p>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                                <div class="text-xs font-bold text-stone-800">傳統軟體訂閱制</div>
+                                <div class="text-xs text-stone-500 mt-0.5">每人每月 $20 美元固定營收池</div>
+                            </div>
+                            <div class="p-3 bg-sky-50 rounded-lg border border-sky-200">
+                                <div class="text-xs font-bold text-sky-900">實體世界 AI 代理 (Robotaxi)</div>
+                                <div class="text-xs text-sky-700 mt-0.5">全美每年數兆英里交通出行按里程收費</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-stone-200 text-xs text-stone-500">
+                        * 9月3日後需確認 Cybercab 何時完全取消安全監控人員並進入量產收費。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: AI 商業化三大階段與產業鏈價值轉移 -->
+        <section id="three-phases" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                AI 產業跨越的三大階段與完整資本支出鏈
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Phase 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-stone-400">
+                    <span class="text-xs font-bold text-stone-500 uppercase tracking-wider">第一階段 (2023~2024)</span>
+                    <h3 class="text-xl font-bold text-stone-900 mt-1 mb-2">算力晶片集中</h3>
+                    <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                        以 GPU 供應商為絕對核心，市場邏輯簡化為「誰的晶片算力最強」。
+                    </p>
+                    <div class="bg-stone-50 p-3 rounded text-xs font-medium text-stone-700">
+                        代表標的：Nvidia, AMD
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 relative">
+                    <span class="absolute -top-3 right-4 bg-sky-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">當前所處階段</span>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">第二階段 (2025~2027)</span>
+                    <h3 class="text-xl font-bold text-stone-900 mt-1 mb-2">實體基礎建設全面化</h3>
+                    <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                        晶片組合成機櫃、整座資料中心部署。電力、變壓器、液冷、散熱與電網成為新定價者。
+                    </p>
+                    <div class="bg-sky-50 p-3 rounded text-xs font-medium text-sky-900">
+                        代表標的：Dell, Broadcom, Vertiv, Eaton, Berkshire Energy
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">第三階段 (2026~2030)</span>
+                    <h3 class="text-xl font-bold text-stone-900 mt-1 mb-2">實體代理與現金流變現</h3>
+                    <p class="text-xs text-stone-600 leading-relaxed mb-4">
+                        AI 自主在實體世界完成工作，以實際產生的交通或勞動效益按次/按里程向終端收費。
+                    </p>
+                    <div class="bg-emerald-50 p-3 rounded text-xs font-medium text-emerald-900">
+                        代表標的：Tesla Cybercab, Waymo, 實體機器人
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Capex Chain Flow -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-bold text-stone-900 mb-4">完整 AI 資本支出價值鏈（從晶片到底層電網）</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 text-center text-xs">
+                    <div class="bg-stone-100 p-3 rounded-lg border border-stone-300 font-semibold text-stone-800">
+                        1. 運算晶片<br><span class="text-[10px] text-stone-500 font-normal">Nvidia / AMD</span>
+                    </div>
+                    <div class="bg-sky-50 p-3 rounded-lg border border-sky-300 font-semibold text-sky-900">
+                        2. 伺服器整合<br><span class="text-[10px] text-stone-500 font-normal">Dell / 系統商</span>
+                    </div>
+                    <div class="bg-stone-100 p-3 rounded-lg border border-stone-300 font-semibold text-stone-800">
+                        3. 高速網路<br><span class="text-[10px] text-stone-500 font-normal">Broadcom / Cisco</span>
+                    </div>
+                    <div class="bg-stone-100 p-3 rounded-lg border border-stone-300 font-semibold text-stone-800">
+                        4. 儲存架構<br><span class="text-[10px] text-stone-500 font-normal">NAND / 硬碟</span>
+                    </div>
+                    <div class="bg-stone-100 p-3 rounded-lg border border-stone-300 font-semibold text-stone-800">
+                        5. 電源管理<br><span class="text-[10px] text-stone-500 font-normal">Power Rack / IC</span>
+                    </div>
+                    <div class="bg-stone-100 p-3 rounded-lg border border-stone-300 font-semibold text-stone-800">
+                        6. 變壓與配電<br><span class="text-[10px] text-stone-500 font-normal">Eaton / 重電</span>
+                    </div>
+                    <div class="bg-sky-50 p-3 rounded-lg border border-sky-300 font-semibold text-sky-900">
+                        7. CDU 液冷散熱<br><span class="text-[10px] text-stone-500 font-normal">Vertiv / 散熱廠</span>
+                    </div>
+                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-300 font-semibold text-amber-900">
+                        8. 發電與電網<br><span class="text-[10px] text-stone-500 font-normal">BHE / 公用事業</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 關鍵指標互動資料表 -->
+        <section id="data-table-section" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                核心數據與指標一覽表（互動式篩選）
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                    <p class="text-xs text-stone-500">即時搜尋公司、項目、關鍵數據或趨勢影響</p>
+                    <div class="relative w-full sm:w-64">
+                        <input type="text" id="tableSearch" placeholder="搜尋表格內容 (如 Dell, 能源...)" 
+                            class="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto border border-stone-200 rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-200 text-left text-xs">
+                        <thead class="bg-stone-100 text-stone-700 sticky top-0 font-bold uppercase tracking-wider">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">核心主體 / 公司</th>
+                                <th scope="col" class="px-4 py-3">指標分類</th>
+                                <th scope="col" class="px-4 py-3">公布數據 / 規模</th>
+                                <th scope="col" class="px-4 py-3">成長幅度 / 現況</th>
+                                <th scope="col" class="px-4 py-3">戰略含義與供應鏈影響</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-stone-200 bg-white">
+                            <!-- Dynamic Table Rows populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResultsMsg" class="hidden py-6 text-center text-xs text-stone-500">
+                    查無符合條件的數據資料。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: 投資策略與四大觀察訊號 -->
+        <section id="investment-strategy" class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+                美股投資策略：從「晶片集中」走向「基礎建設組合」
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Strategy 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-3 flex items-center">
+                        <span class="w-2.5 h-2.5 bg-sky-600 rounded-full mr-2"></span>
+                        投資組合配置思維轉變
+                    </h3>
+                    <ul class="space-y-3 text-xs sm:text-sm text-stone-600 leading-relaxed">
+                        <li class="flex items-start">
+                            <span class="text-sky-600 font-bold mr-2">●</span>
+                            <span><strong>降低 GPU 集中度：</strong>Nvidia 依然重要（Dell 正在交付基於 Vera Rubin 架構機櫃），但應將配置分散至整座 AI 工廠供應鏈。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-600 font-bold mr-2">●</span>
+                            <span><strong>重視系統整合商：</strong>Dell 的優勢從「賣 PC」變成「交付整座 AI 資料中心」，具備極強的供應鏈管理與部署價值。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sky-600 font-bold mr-2">●</span>
+                            <span><strong>公用事業與能源配置：</strong>利用波克夏模式鎖定資料中心長期用電，具備較長設備生命週期與高現金流可預測性。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Strategy 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-900 mb-3 flex items-center">
+                        <span class="w-2.5 h-2.5 bg-amber-600 rounded-full mr-2"></span>
+                        未來 6～12 個月必追蹤的 4 大訊號
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <span class="font-bold text-stone-900 block mb-1">1. Dell AI Backlog 轉化</span>
+                            <span class="text-stone-500">觀察 $950 億訂單交付速度、取消率及毛利率是否穩健。</span>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <span class="font-bold text-stone-900 block mb-1">2. Nvidia 次世代平台進度</span>
+                            <span class="text-stone-500">Vera Rubin 平台交付放量速度與良率情況。</span>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <span class="font-bold text-stone-900 block mb-1">3. 電力與冷卻訂單增速</span>
+                            <span class="text-stone-500">變壓器、CDU 液冷與 Power Rack 交期是否緩解。</span>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <span class="font-bold text-stone-900 block mb-1">4. Tesla Robotaxi 商業化</span>
+                            <span class="text-stone-500">無人監管許可進度、每英里營運成本與收費規模。</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-sky-900 text-white rounded-xl p-6 shadow-md text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h4 class="text-base font-bold text-sky-200 mb-1">結論：下一波 AI 投資屬於「解決瓶頸的人」</h4>
+                    <p class="text-xs sm:text-sm text-stone-300">
+                        AI 價值正沿著「晶片 ➔ 伺服器 ➔ 網路 ➔ 散熱 ➔ 電源 ➔ 電網 ➔ 實體服務」全面擴散。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Template -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI投資進入實體化第二階段。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Dell、Berkshire與Tesla等相關公開資料 (2026年09月02日)。</p>
+        </div>
+    </footer>
+
+    <!-- Native JavaScript Logic -->
+    <script>
+        // 1. Interactive Data Table Source (Real Document Data)
+        const productData = [
+            { company: "Dell (戴爾)", category: "單季營收 (FY27 Q2)", value: "$469.71 億美元", growth: "年增 +58%", notes: "遠超預期，帶動全年展望大幅上修" },
+            { company: "Dell (戴爾)", category: "單季 EPS (調整後)", value: "$7.04 美元", growth: "年增 +203%", notes: "市場預估為 $4.91 美元" },
+            { company: "Dell (戴爾)", category: "單季 AI 伺服器訂單", value: "$609 億美元", growth: "單季認列 $164 億", notes: "需求從新型雲端擴至主權 AI 與企業" },
+            { company: "Dell (戴爾)", category: "待交付 AI 訂單 (Backlog)", value: "$950 億美元", growth: "歷史新高", notes: "過去 12 個月累計訂單達 $1,317 億" },
+            { company: "Dell (戴爾)", category: "全年營收目標", value: "$1,920 億美元", growth: "原預估 $1,670 億", notes: "AI 伺服器目標由 $600 億調升至 $740 億" },
+            { company: "Dell (戴爾)", category: "傳統伺服器與網路營收", value: "持續增長", growth: "年增 +122%", notes: "AI 帶動整體周邊 IT 基礎建設採購" },
+            { company: "Berkshire (波克夏)", category: "Alphabet 股權投資", value: "約 1.06 億股 ($378 億)", growth: "第三大普通股", notes: "6月直接私募 $100 億用於 AI 運算擴充" },
+            { company: "Berkshire (波克夏)", category: "愛荷華州資料中心用電", value: "佔該州負載 8%", growth: "持續提升", notes: "Greg Abel 指出能源為 AI 下一個核心瓶頸" },
+            { company: "McKinsey (麥肯錫)", category: "2030 全球資料中心投資", value: "約 7 兆美元", growth: "極高速擴張", notes: "成熟市場電網接入等待期最長超過 8 年" },
+            { company: "Bank of America (美銀)", category: "高階 AI 單機櫃耗電", value: "> 1.5 MW", growth: "傳統機櫃 100 倍", notes: "液冷滲透率預計從 30% 提升至 70%" },
+            { company: "Tesla (特斯拉)", category: "Robotaxi 運營範圍", value: "6 個主要城市", growth: "Model Y 基礎", notes: "德州 3 城 + 佛州 3 城，Cybercab 監管尚未完成" },
+            { company: "Alphabet (Waymo)", category: "無人自駕服務覆蓋", value: "14 個城市", growth: "新增 3 城", notes: "全無人商業載客規模持續領先" }
+        ];
+
+        // 2. Render Data Table & Live Search Filter
+        function renderTable(data) {
+            const tbody = document.getElementById('dataTableBody');
+            const noResultsMsg = document.getElementById('noResultsMsg');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                noResultsMsg.classList.remove('hidden');
+                return;
+            } else {
+                noResultsMsg.classList.add('hidden');
+            }
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-sky-50/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-semibold text-stone-900">${item.company}</td>
+                    <td class="px-4 py-3 text-stone-600">${item.category}</td>
+                    <td class="px-4 py-3 font-bold text-sky-700">${item.value}</td>
+                    <td class="px-4 py-3">
+                        <span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium ${item.growth.includes('+') ? 'bg-emerald-100 text-emerald-800' : 'bg-stone-100 text-stone-700'}">
+                            ${item.growth}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-stone-500">${item.notes}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Search event listener
+        document.getElementById('tableSearch').addEventListener('input', function(e) {
+            const keyword = e.target.value.toLowerCase().trim();
+            const filtered = productData.filter(item => 
+                item.company.toLowerCase().includes(keyword) ||
+                item.category.toLowerCase().includes(keyword) ||
+                item.value.toLowerCase().includes(keyword) ||
+                item.growth.toLowerCase().includes(keyword) ||
+                item.notes.toLowerCase().includes(keyword)
+            );
+            renderTable(filtered);
+        });
+
+        // 3. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 4. Smooth Scroll Active Nav State with IntersectionObserver
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll("nav a.nav-link");
+
+        const observerOptions = {
+            root: null,
+            rootMargin: "-20% 0px -70% 0px",
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute("id");
+                    navLinks.forEach((link) => {
+                        const href = link.getAttribute("href").replace("#", "");
+                        if (href === activeId) {
+                            link.classList.remove("inactive-nav-link");
+                            link.classList.add("active-nav-link");
+                        } else {
+                            link.classList.remove("active-nav-link");
+                            link.classList.add("inactive-nav-link");
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
+
+        // 5. Chart.js Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTable(productData);
+
+            // Dell Chart: Guidance Revision & AI Orders
+            const dellCtx = document.getElementById('dellChart').getContext('2d');
+            new Chart(dellCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['全年總營收預估', 'AI伺服器全年目標', '單季AI訂單', '單季AI認列營收', 'AI待交付訂單(Backlog)'],
+                    datasets: [
+                        {
+                            label: '原始預估 / 基期 ($B)',
+                            data: [167, 60, null, null, null],
+                            backgroundColor: 'rgba(168, 162, 158, 0.6)',
+                            borderColor: 'rgba(120, 113, 108, 1)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        },
+                        {
+                            label: '最新公布 / 調升後 ($B)',
+                            data: [192, 74, 60.9, 16.4, 95.0],
+                            backgroundColor: 'rgba(2, 132, 199, 0.85)',
+                            borderColor: 'rgba(2, 132, 199, 1)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { boxWidth: 12, font: { size: 11 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': $' + context.raw + ' 億美元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) { return '$' + value + 'B'; },
+                                font: { size: 10 }
+                            },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                        },
+                        x: {
+                            ticks: { font: { size: 10 } },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Energy Rack Power Comparison Chart (Horizontal Bar)
+            const rackCtx = document.getElementById('energyRackChart').getContext('2d');
+            new Chart(rackCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['傳統機櫃', '2030 高階AI機櫃'],
+                    datasets: [{
+                        label: '單一機櫃耗電量 (kW)',
+                        data: [15, 1500], // 1.5MW = 1500kW vs 15kW
+                        backgroundColor: [
+                            'rgba(148, 163, 184, 0.8)',
+                            'rgba(56, 189, 248, 0.9)'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw >= 1000 ? '耗電約 ' + (context.raw/1000) + ' MW (100倍)' : '耗電約 ' + context.raw + ' kW';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'logarithmic',
+                            ticks: { color: '#cbd5e1', font: { size: 9 } },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        y: {
+                            ticks: { color: '#ffffff', font: { size: 10, weight: 'bold' } },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
