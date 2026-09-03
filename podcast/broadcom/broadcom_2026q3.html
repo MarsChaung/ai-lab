@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>巴菲特AI價值投資-AI競爭的實體基建瓶頸</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .active-nav-link {
+      color: #0284c7;
+      font-weight: 700;
+      border-bottom: 2px solid #0284c7;
+    }
+    .inactive-nav-link {
+      color: #44403c;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+    }
+    .inactive-nav-link:hover {
+      color: #0284c7;
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-sky-100 selection:text-sky-800">
+
+  <!-- 1. Sticky Navigation Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <span class="font-bold text-xl tracking-tight text-stone-900">Broadcom 2026財年Q3</span>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex space-x-8 text-sm">
+          <a href="#overview" class="nav-link inactive-nav-link py-2 transition-colors">核心論點</a>
+          <a href="#broadcom" class="nav-link inactive-nav-link py-2 transition-colors">Broadcom 與客製化</a>
+          <a href="#power-bottleneck" class="nav-link inactive-nav-link py-2 transition-colors">能源電力瓶頸</a>
+          <a href="#spacex" class="nav-link inactive-nav-link py-2 transition-colors">SpaceX 垂直整合</a>
+          <a href="#data-table-section" class="nav-link inactive-nav-link py-2 transition-colors">基建鏈全景表</a>
+          <a href="#investment-implications" class="nav-link inactive-nav-link py-2 transition-colors">投資啟示</a>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <div class="flex md:hidden">
+          <button id="mobile-menu-btn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2" aria-label="Toggle menu">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1 shadow-md">
+      <a href="#overview" class="mobile-nav-link block px-3 py-2 rounded-md text-base text-stone-700 hover:bg-sky-50 hover:text-sky-700">核心論點</a>
+      <a href="#broadcom" class="mobile-nav-link block px-3 py-2 rounded-md text-base text-stone-700 hover:bg-sky-50 hover:text-sky-700">Broadcom 與客製化</a>
+      <a href="#power-bottleneck" class="mobile-nav-link block px-3 py-2 rounded-md text-base text-stone-700 hover:bg-sky-50 hover:text-sky-700">能源電力瓶頸</a>
+      <a href="#spacex" class="mobile-nav-link block px-3 py-2 rounded-md text-base text-stone-700 hover:bg-sky-50 hover:text-sky-700">SpaceX 垂直整合</a>
+      <a href="#data-table-section" class="mobile-nav-link block px-3 py-2 rounded-md text-base text-stone-700 hover:bg-sky-50 hover:text-sky-700">基建鏈全景表</a>
+      <a href="#investment-implications" class="mobile-nav-link block px-3 py-2 rounded-md text-base text-stone-700 hover:bg-sky-50 hover:text-sky-700">投資啟示</a>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <!-- Top Hero Section / Core Headline -->
+    <section class="bg-gradient-to-br from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl p-8 md:p-12 shadow-xl">
+      <div class="max-w-3xl">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-white mb-6">
+          從客製化 AI 晶片到自己蓋電廠：AI 競爭的真正新瓶頸
+        </h1>
+        <p class="text-lg text-stone-300 leading-relaxed mb-8">
+          AI 投資已脫離單純衡量 Nvidia GPU 銷售的初階行情，全面演化為橫跨<span class="text-sky-400 font-semibold">客製化 ASIC、高速傳輸、電力電網、發電渦輪機與太空軌道通訊</span>的超大規模實體資本支出競賽。
+        </p>
+      </div>
+
+      <!-- Quick KPI Strip -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-stone-700/60 text-stone-200">
+        <div class="p-4 rounded-xl bg-white/5 backdrop-blur">
+          <p class="text-xs text-stone-400 uppercase tracking-wider">Broadcom Q3 AI 營收</p>
+          <p class="text-2xl font-bold text-sky-400 mt-1">167 億美元</p>
+          <p class="text-xs text-emerald-400 font-medium mt-0.5">年增 +221%</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/5 backdrop-blur">
+          <p class="text-xs text-stone-400 uppercase tracking-wider">高壓變壓器交期</p>
+          <p class="text-2xl font-bold text-amber-400 mt-1">~160 週</p>
+          <p class="text-xs text-stone-400 mt-0.5">約需等待 3 年以上</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/5 backdrop-blur">
+          <p class="text-xs text-stone-400 uppercase tracking-wider">GE Vernova 燃氣儲備</p>
+          <p class="text-2xl font-bold text-sky-400 mt-1">116 GW</p>
+          <p class="text-xs text-stone-400 mt-0.5">預約產能年底估達 125 GW</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/5 backdrop-blur">
+          <p class="text-xs text-stone-400 uppercase tracking-wider">Falcon 9 推進器復用</p>
+          <p class="text-2xl font-bold text-emerald-400 mt-1">35 次飛行</p>
+          <p class="text-xs text-stone-400 mt-0.5">B1063 成功創下歷史紀錄</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: OVERVIEW -->
+    <section id="overview" class="scroll-mt-24">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+        一、AI 產業瓶頸的三次大位移
+      </h2>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <p class="text-stone-700 leading-relaxed mb-6">
+          過去三年市場習慣將「Nvidia 賣了多少晶片」視為產業晴雨表。然而 2026 年初秋同時爆發的三大事件（Broadcom 財報爆發、SpaceX 跨界自造發電機渦輪葉片、Falcon 9 第 35 次復用），正式敲響了產業鏈重構的警鐘：
+        </p>
+
+        <!-- Bottleneck Timeline Graphic (HTML/Tailwind) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+          <!-- Phase 1 -->
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold px-2.5 py-1 rounded bg-stone-200 text-stone-700">第一階段 (2023-2024)</span>
+              <span class="text-sky-600 font-bold text-lg">01</span>
+            </div>
+            <h3 class="text-lg font-bold text-stone-900 mb-2">算力供給瓶頸 (GPU)</h3>
+            <p class="text-sm text-stone-600">Nvidia 獨佔市場，全市場搶購 A100/H100/B200。市場定價邏輯為「誰有 GPU 誰就贏」。</p>
+            <div class="mt-4 pt-3 border-t border-stone-200 text-xs text-stone-500">
+              主要受益者：Nvidia、台積電先進製程
+            </div>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="bg-sky-50 border border-sky-200 rounded-xl p-5 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold px-2.5 py-1 rounded bg-sky-200 text-sky-800">第二階段 (2024-2025)</span>
+              <span class="text-sky-600 font-bold text-lg">02</span>
+            </div>
+            <h3 class="text-lg font-bold text-stone-900 mb-2">伺服器與高速組裝</h3>
+            <p class="text-sm text-stone-600">瓶頸轉向晶片組裝、高頻寬記憶體（HBM）、水冷散熱模組與機櫃層級的高速互聯。</p>
+            <div class="mt-4 pt-3 border-t border-sky-200 text-xs text-stone-500">
+              主要受益者：Dell、HPE、Supermicro、光通訊供應商
+            </div>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 relative overflow-hidden ring-2 ring-amber-400/40">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-200 text-amber-900">當前階段 (2026 起)</span>
+              <span class="text-amber-600 font-bold text-lg">03</span>
+            </div>
+            <h3 class="text-lg font-bold text-stone-900 mb-2">電力能源與發電重裝備</h3>
+            <p class="text-sm text-stone-600">買晶片幾個月，蓋資料中心 1~2 年，但排隊等電網接入、變壓器與燃氣發電設備需耗時 3~5 年。</p>
+            <div class="mt-4 pt-3 border-t border-amber-200 text-xs text-amber-800 font-medium">
+              新核心瓶頸：GE Vernova、Howmet、重電設備
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: BROADCOM & CUSTOM CHIPS -->
+    <section id="broadcom" class="scroll-mt-24">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+        二、Broadcom 財報透析：客製化晶片與網路互連架構崛起
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Left: Analysis Card -->
+        <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-stone-900 mb-4">不是取代 Nvidia，而是「通用與專用並存」</h3>
+            <p class="text-stone-700 text-sm leading-relaxed mb-4">
+              Broadcom 2026 財年 Q3 營收達 <strong>295.91 億美元</strong>（年增 86%），Non-GAAP EPS 達 <strong>3.32 美元</strong>。然而真正的驚喜在於其 AI 半導體事業群：單季營收衝上 <strong>167 億美元</strong>（年增 221%），且預估下季續升至 <strong>217 億美元</strong>（單季暴增 50 億美元）。
+            </p>
+            <div class="p-4 bg-stone-50 rounded-lg border-l-4 border-sky-500 text-sm text-stone-700 space-y-2 mb-4">
+              <p><strong>產業實相：</strong>Google (TPU)、Meta (MTIA)、OpenAI、Anthropic 等超大型模型開發商在固定任務負載下，無法承擔昂貴通用 GPU 的全額資本負擔，積極攜手 Broadcom 自研 ASIC。</p>
+              <p><strong>網路互聯核心：</strong>Broadcom 販售的不僅是 ASIC，更捆綁極高毛利的高速交換晶片（Jericho/Tomahawk）與光通訊晶片。當單一叢集達到 10 萬~50 萬顆晶片，網路延遲就是運算生死線。</p>
+            </div>
+          </div>
+
+          <!-- Market Expectations Alert -->
+          <div class="bg-rose-50 border border-rose-200 rounded-lg p-4 text-xs text-rose-800 mt-2">
+            <span class="font-bold">股價矛盾解讀：</span>財報公佈當日 Broadcom 股價一度重跌約 6%。主因 Q4 總營收展望 348 億美元僅與高標預期（347~354 億）貼合。這標誌著 AI 股邁入<strong>「第二階段：成長速度必須戰勝已被推至雲端的超高預期」</strong>。
+          </div>
+        </div>
+
+        <!-- Right: Chart.js Container -->
+        <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">Broadcom AI 半導體營收爆發軌跡</h3>
+              <p class="text-xs text-stone-500">單位：十億美元 (USD Billion)</p>
+            </div>
+            <span class="text-xs bg-sky-100 text-sky-800 font-semibold px-2 py-1 rounded">年增率逾 200%</span>
+          </div>
+          <!-- Canvas must be wrapped in a div -->
+          <div class="relative flex-1 min-h-[300px] flex items-center justify-center">
+            <canvas id="broadcomChart"></canvas>
+          </div>
+          <p class="text-xs text-stone-400 mt-3 text-center">資料來源：Broadcom 2026 財年 Q3 財報及官方業績預估指引</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: POWER BOTTLENECK & INDUSTRIAL SUPPLY CHAIN -->
+    <section id="power-bottleneck" class="scroll-mt-24">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+        三、電力設備爭奪戰：SpaceX 跨界自製渦輪葉片的深層震撼
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+          <span class="text-xs font-semibold uppercase tracking-wider text-amber-600">實體荒謬現狀</span>
+          <h3 class="text-lg font-bold text-stone-900 mt-1 mb-3">火箭公司跨界鑄造渦輪</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">
+            The Information 揭露 SpaceX 於德州 Bastrop 建造精密鑄造廠，Elon Musk 證實自製大型燃氣渦輪葉片與導流葉片，目的是<strong>將自備發電設備上線時程縮短最多 18 個月</strong>。
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500">
+          <span class="text-xs font-semibold uppercase tracking-wider text-sky-600">重型工業護城河</span>
+          <h3 class="text-lg font-bold text-stone-900 mt-1 mb-3">單晶鎳基合金的高壁壘</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">
+            渦輪葉片需在極端高溫、高壓與離心力旋轉下運作。SpaceX 自製非但沒有擊潰 Howmet 或 GE Vernova，反而向市場驗證：<strong>全球發電渦輪核心組件已面臨極限缺貨</strong>。
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-500">
+          <span class="text-xs font-semibold uppercase tracking-wider text-rose-600">投資暗礁警示</span>
+          <h3 class="text-lg font-bold text-stone-900 mt-1 mb-3">「虛報用電」與項目泡沫</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">
+            全美資料中心電網申請量飆破 <strong>700 GW</strong>（達現行實際消耗 10 倍以上）。德州已暫停審核部分投機申請。評估電力股必須審視「已付訂金、產能預約與積壓訂單」，嚴防重複計算。
+          </p>
+        </div>
+      </div>
+
+      <!-- Chart: Lead Time Comparison & Backlog Visual -->
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+          <div>
+            <h3 class="text-xl font-bold text-stone-900">AI 實體基建交付週期與產能缺口對比</h3>
+            <p class="text-sm text-stone-500">視覺化呈現半導體、變壓器與發電渦輪供應鏈的極度失衡</p>
+          </div>
+          <span class="mt-2 md:mt-0 text-xs px-3 py-1 bg-amber-100 text-amber-800 font-semibold rounded-full">
+            電力供應時程落後運算需求 2~3 倍
+          </span>
+        </div>
+        <!-- Canvas wrapped in div -->
+        <div class="relative min-h-[320px] flex items-center justify-center">
+          <canvas id="bottleneckChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: SPACEX VERTICAL INTEGRATION & SPACE INFRASTRUCTURE -->
+    <section id="spacex" class="scroll-mt-24">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+        四、SpaceX 的真正壁壘：極限垂直整合與邊際成本革命
+      </h2>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <h3 class="text-2xl font-bold text-stone-900">超越火箭製造商的「實體算力物聯體」</h3>
+            <p class="text-stone-700 leading-relaxed text-sm">
+              2026 年 9 月 2 日，Falcon 9 代號 B1063 第一級推進器完成第 <strong>35 次飛行與回收</strong>。截至當日，SpaceX 在 2026 年已累計完成 102 次發射（其中 79 次為 Starlink），在軌活躍衛星數突破 <strong>11,000 顆</strong>。
+            </p>
+            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2">
+              <h4 class="font-bold text-stone-800 text-sm flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                極難複製的「星鏈-火箭飛輪」循環：
+              </h4>
+              <p class="text-xs text-stone-600 leading-relaxed font-mono">
+                Starlink 需擴容 ➔ 帶動發射量 ➔ Falcon 9 重用次數推向 35 次+ ➔ 單次邊際發射成本暴跌 ➔ Starlink 單位帶寬部署成本下降 ➔ 獲取更多現金流 ➔ 投入 Starship 研發與自製電廠設備。
+              </p>
+            </div>
+            <p class="text-stone-700 text-sm leading-relaxed">
+              <strong>Starship Flight 14 關鍵躍升：</strong>Booster 21 於 8 月 28 日完成 33 具猛禽引擎全時長點火。一旦 Starship 具備低成本高頻入軌能力，大型 Starlink V3 衛星、太空邊緣 AI 運算節點乃至軌道資料中心的構想，將不再受限於地表電力配給與冷卻極限。
+            </p>
+          </div>
+
+          <!-- Feature Metric Grid -->
+          <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+            <div class="bg-stone-50 p-4 rounded-xl text-center border border-stone-200">
+              <p class="text-xs text-stone-500 font-semibold">2026 發射次數</p>
+              <p class="text-3xl font-extrabold text-stone-900 mt-1">102 次</p>
+              <p class="text-xs text-sky-600 mt-1 font-medium">Starlink 佔 79 次</p>
+            </div>
+            <div class="bg-stone-50 p-4 rounded-xl text-center border border-stone-200">
+              <p class="text-xs text-stone-500 font-semibold">單體推進器極限</p>
+              <p class="text-3xl font-extrabold text-emerald-600 mt-1">35 次</p>
+              <p class="text-xs text-stone-500 mt-1">B1063 成功回場</p>
+            </div>
+            <div class="bg-stone-50 p-4 rounded-xl text-center border border-stone-200">
+              <p class="text-xs text-stone-500 font-semibold">活躍衛星儲備</p>
+              <p class="text-3xl font-extrabold text-sky-700 mt-1">> 11,000</p>
+              <p class="text-xs text-stone-500 mt-1">低軌巨型星座建置</p>
+            </div>
+            <div class="bg-stone-50 p-4 rounded-xl text-center border border-stone-200">
+              <p class="text-xs text-stone-500 font-semibold">Starship 動力</p>
+              <p class="text-3xl font-extrabold text-amber-600 mt-1">33 具</p>
+              <p class="text-xs text-stone-500 mt-1">Raptor 靜態點火完成</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: INTERACTIVE DATA TABLE -->
+    <section id="data-table-section" class="scroll-mt-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 border-b-2 border-sky-500 pb-2">
+        <div>
+          <h2 class="text-3xl font-bold text-stone-800">
+            五、AI 基礎建設供應鏈核心企業多維評估表
+          </h2>
+          <p class="text-sm text-stone-500 mt-1">整合半導體、重電發電、特殊合金與航太物流的關鍵量化指標與風險要素</p>
+        </div>
+        <!-- Real-time Filter Input -->
+        <div class="mt-4 md:mt-0 w-full md:w-72">
+          <div class="relative">
+            <input 
+              type="text" 
+              id="table-search" 
+              placeholder="搜尋公司、板塊或關鍵字..." 
+              class="w-full px-4 py-2 pl-9 text-sm rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white"
+            >
+            <svg class="w-4 h-4 text-stone-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Card Container -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+        <div class="overflow-x-auto max-h-[500px]">
+          <table class="w-full text-left text-sm text-stone-600" id="product-table">
+            <thead class="text-xs text-stone-700 uppercase bg-stone-100 sticky top-0 z-20 border-b border-stone-200">
+              <tr>
+                <th scope="col" class="py-3.5 px-4 font-bold">標的 / 代碼</th>
+                <th scope="col" class="py-3.5 px-4 font-bold">產業鏈環節</th>
+                <th scope="col" class="py-3.5 px-4 font-bold">核心營運數據 (2026)</th>
+                <th scope="col" class="py-3.5 px-4 font-bold">在 AI 基建中的不可替代性</th>
+                <th scope="col" class="py-3.5 px-4 font-bold">投資風險與估值警戒點</th>
+              </tr>
+            </thead>
+            <tbody id="table-body" class="divide-y divide-stone-200">
+              <!-- Dynamically rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+        <div class="p-3 bg-stone-50 border-t border-stone-200 flex justify-between items-center text-xs text-stone-500">
+          <span id="filter-status">顯示 6 筆中的 6 筆資料</span>
+          <span>資料取自本篇公開研報內容</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: STRATEGIC IMPLICATIONS -->
+    <section id="investment-implications" class="scroll-mt-24">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+        六、美股投資人的三層思維演進
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Layer 1 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-sky-100 text-sky-700 font-bold flex items-center justify-center mb-4">L1</div>
+            <h3 class="text-lg font-bold text-stone-900 mb-2">算力層：雙軌並進</h3>
+            <p class="text-stone-600 text-sm leading-relaxed mb-4">
+              Nvidia 仍是前沿探索與彈性訓練霸主；Broadcom 與 Marvell 則接管成熟、大規模推論負載。兩者並非零和對立，但 Broadcom 同時卡位「交換晶片 + 光互聯」，成為通用之外最具護城河的基礎架構。
+            </p>
+          </div>
+          <div class="text-xs bg-stone-100 p-3 rounded font-medium text-stone-700">
+            結論：基本面強韌，但須提防客戶集中度與估值超預期透支。
+          </div>
+        </div>
+
+        <!-- Layer 2 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 font-bold flex items-center justify-center mb-4">L2</div>
+            <h3 class="text-lg font-bold text-stone-900 mb-2">能源重工：真實稀缺</h3>
+            <p class="text-stone-600 text-sm leading-relaxed mb-4">
+              2030 年前資料中心 7 兆美元資本開支正朝冷卻、電力與發電設備傾斜。GE Vernova 與 Howmet Aerospace 佔據渦輪機與單晶葉片頂層，成為比 GPU 交期更長、更難擴張的實體物理瓶頸。
+            </p>
+          </div>
+          <div class="text-xs bg-stone-100 p-3 rounded font-medium text-stone-700">
+            結論：切勿盲信紙上 GW 申請，緊盯已付訂金、實際簽約與積壓訂單。
+          </div>
+        </div>
+
+        <!-- Layer 3 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center mb-4">L3</div>
+            <h3 class="text-lg font-bold text-stone-900 mb-2">太空物流：極限邊際成本</h3>
+            <p class="text-stone-600 text-sm leading-relaxed mb-4">
+              不可將 SpaceX 當作純航太公司。透過 Falcon 9 的 35 次復用與自研燃氣渦輪，其建立起全球唯一「火箭 + 衛星網 + 自備能源 + 軌道運算」全棧垂直體系，重寫全行業單位資本成本曲線。
+            </p>
+          </div>
+          <div class="text-xs bg-stone-100 p-3 rounded font-medium text-stone-700">
+            結論：超額報酬未必屬於賣最多 GPU 的人，而是掌握「下一個最缺資源」的人。
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Standard Footer (Requirement Compliant) -->
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI競爭的實體基建瓶頸。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中Broadcom與SpaceX等相關公開資料 (2026年09月03日)。</p>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // 1. Dataset for the Interactive Table (Real data derived from the report)
+    const productData = [
+      {
+        company: "Broadcom (AVGO)",
+        sector: "客製化 ASIC / 高速網路",
+        metrics: "Q3 AI 營收 $167億 (+221%)；Q4 預估 $217億；總營收 $295.9億",
+        role: "提供雲端巨頭 (Google, Meta, OpenAI) 專用加速晶片，並壟斷機櫃級高速交換與光通訊互聯",
+        risk: "客戶高度集中、Google 扶植第二供應商 (Marvell)、市場期望過高導致財報後回檔 ~6%"
+      },
+      {
+        company: "Nvidia (NVDA)",
+        sector: "通用 GPU / CUDA 生態",
+        metrics: "Blackwell 量產放量；Rubin 世代接續；主導前沿大模型訓練",
+        role: "高彈性、全功能 AI 運算事實標準；CUDA 生態系具極高轉換壁壘",
+        risk: "單晶片價格昂貴促使超大規模客戶積極轉向專用 ASIC 進行分散採購"
+      },
+      {
+        company: "GE Vernova (GEV)",
+        sector: "燃氣渦輪發電 / 電網輸配電",
+        metrics: "燃氣儲備及預約達 116 GW (年底估 125 GW)；H1 資料中心訂單破 $50億 (>2025 全年兩倍)",
+        role: "提供資料中心 1GW 級別自備燃氣電廠與重型開關變壓設備，解決電網排隊數年之瓶頸",
+        risk: "全美 700 GW 電網申請存在投機重複申請；若資料中心落地放緩可能面臨虛假需求修正"
+      },
+      {
+        company: "Howmet Aerospace (HWM)",
+        sector: "特殊航太高溫合金 / 鑄造",
+        metrics: "燃氣渦輪葉片核心生產商；受 SpaceX 自製衝擊單日曾下跌逾 7%",
+        role: "掌握極高溫高壓單晶結構鑄造工藝，全球少數能大量生產燃氣渦輪動葉片的隱形冠軍",
+        risk: "SpaceX 等極端客戶因供應鏈延遲選擇自行切入垂直鑄造；航空與能源產能排擠"
+      },
+      {
+        company: "SpaceX (未上市)",
+        sector: "太空物流 / 星鏈通訊 / 能源",
+        metrics: "2026 已發射 102 次；Falcon 9 (B1063) 達成 35 次復用；在軌星鏈 >11,000 顆",
+        role: "透過高頻復用徹底降低發射邊際成本；自建德州 Bastrop 鑄造廠縮短自備燃氣電廠 18 個月期程",
+        risk: "Starship 軌道完全復用之工程技術驗證週期；極高自建基礎設施的資本支出"
+      },
+      {
+        company: "Marvell Technology (MRVL)",
+        sector: "客製化 ASIC / 光通訊 DSP",
+        metrics: "獲 Google 擴大合作深化 ASIC 客製晶片架構採購",
+        role: "雲端巨頭為避免被 Broadcom 單一綁定而扶植的第二大客製化晶片合作方",
+        risk: "規模經濟與整體網路產品組合完整度仍次於 Broadcom"
+      }
+    ];
+
+    // Render Table
+    function renderTable(data) {
+      const tbody = document.getElementById("table-body");
+      tbody.innerHTML = "";
+
+      if (data.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-8 text-center text-stone-400">
+              無符合條件的企業或產業鏈資料
+            </td>
+          </tr>
+        `;
+        document.getElementById("filter-status").innerText = "無匹配資料";
+        return;
+      }
+
+      data.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-stone-50 transition-colors";
+        tr.innerHTML = `
+          <td class="py-4 px-4 font-bold text-stone-900 whitespace-nowrap">${item.company}</td>
+          <td class="py-4 px-4 whitespace-nowrap"><span class="px-2.5 py-1 text-xs rounded-md bg-stone-100 text-stone-800 font-medium">${item.sector}</span></td>
+          <td class="py-4 px-4 text-xs font-mono text-stone-800 leading-relaxed">${item.metrics}</td>
+          <td class="py-4 px-4 text-xs text-stone-600 leading-relaxed">${item.role}</td>
+          <td class="py-4 px-4 text-xs text-rose-700 bg-rose-50/40 rounded leading-relaxed">${item.risk}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("filter-status").innerText = `顯示 ${data.length} 筆資料 (共 ${productData.length} 筆)`;
+    }
+
+    // Filter Logic
+    document.getElementById("table-search").addEventListener("input", function(e) {
+      const query = e.target.value.toLowerCase().trim();
+      const filtered = productData.filter(item => 
+        item.company.toLowerCase().includes(query) ||
+        item.sector.toLowerCase().includes(query) ||
+        item.metrics.toLowerCase().includes(query) ||
+        item.role.toLowerCase().includes(query) ||
+        item.risk.toLowerCase().includes(query)
+      );
+      renderTable(filtered);
+    });
+
+    // 2. Mobile Menu Toggle
+    const mobileBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    mobileBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    document.querySelectorAll(".mobile-nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+
+    // 3. Intersection Observer for Active Link Highlighting
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -70% 0px",
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const currentId = entry.target.getAttribute("id");
+          navLinks.forEach(link => {
+            if (link.getAttribute("href") === `#${currentId}`) {
+              link.classList.remove("inactive-nav-link");
+              link.classList.add("active-nav-link");
+            } else {
+              link.classList.remove("active-nav-link");
+              link.classList.add("inactive-nav-link");
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+
+    // 4. Initialize Chart.js Dynamic Charts
+    document.addEventListener("DOMContentLoaded", () => {
+      renderTable(productData);
+
+      // Chart 1: Broadcom AI Semiconductor Revenue Bar Chart
+      const ctx1 = document.getElementById("broadcomChart").getContext("2d");
+      new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: ['FY25 Q3 (前年同期)', 'FY26 Q3 (最新公佈)', 'FY26 Q4 (官方預估指引)'],
+          datasets: [{
+            label: 'AI 半導體營收 (十億美元)',
+            data: [5.20, 16.70, 21.70],
+            backgroundColor: [
+              'rgba(148, 163, 184, 0.7)',
+              'rgba(2, 132, 199, 0.85)',
+              'rgba(3, 105, 161, 0.95)'
+            ],
+            borderColor: [
+              'rgb(148, 163, 184)',
+              'rgb(2, 132, 199)',
+              'rgb(3, 105, 161)'
+            ],
+            borderWidth: 1.5,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (context) => ` 營收: $${context.raw}B (${context.dataIndex === 1 ? '+221% YoY' : context.dataIndex === 2 ? '+236% YoY' : '基準'})`
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: '億美元 (USD Billion)' },
+              grid: { color: 'rgba(226, 232, 240, 0.8)' }
+            },
+            x: {
+              grid: { display: false }
+            }
+          }
+        }
+      });
+
+      // Chart 2: Bottleneck Cycle & Lead Time Horizontal Bar Chart
+      const ctx2 = document.getElementById("bottleneckChart").getContext("2d");
+      new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: [
+            '通用 GPU 採購交付',
+            '資料中心廠房土建',
+            '燃氣渦輪機預約等候 (傳統)',
+            '高壓變壓器交貨週期',
+            '電網輸電併網審查與接電'
+          ],
+          datasets: [{
+            label: '常態交付/建設週期 (週)',
+            data: [16, 60, 104, 160, 180],
+            backgroundColor: [
+              'rgba(56, 189, 248, 0.8)',
+              'rgba(14, 165, 233, 0.8)',
+              'rgba(245, 158, 11, 0.85)',
+              'rgba(239, 68, 68, 0.85)',
+              'rgba(185, 28, 28, 0.9)'
+            ],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` 估計耗時: 約 ${ctx.raw} 週 (~${(ctx.raw/52).toFixed(1)} 年)`
+              }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              title: { display: true, text: '交貨與建設週期（週數）' },
+              grid: { color: 'rgba(226, 232, 240, 0.8)' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { weight: 'bold' } }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
