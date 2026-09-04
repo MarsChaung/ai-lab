@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴菲特AI價值投資-從GPU霸權走向AI入口之戰</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .active-nav-link {
+            color: #0284c7 !important;
+            font-weight: 700 !important;
+            border-bottom: 2px solid #0284c7 !important;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover {
+            color: #1c1917;
+            border-bottom: 2px solid #cbd5e1;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-900 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <span class="font-bold text-lg text-stone-800 tracking-tight">從GPU霸權走向AI入口</span>
+                </div>
+
+                <!-- Desktop Nav Items -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#overview" class="nav-item inactive-nav-link py-5 text-sm transition-colors">產業轉折總覽</a>
+                    <a href="#nvidia-hf" class="nav-item inactive-nav-link py-5 text-sm transition-colors">Nvidia 買下 HF</a>
+                    <a href="#rtx-spark" class="nav-item inactive-nav-link py-5 text-sm transition-colors">RTX Spark 邊緣革命</a>
+                    <a href="#tesla-cybercab" class="nav-item inactive-nav-link py-5 text-sm transition-colors">Cybercab 監管挑戰</a>
+                    <a href="#charts-section" class="nav-item inactive-nav-link py-5 text-sm transition-colors">數據視覺化</a>
+                    <a href="#interactive-table" class="nav-item inactive-nav-link py-5 text-sm transition-colors">關鍵指標檢索</a>
+                    <a href="#investment-strategy" class="nav-item inactive-nav-link py-5 text-sm transition-colors">投資戰略評估</a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" type="button" class="text-stone-600 hover:text-stone-900 focus:outline-none p-2 rounded-md" aria-label="切換選單">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-1 shadow-md">
+            <a href="#overview" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-600">產業轉折總覽</a>
+            <a href="#nvidia-hf" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-600">Nvidia 買下 HF</a>
+            <a href="#rtx-spark" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-600">RTX Spark 邊緣革命</a>
+            <a href="#tesla-cybercab" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-600">Cybercab 監管挑戰</a>
+            <a href="#charts-section" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-600">數據視覺化</a>
+            <a href="#interactive-table" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-600">關鍵指標檢索</a>
+            <a href="#investment-strategy" class="mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50 hover:text-sky-600">投資戰略評估</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- Hero Header Card -->
+        <div class="bg-gradient-to-r from-stone-900 via-stone-800 to-sky-950 text-white rounded-2xl shadow-xl p-8 mb-10 border border-stone-700 relative overflow-hidden">
+            <div class="relative z-10">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                    從GPU霸權走向AI入口之戰
+                </h1>
+                <p class="text-stone-300 text-base sm:text-lg max-w-3xl leading-relaxed">
+                    Nvidia 斥資近 130 億美元併購 Hugging Face、RTX Spark 全面進軍個人 PC；Tesla Cybercab 正式進入奧斯汀 Robotaxi 營運並迎來 NHTSA 監管稽核。AI 產業正式由「算力軍備競賽」邁入「入口控制權」與「終端交付」的全新階段。
+                </p>
+            </div>
+            <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-12 translate-y-8">
+                <svg width="400" height="400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+        </div>
+
+        <!-- Section 1: 產業轉折總覽 -->
+        <section id="overview" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業轉折總覽：三大事件指向同一個未來</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="text-stone-700 text-lg leading-relaxed mb-6">
+                    二〇二六年九月初的 AI 產業出現了三起看似獨立、實則互相呼應的里程碑事件。未來的產業贏家，不再僅靠擁有最先進的晶片製程，更必須掌控<strong class="text-sky-700 font-semibold">模型生態入口</strong>、<strong class="text-sky-700 font-semibold">終端算力硬體</strong>，以及<strong class="text-sky-700 font-semibold">實際執行實體工作與商業場景的能力</strong>。
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Event 1 -->
+                    <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase text-sky-700 tracking-wider">事件一：模型入口</span>
+                            <span class="text-xs bg-sky-200 text-sky-800 px-2 py-0.5 rounded font-mono">129.3億美元</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-900 mb-2">Nvidia 買下 Hugging Face</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            拿下全球最大的開源 AI 開發者社群，將產業控制點從單純的賣 GPU 向上延伸至模型評估、下載與部署的第一站。
+                        </p>
+                    </div>
+
+                    <!-- Event 2 -->
+                    <div class="bg-emerald-50 border-l-4 border-emerald-500 p-5 rounded-r-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase text-emerald-700 tracking-wider">事件二：終端下沉</span>
+                            <span class="text-xs bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded font-mono">10月上市</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-900 mb-2">RTX Spark 進軍 Windows PC</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            Blackwell GPU 結合 Grace 處理器，將高達 1 Petaflop 算力與原生 CUDA 引入個人設備，推進「個人 AI 代理 (Personal AI Agent)」落地。
+                        </p>
+                    </div>
+
+                    <!-- Event 3 -->
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase text-amber-700 tracking-wider">事件三：真實場景驗證</span>
+                            <span class="text-xs bg-amber-200 text-amber-800 px-2 py-0.5 rounded font-mono">Austin 落地</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-900 mb-2">Tesla Cybercab 營運與稽核</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            無方向盤與踏板的無人自駕車正式上路載客，但同時引來 NHTSA 針對約 1,000 輛車輛的大規模安全法規稽核，進入二元監管期。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Nvidia 收購 Hugging Face -->
+        <section id="nvidia-hf" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nvidia 買下 Hugging Face：掌控 AI 開發者第一入口</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-3">戰略定價：以 3 倍估值換取生態主導權</h3>
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            2026年9月3日，Nvidia 宣布達成協議收購 Hugging Face，交易金額達 <strong>129.303 億美元</strong>（約 119 億美元支付給投資人，最高 10 億美元為員工股票留任激勵）。對比 2023 年最後一輪融資時 45 億美元的估值，溢價接近 3 倍。
+                        </p>
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            如果單純視其為軟體平台，難以支撐如此高昂的定價；但若以<strong>「AI 時代的開發者流量入口」</strong>來看，其價值如同 Alphabet 當年收購 Android。Hugging Face 聚集了全球最活躍的模型創作者與微調工作流，是開發者決定硬體部署前的第一站。
+                        </p>
+                        
+                        <div class="bg-stone-50 rounded-lg p-4 border border-stone-200">
+                            <h4 class="font-semibold text-stone-800 mb-2 text-sm">全產業鏈控制版圖形成：</h4>
+                            <div class="flex flex-wrap gap-2 text-xs font-mono">
+                                <span class="bg-stone-200 text-stone-800 px-2.5 py-1 rounded">GPU 晶片</span>
+                                <span class="text-stone-400 self-center">&rarr;</span>
+                                <span class="bg-stone-200 text-stone-800 px-2.5 py-1 rounded">CUDA 架構</span>
+                                <span class="text-stone-400 self-center">&rarr;</span>
+                                <span class="bg-stone-200 text-stone-800 px-2.5 py-1 rounded">NVLink 高速互聯</span>
+                                <span class="text-stone-400 self-center">&rarr;</span>
+                                <span class="bg-stone-200 text-stone-800 px-2.5 py-1 rounded">AI 伺服器</span>
+                                <span class="text-stone-400 self-center">&rarr;</span>
+                                <span class="bg-sky-600 text-white px-2.5 py-1 rounded font-bold">Hugging Face 模型門戶</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-3">防禦雲端 ASIC 威脅與中立性考驗</h3>
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            當前 Meta、Microsoft、Google、Amazon 與 OpenAI 均全力研發自研 AI 晶片（ASIC）以擺脫對 Nvidia 的依賴。Nvidia 的最佳防禦策略是：<strong>將競爭焦點從「誰的晶片更便宜」，轉移為「誰的生態體系最順暢、遷移轉換成本最高」</strong>。
+                        </p>
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-4">
+                            <h4 class="font-bold text-amber-900 text-sm mb-1">關鍵矛盾與監管隱憂：</h4>
+                            <p class="text-xs text-amber-800 leading-relaxed">
+                                Hugging Face 既有股東包含 AMD 與 Amazon。黃仁勳承諾平台保持中立、無需強制使用 Nvidia 運算硬體。然而，若 Nvidia 深度整合自家 TensorRT 與 Nemotron 模型，可能激發 AMD 等競爭對手的警惕，甚至促成開發者尋求替代開源社群。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlight Cards -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-stone-200">
+                    <div class="text-center p-3 bg-stone-50 rounded-lg">
+                        <div class="text-2xl font-black text-sky-600">1,800萬+</div>
+                        <div class="text-xs text-stone-500 mt-1">全球活躍開發者</div>
+                    </div>
+                    <div class="text-center p-3 bg-stone-50 rounded-lg">
+                        <div class="text-2xl font-black text-sky-600">300萬+</div>
+                        <div class="text-xs text-stone-500 mt-1">開源 AI 模型庫</div>
+                    </div>
+                    <div class="text-center p-3 bg-stone-50 rounded-lg">
+                        <div class="text-2xl font-black text-sky-600">50萬+</div>
+                        <div class="text-xs text-stone-500 mt-1">訓練數據集</div>
+                    </div>
+                    <div class="text-center p-3 bg-stone-50 rounded-lg">
+                        <div class="text-2xl font-black text-sky-600">20萬+</div>
+                        <div class="text-xs text-stone-500 mt-1">採用該平台之企業</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: RTX Spark 與端點算力分層 -->
+        <section id="rtx-spark" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">RTX Spark 與 AI 邊緣革命：推理重心的下沉遷移</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="lg:col-span-2">
+                        <h3 class="text-xl font-bold text-stone-800 mb-3">算力分層新架構：資料中心 + 個人 PC 協同</h3>
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            過去三年市場普遍相信「所有 AI 請求都將送回雲端資料中心」。但隨著 AI Agent 一天執行數百次任務，將所有運算集中於雲端面臨三大致命瓶頸：<strong>高昂傳輸成本、回應延遲、企業與個人隱私洩漏</strong>。
+                        </p>
+                        <p class="text-stone-700 leading-relaxed">
+                            Nvidia 聯手聯想（Lenovo Yoga Pro 9n）與宏碁（Acer SFF）在 IFA 2026 發布 RTX Spark PC 平台，將旗艦級 Blackwell 架構與最高 20 核心 Grace CPU 裝進個人電腦，支援 128GB 統一記憶體與 1 Petaflop FP4 算力，使 70B 等級大模型能夠原生於本機極速執行。
+                        </p>
+                    </div>
+
+                    <div class="bg-sky-50 p-5 rounded-xl border border-sky-100 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-sky-600 tracking-wider uppercase">關鍵技術創新</span>
+                            <h4 class="text-lg font-bold text-stone-900 mt-1 mb-2">NVIDIA PAIR</h4>
+                            <p class="text-xs text-stone-600 leading-relaxed mb-3">
+                                <strong>Personal AI Router</strong>：可將局域網內多台 RTX 設備算力自動分派協同。針對 llama.cpp 與 vLLM 本地推理工具大幅最佳化，速度最高可提升 <strong>1.9 倍</strong>。
+                            </p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-sky-200 text-xs text-stone-700">
+                            <strong>微軟協同防禦：</strong> 共同制定 Windows AI Agent 沙盒安全隔離架構，嚴格劃分本地隱私處理與雲端繁重工作邊界。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-stone-200 pt-6">
+                    <div class="p-4 bg-stone-50 rounded-lg">
+                        <div class="font-bold text-stone-800 text-sm mb-1">硬體規格亮點</div>
+                        <div class="text-xs text-stone-600">Blackwell GPU + 20核 Grace CPU，高達 128GB 統一記憶體，原生執行 CUDA 應用。</div>
+                    </div>
+                    <div class="p-4 bg-stone-50 rounded-lg">
+                        <div class="font-bold text-stone-800 text-sm mb-1">市場空間擴張</div>
+                        <div class="text-xs text-stone-600">Nvidia 可服務市場由「AI資料中心」擴展至「資料中心 + 工作站 + 個人 PC + 邊緣終端」。</div>
+                    </div>
+                    <div class="p-4 bg-stone-50 rounded-lg">
+                        <div class="font-bold text-stone-800 text-sm mb-1">競爭對手擠壓</div>
+                        <div class="text-xs text-stone-600">AMD、Intel 與 Qualcomm 不只要比拼 NPU/GPU 算力，更需正面迎戰成熟的 CUDA 生態壁壘。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Tesla Cybercab 監管挑戰 -->
+        <section id="tesla-cybercab" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Tesla Cybercab 營運啟動：故事進入嚴苛監管與營運驗證期</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-3">奧斯汀上路營運 vs NHTSA 千輛大稽核</h3>
+                        <p class="text-stone-700 leading-relaxed mb-4">
+                            2026年9月3日，Tesla 正式於德州奧斯汀部分區域讓無方向盤、無煞車與油門踏板的雙人座 <strong>Cybercab</strong> 投入 Robotaxi 載客服務。根據德州政府官方登記紀錄，截至 9 月 4 日上午，Tesla 於德州登記自駕車共 420 輛，其中首批 Cybercab 占 <strong>45 輛</strong>。
+                        </p>
+                        <div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg mb-4">
+                            <h4 class="font-bold text-rose-900 text-sm mb-1">重大監管風險浮現：</h4>
+                            <p class="text-xs text-rose-800 leading-relaxed">
+                                美國國家公路交通安全管理局（NHTSA）於 9 月 4 日正式對約 <strong>1,000 輛</strong> Cybercab 展開聯邦安全法規稽核，調查其在完全缺乏傳統駕駛控制設備與後視鏡的情形下，如何符合聯邦汽車安全標準（FMVSS）。
+                            </p>
+                        </div>
+                        <p class="text-xs text-stone-500 italic">
+                            *註：德州登記營運的 45 輛為實際路上服務車隊；NHTSA 調查的 1,000 輛為認證及測試試產批次，兩者統計口徑不同。
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-800 mb-3">商業模式的終極對決：Tesla vs Waymo</h3>
+                        <div class="space-y-4">
+                            <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-stone-900 text-sm">Waymo 模式（高精度感測 + 重資本）</span>
+                                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono">4,000+ 輛商用</span>
+                                </div>
+                                <p class="text-xs text-stone-600 leading-relaxed">
+                                    仰賴昂貴的光達（LiDAR）與雷達多感測器融合，採取高度控制的封閉營運邊界，以「逐城市取得執照」穩健推進（目前已進入全美 14 個城市）。
+                                </p>
+                            </div>
+
+                            <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-stone-900 text-sm">Tesla 模式（純視覺 AI + 極致低成本）</span>
+                                    <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-mono">45 輛奧斯汀試點</span>
+                                </div>
+                                <p class="text-xs text-stone-600 leading-relaxed">
+                                    押注純相機視覺架構，大幅消除硬體雷達成本，試圖以極低生產成本達成快速擴張。但「完全無人為控制機構」使其面臨嚴苛的二元監管風險。
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 p-4 bg-sky-50 rounded-lg border border-sky-200">
+                            <h4 class="font-bold text-sky-900 text-xs uppercase mb-1">未來 6-12 個月核心追蹤數據指標：</h4>
+                            <ul class="text-xs text-stone-700 list-disc list-inside space-y-1">
+                                <li>無人駕駛每千英里人類/遠端介入次數（Disengagements）</li>
+                                <li>單車每日實際營運載客時數與空載率</li>
+                                <li>每英里營運營收 vs 綜合折舊保險成本</li>
+                                <li>加州與其他城市跨區營運許可獲准速度</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 資料視覺化分析 (Chart.js) -->
+        <section id="charts-section" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業數據視覺化分析</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
+                <!-- Chart 1: Robotaxi & AV Scale -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">全美 Robotaxi 與自駕車隊規模對比</h3>
+                    <p class="text-xs text-stone-500 mb-4">Waymo 商業營運規模 vs Tesla 德州落地與 NHTSA 稽核口徑 (車輛數)</p>
+                    <div class="relative w-full h-72">
+                        <canvas id="fleetChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Hugging Face Deal Breakdown -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-stone-800 mb-2">Hugging Face 估值成長與交易結構</h3>
+                    <p class="text-xs text-stone-500 mb-4">2023 輪融資估值 vs 2026 Nvidia 收購交易組成 (億美元)</p>
+                    <div class="relative w-full h-72">
+                        <canvas id="dealChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: 關鍵指標互動檢索表 -->
+        <section id="interactive-table" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">報告關鍵指標互動檢索</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 mb-6">
+                    <div class="relative flex-grow max-w-md">
+                        <input type="text" id="searchInput" placeholder="搜尋指標、企業、關鍵數值或技術規格..." 
+                               class="w-full pl-10 pr-4 py-2 text-sm border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2">
+                        <label for="categoryFilter" class="text-xs font-semibold text-stone-500 whitespace-nowrap">分類篩選：</label>
+                        <select id="categoryFilter" class="text-sm border border-stone-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                            <option value="ALL">全部類別</option>
+                            <option value="Nvidia收購">Nvidia 收購</option>
+                            <option value="RTX Spark">RTX Spark</option>
+                            <option value="Tesla營運">Tesla 營運</option>
+                            <option value="Waymo競品">Waymo 競品</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full divide-y divide-stone-200 text-left text-sm">
+                        <thead class="bg-stone-50 sticky top-0 z-10">
+                            <tr>
+                                <th scope="col" class="px-6 py-3.5 font-bold text-stone-700">指標項目</th>
+                                <th scope="col" class="px-6 py-3.5 font-bold text-stone-700">類別</th>
+                                <th scope="col" class="px-6 py-3.5 font-bold text-stone-700">真實核心數據</th>
+                                <th scope="col" class="px-6 py-3.5 font-bold text-stone-700">戰略影響與市場解讀</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-stone-200 bg-white">
+                            <!-- Populated dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noResults" class="hidden text-center py-8 text-stone-500 text-sm">
+                    查無符合條件的數據資料，請調整關鍵字。
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: 價值投資戰略評估 -->
+        <section id="investment-strategy" class="scroll-mt-24 mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">美股投資人策略判斷：橫向平台 vs 垂直閉環</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Nvidia Strategy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-bold text-stone-900">Nvidia：橫向平台生態霸權</h3>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded font-bold">平台擴張</span>
+                        </div>
+                        <p class="text-sm text-stone-700 leading-relaxed mb-4">
+                            Nvidia 透過 Hugging Face 與 RTX Spark，將自身錨定於全產業所有 AI 工作負載的樞紐。不論企業選用 OpenAI、Anthropic 還是開源 DeepSeek，只要 AI 運算持續成長，Nvidia 都能在資料中心或邊緣 PC 抽稅。
+                        </p>
+                        <div class="bg-stone-50 p-3.5 rounded-lg mb-3">
+                            <h4 class="font-bold text-stone-800 text-xs mb-1">主要投資風險：</h4>
+                            <p class="text-xs text-stone-600 leading-relaxed">
+                                並非 AI 需求終止，而是<strong>「市場究竟願意為平台霸權支付多高的溢價」</strong>。Hugging Face 交易存在社群中立性考驗，且高估值收購已引發市場對 AI 生態相互拉抬估值的質疑。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-xs font-semibold text-emerald-700 pt-2 border-t border-stone-100">
+                        核心判斷：由「硬體賣鏟人」升級為「軟硬一體標準制定者」。
+                    </div>
+                </div>
+
+                <!-- Tesla Strategy Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-bold text-stone-900">Tesla：高度垂直整合賭注</h3>
+                            <span class="text-xs bg-sky-100 text-sky-800 px-2 py-1 rounded font-bold">商業驗證</span>
+                        </div>
+                        <p class="text-sm text-stone-700 leading-relaxed mb-4">
+                            從 FSD 模型、自製晶片、車輛生產、營運車隊到叫車 App 全部一手包辦。如果成功，將攫取無人叫車價值鏈絕大部分超額利潤；但若監管卡關或安全事故頻發，單點崩潰即拖垮整套商業預期。
+                        </p>
+                        <div class="bg-stone-50 p-3.5 rounded-lg mb-3">
+                            <h4 class="font-bold text-stone-800 text-xs mb-1">主要投資風險：</h4>
+                            <p class="text-xs text-stone-600 leading-relaxed">
+                                目前 1.4 兆美元市值很大比例取決於 Robotaxi 的成長承諾。面對中國同業價格戰擠壓與 NHTSA 嚴厲稽核，估值模型已進入必須以真實營運利潤交卷的二元時刻。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-xs font-semibold text-sky-700 pt-2 border-t border-stone-100">
+                        核心判斷：由「科技估值敘事」邁入「真金白銀商業模型驗證」。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buffett Value Investing Takeaway Card -->
+            <div class="bg-stone-900 text-stone-200 rounded-xl p-6 shadow-xl">
+                <div class="flex items-center space-x-3 mb-3">
+                    <h3 class="text-lg font-bold text-white">護城河的質變：不可替代性與資本回報率</h3>
+                </div>
+                <p class="text-sm leading-relaxed text-stone-300">
+                    從價值投資的核心原則檢視，真正的經濟護城河在於「極高的顧客轉換成本」與「定價能力」。Nvidia 藉由收購 Hugging Face 固化軟體開發者心智，正是為了構築比單一晶片運算速度更難跨越的生態護城河；而 Tesla 的 Robotaxi 則是典型的高風險、高報酬資本再投入期，投資人切莫只看交付台數，唯有每英里營運利潤與自由現金流才是真正支撐萬億市值的基石。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Component conforming to required specs -->
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-從GPU霸權走向AI入口之戰。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Nvidia與Tesla相關公開資料 (2026年9月4日)。</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic & Data Scripts -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileNavItems.forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Navigation Active State with Intersection Observer
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${currentId}`) {
+                            link.classList.remove('inactive-nav-link');
+                            link.classList.add('active-nav-link');
+                        } else {
+                            link.classList.remove('active-nav-link');
+                            link.classList.add('inactive-nav-link');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // 3. Real Product & Metrics Data
+        const productData = [
+            {
+                name: "Hugging Face 併購協議總額",
+                category: "Nvidia收購",
+                badgeClass: "bg-purple-100 text-purple-800",
+                value: "129.303 億美元",
+                insight: "雙方已簽署協議 (agreed to acquire)；溢價達 2023 年融資估值 45 億美元之近 3 倍"
+            },
+            {
+                name: "Hugging Face 交易結構",
+                category: "Nvidia收購",
+                badgeClass: "bg-purple-100 text-purple-800",
+                value: "119億 (股東) + 10億 (員工股票)",
+                insight: "防範大型客戶 (Meta、微軟、OpenAI) 自研 ASIC 晶片威脅，鎖定 AI 最上游開發者入口"
+            },
+            {
+                name: "Hugging Face 開發者與資產規模",
+                category: "Nvidia收購",
+                badgeClass: "bg-purple-100 text-purple-800",
+                value: "1,800萬人 / 300萬模型",
+                insight: "含 50 萬個數據集、100 萬個應用程式、逾 20 萬家企業採用，構成龐大護城河"
+            },
+            {
+                name: "RTX Spark PC 運算規格",
+                category: "RTX Spark",
+                badgeClass: "bg-emerald-100 text-emerald-800",
+                value: "1 Petaflop FP4 / 128GB 統一記憶體",
+                insight: "結合 Blackwell GPU 與 20 核心 Grace CPU，支援本機原生執行大型語言模型"
+            },
+            {
+                name: "NVIDIA PAIR 本地推理加速",
+                category: "RTX Spark",
+                badgeClass: "bg-emerald-100 text-emerald-800",
+                value: "推理速度提升最高 1.9 倍",
+                insight: "Personal AI Router 在局域網智能分配工作負載，針對 llama.cpp 與 vLLM 工具深度最佳化"
+            },
+            {
+                name: "RTX Spark 首批 OEM 合作夥伴",
+                category: "RTX Spark",
+                badgeClass: "bg-emerald-100 text-emerald-800",
+                value: "Lenovo Yoga Pro 9n / Acer SFF",
+                insight: "2026年10月平台開始出貨，與微軟共建 Windows AI Agent 沙盒安全架構"
+            },
+            {
+                name: "Tesla 德州自駕車登記總數",
+                category: "Tesla營運",
+                badgeClass: "bg-sky-100 text-sky-800",
+                value: "420 輛",
+                insight: "截至 2026 年 9 月 4 日上午德州政府官方登記紀錄，涵蓋各型測試自駕車輛"
+            },
+            {
+                name: "Tesla Austin Cybercab 首發規模",
+                category: "Tesla營運",
+                badgeClass: "bg-sky-100 text-sky-800",
+                value: "45 輛",
+                insight: "無方向盤與踏板雙人座自駕車，正式進駐奧斯汀部分區域 Robotaxi App 供一般叫車"
+            },
+            {
+                name: "NHTSA 聯邦安全標準稽核範疇",
+                category: "Tesla營運",
+                badgeClass: "bg-rose-100 text-rose-800",
+                value: "約 1,000 輛 Cybercab",
+                insight: "針對缺乏方向盤、踏板與實體後視鏡之設計合規依據與認證程序啟動調查，具高度二元監管風險"
+            },
+            {
+                name: "Waymo 全美商用無人車隊",
+                category: "Waymo競品",
+                badgeClass: "bg-amber-100 text-amber-800",
+                value: "4,000+ 輛 / 14 座城市",
+                insight: "採用光達 (LiDAR) 與雷達昂貴感測方案，代表穩健重資本模式，與特斯拉純視覺形成對比"
+            },
+            {
+                name: "Tesla 市場總市值估值架構",
+                category: "Tesla營運",
+                badgeClass: "bg-sky-100 text-sky-800",
+                value: "約 1.4 兆美元",
+                insight: "市值極大比例預期架構於 Robotaxi 商業化，由技術展示全面轉入每英里獲利能力驗證期"
+            }
+        ];
+
+        // 4. Render Table Function
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const noResults = document.getElementById('noResults');
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-stone-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap font-semibold text-stone-900">${item.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="text-xs px-2.5 py-1 rounded-full font-bold ${item.badgeClass}">${item.category}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap font-mono font-bold text-sky-700">${item.value}</td>
+                    <td class="px-6 py-4 text-xs text-stone-600 max-w-md">${item.insight}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function filterData() {
+            const query = searchInput.value.trim().toLowerCase();
+            const category = categoryFilter.value;
+
+            const filtered = productData.filter(item => {
+                const matchesCategory = category === 'ALL' || item.category === category;
+                const matchesQuery = item.name.toLowerCase().includes(query) ||
+                                     item.value.toLowerCase().includes(query) ||
+                                     item.insight.toLowerCase().includes(query) ||
+                                     item.category.toLowerCase().includes(query);
+                return matchesCategory && matchesQuery;
+            });
+
+            renderTable(filtered);
+        }
+
+        searchInput.addEventListener('input', filterData);
+        categoryFilter.addEventListener('change', filterData);
+
+        // Initial Render
+        renderTable(productData);
+
+        // 5. Chart.js Implementation
+        window.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: Robotaxi & AV Deployment Scope
+            const ctxFleet = document.getElementById('fleetChart').getContext('2d');
+            new Chart(ctxFleet, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Waymo全美營運車隊',
+                        'NHTSA稽核Cybercab總數',
+                        'Tesla德州自駕車登記',
+                        'Tesla奧斯汀Cybercab上路'
+                    ],
+                    datasets: [{
+                        label: '車輛規模 (輛)',
+                        data: [4000, 1000, 420, 45],
+                        backgroundColor: [
+                            'rgba(14, 165, 233, 0.85)',
+                            'rgba(244, 63, 94, 0.85)',
+                            'rgba(100, 116, 139, 0.85)',
+                            'rgba(245, 158, 11, 0.85)'
+                        ],
+                        borderColor: [
+                            'rgb(14, 165, 233)',
+                            'rgb(244, 63, 94)',
+                            'rgb(100, 116, 139)',
+                            'rgb(245, 158, 11)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` 數量: ${context.parsed.y} 輛`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f1f5f9' },
+                            ticks: { font: { family: 'sans-serif' } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Hugging Face Deal & Growth
+            const ctxDeal = document.getElementById('dealChart').getContext('2d');
+            new Chart(ctxDeal, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        '2023最後融資估值',
+                        '2026 Nvidia收購總額',
+                        '支付既有投資人',
+                        '員工股票留任激勵'
+                    ],
+                    datasets: [{
+                        label: '金額 (億美元)',
+                        data: [45.0, 129.3, 119.0, 10.3],
+                        backgroundColor: [
+                            'rgba(148, 163, 184, 0.85)',
+                            'rgba(99, 102, 241, 0.85)',
+                            'rgba(56, 189, 248, 0.85)',
+                            'rgba(16, 185, 129, 0.85)'
+                        ],
+                        borderColor: [
+                            'rgb(148, 163, 184)',
+                            'rgb(99, 102, 241)',
+                            'rgb(56, 189, 248)',
+                            'rgb(16, 185, 129)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` 金額: $${context.parsed.y} 億美元`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f1f5f9' },
+                            ticks: { font: { family: 'sans-serif' } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
