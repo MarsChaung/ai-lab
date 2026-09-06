@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>巴菲特AI價值投資-美股市場週報 (2026/8/31~9/4)</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; }
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7;
+            font-weight: 700;
+        }
+        .inactive-nav-link {
+            color: #57534e;
+            border-bottom: 2px solid transparent;
+        }
+        .inactive-nav-link:hover { color: #0284c7; }
+        .section-anchor { scroll-margin-top: 96px; }
+        .gradient-hero {
+            background:
+                radial-gradient(circle at top right, rgba(14,165,233,0.18), transparent 34%),
+                linear-gradient(135deg, #0c4a6e 0%, #1e293b 58%, #292524 100%);
+        }
+        .metric-card {
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 30px rgba(15, 23, 42, .10);
+        }
+        .news-row { transition: background-color .15s ease; }
+        .news-row:hover { background-color: #f8fafc; }
+        .chart-wrap { position: relative; height: 320px; }
+        @media (max-width: 768px) {
+            .chart-wrap { height: 280px; }
+        }
+    </style>
+</head>
+
+<body class="bg-stone-50 text-stone-700">
+
+    <!-- Sticky Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-16 flex items-center justify-between">
+                <a href="#overview" class="flex items-center gap-3">
+                    <div class="font-bold text-stone-900 leading-tight">美股市場週報</div>
+                </a>
+
+                <nav class="hidden lg:flex items-center gap-5 text-sm">
+                    <a href="#overview" data-nav="overview" class="nav-link active-nav-link py-5">總覽</a>
+                    <a href="#macro" data-nav="macro" class="nav-link inactive-nav-link py-5">宏觀環境</a>
+                    <a href="#charts" data-nav="charts" class="nav-link inactive-nav-link py-5">市場圖表</a>
+                    <a href="#top10" data-nav="top10" class="nav-link inactive-nav-link py-5">十大事件</a>
+                    <a href="#table" data-nav="table" class="nav-link inactive-nav-link py-5">互動資料</a>
+                    <a href="#signals" data-nav="signals" class="nav-link inactive-nav-link py-5">投資訊號</a>
+                </nav>
+
+                <button id="mobileMenuButton"
+                    class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-stone-300 text-stone-700"
+                    aria-label="開啟選單">
+                    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <div id="mobileMenu" class="lg:hidden hidden pb-4 border-t border-stone-100">
+                <div class="grid grid-cols-2 gap-2 pt-3 text-sm">
+                    <a href="#overview" class="mobile-nav px-3 py-2 rounded-md hover:bg-sky-50">總覽</a>
+                    <a href="#macro" class="mobile-nav px-3 py-2 rounded-md hover:bg-sky-50">宏觀環境</a>
+                    <a href="#charts" class="mobile-nav px-3 py-2 rounded-md hover:bg-sky-50">市場圖表</a>
+                    <a href="#top10" class="mobile-nav px-3 py-2 rounded-md hover:bg-sky-50">十大事件</a>
+                    <a href="#table" class="mobile-nav px-3 py-2 rounded-md hover:bg-sky-50">互動資料</a>
+                    <a href="#signals" class="mobile-nav px-3 py-2 rounded-md hover:bg-sky-50">投資訊號</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="overview" class="section-anchor gradient-hero text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+            <div class="max-w-4xl">
+                <div class="inline-flex items-center rounded-full bg-white/10 border border-white/20 px-3 py-1 text-sm mb-5">
+                    資料區間：2026/8/31 ～ 2026/9/4
+                </div>
+                <h1 class="text-4xl md:text-5xl font-black leading-tight">
+                    獲利很強，利率也很高
+                </h1>
+                <p class="mt-5 text-lg md:text-xl text-sky-100 leading-relaxed">
+                    AI 基礎建設需求持續擴張，但美國就業轉強、長債殖利率升高，
+                    讓市場從「只看成長」進入「成長能否抵銷資金成本」的新階段。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+                <div class="bg-white/10 border border-white/15 rounded-xl p-5">
+                    <div class="text-sm text-sky-100">S&P 500 週漲跌</div>
+                    <div class="text-3xl font-black mt-1">+0.1%</div>
+                    <div class="text-xs text-sky-100 mt-1">指數平靜，內部分化加大</div>
+                </div>
+                <div class="bg-white/10 border border-white/15 rounded-xl p-5">
+                    <div class="text-sm text-sky-100">Broadcom AI 半導體營收</div>
+                    <div class="text-3xl font-black mt-1">167 億美元</div>
+                    <div class="text-xs text-sky-100 mt-1">年增 221%</div>
+                </div>
+                <div class="bg-white/10 border border-white/15 rounded-xl p-5">
+                    <div class="text-sm text-sky-100">Dell AI 伺服器未交付訂單</div>
+                    <div class="text-3xl font-black mt-1">950 億美元</div>
+                    <div class="text-xs text-sky-100 mt-1">AI 基建需求仍強</div>
+                </div>
+                <div class="bg-white/10 border border-white/15 rounded-xl p-5">
+                    <div class="text-sm text-sky-100">美國 10 年債殖利率</div>
+                    <div class="text-3xl font-black mt-1">約 4.8%</div>
+                    <div class="text-xs text-sky-100 mt-1">估值壓力重新上升</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- Key Thesis -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週核心判斷</h2>
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="metric-card bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-sm font-bold text-sky-700 mb-2">一、經濟比預期強</div>
+                    <p class="leading-relaxed">
+                        八月美國非農就業增加 16.2 萬人，失業率維持 4.1%。
+                        市場開始重新評估聯準會是否仍需要維持偏緊的貨幣政策。
+                    </p>
+                </div>
+                <div class="metric-card bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-sm font-bold text-emerald-700 mb-2">二、AI 支出沒有熄火</div>
+                    <p class="leading-relaxed">
+                        Broadcom、Dell、HPE 的營收、AI 晶片與伺服器訂單同步走強，
+                        從不同供應鏈位置驗證 AI 資本支出仍處高檔。
+                    </p>
+                </div>
+                <div class="metric-card bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-sm font-bold text-amber-700 mb-2">三、估值進入壓力測試</div>
+                    <p class="leading-relaxed">
+                        當長債殖利率接近 5%，企業即使成長，市場願意支付的本益比仍可能下降。
+                        下一階段將更重視現金流、訂單品質與資本效率。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Macro -->
+        <section id="macro" class="section-anchor mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總體經濟與地緣政治</h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <p class="leading-8 text-lg">
+                    本週美股最大的宏觀變數，是美國就業市場意外轉強。八月新增 16.2 萬個工作，
+                    失業率維持 4.1%，六月與七月數據也被上修，使市場重新評估聯準會政策。
+                    同一時間，美國十年期公債殖利率升至約 4.8%，三十年期殖利率重新突破 5.2%；
+                    日本十年期公債殖利率一度升到 3%，顯示全球資金成本正在一起上升。
+                    地緣政治方面，中東與俄羅斯能源供給不確定性使油價維持高檔。
+                    因此，美股目前面對的是「經濟不差、企業獲利不差，但資金成本也更高」的複雜環境。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-sky-50 border border-sky-100 rounded-lg p-5">
+                    <div class="text-xs uppercase tracking-wide text-sky-700">非農就業</div>
+                    <div class="text-2xl font-extrabold text-stone-900 mt-1">+16.2 萬</div>
+                    <div class="text-sm mt-2">高於市場預期，經濟韌性回升。</div>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-100 rounded-lg p-5">
+                    <div class="text-xs uppercase tracking-wide text-emerald-700">失業率</div>
+                    <div class="text-2xl font-extrabold text-stone-900 mt-1">4.1%</div>
+                    <div class="text-sm mt-2">尚未出現明顯惡化。</div>
+                </div>
+                <div class="bg-amber-50 border border-amber-100 rounded-lg p-5">
+                    <div class="text-xs uppercase tracking-wide text-amber-700">10 年美債</div>
+                    <div class="text-2xl font-extrabold text-stone-900 mt-1">約 4.8%</div>
+                    <div class="text-sm mt-2">高估值資產承受重新定價壓力。</div>
+                </div>
+                <div class="bg-rose-50 border border-rose-100 rounded-lg p-5">
+                    <div class="text-xs uppercase tracking-wide text-rose-700">油價</div>
+                    <div class="text-2xl font-extrabold text-stone-900 mt-1">90 美元以上</div>
+                    <div class="text-sm mt-2">增加通膨與企業成本不確定性。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts -->
+        <section id="charts" class="section-anchor mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場與 AI 數據圖表</h2>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-900 mb-1">主要美股指數週表現</h3>
+                    <p class="text-sm text-stone-500 mb-5">2026/8/31～9/4，單位：%</p>
+                    <div class="chart-wrap">
+                        <canvas id="indexChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-bold text-xl text-stone-900 mb-1">AI 基礎建設關鍵數字</h3>
+                    <p class="text-sm text-stone-500 mb-5">依本週報告揭露數字，單位：億美元</p>
+                    <div class="chart-wrap">
+                        <canvas id="aiInfraChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-6">
+                <h3 class="font-bold text-xl text-stone-900 mb-1">AI 需求的「跨供應鏈驗證」</h3>
+                <p class="text-sm text-stone-500 mb-5">以年增率或營運增幅觀察需求強度</p>
+                <div class="chart-wrap">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top 10 -->
+        <section id="top10" class="section-anchor mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週十大重要事件</h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-sky-600 mb-2">01｜總體經濟</div>
+                    <h3 class="text-xl font-bold text-stone-900">美國就業突然轉強</h3>
+                    <p class="mt-3 leading-relaxed">八月新增 16.2 萬個工作，失業率 4.1%，市場由「何時降息」轉向重新討論升息或維持高利率。</p>
+                    <div class="mt-4 rounded-md bg-sky-50 p-4 text-sm"><b>投資影響：</b>金融股相對有支撐，高估值科技、房地產及高負債公司承壓。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-violet-600 mb-2">02｜AI 半導體</div>
+                    <h3 class="text-xl font-bold text-stone-900">Broadcom AI 營收年增 221%</h3>
+                    <p class="mt-3 leading-relaxed">第三季 AI 半導體營收 167 億美元，第四季預估升至 217 億美元，客製化 AI 晶片成為第二條主戰線。</p>
+                    <div class="mt-4 rounded-md bg-violet-50 p-4 text-sm"><b>投資影響：</b>AI 市場由單一 GPU 擴張成 GPU＋XPU 並存。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-emerald-600 mb-2">03｜AI 伺服器</div>
+                    <h3 class="text-xl font-bold text-stone-900">Dell、HPE 驗證 AI 基建需求</h3>
+                    <p class="mt-3 leading-relaxed">Dell AI 伺服器未交付訂單達 950 億美元，HPE 也提高財測並指出記憶體、CPU、儲存供給偏緊。</p>
+                    <div class="mt-4 rounded-md bg-emerald-50 p-4 text-sm"><b>投資影響：</b>AI 受惠鏈由 GPU 擴散到伺服器、網路、儲存、散熱與電力。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-indigo-600 mb-2">04｜Nvidia 生態系</div>
+                    <h3 class="text-xl font-bold text-stone-900">Nvidia 收購 Hugging Face</h3>
+                    <p class="mt-3 leading-relaxed">以約 129.3 億美元取得全球重要的 AI 模型與開發者平台，影響力從晶片向模型工具與社群延伸。</p>
+                    <div class="mt-4 rounded-md bg-indigo-50 p-4 text-sm"><b>投資影響：</b>Nvidia 正從硬體公司升級為 AI 平台控制者。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-cyan-600 mb-2">05｜Nvidia 戰略</div>
+                    <h3 class="text-xl font-bold text-stone-900">投資聯發科 35 億美元</h3>
+                    <p class="mt-3 leading-relaxed">聯發科導入 NVLink Fusion，使客製化 AI 晶片也能接入 Nvidia 機櫃架構。</p>
+                    <div class="mt-4 rounded-md bg-cyan-50 p-4 text-sm"><b>投資影響：</b>Nvidia 嘗試把競爭從晶片性能轉成整體 AI 工廠標準。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-amber-600 mb-2">06｜Apple</div>
+                    <h3 class="text-xl font-bold text-stone-900">Apple 進入 John Ternus 時代</h3>
+                    <p class="mt-3 leading-relaxed">Tim Cook 轉任 Executive Chairman，John Ternus 接任 CEO，市場焦點轉向 Apple 能否在生成式 AI 與新硬體週期迎頭趕上。</p>
+                    <div class="mt-4 rounded-md bg-amber-50 p-4 text-sm"><b>投資影響：</b>AI 是否能重啟 iPhone／Mac 換機週期，將成為估值核心。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-fuchsia-600 mb-2">07｜自駕車</div>
+                    <h3 class="text-xl font-bold text-stone-900">Waymo、Zoox 擴張 Robotaxi</h3>
+                    <p class="mt-3 leading-relaxed">Waymo 與 Amazon 旗下 Zoox 持續擴張美國城市服務，競爭由技術展示進入營運規模與監管能力比較。</p>
+                    <div class="mt-4 rounded-md bg-fuchsia-50 p-4 text-sm"><b>投資影響：</b>Tesla Robotaxi 將被迫以真實營運數據接受檢驗。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-lime-700 mb-2">08｜AI 電力</div>
+                    <h3 class="text-xl font-bold text-stone-900">Berkshire 把 AI 看成能源生意</h3>
+                    <p class="mt-3 leading-relaxed">Greg Abel 指出資料中心已占 Iowa 約 8% 電力負載，AI 資料中心將成為 Berkshire Hathaway Energy 的重要成長來源。</p>
+                    <div class="mt-4 rounded-md bg-lime-50 p-4 text-sm"><b>投資影響：</b>下一階段供給瓶頸可能從 GPU 轉向電力、電網與發電設備。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-rose-600 mb-2">09｜醫療</div>
+                    <h3 class="text-xl font-bold text-stone-900">AbbVie 血癌新藥三期成功</h3>
+                    <p class="mt-3 leading-relaxed">Etentamig 客觀反應率達 74%，疾病惡化或死亡風險降低 60%，強化 Humira 後成長引擎。</p>
+                    <div class="mt-4 rounded-md bg-rose-50 p-4 text-sm"><b>投資影響：</b>AbbVie 的營收來源有望由免疫疾病進一步延伸至腫瘤。</div>
+                </article>
+
+                <article class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="text-xs font-bold text-orange-600 mb-2">10｜零售</div>
+                    <h3 class="text-xl font-bold text-stone-900">Lululemon 暴跌反映品牌分化</h3>
+                    <p class="mt-3 leading-relaxed">美洲營收下降 8%，招牌緊身褲銷售下降約 20%，全年營收與 EPS 預估同步下修。</p>
+                    <div class="mt-4 rounded-md bg-orange-50 p-4 text-sm"><b>投資影響：</b>零售市場不是全面衰退，而是品牌競爭力快速分化。</div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Interactive Table -->
+        <section id="table" class="section-anchor mb-12">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">互動式事件資料庫</h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="flex flex-col md:flex-row md:items-center gap-3 md:justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-xl text-stone-900">搜尋本週十大事件</h3>
+                        <p class="text-sm text-stone-500 mt-1">可依公司、產業、主題或投資影響即時篩選。</p>
+                    </div>
+                    <div class="w-full md:w-80">
+                        <input id="tableSearch" type="text" placeholder="例如：Nvidia、AI、醫療、利率…"
+                            class="w-full rounded-lg border border-stone-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto max-h-[520px] border border-stone-200 rounded-lg">
+                    <table class="min-w-full text-sm">
+                        <thead class="sticky top-0 bg-stone-800 text-white z-10">
+                            <tr>
+                                <th class="text-left px-4 py-3">事件</th>
+                                <th class="text-left px-4 py-3">類別</th>
+                                <th class="text-left px-4 py-3">公司／主題</th>
+                                <th class="text-left px-4 py-3">關鍵數字</th>
+                                <th class="text-left px-4 py-3 min-w-[300px]">投資人影響</th>
+                            </tr>
+                        </thead>
+                        <tbody id="newsTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+                    </table>
+                </div>
+                <div id="resultCount" class="text-xs text-stone-500 mt-3"></div>
+            </div>
+        </section>
+
+        <!-- Signals -->
+        <section id="signals" class="section-anchor mb-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週三個投資訊號</h2>
+
+            <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-sky-500">
+                    <h3 class="font-bold text-xl text-stone-900">一、AI 需求仍然是真實需求</h3>
+                    <p class="mt-3 leading-7">
+                        Nvidia 的 GPU、Broadcom 的客製化 AI 晶片、Dell 與 HPE 的伺服器訂單，
+                        從不同供應鏈位置得到相同答案：AI 資本支出仍然快速增加。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+                    <h3 class="font-bold text-xl text-stone-900">二、AI 投資正進入第二階段</h3>
+                    <p class="mt-3 leading-7">
+                        第一階段由 GPU 主導；第二階段開始擴散到 XPU、網路、伺服器、儲存、記憶體、
+                        電力、資安與軟體平台。Broadcom、Dell、HPE、Palo Alto Networks 與能源供應鏈
+                        都值得持續追蹤。
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-amber-500">
+                    <h3 class="font-bold text-xl text-stone-900">三、利率是最大的估值風險</h3>
+                    <p class="mt-3 leading-7">
+                        如果十年期美債殖利率長期接近 5%，市場將更重視自由現金流、資本效率與訂單品質。
+                        下一階段未必是「AI 題材全部上漲」，而會變成真正的基本面選股。
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-stone-900 text-white rounded-xl p-6 md:p-8">
+                <div class="text-sm text-sky-300 font-semibold">本週一句話總結</div>
+                <blockquote class="text-2xl md:text-3xl font-black mt-2 leading-relaxed">
+                    AI 熱潮沒有結束，但「只要是 AI 就可以上漲」的階段可能正在結束。
+                </blockquote>
+                <p class="mt-4 text-stone-300">
+                    下一階段市場將同時檢查訂單、現金流、資本支出與利率。
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/8/31~9/4)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美國總體經濟、AI產業、美股七巨頭與S&amp;P 500公司相關公開資料 (2026年09月06日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Active Link State using Intersection Observer
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        const isActive = link.dataset.nav === entry.target.id;
+                        link.classList.toggle('active-nav-link', isActive);
+                        link.classList.toggle('inactive-nav-link', !isActive);
+                    });
+                }
+            });
+        }, {
+            rootMargin: '-25% 0px -60% 0px',
+            threshold: 0.01
+        });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Real report data for interactive table
+        const productData = [
+            {
+                event: "美國就業突然轉強",
+                category: "總體經濟",
+                subject: "美國就業／聯準會",
+                number: "非農 +16.2萬；失業率 4.1%",
+                impact: "高利率可能維持更久，高估值科技、房地產及高負債企業估值承壓。"
+            },
+            {
+                event: "Broadcom AI營收年增221%",
+                category: "科技／AI",
+                subject: "Broadcom",
+                number: "AI半導體 167億美元；Q4估217億美元",
+                impact: "客製化AI晶片成為GPU之外的第二條主戰線，AI晶片市場朝GPU＋XPU並存發展。"
+            },
+            {
+                event: "Dell、HPE驗證AI基建需求",
+                category: "科技／伺服器",
+                subject: "Dell、HPE",
+                number: "Dell未交付AI訂單950億美元",
+                impact: "AI投資由GPU向伺服器、網路、儲存、記憶體、散熱與電力全面擴散。"
+            },
+            {
+                event: "Nvidia收購Hugging Face",
+                category: "AI平台",
+                subject: "Nvidia／Hugging Face",
+                number: "交易約129.3億美元",
+                impact: "Nvidia由硬體平台延伸至模型工具與開發者入口，強化整體AI生態系控制力。"
+            },
+            {
+                event: "Nvidia投資聯發科",
+                category: "AI晶片策略",
+                subject: "Nvidia／聯發科",
+                number: "35億美元可轉債",
+                impact: "透過NVLink Fusion把客製化XPU納入Nvidia機櫃架構，競爭焦點轉向AI工廠標準。"
+            },
+            {
+                event: "Apple進入John Ternus時代",
+                category: "七巨頭",
+                subject: "Apple",
+                number: "CEO交棒",
+                impact: "市場將檢驗Apple能否利用AI重啟iPhone、Mac與新型硬體的換機週期。"
+            },
+            {
+                event: "Waymo、Zoox擴張Robotaxi",
+                category: "自駕／AI",
+                subject: "Alphabet／Amazon",
+                number: "持續增加美國城市服務",
+                impact: "Robotaxi由技術展示進入城市擴張、監管與單車經濟效益競賽，對Tesla形成壓力。"
+            },
+            {
+                event: "Berkshire把AI看成能源生意",
+                category: "能源／AI",
+                subject: "Berkshire Hathaway Energy",
+                number: "Iowa資料中心約占8%電力負載",
+                impact: "AI下一階段瓶頸可能從GPU轉向電力、電網、變壓器與發電設備。"
+            },
+            {
+                event: "AbbVie血癌新藥三期成功",
+                category: "醫療",
+                subject: "AbbVie",
+                number: "反應率74%；惡化或死亡風險降60%",
+                impact: "有助AbbVie建立Humira之後的第二成長曲線，強化腫瘤產品線。"
+            },
+            {
+                event: "Lululemon財測下修",
+                category: "零售",
+                subject: "Lululemon",
+                number: "美洲營收-8%；招牌產品約-20%",
+                impact: "零售市場並非全面衰退，而是品牌力與產品創新造成更劇烈的公司分化。"
+            }
+        ];
+
+        const tbody = document.getElementById('newsTableBody');
+        const tableSearch = document.getElementById('tableSearch');
+        const resultCount = document.getElementById('resultCount');
+
+        function renderTable(data) {
+            tbody.innerHTML = data.map(item => `
+                <tr class="news-row">
+                    <td class="px-4 py-3 font-semibold text-stone-900">${item.event}</td>
+                    <td class="px-4 py-3">${item.category}</td>
+                    <td class="px-4 py-3">${item.subject}</td>
+                    <td class="px-4 py-3 whitespace-nowrap">${item.number}</td>
+                    <td class="px-4 py-3 leading-6">${item.impact}</td>
+                </tr>
+            `).join('');
+
+            resultCount.textContent = `顯示 ${data.length} / ${productData.length} 筆事件`;
+        }
+
+        tableSearch.addEventListener('input', (e) => {
+            const keyword = e.target.value.trim().toLowerCase();
+            const filtered = productData.filter(item =>
+                Object.values(item).some(value =>
+                    String(value).toLowerCase().includes(keyword)
+                )
+            );
+            renderTable(filtered);
+        });
+
+        renderTable(productData);
+
+        // Chart defaults
+        Chart.defaults.font.family = '"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif';
+        Chart.defaults.color = '#57534e';
+
+        // Index Performance Chart
+        new Chart(document.getElementById('indexChart'), {
+            type: 'bar',
+            data: {
+                labels: ['S&P 500', 'Nasdaq', 'Dow Jones'],
+                datasets: [{
+                    label: '週漲跌幅 (%)',
+                    data: [0.1, 0.4, -0.3],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.72)',
+                        'rgba(99, 102, 241, 0.72)',
+                        'rgba(244, 63, 94, 0.72)'
+                    ],
+                    borderColor: [
+                        'rgb(14, 165, 233)',
+                        'rgb(99, 102, 241)',
+                        'rgb(244, 63, 94)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `${ctx.raw > 0 ? '+' : ''}${ctx.raw}%`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        suggestedMin: -0.5,
+                        suggestedMax: 0.6,
+                        ticks: {
+                            callback: value => Number(value).toFixed(2) + '%'
+                        },
+                        grid: { color: 'rgba(120,113,108,.12)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // AI Infrastructure Chart
+        new Chart(document.getElementById('aiInfraChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Broadcom Q3 AI營收',
+                    'Broadcom Q4 AI營收指引',
+                    'Dell AI伺服器營收',
+                    'Dell AI未交付訂單',
+                    'Nvidia收購Hugging Face'
+                ],
+                datasets: [{
+                    label: '億美元',
+                    data: [167, 217, 164, 950, 129.3],
+                    backgroundColor: 'rgba(14, 165, 233, 0.70)',
+                    borderColor: 'rgb(2, 132, 199)',
+                    borderWidth: 1,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: { label: (ctx) => `${ctx.raw} 億美元` }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(120,113,108,.12)' }
+                    },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Growth Chart
+        new Chart(document.getElementById('growthChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Broadcom AI半導體',
+                    'Dell總營收',
+                    'HPE總營收',
+                    'AbbVie etentamig反應率',
+                    'Lululemon美洲營收'
+                ],
+                datasets: [{
+                    label: '變化／比率 (%)',
+                    data: [221, 58, 34, 74, -8],
+                    backgroundColor: [
+                        'rgba(139, 92, 246, 0.70)',
+                        'rgba(16, 185, 129, 0.70)',
+                        'rgba(6, 182, 212, 0.70)',
+                        'rgba(244, 63, 94, 0.70)',
+                        'rgba(249, 115, 22, 0.70)'
+                    ],
+                    borderWidth: 0,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `${ctx.raw}%`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { callback: value => value + '%' },
+                        grid: { color: 'rgba(120,113,108,.12)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
