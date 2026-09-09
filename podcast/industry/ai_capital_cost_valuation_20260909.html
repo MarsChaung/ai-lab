@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="解析AI債務、長債殖利率、聯準會升息風險與科技股估值的美股投資專題。" />
+  <title>巴菲特AI價值投資-AI資金戰與科技估值</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; }
+    .active-nav-link {
+      color: rgb(2 132 199);
+      border-bottom: 2px solid rgb(14 165 233);
+      font-weight: 700;
+    }
+    .inactive-nav-link {
+      color: rgb(87 83 78);
+      border-bottom: 2px solid transparent;
+    }
+    .nav-link { transition: all .2s ease; }
+    .metric-gradient {
+      background: linear-gradient(135deg, rgba(224,242,254,.95), rgba(255,255,255,.95));
+    }
+    .risk-gradient {
+      background: linear-gradient(135deg, rgba(255,247,237,.95), rgba(255,255,255,.95));
+    }
+    .positive-gradient {
+      background: linear-gradient(135deg, rgba(240,253,244,.95), rgba(255,255,255,.95));
+    }
+    .table-scroll { max-height: 520px; }
+    .chart-box { position: relative; min-height: 320px; }
+    .section-anchor { scroll-margin-top: 92px; }
+  </style>
+</head>
+
+<body class="bg-stone-50 text-stone-700">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <a href="#hero" class="flex items-center gap-3">
+          <div class="font-bold text-stone-900 leading-tight">AI資本支出 × 美國公債 × 科技股估值</div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-5 text-sm">
+          <a href="#overview" data-nav="overview" class="nav-link inactive-nav-link py-5">核心論點</a>
+          <a href="#debt" data-nav="debt" class="nav-link inactive-nav-link py-5">AI債潮</a>
+          <a href="#rates" data-nav="rates" class="nav-link inactive-nav-link py-5">利率壓力</a>
+          <a href="#treasury" data-nav="treasury" class="nav-link inactive-nav-link py-5">財政部回購</a>
+          <a href="#valuation" data-nav="valuation" class="nav-link inactive-nav-link py-5">估值傳導</a>
+          <a href="#strategy" data-nav="strategy" class="nav-link inactive-nav-link py-5">投資策略</a>
+          <a href="#data" data-nav="data" class="nav-link inactive-nav-link py-5">資料總覽</a>
+        </nav>
+
+        <button id="mobileMenuButton" aria-label="開啟選單"
+          class="lg:hidden inline-flex items-center justify-center rounded-lg border border-stone-200 p-2 text-stone-700 hover:bg-stone-100">
+          <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobileMenu" class="hidden lg:hidden pb-4">
+        <div class="grid grid-cols-2 gap-2 text-sm">
+          <a href="#overview" class="mobile-link rounded-lg px-3 py-2 hover:bg-stone-100">核心論點</a>
+          <a href="#debt" class="mobile-link rounded-lg px-3 py-2 hover:bg-stone-100">AI債潮</a>
+          <a href="#rates" class="mobile-link rounded-lg px-3 py-2 hover:bg-stone-100">利率壓力</a>
+          <a href="#treasury" class="mobile-link rounded-lg px-3 py-2 hover:bg-stone-100">財政部回購</a>
+          <a href="#valuation" class="mobile-link rounded-lg px-3 py-2 hover:bg-stone-100">估值傳導</a>
+          <a href="#strategy" class="mobile-link rounded-lg px-3 py-2 hover:bg-stone-100">投資策略</a>
+          <a href="#data" class="mobile-link rounded-lg px-3 py-2 hover:bg-stone-100">資料總覽</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="hero" class="bg-gradient-to-br from-stone-900 via-slate-900 to-sky-950 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div class="max-w-4xl">
+          <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tight">
+            當AI開始與美國政府搶資金
+          </h1>
+          <p class="mt-5 text-xl md:text-2xl text-slate-200 leading-relaxed">
+            5,000億美元AI債潮、接近5%的長債殖利率，正在把AI多頭從「算力競賽」推向「資本成本競賽」。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key metrics -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="metric-gradient rounded-xl shadow-lg p-6 border border-sky-100">
+          <div class="text-sm text-stone-500">AI相關債務發行</div>
+          <div class="mt-2 text-4xl font-black text-sky-700">近5,000億美元</div>
+          <div class="mt-2 text-sm">截至2026年8月初，約占美國高評級債券發行量20%。</div>
+        </div>
+
+        <div class="risk-gradient rounded-xl shadow-lg p-6 border border-orange-100">
+          <div class="text-sm text-stone-500">10年期美債</div>
+          <div class="mt-2 text-4xl font-black text-orange-700">約4.80%</div>
+          <div class="mt-2 text-sm">9月8日盤中最高約4.805%，接近5%心理關卡。</div>
+        </div>
+
+        <div class="positive-gradient rounded-xl shadow-lg p-6 border border-emerald-100">
+          <div class="text-sm text-stone-500">大型科技債認購倍數</div>
+          <div class="mt-2 text-4xl font-black text-emerald-700">5x → &lt;2x</div>
+          <div class="mt-2 text-sm">由2月接近5倍，下降至7月不到2倍。</div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 border border-stone-200">
+          <div class="text-sm text-stone-500">美國聯邦總債務</div>
+          <div class="mt-2 text-4xl font-black text-stone-800">約40.1兆美元</div>
+          <div class="mt-2 text-sm">政府與AI企業同時大量融資，形成資本競爭。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section id="overview" class="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心論點：AI的新瓶頸不是GPU，而是資金</h2>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <p class="text-lg leading-8">
+          過去兩年，市場把AI看成一場算力軍備競賽：誰買得到更多GPU、誰能蓋出更多資料中心，誰就更有機會取得領先。
+          但到了2026年下半年，另一個變數正在快速放大：<strong class="text-stone-900">資本成本</strong>。
+        </p>
+
+        <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="rounded-lg bg-sky-50 p-5">
+            <div class="font-bold text-sky-800">第一層：AI CapEx暴增</div>
+            <p class="mt-2 text-sm leading-6">資料中心、GPU、電力與高速網路持續擴張，需要比過去更大量的外部資金。</p>
+          </div>
+          <div class="rounded-lg bg-amber-50 p-5">
+            <div class="font-bold text-amber-800">第二層：債券供給增加</div>
+            <p class="mt-2 text-sm leading-6">大型科技公司與基礎建設業者同時發債，債券投資人開始要求更高報酬。</p>
+          </div>
+          <div class="rounded-lg bg-rose-50 p-5">
+            <div class="font-bold text-rose-800">第三層：估值重新定價</div>
+            <p class="mt-2 text-sm leading-6">當無風險利率接近5%，高本益比科技股即使EPS成長，也可能遭遇本益比下修。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-stone-900 text-white rounded-lg shadow-lg p-6">
+        <div class="text-sm uppercase tracking-wider text-sky-300">一句話理解</div>
+        <p class="mt-2 text-2xl font-bold leading-relaxed">
+          過去市場問「誰能拿到最多GPU？」；下一階段會問「誰有足夠自由現金流，在接近5%的利率環境下持續支付AI帳單？」
+        </p>
+      </div>
+    </section>
+
+    <!-- Debt -->
+    <section id="debt" class="section-anchor bg-white/70 py-14">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI債潮：近5,000億美元如何改變信用市場</h2>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-900">規模快速膨脹</h3>
+            <p class="mt-3 leading-7">
+              Reuters Breakingviews引用Goldman Sachs資料指出，截至2026年8月初，AI相關債務發行規模已接近5,000億美元，
+              約占美國高評級債券市場當年發行量的20%；2024年僅約1%。
+            </p>
+            <div class="mt-5 rounded-lg bg-sky-50 p-4 text-sm">
+              <strong>重要釐清：</strong>這是廣義AI相關債務融資，不等於Alphabet、Amazon、Meta、Microsoft、Oracle五家公司合計發債5,000億美元。
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-900">投資人開始要求更高報酬</h3>
+            <p class="mt-3 leading-7">
+              大型科技公司新債的認購倍數，由2026年2月接近5倍降至7月不到2倍；
+              同時，部分AI曝險較高公司的債券相較同評級企業已出現較高風險溢價。
+            </p>
+            <p class="mt-4 leading-7">
+              這不代表大型科技公司出現信用危機，而是市場開始反映：
+              <strong>供給增加、回收期拉長、AI投資報酬必須被證明。</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-6 grid lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-lg font-bold text-stone-900 mb-4">AI債券占高評級債券發行比重</h3>
+            <div class="chart-box">
+              <canvas id="aiDebtShareChart"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-lg font-bold text-stone-900 mb-4">大型科技新債認購倍數變化</h3>
+            <div class="chart-box">
+              <canvas id="bondCoverChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rates -->
+    <section id="rates" class="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">利率壓力：5%美債為何比Fed升息一碼更關鍵</h2>
+
+      <div class="grid lg:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-sm text-stone-500">10年期</div>
+          <div class="text-3xl font-black text-stone-900 mt-2">4.80%</div>
+          <p class="text-sm mt-3">9月8日官方每日恒定到期殖利率。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-sm text-stone-500">20年期</div>
+          <div class="text-3xl font-black text-stone-900 mt-2">5.26%</div>
+          <p class="text-sm mt-3">長端利率已明顯高於5%。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-sm text-stone-500">30年期</div>
+          <div class="text-3xl font-black text-stone-900 mt-2">5.25%</div>
+          <p class="text-sm mt-3">反映長期通膨、財政與供給風險。</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-bold text-stone-900 mb-4">美債殖利率曲線重點</h3>
+          <div class="chart-box">
+            <canvas id="treasuryYieldChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-bold text-stone-900">市場正在重新計算折現率</h3>
+          <p class="mt-3 leading-7">
+            當無風險的10年期美債殖利率接近5%，投資人對股票的最低報酬要求會提高。
+            因此即使AI公司的EPS仍持續成長，只要市場願意支付的本益比下降，股價仍可能修正。
+          </p>
+          <div class="mt-5 rounded-lg bg-orange-50 p-4">
+            <div class="font-bold text-orange-800">典型情境</div>
+            <p class="mt-2 text-sm leading-6">
+              一家AI公司獲利仍成長，但市場給的估值從35倍本益比下修至28倍；
+              即使營運沒有衰退，股價仍可能因折現率上升而下跌。
+            </p>
+          </div>
+          <div class="mt-5">
+            <div class="text-sm text-stone-500">9月FOMC市場定價</div>
+            <div class="mt-2 text-3xl font-black text-rose-700">約60% 升息1碼機率</div>
+            <p class="text-sm mt-2">這是Fed Funds期貨推導的市場機率，不是Fed官方預測。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Treasury -->
+    <section id="treasury" class="section-anchor bg-white/70 py-14">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財政部長債回購：改善流動性，不等於QE</h2>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-900">9月9日起回購上限至少提高一倍</h3>
+            <p class="mt-3 leading-7">
+              美國財政部自2026年9月9日起，提高10年至20年、以及20年至30年名目公債的流動性支持回購規模，
+              每次最高規模由20億美元提高至至少40億美元，措施持續至11月4日。
+            </p>
+            <div class="mt-5 grid grid-cols-2 gap-4">
+              <div class="rounded-lg bg-stone-100 p-4">
+                <div class="text-xs text-stone-500">原單次上限</div>
+                <div class="text-2xl font-black mt-1">20億美元</div>
+              </div>
+              <div class="rounded-lg bg-sky-50 p-4">
+                <div class="text-xs text-stone-500">新單次上限</div>
+                <div class="text-2xl font-black text-sky-700 mt-1">至少40億美元</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-900">Treasury Buyback ≠ Fed QE</h3>
+            <p class="mt-3 leading-7">
+              財政部回購的主要功能，是改善較舊、流動性較差的off-the-run公債交易效率與現金管理。
+              Fed QE則涉及中央銀行擴張資產負債表與金融體系準備金，兩者政策機制不同。
+            </p>
+            <div class="mt-5 rounded-lg bg-emerald-50 p-4 text-sm leading-6">
+              <strong>投資重點：</strong>市場真正應注意的不是「財政部是否正在救市」，而是接近5%的長債殖利率是否會變成新常態。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Valuation -->
+    <section id="valuation" class="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">估值傳導：從油價、通膨一路傳到AI本益比</h2>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-6 gap-3 text-center">
+          <div class="rounded-lg bg-rose-50 p-4"><div class="font-bold text-rose-800">中東衝突</div></div>
+          <div class="rounded-lg bg-orange-50 p-4"><div class="font-bold text-orange-800">油價破100美元</div></div>
+          <div class="rounded-lg bg-amber-50 p-4"><div class="font-bold text-amber-800">通膨壓力回升</div></div>
+          <div class="rounded-lg bg-yellow-50 p-4"><div class="font-bold text-yellow-800">Fed更難降息</div></div>
+          <div class="rounded-lg bg-sky-50 p-4"><div class="font-bold text-sky-800">長債殖利率上升</div></div>
+          <div class="rounded-lg bg-violet-50 p-4"><div class="font-bold text-violet-800">AI估值下修</div></div>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-bold text-stone-900">AI企業將出現兩個世界</h3>
+          <div class="mt-4 space-y-4">
+            <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+              <div class="font-bold text-emerald-800">大型現金流平台</div>
+              <p class="mt-2 text-sm leading-6">
+                Alphabet、Microsoft、Amazon、Meta即使持續發債，仍有龐大營業現金流支撐，
+                可以承受較高資金成本。
+              </p>
+            </div>
+            <div class="rounded-lg border border-rose-200 bg-rose-50 p-4">
+              <div class="font-bold text-rose-800">高槓桿AI基建業者</div>
+              <p class="mt-2 text-sm leading-6">
+                對高度依賴外部融資的資料中心與AI基礎建設專案而言，
+                利率每上升1個百分點，都可能直接改變專案報酬率與建設決策。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-bold text-stone-900">自由現金流成為下一個核心指標</h3>
+          <p class="mt-3 leading-7">
+            未來分析AI科技股，不能只看雲端成長、AI收入或GPU採購量。
+            更重要的是：企業在投入龐大AI CapEx後，究竟還能留下多少自由現金流。
+          </p>
+          <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+            <div class="rounded-lg bg-stone-100 p-3">營業現金流是否同步成長</div>
+            <div class="rounded-lg bg-stone-100 p-3">AI CapEx是否越來越依賴舉債</div>
+            <div class="rounded-lg bg-stone-100 p-3">公司債利差是否擴大</div>
+            <div class="rounded-lg bg-stone-100 p-3">5%利率下估值是否仍合理</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategy -->
+    <section id="strategy" class="section-anchor bg-white/70 py-14">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略：三種市場情境</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-emerald-500">
+            <div class="text-sm font-bold text-emerald-700">情境一｜偏多</div>
+            <h3 class="text-xl font-bold text-stone-900 mt-2">PPI、CPI低於預期</h3>
+            <p class="mt-3 leading-7">
+              市場降低升息機率，10年期殖利率回落，Nasdaq與高本益比AI股獲得估值支撐。
+            </p>
+            <div class="mt-4 text-sm rounded-lg bg-emerald-50 p-3">
+              受惠重點：大型平台、優質半導體、現金流強的AI基礎設施供應商。
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-amber-500">
+            <div class="text-sm font-bold text-amber-700">情境二｜震盪分化</div>
+            <h3 class="text-xl font-bold text-stone-900 mt-2">通膨符合或略高預期</h3>
+            <p class="mt-3 leading-7">
+              Fed升息機率維持，長債殖利率高檔震盪，AI股不一定全面下跌，但現金流與槓桿差異會被放大。
+            </p>
+            <div class="mt-4 text-sm rounded-lg bg-amber-50 p-3">
+              策略重點：偏好自由現金流強、負債壓力低、AI收入可見度高的公司。
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-rose-500">
+            <div class="text-sm font-bold text-rose-700">情境三｜偏空</div>
+            <h3 class="text-xl font-bold text-stone-900 mt-2">油價高檔＋CPI高於預期</h3>
+            <p class="mt-3 leading-7">
+              市場重新定價升息週期，10年期突破5%，高估值科技股可能出現新一輪本益比壓縮。
+            </p>
+            <div class="mt-4 text-sm rounded-lg bg-rose-50 p-3">
+              風險重點：高槓桿AI資料中心、依賴遠期獲利的高本益比成長股。
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-6 bg-stone-900 text-white rounded-lg shadow-lg p-6">
+          <div class="text-sky-300 text-sm font-bold">策略結論</div>
+          <p class="mt-2 text-2xl font-bold leading-relaxed">
+            AI故事沒有結束，但「免費資金時代」正在結束。下一階段的勝負，將由自由現金流與融資能力決定。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data table -->
+    <section id="data" class="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">資料總覽：關鍵數字與來源</h2>
+
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
+          <div>
+            <h3 class="text-xl font-bold text-stone-900">可搜尋資料表</h3>
+            <p class="text-sm text-stone-500 mt-1">輸入「AI債務、殖利率、Fed、財政部、Apollo」等關鍵字即可即時篩選。</p>
+          </div>
+          <input id="tableSearch" type="search" placeholder="搜尋關鍵資料…"
+            class="w-full md:w-80 rounded-lg border border-stone-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" />
+        </div>
+
+        <div class="overflow-auto table-scroll border border-stone-200 rounded-lg">
+          <table class="min-w-full text-sm">
+            <thead class="sticky top-0 bg-stone-800 text-white">
+              <tr>
+                <th class="text-left px-4 py-3">主題</th>
+                <th class="text-left px-4 py-3">數據</th>
+                <th class="text-left px-4 py-3">意義</th>
+                <th class="text-left px-4 py-3">公開／報導日期</th>
+                <th class="text-left px-4 py-3">來源</th>
+              </tr>
+            </thead>
+            <tbody id="dataTableBody" class="divide-y divide-stone-200"></tbody>
+          </table>
+        </div>
+        <div id="noResult" class="hidden text-center text-stone-500 py-8">沒有符合條件的資料。</div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI資金戰與科技估值。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中AI資本支出、美國公債與科技股估值相關公開資料 (2026年09月09日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Active nav state
+    const sections = document.querySelectorAll('.section-anchor');
+    const navLinks = document.querySelectorAll('[data-nav]');
+
+    const setActiveNav = (id) => {
+      navLinks.forEach(link => {
+        const isActive = link.dataset.nav === id;
+        link.classList.toggle('active-nav-link', isActive);
+        link.classList.toggle('inactive-nav-link', !isActive);
+      });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible.length) setActiveNav(visible[0].target.id);
+    }, {
+      rootMargin: '-30% 0px -55% 0px',
+      threshold: [0.05, 0.25, 0.5]
+    });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Real report data
+    const productData = [
+      {
+        topic: 'AI相關債務發行',
+        value: '近5,000億美元',
+        meaning: '截至2026年8月初，約占美國高評級債券發行量20%；2024年約1%。',
+        date: '2026-09-08',
+        source: 'Reuters Breakingviews / Goldman Sachs'
+      },
+      {
+        topic: 'AI債券占高評級債券發行比重',
+        value: '約20%',
+        meaning: 'AI基礎建設已成為美國信用市場最重要的資金需求來源之一。',
+        date: '2026-09-08',
+        source: 'Reuters Breakingviews'
+      },
+      {
+        topic: '2024年AI相關發債占比',
+        value: '約1%',
+        meaning: '與2026年約20%相比，顯示AI融資需求在兩年內急速放大。',
+        date: '2026-09-08',
+        source: 'Reuters Breakingviews'
+      },
+      {
+        topic: '大型科技新債認購倍數',
+        value: '2月近5倍 → 7月不到2倍',
+        meaning: '新債仍可發行，但投資人吸收能力下降並開始要求更高報酬。',
+        date: '2026-07-15',
+        source: 'Apollo Global Management'
+      },
+      {
+        topic: '10年期美債殖利率',
+        value: '4.80%',
+        meaning: '9月8日官方每日恒定到期殖利率；盤中高點約4.805%。',
+        date: '2026-09-08',
+        source: 'U.S. Treasury / Reuters'
+      },
+      {
+        topic: '20年期美債殖利率',
+        value: '5.26%',
+        meaning: '長端利率已明顯高於5%，反映財政、通膨與供給壓力。',
+        date: '2026-09-08',
+        source: 'U.S. Treasury'
+      },
+      {
+        topic: '30年期美債殖利率',
+        value: '5.25%',
+        meaning: '長債市場對長期通膨與供給風險要求更高回報。',
+        date: '2026-09-08',
+        source: 'U.S. Treasury'
+      },
+      {
+        topic: '9月FOMC升息1碼市場機率',
+        value: '約60%',
+        meaning: '由Fed Funds期貨推導，屬市場定價，不是Fed官方預測。',
+        date: '2026-09-08',
+        source: 'Reuters / CME FedWatch'
+      },
+      {
+        topic: '美國聯邦總債務',
+        value: '約40.1兆美元',
+        meaning: '政府與AI企業同時大量借錢，對全球資金形成更強競爭。',
+        date: '2026-09-08',
+        source: 'U.S. Congress JEC / Reuters'
+      },
+      {
+        topic: '財政部10–20年期公債回購',
+        value: '20億美元 → 至少40億美元',
+        meaning: '自9月9日起提高單次流動性支持回購規模，持續至11月4日。',
+        date: '2026-08-19／2026-09-09生效',
+        source: 'U.S. Department of the Treasury'
+      },
+      {
+        topic: '財政部20–30年期公債回購',
+        value: '20億美元 → 至少40億美元',
+        meaning: '改善off-the-run長債市場流動性，並非Fed QE。',
+        date: '2026-08-19／2026-09-09生效',
+        source: 'U.S. Department of the Treasury'
+      },
+      {
+        topic: '高槓桿AI資料中心融資案例',
+        value: '約10%殖利率',
+        meaning: '高度槓桿AI基建專案的資本成本已明顯高於大型科技平台。',
+        date: '2026-09-08',
+        source: 'Reuters Breakingviews'
+      }
+    ];
+
+    const tableBody = document.getElementById('dataTableBody');
+    const tableSearch = document.getElementById('tableSearch');
+    const noResult = document.getElementById('noResult');
+
+    function renderTable(rows) {
+      tableBody.innerHTML = '';
+      noResult.classList.toggle('hidden', rows.length !== 0);
+
+      rows.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-sky-50/60';
+        tr.innerHTML = `
+          <td class="px-4 py-3 font-semibold text-stone-900 whitespace-nowrap">${item.topic}</td>
+          <td class="px-4 py-3 whitespace-nowrap">${item.value}</td>
+          <td class="px-4 py-3 min-w-[360px]">${item.meaning}</td>
+          <td class="px-4 py-3 whitespace-nowrap">${item.date}</td>
+          <td class="px-4 py-3 whitespace-nowrap">${item.source}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    tableSearch.addEventListener('input', (e) => {
+      const keyword = e.target.value.trim().toLowerCase();
+      const filtered = productData.filter(item =>
+        Object.values(item).some(value => String(value).toLowerCase().includes(keyword))
+      );
+      renderTable(filtered);
+    });
+
+    renderTable(productData);
+
+    // Chart.js defaults
+    Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif';
+    Chart.defaults.color = '#57534e';
+
+    // Chart 1
+    new Chart(document.getElementById('aiDebtShareChart'), {
+      type: 'bar',
+      data: {
+        labels: ['2024', '2026年8月初'],
+        datasets: [{
+          label: 'AI相關債務占美國高評級債券發行量',
+          data: [1, 20],
+          backgroundColor: ['rgba(120,113,108,.65)', 'rgba(2,132,199,.75)'],
+          borderColor: ['rgb(120,113,108)', 'rgb(2,132,199)'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.raw.toFixed(2)}%`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { callback: value => Number(value).toFixed(2) + '%' },
+            title: { display: true, text: '占比（%）' }
+          }
+        }
+      }
+    });
+
+    // Chart 2
+    new Chart(document.getElementById('bondCoverChart'), {
+      type: 'line',
+      data: {
+        labels: ['2026年2月', '2026年7月'],
+        datasets: [{
+          label: '認購倍數',
+          data: [5, 1.9],
+          borderColor: 'rgb(5,150,105)',
+          backgroundColor: 'rgba(5,150,105,.12)',
+          tension: 0.25,
+          fill: true,
+          pointRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.raw.toFixed(2)} 倍`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            suggestedMax: 6,
+            ticks: { callback: value => Number(value).toFixed(2) + 'x' },
+            title: { display: true, text: '認購倍數' }
+          }
+        }
+      }
+    });
+
+    // Chart 3
+    new Chart(document.getElementById('treasuryYieldChart'), {
+      type: 'bar',
+      data: {
+        labels: ['10年期', '20年期', '30年期'],
+        datasets: [{
+          label: '2026/9/8 美國公債殖利率',
+          data: [4.80, 5.26, 5.25],
+          backgroundColor: [
+            'rgba(14,165,233,.72)',
+            'rgba(245,158,11,.72)',
+            'rgba(244,63,94,.72)'
+          ],
+          borderColor: [
+            'rgb(14,165,233)',
+            'rgb(245,158,11)',
+            'rgb(244,63,94)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.raw.toFixed(2)}%`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 4.4,
+            max: 5.5,
+            ticks: { callback: value => Number(value).toFixed(2) + '%' },
+            title: { display: true, text: '殖利率（%）' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
