@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>巴菲特AI價值投資-AI踩煞車與算力重估</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .active-nav-link {
+      color: rgb(2 132 199);
+      font-weight: 700;
+      border-bottom: 2px solid rgb(14 165 233);
+    }
+    .inactive-nav-link {
+      color: rgb(68 64 60);
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+    }
+  </style>
+</head>
+
+<body class="bg-stone-100 text-stone-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-16 flex items-center justify-between">
+        <div>
+          <div class="font-bold text-stone-900">巴菲特AI價值投資</div>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#overview" class="nav-link inactive-nav-link py-5">市場總覽</a>
+          <a href="#thesis" class="nav-link inactive-nav-link py-5">核心邏輯</a>
+          <a href="#stocks" class="nav-link inactive-nav-link py-5">晶片股反應</a>
+          <a href="#rotation" class="nav-link inactive-nav-link py-5">產業輪動</a>
+          <a href="#signals" class="nav-link inactive-nav-link py-5">觀察指標</a>
+          <a href="#conclusion" class="nav-link inactive-nav-link py-5">投資結論</a>
+        </nav>
+
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-stone-700 hover:bg-stone-100" aria-label="開啟選單">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobileMenu" class="hidden md:hidden pb-4">
+        <div class="flex flex-col gap-2 text-sm">
+          <a href="#overview" class="mobile-link px-3 py-2 rounded hover:bg-stone-100">市場總覽</a>
+          <a href="#thesis" class="mobile-link px-3 py-2 rounded hover:bg-stone-100">核心邏輯</a>
+          <a href="#stocks" class="mobile-link px-3 py-2 rounded hover:bg-stone-100">晶片股反應</a>
+          <a href="#rotation" class="mobile-link px-3 py-2 rounded hover:bg-stone-100">產業輪動</a>
+          <a href="#signals" class="mobile-link px-3 py-2 rounded hover:bg-stone-100">觀察指標</a>
+          <a href="#conclusion" class="mobile-link px-3 py-2 rounded hover:bg-stone-100">投資結論</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-white to-stone-100 border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="max-w-4xl">
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight text-stone-900 leading-tight">
+          AI開始踩煞車：<br class="hidden md:block" />
+          真正要重估的是資本支出的時間軸
+        </h1>
+        <p class="mt-6 text-lg text-stone-600 leading-8">
+          Anthropic、OpenAI 與 xAI 領導人同時對 frontier model 的開發速度提出更審慎的態度，
+          市場因此第一次把「AI 能力進步是否需要降速」直接轉換成半導體與資料中心估值問題。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <!-- Overview -->
+    <section id="overview" class="scroll-mt-24 mb-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場總覽</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-sm font-semibold text-sky-600 mb-2">市場新增風險</div>
+          <div class="text-2xl font-black text-stone-900 mb-2">速度風險</div>
+          <p class="text-stone-600 leading-7">
+            AI需求並未消失，但投資人開始質疑 frontier model 是否還能維持過去數年的高頻迭代速度。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-sm font-semibold text-amber-600 mb-2">估值關鍵</div>
+          <div class="text-2xl font-black text-stone-900 mb-2">時間軸往後移</div>
+          <p class="text-stone-600 leading-7">
+            對高成長股而言，需求延後本身就會壓低現值與本益比，即使長期總需求沒有明顯下修。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-sm font-semibold text-emerald-600 mb-2">核心結論</div>
+          <div class="text-2xl font-black text-stone-900 mb-2">非需求反轉</div>
+          <p class="text-stone-600 leading-7">
+            現階段更像是 AI 資本支出節奏重新定價，而不是 GPU、HBM、網通與資料中心需求全面崩跌。
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-xl font-bold mb-4">今天市場在重新定價什麼？</h3>
+        <div class="grid md:grid-cols-4 gap-4 text-center">
+          <div class="rounded-lg bg-stone-50 p-4 border border-stone-200">
+            <div class="text-sm text-stone-500">第一步</div>
+            <div class="font-bold mt-1">模型能力進步</div>
+          </div>
+          <div class="rounded-lg bg-stone-50 p-4 border border-stone-200">
+            <div class="text-sm text-stone-500">第二步</div>
+            <div class="font-bold mt-1">模型規模擴大</div>
+          </div>
+          <div class="rounded-lg bg-stone-50 p-4 border border-stone-200">
+            <div class="text-sm text-stone-500">第三步</div>
+            <div class="font-bold mt-1">算力需求增加</div>
+          </div>
+          <div class="rounded-lg bg-stone-50 p-4 border border-stone-200">
+            <div class="text-sm text-stone-500">第四步</div>
+            <div class="font-bold mt-1">AI CapEx 上升</div>
+          </div>
+        </div>
+        <p class="mt-5 text-stone-600 leading-7">
+          過去市場幾乎把第一個箭頭視為理所當然；這次事件的真正意義，是第一次有核心 AI 業者主動討論
+          「能力進步是否應該被刻意放慢」，因此整條 AI 基礎建設因果鏈都需要重新估算。
+        </p>
+      </div>
+    </section>
+
+    <!-- Thesis -->
+    <section id="thesis" class="scroll-mt-24 mb-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心邏輯</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-bold mb-4">為什麼這次不同？</h3>
+          <p class="text-stone-600 leading-7 mb-4">
+            過去 AI 安全議題多半停留在研究圈、政策圈與倡議組織；這一次則是掌握 frontier model 開發能力的
+            核心公司領導人直接討論 pacing，使「安全約束」首次更直接進入資本市場的成長率模型。
+          </p>
+          <div class="space-y-3">
+            <div class="rounded-lg bg-sky-50 border border-sky-100 p-4">
+              <div class="font-semibold text-sky-800">Dario Amodei</div>
+              <div class="text-sm text-stone-600 mt-1">主張讓安全、alignment 與第三方評估跟得上能力進步。</div>
+            </div>
+            <div class="rounded-lg bg-sky-50 border border-sky-100 p-4">
+              <div class="font-semibold text-sky-800">Sam Altman / Elon Musk</div>
+              <div class="text-sm text-stone-600 mt-1">對減速或更審慎開發的方向公開表達支持。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-bold mb-4">投資人真正該問的問題</h3>
+          <div class="space-y-4">
+            <div class="border-l-4 border-sky-500 pl-4">
+              <div class="font-semibold">不是：GPU 需求會不會消失？</div>
+              <p class="text-sm text-stone-600 mt-1">目前沒有足夠證據支持 AI 算力需求全面反轉。</p>
+            </div>
+            <div class="border-l-4 border-amber-500 pl-4">
+              <div class="font-semibold">而是：需求何時發生？</div>
+              <p class="text-sm text-stone-600 mt-1">如果模型發布週期拉長，訂單與資料中心認列時間可能延後。</p>
+            </div>
+            <div class="border-l-4 border-emerald-500 pl-4">
+              <div class="font-semibold">以及：算力組成是否改變？</div>
+              <p class="text-sm text-stone-600 mt-1">安全評測、red teaming、agent simulation 與推論需求可能反而增加。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stocks -->
+    <section id="stocks" class="scroll-mt-24 mb-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">晶片股反應</h2>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-bold mb-2">AI晶片與網通股盤前跌幅</h3>
+        <p class="text-sm text-stone-500 mb-6">
+          依當日 Reuters 不同時間點盤前報價整理，採區間中位數作視覺化；實際盤前價格持續變動。
+        </p>
+        <div class="relative w-full h-[360px]">
+          <canvas id="chipChart"></canvas>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+          <div>
+            <h3 class="text-xl font-bold">盤前反應資料</h3>
+            <p class="text-sm text-stone-500 mt-1">輸入公司名稱或類型可即時篩選。</p>
+          </div>
+          <input id="stockFilter" type="text" placeholder="搜尋 Nvidia、AMD、網通…"
+                 class="w-full md:w-80 rounded-lg border border-stone-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" />
+        </div>
+
+        <div class="overflow-x-auto max-h-[360px] rounded-lg border border-stone-200">
+          <table class="min-w-full text-sm">
+            <thead class="sticky top-0 bg-stone-800 text-white">
+              <tr>
+                <th class="px-4 py-3 text-left">公司</th>
+                <th class="px-4 py-3 text-left">類型</th>
+                <th class="px-4 py-3 text-left">盤前跌幅區間</th>
+                <th class="px-4 py-3 text-left">市場解讀</th>
+              </tr>
+            </thead>
+            <tbody id="stockTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rotation -->
+    <section id="rotation" class="scroll-mt-24 mb-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業輪動</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-sm font-semibold text-rose-600">相對承壓</div>
+          <h3 class="text-2xl font-black mt-1 mb-4">AI Infrastructure</h3>
+          <ul class="space-y-3 text-stone-600">
+            <li>• GPU 與加速器：估值高度依賴高成長持續。</li>
+            <li>• HBM 與記憶體：若訓練週期拉長，訂單時間可能遞延。</li>
+            <li>• 網通晶片：大型叢集建設節奏可能重新估值。</li>
+            <li>• 資料中心：建設、融資、電力承諾的回收期風險上升。</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-sm font-semibold text-emerald-600">相對受惠</div>
+          <h3 class="text-2xl font-black mt-1 mb-4">既有軟體現金流</h3>
+          <p class="text-stone-600 leading-7 mb-4">
+            如果 AI 顛覆既有 SaaS 的速度變慢，市場會重新提高既有軟體商現金流的可見度。
+          </p>
+          <div class="rounded-lg bg-emerald-50 border border-emerald-100 p-4">
+            <div class="font-semibold">市場可能交易的主題</div>
+            <div class="text-lg font-black mt-1">Long Software / Short AI Infrastructure</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signals -->
+    <section id="signals" class="scroll-mt-24 mb-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">未來五大觀察指標</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-3xl font-black text-sky-600">01</div>
+          <h3 class="font-bold text-lg mt-2">Frontier model cadence</h3>
+          <p class="text-stone-600 mt-2">OpenAI、Anthropic、Google DeepMind、Meta、xAI 的下一代模型訓練與發布是否延期。</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-3xl font-black text-sky-600">02</div>
+          <h3 class="font-bold text-lg mt-2">第三方安全評估</h3>
+          <p class="text-stone-600 mt-2">安全評測是否由自願機制逐步變成產業標準或法規要求。</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-3xl font-black text-sky-600">03</div>
+          <h3 class="font-bold text-lg mt-2">Hyperscaler CapEx</h3>
+          <p class="text-stone-600 mt-2">Microsoft、Amazon、Alphabet、Meta 是否下修資料中心與 AI 資本支出。</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-3xl font-black text-sky-600">04</div>
+          <h3 class="font-bold text-lg mt-2">GPU backlog</h3>
+          <p class="text-stone-600 mt-2">Nvidia、AMD 等供應商待交訂單、交期與大型客戶採購是否出現縮短或延後。</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <div class="text-3xl font-black text-sky-600">05</div>
+          <h3 class="font-bold text-lg mt-2">資料中心融資</h3>
+          <p class="text-stone-600 mt-2">債務、租賃、電力合約與資料中心專案是否同步延後，這將決定速度風險是否升級成信用風險。</p>
+        </div>
+
+        <div class="bg-stone-800 text-white rounded-lg shadow-lg p-6">
+          <div class="text-sm text-stone-300">判斷轉折的關鍵</div>
+          <div class="text-2xl font-black mt-2">四項訊號若同時惡化</div>
+          <p class="text-stone-300 mt-3 leading-7">
+            模型延期、CapEx 下修、GPU backlog 縮短、資料中心融資延後，才足以支持「AI 基礎建設週期反轉」的結論。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="conclusion" class="scroll-mt-24 mb-4">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資結論</h2>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="rounded-lg bg-emerald-50 p-5 border border-emerald-100">
+            <div class="text-sm font-semibold text-emerald-700">基本面判斷</div>
+            <div class="font-black text-xl mt-1">尚未反轉</div>
+            <p class="text-sm text-stone-600 mt-2">沒有足夠證據顯示 AI 算力總需求已經下降。</p>
+          </div>
+
+          <div class="rounded-lg bg-amber-50 p-5 border border-amber-100">
+            <div class="text-sm font-semibold text-amber-700">估值判斷</div>
+            <div class="font-black text-xl mt-1">需要降速重估</div>
+            <p class="text-sm text-stone-600 mt-2">高估值建立在高速迭代假設上，時間軸拉長就會降低現值。</p>
+          </div>
+
+          <div class="rounded-lg bg-sky-50 p-5 border border-sky-100">
+            <div class="text-sm font-semibold text-sky-700">策略判斷</div>
+            <div class="font-black text-xl mt-1">觀察勝過猜底</div>
+            <p class="text-sm text-stone-600 mt-2">優先追蹤模型 cadence、CapEx 與 backlog，而不是只看單日股價。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-stone-900 text-white rounded-lg shadow-lg p-8">
+        <div class="text-sm text-stone-400 mb-2">一句話總結</div>
+        <p class="text-2xl md:text-3xl font-black leading-snug">
+          從今天開始，Nvidia 投資人不能只問「下一顆 GPU 有多快」，還要問：
+          「下一代模型，還會不會用同樣的速度往前跑？」
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI踩煞車與算力重估。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中 AI 產業、Nvidia 與半導體相關公開資料 (2026年9月14日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Active navigation
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            const active = link.getAttribute('href') === `#${entry.target.id}`;
+            link.classList.toggle('active-nav-link', active);
+            link.classList.toggle('inactive-nav-link', !active);
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: 0.01 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Real market data captured from Reuters intraday pre-market reports on 2026-09-14.
+    const productData = [
+      {
+        company: 'Nvidia',
+        type: 'GPU / AI加速器',
+        low: 2.0,
+        high: 3.0,
+        midpoint: 2.5,
+        view: '市場首次明顯交易 AI 模型減速對高估值與未來 GPU 訂單時間軸的影響。'
+      },
+      {
+        company: 'AMD',
+        type: 'GPU / CPU',
+        low: 5.0,
+        high: 6.0,
+        midpoint: 5.5,
+        view: '同時承受 AI 成長率疑慮與高利率環境下的估值壓力。'
+      },
+      {
+        company: 'Intel',
+        type: 'CPU / 晶圓代工',
+        low: 5.0,
+        high: 6.0,
+        midpoint: 5.5,
+        view: 'AI 相關估值與整體半導體風險偏好同步轉弱。'
+      },
+      {
+        company: 'Marvell',
+        type: '高速網通 / ASIC',
+        low: 6.0,
+        high: 7.5,
+        midpoint: 6.75,
+        view: '對大型 AI 叢集與網路擴建節奏敏感，因此市場反應更大。'
+      }
+    ];
+
+    // Chart.js
+    const ctx = document.getElementById('chipChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: productData.map(d => d.company),
+        datasets: [{
+          label: '盤前跌幅中位數 (%)',
+          data: productData.map(d => d.midpoint),
+          borderWidth: 1,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top' },
+          tooltip: {
+            callbacks: {
+              afterLabel: function(context) {
+                const row = productData[context.dataIndex];
+                return `報導區間：-${row.low.toFixed(2)}% ~ -${row.high.toFixed(2)}%`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: value => Number(value).toFixed(2) + '%'
+            },
+            title: {
+              display: true,
+              text: '盤前跌幅'
+            }
+          }
+        }
+      }
+    });
+
+    // Interactive table
+    const tbody = document.getElementById('stockTableBody');
+    const filterInput = document.getElementById('stockFilter');
+
+    function renderTable(rows) {
+      tbody.innerHTML = rows.map(row => `
+        <tr class="hover:bg-stone-50">
+          <td class="px-4 py-3 font-semibold">${row.company}</td>
+          <td class="px-4 py-3">${row.type}</td>
+          <td class="px-4 py-3">-${row.low.toFixed(2)}% ～ -${row.high.toFixed(2)}%</td>
+          <td class="px-4 py-3 text-stone-600">${row.view}</td>
+        </tr>
+      `).join('');
+    }
+
+    renderTable(productData);
+
+    filterInput.addEventListener('input', (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      const rows = productData.filter(row =>
+        row.company.toLowerCase().includes(q) ||
+        row.type.toLowerCase().includes(q) ||
+        row.view.toLowerCase().includes(q)
+      );
+      renderTable(rows);
+    });
+  </script>
+</body>
+</html>
