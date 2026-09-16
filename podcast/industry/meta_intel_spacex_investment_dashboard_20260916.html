@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="從 Meta One 訂閱變現、Intel 與 SK 海力士的美國記憶體布局，到 SpaceX Starship 與 Starlink，掌握 AI 成長與現金流驗證的關鍵。">
+  <title>巴菲特AI價值投資-AI變現與晶片太空新局</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 108px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; }
+    section[id] { scroll-margin-top: 106px; }
+    .active-nav-link { color: #0369a1; background: #e0f2fe; box-shadow: inset 0 -2px 0 #0284c7; }
+    .inactive-nav-link { color: #57534e; background: transparent; }
+    .inactive-nav-link:hover { color: #0369a1; background: #f0f9ff; }
+    .nav-link { transition: color .18s ease, background .18s ease; }
+    .hero-mesh { background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985); }
+    .eyebrow { letter-spacing: .17em; text-transform: uppercase; font-size: .7rem; font-weight: 800; }
+    .section-title { font-size: 1.875rem; line-height: 2.35rem; font-weight: 700; color: #292524; margin-bottom: 1.5rem; border-bottom: 2px solid #0ea5e9; padding-bottom: .5rem; }
+    .glass-number { font-variant-numeric: tabular-nums; letter-spacing: -.035em; }
+    .metric-accent { position: relative; overflow: hidden; }
+    .metric-accent:after { content: ""; position:absolute; width: 115px; height:115px; border-radius:50%; right:-35px; top:-49px; background:rgba(255,255,255,.40); }
+    .chart-fallback { display: none; }
+    .chart-unavailable .chart-fallback { display: block; }
+    .chart-unavailable canvas { display: none; }
+    #mobileMenu[hidden] { display: none !important; }
+    :focus-visible { outline: 3px solid #0ea5e9; outline-offset: 3px; }
+    @media (max-width: 640px) { .section-title { font-size: 1.55rem; line-height: 2rem; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *:before, *:after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 shadow-sm backdrop-blur" id="siteHeader">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+      <a href="#overview" class="flex min-w-0 items-center gap-3" aria-label="回到報告首頁">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-700 text-xl font-black text-white">AI</div>
+        <div class="min-w-0"><p class="truncate text-sm font-black tracking-wide text-stone-900 sm:text-base">巴菲特AI價值投資</p><p class="truncate text-xs text-stone-500">2026.09.16 · 互動研究快覽</p></div>
+      </a>
+      <nav class="hidden items-center gap-0.5 lg:flex" aria-label="主要章節">
+        <a class="nav-link active-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#overview">總覽</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#verification">新聞定位</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#meta">Meta</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#intel">Intel</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#spacex">SpaceX</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#macro">市場環境</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#strategy">投資觀察</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#events">事件雷達</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#conclusion">結論</a>
+      </nav>
+      <button id="menuButton" type="button" class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-stone-200 text-stone-800 lg:hidden" aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟章節選單">
+        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <nav id="mobileMenu" class="border-t border-stone-100 bg-white px-4 pb-4 pt-2 shadow-xl lg:hidden" aria-label="手機章節選單" hidden>
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        <a class="nav-link active-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#overview">總覽</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#verification">新聞定位</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#meta">Meta</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#intel">Intel</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#spacex">SpaceX</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#macro">市場環境</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#strategy">投資觀察</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#events">事件雷達</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold" href="#conclusion">結論</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="overview" class="hero-mesh text-white">
+      <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+        <div class="max-w-4xl">
+          <p class="eyebrow mb-5 text-sky-200">Investment intelligence / 2026.09.16</p>
+          <h1 class="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">AI變現與晶片太空新局</h1>
+          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-sky-50 sm:text-xl">從 Meta 的訂閱收入、Intel 的製造資產，到 SpaceX 的衛星部署：市場正在問同一道問題——<span class="font-bold text-white">龐大資本投入，何時轉成可持續的現金流？</span></p>
+          <div class="mt-9 flex flex-wrap gap-3 text-sm"><a href="#meta" class="rounded-full bg-white px-5 py-2.5 font-bold text-sky-900 shadow-lg hover:bg-sky-100">探索核心數據 ↓</a><a href="#events" class="rounded-full border border-white/40 px-5 py-2.5 font-bold text-white hover:bg-white/10">查看近期事件 →</a></div>
+        </div>
+        <div class="mt-12 grid gap-4 md:grid-cols-3">
+          <div class="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"><span class="eyebrow text-sky-200">01 · Meta</span><p class="mt-2 text-2xl font-bold">先看付費，再看利潤</p><p class="mt-2 text-sm leading-relaxed text-sky-100">1,500 萬筆為訂閱與試用合計，不能當成付費用戶。</p></div>
+          <div class="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"><span class="eyebrow text-sky-200">02 · Intel</span><p class="mt-2 text-2xl font-bold">先看簽約，再看產能</p><p class="mt-2 text-sm leading-relaxed text-sky-100">與 SK 海力士仍在討論；製造品類、協議與投產時間未定。</p></div>
+          <div class="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"><span class="eyebrow text-sky-200">03 · SpaceX</span><p class="mt-2 text-2xl font-bold">先看入軌，再看現金流</p><p class="mt-2 text-sm leading-relaxed text-sky-100">Starship 的目標尚待驗證；衛星部署不等於當期對外營收。</p></div>
+        </div>
+        <p class="mt-6 text-xs leading-relaxed text-sky-100/80">依上傳研究報告整理；保留報告對假設、規劃及未確定事項的區分。數據為報告記載，非本頁重新查證結果。</p>
+      </div>
+    </section>
+
+    <div class="mx-auto max-w-7xl space-y-16 px-4 py-14 sm:px-6 lg:px-8">
+      <section id="verification" aria-labelledby="verificationTitle">
+        <div class="mb-3 flex items-center gap-2"><span class="eyebrow text-sky-700">Chapter 01</span><span class="h-px w-10 bg-sky-300"></span><span class="text-xs text-stone-500">新聞查證與研究主線</span></div>
+        <h2 id="verificationTitle" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三則消息，三種不同的確定性</h2>
+        <div class="grid gap-5 lg:grid-cols-3">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500"><span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">已宣布</span><h3 class="mt-4 text-xl font-bold text-stone-900">Meta One 訂閱</h3><p class="mt-3 text-sm leading-7">9 月 15 日推出進階 AI、創作者與企業工具；基礎社群與 Meta AI 服務維持免費。</p><p class="mt-4 text-sm font-semibold text-emerald-800">驗證重點：付費轉換、續訂與單位成本。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-amber-500"><span class="rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800">仍在探索</span><h3 class="mt-4 text-xl font-bold text-stone-900">SK 海力士 × Intel</h3><p class="mt-3 text-sm leading-7">9 月 16 日的合作報導提出俄亥俄州廠房租賃、合資等可能性，尚無確定方案。</p><p class="mt-4 text-sm font-semibold text-amber-800">驗證重點：正式協議、產品與資本負擔。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500"><span class="rounded-full bg-sky-50 px-3 py-1 text-xs font-bold text-sky-800">已規劃，待試飛</span><h3 class="mt-4 text-xl font-bold text-stone-900">Starship 第十四次試飛</h3><p class="mt-3 text-sm leading-7">目標最早 9 月 22 日入軌並部署 Starlink V3，仍須監管批准及技術驗證。</p><p class="mt-4 text-sm font-semibold text-sky-800">驗證重點：入軌、部署與可重複使用。</p></article>
+        </div>
+        <div class="rounded-2xl border border-sky-100 bg-sky-50 p-5 text-sm leading-7 text-sky-950"><strong>讀圖原則：</strong>已推出的服務 ≠ 已實現獲利；合作消息 ≠ 已取得訂單；試飛目標 ≠ 已完成商業化。以下圖表對實際數據、推算情境及公司規劃分別標示。</div>
+      </section>
+
+      <section id="meta" aria-labelledby="metaTitle">
+        <div class="mb-3 flex items-center gap-2"><span class="eyebrow text-sky-700">Chapter 02</span><span class="h-px w-10 bg-sky-300"></span><span class="text-xs text-stone-500">訂閱與 AI 商業化</span></div>
+        <h2 id="metaTitle" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta｜免費流量，能否成為付費價值？</h2>
+        <p class="mb-7 max-w-4xl leading-8">Meta One 採「免費基礎服務 + 進階功能付費」模式，個別產品、個人組合、創作者與企業方案分層收費。短期重點不是試用規模，而是新增收入能否超過額外 AI 運算成本。</p>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div class="metric-accent rounded-2xl border border-sky-100 bg-sky-50 p-5"><p class="text-sm font-bold text-sky-900">個別產品月費起</p><p class="glass-number mt-2 text-4xl font-black text-sky-900">US$2.99</p><p class="mt-2 text-xs text-sky-800">個人組合 US$7.99 起；創作者／企業 US$14.99 起</p></div>
+          <div class="metric-accent rounded-2xl border border-amber-100 bg-amber-50 p-5"><p class="text-sm font-bold text-amber-900">公布訂閱與試用合計</p><p class="glass-number mt-2 text-4xl font-black text-amber-900">1,500 萬筆</p><p class="mt-2 text-xs text-amber-800">非已確認付費數，亦非不重複付費用戶數</p></div>
+          <div class="metric-accent rounded-2xl border border-stone-200 bg-white p-5"><p class="text-sm font-bold text-stone-600">2026 Q2 營收</p><p class="glass-number mt-2 text-4xl font-black text-stone-900">608 億美元</p><p class="mt-2 text-xs text-stone-500">年增 28%；平均每日使用旗下應用人數約 36 億</p></div>
+        </div>
+        <div class="mt-6 grid gap-6 lg:grid-cols-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3"><div class="flex flex-wrap items-center justify-between gap-2"><h3 class="text-lg font-bold text-stone-900">訂閱收入情境｜年化收入</h3><span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">假設，非公司財測</span></div><p class="mt-2 text-sm text-stone-500">假設每筆付費訂閱每月 US$7.99，全年持續付費。</p><div class="relative mt-5 h-64 sm:h-72"><canvas id="metaScenarioChart" role="img" aria-label="假設五百萬筆付費訂閱年化收入為四點七九四億美元，一千五百萬筆為十四點三八二億美元"></canvas><p class="chart-fallback rounded-lg bg-stone-100 p-4 text-sm">假設 500 萬筆：4.794 億美元；假設 1,500 萬筆：14.382 億美元。</p></div><p class="mt-3 text-xs leading-6 text-stone-500">情境忽略退款、折扣、稅金與平台分潤；1,500 萬筆僅作假設，不是實際付費訂戶。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2"><h3 class="text-lg font-bold text-stone-900">財報端：成長與成本並行</h3><div class="mt-5 space-y-5"><div><p class="flex justify-between text-sm"><span>2026 Q2 資本支出（含融資租賃本金）</span><strong class="text-stone-900">310.8 億美元</strong></p><div class="mt-2 h-2 overflow-hidden rounded-full bg-stone-100"><div class="h-full w-[74%] rounded-full bg-sky-500"></div></div></div><div><p class="flex justify-between text-sm"><span>同期總成本與費用</span><strong class="text-stone-900">420.3 億美元</strong></p><div class="mt-2 h-2 overflow-hidden rounded-full bg-stone-100"><div class="h-full w-full rounded-full bg-amber-400"></div></div></div><div class="rounded-xl bg-rose-50 p-4"><p class="text-sm font-bold text-rose-900">總成本與費用年增 55%</p><p class="mt-1 text-sm leading-6 text-rose-800">營業利益年減 8%；上述資本支出與費用屬不同會計口徑，不可直接相加。</p></div></div><p class="mt-4 text-xs text-stone-500">長條僅呈現各項金額相對大小，不代表佔營收比率。</p></article>
+        </div>
+        <div class="rounded-xl border-l-4 border-sky-500 bg-white px-6 py-5 shadow-sm"><p class="font-bold text-stone-900">追蹤問題</p><p class="mt-2 leading-7">試用者有多少轉付費？續訂率能否維持？每新增一筆訂閱所帶來的收入，是否超過其 AI 推理與基礎設施成本？</p></div>
+      </section>
+
+      <section id="intel" aria-labelledby="intelTitle">
+        <div class="mb-3 flex items-center gap-2"><span class="eyebrow text-sky-700">Chapter 03</span><span class="h-px w-10 bg-sky-300"></span><span class="text-xs text-stone-500">美國記憶體製造布局</span></div>
+        <h2 id="intelTitle" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Intel × SK 海力士｜先確認合作型態</h2>
+        <p class="mb-7 max-w-4xl leading-8">AI 伺服器不只需要 GPU，也需要 DRAM、HBM 與儲存設備。但洽談美國記憶體產線，不等於 Intel 已拿到 HBM 代工訂單：產品品類、製程分工、資金來源與時程仍未知。</p>
+        <div class="grid gap-4 md:grid-cols-3">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow text-sky-700">模式 A</span><h3 class="mt-2 text-xl font-bold text-stone-900">廠房租賃</h3><p class="mt-3 text-sm leading-7">可能創造設施租金並緩解閒置資產壓力；但不代表 Intel 製程競爭力得到驗證。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow text-sky-700">模式 B</span><h3 class="mt-2 text-xl font-bold text-stone-900">合資與共同投資</h3><p class="mt-3 text-sm leading-7">可能分攤資本支出，也可能帶來設備整合、營運及新增投資風險。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow text-sky-700">關鍵未知</span><h3 class="mt-2 text-xl font-bold text-stone-900">DRAM 還是 HBM？</h3><p class="mt-3 text-sm leading-7">記憶體產品不同，技術門檻、所需設備、投資規模及潛在收益也不同。</p></article>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold text-stone-900">Intel 代工業務：虧損幅度縮小</h3><p class="mt-1 text-sm text-stone-500">季度營業虧損，單位：億美元；數值愈低代表虧損愈少。</p><div class="relative mt-5 h-64"><canvas id="intelLossChart" role="img" aria-label="Intel 代工業務二〇二五年第二季虧損三十二億美元，二〇二六年第二季虧損二十一億美元"></canvas><p class="chart-fallback rounded-lg bg-stone-100 p-4 text-sm">2025 Q2：虧損 32 億美元；2026 Q2：虧損 21 億美元。</p></div><p class="mt-3 text-xs text-stone-500">2026 Q2 Intel 合併營收 161 億美元、年增 25%；代工業務仍未轉盈。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold text-stone-900">比較基準：Micron 美國建廠</h3><div class="mt-6 space-y-5 border-l-2 border-sky-200 pl-5"><div class="relative"><span class="absolute -left-[27px] top-1 h-3 w-3 rounded-full bg-sky-500"></span><p class="text-xs font-bold text-sky-800">2026 年 7 月</p><p class="mt-1 text-sm leading-6">紐約州新廠完成早期整地，開始進入垂直建造階段。</p></div><div class="relative"><span class="absolute -left-[27px] top-1 h-3 w-3 rounded-full bg-sky-500"></span><p class="text-xs font-bold text-sky-800">2027 年中（規劃）</p><p class="mt-1 text-sm leading-6">愛達荷州首座新廠預計開始產出晶圓。</p></div><div class="relative"><span class="absolute -left-[27px] top-1 h-3 w-3 rounded-full bg-sky-500"></span><p class="text-xs font-bold text-sky-800">2028 年下半年（規劃）</p><p class="mt-1 text-sm leading-6">愛達荷州第二座新廠預計開始產出晶圓。</p></div></div><p class="mt-5 rounded-lg bg-amber-50 p-3 text-xs leading-6 text-amber-900">Intel 俄亥俄州相關完工時程，報告記載已延後至 2030、2031 年；合作成真也不代表立即投產。</p></article>
+        </div>
+        <div class="rounded-xl border-l-4 border-amber-500 bg-amber-50 px-6 py-5"><p class="font-bold text-stone-900">Micron 與產業的二階效應</p><p class="mt-2 leading-7">短期：既有訂單不會因合作消息立即改變。中期：美國在地供應與先進封裝可能受益。長期：若記憶體業者同步擴產過快，供給過剩可能壓低價格與毛利率。</p></div>
+      </section>
+
+      <section id="spacex" aria-labelledby="spacexTitle">
+        <div class="mb-3 flex items-center gap-2"><span class="eyebrow text-sky-700">Chapter 04</span><span class="h-px w-10 bg-sky-300"></span><span class="text-xs text-stone-500">軌道運輸 × 衛星網路</span></div>
+        <h2 id="spacexTitle" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">SpaceX｜從成功入軌，到網路營收</h2>
+        <p class="mb-7 max-w-4xl leading-8">報告記載 SpaceX 已於 2026 年 6 月以 SPCX 在 Nasdaq 掛牌。Starship 第十四次試飛的價值，在於驗證軌道飛行、衛星部署及長時間運行；但成功部署自家衛星，不等於取得一筆對外發射收入。</p>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="metric-accent rounded-2xl border border-sky-100 bg-sky-50 p-5"><p class="text-sm font-bold text-sky-900">第十四次試飛</p><p class="glass-number mt-2 text-3xl font-black text-sky-900">9/22</p><p class="mt-2 text-xs text-sky-800">最早預定日期；須監管批准</p></div>
+          <div class="metric-accent rounded-2xl border border-violet-100 bg-violet-50 p-5"><p class="text-sm font-bold text-violet-900">計畫部署 Starlink V3</p><p class="glass-number mt-2 text-3xl font-black text-violet-900">26 顆</p><p class="mt-2 text-xs text-violet-800">預定入軌部署，尚非既成成果</p></div>
+          <div class="metric-accent rounded-2xl border border-cyan-100 bg-cyan-50 p-5"><p class="text-sm font-bold text-cyan-900">預定軌道高度</p><p class="glass-number mt-2 text-3xl font-black text-cyan-900">約 275 km</p><p class="mt-2 text-xs text-cyan-800">計畫繞行約六圈</p></div>
+          <div class="metric-accent rounded-2xl border border-stone-200 bg-white p-5"><p class="text-sm font-bold text-stone-700">規劃任務時間</p><p class="glass-number mt-2 text-3xl font-black text-stone-900">近 10 小時</p><p class="mt-2 text-xs text-stone-500">計畫於智利以西太平洋濺落</p></div>
+        </div>
+        <div class="mt-6 rounded-2xl bg-stone-900 p-6 text-white shadow-lg"><h3 class="text-lg font-bold">商業化驗證路徑</h3><div class="mt-5 grid gap-3 md:grid-cols-5"><div class="rounded-lg bg-white/10 p-4"><p class="text-xs text-sky-300">01</p><p class="mt-1 font-bold">成功入軌</p></div><div class="rounded-lg bg-white/10 p-4"><p class="text-xs text-sky-300">02</p><p class="mt-1 font-bold">有效部署衛星</p></div><div class="rounded-lg bg-white/10 p-4"><p class="text-xs text-sky-300">03</p><p class="mt-1 font-bold">安全返回</p></div><div class="rounded-lg bg-white/10 p-4"><p class="text-xs text-sky-300">04</p><p class="mt-1 font-bold">可重複使用</p></div><div class="rounded-lg bg-white/10 p-4"><p class="text-xs text-sky-300">05</p><p class="mt-1 font-bold">高頻發射與成本下降</p></div></div><p class="mt-4 text-xs leading-6 text-stone-300">以上各階段需要分別驗證；單次試飛成功不能替代全部商業化證據。</p></div>
+        <div class="mt-6 grid gap-6 lg:grid-cols-2">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold text-stone-900">Starlink 訂閱服務線數</h3><p class="mt-1 text-sm text-stone-500">單位：萬條；2026 年第二季末較上年同期增加一倍。</p><div class="relative mt-5 h-60"><canvas id="starlinkSubscribersChart" role="img" aria-label="Starlink 訂閱服務線數從六百萬增至一千二百萬"></canvas><p class="chart-fallback rounded-lg bg-stone-100 p-4 text-sm">2025 Q2：600 萬條；2026 Q2：1,200 萬條。</p></div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold text-stone-900">Starlink 月均訂閱收入（ARPU）</h3><p class="mt-1 text-sm text-stone-500">單位：美元／月；擴張國際及低價方案時下降。</p><div class="relative mt-5 h-60"><canvas id="starlinkArpuChart" role="img" aria-label="Starlink 月均訂閱收入由八十五美元降至六十六美元"></canvas><p class="chart-fallback rounded-lg bg-stone-100 p-4 text-sm">2025 Q2：85 美元；2026 Q2：66 美元。</p></div></article>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-xl border border-stone-200 bg-white p-5"><p class="text-xs font-semibold text-stone-500">2026 Q2 Connectivity 營收</p><p class="glass-number mt-2 text-2xl font-black text-stone-900">42.91 億美元</p><p class="mt-1 text-xs text-emerald-700">年增 66%</p></div>
+          <div class="rounded-xl border border-stone-200 bg-white p-5"><p class="text-xs font-semibold text-stone-500">Connectivity 營業利益</p><p class="glass-number mt-2 text-2xl font-black text-stone-900">16.56 億美元</p><p class="mt-1 text-xs text-stone-500">部門口徑</p></div>
+          <div class="rounded-xl border border-stone-200 bg-white p-5"><p class="text-xs font-semibold text-stone-500">集團合併營收／淨損</p><p class="glass-number mt-2 text-2xl font-black text-stone-900">78.14 / −5.41 億</p><p class="mt-1 text-xs text-stone-500">同季營收／GAAP 淨損，美元</p></div>
+          <div class="rounded-xl border border-rose-200 bg-rose-50 p-5"><p class="text-xs font-semibold text-rose-900">集團資本支出</p><p class="glass-number mt-2 text-2xl font-black text-rose-900">183.69 億美元</p><p class="mt-1 text-xs text-rose-800">其中 AI 業務約 158.28 億美元</p></div>
+        </div>
+        <p class="mt-5 rounded-xl border-l-4 border-sky-500 bg-white px-6 py-4 text-sm leading-7 shadow-sm"><strong>財務含意：</strong>集團內部發射自家衛星，不認列對外發射營收；經濟效益應看衛星投入服務後的連線收入、網路利用率、單位部署成本與自由現金流。調整後 EBITDA 也不能取代淨利或自由現金流。</p>
+      </section>
+
+      <section id="macro" aria-labelledby="macroTitle">
+        <div class="mb-3 flex items-center gap-2"><span class="eyebrow text-sky-700">Chapter 05</span><span class="h-px w-10 bg-sky-300"></span><span class="text-xs text-stone-500">市場環境與資金成本</span></div>
+        <h2 id="macroTitle" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">利率環境，提高資本回報門檻</h2>
+        <div class="grid gap-4 md:grid-cols-2"><div class="rounded-xl border border-stone-200 bg-white p-6"><p class="text-sm text-stone-600">9 月 15 日｜S&amp;P 500</p><p class="glass-number mt-2 text-3xl font-black text-stone-900">7,585.73 <span class="text-lg text-rose-600">−0.4%</span></p></div><div class="rounded-xl border border-stone-200 bg-white p-6"><p class="text-sm text-stone-600">9 月 15 日｜Nasdaq 綜合指數</p><p class="glass-number mt-2 text-3xl font-black text-stone-900">25,981.57 <span class="text-lg text-rose-600">−0.8%</span></p></div></div>
+        <div class="mt-6 grid gap-3 md:grid-cols-4"><div class="rounded-lg bg-sky-100 p-5"><span class="eyebrow text-sky-800">傳導 1</span><h3 class="mt-2 font-bold text-sky-950">油價上漲</h3><p class="mt-1 text-sm text-sky-900">能源及運輸成本可能上升</p></div><div class="rounded-lg bg-sky-50 p-5"><span class="eyebrow text-sky-800">傳導 2</span><h3 class="mt-2 font-bold text-sky-950">通膨壓力</h3><p class="mt-1 text-sm text-sky-900">降息空間可能受約束</p></div><div class="rounded-lg bg-amber-50 p-5"><span class="eyebrow text-amber-800">傳導 3</span><h3 class="mt-2 font-bold text-amber-950">資金成本偏高</h3><p class="mt-1 text-sm text-amber-900">融資及要求報酬率提高</p></div><div class="rounded-lg bg-rose-50 p-5"><span class="eyebrow text-rose-800">傳導 4</span><h3 class="mt-2 font-bold text-rose-950">估值更重現金流</h3><p class="mt-1 text-sm text-rose-900">遠期收益折現價值承壓</p></div></div>
+        <div class="mt-6 rounded-xl bg-white p-6 shadow-sm"><h3 class="font-bold text-stone-900">AI 投資的三階段傳導</h3><div class="mt-4 grid gap-4 md:grid-cols-3"><div><p class="text-sm font-bold text-sky-700">需求</p><p class="mt-1 text-sm leading-7">進階 AI 服務是否有人願意付費？</p></div><div><p class="text-sm font-bold text-sky-700">資本投入</p><p class="mt-1 text-sm leading-7">訂單是否帶動晶片、記憶體與基礎設施投資？</p></div><div><p class="text-sm font-bold text-sky-700">投資回收</p><p class="mt-1 text-sm leading-7">新增營收能否支持資本支出，改善自由現金流？</p></div></div></div>
+      </section>
+
+      <section id="strategy" aria-labelledby="strategyTitle">
+        <div class="mb-3 flex items-center gap-2"><span class="eyebrow text-sky-700">Chapter 06</span><span class="h-px w-10 bg-sky-300"></span><span class="text-xs text-stone-500">投資策略與驗證時程</span></div>
+        <h2 id="strategyTitle" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">用時間框架，區分消息與價值</h2>
+        <div class="grid gap-5 lg:grid-cols-3"><article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="rounded-full bg-sky-100 px-3 py-1 text-xs font-bold text-sky-800">短期｜催化事件</span><h3 class="mt-4 text-xl font-bold text-stone-900">先找新的實質證據</h3><p class="mt-3 text-sm leading-7">Meta：是否揭露真實付費訂閱？Intel：是否正式簽約並確認產品？SpaceX：是否完成入軌和部署目標？</p></article><article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-bold text-cyan-900">中期｜3–12 個月</span><h3 class="mt-4 text-xl font-bold text-stone-900">營收能否改善回報</h3><p class="mt-3 text-sm leading-7">Meta：訂閱與廣告成長相對於資本支出。Intel：外部客戶及代工虧損。SpaceX：Starlink 收入、可靠度及自由現金流。</p></article><article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-900">長期｜競爭優勢</span><h3 class="mt-4 text-xl font-bold text-stone-900">看可持續的單位經濟</h3><p class="mt-3 text-sm leading-7">Meta：平台整合與 AI 變現。Intel：製程、信任、稼動率與資本效率。SpaceX：高頻可靠發射及 Starlink 單位成本。</p></article></div>
+        <p class="rounded-xl border border-stone-200 bg-stone-100 p-5 text-sm leading-7"><strong>估值提醒：</strong>三家業務性質及投資階段不同，不宜只用同一營收成長率或同一本益比比較；應連同淨利、自由現金流、資本支出及資產負債表一併評估。</p>
+      </section>
+
+      <section id="events" aria-labelledby="eventsTitle">
+        <div class="mb-3 flex items-center gap-2"><span class="eyebrow text-sky-700">Chapter 07</span><span class="h-px w-10 bg-sky-300"></span><span class="text-xs text-stone-500">後續值得追蹤的事件</span></div>
+        <h2 id="eventsTitle" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">事件雷達｜即時篩選關鍵里程碑</h2>
+        <p class="mb-5 max-w-4xl leading-8">表格僅採用提供報告中有記載的事件與數據；輸入公司、日期或關鍵字，即可篩選。預計日期及合作可能性均非完成保證。</p>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><label for="eventSearch" class="mb-2 block text-sm font-bold text-stone-900">搜尋事件與公司</label><div class="flex flex-col gap-3 sm:flex-row sm:items-center"><input id="eventSearch" type="search" placeholder="例如：Meta、HBM、9/22、現金流" class="w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-stone-900 placeholder-stone-400 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-100" aria-controls="eventTableBody"><button type="button" id="clearSearch" class="shrink-0 rounded-xl border border-stone-300 px-4 py-3 text-sm font-bold text-stone-600 hover:border-sky-400 hover:text-sky-700">清除搜尋</button></div><p id="resultCount" class="mt-3 text-xs text-stone-500" aria-live="polite"></p>
+          <div class="mt-5 max-h-[440px] overflow-auto rounded-xl border border-stone-200"><table class="min-w-[850px] w-full border-collapse text-left text-sm"><thead class="sticky top-0 z-10 bg-stone-800 text-white"><tr><th scope="col" class="whitespace-nowrap px-4 py-4 font-bold">日期／時程</th><th scope="col" class="whitespace-nowrap px-4 py-4 font-bold">公司／主題</th><th scope="col" class="px-4 py-4 font-bold">事件重點</th><th scope="col" class="whitespace-nowrap px-4 py-4 font-bold">目前狀態</th><th scope="col" class="px-4 py-4 font-bold">後續驗證指標</th></tr></thead><tbody id="eventTableBody" class="divide-y divide-stone-100 bg-white"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="conclusion" aria-labelledby="conclusionTitle">
+        <div class="mb-3 flex items-center gap-2"><span class="eyebrow text-sky-700">Chapter 08</span><span class="h-px w-10 bg-sky-300"></span><span class="text-xs text-stone-500">研究結論</span></div>
+        <h2 id="conclusionTitle" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">技術、成長與股東回報，不是同一件事</h2>
+        <div class="rounded-2xl bg-stone-900 px-6 py-9 text-white shadow-xl sm:px-10"><p class="eyebrow text-sky-300">The investment lens</p><p class="mt-4 text-2xl font-black leading-relaxed sm:text-3xl">先看付費，再看利潤。<br>先看簽約，再看產能。<br>先看入軌，再看現金流。</p><p class="mt-6 max-w-3xl text-sm leading-7 text-stone-300">Meta 需要驗證訂閱利潤，Intel 需要驗證合作的資本回報，SpaceX 需要驗證衛星服務與火箭投入能否改善整體財務表現。新增營收是否帶來新增自由現金流，才是三條成長路徑共同的檢驗點。</p></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"><p>&copy; 巴菲特AI價值投資-AI變現與晶片太空新局。僅供參考，不構成投資建議。</p><p class="text-xs mt-1">資料整理：依本次提供的 Meta、Intel 與 SpaceX 投資研究報告（2026年9月16日）。</p></div></footer>
+
+  <script>
+    'use strict';
+    // 本表所有紀錄及圖表均取自使用者提供的報告；未以佔位資料填充。
+    const productData = [
+      { date:'2026/09/15', company:'Meta｜Meta One', event:'推出進階 AI、創作者及企業訂閱；月費 US$2.99 起；1,500 萬筆為訂閱與試用合計。', status:'已宣布', tone:'emerald', focus:'付費轉換、續訂率、訂閱收入與推理成本' },
+      { date:'2026/09/16', company:'SK 海力士 × Intel', event:'討論美國記憶體製造；可能利用 Intel 俄亥俄州廠房或採合資形式。', status:'洽談中', tone:'amber', focus:'是否簽約、DRAM 或 HBM、投資方及投產時間' },
+      { date:'最早 2026/09/22', company:'SpaceX｜Starship', event:'第十四次試飛擬入軌約 275 公里、繞行約六圈，部署 26 顆 Starlink V3。', status:'預計／待批准', tone:'sky', focus:'實際發射日期、入軌、部署及飛行成果' },
+      { date:'預定 2026/09/30', company:'Micron｜財報', event:'預定公布財報，提供 AI 記憶體供需及美國建廠觀察點。', status:'預定', tone:'sky', focus:'HBM、記憶體價格、毛利率與資本支出' },
+      { date:'後續財報', company:'Meta｜變現追蹤', event:'檢視 Meta One 是否進一步揭露付費用戶、營收與成本。', status:'待揭露', tone:'amber', focus:'是否由試用規模轉為可持續的訂閱利潤' },
+      { date:'日期未定', company:'Intel × SK 海力士｜合作進展', event:'合作條件尚未確定；美國記憶體製造計畫尚待正式定案。', status:'未定案', tone:'amber', focus:'協議、產品品類、產能、廠房／設備成本分擔' }
+    ];
+
+    const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (ch) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    const badgeTone = { emerald:'bg-emerald-50 text-emerald-800', amber:'bg-amber-50 text-amber-800', sky:'bg-sky-50 text-sky-800' };
+    const tableBody = document.getElementById('eventTableBody');
+    const searchInput = document.getElementById('eventSearch');
+    const count = document.getElementById('resultCount');
+    function renderTable(query = '') {
+      const term = String(query).trim().toLocaleLowerCase('zh-Hant');
+      const matches = productData.filter(item => Object.values(item).some(value => String(value).toLocaleLowerCase('zh-Hant').includes(term)));
+      tableBody.innerHTML = matches.length ? matches.map(item => `<tr class="hover:bg-sky-50/70"><td class="whitespace-nowrap px-4 py-4 align-top font-semibold text-stone-800">${escapeHTML(item.date)}</td><td class="px-4 py-4 align-top font-bold text-stone-900">${escapeHTML(item.company)}</td><td class="px-4 py-4 align-top leading-6">${escapeHTML(item.event)}</td><td class="whitespace-nowrap px-4 py-4 align-top"><span class="inline-block rounded-full px-2.5 py-1 text-xs font-bold ${badgeTone[item.tone] || badgeTone.sky}">${escapeHTML(item.status)}</span></td><td class="px-4 py-4 align-top leading-6">${escapeHTML(item.focus)}</td></tr>`).join('') : '<tr><td colspan="5" class="px-4 py-8 text-center text-stone-500">沒有符合的事件，請嘗試其他關鍵字。</td></tr>';
+      count.textContent = `顯示 ${matches.length}／${productData.length} 筆真實報告紀錄`;
+    }
+    searchInput.addEventListener('input', (event) => renderTable(event.target.value));
+    document.getElementById('clearSearch').addEventListener('click', () => { searchInput.value = ''; renderTable(); searchInput.focus(); });
+    renderTable();
+
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuButton = document.getElementById('menuButton');
+    const menuIcon = document.getElementById('menuIcon');
+    function setMenu(open) {
+      mobileMenu.hidden = !open;
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      menuIcon.innerHTML = open ? '<path d="M18 6 6 18M6 6l12 12"/>' : '<path d="M4 6h16M4 12h16M4 18h16"/>';
+    }
+    menuButton.addEventListener('click', () => setMenu(mobileMenu.hidden));
+    document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', (event) => { if (event.matches) setMenu(false); });
+
+    const sectionIds = ['overview','verification','meta','intel','spacex','macro','strategy','events','conclusion'];
+    const navLinks = [...document.querySelectorAll('header nav a[href^="#"]')];
+    function setActiveSection(id) {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current');
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      const visible = new Map();
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) visible.set(entry.target.id, entry.boundingClientRect.top); else visible.delete(entry.target.id); });
+        if (visible.size) {
+          const candidate = [...visible.entries()].sort((a,b) => Math.abs(a[1]-120)-Math.abs(b[1]-120))[0][0];
+          setActiveSection(candidate);
+        }
+      }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
+      sectionIds.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+    }
+    navLinks.forEach(link => link.addEventListener('click', () => setActiveSection(link.hash.substring(1))));
+    if (location.hash && sectionIds.includes(location.hash.substring(1))) setActiveSection(location.hash.substring(1));
+
+    if (typeof Chart === 'undefined') {
+      document.querySelectorAll('canvas').forEach(canvas => canvas.parentElement.classList.add('chart-unavailable'));
+      console.warn('Chart.js 無法載入：已保留圖表文字備援。');
+    } else {
+      Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", sans-serif';
+      Chart.defaults.color = '#57534e';
+      const grid = { color: 'rgba(120,113,108,.13)' };
+      const tooltip = (unit, digits = 2, prefix = '') => ({ callbacks: { label: ctx => `${ctx.dataset.label ? ctx.dataset.label + '：' : ''}${prefix}${Number(ctx.parsed.y).toFixed(digits)} ${unit}` } });
+      const defaultOptions = (unit, digits = 2, max) => ({ responsive:true, maintainAspectRatio:false, animation:{duration:650}, plugins:{legend:{display:false},tooltip:tooltip(unit,digits)}, scales:{x:{grid:{display:false}, ticks:{maxRotation:0}},y:{beginAtZero:true, ...(max ? {max} : {}), grid, ticks:{callback:value => `${Number(value).toFixed(digits)} ${unit}`}}} });
+      new Chart(document.getElementById('metaScenarioChart'), { type:'bar', data:{labels:['假設 500 萬筆付費','假設 1,500 萬筆付費'],datasets:[{label:'年化收入',data:[4.794,14.382],backgroundColor:['#38bdf8','#0369a1'],borderRadius:8,maxBarThickness:90}]},options:defaultOptions('億美元',2,16) });
+      new Chart(document.getElementById('intelLossChart'), { type:'bar', data:{labels:['2025 Q2','2026 Q2'],datasets:[{label:'代工營業虧損',data:[32,21],backgroundColor:['#fbbf24','#0ea5e9'],borderRadius:8,maxBarThickness:85}]},options:defaultOptions('億美元',2,40) });
+      new Chart(document.getElementById('starlinkSubscribersChart'), { type:'bar', data:{labels:['2025 Q2','2026 Q2'],datasets:[{label:'訂閱服務線數',data:[600,1200],backgroundColor:['#7dd3fc','#0369a1'],borderRadius:8,maxBarThickness:85}]},options:defaultOptions('萬條',0,1400) });
+      new Chart(document.getElementById('starlinkArpuChart'), { type:'line', data:{labels:['2025 Q2','2026 Q2'],datasets:[{label:'月均訂閱收入',data:[85,66],borderColor:'#0e7490',backgroundColor:'rgba(14,116,144,.12)',fill:true,tension:.2,pointRadius:6,pointHoverRadius:8,pointBackgroundColor:'#0e7490',borderWidth:3}]},options:defaultOptions('美元／月',2,100) });
+    }
+  </script>
+</body>
+</html>
