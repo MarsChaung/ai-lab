@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2026年9月17日美股投資專題：聯準會升息、Crux AI融資與AI資本成本，掌握六大章節重點、動態圖表與公司觀察指標。">
+  <meta name="theme-color" content="#0f172a">
+  <title>巴菲特AI價值投資-升息與AI資本戰</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6.8rem; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif; }
+    section[id] { scroll-margin-top: 7rem; }
+    .active-nav-link { color:#0369a1; background:#e0f2fe; font-weight:700; }
+    .inactive-nav-link { color:#57534e; background:transparent; }
+    .inactive-nav-link:hover { color:#0369a1; background:#f0f9ff; }
+    .nav-link { transition: color .18s ease, background .18s ease; border-radius:.55rem; }
+    .hero-grid { background-image:linear-gradient(rgba(148,163,184,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.075) 1px,transparent 1px);background-size:38px 38px; }
+    .eyebrow { font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; font-weight:800; }
+    .metric { font-variant-numeric:tabular-nums; letter-spacing:-.045em; }
+    .timeline-line::before { content:""; position:absolute; top:1.05rem; bottom:1rem; left:1.12rem; width:2px; background:#bae6fd; }
+    .chart-wrap { position:relative; height:310px; width:100%; }
+    .chart-wrap.short { height:255px; }
+    .flow-arrow { color:#0284c7; font-size:1.25rem; line-height:1; font-weight:800; }
+    .pill { display:inline-flex;align-items:center;gap:.35rem;border-radius:999px;padding:.3rem .7rem;font-size:.72rem;font-weight:700; }
+    .focus-visible:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible { outline:3px solid #38bdf8; outline-offset:3px; }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .nav-link { transition:none; } }
+    @media (min-width:768px) { .chart-wrap { height:350px; } }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200/90 bg-white/95 backdrop-blur shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex min-h-[76px] items-center justify-between gap-4">
+        <a href="#overview" class="flex items-center gap-3 shrink-0" aria-label="返回報告總覽">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-sky-700 text-white text-lg font-black" aria-hidden="true">AI</span>
+          <span class="leading-tight"><span class="block font-extrabold tracking-tight text-stone-900">巴菲特AI價值投資</span><span class="block text-[11px] text-stone-500">美股投資專題 · 2026.09.17</span></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-1" aria-label="主選單">
+          <a class="nav-link active-nav-link px-3 py-2 text-sm" href="#overview">總覽</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#fed">聯準會</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#crux">Crux AI</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#cashflow">現金流</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#companies">公司觀察</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#timeline">時間框架</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#scenarios">三種情境</a>
+        </nav>
+        <button id="menuToggle" type="button" class="lg:hidden inline-flex items-center justify-center rounded-lg border border-stone-200 bg-white p-2.5 text-stone-700 hover:bg-stone-100" aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟選單">
+          <svg id="menuIcon" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+      <nav id="mobileMenu" class="hidden lg:hidden border-t border-stone-100 pb-4 pt-3 grid grid-cols-2 sm:grid-cols-4 gap-2" aria-label="手機選單">
+        <a class="nav-link active-nav-link px-3 py-2 text-sm" href="#overview">總覽</a>
+        <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#fed">聯準會</a>
+        <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#crux">Crux AI</a>
+        <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#cashflow">現金流</a>
+        <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#companies">公司觀察</a>
+        <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#timeline">時間框架</a>
+        <a class="nav-link inactive-nav-link px-3 py-2 text-sm" href="#scenarios">三種情境</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview" class="relative overflow-hidden bg-slate-900 text-white">
+      <div class="hero-grid absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute -right-28 -top-32 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl" aria-hidden="true"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+        <div class="max-w-4xl">
+          <p class="eyebrow text-sky-300 mb-4">US EQUITY INSIGHTS / 2026.09.17</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight">升息與<span class="text-sky-300">AI資本戰</span></h1>
+          <p class="mt-5 text-lg sm:text-xl text-slate-200 leading-relaxed max-w-3xl">聯準會提高資金價格，AI建設卻持續尋求巨額融資。真正的投資問題，從「買進多少晶片」轉向「算力能否創造可持續的現金流」。</p>
+          <p class="mt-5 text-xs sm:text-sm text-slate-400">報告日期：2026年9月17日（星期四）｜觀察基準：美東時間9月16日的政策決策與融資消息</p>
+          <div class="mt-8 flex flex-wrap gap-2">
+            <span class="pill bg-sky-400/15 text-sky-200 border border-sky-400/30">✓ 聯準會：已公布</span>
+            <span class="pill bg-amber-400/10 text-amber-200 border border-amber-400/25">◇ 融資：媒體報導</span>
+            <span class="pill bg-white/10 text-slate-200 border border-white/20">◷ 未來數據：預測／規劃</span>
+          </div>
+        </div>
+        <div class="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur"><p class="text-sky-200 text-sm">政策利率目標區間</p><p class="metric mt-2 text-3xl sm:text-4xl font-black">3.75–4.00<span class="text-xl">%</span></p><p class="mt-3 text-xs text-slate-300">9月16日升息0.25個百分點 · 已決議</p></article>
+          <article class="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur"><p class="text-sky-200 text-sm">年底前至少再升息一次</p><p class="metric mt-2 text-4xl font-black">16<span class="text-xl font-semibold"> / 18人</span></p><p class="mt-3 text-xs text-slate-300">官員個別預測，不代表既定政策</p></article>
+          <article class="rounded-2xl border border-amber-200/20 bg-amber-400/10 p-5 backdrop-blur"><p class="text-amber-200 text-sm">Crux AI晶片融資</p><p class="metric mt-2 text-4xl font-black">220<span class="text-xl font-semibold">億美元</span></p><p class="mt-3 text-xs text-slate-300">約數；媒體引述知情人士，非已撥款額</p></article>
+          <article class="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur"><p class="text-sky-200 text-sm">首批資料中心規劃容量</p><p class="metric mt-2 text-4xl font-black">500<span class="text-xl font-semibold"> MW</span></p><p class="mt-3 text-xs text-slate-300">計畫於2027年上線，非已建成容量</p></article>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+      <section aria-labelledby="thesis-title">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+          <p class="eyebrow text-sky-700 mb-2">核心觀點</p>
+          <h2 id="thesis-title" class="text-2xl sm:text-3xl font-extrabold text-stone-900 leading-snug">借得到錢，不等於賺得到錢。</h2>
+          <p class="mt-3 text-stone-600 leading-8">利率決定資金成本，客戶付費決定資產價值。AI專案須以實際利用率、營運現金流及扣除利息與設備更新後的報酬，驗證擴張是否有效。</p>
+        </div>
+      </section>
+
+      <section id="fed" aria-labelledby="fed-title">
+        <div class="flex flex-wrap items-center gap-3 mb-3"><span class="eyebrow text-sky-700">01 / MONETARY POLICY</span><span class="pill bg-sky-100 text-sky-800">已公布的政策與預測</span></div>
+        <h2 id="fed-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">聯準會：升息落地，路徑仍有變數</h2>
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+            <div class="flex flex-wrap items-center justify-between gap-2"><h3 class="text-xl font-bold">六月與九月經濟預測比較</h3><span class="text-xs bg-sky-50 text-sky-700 px-3 py-1 rounded-full">預測中位數 · 單位：%</span></div>
+            <p class="mt-2 mb-4 text-sm text-stone-500">2026年預測；前三項為第四季相對上年第四季變動率，失業率為年底預測。</p>
+            <div class="chart-wrap"><canvas id="fedForecastChart" role="img" aria-label="2026年六月與九月經濟預測長條圖：GDP 2.2與2.3、PCE通膨3.6與3.7、核心PCE 3.3與3.4、失業率4.3與4.1，單位百分比。"></canvas></div>
+            <p id="fedChartFallback" class="hidden rounded-lg bg-stone-100 p-4 text-sm text-stone-700">圖表需連線載入 Chart.js。預測數據：實質GDP 2.20% → 2.30%；PCE通膨 3.60% → 3.70%；核心PCE 3.30% → 3.40%；失業率 4.30% → 4.10%。</p>
+            <p class="mt-4 text-xs leading-6 text-stone-500">圖表顯示的是預測修正，不是已實現的全年平均經濟數據。</p>
+          </div>
+          <div class="space-y-4 mb-6">
+            <article class="rounded-lg bg-sky-50 border border-sky-100 p-5"><p class="text-xs font-bold text-sky-700">9月16日決議</p><p class="metric text-3xl font-black text-sky-900 mt-2">12 : 0</p><p class="text-sm text-stone-600 mt-2">一致升息一碼；報告指出為2023年7月以來首次升息。</p></article>
+            <article class="rounded-lg bg-white shadow-lg p-5"><p class="text-xs font-bold text-stone-500">2026年底利率預測中位數</p><p class="metric text-3xl font-black text-stone-900 mt-2">4.1%</p><p class="text-sm text-stone-600 mt-2">約對應4.00%–4.25%的政策利率區間，並非下一次會議的決策。</p></article>
+            <article class="rounded-lg bg-amber-50 border border-amber-100 p-5"><p class="text-xs font-bold text-amber-800">市場閱讀重點</p><p class="text-sm leading-7 text-stone-700 mt-2">留意升息次數與高利率持續多久；折現率、再融資成本與未來獲利將共同影響估值。</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="crux" aria-labelledby="crux-title">
+        <div class="flex flex-wrap items-center gap-3 mb-3"><span class="eyebrow text-sky-700">02 / AI INFRASTRUCTURE</span><span class="pill bg-amber-100 text-amber-900">部分資訊尚待正式揭露</span></div>
+        <h2 id="crux-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Crux AI：TPU走向外部資本市場</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-2"><h3 class="text-xl font-bold">融資結構，分開看</h3><span class="text-xs text-stone-500">單位：億美元</span></div>
+            <div class="chart-wrap short mt-3"><canvas id="capitalChart" role="img" aria-label="Crux AI股權承諾50億美元、媒體報導籌組債務融資約220億美元；兩者不同性質及進度，不能當作已投入建設總額。"></canvas></div>
+            <p id="capitalChartFallback" class="hidden rounded-lg bg-stone-100 p-4 text-sm text-stone-700">圖表需連線載入 Chart.js。股權承諾：約50億美元；報導中的銀行貸款籌組：約220億美元。</p>
+            <p class="mt-3 text-xs leading-6 text-stone-500">50億是Blackstone管理基金的初期股權承諾；220億是媒體報導的銀行融資安排。性質、確認程度與資金進度不同，不能直接相加為已到位資金或已完工成本。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold">合作與資金分工</h3>
+            <div class="mt-5 space-y-4">
+              <div class="flex gap-3 items-start"><span class="shrink-0 w-9 h-9 rounded-lg grid place-items-center bg-violet-100 text-violet-700 font-black">1</span><div><p class="font-bold">Blackstone管理基金</p><p class="text-sm text-stone-600 leading-6">承諾提供約50億美元初期股權資本，並非上市公司自身同額投入。</p></div></div>
+              <div class="flex gap-3 items-start"><span class="shrink-0 w-9 h-9 rounded-lg grid place-items-center bg-amber-100 text-amber-700 font-black">2</span><div><p class="font-bold">銀行團</p><p class="text-sm text-stone-600 leading-6">據報十家銀行籌組約220億美元融資，主要支援採購TPU；完整契約與撥款狀態未公開。</p></div></div>
+              <div class="flex gap-3 items-start"><span class="shrink-0 w-9 h-9 rounded-lg grid place-items-center bg-sky-100 text-sky-700 font-black">3</span><div><p class="font-bold">Google與Crux AI</p><p class="text-sm text-stone-600 leading-6">Google提供TPU與軟硬體技術；專案公司建置設施、嘗試將算力轉為可銷售服務。</p></div></div>
+            </div>
+          </article>
+        </div>
+        <div class="rounded-xl bg-slate-900 text-slate-100 p-6 md:p-8">
+          <h3 class="text-xl font-bold mb-5">進展時間軸</h3>
+          <div class="grid md:grid-cols-3 gap-5">
+            <div class="border-l-2 border-sky-400 pl-4"><p class="text-xs text-sky-300 font-bold">2026 / 05 / 18 · 已宣布</p><p class="mt-1 font-semibold">合作成立AI基礎建設企業</p><p class="text-sm mt-2 text-slate-300 leading-6">股權承諾約50億美元，Google提供TPU與技術。</p></div>
+            <div class="border-l-2 border-amber-400 pl-4"><p class="text-xs text-amber-300 font-bold">2026 / 09 / 16 · 媒體報導</p><p class="mt-1 font-semibold">籌組約220億美元融資</p><p class="text-sm mt-2 text-slate-300 leading-6">貸款結構、費率與資金撥付均待進一步確認。</p></div>
+            <div class="border-l-2 border-white/60 pl-4"><p class="text-xs text-slate-300 font-bold">2027 · 規劃目標</p><p class="mt-1 font-semibold">首批約500 MW容量上線</p><p class="text-sm mt-2 text-slate-300 leading-6">為設施／電力容量目標，不代表已建成或已實現營收。</p></div>
+          </div>
+        </div>
+        <p class="mt-4 rounded-lg bg-amber-50 border-l-4 border-amber-400 p-4 text-sm leading-7 text-amber-950">尚待釐清：Alphabet的收入認列、Crux AI是否合併報表、採購承諾或其他支援安排，以及融資的擔保與客戶付款條款。</p>
+      </section>
+
+      <section id="cashflow" aria-labelledby="cashflow-title">
+        <div class="eyebrow text-sky-700 mb-3">03 / UNIT ECONOMICS</div>
+        <h2 id="cashflow-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">算力需求：從意願走到現金流</h2>
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-stone-100 text-stone-700">階段一 / 意向</span><h3 class="mt-4 font-bold text-xl">想要算力</h3><p class="mt-2 text-stone-600 leading-7">企業或模型開發商表達需求；尚未等同確定付款。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-sky-100 text-sky-800">階段二 / 合約</span><h3 class="mt-4 font-bold text-xl">承諾購買</h3><p class="mt-2 text-stone-600 leading-7">保留容量與付款條款；仍須檢視期限、取消權及客戶信用。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-emerald-100 text-emerald-800">階段三 / 實現</span><h3 class="mt-4 font-bold text-xl">持續付費</h3><p class="mt-2 text-stone-600 leading-7">設備上線並被使用，實際產生收入與營運現金流。</p></article>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold mb-4">資本成本上升的傳導路徑</h3>
+          <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3" aria-label="利率升高，融資成本增加，利息及維運壓力上升，現金流緩衝縮小">
+            <div class="flex-1 rounded-xl bg-sky-50 border border-sky-100 p-4 text-center font-bold text-sky-900">政策利率上升</div><span class="flow-arrow text-center" aria-hidden="true">→</span>
+            <div class="flex-1 rounded-xl bg-sky-50 border border-sky-100 p-4 text-center font-bold text-sky-900">借款／再融資變貴</div><span class="flow-arrow text-center" aria-hidden="true">→</span>
+            <div class="flex-1 rounded-xl bg-amber-50 border border-amber-100 p-4 text-center font-bold text-amber-900">利息與營運成本壓力</div><span class="flow-arrow text-center" aria-hidden="true">→</span>
+            <div class="flex-1 rounded-xl bg-rose-50 border border-rose-100 p-4 text-center font-bold text-rose-900">現金流緩衝縮小</div>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-stone-600">以上是可能的經濟傳導機制，並非Crux AI已發生財務困難的事實。</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="rounded-lg border border-stone-200 bg-white p-5"><p class="font-bold text-stone-900">晶片抵押品</p><p class="text-sm leading-7 text-stone-600 mt-2">TPU的專用性與迭代速度影響殘值；晶片不是現金。</p></div>
+          <div class="rounded-lg border border-stone-200 bg-white p-5"><p class="font-bold text-stone-900">客戶合約</p><p class="text-sm leading-7 text-stone-600 mt-2">期限、取消條款、信用與集中度，決定收入保障程度。</p></div>
+          <div class="rounded-lg border border-stone-200 bg-white p-5"><p class="font-bold text-stone-900">機房與電力</p><p class="text-sm leading-7 text-stone-600 mt-2">電網接入、冷卻、施工與供電，左右實際交付時點。</p></div>
+        </div>
+      </section>
+
+      <section id="companies" aria-labelledby="companies-title">
+        <div class="eyebrow text-sky-700 mb-3">04 / EQUITY TRANSMISSION</div>
+        <h2 id="companies-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">美股公司：同一輪擴張，不同的損益表</h2>
+        <p class="text-stone-600 leading-7 mb-5">依原報告整理公司角色、可能機會、待查風險及後續觀察指標。表格可即時搜尋公司、代號、產業及關鍵字；分析不等於投資評級。</p>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <label for="companySearch" class="block font-bold text-stone-800 mb-2">搜尋公司或觀察指標</label>
+          <div class="relative">
+            <svg class="w-5 h-5 absolute top-1/2 left-3 -translate-y-1/2 text-stone-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input id="companySearch" type="search" class="w-full border border-stone-300 rounded-lg py-3 pl-11 pr-4 focus:border-sky-500 focus:ring-2 focus:ring-sky-100 outline-none" placeholder="例如：GOOGL、融資、毛利、利用率…" autocomplete="off">
+          </div>
+          <p id="tableCount" class="mt-3 text-sm text-stone-500" role="status" aria-live="polite">顯示 5 筆資料</p>
+          <div class="mt-4 max-h-[470px] overflow-auto rounded-lg border border-stone-200">
+            <table class="w-full min-w-[860px] text-sm text-left border-separate border-spacing-0">
+              <thead class="sticky top-0 z-10 bg-slate-900 text-white"><tr><th scope="col" class="px-4 py-4 whitespace-nowrap">公司／領域</th><th scope="col" class="px-4 py-4">可能機會</th><th scope="col" class="px-4 py-4">風險與限制</th><th scope="col" class="px-4 py-4">後續檢核</th></tr></thead>
+              <tbody id="companyTableBody" class="divide-y divide-stone-100"></tbody>
+            </table>
+          </div>
+          <p class="mt-3 text-xs leading-6 text-stone-500">資料根據報告的公司分析整理；「可能機會」是條件式分析，非已實現收益。電力與資料中心一列為產業範疇，並非個別公司的已確認訂單。</p>
+        </div>
+      </section>
+
+      <section id="timeline" aria-labelledby="timeline-title">
+        <div class="eyebrow text-sky-700 mb-3">05 / INVESTMENT HORIZONS</div>
+        <h2 id="timeline-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">短、中、長期：觀察什麼？</h2>
+        <div class="relative timeline-line space-y-5">
+          <article class="relative pl-14"><span class="absolute left-0 top-1 w-9 h-9 rounded-full bg-sky-700 text-white grid place-items-center text-sm font-bold">1</span><div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-sky-100 text-sky-900">短期｜未來數週至2026年底</span><h3 class="mt-3 text-xl font-bold">利率預期與貸款進度</h3><p class="mt-2 text-stone-600 leading-7">追蹤通膨、就業、能源價格，兩年期／十年期美債殖利率及信用利差；核對Crux AI貸款最終承諾、分銷、融資成本與具體客戶合約。</p></div></article>
+          <article class="relative pl-14"><span class="absolute left-0 top-1 w-9 h-9 rounded-full bg-sky-700 text-white grid place-items-center text-sm font-bold">2</span><div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-sky-100 text-sky-900">中期｜2027年</span><h3 class="mt-3 text-xl font-bold">機房交付與付費需求</h3><p class="mt-2 text-stone-600 leading-7">驗證首批500 MW容量進度、可用設備、利用率、平均服務價格、電費及維護費用，並檢查營運現金流能否轉正。</p></div></article>
+          <article class="relative pl-14"><span class="absolute left-0 top-1 w-9 h-9 rounded-full bg-sky-700 text-white grid place-items-center text-sm font-bold">3</span><div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-sky-100 text-sky-900">長期｜2028年以後</span><h3 class="mt-3 text-xl font-bold">生產力與資本報酬</h3><p class="mt-2 text-stone-600 leading-7">檢驗AI是否改善客戶成本和獲利；留意晶片更新、電力效率、債務到期與再融資能力。技術成功不保證每一檔相關股票都有同樣報酬。</p></div></article>
+        </div>
+      </section>
+
+      <section id="scenarios" aria-labelledby="scenarios-title">
+        <div class="eyebrow text-sky-700 mb-3">06 / SCENARIO ANALYSIS</div>
+        <h2 id="scenarios-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三種情境：用證據，而非敘事驗證</h2>
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500"><span class="pill bg-emerald-100 text-emerald-800">情境一 · 需求與現金流同步成長</span><h3 class="mt-4 text-xl font-bold">付費需求支撐擴張</h3><p class="mt-3 text-stone-600 leading-7">客戶持續付費、設備利用率提高，收入可覆蓋營運、折舊與資金成本。</p><p class="mt-4 text-sm font-semibold text-emerald-800">檢核：使用率、毛利、自由現金流。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-amber-500"><span class="pill bg-amber-100 text-amber-900">情境二 · 需求有，回收慢</span><h3 class="mt-4 text-xl font-bold">擴張未必等於獲利</h3><p class="mt-3 text-stone-600 leading-7">工程延遲、電力瓶頸或售價下滑，使專案現金回收期拉長。</p><p class="mt-4 text-sm font-semibold text-amber-800">檢核：訂單與營收落差、建設支出、回收期。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-rose-500"><span class="pill bg-rose-100 text-rose-800">情境三 · 高利率＋利用率不足</span><h3 class="mt-4 text-xl font-bold">槓桿可能放大壓力</h3><p class="mt-3 text-stone-600 leading-7">付費成長落後、設備殘值下降，再融資壓力可能沿專案、銀行與供應商傳導。</p><p class="mt-4 text-sm font-semibold text-rose-800">檢核：到期債務、利息負擔、客戶集中度。</p></article>
+        </div>
+        <p class="text-xs text-stone-500 leading-6">上述均為未來可能情境，並非對Crux AI目前經營狀況或市場方向的既定判斷。</p>
+      </section>
+
+      <section aria-labelledby="closing-title">
+        <div class="rounded-2xl bg-gradient-to-r from-sky-800 to-slate-900 p-7 sm:p-10 text-white shadow-xl">
+          <p class="eyebrow text-sky-200">THE BOTTOM LINE</p>
+          <h2 id="closing-title" class="mt-3 text-2xl sm:text-3xl font-black">AI故事沒有結束，投資問題已經改變。</h2>
+          <p class="mt-4 max-w-4xl text-slate-200 leading-8">從晶片數量、融資金額與擴產規模，轉向可持續的客戶付費、設備利用率、自由現金流，以及扣除融資成本後的投資報酬。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-升息與AI資本戰。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中聯準會、Crux AI、Alphabet與Blackstone相關公開資料及所附專題報告 (2026年9月17日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 每筆資料均按上傳的2026-09-17報告整理；沒有填入臆測的交易數字。
+    const productData = [
+      { name:'Alphabet', ticker:'GOOGL / GOOG', category:'雲端與自研晶片', opportunity:'TPU透過外部平台觸及更多專用AI算力客戶。', risk:'不能將220億美元融資視為Google同額營收；合併與支援責任待揭露。', watch:'實際收入、毛利、履約責任、與Google Cloud的互補／競爭。' },
+      { name:'Blackstone', ticker:'BX', category:'私募資本與基建', opportunity:'透過管理基金參與資料中心股權及長期營運收益。', risk:'建設、募資、負債與退出風險；基金承諾非上市公司自身同額投入。', watch:'管理費與實現收益、專案進度、資產評價與融資條件。' },
+      { name:'Goldman Sachs', ticker:'GS', category:'銀行與融資安排', opportunity:'可能取得安排、承銷、分銷或持有融資部位的收入。', risk:'各銀行持有額、費率與風險留存未披露；有信用與資本占用風險。', watch:'費用收入、最終風險部位、借款人集中度、信用損失。' },
+      { name:'Nvidia', ticker:'NVDA', category:'AI晶片與網路', opportunity:'整體算力擴張可能維持硬體與網路需求。', risk:'TPU可取得性上升，可能在特定工作負載形成替代選項；非全面取代GPU。', watch:'訂單品質、毛利、模型相容性、總持有成本與客戶集中度。' },
+      { name:'電力／電網／資料中心', ticker:'產業範疇', category:'基礎建設', opportunity:'若新增機房落地，相關設備與建設需求可能成長。', risk:'500 MW僅為規劃容量，不能視為特定公司已確定的訂單。', watch:'電網接入、施工時程、已簽合約、電力與冷卻交付能力。' }
+    ];
+
+    const searchInput = document.getElementById('companySearch');
+    const tbody = document.getElementById('companyTableBody');
+    const tableCount = document.getElementById('tableCount');
+    function appendCell(row, value, className='px-4 py-4 align-top leading-6 text-stone-600') {
+      const cell = document.createElement('td'); cell.className = className; cell.textContent = value; row.appendChild(cell); return cell;
+    }
+    function renderTable(query='') {
+      const term = query.normalize('NFKC').trim().toLocaleLowerCase('zh-Hant');
+      const matches = productData.filter(item => Object.values(item).join(' ').normalize('NFKC').toLocaleLowerCase('zh-Hant').includes(term));
+      tbody.replaceChildren();
+      matches.forEach(item => {
+        const tr = document.createElement('tr'); tr.className = 'hover:bg-sky-50/70 transition-colors';
+        const company = document.createElement('td'); company.className = 'px-4 py-4 align-top';
+        const companyName = document.createElement('span'); companyName.className = 'block font-bold text-stone-900'; companyName.textContent = item.name;
+        const ticker = document.createElement('span'); ticker.className = 'block text-xs text-sky-700 mt-1 font-semibold'; ticker.textContent = item.ticker;
+        const category = document.createElement('span'); category.className = 'block text-xs text-stone-500 mt-1'; category.textContent = item.category;
+        company.append(companyName,ticker,category); tr.appendChild(company);
+        appendCell(tr, item.opportunity); appendCell(tr, item.risk); appendCell(tr, item.watch);
+        tbody.appendChild(tr);
+      });
+      if (!matches.length) {
+        const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 4;
+        td.className = 'text-center p-10 text-stone-500'; td.textContent = '沒有符合的資料，請嘗試其他公司名稱或關鍵字。'; tr.appendChild(td); tbody.appendChild(tr);
+      }
+      tableCount.textContent = `顯示 ${matches.length} / ${productData.length} 筆資料`;
+    }
+    searchInput.addEventListener('input', event => renderTable(event.target.value));
+    renderTable();
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function setMenu(open) {
+      mobileMenu.classList.toggle('hidden', !open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
+      document.getElementById('menuIcon').innerHTML = open
+        ? '<path d="M6 6l12 12M18 6 6 18"/>'
+        : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+    menuToggle.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') setMenu(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1024) setMenu(false); });
+
+    // Intersection Observer 在兩組導覽連結上同步切換 active / inactive 樣式。
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const allNavLinks = [...document.querySelectorAll('.nav-link')];
+    function activateNavigation(id) {
+      allNavLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', isActive);
+        link.classList.toggle('inactive-nav-link', !isActive);
+        if (isActive) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current');
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      const visible = new Map();
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) visible.set(entry.target.id, entry.boundingClientRect.top); else visible.delete(entry.target.id); });
+        if (visible.size) {
+          const current = [...visible.entries()].sort((a,b) => Math.abs(a[1]-110) - Math.abs(b[1]-110))[0][0];
+          activateNavigation(current);
+        }
+      }, { rootMargin:'-96px 0px -56% 0px', threshold:0 });
+      sections.forEach(section => observer.observe(section));
+    }
+    allNavLinks.forEach(link => link.addEventListener('click', () => activateNavigation(link.hash.slice(1))));
+
+    function revealFallback(id) { document.getElementById(id).classList.remove('hidden'); }
+    if (typeof Chart === 'undefined') {
+      revealFallback('fedChartFallback'); revealFallback('capitalChartFallback');
+      document.getElementById('fedForecastChart').hidden = true;
+      document.getElementById('capitalChart').hidden = true;
+    } else {
+      Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+      Chart.defaults.color = '#57534e';
+      const forecastData = {
+        labels:['實質GDP成長','PCE通膨','核心PCE通膨','年底失業率'],
+        datasets:[
+          {label:'2026年6月預測',data:[2.2,3.6,3.3,4.3],backgroundColor:'#94a3b8',borderRadius:5,maxBarThickness:42},
+          {label:'2026年9月預測',data:[2.3,3.7,3.4,4.1],backgroundColor:'#0284c7',borderRadius:5,maxBarThickness:42}
+        ]
+      };
+      new Chart(document.getElementById('fedForecastChart'), {
+        type:'bar', data:forecastData,
+        options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false},
+          plugins:{ legend:{position:'bottom',labels:{boxWidth:12,usePointStyle:true,padding:20}},tooltip:{callbacks:{label: ctx => `${ctx.dataset.label}：${Number(ctx.parsed.y).toFixed(2)}%`}}},
+          scales:{x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:false,font:{size:11}}},y:{beginAtZero:true,max:5,title:{display:true,text:'百分比 (%)'},ticks:{stepSize:1,callback:value=>Number(value).toFixed(2)+'%'},grid:{color:'#e7e5e4'}}}}
+      });
+      new Chart(document.getElementById('capitalChart'), {
+        type:'bar', data:{labels:['已宣布股權承諾','媒體報導籌組貸款'],datasets:[{label:'金額（億美元）',data:[50,220],backgroundColor:['#7c3aed','#d97706'],borderRadius:7,maxBarThickness:56}]},
+        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`約 ${Number(ctx.parsed.x).toFixed(2)} 億美元`}}},
+          scales:{x:{beginAtZero:true,max:250,title:{display:true,text:'億美元'},ticks:{stepSize:50,callback:value=>Number(value).toFixed(2)},grid:{color:'#e7e5e4'}},y:{grid:{display:false},ticks:{font:{size:12}}}}}
+      });
+    }
+  </script>
+</body>
+</html>
