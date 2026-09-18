@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c253a">
+  <meta name="description" content="以 Nebius 算力漲價、Generac 與 Amazon 備援電力協議及波克夏董事長交接，觀察升息環境中的獲利品質與現金流。">
+  <title>巴菲特AI價值投資-算力漲價與現金流考驗</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6.25rem; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif; }
+    .hero-mesh { background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985); }
+    .active-nav-link { color: #0369a1; background: #e0f2fe; box-shadow: inset 0 -2px 0 #0284c7; }
+    .inactive-nav-link { color: #57534e; background: transparent; }
+    .inactive-nav-link:hover { color: #0369a1; background: #f0f9ff; }
+    .section-anchor { scroll-margin-top: 6.25rem; }
+    .metric-number { font-variant-numeric: tabular-nums; }
+    .chart-shell { position: relative; width: 100%; height: 280px; }
+    .chart-shell canvas { display: block; width: 100% !important; height: 100% !important; }
+    .data-table th { position: sticky; top: 0; z-index: 10; background: #f1f5f9; }
+    .data-table tr:nth-child(even) td { background: #f8fafc; }
+    .data-table tr:hover td { background: #eff6ff; }
+    .step-rail { border-left: 2px solid #bae6fd; }
+    :focus-visible { outline: 3px solid #0284c7; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+  <header class="sticky top-0 z-50 border-b border-sky-100/80 bg-white/95 backdrop-blur-lg shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex min-h-[76px] items-center justify-between gap-3">
+        <a href="#overview" class="flex items-center gap-3 min-w-0 group" aria-label="回到報告首頁">
+          <span class="w-10 h-10 shrink-0 rounded-xl bg-sky-800 text-white grid place-items-center font-black text-lg group-hover:bg-sky-700">AI</span>
+          <span class="min-w-0"><span class="block text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">巴菲特AI價值投資</span></span>
+        </a>
+        <nav class="hidden xl:flex items-center gap-1" aria-label="章節導航" id="desktopNav">
+          <a href="#overview" data-nav class="active-nav-link rounded-lg px-3 py-2 text-sm font-semibold transition-colors" aria-current="location">總覽</a>
+          <a href="#nebius" data-nav class="inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold transition-colors">算力定價</a>
+          <a href="#power" data-nav class="inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold transition-colors">備援電力</a>
+          <a href="#berkshire" data-nav class="inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold transition-colors">波克夏接班</a>
+          <a href="#cashflow" data-nav class="inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold transition-colors">資金成本</a>
+          <a href="#watchlist" data-nav class="inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold transition-colors">後續觀察</a>
+          <a href="#data" data-nav class="inactive-nav-link rounded-lg px-3 py-2 text-sm font-semibold transition-colors">數據速查</a>
+        </nav>
+        <button id="menuButton" type="button" aria-label="開啟章節選單" aria-controls="mobileMenu" aria-expanded="false" class="xl:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border border-slate-200 text-slate-700 hover:bg-sky-50">
+          <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <nav id="mobileMenu" aria-label="手機章節導航" class="hidden xl:hidden border-t border-stone-100 py-3 grid grid-cols-2 sm:grid-cols-3 gap-2">
+        <a href="#overview" data-nav class="active-nav-link rounded-lg px-3 py-3 text-sm font-semibold" aria-current="location">總覽</a>
+        <a href="#nebius" data-nav class="inactive-nav-link rounded-lg px-3 py-3 text-sm font-semibold">算力定價</a>
+        <a href="#power" data-nav class="inactive-nav-link rounded-lg px-3 py-3 text-sm font-semibold">備援電力</a>
+        <a href="#berkshire" data-nav class="inactive-nav-link rounded-lg px-3 py-3 text-sm font-semibold">波克夏接班</a>
+        <a href="#cashflow" data-nav class="inactive-nav-link rounded-lg px-3 py-3 text-sm font-semibold">資金成本</a>
+        <a href="#watchlist" data-nav class="inactive-nav-link rounded-lg px-3 py-3 text-sm font-semibold">後續觀察</a>
+        <a href="#data" data-nav class="inactive-nav-link rounded-lg px-3 py-3 text-sm font-semibold">數據速查</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview" class="section-anchor hero-mesh relative overflow-hidden text-white">
+      <div class="absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true" style="background-image:linear-gradient(rgba(255,255,255,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.10) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 90%)"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+        <p class="text-sky-200 font-semibold tracking-[.2em] text-sm mb-3">AI INFRASTRUCTURE × CASH FLOW</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight max-w-4xl">算力漲價與<br class="hidden sm:block">現金流考驗</h1>
+        <p class="text-base sm:text-lg text-sky-50/90 max-w-3xl leading-8 mt-6">算力租金調升、備援電力提前布局、波克夏完成董事長交接——三則新聞共同指向一個問題：<strong class="text-white">資金成本提高時，需求能否真正轉成可分配的現金？</strong></p>
+        <div class="flex flex-wrap gap-3 mt-8">
+          <a href="#nebius" class="inline-flex items-center gap-2 rounded-lg bg-white text-sky-900 hover:bg-sky-50 px-5 py-3 font-bold text-sm shadow-lg">探索三則關鍵事件 <span aria-hidden="true">↗</span></a>
+          <a href="#data" class="inline-flex items-center gap-2 rounded-lg border border-white/40 hover:bg-white/10 px-5 py-3 font-semibold text-sm">查看數據速查 ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-9" aria-label="三項核心訊號">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500">
+          <p class="text-xs font-bold uppercase tracking-widest text-sky-700">01 / 算力定價</p>
+          <p class="metric-number mt-3 text-4xl font-black text-slate-900">17–21<span class="text-2xl text-sky-700">%</span></p>
+          <p class="font-semibold mt-2">Nebius 部分 GPU 隨用隨付租金調漲</p>
+          <p class="text-sm text-stone-500 mt-2 leading-6">10 月 1 日起生效，僅適用指定服務；不可視為全體 GPU 合約漲價。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-amber-500">
+          <p class="text-xs font-bold uppercase tracking-widest text-amber-700">02 / 電力供應</p>
+          <p class="metric-number mt-3 text-4xl font-black text-slate-900">24<span class="text-xl text-amber-700 ml-1">億美元</span></p>
+          <p class="font-semibold mt-2">Generac × Amazon 初期設備交付</p>
+          <p class="text-sm text-stone-500 mt-2 leading-6">預計 2027–2028 年交付；並非已完成交貨或認列營收。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
+          <p class="text-xs font-bold uppercase tracking-widest text-emerald-700">03 / 治理與資本配置</p>
+          <p class="mt-3 text-3xl font-black text-slate-900">董事長交接</p>
+          <p class="font-semibold mt-3">Howard Buffett 接任波克夏董事長</p>
+          <p class="text-sm text-stone-500 mt-2 leading-6">Greg Abel 持續擔任執行長；評估焦點是經營績效與資本配置。</p>
+        </article>
+      </div>
+
+      <section class="mb-16" aria-labelledby="thesisTitle">
+        <div class="rounded-2xl bg-slate-900 text-white p-6 sm:p-8 lg:p-10 relative overflow-hidden">
+          <div class="absolute -right-14 -top-16 w-56 h-56 rounded-full bg-sky-400/10" aria-hidden="true"></div>
+          <p class="text-xs font-bold tracking-widest text-sky-300">投資主軸 / ONE QUESTION</p>
+          <h2 id="thesisTitle" class="text-2xl sm:text-3xl font-extrabold mt-3">從「訂單有多少」，轉向「現金留下多少」</h2>
+          <p class="mt-4 text-slate-200 max-w-4xl leading-8">雲端業者要證明漲價與使用率能覆蓋建置、折舊及融資成本；電力設備商要把合約轉為交付、毛利與回款；波克夏則須靠持續經營與資本配置證明治理交接後的價值。</p>
+          <div class="grid sm:grid-cols-3 gap-4 mt-7">
+            <div class="rounded-xl bg-white/10 p-4 border border-white/10"><span class="text-sky-300 text-xs font-bold">雲端</span><p class="font-semibold mt-1">成交租金 × 使用率</p></div>
+            <div class="rounded-xl bg-white/10 p-4 border border-white/10"><span class="text-amber-300 text-xs font-bold">工業</span><p class="font-semibold mt-1">可交付產能 × 增量毛利</p></div>
+            <div class="rounded-xl bg-white/10 p-4 border border-white/10"><span class="text-emerald-300 text-xs font-bold">控股公司</span><p class="font-semibold mt-1">經營獲利 × 資本報酬</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="nebius" class="section-anchor mb-16" aria-labelledby="nebiusTitle">
+        <div class="flex items-center gap-3 mb-4"><span class="rounded-md bg-sky-100 text-sky-800 px-3 py-1 text-xs font-extrabold">CHAPTER 01</span><span class="text-sm text-stone-500">算力定價能力</span></div>
+        <h2 id="nebiusTitle" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nebius 漲價：算力開始「收租」</h2>
+        <p class="text-stone-600 leading-8 mb-7 max-w-5xl">Nebius 將自 10 月 1 日起調整部分隨用隨付服務價格，競爭對手 CoreWeave 也指出新合約定價提高。價格訊號值得追蹤，但硬體售價與雲端服務毛利不能直接畫上等號。</p>
+        <div class="grid lg:grid-cols-5 gap-6 items-stretch">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4"><h3 class="text-xl font-bold text-slate-900">指定服務調價幅度</h3><span class="rounded-full bg-sky-50 text-sky-800 px-3 py-1 text-xs font-semibold">生效日：10/01</span></div>
+            <div class="chart-shell"><canvas id="priceChart" role="img" aria-label="Nebius 指定服務漲幅：GPU 17% 至 21%，CPU 25%，記憶體約 41%"></canvas></div>
+            <p class="mt-3 text-xs leading-6 text-stone-500">圖中 GPU 分別列出漲幅下限與上限，並非兩個獨立產品；CPU 與記憶體亦僅為部分指定服務。</p>
+          </article>
+          <div class="lg:col-span-2 space-y-5 mb-6">
+            <article class="rounded-lg bg-sky-50 border border-sky-100 p-6"><p class="text-xs font-bold text-sky-700 tracking-wider">客戶合約 / 需求線索</p><p class="mt-2 text-3xl font-black text-slate-900">4 <span class="text-lg">份大型合約</span></p><p class="mt-2 text-sm leading-7">Nebius 近期簽訂四份客戶合約，<strong>平均每份逾 10 億美元</strong>；合約總值不等於當季收現。</p></article>
+            <article class="rounded-lg bg-indigo-50 border border-indigo-100 p-6"><p class="text-xs font-bold text-indigo-700 tracking-wider">CoreWeave / 短約定價</p><p class="mt-2 text-3xl font-black text-slate-900">4,000<span class="text-base ml-1">萬美元</span></p><p class="mt-2 text-sm leading-7">第三季新簽的部分 3–6 個月短期合約，每兆瓦<strong>年化收入定價</strong>約 4,000 萬美元；不是已收到一整年收入。</p></article>
+          </div>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">現金流能否跟上擴建？</h3>
+            <p class="text-sm text-stone-500 mb-4">Nebius 2026 年第二季，單位：億美元</p>
+            <div class="chart-shell"><canvas id="nebiusCashChart" role="img" aria-label="Nebius 第二季營業現金流約 22.46 億美元，購置不動產、設備與無形資產約 56.57 億美元"></canvas></div>
+            <p class="mt-3 text-xs leading-6 text-stone-500">營業現金流受到客戶預付款與遞延收入增加影響；圖表為兩項已披露數字比較，不可直接視為正式自由現金流計算。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+            <h3 class="text-xl font-bold text-slate-900 mb-5">融資與股東成本</h3>
+            <div class="border-l-4 border-amber-400 pl-4 mb-6"><p class="metric-number font-black text-3xl text-slate-900">30 億美元</p><p class="text-sm leading-6 mt-1">CoreWeave <strong>提出發行</strong>可轉換公司債計畫，並非已全數完成。</p></div>
+            <div class="border-l-4 border-sky-400 pl-4 mb-6"><p class="metric-number font-black text-3xl text-slate-900">最多 3,500 萬股</p><p class="text-sm leading-6 mt-1">啟動可選擇使用的市價發行股票機制；關注潛在稀釋。</p></div>
+            <div class="rounded-lg bg-amber-50 p-4 text-sm leading-7"><strong class="text-amber-900">讀數提醒：</strong>GPU 租金上升 ≠ 晶片售價同步上升；營業現金流為正 ≠ 擴建費用已由成熟營運完全支應。</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="power" class="section-anchor mb-16" aria-labelledby="powerTitle">
+        <div class="flex items-center gap-3 mb-4"><span class="rounded-md bg-amber-100 text-amber-800 px-3 py-1 text-xs font-extrabold">CHAPTER 02</span><span class="text-sm text-stone-500">資料中心的電力可用性</span></div>
+        <h2 id="powerTitle" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Generac × Amazon：備援電力搶先卡位</h2>
+        <p class="text-stone-600 leading-8 mb-7 max-w-5xl">9 月 16 日監管文件披露長期備用發電機供應協議。這筆合作把 AI 資料中心的瓶頸，從 GPU 與伺服器延伸到<strong>設備供應、停電備援與準時交付</strong>。</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="text-amber-700 text-xs font-bold">初期設備</p><p class="metric-number text-4xl text-slate-900 font-black mt-2">24 億美元</p><p class="text-sm mt-3 leading-7">預計 2027–2028 年交付；需要隨履約、驗收及回款實際落地。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="text-amber-700 text-xs font-bold">認股權歸屬條件</p><p class="metric-number text-4xl text-slate-900 font-black mt-2">80 億美元</p><p class="text-sm mt-3 leading-7">最高累計採購付款門檻，<strong>不是保證訂單或可立即認列的營收</strong>。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="text-amber-700 text-xs font-bold">9/17 市場反應</p><p class="metric-number text-4xl text-slate-900 font-black mt-2">+18.3%</p><p class="text-sm mt-3 leading-7">Generac 當日收盤漲幅約 18.3%；後續仍需交貨、利潤及現金回收驗證。</p></article>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="font-bold text-xl text-slate-900 mb-5">合約與認股權：不要混為一談</h3>
+            <div class="space-y-5 step-rail ml-2 pl-6">
+              <div class="relative"><span class="absolute -left-[31px] top-1 rounded-full w-3 h-3 bg-sky-500 ring-4 ring-sky-100"></span><p class="font-bold text-slate-900">初期供貨協議</p><p class="text-sm leading-7 mt-1">約 24 億美元設備，預計 2027–2028 年交付。</p></div>
+              <div class="relative"><span class="absolute -left-[31px] top-1 rounded-full w-3 h-3 bg-amber-500 ring-4 ring-amber-100"></span><p class="font-bold text-slate-900">認股權安排</p><p class="text-sm leading-7 mt-1">Amazon 旗下實體可按每股約 200.93 美元購買最多約 169 萬股；其中約 30.8 萬股權利立即歸屬。</p></div>
+              <div class="relative"><span class="absolute -left-[31px] top-1 rounded-full w-3 h-3 bg-emerald-500 ring-4 ring-emerald-100"></span><p class="font-bold text-slate-900">後續條件</p><p class="text-sm leading-7 mt-1">剩餘權利依後續採購付款分批歸屬；認股權期限延伸至 2033 年 9 月。</p></div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="font-bold text-xl text-slate-900 mb-5">Generac 的既有業務體量</h3>
+            <p class="text-sm text-stone-500">2026 年第二季</p>
+            <div class="mt-4 space-y-5">
+              <div><div class="flex items-baseline justify-between gap-3"><span class="font-semibold">公司整體營收</span><strong class="text-2xl text-slate-900 metric-number">11.7 億美元</strong></div><div class="h-2 rounded-full bg-slate-100 mt-2"><div class="bg-sky-500 h-2 rounded-full w-full"></div></div><p class="text-sm text-stone-500 mt-1">年增約 11%</p></div>
+              <div><div class="flex items-baseline justify-between gap-3"><span class="font-semibold">商用與工業部門</span><strong class="text-2xl text-slate-900 metric-number">5.56 億美元</strong></div><div class="h-2 rounded-full bg-slate-100 mt-2"><div class="bg-amber-500 h-2 rounded-full" style="width:47.52%"></div></div><p class="text-sm text-stone-500 mt-1">年增約 29%；為整體營收的一部分，不應相加。</p></div>
+            </div>
+            <p class="rounded-lg bg-amber-50 p-4 text-sm leading-7 mt-6">真正要驗證的是<strong>大型發電機產能、原料與關稅成本、增量毛利、客戶集中度、營運資金與收款速度</strong>。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="berkshire" class="section-anchor mb-16" aria-labelledby="berkshireTitle">
+        <div class="flex items-center gap-3 mb-4"><span class="rounded-md bg-emerald-100 text-emerald-800 px-3 py-1 text-xs font-extrabold">CHAPTER 03</span><span class="text-sm text-stone-500">治理與資本配置</span></div>
+        <h2 id="berkshireTitle" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">波克夏接班：角色分工比人事標題重要</h2>
+        <p class="text-stone-600 leading-8 mb-7 max-w-5xl">波克夏 9 月 18 日宣布的是<strong>董事長職務交接，不是再一次更換執行長</strong>。長期股東應觀察經營、文化傳承與董事會監督如何各司其職。</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-slate-500"><p class="text-xs font-bold text-stone-500">榮譽董事長・保留董事席位</p><h3 class="font-extrabold text-xl text-slate-900 mt-2">Warren Buffett</h3><p class="text-sm mt-3 leading-7">職務調整後保留董事身分。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500"><p class="text-xs font-bold text-emerald-700">董事長</p><h3 class="font-extrabold text-xl text-slate-900 mt-2">Howard Buffett</h3><p class="text-sm mt-3 leading-7">著重維護波克夏文化與價值。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500"><p class="text-xs font-bold text-sky-700">執行長・持續任職</p><h3 class="font-extrabold text-xl text-slate-900 mt-2">Greg Abel</h3><p class="text-sm mt-3 leading-7">負責公司營運與實際經營決策。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-violet-500"><p class="text-xs font-bold text-violet-700">首席獨立董事・續任</p><h3 class="font-extrabold text-xl text-slate-900 mt-2">Susan Decker</h3><p class="text-sm mt-3 leading-7">延續獨立董事監督架構。</p></article>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3">
+            <h3 class="text-xl font-bold text-slate-900">波克夏第二季營業利益</h3>
+            <p class="text-sm text-stone-500 mt-1 mb-5">比較 2025 與 2026 年同期，單位：億美元</p>
+            <div class="chart-shell"><canvas id="berkshireChart" role="img" aria-label="波克夏第二季營業利益：2025 年約 111.60 億美元，2026 年約 129.83 億美元"></canvas></div>
+            <p class="text-xs mt-3 leading-6 text-stone-500">營業利益排除部分投資損益與減損；仍須分別分析保險、鐵路、能源及製造零售等事業。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+            <h3 class="text-xl font-bold text-slate-900 mb-5">交接後的財務檢核</h3>
+            <div class="space-y-4 text-sm leading-7">
+              <div class="flex gap-3"><span class="mt-1 text-emerald-600 font-black">✓</span><p><strong>資本配置：</strong>大型收購的價格紀律、股票回購條件與現金運用。</p></div>
+              <div class="flex gap-3"><span class="mt-1 text-emerald-600 font-black">✓</span><p><strong>事業營運：</strong>分部營業表現、子公司管理與資本報酬。</p></div>
+              <div class="flex gap-3"><span class="mt-1 text-emerald-600 font-black">✓</span><p><strong>風險治理：</strong>文化延續、風險紀律與董事會監督。</p></div>
+            </div>
+            <p class="bg-emerald-50 p-4 rounded-lg mt-6 text-sm leading-7">人事安排本身不等於企業價值已改變；觀察後續可驗證的經營與投資決策。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="cashflow" class="section-anchor mb-16" aria-labelledby="cashflowTitle">
+        <div class="flex items-center gap-3 mb-4"><span class="rounded-md bg-violet-100 text-violet-800 px-3 py-1 text-xs font-extrabold">CHAPTER 04</span><span class="text-sm text-stone-500">升息下的同一張考卷</span></div>
+        <h2 id="cashflowTitle" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">資金成本提高，現金流成為共同尺度</h2>
+        <div class="grid lg:grid-cols-3 gap-6 mb-4">
+          <article class="rounded-lg bg-slate-900 text-white p-7 lg:col-span-1 mb-6"><p class="text-sm font-semibold text-sky-200">9/16 聯準會目標利率區間</p><p class="metric-number text-4xl sm:text-5xl font-black mt-4">3.75–4.00<span class="text-xl">%</span></p><p class="text-sm text-slate-200 mt-5 leading-7">提高一碼（0.25 個百分點）。新融資、浮動利率負債與到期再融資通常較直接受影響。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2"><h3 class="font-bold text-xl text-slate-900 mb-5">同樣是 AI 基建，應追蹤的指標不同</h3><div class="grid sm:grid-cols-2 gap-4 text-sm"><div class="rounded-lg bg-sky-50 p-4"><p class="font-bold text-sky-800">雲端服務商</p><p class="leading-7 mt-1">成交價格、上線速度、利用率、自由現金流。</p></div><div class="rounded-lg bg-indigo-50 p-4"><p class="font-bold text-indigo-800">硬體供應商</p><p class="leading-7 mt-1">出貨量、產品組合、產能與議價條件。</p></div><div class="rounded-lg bg-amber-50 p-4"><p class="font-bold text-amber-800">電力設備商</p><p class="leading-7 mt-1">可交付產能、合約毛利、應收帳款。</p></div><div class="rounded-lg bg-emerald-50 p-4"><p class="font-bold text-emerald-800">成熟控股公司</p><p class="leading-7 mt-1">資本配置、穩定經營獲利與資本報酬。</p></div></div></article>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-rose-400"><h3 class="font-bold text-xl text-slate-900 mb-3">四種數字，不能直接相加</h3><div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm leading-7"><p class="rounded-lg bg-stone-50 p-4"><strong class="block text-slate-900">合約總值</strong>Nebius 大型客戶合約 ≠ 當季現金入帳。</p><p class="rounded-lg bg-stone-50 p-4"><strong class="block text-slate-900">年化價格</strong>CoreWeave 年化收入定價 ≠ 已實現全年收入。</p><p class="rounded-lg bg-stone-50 p-4"><strong class="block text-slate-900">預定交貨</strong>Generac 初期設備交付 ≠ 已完成營收認列。</p><p class="rounded-lg bg-stone-50 p-4"><strong class="block text-slate-900">歸屬門檻</strong>80 億美元付款門檻 ≠ 保證採購額。</p></div></div>
+      </section>
+
+      <section id="watchlist" class="section-anchor mb-16" aria-labelledby="watchlistTitle">
+        <div class="flex items-center gap-3 mb-4"><span class="rounded-md bg-sky-100 text-sky-800 px-3 py-1 text-xs font-extrabold">CHAPTER 05</span><span class="text-sm text-stone-500">以財報和交付數據驗證</span></div>
+        <h2 id="watchlistTitle" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">後續觀察：把故事交給數據</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex justify-between gap-3 items-start"><h3 class="font-extrabold text-xl text-slate-900">Nebius / CoreWeave</h3><span class="rounded-full px-3 py-1 bg-sky-100 text-sky-800 text-xs font-bold whitespace-nowrap">10 月後</span></div><p class="text-sm text-stone-500 mt-2 mb-4">定價能力 → 經濟利益</p><ul class="space-y-3 text-sm leading-7"><li>• 比較新、舊合約的實際成交租金。</li><li>• 核對 GPU 可用產能與利用率。</li><li>• 觀察單位成本、折舊與資本支出後現金缺口。</li><li>• 注意新設備擴增、價格回落及融資支出速度。</li></ul></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex justify-between gap-3 items-start"><h3 class="font-extrabold text-xl text-slate-900">Generac</h3><span class="rounded-full px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold whitespace-nowrap">2027–2028</span></div><p class="text-sm text-stone-500 mt-2 mb-4">訂單能見度 → 交付與回款</p><ul class="space-y-3 text-sm leading-7"><li>• 追蹤初期設備的實際交貨進度。</li><li>• 檢查資料中心業務增量毛利與擴產資金。</li><li>• 觀察 Amazon 採購付款是否達到後續認股權門檻。</li><li>• 核對收款速度與客戶集中風險。</li></ul></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex justify-between gap-3 items-start"><h3 class="font-extrabold text-xl text-slate-900">波克夏</h3><span class="rounded-full px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold whitespace-nowrap">後續財報</span></div><p class="text-sm text-stone-500 mt-2 mb-4">治理延續 → 資本配置成效</p><ul class="space-y-3 text-sm leading-7"><li>• 觀察 Abel 主導的投資與收購決策。</li><li>• 比較分部營業績效與資本報酬。</li><li>• 檢查現金運用、回購及價格紀律。</li><li>• 區分治理變動與獲利的實際變化。</li></ul></article>
+        </div>
+      </section>
+
+      <section id="data" class="section-anchor mb-4" aria-labelledby="dataTitle">
+        <div class="flex items-center gap-3 mb-4"><span class="rounded-md bg-slate-200 text-slate-700 px-3 py-1 text-xs font-extrabold">DATA EXPLORER</span><span class="text-sm text-stone-500">報告數據速查</span></div>
+        <h2 id="dataTitle" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">互動數據表格</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col md:flex-row md:items-end gap-4 mb-5">
+            <div class="flex-1"><label for="tableSearch" class="block text-sm font-bold text-slate-800 mb-2">搜尋公司、指標、數值或說明</label><input id="tableSearch" type="search" autocomplete="off" placeholder="例如：Generac、營業現金流、認股權…" class="w-full rounded-lg border border-stone-300 px-4 py-3 text-sm focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none"></div>
+            <div class="w-full md:w-52"><label for="categoryFilter" class="block text-sm font-bold text-slate-800 mb-2">篩選主題</label><select id="categoryFilter" class="w-full rounded-lg border border-stone-300 px-3 py-3 text-sm focus:ring-2 focus:ring-sky-400 bg-white"><option value="all">全部主題</option><option value="算力與融資">算力與融資</option><option value="備援電力">備援電力</option><option value="波克夏">波克夏</option><option value="總體環境">總體環境</option></select></div>
+            <button type="button" id="resetFilters" class="rounded-lg border border-sky-200 bg-sky-50 text-sky-800 px-5 py-3 text-sm font-bold hover:bg-sky-100">清除篩選</button>
+          </div>
+          <p id="tableCount" role="status" aria-live="polite" class="text-sm text-stone-500 mb-4">載入資料中…</p>
+          <div class="overflow-x-auto max-h-[510px] overflow-y-auto rounded-lg border border-slate-200">
+            <table class="data-table min-w-[850px] w-full text-left text-sm border-collapse">
+              <caption class="sr-only">2026 年 9 月 18 日美股專題數據，可依公司、指標及主題搜尋</caption>
+              <thead class="text-slate-700"><tr><th scope="col" class="px-4 py-4 whitespace-nowrap">主題</th><th scope="col" class="px-4 py-4 whitespace-nowrap">公司／機構</th><th scope="col" class="px-4 py-4 whitespace-nowrap">指標</th><th scope="col" class="px-4 py-4 whitespace-nowrap">報告數值</th><th scope="col" class="px-4 py-4 min-w-[310px]">口徑／注意事項</th></tr></thead>
+              <tbody id="dataBody" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+          <p id="tableEmpty" class="hidden rounded-lg bg-stone-50 text-center text-stone-600 p-7 mt-4">沒有符合的資料，請調整搜尋字詞或篩選主題。</p>
+          <p class="text-xs text-stone-500 leading-6 mt-4">僅整理本篇報告已列示的數據；不同期間、單位與財務口徑不可直接加總或當成已實現收入。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-算力漲價與現金流考驗。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中AI算力、備援電力與波克夏相關公開資料 (2026年9月18日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 報告已載明的資料；不把擬議融資、合約門檻或年化價格當成已實現收入。
+    const productData = [
+      {category:'算力與融資',company:'Nebius',metric:'部分 Nvidia GPU 隨用隨付租金',value:'+17%～21%',note:'2026/10/01 起；僅指定服務，非所有 GPU 合約。'},
+      {category:'算力與融資',company:'Nebius',metric:'部分純 CPU 執行個體租金',value:'+25%',note:'2026/10/01 起；僅指定隨用隨付服務。'},
+      {category:'算力與融資',company:'Nebius',metric:'部分記憶體服務價格',value:'約 +41%',note:'2026/10/01 起；僅指定服務。'},
+      {category:'算力與融資',company:'Nebius',metric:'近期大型客戶合約',value:'4 份；平均每份逾 10 億美元',note:'合約規模，不是當季收到的現金。'},
+      {category:'算力與融資',company:'Nebius',metric:'2026 Q2 營業現金流',value:'約 22.46 億美元',note:'持續營運；受客戶預付款及遞延收入增加影響。'},
+      {category:'算力與融資',company:'Nebius',metric:'2026 Q2 購置設備及無形資產等',value:'約 56.57 億美元',note:'購置不動產、設備與無形資產；非營收。'},
+      {category:'算力與融資',company:'CoreWeave',metric:'部分 Q3 短約每兆瓦年化收入定價',value:'約 4,000 萬美元／MW／年',note:'3–6 個月短期合約換算；非全年已收現。'},
+      {category:'算力與融資',company:'CoreWeave',metric:'擬議可轉換公司債',value:'30 億美元',note:'發行計畫；不得視為已完成融資。'},
+      {category:'算力與融資',company:'CoreWeave',metric:'市價發行股票機制',value:'最多 3,500 萬股',note:'可選擇使用的安排；非已全數發行。'},
+      {category:'備援電力',company:'Generac × Amazon',metric:'初期備用發電機設備',value:'約 24 億美元',note:'預計 2027–2028 年交付；尚需履約及認列。'},
+      {category:'備援電力',company:'Generac × Amazon',metric:'認股權連動累計採購付款門檻',value:'最高 80 億美元',note:'歸屬條件，非保證採購額或立即營收。'},
+      {category:'備援電力',company:'Amazon 投資實體',metric:'可購買 Generac 股數及價格',value:'最多約 169 萬股；約 200.93 美元／股',note:'其中約 30.8 萬股的權利立即歸屬。'},
+      {category:'備援電力',company:'Generac',metric:'2026 Q2 公司營收',value:'約 11.7 億美元',note:'年增約 11%。'},
+      {category:'備援電力',company:'Generac',metric:'2026 Q2 商用與工業部門營收',value:'約 5.56 億美元',note:'年增約 29%；已包含在公司整體營收之內。'},
+      {category:'備援電力',company:'Generac',metric:'2026/09/17 股價收盤漲幅',value:'約 +18.3%',note:'新聞公布後的單日收盤變化，不代表未來報酬。'},
+      {category:'波克夏',company:'Berkshire Hathaway',metric:'2026 Q2 營業利益',value:'約 129.83 億美元',note:'排除部分投資損益與減損。'},
+      {category:'波克夏',company:'Berkshire Hathaway',metric:'2025 Q2 營業利益',value:'約 111.60 億美元',note:'2026 Q2 的上年同期比較基準。'},
+      {category:'總體環境',company:'聯準會',metric:'2026/09/16 利率決議',value:'升息 1 碼；3.75%～4.00%',note:'聯邦基金利率目標區間；新融資及再融資較容易受影響。'}
+    ];
+
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function setMenu(open) {
+      mobileMenu.classList.toggle('hidden', !open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      document.getElementById('menuIcon').innerHTML = open
+        ? '<path d="M18 6 6 18M6 6l12 12"/>'
+        : '<path d="M4 6h16M4 12h16M4 18h16"/>';
+    }
+    menuButton.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+    const navLinks = [...document.querySelectorAll('[data-nav]')];
+    const trackedSections = [...document.querySelectorAll('main section[id]')].filter(section => navLinks.some(link => link.hash === '#' + section.id));
+    function setActive(id) {
+      navLinks.forEach(link => {
+        const active = link.hash === '#' + id;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    navLinks.forEach(link => link.addEventListener('click', () => { setActive(link.hash.slice(1)); setMenu(false); }));
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length) setActive(visible[0].target.id);
+      }, {rootMargin: '-14% 0px -68% 0px', threshold: [0, 0.05, 0.15, 0.3, 0.6]});
+      trackedSections.forEach(section => observer.observe(section));
+    }
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1280) setMenu(false); });
+
+    const search = document.getElementById('tableSearch');
+    const category = document.getElementById('categoryFilter');
+    const tbody = document.getElementById('dataBody');
+    function renderTable() {
+      const query = search.value.trim().toLocaleLowerCase('zh-Hant');
+      const chosen = category.value;
+      const rows = productData.filter(row => (chosen === 'all' || row.category === chosen) &&
+        Object.values(row).some(value => value.toLocaleLowerCase('zh-Hant').includes(query)));
+      const fragment = document.createDocumentFragment();
+      rows.forEach(row => {
+        const tr = document.createElement('tr');
+        [row.category, row.company, row.metric, row.value, row.note].forEach((value, index) => {
+          const td = document.createElement('td');
+          td.textContent = value;
+          td.className = 'px-4 py-4 align-top leading-6 ' + (index === 3 ? 'whitespace-nowrap font-bold text-sky-800 metric-number' : index === 0 ? 'whitespace-nowrap font-semibold text-stone-500' : 'text-stone-700');
+          tr.appendChild(td);
+        });
+        fragment.appendChild(tr);
+      });
+      tbody.replaceChildren(fragment);
+      document.getElementById('tableCount').textContent = `顯示 ${rows.length} 筆／共 ${productData.length} 筆報告數據`;
+      document.getElementById('tableEmpty').classList.toggle('hidden', rows.length !== 0);
+    }
+    search.addEventListener('input', renderTable);
+    category.addEventListener('change', renderTable);
+    document.getElementById('resetFilters').addEventListener('click', () => { search.value = ''; category.value = 'all'; renderTable(); search.focus(); });
+    renderTable();
+
+    function makeBarChart(id, labels, values, colors, opts = {}) {
+      if (typeof Chart === 'undefined') return;
+      const canvas = document.getElementById(id);
+      if (!canvas) return;
+      new Chart(canvas, {
+        type: 'bar',
+        data: { labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 7, borderSkipped: false, maxBarThickness: 60, barPercentage: 0.72 }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: context => ` ${context.parsed.y.toLocaleString('zh-TW')} ${opts.unit || ''}` } }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: '#475569', font: { size: 12, weight: '600' }, maxRotation: 0, autoSkip: false } },
+            y: { beginAtZero: true, suggestedMax: opts.max, grid: { color: '#e2e8f0' }, ticks: { color: '#64748b', callback: value => `${value}${opts.axisSuffix || ''}` } }
+          }
+        }
+      });
+    }
+    makeBarChart('priceChart', ['GPU 下限','GPU 上限','CPU 指定服務','記憶體服務'], [17,21,25,41], ['#38bdf8','#0284c7','#6366f1','#f59e0b'], {unit:'%',axisSuffix:'%',max:45});
+    makeBarChart('nebiusCashChart', [['營業','現金流'],['購置設備','及無形資產等']], [22.46,56.57], ['#0ea5e9','#f59e0b'], {unit:'億美元',max:65});
+    makeBarChart('berkshireChart', ['2025 Q2','2026 Q2'], [111.60,129.83], ['#94a3b8','#059669'], {unit:'億美元',max:145});
+  </script>
+</body>
+</html>
