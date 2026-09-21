@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="聚焦 Meta 資料中心、Nvidia 與 Einride 自動駕駛貨運、SpaceX 星艦，從需求、交付與現金流三階段觀察 AI 商業化。">
+  <meta name="theme-color" content="#0c253a">
+  <title>巴菲特AI價值投資-AI基建與商業化驗證</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; --ink: #183345; --muted: #597182; --sky: #0284c7; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6.25rem; }
+    body { color: var(--ink); background: #f6f8fa; font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif; }
+    .hero-mesh { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985); }
+    .hero-mesh::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size: 36px 36px; }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0284c7; background: #e0f2fe; font-weight: 700; }
+    .inactive-nav-link { color: #475569; background: transparent; }
+    .inactive-nav-link:hover { color: #0369a1; background: #f1f5f9; }
+    .section-title { letter-spacing: -.025em; }
+    .metric-number { font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+
+    .spotlight { box-shadow: 0 16px 48px -28px rgba(15, 56, 82, .42); }
+    .chart-shell { position: relative; width: 100%; height: 270px; }
+    .status-pill { display: inline-flex; align-items: center; border-radius: 9999px; padding: .3rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .015em; white-space: nowrap; }
+    .status-agreed { background: #dcfce7; color: #166534; }
+    .status-target { background: #fef3c7; color: #92400e; }
+    .status-observe { background: #e0f2fe; color: #075985; }
+    .vertical-rule { border-left: 2px solid #bae6fd; }
+    .table-scroll { scrollbar-color: #bae6fd transparent; }
+    .table-scroll th { position: sticky; top: 0; z-index: 1; }
+    .focus-ring:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #38bdf8; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body class="antialiased">
+  <a href="#overview" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-3 focus:z-[70] focus:bg-white focus:p-3 focus:rounded-lg">跳至主要內容</a>
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm" id="site-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-[74px] flex items-center justify-between gap-4">
+        <a href="#overview" class="flex items-center gap-3 shrink-0 group" aria-label="巴菲特AI價值投資，返回總覽">
+          <span class="w-10 h-10 grid place-items-center rounded-xl bg-sky-900 text-white font-black text-sm group-hover:bg-sky-700 transition">AI</span>
+          <span class="leading-tight"><strong class="block text-sm sm:text-base text-stone-800">巴菲特AI價值投資</strong><span class="block text-[11px] sm:text-xs text-slate-500">基礎建設 × 商業化驗證</span></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-1" aria-label="章節導覽" id="desktop-nav">
+          <a class="nav-link active-nav-link rounded-lg px-3 py-2 text-sm transition" href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm transition" href="#meta">Meta 電力</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm transition" href="#freight">自駕貨運</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm transition" href="#space">星艦任務</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm transition" href="#framework">投資框架</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm transition" href="#watchlist">追蹤清單</a>
+        </nav>
+        <button type="button" id="menu-toggle" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border border-slate-200 text-slate-700" aria-controls="mobile-nav" aria-expanded="false" aria-label="開啟選單">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+      <nav id="mobile-nav" class="hidden lg:hidden border-t border-slate-100 py-3 grid grid-cols-2 gap-2" aria-label="手機章節導覽">
+        <a class="nav-link active-nav-link rounded-lg px-3 py-3 text-sm" href="#overview">核心觀點</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-3 text-sm" href="#meta">Meta 電力</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-3 text-sm" href="#freight">自駕貨運</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-3 text-sm" href="#space">星艦任務</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-3 text-sm" href="#framework">投資框架</a>
+        <a class="nav-link inactive-nav-link rounded-lg px-3 py-3 text-sm" href="#watchlist">追蹤清單</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="absolute -top-20 right-[-90px] w-72 h-72 rounded-full border border-white/10" aria-hidden="true"></div>
+      <div class="absolute top-2 right-[-40px] w-48 h-48 rounded-full border border-white/10" aria-hidden="true"></div>
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div class="max-w-4xl">
+          <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-[3.8rem] font-extrabold tracking-tight leading-[1.2]">AI 投資進入<br><span class="text-sky-200">基建與商業化驗證期</span></h1>
+          <p class="mt-6 max-w-3xl text-base sm:text-lg text-sky-50/90 leading-relaxed">從 Meta 的資料中心電力、Nvidia 的自動駕駛貨運，到 SpaceX 的星艦任務：市場下一步要驗證的，是計畫能否準時交付，並轉化為可持續的收入與現金流。</p>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-3 mt-10 max-w-5xl">
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur p-5"><p class="text-sm text-sky-100">Meta 計畫設施投資</p><p class="metric-number text-3xl font-black mt-2">&gt;130<span class="text-base font-medium ml-1">億加幣</span></p><p class="text-xs text-sky-100/85 mt-2">不含內部晶片與配套電廠</p></div>
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur p-5"><p class="text-sm text-sky-100">Einride 2028 年車隊展望</p><p class="metric-number text-3xl font-black mt-2">1,500–2,000<span class="text-base font-medium ml-1">輛</span></p><p class="text-xs text-sky-100/85 mt-2">整體車隊，不是已交付自駕車</p></div>
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur p-5"><p class="text-sm text-sky-100">星艦第 14 次飛行測試</p><p class="metric-number text-3xl font-black mt-2">9 / 28<span class="text-base font-medium ml-1">最早</span></p><p class="text-xs text-sky-100/85 mt-2">截至 9/21，仍待監管核准</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" data-section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8 scroll-mt-28" aria-labelledby="overview-heading">
+      <p class="text-sky-700 text-xs font-extrabold tracking-[.2em] uppercase mb-3">01 / Investment Thesis</p>
+      <h2 id="overview-heading" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心觀點：需求不是收入</h2>
+      <p class="text-slate-600 max-w-4xl leading-8 mb-8">AI 產業的觀察範圍，正從晶片與模型擴展至電力、建設執行、實體 AI 部署及衛星通訊。三項事件橫跨不同產業，但都必須把「宣布了什麼」與「已經做到什麼」拆開看。</p>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500"><div class="text-xs font-bold text-sky-700 tracking-widest">INFRASTRUCTURE</div><h3 class="text-xl font-bold mt-3">Meta：電力成為瓶頸</h3><p class="text-slate-600 leading-7 mt-3">1GW 資料中心規劃，仍需確認供電、施工、設備與運算容量能否按期接軌。</p><a href="#meta" class="inline-block mt-5 text-sm font-bold text-sky-700 hover:underline">閱讀電力與建設重點 →</a></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-cyan-500"><div class="text-xs font-bold text-cyan-700 tracking-widest">PHYSICAL AI</div><h3 class="text-xl font-bold mt-3">Nvidia × Einride：驗證車隊經濟</h3><p class="text-slate-600 leading-7 mt-3">Hyperion 合作擴大實體 AI 布局；未來車隊目標不等於已交付車輛或已實現獲利。</p><a href="#freight" class="inline-block mt-5 text-sm font-bold text-sky-700 hover:underline">閱讀自駕貨運重點 →</a></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-indigo-500"><div class="text-xs font-bold text-indigo-700 tracking-widest">SPACE CONNECTIVITY</div><h3 class="text-xl font-bold mt-3">SpaceX：從軌道到現金流</h3><p class="text-slate-600 leading-7 mt-3">軌道測試、衛星部署、網路入網與可重複使用，是各自獨立的里程碑。</p><a href="#space" class="inline-block mt-5 text-sm font-bold text-sky-700 hover:underline">閱讀星艦任務重點 →</a></article>
+      </div>
+      <div class="rounded-2xl bg-sky-50 border border-sky-100 p-6 sm:p-8 mt-2 flex flex-col md:flex-row gap-4 md:items-center"><div class="shrink-0 flex items-center justify-center rounded-xl bg-sky-900 text-white w-12 h-12 text-xl" aria-hidden="true">≠</div><div><p class="text-lg font-extrabold text-sky-950">三個不可混淆的口徑</p><p class="text-sm sm:text-base text-sky-900/85 mt-1 leading-7">Meta 的 250MW 是 <strong>7 月已公布合約</strong>；Einride 的 1,500–2,000 輛是 <strong>2028 年整體車隊展望</strong>；星艦 9 月 28 日是 <strong>待核准的最早目標日</strong>。</p></div></div>
+    </section>
+
+    <section id="meta" data-section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8 scroll-mt-28" aria-labelledby="meta-heading">
+      <p class="text-sky-700 text-xs font-extrabold tracking-[.2em] uppercase mb-3">02 / Data Center &amp; Power</p>
+      <h2 id="meta-heading" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta：從取得晶片到取得可用電力</h2>
+      <p class="max-w-4xl text-slate-600 leading-8 mb-7">亞伯達省 Sturgeon County 的大型資料中心，讓電力供應與建設執行能力成為運算擴張的核心條件。設施支出不代表完整 AI 運算投資，也不代表新增容量立即產生報酬。</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">規劃資料中心容量</p><p class="metric-number text-3xl font-extrabold text-sky-900 mt-2">1 GW</p><p class="text-xs text-slate-500 mt-2">相當於 1,000 MW；計畫值</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">完工後設施投資</p><p class="metric-number text-3xl font-extrabold text-sky-900 mt-2">&gt;130 億</p><p class="text-xs text-slate-500 mt-2">加幣，不含晶片與電廠</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">Capital Power 供電協議</p><p class="metric-number text-3xl font-extrabold text-sky-900 mt-2">250 MW</p><p class="text-xs text-slate-500 mt-2">2026/7/8 已宣布，期限逾 10 年</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">亞伯達省接網申請負載</p><p class="metric-number text-3xl font-extrabold text-sky-900 mt-2">19,565 MW</p><p class="text-xs text-slate-500 mt-2">截至 7/30，非已核准建設量</p></div>
+      </div>
+      <div class="grid lg:grid-cols-5 gap-6 items-stretch">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3">
+          <div class="flex flex-wrap items-start justify-between gap-2"><div><h3 class="text-xl font-bold text-stone-800">資料中心規劃與既有供電協議</h3><p class="text-sm text-slate-500 mt-1">單位：MW；兩者是不同層級的容量口徑</p></div><span class="status-pill status-agreed">250MW：已簽協議</span></div>
+          <div class="chart-shell mt-5"><canvas id="powerChart" role="img" aria-label="Meta 資料中心規劃容量一千兆瓦，Capital Power 已簽供電協議二百五十兆瓦；後者不是總供電容量。"></canvas></div>
+          <p class="text-xs text-slate-500 leading-6 mt-4 border-t border-slate-100 pt-4">註：1,000MW 為資料中心規劃容量；250MW 是 Capital Power 的一筆既有供電安排，不能推論其餘容量均未簽約，亦不代表新增營收已入帳。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2"><h3 class="text-xl font-bold text-stone-800 mb-6">供電與建設時間線</h3><ol class="space-y-6 ml-2">
+          <li class="relative vertical-rule pl-5"><span class="absolute w-3 h-3 rounded-full bg-sky-600 -left-[7px] top-1"></span><span class="status-pill status-agreed">2026 / 07 / 08</span><h4 class="font-bold mt-2">原供電協議已公布</h4><p class="text-sm text-slate-600 leading-6 mt-1">Capital Power 與 Meta 的 250MW、逾 10 年供電合約；9/21 的消息並非重新簽約。</p></li>
+          <li class="relative vertical-rule pl-5"><span class="absolute w-3 h-3 rounded-full bg-amber-500 -left-[7px] top-1"></span><span class="status-pill status-target">2028 下半年 · 預計</span><h4 class="font-bold mt-2">相關用電需求啟動</h4><p class="text-sm text-slate-600 leading-6 mt-1">確認供電實際投入運作、建設進度及資料中心利用率。</p></li>
+          <li class="relative vertical-rule pl-5"><span class="absolute w-3 h-3 rounded-full bg-amber-500 -left-[7px] top-1"></span><span class="status-pill status-target">2030 · 預計</span><h4 class="font-bold mt-2">專用天然氣電廠投運</h4><p class="text-sm text-slate-600 leading-6 mt-1">Pembina Pipeline 參與規劃；在此之前由過渡供電安排支援。</p></li>
+        </ol></article>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5 mt-1">
+        <div class="bg-sky-50 rounded-xl p-6 border border-sky-100"><h3 class="font-bold text-sky-950 text-lg mb-3">潛在機會</h3><p class="text-slate-700 leading-7">信用良好客戶的長期合約，有機會提升發電業者現金流可預測性；配電、發電與冷卻設備可能受益於後續正式訂單。</p></div>
+        <div class="bg-amber-50 rounded-xl p-6 border border-amber-100"><h3 class="font-bold text-amber-950 text-lg mb-3">尚待確認</h3><p class="text-slate-700 leading-7">19,565MW 是接網申請，不是批准量或確定營收；仍要檢驗電網壓力、成本、融資、正式合約及 Meta 的資本支出效率。</p></div>
+      </div>
+      <p class="mt-5 text-sm text-slate-600 leading-7"><strong class="text-stone-800">美股觀察：</strong>META 觀察資本支出、折舊與 AI 服務及廣告業務回報；ETN、GEV、VRT 觀察正式訂單與獲利。MSFT、AMZN 僅屬同產業觀察對象，不能直接指認為匿名洽談客戶。</p>
+    </section>
+
+    <section id="freight" data-section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8 scroll-mt-28" aria-labelledby="freight-heading">
+      <p class="text-sky-700 text-xs font-extrabold tracking-[.2em] uppercase mb-3">03 / Physical AI &amp; Logistics</p>
+      <h2 id="freight-heading" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nvidia × Einride：從技術合作走向車隊營運</h2>
+      <p class="max-w-4xl text-slate-600 leading-8 mb-7">9 月 21 日公布的合作將 Nvidia Hyperion 導入下一代重型卡車自駕系統；Nvidia 提供運算與 AI 工具，Einride 負責系統開發、許可、安全驗證及實際部署。</p>
+      <div class="grid md:grid-cols-3 gap-4 mb-7">
+        <article class="bg-white rounded-lg shadow-lg p-6"><p class="text-xs tracking-widest font-bold text-sky-700">PLATFORM</p><h3 class="font-bold text-lg mt-2">Hyperion</h3><p class="text-sm text-slate-600 leading-7 mt-2">整合運算硬體、感測器架構與安全系統，作為車載自動駕駛平台。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6"><p class="text-xs tracking-widest font-bold text-sky-700">TRAINING</p><h3 class="font-bold text-lg mt-2">Blackwell</h3><p class="text-sm text-slate-600 leading-7 mt-2">為自動駕駛模型訓練提供 AI 運算架構。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6"><p class="text-xs tracking-widest font-bold text-sky-700">SIMULATION</p><h3 class="font-bold text-lg mt-2">Cosmos</h3><p class="text-sm text-slate-600 leading-7 mt-2">支援建立模擬場景，協助實體 AI 開發與驗證。</p></article>
+      </div>
+      <div class="grid lg:grid-cols-5 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3"><div class="flex flex-wrap justify-between items-start gap-2"><div><h3 class="text-xl font-bold">Einride 2028 年整體車隊展望</h3><p class="text-sm text-slate-500 mt-1">車輛數；最低／最高為公司展望區間</p></div><span class="status-pill status-target">未來目標，非已交付量</span></div><div class="chart-shell mt-5"><canvas id="fleetChart" role="img" aria-label="Einride 預期 2028 年整體車隊介於一千五百至兩千輛；不是已部署自動駕駛卡車。"></canvas></div><p class="text-xs text-slate-500 leading-6 border-t border-slate-100 pt-4 mt-4">約 80% 是公司認為相關需求在中期「適合導入自駕」的估計，不是已獲許可、已交付或已自動化的比例；未公布 Nvidia 確定採購金額。</p></article>
+        <article class="bg-sky-950 text-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2"><p class="text-xs font-extrabold tracking-widest text-sky-300">COMMERCIALIZATION CHECK</p><h3 class="text-2xl font-bold mt-3">擴張規模 ≠ 改善獲利</h3><p class="mt-4 text-sky-100 leading-8">Einride 目前在美洲、歐洲與中東營運數百輛電動卡車，含部分自動駕駛車輛。真正的檢驗，是車輛實際部署、每車收入、單位運輸成本與營業現金流能否同步改善。</p><div class="border-t border-white/20 mt-6 pt-5"><div class="text-sky-300 text-xs font-bold tracking-widest">目標</div><p class="text-2xl font-extrabold mt-2">2028 年現金流損益兩平</p><p class="text-sm text-sky-100/80 mt-2">公司目標，非保證結果；融資成本與部署時程是主要變數。</p></div></article>
+      </div>
+      <h3 class="font-bold text-xl text-stone-800 mt-2 mb-4">Einride 財務快照 <span class="text-sm font-normal text-slate-500">｜2026 年上半年；現金截至 6 月底</span></h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">營收（固定匯率）</p><p class="metric-number text-2xl font-extrabold text-sky-900 mt-3">2,700 萬</p><p class="text-xs text-slate-500 mt-2">美元，年增 26%</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">淨損</p><p class="metric-number text-2xl font-extrabold text-rose-800 mt-3">11.2 億</p><p class="text-xs text-slate-500 mt-2">瑞典克朗；含一次性與非現金項目</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">營業活動淨現金流出</p><p class="metric-number text-2xl font-extrabold text-rose-800 mt-3">5.37 億</p><p class="text-xs text-slate-500 mt-2">瑞典克朗；期間流量</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">期末現金部位</p><p class="metric-number text-2xl font-extrabold text-sky-900 mt-3">7.48 億</p><p class="text-xs text-slate-500 mt-2">瑞典克朗；6 月底存量</p></div>
+      </div>
+      <div class="bg-amber-50 border border-amber-100 rounded-xl p-5 mt-6 text-sm text-amber-950 leading-7"><strong>閱讀財務數據時：</strong>淨損不宜直接視為全部日常營運虧損；期末現金（存量）與上半年現金流出（期間流量）亦不能直接當成相同期間的損益比較。</div>
+      <p class="mt-6 text-sm text-slate-600 leading-7"><strong class="text-stone-800">美股觀察：</strong>NVDA 關注 Hyperion 平台採用與車用運算需求；ENRD 關注部署數、車隊融資、營收與現金消耗。合作公告本身尚不足以量化 NVDA 的新增收入。</p>
+    </section>
+
+    <section id="space" data-section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8 scroll-mt-28" aria-labelledby="space-heading">
+      <p class="text-sky-700 text-xs font-extrabold tracking-[.2em] uppercase mb-3">04 / Space Infrastructure</p>
+      <h2 id="space-heading" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">SpaceX 星艦：軌道測試不等於商業化</h2>
+      <div class="rounded-2xl bg-slate-900 text-white p-6 sm:p-8 mb-6 relative overflow-hidden"><div class="absolute -right-10 -top-16 w-60 h-60 rounded-full border border-white/10" aria-hidden="true"></div><div class="relative flex flex-col md:flex-row md:items-center justify-between gap-5"><div><span class="status-pill status-target">發射日期仍有變動可能</span><h3 class="text-2xl sm:text-3xl font-extrabold mt-4">第 14 次飛行測試：最早 9 月 28 日</h3><p class="text-slate-300 leading-7 mt-2">原訂 9 月 22 日；9 月 17 日宣布延後。截至 9 月 21 日尚未執行，且仍需監管核准；延期原因未公開。</p></div><div class="shrink-0 rounded-xl border border-white/20 bg-white/10 p-5 min-w-[160px]"><p class="text-sm text-slate-300">狀態</p><p class="text-xl font-black mt-1">待執行／待核准</p></div></div></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">規劃飛行高度</p><p class="metric-number text-3xl font-extrabold text-sky-900 mt-2">約 275 km</p><p class="text-xs text-slate-500 mt-2">上級預計首次進入地球軌道</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">規劃繞地圈數</p><p class="metric-number text-3xl font-extrabold text-sky-900 mt-2">6 圈</p><p class="text-xs text-slate-500 mt-2">任務時長接近 10 小時</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">規劃部署衛星</p><p class="metric-number text-3xl font-extrabold text-sky-900 mt-2">26 顆</p><p class="text-xs text-slate-500 mt-2">Starlink V3；尚未部署</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="text-sm text-slate-500">其中配備相機</p><p class="metric-number text-3xl font-extrabold text-sky-900 mt-2">3 顆</p><p class="text-xs text-slate-500 mt-2">觀察星艦隔熱系統；26 顆的子集</p></div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold mb-5">本次任務的驗證順序</h3><div class="space-y-4">
+          <div class="flex gap-4"><span class="shrink-0 w-9 h-9 bg-sky-100 text-sky-800 grid place-items-center rounded-lg font-black">1</span><div><p class="font-bold">實際發射與進入軌道</p><p class="text-sm text-slate-600 mt-1 leading-6">先確認發射日期與軌道飛行結果，而非依最早目標日視為已完成。</p></div></div>
+          <div class="flex gap-4"><span class="shrink-0 w-9 h-9 bg-sky-100 text-sky-800 grid place-items-center rounded-lg font-black">2</span><div><p class="font-bold">衛星部署與後續入網</p><p class="text-sm text-slate-600 mt-1 leading-6">部署 26 顆 Starlink V3 是計畫；完成部署後還需整合進通訊網路。</p></div></div>
+          <div class="flex gap-4"><span class="shrink-0 w-9 h-9 bg-sky-100 text-sky-800 grid place-items-center rounded-lg font-black">3</span><div><p class="font-bold">高頻發射、回收及成本效率</p><p class="text-sm text-slate-600 mt-1 leading-6">本次未規劃發射塔回收星艦或助推器；完整快速重複使用仍是另一項驗證。</p></div></div>
+        </div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold mb-5">Starlink 如何形成財務回報？</h3><div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center"><div class="rounded-xl bg-slate-50 border border-slate-100 p-4"><div class="text-2xl mb-2" aria-hidden="true">①</div><p class="font-bold">發射與部署</p><p class="text-xs text-slate-500 leading-5 mt-2">提高衛星部署效率</p></div><div class="rounded-xl bg-slate-50 border border-slate-100 p-4"><div class="text-2xl mb-2" aria-hidden="true">②</div><p class="font-bold">新增可用容量</p><p class="text-xs text-slate-500 leading-5 mt-2">完成衛星入網與服務</p></div><div class="rounded-xl bg-slate-50 border border-slate-100 p-4"><div class="text-2xl mb-2" aria-hidden="true">③</div><p class="font-bold">收入與現金流</p><p class="text-xs text-slate-500 leading-5 mt-2">用戶與企業需求抵銷成本</p></div></div><div class="rounded-xl bg-sky-50 border border-sky-100 p-4 mt-6 text-sm text-slate-700 leading-7">進入軌道、衛星部署、網路容量成長與收入實現不能畫上等號；仍要觀察發射頻率、維修與製造成本，以及 Starlink 用戶、平均收入和自由現金流。</div></article>
+      </div>
+      <p class="text-sm text-slate-600 leading-7"><strong class="text-stone-800">美股觀察：</strong>報告列示 SPCX 的 Starlink 與發射業務指標，以及 RKLB 在不同載荷與任務定位下的產業競爭。單次測試結果不是完整的長期估值依據。</p>
+    </section>
+
+    <section id="framework" data-section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8 scroll-mt-28" aria-labelledby="framework-heading">
+      <p class="text-sky-700 text-xs font-extrabold tracking-[.2em] uppercase mb-3">05 / Investment Framework</p>
+      <h2 id="framework-heading" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資框架：把「宣布」與「兌現」分開估值</h2>
+      <div class="grid md:grid-cols-3 gap-4 mb-7">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-300"><span class="text-xs font-extrabold text-sky-700 tracking-widest">STAGE 01</span><h3 class="text-xl font-bold mt-2">需求與合作</h3><p class="text-slate-600 text-sm mt-3 leading-7">供電洽談、技術合作、飛行計畫。衡量需求的可能性，但不直接認列營收。</p><p class="mt-4 text-xs font-bold text-slate-500">關鍵證據：正式公告與合約條款</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500"><span class="text-xs font-extrabold text-sky-700 tracking-widest">STAGE 02</span><h3 class="text-xl font-bold mt-2">實際交付</h3><p class="text-slate-600 text-sm mt-3 leading-7">資料中心接通、車隊獲許可並營運、衛星完成發射及入網。</p><p class="mt-4 text-xs font-bold text-slate-500">關鍵證據：啟用時點與可運行規模</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-800"><span class="text-xs font-extrabold text-sky-700 tracking-widest">STAGE 03</span><h3 class="text-xl font-bold mt-2">財務兌現</h3><p class="text-slate-600 text-sm mt-3 leading-7">資料中心投資報酬、貨運單位經濟、衛星服務新增收入與自由現金流。</p><p class="mt-4 text-xs font-bold text-slate-500">關鍵證據：財報與持續性現金流</p></article>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="bg-sky-50 border border-sky-100 rounded-xl p-6"><h3 class="text-lg font-bold text-sky-950">分產業檢驗指標</h3><div class="mt-4 space-y-4 text-sm text-slate-700 leading-7"><p><strong>大型 AI 平台：</strong>資本支出相對營收與自由現金流的增速，及新增算力啟用時間。</p><p><strong>電力及設備：</strong>已簽約訂單、客戶信用、建設融資、燃料與電價風險。</p><p><strong>自駕與太空：</strong>實際部署、單位成本、許可、現金消耗和下一階段融資能力。</p></div></div>
+        <div class="bg-amber-50 border border-amber-100 rounded-xl p-6"><h3 class="text-lg font-bold text-amber-950">避免「雙重計算成長」</h3><p class="text-sm text-slate-700 leading-7 mt-4">不能先把客戶的計畫視作確定採購，又把供應商的洽談機會當成另一筆已實現收入。250MW 舊合約、2028 年車隊目標、9/28 最早發射日都必須保留正確日期與統計口徑。</p><p class="text-sm text-slate-700 leading-7 mt-3">若專案延後，還需檢視公司是否具備足夠的現金與融資安排。</p></div>
+      </div>
+    </section>
+
+    <section id="watchlist" data-section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-16 scroll-mt-28" aria-labelledby="watchlist-heading">
+      <p class="text-sky-700 text-xs font-extrabold tracking-[.2em] uppercase mb-3">06 / Monitor &amp; Milestones</p>
+      <h2 id="watchlist-heading" class="section-title text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">後續催化因素與美股觀察清單</h2>
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <article class="rounded-xl p-6 bg-white shadow-lg border-l-4 border-sky-500"><div class="flex justify-between gap-2 items-center"><h3 class="font-bold text-lg">Meta／電力鏈</h3><span class="status-pill status-target">2028–2030</span></div><p class="text-sm text-slate-600 leading-7 mt-3">追蹤 2028 下半年用電啟動、2030 年專用電廠；若新增供電合約公布，核對容量、條款、施工及投運日期。</p></article>
+        <article class="rounded-xl p-6 bg-white shadow-lg border-l-4 border-cyan-500"><div class="flex justify-between gap-2 items-center"><h3 class="font-bold text-lg">Nvidia／Einride</h3><span class="status-pill status-observe">後續財報</span></div><p class="text-sm text-slate-600 leading-7 mt-3">檢查實際車隊與自駕部署數、營收、營業現金流，並比較 2028 車隊與損益兩平目標進度。</p></article>
+        <article class="rounded-xl p-6 bg-white shadow-lg border-l-4 border-indigo-500"><div class="flex justify-between gap-2 items-center"><h3 class="font-bold text-lg">SpaceX／Starlink</h3><span class="status-pill status-target">最早 9/28</span></div><p class="text-sm text-slate-600 leading-7 mt-3">依序確認監管核准、實際發射、軌道飛行、26 顆衛星部署、入網及可重複使用進度。</p></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-5 sm:p-6 mb-6">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-5"><div><h3 class="text-xl font-bold text-stone-800">報告提及的美股公司</h3><p class="text-sm text-slate-500 mt-1">即時搜尋公司、代號、產業角色或追蹤項目；僅收錄報告列示的公司。</p></div><div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto"><label class="sr-only" for="company-search">搜尋公司或代號</label><input id="company-search" type="search" placeholder="搜尋：META、電力、現金流…" class="w-full sm:w-64 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-sky-500" autocomplete="off"><label class="sr-only" for="company-filter">產業分類</label><select id="company-filter" class="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-sky-500"><option value="全部">所有產業</option><option value="AI平台與雲端">AI 平台與雲端</option><option value="電力及設備">電力及設備</option><option value="自駕貨運">自駕貨運</option><option value="太空通訊">太空通訊</option></select></div></div>
+        <p class="text-xs text-slate-500 mb-3" id="table-count" role="status" aria-live="polite">顯示 10 家公司</p>
+        <div class="overflow-x-auto table-scroll rounded-lg border border-slate-200 max-h-[500px] overflow-y-auto">
+          <table class="w-full min-w-[790px] text-sm text-left border-collapse"><caption class="sr-only">報告提及的美股公司、產業分類、角色及觀察指標</caption><thead class="bg-sky-950 text-white"><tr><th scope="col" class="px-4 py-4 font-bold">公司／代號</th><th scope="col" class="px-4 py-4 font-bold">領域</th><th scope="col" class="px-4 py-4 font-bold">在報告中的角色</th><th scope="col" class="px-4 py-4 font-bold">待驗證指標</th></tr></thead><tbody id="company-table-body" class="divide-y divide-slate-100"></tbody></table>
+        </div><p class="text-xs text-slate-500 leading-6 mt-4">提醒：分類僅用於整理研究範圍，並非投資評級。Capital Power 與 Pembina Pipeline 在報告中屬加拿大供電／電廠相關業者，未被列入此美股清單。</p>
+      </div>
+      <div class="rounded-2xl bg-sky-950 text-white p-7 sm:p-9 spotlight"><p class="text-sm font-bold tracking-widest text-sky-300">THE TAKEAWAY</p><p class="text-2xl sm:text-3xl font-extrabold leading-snug mt-3">值得追蹤的不是最宏大的規劃，<br class="hidden sm:block">而是它距離營運與財務回報還有多遠。</p><p class="text-sky-100/85 mt-4 leading-7 max-w-3xl">把資本支出、實際交付、單位經濟效益與現金流放在同一條時間線上，才能辨別 AI 機會的商業化進度。</p></div>
+    </section>
+  </main>
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"><p>&copy; 巴菲特AI價值投資-AI基建與商業化驗證。僅供參考，不構成投資建議。</p><p class="text-xs mt-1">資料來源：基於網路中AI基礎建設與商業化相關公開資料 (2026年9月21日)。</p></div></footer>
+  <script>
+    'use strict';
+    // Only companies/tickers and descriptions appearing in the supplied report are used.
+    const productData = [
+      { company: 'Meta', ticker: 'META', category: 'AI平台與雲端', role: '亞伯達省 1GW 資料中心規劃', checkpoint: '2028 下半年用電啟動、資本支出、折舊與 AI／廣告收入' },
+      { company: 'Microsoft', ticker: 'MSFT', category: 'AI平台與雲端', role: '雲端業者，同產業建設觀察', checkpoint: '正式資料中心投資、電力保障與投資報酬；非已確認匿名客戶' },
+      { company: 'Amazon', ticker: 'AMZN', category: 'AI平台與雲端', role: '雲端業者，同產業建設觀察', checkpoint: '正式資料中心投資、電力保障與投資報酬；非已確認匿名客戶' },
+      { company: 'Eaton', ticker: 'ETN', category: '電力及設備', role: '配電設備供應鏈', checkpoint: '正式訂單、產品組合與獲利' },
+      { company: 'GE Vernova', ticker: 'GEV', category: '電力及設備', role: '發電與電網設備供應鏈', checkpoint: '正式訂單、建設進度與獲利' },
+      { company: 'Vertiv', ticker: 'VRT', category: '電力及設備', role: '資料中心電力與冷卻設備', checkpoint: '正式訂單、交付與獲利' },
+      { company: 'Nvidia', ticker: 'NVDA', category: '自駕貨運', role: 'Hyperion／Blackwell／Cosmos 技術平台', checkpoint: '平台採用、車用運算與軟體需求；合作收入未量化' },
+      { company: 'Einride', ticker: 'ENRD', category: '自駕貨運', role: '電動與自動駕駛貨運營運商', checkpoint: '實際部署車輛、2028 車隊目標、營收、營業現金流' },
+      { company: 'SpaceX', ticker: 'SPCX', category: '太空通訊', role: '星艦／Starlink 任務與服務', checkpoint: '飛行測試、衛星入網、發射成本、Starlink 自由現金流' },
+      { company: 'Rocket Lab', ticker: 'RKLB', category: '太空通訊', role: '發射服務業者，產業競爭觀察', checkpoint: '不同載荷與軌道需求下的發射定位及任務彈性' }
+    ];
+    const body = document.getElementById('company-table-body');
+    const search = document.getElementById('company-search');
+    const filter = document.getElementById('company-filter');
+    const count = document.getElementById('table-count');
+    function escapeHtml(value) { return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
+    function renderTable() {
+      const q = search.value.trim().toLocaleLowerCase();
+      const category = filter.value;
+      const matches = productData.filter(row => (category === '全部' || row.category === category) && Object.values(row).some(value => value.toLocaleLowerCase().includes(q)));
+      body.innerHTML = matches.length ? matches.map(row => `<tr class="hover:bg-sky-50/70 transition"><th scope="row" class="px-4 py-4 whitespace-nowrap"><span class="block font-bold text-slate-800">${escapeHtml(row.company)}</span><span class="inline-block mt-1 font-semibold text-sky-700 tracking-wide">${escapeHtml(row.ticker)}</span></th><td class="px-4 py-4 text-slate-600">${escapeHtml(row.category)}</td><td class="px-4 py-4 text-slate-600 leading-6">${escapeHtml(row.role)}</td><td class="px-4 py-4 text-slate-600 leading-6">${escapeHtml(row.checkpoint)}</td></tr>`).join('') : '<tr><td colspan="4" class="px-4 py-10 text-center text-slate-500">找不到符合條件的公司，請調整關鍵字或產業分類。</td></tr>';
+      count.textContent = `顯示 ${matches.length} / ${productData.length} 家公司`;
+    }
+    search.addEventListener('input', renderTable);
+    filter.addEventListener('change', renderTable);
+    renderTable();
+
+    const menuButton = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    function closeMenu() { mobileNav.classList.add('hidden'); menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', '開啟選單'); }
+    menuButton.addEventListener('click', () => {
+      const willOpen = mobileNav.classList.contains('hidden');
+      mobileNav.classList.toggle('hidden', !willOpen);
+      menuButton.setAttribute('aria-expanded', String(willOpen));
+      menuButton.setAttribute('aria-label', willOpen ? '關閉選單' : '開啟選單');
+    });
+    document.querySelectorAll('#mobile-nav a').forEach(link => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeMenu(); });
+    const links = document.querySelectorAll('.nav-link');
+    const sections = [...document.querySelectorAll('[data-section]')];
+    function setActive(id) {
+      links.forEach(link => {
+        const active = link.getAttribute('href') === '#' + id;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      const visible = new Map();
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) visible.set(entry.target.id, entry.boundingClientRect.top); else visible.delete(entry.target.id); });
+        if (visible.size) setActive([...visible].sort((a, b) => Math.abs(a[1] - 100) - Math.abs(b[1] - 100))[0][0]);
+      }, { rootMargin: '-95px 0px -58% 0px', threshold: 0 });
+      sections.forEach(section => observer.observe(section));
+    }
+    links.forEach(link => link.addEventListener('click', () => setActive(link.hash.slice(1))));
+
+    // Each chart compares values with matching units and clearly distinguishes plans from contracted amounts.
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+      Chart.defaults.color = '#597182';
+      const commonOptions = { responsive: true, maintainAspectRatio: false, animation: { duration: 650 }, plugins: { legend: { display: false }, tooltip: { displayColors: false } }, scales: { x: { beginAtZero: true, grid: { color: '#edf2f7' }, border: { display: false }, ticks: { precision: 0 } }, y: { grid: { display: false }, border: { display: false }, ticks: { color: '#334155', font: { weight: '600' } } } } };
+      new Chart(document.getElementById('powerChart'), {
+        type: 'bar',
+        data: { labels: ['資料中心規劃容量', 'Capital Power 已簽供電協議'], datasets: [{ data: [1000, 250], backgroundColor: ['#0c4a6e', '#38bdf8'], borderRadius: 7, barThickness: 35 }] },
+        options: { ...commonOptions, indexAxis: 'y', scales: { ...commonOptions.scales, x: { ...commonOptions.scales.x, max: 1100, title: { display: true, text: '容量（MW）' } } }, plugins: { ...commonOptions.plugins, tooltip: { callbacks: { label: context => `${context.parsed.x.toLocaleString('zh-TW')} MW` } } } }
+      });
+      new Chart(document.getElementById('fleetChart'), {
+        type: 'bar',
+        data: { labels: ['2028 年展望下緣', '2028 年展望上緣'], datasets: [{ data: [1500, 2000], backgroundColor: ['#38bdf8', '#0c4a6e'], borderRadius: 7, barThickness: 35 }] },
+        options: { ...commonOptions, indexAxis: 'y', scales: { ...commonOptions.scales, x: { ...commonOptions.scales.x, max: 2200, title: { display: true, text: '整體車隊（輛）' } } }, plugins: { ...commonOptions.plugins, tooltip: { callbacks: { label: context => `${context.parsed.x.toLocaleString('zh-TW')} 輛（公司展望）` } } } }
+      });
+    } else {
+      document.querySelectorAll('.chart-shell').forEach(shell => { const p = document.createElement('p'); p.className = 'p-5 text-sm text-slate-600'; p.textContent = shell.querySelector('canvas')?.getAttribute('aria-label') || '圖表暫時無法載入。'; shell.replaceChildren(p); });
+    }
+  </script>
+</body>
+</html>
