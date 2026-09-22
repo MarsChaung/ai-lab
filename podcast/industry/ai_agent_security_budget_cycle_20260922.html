@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="解析 Gemini 資安測試越界事件與 Palo Alto Networks Continuous Frontier AI Defense，觀察 AI 代理安全如何形成企業資安預算的新週期。" />
+  <title>巴菲特AI價值投資-AI資安預算新週期</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { overflow-x: hidden; }
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    .active-nav-link {
+      color: rgb(2 132 199);
+      border-bottom-color: rgb(14 165 233);
+      font-weight: 700;
+    }
+    .inactive-nav-link {
+      color: rgb(87 83 78);
+      border-bottom-color: transparent;
+      font-weight: 500;
+    }
+    .nav-link {
+      border-bottom-width: 2px;
+      padding-bottom: 0.35rem;
+      transition: color .2s ease, border-color .2s ease;
+    }
+    .chart-shell {
+      position: relative;
+      width: 100%;
+      height: 320px;
+    }
+    @media (max-width: 640px) {
+      .chart-shell { height: 300px; }
+    }
+    .metric-number {
+      font-variant-numeric: tabular-nums;
+    }
+    .table-shell {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    section[id] {
+      scroll-margin-top: 6.5rem;
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between min-h-16">
+        <a href="#top" class="font-extrabold text-stone-800 tracking-tight">巴菲特AI價值投資</a>
+
+        <nav class="hidden lg:flex items-center gap-5 text-sm" aria-label="主要導覽">
+          <a class="nav-link inactive-nav-link" data-nav href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#gemini">Gemini 事件</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#panw">PANW 商業化</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#financials">財務基礎</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#ecosystem">產業影響</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#scenarios">投資情境</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#watchlist">追蹤指標</a>
+        </nav>
+
+        <button id="menuButton" type="button"
+          class="lg:hidden inline-flex items-center justify-center rounded-md border border-stone-300 p-2 text-stone-700 hover:bg-stone-100"
+          aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟導覽選單">
+          <svg id="menuIcon" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav id="mobileMenu" class="hidden lg:hidden pb-4 border-t border-stone-100" aria-label="手機導覽">
+        <div class="grid grid-cols-2 gap-x-4 gap-y-3 pt-4 text-sm">
+          <a class="nav-link inactive-nav-link" data-nav href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#gemini">Gemini 事件</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#panw">PANW 商業化</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#financials">財務基礎</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#ecosystem">產業影響</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#scenarios">投資情境</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#watchlist">追蹤指標</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold leading-tight">
+          AI 資安預算的新週期
+        </h1>
+        <p class="mt-6 max-w-3xl text-sky-50/90 leading-relaxed text-base sm:text-lg">
+          Gemini 資安測試越界事件凸顯 AI 代理能力與安全控制之間的落差；Palo Alto Networks 同日推出持續性 AI 攻防服務，顯示企業資安支出正從模型風險討論，逐步走向可訂閱、可驗證、可量化的安全產品。
+        </p>
+
+        <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl">
+          <div class="rounded-lg border border-white/15 bg-white/10 backdrop-blur p-4">
+            <p class="text-xs text-sky-100">PANW FY26 Q4 營收</p>
+            <p class="metric-number mt-1 text-2xl font-bold">34.1 億美元</p>
+            <p class="mt-1 text-xs text-sky-100/90">年增 34%</p>
+          </div>
+          <div class="rounded-lg border border-white/15 bg-white/10 backdrop-blur p-4">
+            <p class="text-xs text-sky-100">NGS ARR</p>
+            <p class="metric-number mt-1 text-2xl font-bold">91 億美元</p>
+            <p class="mt-1 text-xs text-sky-100/90">年增 63%</p>
+          </div>
+          <div class="rounded-lg border border-white/15 bg-white/10 backdrop-blur p-4">
+            <p class="text-xs text-sky-100">RPO</p>
+            <p class="metric-number mt-1 text-2xl font-bold">212 億美元</p>
+            <p class="mt-1 text-xs text-sky-100/90">年增 34%</p>
+          </div>
+          <div class="rounded-lg border border-white/15 bg-white/10 backdrop-blur p-4">
+            <p class="text-xs text-sky-100">既有客戶基礎</p>
+            <p class="metric-number mt-1 text-2xl font-bold">7.5 萬+</p>
+            <p class="mt-1 text-xs text-sky-100/90">具交叉銷售基礎</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+      <section id="overview" class="mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心觀點：AI 能力愈強，治理與防禦預算愈難省</h2>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="leading-8">
+            報告的主線不是把 Gemini 事件解讀成「AI 主動攻擊企業」，而是把它視為一個控制面問題：當模型能讀取資料、呼叫工具、執行程式、使用憑證與完成多步驟任務時，安全風險會從「回答錯誤」升級為「執行錯誤」。企業因此必須同步投資測試環境、身份權限、網路隔離、代理監控、稽核與人工覆核。
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="bg-sky-50 border border-sky-100 rounded-lg p-6">
+            <p class="text-sm font-semibold text-sky-700">01｜模型安全</p>
+            <h3 class="mt-2 text-xl font-bold text-stone-800">從沙盒測試升級到代理行為監控</h3>
+            <p class="mt-3 leading-7">紅隊測試、越權行為測試與代理行為監控，將成為高能力模型進入企業流程後的基本安全需求。</p>
+          </article>
+          <article class="bg-emerald-50 border border-emerald-100 rounded-lg p-6">
+            <p class="text-sm font-semibold text-emerald-700">02｜身份與權限</p>
+            <h3 class="mt-2 text-xl font-bold text-stone-800">AI 代理成為新的數位身份</h3>
+            <p class="mt-3 leading-7">企業必須知道代理能存取哪些資料、使用哪些憑證、呼叫哪些 API，以及是否執行超出授權範圍的行動。</p>
+          </article>
+          <article class="bg-amber-50 border border-amber-100 rounded-lg p-6">
+            <p class="text-sm font-semibold text-amber-700">03｜傳統資安 AI 化</p>
+            <h3 class="mt-2 text-xl font-bold text-stone-800">攻擊自動化迫使防禦走向持續化</h3>
+            <p class="mt-3 leading-7">當攻擊者能用 AI 加速漏洞研究與攻擊流程，防禦方若仍依賴週期性人工掃描，速度差距會持續擴大。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="gemini" class="mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Gemini 事件：重點在能力與控制的落差</h2>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-4">
+              <h3 class="text-xl font-bold text-stone-800">事件輪廓</h3>
+              <span class="shrink-0 text-xs font-semibold px-3 py-1 rounded-full bg-stone-100 text-stone-600">已發生事實</span>
+            </div>
+            <div class="mt-5 space-y-4 leading-7">
+              <p><strong class="text-stone-800">測試目的：</strong>第三方 AI 安全公司 Irregular 讓 Gemini 在模擬環境中執行網路安全任務、尋找漏洞。</p>
+              <p><strong class="text-stone-800">控制失誤：</strong>測試環境隔離不完整，使模型可以接觸公開網路，並把真實企業誤認為測試目標。</p>
+              <p><strong class="text-stone-800">後續：</strong>Google 表示模型確認目標不是測試環境後停止行為；受影響企業已被通知，報告指出目前沒有已確認的實際損害。</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-800">不宜過度解讀的地方</h3>
+            <div class="mt-5 rounded-lg bg-rose-50 border border-rose-100 p-5">
+              <p class="font-semibold text-rose-800">報告不支持「AI 具有惡意意圖」的結論。</p>
+              <p class="mt-2 leading-7 text-stone-700">
+                模型原本就被要求執行資安任務；問題在於測試邊界、權限與目標辨識。投資意義在於：高能力模型需要更強的治理控制，而不是把單一測試事件直接等同自主惡意攻擊。
+              </p>
+            </div>
+            <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+              <div class="rounded-lg bg-stone-50 p-4"><strong>風險面</strong><br>資料外洩、越權操作、合規與法律責任</div>
+              <div class="rounded-lg bg-stone-50 p-4"><strong>預算面</strong><br>身份管理、監控、稽核、隔離與事件處理</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 text-slate-100 rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold">從「回答錯誤」到「執行錯誤」</h3>
+          <div class="mt-5 grid md:grid-cols-3 gap-4">
+            <div class="rounded-lg bg-white/5 border border-white/10 p-5">
+              <p class="text-sky-300 font-semibold">傳統生成式 AI</p>
+              <p class="mt-2 text-sm leading-6">主要風險集中在內容品質、幻覺與錯誤回答。</p>
+            </div>
+            <div class="rounded-lg bg-white/5 border border-white/10 p-5">
+              <p class="text-sky-300 font-semibold">AI 代理</p>
+              <p class="mt-2 text-sm leading-6">可使用工具、API、憑證與網路連線，錯誤行動可能直接碰到真實系統。</p>
+            </div>
+            <div class="rounded-lg bg-white/5 border border-white/10 p-5">
+              <p class="text-sky-300 font-semibold">企業治理</p>
+              <p class="mt-2 text-sm leading-6">必須將模型能力、身份權限與持續監控一起納入 AI 基礎設施。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="panw" class="mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Palo Alto Networks：把 AI 攻防能力包裝成持續訂閱</h2>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h3 class="text-2xl font-bold text-stone-800">Unit 42 Continuous Frontier AI Defense</h3>
+              <p class="mt-2 text-stone-600">產品方向：由一次性安全評估，轉向持續性的漏洞發現、驗證與修補。</p>
+            </div>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-sky-100 text-sky-800">2026/9/22 公布</span>
+          </div>
+
+          <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-xs uppercase tracking-wide text-stone-500">架構</p>
+              <p class="mt-2 font-bold text-stone-800">多模型調度</p>
+              <p class="mt-2 text-sm leading-6">整合 Anthropic Claude Mythos 5、OpenAI GPT-5.6-Cyber 與開放權重模型。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-xs uppercase tracking-wide text-stone-500">資料與判斷</p>
+              <p class="mt-2 font-bold text-stone-800">Unit 42 威脅情報</p>
+              <p class="mt-2 text-sm leading-6">結合資安專家判斷，不把價值只建立在單一模型能力上。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-xs uppercase tracking-wide text-stone-500">掃描範圍</p>
+              <p class="mt-2 font-bold text-stone-800">Web、API、雲端與原始碼</p>
+              <p class="mt-2 text-sm leading-6">持續掃描企業攻擊面，並驗證漏洞是否能形成實際攻擊路徑。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-xs uppercase tracking-wide text-stone-500">商業模式</p>
+              <p class="mt-2 font-bold text-stone-800">朝年度訂閱發展</p>
+              <p class="mt-2 text-sm leading-6">若能降低人工顧問依賴，較有機會形成可擴張的經常性收入。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm text-stone-500">內部測試期</p>
+            <p class="metric-number mt-2 text-3xl font-extrabold text-sky-700">約 6 個月</p>
+            <p class="mt-2 text-sm">公司揭露</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm text-stone-500">Unit 42 客戶專案</p>
+            <p class="metric-number mt-2 text-3xl font-extrabold text-sky-700">100+</p>
+            <p class="mt-2 text-sm">測試／專案，不等同訂閱客戶</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm text-stone-500">研發與方法優化投入</p>
+            <p class="metric-number mt-2 text-3xl font-extrabold text-sky-700">1,700 萬美元</p>
+            <p class="mt-2 text-sm">公司自行揭露</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm text-stone-500">高風險或重大風險曝險</p>
+            <p class="metric-number mt-2 text-3xl font-extrabold text-sky-700">37%</p>
+            <p class="mt-2 text-sm">客戶評估結果；不等同營收</p>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-5">
+          <p class="font-bold text-amber-900">商業化驗證點</p>
+          <p class="mt-2 leading-7">
+            目前測試成果只能支持技術能力與客戶需求的初步證據，不能直接視為未來營收。真正要驗證的是：測試是否轉成正式訂閱、既有大型客戶是否把服務加進原合約，以及服務能否在模型推理與人工顧問成本下維持軟體型毛利結構。
+          </p>
+        </div>
+      </section>
+
+      <section id="financials" class="mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務基礎：新產品建立在既有成長之上</h2>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold text-stone-800">FY2026 Q4 主要成長率</h3>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">已公布</span>
+            </div>
+            <p class="mt-2 text-sm text-stone-500">以報告列示的年增率比較營收、NGS ARR 與 RPO。</p>
+            <div class="chart-shell mt-4"><canvas id="growthChart"></canvas></div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold text-stone-800">FY2027 年增率指引區間</h3>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full bg-violet-100 text-violet-800">公司預估</span>
+            </div>
+            <p class="mt-2 text-sm text-stone-500">使用浮動長條呈現報告中的指引上下限，不以單點中值替代。</p>
+            <div class="chart-shell mt-4"><canvas id="guidanceChart"></canvas></div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-stone-800">FY2027 指引摘要</h3>
+          <div class="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="rounded-lg bg-stone-50 p-5">
+              <p class="text-sm text-stone-500">全年營收</p>
+              <p class="metric-number mt-1 text-xl font-bold text-stone-800">141–142 億美元</p>
+              <p class="mt-1 text-sm">年增約 23%–24%</p>
+            </div>
+            <div class="rounded-lg bg-stone-50 p-5">
+              <p class="text-sm text-stone-500">NGS ARR</p>
+              <p class="metric-number mt-1 text-xl font-bold text-stone-800">110.75–111.75 億美元</p>
+              <p class="mt-1 text-sm">年增約 22%–23%</p>
+            </div>
+            <div class="rounded-lg bg-stone-50 p-5">
+              <p class="text-sm text-stone-500">非 GAAP 營業利益率</p>
+              <p class="metric-number mt-1 text-xl font-bold text-stone-800">約 29.5%</p>
+              <p class="mt-1 text-sm">公司預估</p>
+            </div>
+            <div class="rounded-lg bg-stone-50 p-5">
+              <p class="text-sm text-stone-500">調整後自由現金流率</p>
+              <p class="metric-number mt-1 text-xl font-bold text-stone-800">約 38%</p>
+              <p class="mt-1 text-sm">公司預估</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-5">
+          <article class="bg-emerald-50 border border-emerald-100 rounded-lg p-6">
+            <h3 class="font-bold text-emerald-900">有利條件</h3>
+            <p class="mt-3 leading-7">現有營收、NGS ARR 與 RPO 已具規模，Continuous Frontier AI Defense 並非公司維持當前營運的唯一依賴，而是疊加在既有平台上的新產品層。</p>
+          </article>
+          <article class="bg-rose-50 border border-rose-100 rounded-lg p-6">
+            <h3 class="font-bold text-rose-900">需要驗證</h3>
+            <p class="mt-3 leading-7">若 AI 攻防服務高度依賴 Unit 42 顧問與人工專家，收入成長未必帶來純軟體式毛利；模型推理成本也可能影響利潤率與自由現金流。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="ecosystem" class="mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業影響：AI 安全預算可能向平台、身份與邊緣安全擴散</h2>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="grid lg:grid-cols-3 gap-5">
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-sm font-semibold text-sky-700">平台化資安</p>
+              <p class="mt-2 leading-7">大型供應商可利用既有客戶、資料整合與採購關係，把新 AI 安全能力附加到既有平台。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-sm font-semibold text-sky-700">非人類身份</p>
+              <p class="mt-2 leading-7">企業同時管理員工、服務帳號與 AI 代理後，身份數量與最小權限管理需求可能上升。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-sm font-semibold text-sky-700">持續性攻防</p>
+              <p class="mt-2 leading-7">弱點掃描可能由週期性工作轉向持續性工作，並從人工分析轉向人機協作與多模型組合。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-bold text-stone-800">資安公司受益面向比較</h3>
+              <p class="mt-1 text-sm text-stone-500">以下整理均來自報告中的公司定位與可能受益方向。</p>
+            </div>
+            <div class="w-full md:w-80">
+              <label for="companySearch" class="sr-only">搜尋公司或受益面向</label>
+              <input id="companySearch" type="search" placeholder="搜尋公司、領域或關鍵字…"
+                class="w-full rounded-md border border-stone-300 bg-white px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-sky-400" />
+            </div>
+          </div>
+
+          <div class="table-shell mt-5 max-h-[560px]">
+            <table class="min-w-[820px] w-full text-sm">
+              <thead class="sticky top-0 bg-stone-100 z-10 text-stone-700">
+                <tr>
+                  <th class="text-left px-4 py-3 font-semibold">公司</th>
+                  <th class="text-left px-4 py-3 font-semibold">主要受益面向</th>
+                  <th class="text-left px-4 py-3 font-semibold">報告中的投資觀察</th>
+                </tr>
+              </thead>
+              <tbody id="companyTableBody" class="divide-y divide-stone-200"></tbody>
+            </table>
+          </div>
+          <p id="tableEmpty" class="hidden py-6 text-center text-stone-500">沒有符合搜尋條件的公司。</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-stone-800">Alphabet 的關鍵不是單次事件損失，而是代理治理成本</h3>
+          <p class="mt-4 leading-8">
+            報告指出，Gemini 事件目前沒有已確認的重大財務損失；對 Alphabet 更值得觀察的是類似事件是否反覆發生。若 Gemini 從聊天工具進一步延伸到搜尋、工作軟體、雲端與企業代理，企業級 AI 的總成本就不只包含模型推理與資料中心資本支出，也會納入身份管理、監控、稽核、安全測試、權限隔離與事件處理。
+          </p>
+        </div>
+      </section>
+
+      <section id="scenarios" class="mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資情境：市場接下來會驗證三件事</h2>
+
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold text-stone-800">基準情境</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-sky-100 text-sky-800 font-semibold">循序採用</span>
+            </div>
+            <p class="mt-4 leading-7">
+              AI 安全逐步進入既有資安預算，先由大型企業、金融、科技、政府與高風險產業採用。PANW 透過既有客戶交叉銷售，AI 資安成為新成長來源，但短期不單獨改變公司營收結構。
+            </p>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold text-stone-800">樂觀情境</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-semibold">快速標準化</span>
+            </div>
+            <p class="mt-4 leading-7">
+              AI 代理快速普及，真實世界 AI 輔助攻擊事件增加，持續性 AI 攻防測試逐漸成為標準安全配置。若 Unit 42 專業服務能高度自動化並大量附加到既有合約，AI 資安可能推動 NGS ARR 形成新的成長曲線。
+            </p>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold text-stone-800">保守情境</h3>
+              <span class="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-800 font-semibold">採購低於預期</span>
+            </div>
+            <p class="mt-4 leading-7">
+              企業有興趣但採購速度偏慢，可能受預算、模型成本、誤報、法務責任或自行開發影響。若產品仍高度依賴顧問與人工專家，商業模式就更接近高價專業服務，而不是高擴張性的軟體訂閱。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="watchlist" class="mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資人後續追蹤指標</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-bold text-sky-700">01</p>
+            <h3 class="mt-2 font-bold text-stone-800">Continuous Frontier AI Defense 的商業化</h3>
+            <p class="mt-3 text-sm leading-6">是否開始揭露客戶數、訂閱合約或 ARR 貢獻。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-bold text-sky-700">02</p>
+            <h3 class="mt-2 font-bold text-stone-800">平台交叉銷售</h3>
+            <p class="mt-3 text-sm leading-6">Prisma AIRS、Cortex、Unit 42 與身份安全之間是否出現更高交叉銷售率。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-bold text-sky-700">03</p>
+            <h3 class="mt-2 font-bold text-stone-800">NGS ARR 新增金額</h3>
+            <p class="mt-3 text-sm leading-6">基期擴大後，新增 ARR 絕對金額比單看百分比成長更具資訊量。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-bold text-sky-700">04</p>
+            <h3 class="mt-2 font-bold text-stone-800">利潤率與現金流</h3>
+            <p class="mt-3 text-sm leading-6">模型推理與顧問支出是否壓縮非 GAAP 營業利益率與自由現金流率。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-bold text-sky-700">05</p>
+            <h3 class="mt-2 font-bold text-stone-800">模型供應商安全事件</h3>
+            <p class="mt-3 text-sm leading-6">Google、OpenAI、Anthropic、Meta 是否持續出現測試越界或代理安全事件。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-bold text-sky-700">06</p>
+            <h3 class="mt-2 font-bold text-stone-800">AI 代理身份市場</h3>
+            <p class="mt-3 text-sm leading-6">「非人類身份」是否形成獨立採購預算，並帶動身份與零信任供應商。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="conclusion" class="mb-4">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論：AI 資安可能成為 AI 投資週期的第二條主線</h2>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="leading-8">
+            Gemini 事件顯示，高能力 AI 已具備讓測試環境錯誤延伸成真實世界安全事件的能力；而 Palo Alto Networks 的新服務，則嘗試把這項風險轉換成可重複收費的持續性安全能力。報告的核心投資邏輯因此相當清楚：AI 模型愈強、代理可執行的工作愈多，企業對身份、權限、監控、漏洞驗證與自動修補的需求就愈高。
+          </p>
+          <p class="mt-4 leading-8">
+            接下來應以合約、ARR、現金流與客戶黏著度驗證這條成長曲線，而不是只看 AI 資安新聞數量。AI 資本支出未來不只流向 GPU、資料中心與模型供應商，也可能逐步轉化成「讓 AI 能安全運作」的長期資安預算。
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p>&copy; 巴菲特AI價值投資-AI資安預算新週期。僅供參考，不構成投資建議。</p>
+          <p class="text-xs mt-1">資料來源：基於網路中 AI 代理資安與 Palo Alto Networks 相關公開資料 (2026年9月22日)。</p>
+      </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? '開啟導覽選單' : '關閉導覽選單');
+    });
+
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', '開啟導覽選單');
+      });
+    });
+
+    const navLinks = [...document.querySelectorAll('[data-nav]')];
+    const observedSections = [...document.querySelectorAll('main section[id]')].filter(section =>
+      navLinks.some(link => link.getAttribute('href') === `#${section.id}`)
+    );
+
+    function setActiveNav(id) {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible.length) setActiveNav(visible[0].target.id);
+    }, {
+      rootMargin: '-20% 0px -62% 0px',
+      threshold: [0.05, 0.15, 0.3, 0.5]
+    });
+
+    observedSections.forEach(section => sectionObserver.observe(section));
+
+    const productData = [
+      {
+        company: 'Palo Alto Networks',
+        focus: '平台化資安、AI 攻防、雲端與安全營運',
+        note: '可利用既有客戶與平台交叉銷售 Continuous Frontier AI Defense；關鍵在能否轉成可持續訂閱與 NGS ARR。'
+      },
+      {
+        company: 'CrowdStrike',
+        focus: '端點、安全營運與威脅情報',
+        note: '若 AI 提高攻擊事件數量與速度，企業對更快偵測、調查與回應的需求可能增加。'
+      },
+      {
+        company: 'Zscaler',
+        focus: 'Zero Trust、雲端存取控制',
+        note: 'AI 代理可被視為新的數位身份，權限與零信任架構的重要性可能上升。'
+      },
+      {
+        company: 'Okta',
+        focus: '身份與存取管理',
+        note: '企業同時管理人類員工、服務帳號與大量 AI 代理時，非人類身份可能形成新的管理領域。'
+      },
+      {
+        company: 'Cloudflare',
+        focus: 'Web、API、Bot 與邊緣安全',
+        note: 'AI 代理大量透過網路與 API 互動後，企業需要更清楚區分合法代理、自動化流量與惡意機器人。'
+      },
+      {
+        company: 'Fortinet',
+        focus: '網路安全基礎設備與整合安全產品',
+        note: 'AI 對網路層威脅的增加，可能持續帶動防火牆與安全網路需求。'
+      }
+    ];
+
+    const companySearch = document.getElementById('companySearch');
+    const companyTableBody = document.getElementById('companyTableBody');
+    const tableEmpty = document.getElementById('tableEmpty');
+
+    function renderCompanyTable(filter = '') {
+      const query = filter.trim().toLowerCase();
+      const filtered = productData.filter(item =>
+        `${item.company} ${item.focus} ${item.note}`.toLowerCase().includes(query)
+      );
+
+      companyTableBody.innerHTML = filtered.map(item => `
+        <tr class="align-top hover:bg-stone-50">
+          <td class="px-4 py-4 font-semibold text-stone-800 whitespace-nowrap">${item.company}</td>
+          <td class="px-4 py-4 text-stone-700">${item.focus}</td>
+          <td class="px-4 py-4 text-stone-600 leading-6">${item.note}</td>
+        </tr>
+      `).join('');
+
+      tableEmpty.classList.toggle('hidden', filtered.length !== 0);
+    }
+
+    companySearch.addEventListener('input', event => renderCompanyTable(event.target.value));
+    renderCompanyTable();
+
+    Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    Chart.defaults.color = '#57534e';
+
+    const growthCtx = document.getElementById('growthChart');
+    new Chart(growthCtx, {
+      type: 'bar',
+      data: {
+        labels: ['營收', 'NGS ARR', 'RPO'],
+        datasets: [{
+          label: '年增率 (%)',
+          data: [34, 63, 34],
+          backgroundColor: ['rgba(14,165,233,.72)','rgba(2,132,199,.78)','rgba(3,105,161,.72)'],
+          borderColor: ['rgb(14,165,233)','rgb(2,132,199)','rgb(3,105,161)'],
+          borderWidth: 1,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: context => `年增 ${context.raw}%`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            suggestedMax: 70,
+            ticks: { callback: value => `${value}%` },
+            grid: { color: 'rgba(120,113,108,.12)' }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    const guidanceCtx = document.getElementById('guidanceChart');
+    new Chart(guidanceCtx, {
+      type: 'bar',
+      data: {
+        labels: ['全年營收', 'NGS ARR', 'RPO'],
+        datasets: [{
+          label: 'FY2027 年增率指引 (%)',
+          data: [[23,24], [22,23], [19,20]],
+          backgroundColor: 'rgba(124,58,237,.68)',
+          borderColor: 'rgb(109,40,217)',
+          borderWidth: 1,
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: context => {
+                const value = context.raw;
+                return `年增約 ${value[0]}%–${value[1]}%`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            min: 0,
+            suggestedMax: 26,
+            ticks: { callback: value => `${value}%` },
+            grid: { color: 'rgba(120,113,108,.12)' }
+          },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
