@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="整理 McDonald’s、Starbucks 與 Darden Restaurants 在 2026 年美國餐飲市場的效率策略、單店經濟與消費分化。" />
+  <title>巴菲特AI價值投資-美國餐飲股效率戰</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; }
+    section[id] { scroll-margin-top: 92px; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: rgb(3 105 161); background: rgb(240 249 255); }
+    .inactive-nav-link { color: rgb(87 83 78); background: transparent; }
+    .inactive-nav-link:hover { color: rgb(3 105 161); background: rgb(248 250 252); }
+    .chart-shell { position: relative; min-height: 320px; width: 100%; }
+    .metric-number { font-variant-numeric: tabular-nums; }
+    .status-chip { display: inline-flex; align-items: center; border-radius: 9999px; padding: .2rem .55rem; font-size: .72rem; font-weight: 700; white-space: nowrap; }
+    .status-announced { background: rgb(224 242 254); color: rgb(3 105 161); }
+    .status-target { background: rgb(254 249 195); color: rgb(133 77 14); }
+    .status-reported { background: rgb(220 252 231); color: rgb(22 101 52); }
+    .soft-panel { background: linear-gradient(180deg, rgba(240,249,255,.9), rgba(255,255,255,.96)); }
+    @media (max-width: 640px) {
+      .chart-shell { min-height: 280px; }
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="主要章節導航">
+      <div class="flex h-16 items-center justify-between gap-4">
+        <a href="#overview" class="font-extrabold text-stone-900 tracking-tight">巴菲特AI價值投資</a>
+        <div class="hidden lg:flex items-center gap-1" id="desktopNav">
+          <a href="#overview" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">總覽</a>
+          <a href="#mcdonalds" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">McDonald’s</a>
+          <a href="#starbucks" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">Starbucks</a>
+          <a href="#darden" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">Darden</a>
+          <a href="#industry" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">產業轉折</a>
+          <a href="#investors" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">投資觀察</a>
+          <a href="#comparison" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">比較表</a>
+        </div>
+        <button id="mobileMenuButton" class="lg:hidden inline-flex items-center justify-center rounded-md border border-stone-200 p-2 text-stone-700 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-sky-500" aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟選單">
+          <svg id="menuIcon" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div id="mobileMenu" class="hidden lg:hidden border-t border-stone-100 py-3">
+        <div class="grid gap-1">
+          <a href="#overview" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">總覽</a>
+          <a href="#mcdonalds" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">McDonald’s</a>
+          <a href="#starbucks" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">Starbucks</a>
+          <a href="#darden" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">Darden</a>
+          <a href="#industry" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">產業轉折</a>
+          <a href="#investors" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">投資觀察</a>
+          <a href="#comparison" class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-semibold">比較表</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="overview" class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight">餐飲股進入「效率戰」</h1>
+        <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">
+          McDonald’s、Starbucks 與 Darden Restaurants 的最新動向共同指向同一個產業轉折：在高通膨、高利率與消費者價格敏感度上升的環境下，餐飲股的競爭核心正從「開更多店」轉向「讓每一家店產生更多現金流」。
+        </p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">McDonald’s 加盟商支持</p>
+            <p class="metric-number mt-2 text-3xl font-extrabold">85 億美元</p>
+            <p class="mt-1 text-xs text-sky-100/85">公司計畫至 2036 年提供</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">Starbucks 北美關店</p>
+            <p class="metric-number mt-2 text-3xl font-extrabold">約 250 家</p>
+            <p class="mt-1 text-xs text-sky-100/85">處理低效率或回報不佳據點</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">Darden 最新季度營收</p>
+            <p class="metric-number mt-2 text-3xl font-extrabold">約 32 億美元</p>
+            <p class="mt-1 text-xs text-sky-100/85">年增 5.1%</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">LongHorn 可比同店銷售</p>
+            <p class="metric-number mt-2 text-3xl font-extrabold">+6.8%</p>
+            <p class="mt-1 text-xs text-sky-100/85">Olive Garden 約 +1.0%</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-14">
+      <section aria-labelledby="thesis-heading">
+        <h2 id="thesis-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心投資主題：從門市數量轉向單店經濟</h2>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-100 text-sky-700 font-black">1</div>
+            <h3 class="mt-4 text-xl font-bold text-stone-900">需求仍在，但分配更集中</h3>
+            <p class="mt-3 leading-relaxed">消費者並非全面停止外食，而是更仔細比較價格、份量、品質、服務與整體體驗。品牌之間的成長差距因此擴大。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-100 text-sky-700 font-black">2</div>
+            <h3 class="mt-4 text-xl font-bold text-stone-900">低回報門市容忍度下降</h3>
+            <p class="mt-3 leading-relaxed">資金成本提高後，企業更重視新店、改裝與科技部署的回收期。展店速度本身不再等於價值創造。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-100 text-sky-700 font-black">3</div>
+            <h3 class="mt-4 text-xl font-bold text-stone-900">科技要證明能降成本</h3>
+            <p class="mt-3 leading-relaxed">下一階段的數位投資重點不是只增加便利性，而是能否降低人力需求、提高尖峰吞吐量並減少錯單與浪費。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="mcdonalds" aria-labelledby="mcd-heading">
+        <h2 id="mcd-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">McDonald’s：用資本支援保護加盟體系回報率</h2>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="leading-relaxed">McDonald’s 的 NEXT 成長策略，重點不是單純擴張，而是到 2036 年提供約 85 億美元的加盟商合作支持，其中約 50 億美元預計在 2030 年前投入。資金將透過租金減免與資本支援，用於餐廳現代化、科技部署與流程改善。</p>
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-lg bg-sky-50 p-4">
+                <p class="text-sm font-semibold text-sky-700">加盟體系結構</p>
+                <p class="metric-number mt-1 text-2xl font-extrabold text-stone-900">約 95%</p>
+                <p class="mt-1 text-sm">全球餐廳由獨立加盟商經營，因此加盟商現金流與投資意願直接影響品牌競爭力。</p>
+              </div>
+              <div class="rounded-lg bg-emerald-50 p-4">
+                <p class="text-sm font-semibold text-emerald-700">公司估計的效率改善</p>
+                <p class="metric-number mt-1 text-2xl font-extrabold text-stone-900">約 +250 bps</p>
+                <p class="mt-1 text-sm">若新系統全面導入，美國平均每家餐廳每年現金流估計可增加約 10 萬美元。</p>
+              </div>
+            </div>
+          </div>
+          <aside class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-lg font-bold text-stone-900">公司目標與待驗證項目</h3>
+            <ul class="mt-4 space-y-3 text-sm leading-relaxed">
+              <li><span class="status-chip status-target">公司目標</span><span class="ml-2">2030 年雞肉與飲料品類市占率各提高約 1.5 個百分點。</span></li>
+              <li><span class="status-chip status-target">公司目標</span><span class="ml-2">2030 年營業利益率達 50% 出頭至 50% 中段。</span></li>
+              <li><span class="status-chip status-target">公司目標</span><span class="ml-2">自由現金流轉換率達 80% 中段至高段。</span></li>
+              <li><span class="status-chip status-announced">待驗證</span><span class="ml-2">約 4 年投資回收期與效率改善是否如期實現。</span></li>
+            </ul>
+          </aside>
+        </div>
+        <div class="rounded-lg border border-amber-200 bg-amber-50 p-5">
+          <p class="font-bold text-amber-900">關鍵風險訊號</p>
+          <p class="mt-2 leading-relaxed text-amber-950/80">管理層警告：若通膨維持偏高，主要市場餐飲業客流成長可能接近零。這使交易次數、加盟商現金流與科技降本效果，比單純同店銷售成長更值得追蹤。</p>
+        </div>
+      </section>
+
+      <section id="starbucks" aria-labelledby="sbux-heading">
+        <h2 id="sbux-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Starbucks：轉型進入「汰弱留強」階段</h2>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-semibold text-stone-500">已宣布的門市調整</p>
+            <p class="metric-number mt-2 text-4xl font-extrabold text-stone-900">約 250 家</p>
+            <p class="mt-2 leading-relaxed">北美門市將於本週關閉，約占北美超過 18,000 家門市的 1%。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-semibold text-stone-500">預計重整費用</p>
+            <p class="metric-number mt-2 text-4xl font-extrabold text-stone-900">約 3 億美元</p>
+            <p class="mt-2 leading-relaxed">關店與轉型會造成短期成本壓力，真正的財務驗證點是後續門市利潤率與自由現金流。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-sm font-semibold text-stone-500">北美升級目標</p>
+            <p class="metric-number mt-2 text-4xl font-extrabold text-stone-900">約 1,500 家</p>
+            <p class="mt-2 leading-relaxed">公司持續改造店面，加入更舒適座位、空間設計與新的服務流程，以改善體驗與出杯效率。</p>
+          </div>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <article class="soft-panel rounded-lg border border-sky-100 p-6">
+            <h3 class="text-xl font-bold text-stone-900">策略不是縮小，而是重新配置資本</h3>
+            <p class="mt-3 leading-relaxed">被關閉的店主要是無法提供目標顧客與員工體驗，或管理層看不到合理財務回報路徑的據點。公司同時把 2026 財年全球淨新增門市目標，從原本 600–650 家下修至約 440 家。</p>
+          </article>
+          <article class="rounded-lg border border-emerald-100 bg-emerald-50 p-6">
+            <h3 class="text-xl font-bold text-stone-900">財務驗證點</h3>
+            <p class="mt-3 leading-relaxed">如果客流與服務速度改善，卻仍伴隨高人力與改裝成本，轉型只是用更多成本換更多收入。市場最終需要看到平均單店營收、營業利益率與自由現金流同步改善。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="darden" aria-labelledby="dri-heading">
+        <h2 id="dri-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Darden：品牌分化揭示美國外食預算重新分配</h2>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="leading-relaxed">Darden 是美國大型全服務型連鎖餐飲集團，旗下橫跨 Olive Garden、LongHorn Steakhouse、Ruth’s Chris Steak House、The Capital Grille 等品牌，經營超過 2,200 家餐廳。其財報可用來觀察美國中產階級外食支出意願。</p>
+            <div class="mt-6 grid gap-4 sm:grid-cols-3">
+              <div class="rounded-lg bg-stone-100 p-4">
+                <p class="text-sm text-stone-500">FY2027 Q1 營收</p>
+                <p class="metric-number mt-1 text-2xl font-extrabold text-stone-900">約 32 億美元</p>
+                <p class="mt-1 text-sm">年增 5.1%</p>
+              </div>
+              <div class="rounded-lg bg-stone-100 p-4">
+                <p class="text-sm text-stone-500">整體同店銷售</p>
+                <p class="metric-number mt-1 text-2xl font-extrabold text-stone-900">+3.1%</p>
+                <p class="mt-1 text-sm">可比日曆口徑 +3.2%</p>
+              </div>
+              <div class="rounded-lg bg-stone-100 p-4">
+                <p class="text-sm text-stone-500">持續營業 EPS</p>
+                <p class="metric-number mt-1 text-2xl font-extrabold text-stone-900">2.05 美元</p>
+                <p class="mt-1 text-sm">全年財測維持 11.10–11.35 美元</p>
+              </div>
+            </div>
+          </div>
+          <aside class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-lg font-bold text-stone-900">報告解讀</h3>
+            <p class="mt-3 leading-relaxed">整體財報接近市場普遍預期，真正值得注意的是品牌差距。這表示消費者並非全面減少外食，而是在高通膨下把預算集中到感知價值更高的品牌。</p>
+          </aside>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-stone-900">Darden 可比日曆同店銷售成長</h3>
+              <p class="mt-1 text-sm text-stone-500">使用同一口徑比較集團與主要品牌，單位：%</p>
+            </div>
+            <span class="status-chip status-reported">已公布數據</span>
+          </div>
+          <div class="chart-shell mt-5"><canvas id="dardenChart" aria-label="Darden、LongHorn Steakhouse 與 Olive Garden 可比日曆同店銷售成長圖" role="img"></canvas></div>
+          <p class="mt-3 text-xs text-stone-500">會計期間原始口徑：Darden 整體 +3.1%、LongHorn +6.2%、Olive Garden +1.1%；圖表採報告中的可比日曆口徑：+3.2%、+6.8%、約 +1.0%。</p>
+        </div>
+      </section>
+
+      <section id="industry" aria-labelledby="industry-heading">
+        <h2 id="industry-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業轉折：從「成長競賽」轉向「資本報酬率競賽」</h2>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">消費選擇集中</h3>
+            <p class="mt-3 leading-relaxed">LongHorn 的可比同店銷售約 +6.8%，Olive Garden 約 +1.0%；Starbucks 的部分門市仍看不到合理回報；McDonald’s 則警告產業客流可能接近零成長。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">單店生產力優先</h3>
+            <p class="mt-3 leading-relaxed">三家公司分別透過加盟商支援、關閉低效率據點與品牌組合配置，提高單店經濟性，而不是單純追求門市總數。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">科技必須落到自由現金流</h3>
+            <p class="mt-3 leading-relaxed">App、自助點餐與數位系統的下一個驗證點，是是否能提高每小時服務顧客數、降低單筆交易成本，並改善自由現金流。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="investors" aria-labelledby="investors-heading">
+        <h2 id="investors-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">對美股投資人的意義：看「流量品質」，不只看營收</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="leading-relaxed">同店銷售成長本身不再足夠。如果營收成長主要靠漲價，而客流持續下降，成長品質仍然偏弱。報告認為，真正健康的餐飲成長應同時看到交易次數增加、客單價合理成長與單店利潤率改善。</p>
+          <div class="mt-6 grid gap-4 md:grid-cols-3">
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-sm font-semibold text-sky-700">McDonald’s</p>
+              <h3 class="mt-1 font-bold text-stone-900">加盟商現金流與效率兌現</h3>
+              <p class="mt-2 text-sm leading-relaxed">追蹤顧客交易次數、加盟商現金流、250 bps 效率改善進度，以及科技是否降低人力與營運成本。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-sm font-semibold text-sky-700">Starbucks</p>
+              <h3 class="mt-1 font-bold text-stone-900">從營運改善走向財務改善</h3>
+              <p class="mt-2 text-sm leading-relaxed">追蹤平均單店營收、門市利潤率與自由現金流，確認關店與改裝是否真正提高資本效率。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 p-5">
+              <p class="text-sm font-semibold text-sky-700">Darden</p>
+              <h3 class="mt-1 font-bold text-stone-900">品牌分化與規模優勢</h3>
+              <p class="mt-2 text-sm leading-relaxed">追蹤 LongHorn 高成長能否延續、Olive Garden 是否加速，以及成本壓力下餐廳層級利潤率的韌性。</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg bg-stone-900 p-6 text-stone-100">
+          <h3 class="text-xl font-bold">五個更值得問的問題</h3>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5 text-sm">
+            <div class="rounded-lg bg-white/10 p-4">成熟門市還能增加多少交易量？</div>
+            <div class="rounded-lg bg-white/10 p-4">科技投資能降低多少成本？</div>
+            <div class="rounded-lg bg-white/10 p-4">品牌能否不靠大幅漲價增加客流？</div>
+            <div class="rounded-lg bg-white/10 p-4">新店與改裝回收期是否合理？</div>
+            <div class="rounded-lg bg-white/10 p-4">自由現金流能否跟著營收一起成長？</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="comparison" aria-labelledby="comparison-heading">
+        <h2 id="comparison-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三家公司策略比較</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-stone-900">報告資料互動表</h3>
+              <p class="mt-1 text-sm text-stone-500">可搜尋公司、策略、數字與追蹤指標。</p>
+            </div>
+            <label class="w-full md:max-w-sm">
+              <span class="sr-only">搜尋比較表</span>
+              <input id="tableSearch" type="search" placeholder="搜尋，例如：現金流、關店、LongHorn" class="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-200" />
+            </label>
+          </div>
+          <div class="mt-5 overflow-x-auto rounded-lg border border-stone-200">
+            <table class="min-w-full text-left text-sm">
+              <thead class="sticky top-0 bg-stone-100 text-stone-700">
+                <tr>
+                  <th class="px-4 py-3 font-bold">公司</th>
+                  <th class="px-4 py-3 font-bold">主要行動／數據</th>
+                  <th class="px-4 py-3 font-bold">時間／規模</th>
+                  <th class="px-4 py-3 font-bold">性質</th>
+                  <th class="px-4 py-3 font-bold">後續觀察</th>
+                </tr>
+              </thead>
+              <tbody id="comparisonTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+            </table>
+          </div>
+          <p id="tableEmpty" class="hidden py-6 text-center text-sm text-stone-500">沒有符合搜尋條件的資料。</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="conclusion-heading">
+        <h2 id="conclusion-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論：下一階段比的是每家店能賺多少</h2>
+        <div class="rounded-xl border border-sky-100 bg-sky-50 p-6 md:p-8">
+          <p class="text-lg leading-relaxed text-stone-800">2026 年的美國餐飲股，真正的競爭已不只是誰開最多店，而是誰能在客流成長受限、成本偏高的環境中，提高單店生產力、縮短資本回收期，並讓自由現金流與營收一起成長。</p>
+          <p class="mt-4 leading-relaxed">McDonald’s 的 85 億美元支持計畫、Starbucks 的關店與改造、以及 Darden 的品牌分化，都是同一個資本紀律趨勢的不同表現。若效率改善無法帶來更高現金流，穩定的營收數字仍可能掩蓋資本報酬率下滑。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-美國餐飲股效率戰。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中 McDonald’s、Starbucks 與 Darden Restaurants 相關公開資料 (2026年9月24日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    const productData = [
+      {
+        company: "McDonald’s",
+        action: "NEXT 計畫提供加盟商合作支持，用於餐廳現代化、科技與營運流程改善",
+        scale: "至 2036 年約 85 億美元；其中約 50 億美元預計於 2030 年前投入",
+        status: "公司已公布計畫",
+        statusClass: "status-announced",
+        watch: "加盟商現金流、約 250 bps 效率改善、交易次數與科技降本效果"
+      },
+      {
+        company: "McDonald’s",
+        action: "雞肉與飲料品類市占率提升",
+        scale: "2030 年各提高約 1.5 個百分點",
+        status: "公司目標",
+        statusClass: "status-target",
+        watch: "品類市占率、產品組合、餐廳客流與單店經濟"
+      },
+      {
+        company: "Starbucks",
+        action: "關閉北美低效率或缺乏合理財務回報路徑的門市",
+        scale: "約 250 家；約占北美 18,000+ 門市的 1%",
+        status: "已宣布行動",
+        statusClass: "status-announced",
+        watch: "平均單店營收、門市利潤率、重整後自由現金流"
+      },
+      {
+        company: "Starbucks",
+        action: "北美門市升級與空間、服務流程改造",
+        scale: "目標約 1,500 家；2026 財年全球淨新增門市目標下修至約 440 家",
+        status: "公司目標",
+        statusClass: "status-target",
+        watch: "出杯效率、顧客體驗、改裝成本與營業利益率"
+      },
+      {
+        company: "Darden Restaurants",
+        action: "FY2027 Q1 營收與整體同店銷售成長",
+        scale: "營收約 32 億美元、年增 5.1%；可比日曆同店銷售 +3.2%",
+        status: "已公布財報",
+        statusClass: "status-reported",
+        watch: "餐廳層級利潤率與全年 EPS 11.10–11.35 美元財測"
+      },
+      {
+        company: "LongHorn Steakhouse",
+        action: "同店銷售顯著領先集團其他成熟品牌",
+        scale: "可比日曆同店銷售 +6.8%（原始口徑 +6.2%）",
+        status: "已公布財報",
+        statusClass: "status-reported",
+        watch: "高成長能否延續，以及價值感是否持續吸引客流"
+      },
+      {
+        company: "Olive Garden",
+        action: "同店銷售成長較弱，顯示成熟品牌需求壓力",
+        scale: "可比日曆同店銷售約 +1.0%（原始口徑 +1.1%）",
+        status: "已公布財報",
+        statusClass: "status-reported",
+        watch: "成長是否重新加速，以及成本壓力下的門市利潤率"
+      }
+    ];
+
+    const mobileMenuButton = document.getElementById("mobileMenuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    mobileMenuButton.addEventListener("click", () => {
+      const expanded = mobileMenuButton.getAttribute("aria-expanded") === "true";
+      mobileMenuButton.setAttribute("aria-expanded", String(!expanded));
+      mobileMenu.classList.toggle("hidden");
+      mobileMenuButton.setAttribute("aria-label", expanded ? "開啟選單" : "關閉選單");
+    });
+
+    document.querySelectorAll("#mobileMenu a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+        mobileMenuButton.setAttribute("aria-label", "開啟選單");
+      });
+    });
+
+    const sections = Array.from(document.querySelectorAll("main section[id]"));
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+    const setActiveNav = (id) => {
+      navLinks.forEach(link => {
+        const active = link.getAttribute("href") === `#${id}`;
+        link.classList.toggle("active-nav-link", active);
+        link.classList.toggle("inactive-nav-link", !active);
+        if (active) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveNav(visible.target.id);
+    }, { rootMargin: "-22% 0px -62% 0px", threshold: [0.05, 0.2, 0.5] });
+    sections.forEach(section => observer.observe(section));
+    setActiveNav("overview");
+
+    const dardenCanvas = document.getElementById("dardenChart");
+    if (window.Chart && dardenCanvas) {
+      new Chart(dardenCanvas, {
+        type: "bar",
+        data: {
+          labels: ["Darden 整體", "LongHorn Steakhouse", "Olive Garden"],
+          datasets: [{
+            label: "可比日曆同店銷售成長 (%)",
+            data: [3.2, 6.8, 1.0],
+            backgroundColor: ["rgba(14, 165, 233, 0.72)", "rgba(16, 185, 129, 0.72)", "rgba(245, 158, 11, 0.72)"],
+            borderColor: ["rgb(14, 165, 233)", "rgb(16, 185, 129)", "rgb(245, 158, 11)"],
+            borderWidth: 1,
+            borderRadius: 8,
+            maxBarThickness: 90
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: ctx => `${ctx.parsed.y.toFixed(1)}%` } }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              suggestedMax: 8,
+              ticks: { callback: value => `${value}%` },
+              grid: { color: "rgba(120,113,108,.14)" }
+            },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    const tableBody = document.getElementById("comparisonTableBody");
+    const tableSearch = document.getElementById("tableSearch");
+    const tableEmpty = document.getElementById("tableEmpty");
+
+    function renderTable(rows) {
+      tableBody.innerHTML = rows.map(row => `
+        <tr class="align-top hover:bg-stone-50">
+          <td class="px-4 py-4 font-bold text-stone-900 whitespace-nowrap">${row.company}</td>
+          <td class="px-4 py-4 min-w-[260px]">${row.action}</td>
+          <td class="px-4 py-4 min-w-[260px]">${row.scale}</td>
+          <td class="px-4 py-4 whitespace-nowrap"><span class="status-chip ${row.statusClass}">${row.status}</span></td>
+          <td class="px-4 py-4 min-w-[260px]">${row.watch}</td>
+        </tr>
+      `).join("");
+      tableEmpty.classList.toggle("hidden", rows.length !== 0);
+    }
+
+    tableSearch.addEventListener("input", (event) => {
+      const query = event.target.value.trim().toLowerCase();
+      if (!query) return renderTable(productData);
+      const filtered = productData.filter(row => Object.values(row).join(" ").toLowerCase().includes(query));
+      renderTable(filtered);
+    });
+    renderTable(productData);
+  </script>
+</body>
+</html>
