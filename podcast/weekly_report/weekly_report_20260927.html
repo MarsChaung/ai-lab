@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2026/9/21~9/25 美股市場週報：AI 商業化動能延續，但油價與長天期美債殖利率升高，估值壓力同步增加。">
+  <title>巴菲特AI價值投資-美股市場週報 (2026/9/21~9/25)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #f7f7f5; color: #292524; }
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    .active-nav-link {
+        color: #0369a1;
+        background: #e0f2fe;
+        font-weight: 700;
+    }
+    .inactive-nav-link {
+        color: #57534e;
+        background: transparent;
+        font-weight: 500;
+    }
+    .nav-link { transition: all .18s ease; }
+    .nav-link:hover { color: #0369a1; background: #f0f9ff; }
+    .chart-shell {
+        position: relative;
+        width: 100%;
+        min-height: 320px;
+        height: 38vw;
+        max-height: 430px;
+    }
+    @media (max-width: 640px) {
+        .chart-shell { min-height: 280px; height: 72vw; max-height: 340px; }
+    }
+    .metric-card {
+        background: rgba(255,255,255,.10);
+        border: 1px solid rgba(255,255,255,.18);
+        backdrop-filter: blur(8px);
+    }
+    .soft-label {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 9999px;
+        padding: .25rem .7rem;
+        font-size: .75rem;
+        font-weight: 700;
+    }
+    .table-scroll::-webkit-scrollbar { height: 8px; }
+    .table-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="主要導覽">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="font-extrabold tracking-tight text-stone-800">巴菲特AI價值投資</a>
+        <button id="menuButton" type="button" class="md:hidden inline-flex items-center justify-center rounded-lg border border-stone-200 p-2 text-stone-700" aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟導覽選單">
+          <svg id="menuIcon" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        <div class="hidden md:flex items-center gap-1">
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#market">市場表現</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#macro">宏觀壓力</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#ai">AI 與科技</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#sectors">產業事件</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#focus">十大重點</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#outlook">投資觀察</a>
+        </div>
+      </div>
+      <div id="mobileMenu" class="hidden md:hidden pb-3">
+        <div class="grid gap-1">
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#market">市場表現</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#macro">宏觀壓力</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#ai">AI 與科技</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#sectors">產業事件</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#focus">十大重點</a>
+          <a class="nav-link inactive-nav-link rounded-lg px-3 py-2 text-sm" href="#outlook">投資觀察</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold leading-tight">美股市場週報｜AI 再點火，油價與長債殖利率成為估值壓力</h1>
+        <p class="mt-6 max-w-4xl text-sky-50/90 leading-relaxed text-base sm:text-lg">
+          2026 年 9 月 21 日至 9 月 25 日，美股在 AI 商業化熱潮與利率壓力之間拉鋸。Nasdaq 週線表現最強，但強勁經濟數據、油價波動與長天期美債殖利率走高，讓市場更要求 AI 投資能轉化為實際營收、現金流與資本效率。
+        </p>
+        <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div class="metric-card rounded-xl p-4">
+            <p class="text-xs uppercase tracking-wider text-sky-100">S&amp;P 500 週線</p>
+            <p class="mt-1 text-2xl font-extrabold">約 +1.2%</p>
+          </div>
+          <div class="metric-card rounded-xl p-4">
+            <p class="text-xs uppercase tracking-wider text-sky-100">Nasdaq 週線</p>
+            <p class="mt-1 text-2xl font-extrabold">約 +2.1%</p>
+          </div>
+          <div class="metric-card rounded-xl p-4">
+            <p class="text-xs uppercase tracking-wider text-sky-100">10 年期美債</p>
+            <p class="mt-1 text-2xl font-extrabold">一度約 5.23%</p>
+          </div>
+          <div class="metric-card rounded-xl p-4">
+            <p class="text-xs uppercase tracking-wider text-sky-100">Brent 原油</p>
+            <p class="mt-1 text-2xl font-extrabold">一度近 $107</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-14">
+      <section id="market" class="scroll-mt-24">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">上一週市場表現</h2>
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex flex-wrap items-end justify-between gap-3 mb-5">
+              <div>
+                <h3 class="text-xl font-bold text-stone-800">主要指數週線估算</h3>
+                <p class="mt-1 text-sm text-stone-500">2026/9/21–9/25，依報告週線估算</p>
+              </div>
+              <span class="soft-label bg-sky-50 text-sky-700">Nasdaq 領漲</span>
+            </div>
+            <div class="chart-shell"><canvas id="weeklyIndexChart" aria-label="S&P 500、Nasdaq、Dow Jones 週線表現長條圖"></canvas></div>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-800">市場結構</h3>
+            <p class="mt-4 leading-relaxed text-stone-600">
+              資金重新集中到 AI、半導體與大型科技股，但這並非全面性的風險偏好回升。市場更願意追逐能看見營收成長與 AI 商業化機會的公司，對高利率敏感產業則維持謹慎。
+            </p>
+            <div class="mt-5 rounded-xl bg-amber-50 p-4 border border-amber-100">
+              <p class="font-bold text-amber-900">核心矛盾</p>
+              <p class="mt-1 text-sm leading-relaxed text-amber-800">AI 題材仍可推動指數，但油價與長債殖利率若再往上，科技股估值會更快受到壓力。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="macro" class="scroll-mt-24">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏觀壓力：利率、油價與政策</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="soft-label bg-rose-50 text-rose-700">利率</p>
+            <h3 class="mt-4 text-xl font-bold">強勁數據壓低降息期待</h3>
+            <p class="mt-3 text-stone-600 leading-relaxed">
+              9 月綜合 PMI 初值升至 <strong>58.4</strong>；8 月核心資本財訂單月增 <strong>1.6%</strong>，高於原先預期的 0.5%。企業投資與 AI 基礎建設支出仍強，但也提高通膨降溫不夠快的疑慮。
+            </p>
+            <p class="mt-4 text-sm font-semibold text-rose-700">10 年期美債殖利率一度升至約 5.23%。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="soft-label bg-amber-50 text-amber-700">油價</p>
+            <h3 class="mt-4 text-xl font-bold">中東局勢放大通膨風險</h3>
+            <p class="mt-3 text-stone-600 leading-relaxed">
+              美國與伊朗討論分階段降低衝突，但尚未形成正式協議；期間胡塞武裝對沙烏地阿拉伯發動飛彈攻擊，Brent 原油一度逼近每桶 107 美元，之後因談判希望回落。
+            </p>
+            <p class="mt-4 text-sm font-semibold text-amber-700">油價已成為通膨、殖利率與 Fed 政策的關鍵變數。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="soft-label bg-violet-50 text-violet-700">政策</p>
+            <h3 class="mt-4 text-xl font-bold">美中延長短期貿易休兵</h3>
+            <p class="mt-3 text-stone-600 leading-relaxed">
+              雙方延長短期休兵，但關稅、中國採購、稀土、先進科技限制、AI 與台灣等核心問題未根本解決。AI 重大事件通知機制也成為討論議題。
+            </p>
+            <p class="mt-4 text-sm font-semibold text-violet-700">半導體、AI 晶片與全球供應鏈仍需持續納入政策風險。</p>
+          </article>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-stone-800">經濟與消費訊號並不一致</h3>
+          <div class="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="rounded-xl bg-stone-50 p-4">
+              <p class="text-sm text-stone-500">綜合 PMI 初值</p>
+              <p class="mt-1 text-2xl font-extrabold">58.4</p>
+              <p class="mt-1 text-xs text-stone-500">企業活動仍強勁</p>
+            </div>
+            <div class="rounded-xl bg-stone-50 p-4">
+              <p class="text-sm text-stone-500">核心資本財訂單</p>
+              <p class="mt-1 text-2xl font-extrabold">+1.6%</p>
+              <p class="mt-1 text-xs text-stone-500">月增，優於預期</p>
+            </div>
+            <div class="rounded-xl bg-stone-50 p-4">
+              <p class="text-sm text-stone-500">密大消費者信心</p>
+              <p class="mt-1 text-2xl font-extrabold">48.1</p>
+              <p class="mt-1 text-xs text-stone-500">消費者承受價格壓力</p>
+            </div>
+            <div class="rounded-xl bg-stone-50 p-4">
+              <p class="text-sm text-stone-500">一年通膨預期</p>
+              <p class="mt-1 text-2xl font-extrabold">4.6%</p>
+              <p class="mt-1 text-xs text-stone-500">通膨擔憂升高</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ai" class="scroll-mt-24">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 與科技：從聊天工具走向交易與自主工作</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold">Meta：Muse 擴張 AI Agent 入口</h3>
+              <span class="soft-label bg-sky-50 text-sky-700">代理型 AI</span>
+            </div>
+            <p class="mt-4 text-stone-600 leading-relaxed">
+              Muse 可代替使用者寄信、訂行程與執行交易，下載量快速成長，Meta 週初單日股價一度上漲超過 11%。Meta 並宣布將 Muse 導入 AI 眼鏡，擴大與零售、支付與旅遊平台的連接。
+            </p>
+            <div class="mt-4 rounded-xl bg-rose-50 p-4 text-sm text-rose-800">
+              報告同時指出 Amazon 封鎖 Muse 代購，且週五傳出可能暴露使用者資料的安全漏洞；AI 代理的變現機會與平台防禦、安全成本同步升高。
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold">Alphabet：Gemini 進入高階 PC</h3>
+              <span class="soft-label bg-emerald-50 text-emerald-700">預購開放</span>
+            </div>
+            <p class="mt-4 text-stone-600 leading-relaxed">
+              Google 於 9 月 21 日開放 Googlebook 預購，起價 899 美元，並與 Acer、ASUS、Dell、HP、Lenovo 等廠商合作，把 Android 技術、ChromeOS 桌面能力與 Gemini 深度整合。
+            </p>
+            <p class="mt-4 text-sm font-semibold text-emerald-700">重點是把 Gemini 從搜尋、手機延伸到作業系統層級的工作助手，而非把預購誤寫成已形成銷售成果。</p>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold">Microsoft：Copilot 朝長時間自主工作演進</h3>
+              <span class="soft-label bg-indigo-50 text-indigo-700">企業 AI</span>
+            </div>
+            <p class="mt-4 text-stone-600 leading-relaxed">
+              9 月 25 日公布新版 Copilot，加入 Home、Code 與 Autopilot。Code 讓一般使用者用自然語言建立應用與自動化流程；Autopilot 定位為即使使用者離線也能持續推進任務的 AI agent。
+            </p>
+            <p class="mt-4 text-sm text-stone-500">投資焦點在 Office、GitHub、Teams、Azure 與企業資料整合能否帶動付費與雲端用量。</p>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-bold">AI 基礎建設：需求強，資金成本也升高</h3>
+              <span class="soft-label bg-amber-50 text-amber-700">資本效率</span>
+            </div>
+            <p class="mt-4 text-stone-600 leading-relaxed">
+              Akamai 宣布與 Anthropic 簽下約 <strong>116 億美元</strong>、為期 <strong>7 年</strong>的雲端服務合約，未來合作金額還可能再增加最多 <strong>90 億美元</strong>。同週 AMD 股價大漲並首次突破 1 兆美元市值。
+            </p>
+            <p class="mt-4 text-sm text-stone-500">
+              同時，市場預估 hyperscaler 明年債券發行量可能達 4,200 億美元，較 2026 年估計增加約六成。這是市場預估，不是已完成融資。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="sectors" class="scroll-mt-24">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業與個股事件</h2>
+        <div class="grid lg:grid-cols-3 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="soft-label bg-slate-100 text-slate-700">太空產業</p>
+            <h3 class="mt-4 text-xl font-bold">Starship Flight 14 進入發射前準備</h3>
+            <p class="mt-3 text-stone-600 leading-relaxed">
+              SpaceX 於 9 月 23 日完成 Booster 21 與 Ship 41 完整堆疊，9 月 24 日完成濕式彩排。Flight 14 <strong>預定</strong> 於 9 月 28 日進行，目標為首次入軌並部署 26 顆 Starlink V3 衛星。
+            </p>
+            <p class="mt-4 text-sm font-semibold text-slate-600">這仍是預定測試，不能視為已成功入軌或已完成衛星部署。</p>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="soft-label bg-emerald-50 text-emerald-700">消費財報</p>
+            <h3 class="mt-4 text-xl font-bold">具價值感品牌仍維持需求</h3>
+            <div class="mt-4 space-y-4 text-stone-600 text-sm leading-relaxed">
+              <p><strong>Costco：</strong>Q4 淨銷售年增 11.2% 至 939 億美元，調整後同店銷售 +6.7%，數位通路接近 +20%，EPS 6.75 美元。</p>
+              <p><strong>AutoZone：</strong>Q4 EPS 56.05 美元，高於市場預期約 54.08 美元；營收略低於預期，但毛利率改善。</p>
+              <p><strong>Darden：</strong>Q1 營收年增 5.1% 至 32 億美元，同店銷售 +3.1%，LongHorn Steakhouse +6.2%，全年展望維持。</p>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="soft-label bg-rose-50 text-rose-700">醫療研發</p>
+            <h3 class="mt-4 text-xl font-bold">Merck 撤回一項加速核准申請</h3>
+            <p class="mt-3 text-stone-600 leading-relaxed">
+              Merck 與 Daiichi Sankyo 於 9 月 25 日宣布，自願撤回 ifinatamab deruxtecan 用於特定廣泛期小細胞肺癌患者的美國加速核准申請；原因是現有第二期試驗數據不足以支持該適應症的加速核准。
+            </p>
+            <p class="mt-4 text-sm font-semibold text-rose-700">第三期試驗仍持續，這是單一研發專案的監管進展，不等同於整家公司長期價值結論。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="focus" class="scroll-mt-24">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">最值得投資人關注的 10 個重點</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+            <div>
+              <h3 class="text-xl font-bold">報告重點篩選表</h3>
+              <p class="mt-1 text-sm text-stone-500">搜尋公司、事件、風險或主題關鍵字。</p>
+            </div>
+            <div class="w-full sm:w-80">
+              <label for="focusSearch" class="sr-only">搜尋十大重點</label>
+              <input id="focusSearch" type="search" placeholder="例如：Meta、油價、利率、Merck" class="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100">
+            </div>
+          </div>
+          <div class="table-scroll overflow-x-auto rounded-lg border border-stone-200">
+            <table class="min-w-[980px] w-full text-sm">
+              <thead class="sticky top-0 bg-stone-100 text-left text-stone-700">
+                <tr>
+                  <th class="px-4 py-3 font-bold w-14">#</th>
+                  <th class="px-4 py-3 font-bold w-52">主題</th>
+                  <th class="px-4 py-3 font-bold">報告重點</th>
+                  <th class="px-4 py-3 font-bold w-72">投資人觀察</th>
+                </tr>
+              </thead>
+              <tbody id="focusTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+            </table>
+          </div>
+          <p id="tableStatus" class="mt-3 text-xs text-stone-500" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section id="outlook" class="scroll-mt-24">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資觀察：AI 有成長，但資金不再免費</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-lg leading-relaxed text-stone-700">
+            上一週最值得記住的不是 Nasdaq 再創新高，而是市場同時看見 AI 商業化速度加快與資金成本上升。Meta、Microsoft、Google 都在把 AI 從聊天功能延伸到軟體操作、交易、應用程式建立與裝置入口；另一方面，高殖利率與龐大融資需求也讓市場開始更嚴格檢查 AI 投資的回報。
+          </p>
+          <div class="mt-7 grid md:grid-cols-3 gap-5">
+            <div class="rounded-xl border border-sky-100 bg-sky-50 p-5">
+              <p class="text-sm font-bold text-sky-800">追蹤主線 1</p>
+              <p class="mt-2 text-lg font-extrabold text-stone-800">油價能否明顯回落</p>
+              <p class="mt-2 text-sm leading-relaxed text-stone-600">中東談判若推動油價降溫，有助緩解通膨與利率壓力。</p>
+            </div>
+            <div class="rounded-xl border border-indigo-100 bg-indigo-50 p-5">
+              <p class="text-sm font-bold text-indigo-800">追蹤主線 2</p>
+              <p class="mt-2 text-lg font-extrabold text-stone-800">10 年債殖利率能否離開 5% 上方</p>
+              <p class="mt-2 text-sm leading-relaxed text-stone-600">無風險利率越高，科技股越需要用現金流與獲利支撐估值。</p>
+            </div>
+            <div class="rounded-xl border border-emerald-100 bg-emerald-50 p-5">
+              <p class="text-sm font-bold text-emerald-800">追蹤主線 3</p>
+              <p class="mt-2 text-lg font-extrabold text-stone-800">AI Agent 是否轉成真實支出</p>
+              <p class="mt-2 text-sm leading-relaxed text-stone-600">觀察使用量能否進一步轉化為訂閱、交易收入與企業支出。</p>
+            </div>
+          </div>
+          <div class="mt-7 rounded-xl bg-stone-900 p-5 text-stone-100">
+            <p class="font-bold">週報結論</p>
+            <p class="mt-2 text-sm leading-relaxed text-stone-300">
+              報告認為市場更可能分化：一類公司能把 AI 轉成實際營收與現金流；另一類投入龐大資本，但回報時間仍不明確。若油價與殖利率壓力下降、AI agent 商業化持續改善，科技股仍有基本面支撐；若油價與殖利率同步創高，市場震盪可能快速放大。
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/9/21~9/25)。僅供參考，不構成投資建議。</p>
+          <p class="text-xs mt-1">資料來源：基於網路中美股市場相關公開資料 (2026年9月27日)。</p>
+      </div>
+  </footer>
+
+  <script>
+    const productData = [
+      { id: 1, topic: "利率與經濟數據", detail: "9 月綜合 PMI 初值 58.4，8 月核心資本財訂單月增 1.6%；10 年期美債殖利率一度約 5.23%。", impact: "AI 基本面可強，但高殖利率會提高市場對營收、現金流與獲利的要求。" },
+      { id: 2, topic: "中東局勢與油價", detail: "美伊討論分階段降低衝突但尚未形成協議；Brent 一度逼近每桶 107 美元。", impact: "油價會透過通膨預期、債券殖利率與 Fed 政策影響科技股估值。" },
+      { id: 3, topic: "美中貿易與科技政策", detail: "美中延長短期貿易休兵，但關稅、稀土、先進科技限制、AI 與台灣等核心議題未根本解決。", impact: "半導體、AI 晶片、關鍵原料與全球供應鏈的政策風險仍屬常態。" },
+      { id: 4, topic: "Meta Muse", detail: "Muse 可寄信、訂行程與執行交易；Meta 宣布擴大至 AI 眼鏡與零售、支付、旅遊連接。", impact: "AI 競爭焦點從模型能力延伸到消費決策與交易入口，同時帶來平台與安全風險。" },
+      { id: 5, topic: "Alphabet Googlebook", detail: "9 月 21 日開放 Googlebook 預購，起價 899 美元，Gemini 深度整合 PC 作業系統層級體驗。", impact: "Alphabet 嘗試把 Gemini 延伸到個人電腦入口，並迫使 Microsoft 與 Apple 加快 AI PC 差異化。" },
+      { id: 6, topic: "Microsoft Copilot", detail: "9 月 25 日公布新版 Copilot，加入 Home、Code 與 Autopilot，朝可長時間自主工作的 agent 演進。", impact: "企業若願為節省人力時間的 agent 付費，Copilot 每位使用者收入與 Azure 用量可能受益。" },
+      { id: 7, topic: "AI 基礎建設與融資", detail: "Akamai 與 Anthropic 簽下約 116 億美元、7 年雲端服務合約；市場預估 hyperscaler 明年發債量可能達 4,200 億美元。", impact: "AI 投資進入重視需求、定價能力與資本效率的第二階段。" },
+      { id: 8, topic: "SpaceX Starship Flight 14", detail: "9 月 24 日完成濕式彩排；Flight 14 預定 9 月 28 日進行，目標首次入軌並部署 26 顆 Starlink V3。", impact: "若未來成功，可能改變發射成本與太空、衛星、通訊供應鏈結構；目前仍是預定測試。" },
+      { id: 9, topic: "Costco / AutoZone / Darden", detail: "Costco Q4 淨銷售年增 11.2%；AutoZone EPS 56.05 美元；Darden Q1 營收年增 5.1%、同店銷售 +3.1%。", impact: "消費並非全面轉弱，選股更需檢視客流、同店銷售與毛利率是否同時守住。" },
+      { id: 10, topic: "Merck 監管事件", detail: "Merck 與 Daiichi Sankyo 9 月 25 日自願撤回一項小細胞肺癌藥物的美國加速核准申請，第三期試驗仍持續。", impact: "研發管線與監管進度屬單一事件風險，後續需觀察第三期數據與重新申請可能性。" }
+    ];
+
+    const tableBody = document.getElementById("focusTableBody");
+    const searchInput = document.getElementById("focusSearch");
+    const tableStatus = document.getElementById("tableStatus");
+
+    function renderTable(rows) {
+      tableBody.innerHTML = rows.map(item => `
+        <tr class="align-top hover:bg-stone-50">
+          <td class="px-4 py-4 font-extrabold text-sky-700">${item.id}</td>
+          <td class="px-4 py-4 font-bold text-stone-800">${item.topic}</td>
+          <td class="px-4 py-4 leading-relaxed text-stone-600">${item.detail}</td>
+          <td class="px-4 py-4 leading-relaxed text-stone-600">${item.impact}</td>
+        </tr>
+      `).join("");
+      tableStatus.textContent = `顯示 ${rows.length} / ${productData.length} 筆重點`;
+    }
+
+    renderTable(productData);
+
+    searchInput.addEventListener("input", (event) => {
+      const keyword = event.target.value.trim().toLowerCase();
+      const rows = productData.filter(item =>
+        `${item.topic} ${item.detail} ${item.impact}`.toLowerCase().includes(keyword)
+      );
+      renderTable(rows);
+    });
+
+    const chartCanvas = document.getElementById("weeklyIndexChart");
+    new Chart(chartCanvas, {
+      type: "bar",
+      data: {
+        labels: ["S&P 500", "Nasdaq", "Dow Jones"],
+        datasets: [{
+          label: "週線估算（%）",
+          data: [1.2, 2.1, 0.3],
+          backgroundColor: ["rgba(14,165,233,.72)", "rgba(2,132,199,.88)", "rgba(56,189,248,.56)"],
+          borderColor: ["rgb(14,165,233)", "rgb(2,132,199)", "rgb(56,189,248)"],
+          borderWidth: 1,
+          borderRadius: 8,
+          maxBarThickness: 72
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.raw > 0 ? "+" : ""}${ctx.raw}%`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            suggestedMax: 2.5,
+            ticks: { callback: (value) => `${value}%` },
+            grid: { color: "rgba(120,113,108,.12)" }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    document.querySelectorAll("#mobileMenu a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const sections = [...document.querySelectorAll("main section[id]")];
+    const navLinks = [...document.querySelectorAll(".nav-link")];
+
+    function setActiveNav(id) {
+      navLinks.forEach(link => {
+        const isActive = link.getAttribute("href") === `#${id}`;
+        link.classList.toggle("active-nav-link", isActive);
+        link.classList.toggle("inactive-nav-link", !isActive);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveNav(visible.target.id);
+    }, { rootMargin: "-22% 0px -58% 0px", threshold: [0.05, 0.2, 0.45] });
+
+    sections.forEach(section => observer.observe(section));
+    setActiveNav("market");
+  </script>
+</body>
+</html>
