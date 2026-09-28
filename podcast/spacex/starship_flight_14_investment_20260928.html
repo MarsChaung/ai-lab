@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="整理 Starship Flight 14 首次入軌、26 顆 Starlink V3 部署、尚待驗證項目與 SpaceX 投資觀察。" />
+  <title>巴菲特AI價值投資-星艦Flight 14投資解讀</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { overflow-x: hidden; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0369a1; background: #e0f2fe; }
+    .inactive-nav-link { color: #57534e; background: transparent; }
+    .nav-link { transition: color .2s ease, background-color .2s ease; }
+    .chart-shell { position: relative; width: 100%; min-height: 320px; height: 360px; }
+    .status-dot { width: .65rem; height: .65rem; border-radius: 9999px; flex: 0 0 auto; margin-top: .4rem; }
+    .table-scroll { scrollbar-width: thin; }
+    @media (max-width: 640px) {
+      .chart-shell { min-height: 290px; height: 320px; }
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between gap-4">
+        <a href="#top" class="font-bold text-stone-900 tracking-tight whitespace-nowrap">巴菲特AI價值投資</a>
+        <button id="menuButton" type="button" class="md:hidden inline-flex items-center justify-center rounded-md border border-stone-200 p-2 text-stone-700" aria-expanded="false" aria-controls="mobileMenu" aria-label="開啟導覽選單">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <nav class="hidden md:flex items-center gap-1 text-sm" aria-label="主要導覽">
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#mission">任務進度</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#importance">關鍵意義</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#investment">投資分析</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#financials">財務約束</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#watchlist">後續觀察</a>
+        </nav>
+      </div>
+      <nav id="mobileMenu" class="hidden md:hidden pb-4 text-sm" aria-label="手機導覽">
+        <div class="grid gap-1">
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#mission">任務進度</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#importance">關鍵意義</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#investment">投資分析</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#financials">財務約束</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#watchlist">後續觀察</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight">星艦跨過入軌門檻：Flight 14 交付 Starlink V3，投資人該看見什麼？</h1>
+        <p class="mt-6 max-w-4xl text-sky-50/90 leading-relaxed text-base sm:text-lg">Flight 14 已完成星艦首次真正入軌，並將 26 顆 Starlink V3 全數部署至軌道，證明星艦開始跨入實際運輸服務驗證；但上面級離軌、再入與濺落仍未完成，衛星也尚待在軌檢測與服務啟用。投資判讀的核心，不是一次成功畫面，而是能否把更高容量以可重複、可靠且更低的單位成本送上軌道。</p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">首次入軌</p><p class="mt-1 text-3xl font-bold">已達成</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">Starlink V3</p><p class="mt-1 text-3xl font-bold">26 顆</p><p class="mt-1 text-xs text-sky-100/80">已部署至軌道</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">設計下行容量</p><p class="mt-1 text-3xl font-bold">約 26 Tbps</p><p class="mt-1 text-xs text-sky-100/80">規格合計，非已實現收入</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">任務狀態</p><p class="mt-1 text-3xl font-bold">尚未結案</p><p class="mt-1 text-xs text-sky-100/80">仍待離軌、再入、濺落</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mission" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">任務進度：哪些已完成，哪些仍待驗證</h2>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+          <h3 class="text-xl font-bold text-stone-800">已發生的關鍵過程</h3>
+          <div class="mt-6 space-y-5">
+            <div class="flex gap-3"><span class="status-dot bg-emerald-500"></span><div><p class="font-semibold text-stone-900">約 20:48｜Starbase 起飛</p><p class="mt-1 text-sm leading-relaxed">Booster 21 與 Ship 41 執行無人整合飛行測試。</p></div></div>
+            <div class="flex gap-3"><span class="status-dot bg-emerald-500"></span><div><p class="font-semibold text-stone-900">起飛後數分鐘｜兩級分離、助推器受控濺落</p><p class="mt-1 text-sm leading-relaxed">助推器在墨西哥灣以引擎減速後受控濺落，本次未嘗試發射塔捕捉。</p></div></div>
+            <div class="flex gap-3"><span class="status-dot bg-amber-500"></span><div><p class="font-semibold text-stone-900">約 8 分鐘｜一具猛禽引擎提早停機</p><p class="mt-1 text-sm leading-relaxed">團隊一度不承諾入軌，重新評估剩餘推進與飛行狀態後才決定繼續。最終入軌成功不代表引擎異常已解決。</p></div></div>
+            <div class="flex gap-3"><span class="status-dot bg-emerald-500"></span><div><p class="font-semibold text-stone-900">約 21:13｜軌道插入</p><p class="mt-1 text-sm leading-relaxed">星艦再次點火，Flight 14 成為星艦首次真正進入地球軌道的任務。</p></div></div>
+            <div class="flex gap-3"><span class="status-dot bg-emerald-500"></span><div><p class="font-semibold text-stone-900">約 21:22–21:54｜26 顆 Starlink V3 部署</p><p class="mt-1 text-sm leading-relaxed">SpaceX 確認 26 顆真實衛星已全數部署至軌道；但部署不等於完成在軌檢測、升軌與商業服務啟用。</p></div></div>
+          </div>
+        </article>
+
+        <aside class="space-y-6">
+          <div class="bg-amber-50 rounded-lg border border-amber-200 p-6">
+            <h3 class="font-bold text-amber-900">報告進度截點</h3>
+            <p class="mt-2 text-2xl font-bold text-amber-950">2026/09/28 22:40</p>
+            <p class="mt-2 text-sm leading-relaxed text-amber-900/80">投資分析補充至約 23:20 可取得的公開資訊；原訂清晨離軌與濺落仍屬未來事件。</p>
+          </div>
+          <div class="bg-sky-50 rounded-lg border border-sky-200 p-6">
+            <h3 class="font-bold text-sky-900">原訂後續時點</h3>
+            <dl class="mt-4 space-y-3 text-sm">
+              <div class="flex justify-between gap-4"><dt>離軌點火</dt><dd class="font-semibold text-stone-900">9/29 約 05:40</dd></div>
+              <div class="flex justify-between gap-4"><dt>受控濺落</dt><dd class="font-semibold text-stone-900">9/29 約 06:38</dd></div>
+            </dl>
+            <p class="mt-4 text-xs leading-relaxed text-sky-900/80">以上為依原訂時間軸估算的計畫時點，不是已完成結果，也可能隨飛行決策變動。</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="importance" class="scroll-mt-24 bg-white border-y border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">這次飛行為何重要</h2>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
+            <p class="text-sm font-semibold text-emerald-700">已確認</p><h3 class="mt-2 text-xl font-bold text-stone-900">從次軌道測試走向真正入軌</h3><p class="mt-3 leading-relaxed">前 13 次整合飛行採次軌道路徑；Flight 14 跨過的是「上面級真正留在軌道」的門檻。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
+            <p class="text-sm font-semibold text-emerald-700">已確認</p><h3 class="mt-2 text-xl font-bold text-stone-900">開始交付真正的 V3 衛星</h3><p class="mt-3 leading-relaxed">26 顆 Starlink V3 已部署至軌道，驗證星艦不只測試釋放機構，也開始承擔實際軌道運輸。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-amber-500">
+            <p class="text-sm font-semibold text-amber-700">尚待驗證</p><h3 class="mt-2 text-xl font-bold text-stone-900">商業化關鍵仍在可靠度與成本</h3><p class="mt-3 leading-relaxed">衛星啟用、再入、回收重飛、快速整備與高頻率發射，才會決定單位容量成本是否真正下降。</p>
+          </div>
+        </div>
+        <div class="rounded-xl border border-sky-200 bg-sky-50 p-6">
+          <p class="font-bold text-sky-900">容量解讀的界線</p>
+          <p class="mt-2 leading-relaxed text-sky-950/85">SpaceX 估計每顆 Starlink V3 可提供約 1 Tbps 下行容量，26 顆的設計容量合計約 26 Tbps。這是衛星規格與潛在網路容量，不能直接當作今天已增加的可售服務容量、營收或利潤。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="investment" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資分析：價值取決於每單位容量成本</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-bold text-stone-900">核心因果鏈</h3>
+        <div class="mt-5 grid gap-4 md:grid-cols-4">
+          <div class="rounded-lg bg-stone-50 p-4"><p class="text-xs font-bold text-sky-700">1</p><p class="mt-1 font-semibold">可靠、高酬載的星艦發射</p></div>
+          <div class="rounded-lg bg-stone-50 p-4"><p class="text-xs font-bold text-sky-700">2</p><p class="mt-1 font-semibold">持續部署更大型 V3</p></div>
+          <div class="rounded-lg bg-stone-50 p-4"><p class="text-xs font-bold text-sky-700">3</p><p class="mt-1 font-semibold">有效網路容量增加</p></div>
+          <div class="rounded-lg bg-stone-50 p-4"><p class="text-xs font-bold text-sky-700">4</p><p class="mt-1 font-semibold">收入與資本效率改善才轉成現金流</p></div>
+        </div>
+        <p class="mt-5 leading-relaxed">Flight 14 已降低「星艦完全無法承擔 V3 軌道運輸」的風險，但尚未證明星艦上面級回收、快速整備與重飛，也沒有完成商業模型驗證。</p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-sm font-bold text-sky-700">第一層</p><h3 class="mt-2 text-xl font-bold text-stone-900">容量有機會擴大，但不會自動變成收入</h3><p class="mt-3 leading-relaxed">第二季 Starlink 訂閱線數約 1,200 萬，較去年同期翻倍，但月平均每戶收入約 66 美元，低於去年同期 85 美元。新增容量能否改善網路品質、付費客戶、平均收入與營業利益，需要同步觀察。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-sm font-bold text-sky-700">第二層</p><h3 class="mt-2 text-xl font-bold text-stone-900">星艦可能改寫運輸成本，但仍在投入期</h3><p class="mt-3 leading-relaxed">規模效益要等火箭製造、發射台周轉、引擎可靠性、回收與整備成熟後才能轉成更低單位成本。本次上面級未回收，助推器也未執行塔架捕捉重飛。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-sm font-bold text-sky-700">第三層</p><h3 class="mt-2 text-xl font-bold text-stone-900">其他業務獲得的是選擇權，不是立即收益</h3><p class="mt-3 leading-relaxed">大型商業／政府酬載與 NASA 月球任務的可信度可能隨可靠飛行提升，但載人登月仍需多次發射、在軌推進劑轉移與其他系統驗證；不能提前當成已實現收入。</p>
+        </article>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="rounded-lg bg-emerald-50 border border-emerald-200 p-6"><h3 class="font-bold text-emerald-900">短期</h3><p class="mt-2 text-sm leading-relaxed">看再入結果、引擎異常調查與衛星健康狀態，而不是只用發射當天股價解讀任務。</p></div>
+        <div class="rounded-lg bg-sky-50 border border-sky-200 p-6"><h3 class="font-bold text-sky-900">中期</h3><p class="mt-2 text-sm leading-relaxed">看飛行是否可複製：實際運送量、發射間隔、延誤、重用與衛星啟用率。</p></div>
+        <div class="rounded-lg bg-violet-50 border border-violet-200 p-6"><h3 class="font-bold text-violet-900">長期</h3><p class="mt-2 text-sm leading-relaxed">回到資本配置與自由現金流，驗證更低建網成本是否真正改善連網業務資本效率。</p></div>
+      </div>
+    </section>
+
+    <section id="financials" class="scroll-mt-24 bg-white border-y border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">財務現況：成長與資本消耗同時存在</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+          <div class="rounded-lg border border-stone-200 p-5"><p class="text-sm text-stone-500">Q2 連網業務營收</p><p class="mt-1 text-2xl font-bold text-stone-900">42.91 億美元</p></div>
+          <div class="rounded-lg border border-stone-200 p-5"><p class="text-sm text-stone-500">Q2 連網營業利益</p><p class="mt-1 text-2xl font-bold text-stone-900">16.56 億美元</p></div>
+          <div class="rounded-lg border border-stone-200 p-5"><p class="text-sm text-stone-500">Q2 航太業務營收</p><p class="mt-1 text-2xl font-bold text-stone-900">9.62 億美元</p></div>
+          <div class="rounded-lg border border-stone-200 p-5"><p class="text-sm text-stone-500">Q2 航太營業損失</p><p class="mt-1 text-2xl font-bold text-rose-700">5.42 億美元</p></div>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">第二季主要業務營收與營業結果</h3>
+            <p class="mt-2 text-sm text-stone-500">單位：億美元。航太營業結果以負值表示營業虧損。</p>
+            <div class="chart-shell mt-5"><canvas id="segmentChart" aria-label="第二季主要業務營收與營業結果圖表" role="img"></canvas></div>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">資本支出與簡化自由現金流</h3>
+            <p class="mt-2 text-sm text-stone-500">單位：億美元；期間依報告原文分別為第二季與上半年。</p>
+            <div class="chart-shell mt-5"><canvas id="cashFlowChart" aria-label="資本支出與簡化自由現金流圖表" role="img"></canvas></div>
+          </div>
+        </div>
+        <div class="rounded-xl bg-stone-900 text-stone-100 p-6">
+          <div class="grid gap-5 md:grid-cols-3">
+            <div><p class="text-sm text-stone-400">Q2 全公司資本支出</p><p class="mt-1 text-2xl font-bold">183.69 億美元</p></div>
+            <div><p class="text-sm text-stone-400">其中 AI 業務</p><p class="mt-1 text-2xl font-bold">158.28 億美元</p></div>
+            <div><p class="text-sm text-stone-400">Q2 末現金與有價證券</p><p class="mt-1 text-2xl font-bold">約 1,000 億美元</p></div>
+          </div>
+          <p class="mt-5 text-sm leading-relaxed text-stone-300">上半年營業現金流約 34.66 億美元、購置不動產廠房及設備約 284.76 億美元，兩者相減的簡化自由現金流約為 -250.1 億美元。此口徑未涵蓋所有投資及融資項目，主要用來提醒：集團擴張仍消耗大量現金。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="watchlist" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">後續檢驗投資論點的觀察清單</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <label for="metricSearch" class="block text-sm font-semibold text-stone-800">搜尋觀察項目</label>
+        <input id="metricSearch" type="search" placeholder="例如：再入、衛星、現金流、營業利益" class="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100" />
+        <div class="table-scroll mt-5 overflow-x-auto rounded-lg border border-stone-200">
+          <table class="min-w-full text-sm">
+            <thead class="sticky top-0 bg-stone-100 text-left text-stone-700">
+              <tr><th class="px-4 py-3 font-semibold">面向</th><th class="px-4 py-3 font-semibold">目前狀態</th><th class="px-4 py-3 font-semibold">後續要看什麼</th><th class="px-4 py-3 font-semibold">投資意義</th></tr>
+            </thead>
+            <tbody id="metricTableBody" class="divide-y divide-stone-100 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="rounded-lg border border-rose-200 bg-rose-50 p-6">
+          <h3 class="text-lg font-bold text-rose-900">投資論點可能轉弱的情況</h3>
+          <p class="mt-3 leading-relaxed text-rose-950/85">後續再入或引擎問題反覆導致長期停飛、衛星部署成功卻無法快速啟用、V3 容量增加但定價與獲客不足，或高額資本支出長期快於營業現金流改善。</p>
+        </div>
+        <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-6">
+          <h3 class="text-lg font-bold text-emerald-900">商業化論點變得更扎實的條件</h3>
+          <p class="mt-3 leading-relaxed text-emerald-950/85">需要連續證明星艦可靠重飛、快速部署可用衛星，並讓連網業務在更低單位成本下擴大利潤；到那時，Flight 14 才更能被視為可持續商業化的起點。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-星艦Flight 14投資解讀。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中 SpaceX、Starship Flight 14 與 Starlink V3 相關公開資料 (2026年09月28日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }));
+
+    const sections = [...document.querySelectorAll('section[id]')].filter(section => section.id !== 'top');
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    const setActiveLink = (id) => {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+      });
+    };
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveLink(visible.target.id);
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.05, 0.2, 0.5] });
+    sections.forEach(section => observer.observe(section));
+
+    const productData = [
+      { aspect: '上面級再入與熱防護', status: '截至報告截點尚未完成', watch: '真正軌道速度下的再入與隔熱盾表現', meaning: '驗證長時間在軌後安全返回能力' },
+      { aspect: '猛禽引擎異常', status: '上升段一具引擎提早停機', watch: '原因、修正與後續任務是否再發生', meaning: '關係到可靠度與高頻率飛行' },
+      { aspect: '發射與重用節奏', status: '本次助推器受控海上濺落，上面級不回收', watch: '發射間隔、延誤、塔架捕捉與重飛', meaning: '決定運輸成本能否持續下降' },
+      { aspect: '26 顆 V3 衛星', status: '已部署至軌道', watch: '在軌健康檢查、升軌與啟用率', meaning: '部署成功仍需轉成可用網路容量' },
+      { aspect: 'Starlink 商業化', status: 'Q2 訂閱線數約 1,200 萬；月 ARPU 約 66 美元', watch: '用戶、ARPU、企業／政府收入與連網營業利益', meaning: '判斷新增容量是否能形成收入與利潤' },
+      { aspect: '航太業務損益', status: 'Q2 營收 9.62 億美元、營業虧損 5.42 億美元', watch: '星艦研發投入與航太業務虧損趨勢', meaning: '評估技術進展是否改善經濟性' },
+      { aspect: '集團現金流', status: '上半年簡化自由現金流約 -250.1 億美元', watch: '營業現金流、資本支出與連網資本效率', meaning: '驗證成長是否轉化為更好的資本回報' }
+    ];
+
+    const metricTableBody = document.getElementById('metricTableBody');
+    const metricSearch = document.getElementById('metricSearch');
+    const renderTable = (rows) => {
+      metricTableBody.innerHTML = rows.map(row => `
+        <tr class="align-top">
+          <td class="px-4 py-4 font-semibold text-stone-900 min-w-40">${row.aspect}</td>
+          <td class="px-4 py-4 text-stone-600 min-w-56">${row.status}</td>
+          <td class="px-4 py-4 text-stone-600 min-w-64">${row.watch}</td>
+          <td class="px-4 py-4 text-stone-600 min-w-64">${row.meaning}</td>
+        </tr>`).join('');
+    };
+    renderTable(productData);
+    metricSearch.addEventListener('input', (event) => {
+      const query = event.target.value.trim().toLowerCase();
+      const filtered = productData.filter(row => Object.values(row).some(value => value.toLowerCase().includes(query)));
+      renderTable(filtered);
+    });
+
+    Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    Chart.defaults.color = '#57534e';
+
+    new Chart(document.getElementById('segmentChart'), {
+      type: 'bar',
+      data: {
+        labels: ['連網業務', '航太業務'],
+        datasets: [
+          { label: '營收', data: [42.91, 9.62], backgroundColor: 'rgba(14, 165, 233, 0.72)', borderRadius: 6 },
+          { label: '營業利益／損失', data: [16.56, -5.42], backgroundColor: 'rgba(15, 118, 110, 0.72)', borderRadius: 6 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw} 億美元` } } },
+        scales: { y: { title: { display: true, text: '億美元' }, grid: { color: 'rgba(120,113,108,.12)' } }, x: { grid: { display: false } } }
+      }
+    });
+
+    new Chart(document.getElementById('cashFlowChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Q2 全公司資本支出', 'Q2 AI 業務資本支出', 'H1 營業現金流', 'H1 購置 PP&E', 'H1 簡化自由現金流'],
+        datasets: [{
+          label: '金額',
+          data: [183.69, 158.28, 34.66, 284.76, -250.10],
+          backgroundColor: ['rgba(14,165,233,.72)','rgba(99,102,241,.72)','rgba(16,185,129,.72)','rgba(245,158,11,.72)','rgba(225,29,72,.72)'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.raw} 億美元` } } },
+        scales: { x: { title: { display: true, text: '億美元' }, grid: { color: 'rgba(120,113,108,.12)' } }, y: { grid: { display: false } } }
+      }
+    });
+  </script>
+</body>
+</html>
