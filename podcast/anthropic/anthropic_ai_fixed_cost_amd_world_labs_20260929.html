@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="解析 Anthropic 長期 AI 算力承諾、固定成本與治理風險，以及 AMD 收購 World Labs 對下一代 AI 工作負載競爭的意義。" />
+  <title>巴菲特AI價值投資-AI算力承諾與固定成本考驗</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0369a1; background: #e0f2fe; }
+    .inactive-nav-link { color: #57534e; background: transparent; }
+    .inactive-nav-link:hover { color: #0369a1; background: #f0f9ff; }
+    .chart-shell { position: relative; height: 360px; width: 100%; }
+    .metric-number { font-variant-numeric: tabular-nums; }
+    .sticky-head th { position: sticky; top: 0; z-index: 2; }
+    section[id] { scroll-margin-top: 88px; }
+    @media (max-width: 640px) { .chart-shell { height: 320px; } }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between gap-4">
+        <a href="#top" class="font-bold text-stone-900 tracking-tight whitespace-nowrap">巴菲特AI價值投資</a>
+        <nav class="hidden lg:flex items-center gap-1" aria-label="主要導覽">
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#anthropic">Anthropic</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#governance">安全治理</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#supply-chain">供應鏈</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#amd">AMD × World Labs</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#strategy">投資追蹤</a>
+        </nav>
+        <button id="menuButton" class="lg:hidden inline-flex items-center justify-center rounded-md border border-stone-300 p-2 text-stone-700" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
+          <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+      </div>
+      <nav id="mobileMenu" class="hidden lg:hidden pb-4 grid gap-1" aria-label="手機導覽">
+        <a class="mobile-nav-link nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#overview">核心觀點</a>
+        <a class="mobile-nav-link nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#anthropic">Anthropic</a>
+        <a class="mobile-nav-link nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#governance">安全治理</a>
+        <a class="mobile-nav-link nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#supply-chain">供應鏈</a>
+        <a class="mobile-nav-link nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#amd">AMD × World Labs</a>
+        <a class="mobile-nav-link nav-link inactive-nav-link rounded-md px-3 py-2 text-sm font-medium" href="#strategy">投資追蹤</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">AI的下一道考題：五千一百八十億美元承諾由誰埋單？</h1>
+        <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">Anthropic 的長期算力承諾與 AMD 收購 World Labs，反映 AI 產業正在同時鎖定未來供給、押注下一代應用。真正要驗證的，不只是晶片與資料中心能否交付，而是終端付費需求、使用率與毛利能否支撐固定付款，並最終轉化為自由現金流。</p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl">
+          <div class="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">未來AI基礎建設承諾</p>
+            <p class="metric-number mt-1 text-2xl font-bold">≥ US$518B</p>
+            <p class="mt-1 text-xs text-sky-100/80">涵蓋未來約十年，不等同 2026 年資本支出</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">約不可輕易取消／仍須付款</p>
+            <p class="metric-number mt-1 text-2xl font-bold">約 80%</p>
+            <p class="mt-1 text-xs text-sky-100/80">屬整體敘述，不應直接套用到單筆合約</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">AMD 收購 World Labs</p>
+            <p class="metric-number mt-1 text-2xl font-bold">約 US$8.2B</p>
+            <p class="mt-1 text-xs text-sky-100/80">全股票交易，預計待條件達成後於 2026 年底完成</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-sm text-sky-100">Anthropic 2025 營收</p>
+            <p class="metric-number mt-1 text-2xl font-bold">約 US$4.6B</p>
+            <p class="mt-1 text-xs text-sky-100/80">需與多年付款到期、毛利與融資能力一起檢驗</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心觀點</h2>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <p class="text-sm font-semibold text-sky-700">需求與供給</p>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">長約先解決算力稀缺，卻把需求風險留到未來</h3>
+          <p class="mt-3 leading-relaxed">當訓練與推論需求持續上升，預先鎖定晶片與資料中心容量能降低供給不足的風險；但若單位推論成本下降、客戶轉向更便宜模型，預訂容量可能閒置，而固定付款仍可能存在。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <p class="text-sm font-semibold text-sky-700">財務口徑</p>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">合約金額、收入與利潤必須分開看</h3>
+          <p class="mt-3 leading-relaxed">跨多年、不同法律形式的未來義務不能直接當作單年度資本支出，也不能把設備租賃總額視為供應商已實現銷售。收入仍須隨實際交付與服務提供逐步認列。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <p class="text-sm font-semibold text-sky-700">投資檢驗</p>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">真正的閉環是「客戶付費 → 現金流 → 履約 → 供應商利潤」</h3>
+          <p class="mt-3 leading-relaxed">雲端與晶片供應商的訂單可見度提高，不代表股東報酬已確定。要追蹤的是使用率、毛利、資本支出回收期、客戶信用，以及下一代應用是否帶來獨立的外部需求。</p>
+        </article>
+      </div>
+      <div class="mt-6 rounded-xl border-l-4 border-sky-500 bg-sky-50 p-5">
+        <p class="font-semibold text-stone-900">報告主導問題</p>
+        <p class="mt-2 leading-relaxed text-stone-700">AI 產業可以先用合約確定算力供給，卻不能先保證終端需求與投資報酬。基礎建設擴張之後，付款條件、使用率與最終客戶獲利能力，會成為估值能否兌現的核心。</p>
+      </div>
+    </section>
+
+    <section id="anthropic" class="bg-white border-y border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Anthropic：承諾金額很大，支付條件比總額更重要</h2>
+        <div class="grid gap-6 lg:grid-cols-5">
+          <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">已揭露主要承諾金額</h3>
+            <p class="mt-2 text-sm text-stone-600">單位：十億美元。僅呈現報告具體列示的四筆 Anthropic 義務；不同合約年期與法律形式不可直接視為同質收入。</p>
+            <div class="chart-shell mt-5"><canvas id="commitmentChart" aria-label="Anthropic主要未來承諾金額長條圖" role="img"></canvas></div>
+          </div>
+          <div class="lg:col-span-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-1 content-start">
+            <div class="rounded-lg border border-stone-200 bg-stone-50 p-5">
+              <p class="text-sm font-semibold text-stone-500">Google</p>
+              <p class="metric-number mt-1 text-2xl font-bold text-stone-900">US$111.1B</p>
+              <p class="mt-2 text-sm">長期運算服務義務。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 bg-stone-50 p-5">
+              <p class="text-sm font-semibold text-stone-500">Amazon</p>
+              <p class="metric-number mt-1 text-2xl font-bold text-stone-900">US$110.0B</p>
+              <p class="mt-2 text-sm">長期運算服務義務。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 bg-stone-50 p-5">
+              <p class="text-sm font-semibold text-stone-500">Microsoft</p>
+              <p class="metric-number mt-1 text-2xl font-bold text-stone-900">US$31.4B</p>
+              <p class="mt-2 text-sm">長期運算服務義務。</p>
+            </div>
+            <div class="rounded-lg border border-stone-200 bg-stone-50 p-5">
+              <p class="text-sm font-semibold text-stone-500">Broadcom 相關</p>
+              <p class="metric-number mt-1 text-2xl font-bold text-stone-900">US$161.2B</p>
+              <p class="mt-2 text-sm">設備租賃義務，不等於 Broadcom 已實現銷售。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-2 mt-2">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">2025 年財務輪廓</h3>
+            <div class="mt-5 grid grid-cols-2 gap-4">
+              <div class="rounded-lg bg-emerald-50 p-4">
+                <p class="text-xs font-semibold text-emerald-800">營收</p>
+                <p class="metric-number mt-1 text-xl font-bold text-emerald-950">約 US$4.6B</p>
+              </div>
+              <div class="rounded-lg bg-rose-50 p-4">
+                <p class="text-xs font-semibold text-rose-800">營業虧損</p>
+                <p class="metric-number mt-1 text-xl font-bold text-rose-950">約 US$8.06B</p>
+              </div>
+              <div class="rounded-lg bg-amber-50 p-4">
+                <p class="text-xs font-semibold text-amber-800">運算與基建費用</p>
+                <p class="metric-number mt-1 text-xl font-bold text-amber-950">約 US$7.33B</p>
+              </div>
+              <div class="rounded-lg bg-sky-50 p-4">
+                <p class="text-xs font-semibold text-sky-800">年末現金＋短期投資</p>
+                <p class="metric-number mt-1 text-xl font-bold text-sky-950">約 US$20.28B</p>
+              </div>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-stone-600">約 US$42B 的淨虧損中，約 US$34B 與可轉換融資估值變動的非現金會計費用有關，因此不能把整筆淨虧損視為當年現金流出。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">期限不匹配：上游長約，下游客戶可能更彈性</h3>
+            <p class="mt-3 leading-relaxed">報告指出，2025 年近四分之一營收來自兩名客戶，且部分大型客戶並沒有與上游算力承諾相同期限的長約。如果下游客戶能較快縮減用量，上游固定付款則可能成為 Anthropic 的期限錯配風險。</p>
+            <div class="mt-5 space-y-3">
+              <div class="flex gap-3 rounded-lg border border-stone-200 p-4"><span class="mt-0.5 text-sky-600 font-bold">1</span><p><strong class="text-stone-900">到期結構：</strong>需要逐年付款資料，而不是只看十年總額。</p></div>
+              <div class="flex gap-3 rounded-lg border border-stone-200 p-4"><span class="mt-0.5 text-sky-600 font-bold">2</span><p><strong class="text-stone-900">單位經濟：</strong>收入增速、推論毛利與使用率必須跟得上固定成本。</p></div>
+              <div class="flex gap-3 rounded-lg border border-stone-200 p-4"><span class="mt-0.5 text-sky-600 font-bold">3</span><p><strong class="text-stone-900">融資能力：</strong>現金、融資與自由現金流需與付款節奏配對。</p></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="governance" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI安全與治理：估值需要納入另一種成本</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-sm font-semibold text-violet-700">安全成本</p>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">風險揭露不等於極端事件已發生</h3>
+          <p class="mt-3 leading-relaxed">申報草案主要內容約 261 頁，其中約 80 頁說明風險，包括先進模型可能隱瞞或操縱資訊、抗拒關閉等情境。這些是潛在危害的風險揭露，不代表結果已發生或必然發生。</p>
+          <p class="mt-3 leading-relaxed">投資上更可操作的問題，是安全評估是否延長發布週期、增加算力與人力成本，或在事故後增加賠償、保險與監管支出。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-sm font-semibold text-violet-700">治理結構</p>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">Founder LLC 擬掌握約 50.1% 重要事項投票權</h3>
+          <p class="mt-3 leading-relaxed">七名共同創辦人組成的 Founder LLC，擬透過一股特殊 F 類股份，在重要公司事項上維持約 50.1% 投票權，並延續公益公司架構。</p>
+          <p class="mt-3 leading-relaxed">這可能讓創辦團隊更能優先考量安全與長期使命，同時也意味一般股東對資本配置與商業決策的影響力可能受限。估值需納入透明度、董事會監督與少數股東權利。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="supply-chain" class="bg-stone-100 border-y border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">對雲端與晶片供應鏈的影響</h2>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">Amazon / Google / Microsoft</h3>
+            <p class="mt-3 leading-relaxed">多年算力需求提高資料中心投資可見度，但合約金額不等於可立即認列收入，更不等於利潤。機房、電力、晶片與網路設備必須交付，並扣除折舊、用電、融資與營運成本。</p>
+            <p class="mt-3 text-sm text-stone-600">三家公司同時也開發自己的 AI 模型，與 Anthropic 之間存在合作與競爭並存的關係。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">Broadcom / Nvidia</h3>
+            <p class="mt-3 leading-relaxed">Broadcom 相關設備租賃義務凸顯客製晶片與系統在 AI 建設中的重要性，但收入認列、設備交付與最終毛利仍需逐期驗證。</p>
+            <p class="mt-3 text-sm text-stone-600">可取消的意向規模與不可取消的採購承諾，對 Nvidia 等供應商未來收入保障程度不同；直接把生態系全部承諾相加，容易重複計算。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">AMD 與 Anthropic</h3>
+            <p class="mt-3 leading-relaxed">申報草案另顯示，AMD 承諾最多購買 US$5B Anthropic 股份，並提供預期超過 US$20B 的 AI 算力。</p>
+            <p class="mt-3 text-sm text-stone-600">這些安排的執行時間、付款與最終獲利仍待後續揭露，不能直接視為已入帳收入；投資人也需要分辨戰略投資回流採購與獨立終端客戶需求。</p>
+          </article>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mt-2">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-bold text-stone-900">交易與承諾清單</h3>
+              <p class="mt-1 text-sm text-stone-600">搜尋公司、類型、狀態或關鍵字；金額不可跨不同法律性質直接相加。</p>
+            </div>
+            <label class="w-full md:w-80">
+              <span class="sr-only">搜尋交易與承諾</span>
+              <input id="tableSearch" type="search" placeholder="搜尋：Broadcom、待交割、算力…" class="w-full rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" />
+            </label>
+          </div>
+          <div class="mt-5 overflow-x-auto rounded-lg border border-stone-200 max-h-[480px] overflow-y-auto">
+            <table class="min-w-[920px] w-full text-sm text-left">
+              <thead class="sticky-head bg-stone-100 text-stone-700">
+                <tr>
+                  <th class="px-4 py-3">主體</th>
+                  <th class="px-4 py-3">金額</th>
+                  <th class="px-4 py-3">類型</th>
+                  <th class="px-4 py-3">狀態／期限</th>
+                  <th class="px-4 py-3">解讀重點</th>
+                </tr>
+              </thead>
+              <tbody id="commitmentTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+            </table>
+          </div>
+          <p id="tableEmpty" class="hidden py-8 text-center text-sm text-stone-500">沒有符合條件的資料。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="amd" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AMD 收購 World Labs：從晶片競爭走向工作負載競爭</h2>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-sm font-semibold text-sky-700">交易結構</p>
+          <p class="metric-number mt-2 text-3xl font-extrabold text-stone-900">約 US$8.2B</p>
+          <p class="mt-2 leading-relaxed">AMD 於 9 月 28 日宣布以全股票交易收購 World Labs。交易仍需監管核准等條件，預計於 2026 年底完成；在完成前，不應表述為已整合或已產生收購後營收。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-sm font-semibold text-sky-700">技術意義</p>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">把世界模型需求更早回饋硬體與軟體路線圖</h3>
+          <p class="mt-3 leading-relaxed">World Labs 聚焦空間智慧與世界模型，應用可能涵蓋設計、模擬與機器人。兩家公司已合作進行模型訓練與推論最佳化，整合後可更直接把工作負載需求回饋晶片、記憶體、軟體與系統設計。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-sm font-semibold text-sky-700">商業驗證</p>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">研究能力不等於成熟平台或可持續收入</h3>
+          <p class="mt-3 leading-relaxed">真正需要驗證的是第三方開發者採用、可重複部署的產品、成本競爭力，以及 World Labs 技術是否帶動 AMD 平台的外部客戶需求，而不只是成為內部展示案例。</p>
+        </article>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 mt-2">
+        <div class="rounded-xl bg-sky-50 p-6 border border-sky-100">
+          <h3 class="font-bold text-stone-900">可能的戰略價值</h3>
+          <p class="mt-2 leading-relaxed">競爭焦點從單顆 GPU 性能，擴大到工具、模型、模擬環境與部署效率。若 AMD 能在世界模型開發流程中建立開放且易用的軟硬體生態，可能擴大其可服務的工作負載範圍。</p>
+        </div>
+        <div class="rounded-xl bg-amber-50 p-6 border border-amber-100">
+          <h3 class="font-bold text-stone-900">需持續檢驗的代價</h3>
+          <p class="mt-2 leading-relaxed">全股票支付降低即期現金支出，但會帶來股權稀釋。後續需比較新增研發支出與未來產品毛利、人才留任、技術整合，以及實際客戶部署的證據。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="strategy" class="bg-white border-y border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略：區分短期訂單、長期應用與風險承擔者</h2>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500">
+            <p class="text-sm font-bold text-sky-700">短期｜3 個月內</p>
+            <h3 class="mt-2 text-xl font-bold text-stone-900">市場預期先反應，獲利仍需公司指引驗證</h3>
+            <p class="mt-3 leading-relaxed">Anthropic 合約揭露可能提高市場對雲端容量、客製晶片與資料中心需求的預期；AMD 交易則提高其在 Physical AI 領域能見度。兩者都不應直接等同本季獲利上修。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-cyan-500">
+            <p class="text-sm font-bold text-cyan-700">中期｜3–18 個月</p>
+            <h3 class="mt-2 text-xl font-bold text-stone-900">追蹤營收、毛利、現金消耗與實際交付</h3>
+            <p class="mt-3 leading-relaxed">觀察 Anthropic 付費客戶收入、推論毛利與現金消耗；雲端供應商的資本支出、設備交付與 AI 業務收入是否同步；AMD 則看 World Labs 交割、人才留任、平台性能與開發工具採用。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-indigo-500">
+            <p class="text-sm font-bold text-indigo-700">長期｜18 個月至 5 年以上</p>
+            <h3 class="mt-2 text-xl font-bold text-stone-900">最終仍由持續付費的應用決定資本回報</h3>
+            <p class="mt-3 leading-relaxed">若企業持續付費，長期算力合約可支撐晶片、雲端、電力、網路與安全產業；若投資速度長期快於終端需求，即使技術與基建有價值，股東仍可能承擔融資、折舊與估值調整。</p>
+          </article>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mt-2">
+          <h3 class="text-xl font-bold text-stone-900">接下來最值得追蹤的五項訊號</h3>
+          <div class="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+            <div class="rounded-lg border border-stone-200 p-4"><span class="text-2xl font-bold text-sky-600">01</span><p class="mt-2 text-sm leading-relaxed">Anthropic 已交付服務的收入與毛利，對照到期付款。</p></div>
+            <div class="rounded-lg border border-stone-200 p-4"><span class="text-2xl font-bold text-sky-600">02</span><p class="mt-2 text-sm leading-relaxed">大型雲端業者 AI 收入與資本支出回收期。</p></div>
+            <div class="rounded-lg border border-stone-200 p-4"><span class="text-2xl font-bold text-sky-600">03</span><p class="mt-2 text-sm leading-relaxed">Broadcom 相關設備的實際交付與獲利。</p></div>
+            <div class="rounded-lg border border-stone-200 p-4"><span class="text-2xl font-bold text-sky-600">04</span><p class="mt-2 text-sm leading-relaxed">大型 AI 客戶的融資條件與信用風險。</p></div>
+            <div class="rounded-lg border border-stone-200 p-4"><span class="text-2xl font-bold text-sky-600">05</span><p class="mt-2 text-sm leading-relaxed">World Labs 技術帶動 AMD 平台外部採用的證據。</p></div>
+          </div>
+          <div class="mt-6 rounded-xl bg-rose-50 border border-rose-100 p-5">
+            <p class="font-semibold text-rose-900">情境轉弱的訊號</p>
+            <p class="mt-2 leading-relaxed text-rose-900/80">收入與使用率增長放緩、固定付款加速、供應商毛利承壓，或新收購長期無法轉化為實際客戶部署。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="rounded-2xl bg-stone-900 text-stone-100 p-6 sm:p-8">
+        <h2 class="text-2xl font-bold">結論：從合約名目金額走向現金流驗證</h2>
+        <p class="mt-4 max-w-4xl leading-relaxed text-stone-300">這一輪 AI 基礎建設的關鍵，不是「需求是否存在」的二選一問題，而是需求能否在正確的時間、價格與毛利下兌現。投資判斷要沿著「最終客戶付費 → 模型公司現金流 → 雲端履約與回收 → 晶片與設備利潤」逐層檢查，並把公告、承諾、可取消意向與已實現收入清楚分離。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI算力承諾與固定成本考驗。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中Anthropic、AMD與World Labs相關公開資料 (2026年09月29日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    const sectionIds = ['overview', 'anthropic', 'governance', 'supply-chain', 'amd', 'strategy'];
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+    const setActiveNav = (id) => {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveNav(visible.target.id);
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.1, 0.25, 0.5] });
+    sections.forEach(section => observer.observe(section));
+    setActiveNav('overview');
+
+    Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif';
+    new Chart(document.getElementById('commitmentChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Google', 'Amazon', 'Microsoft', 'Broadcom 相關'],
+        datasets: [{
+          label: '未來合約義務（十億美元）',
+          data: [111.1, 110.0, 31.4, 161.2],
+          backgroundColor: ['rgba(14,165,233,.72)','rgba(2,132,199,.72)','rgba(56,189,248,.72)','rgba(8,145,178,.72)'],
+          borderColor: ['rgb(14,165,233)','rgb(2,132,199)','rgb(56,189,248)','rgb(8,145,178)'],
+          borderWidth: 1,
+          borderRadius: 7,
+          maxBarThickness: 60
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => `約 US$${ctx.raw}B` } }
+        },
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: '十億美元' }, grid: { color: 'rgba(120,113,108,.12)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    const productData = [
+      { entity: 'Google', amount: '約 US$111.1B', type: '長期運算服務義務', status: '未來多年', note: '屬未來合約義務，收入仍須隨服務提供逐步實現。' },
+      { entity: 'Amazon', amount: '約 US$110.0B', type: '長期運算服務義務', status: '未來多年', note: '屬未來合約義務，需與資料中心交付、成本與毛利一起評估。' },
+      { entity: 'Microsoft', amount: '約 US$31.4B', type: '長期運算服務義務', status: '未來多年', note: '雲端承諾的一部分，不等於當期收入或利潤。' },
+      { entity: 'Broadcom 相關', amount: '約 US$161.2B', type: '設備租賃義務', status: '未來多年', note: '不能直接視為 Broadcom 已實現銷售，仍要看交付、認列與毛利。' },
+      { entity: 'AMD → Anthropic', amount: '最多 US$5B', type: '股權投資承諾', status: '待後續執行與揭露', note: 'AMD 可能同時扮演投資人與供應商，需辨別戰略資金與獨立外部需求。' },
+      { entity: 'AMD → Anthropic', amount: '預期 > US$20B', type: 'AI 算力安排', status: '預期安排', note: '執行時間、付款與獲利尚待揭露，不是已入帳收入。' },
+      { entity: 'AMD → World Labs', amount: '約 US$8.2B', type: '全股票收購', status: '2026/09/28 宣布；預計 2026 年底完成', note: '仍須監管核准等條件；交易完成前不應視為已完成整合。' }
+    ];
+
+    const tbody = document.getElementById('commitmentTableBody');
+    const searchInput = document.getElementById('tableSearch');
+    const emptyState = document.getElementById('tableEmpty');
+    const escapeHtml = (value) => String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+    const renderTable = (rows) => {
+      tbody.innerHTML = rows.map(row => `
+        <tr class="hover:bg-sky-50/50">
+          <td class="px-4 py-3 font-semibold text-stone-900">${escapeHtml(row.entity)}</td>
+          <td class="px-4 py-3 whitespace-nowrap metric-number">${escapeHtml(row.amount)}</td>
+          <td class="px-4 py-3">${escapeHtml(row.type)}</td>
+          <td class="px-4 py-3">${escapeHtml(row.status)}</td>
+          <td class="px-4 py-3 min-w-[320px]">${escapeHtml(row.note)}</td>
+        </tr>`).join('');
+      emptyState.classList.toggle('hidden', rows.length > 0);
+    };
+    const filterTable = () => {
+      const q = searchInput.value.trim().toLowerCase();
+      if (!q) return renderTable(productData);
+      const rows = productData.filter(row => Object.values(row).some(value => String(value).toLowerCase().includes(q)));
+      renderTable(rows);
+    };
+    searchInput.addEventListener('input', filterTable);
+    renderTable(productData);
+  </script>
+</body>
+</html>
