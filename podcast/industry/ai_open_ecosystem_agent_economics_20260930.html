@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI競爭從晶片採購走向交付成果：解析HPE與Vultr的AMD平台大單、AI Agent商業化、企業治理與後續投資驗證指標。" />
+  <title>巴菲特AI價值投資-AI交付經濟的新戰場</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0369a1; background: #e0f2fe; }
+    .inactive-nav-link { color: #57534e; }
+    .inactive-nav-link:hover { color: #0369a1; background: #f0f9ff; }
+    .chart-shell { position: relative; width: 100%; height: 320px; }
+    .soft-grid {
+      background-image: radial-gradient(circle at 1px 1px, rgba(12,37,58,.08) 1px, transparent 0);
+      background-size: 22px 22px;
+    }
+    .table-scroll { scrollbar-width: thin; }
+    .metric-num { font-variant-numeric: tabular-nums; }
+    @media (max-width: 640px) {
+      .chart-shell { height: 280px; }
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between gap-4">
+        <a href="#top" class="font-extrabold tracking-tight text-stone-900">巴菲特AI價值投資</a>
+        <button id="menuButton" type="button" class="md:hidden inline-flex items-center justify-center rounded-lg border border-stone-200 p-2 text-stone-700 hover:bg-stone-100" aria-expanded="false" aria-controls="mobileMenu" aria-label="開啟導覽選單">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <nav class="hidden md:flex items-center gap-1 text-sm font-semibold" aria-label="主要導覽">
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#thesis">主軸</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#infrastructure">基礎建設</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#agents">Agent</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#governance">治理</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#value-chain">供應鏈</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#evidence">追蹤證據</a>
+        </nav>
+      </div>
+      <nav id="mobileMenu" class="hidden md:hidden pb-3" aria-label="手機導覽">
+        <div class="grid grid-cols-2 gap-2 text-sm font-semibold">
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#thesis">投資主軸</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#infrastructure">基礎建設</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#agents">Agent經濟</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#governance">治理</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#value-chain">供應鏈</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#evidence">追蹤證據</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">AI競爭走向交付：AMD大單、全天候Agent與企業信任的新戰場</h1>
+        <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">AI投資的衡量標準正從「買多少晶片」轉向「完成多少有價值的工作」。硬體端要驗證訂單能否轉成獲利與現金流，Agent端要驗證任務成果、留存與單位經濟，治理端則決定企業是否敢把更多權限交給AI。</p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <div class="text-xs font-semibold uppercase tracking-wider text-sky-100">HPE × Vultr 訂單</div>
+            <div class="metric-num mt-2 text-3xl font-black">約 US$1.2B</div>
+            <p class="mt-2 text-sm text-sky-50/80">AMD平台整合AI機櫃訂單總額；不是AMD可直接認列營收。</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <div class="text-xs font-semibold uppercase tracking-wider text-sky-100">Helios 機櫃配置</div>
+            <div class="metric-num mt-2 text-3xl font-black">72 GPUs</div>
+            <p class="mt-2 text-sm text-sky-50/80">每座機櫃配置72顆GPU；實際運作效率仍待客戶部署驗證。</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <div class="text-xs font-semibold uppercase tracking-wider text-sky-100">工作型AI使用規模</div>
+            <div class="metric-num mt-2 text-3xl font-black">&gt;35M / 週</div>
+            <p class="mt-2 text-sm text-sky-50/80">OpenAI公布Codex＋ChatGPT Work合計每週使用者；不是dots使用人數。</p>
+          </div>
+          <div class="rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <div class="text-xs font-semibold uppercase tracking-wider text-sky-100">Juniper整合目標</div>
+            <div class="metric-num mt-2 text-3xl font-black">US$800M</div>
+            <p class="mt-2 text-sm text-sky-50/80">HPE預期至FY2028末的年度化成本節省目標；尚非已實現節省。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="thesis" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、投資主軸：衡量「合格工作」的總成本</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div>
+            <div class="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-bold text-sky-800">硬體層</div>
+            <h3 class="mt-3 text-xl font-bold text-stone-900">訂單 → 交付 → 使用率</h3>
+            <p class="mt-3 leading-relaxed">大額採購證明客戶願意投入資本，但還需要交貨、上線、付費使用、毛利與現金回收，才能證明資本報酬。</p>
+          </div>
+          <div>
+            <div class="inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-bold text-violet-800">應用層</div>
+            <h3 class="mt-3 text-xl font-bold text-stone-900">使用量 → 工作完成 → 續約</h3>
+            <p class="mt-3 leading-relaxed">Agent的價值不只是一段回答，而是讀取資料、規劃、操作、檢查與更新進度後，真正完成任務並讓客戶願意再次授權。</p>
+          </div>
+          <div>
+            <div class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">治理層</div>
+            <h3 class="mt-3 text-xl font-bold text-stone-900">安全控制 → 放權 → 規模化</h3>
+            <p class="mt-3 leading-relaxed">能否追蹤行為、限制權限、及時停止並釐清責任，將影響企業擴大AI授權的速度，也會直接影響供應商成本。</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-xl border-l-4 border-sky-500 bg-sky-50 p-6">
+        <p class="text-lg font-bold text-sky-950">核心變數：每完成一項「合格工作」的總成本。</p>
+        <p class="mt-2 leading-relaxed text-sky-900/85">成本不只包含晶片與雲端費用，還包括軟體整合、人工覆核、錯誤重做、安全與責任管理。長期競爭優勢取決於能否在維持品質與信任的前提下，持續降低這個總成本。</p>
+      </div>
+    </section>
+
+    <section id="infrastructure" class="scroll-mt-24 bg-white py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二～四、從AMD大單到HPE整合：硬體競爭進入交付階段</h2>
+
+        <div class="grid gap-6 lg:grid-cols-2">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+            <div class="flex items-center justify-between gap-4">
+              <h3 class="text-xl font-bold text-stone-900">US$12億訂單證明什麼？</h3>
+              <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">已公告訂單</span>
+            </div>
+            <p class="mt-4 leading-relaxed">Vultr將在美國資料中心部署AMD Helios AI Rack by HPE。架構涵蓋AMD Instinct MI455X GPU、EPYC、ROCm，以及HPE網路交換與液冷整合。商業意義是AMD平台跨過了大型系統採購門檻。</p>
+            <div class="mt-5 rounded-lg bg-amber-50 p-4 text-sm leading-relaxed text-amber-950">
+              <strong>不可過度延伸：</strong> US$12億是HPE整合系統訂單總額，不能全部計入AMD營收，也不能直接視為HPE本季已認列營收；交貨時程、付款條件與訂單毛利並未足夠揭露。
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+            <div class="flex items-center justify-between gap-4">
+              <h3 class="text-xl font-bold text-stone-900">AMD與Nvidia並非零和替換</h3>
+              <span class="rounded-full bg-sky-100 px-3 py-1 text-xs font-bold text-sky-800">多平台策略</span>
+            </div>
+            <p class="mt-4 leading-relaxed">HPE在2026年6月已宣布Vultr選用包含Nvidia GB300 NVL72的平台。9月AMD訂單更合理的解讀是增加多平台供應，而不是已有證據顯示全面撤換Nvidia。</p>
+            <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+              <div class="rounded-lg bg-stone-50 p-4"><strong class="block text-stone-900">可能收益</strong><span class="mt-1 block">降低單一供應商依賴、增加交貨與議價選擇、依工作負載配置平台。</span></div>
+              <div class="rounded-lg bg-stone-50 p-4"><strong class="block text-stone-900">新增成本</strong><span class="mt-1 block">軟體移轉、效能最佳化、員工訓練、維運與除錯複雜度。</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-5">
+          <article class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+            <h3 class="text-xl font-bold text-stone-900">HPE：AI設備之外，網路與整合才是收入品質的驗證點</h3>
+            <p class="mt-4 leading-relaxed">HPE消息公布後盤前一度上漲接近6%，但這只是當時市場反應，且公司同時上調網路業務展望，不能把漲幅全部歸因於AMD訂單。更重要的是，AI叢集的網路、散熱、安裝與維運能力能否提高整套系統效率，並最終改善利潤與現金回收。</p>
+            <div class="mt-6 grid gap-4 sm:grid-cols-3">
+              <div class="rounded-lg bg-stone-50 p-4"><div class="text-xs font-bold text-stone-500">FY2026–2029</div><div class="mt-2 font-bold text-stone-900">網路營收CAGR：百分之十幾高段</div><p class="mt-2 text-xs">管理層預測，不是已實現。</p></div>
+              <div class="rounded-lg bg-stone-50 p-4"><div class="text-xs font-bold text-stone-500">FY2027</div><div class="mt-2 font-bold text-stone-900">成長展望：百分之十幾高段～20%出頭</div><p class="mt-2 text-xs">管理層展望。</p></div>
+              <div class="rounded-lg bg-stone-50 p-4"><div class="text-xs font-bold text-stone-500">FY2028末</div><div class="mt-2 font-bold text-stone-900">年度化成本節省目標：US$800M</div><p class="mt-2 text-xs">由至少US$600M提高；尚未實現。</p></div>
+            </div>
+          </article>
+
+          <article class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+            <h3 class="text-xl font-bold text-stone-900">Juniper整合成本節省目標</h3>
+            <p class="mt-2 text-sm leading-relaxed text-stone-600">同一FY2028末年度化目標由「至少US$600M」提高至US$800M。圖表將原目標的最低門檻以600呈現。</p>
+            <div class="chart-shell mt-4"><canvas id="savingsChart" aria-label="HPE Juniper整合年度化成本節省目標比較" role="img"></canvas></div>
+          </article>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+          <h3 class="text-xl font-bold text-stone-900">AMD vs. Nvidia：真正的比較不是單顆GPU價格</h3>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            <div class="rounded-lg border border-stone-200 p-5"><div class="text-sm font-bold text-sky-700">平台可用性</div><p class="mt-2 text-sm leading-relaxed">ROCm能否讓特定工作容易部署、穩定執行，並降低移轉與故障排除成本。</p></div>
+            <div class="rounded-lg border border-stone-200 p-5"><div class="text-sm font-bold text-sky-700">總工作成本</div><p class="mt-2 text-sm leading-relaxed">硬體便宜不代表總成本更低；開發、最佳化、維運與人力都必須納入。</p></div>
+            <div class="rounded-lg border border-stone-200 p-5"><div class="text-sm font-bold text-sky-700">市場擴張 vs. 利潤率</div><p class="mt-2 text-sm leading-relaxed">AI總需求成長可以讓多家平台同時增收，但競爭也可能壓低每一美元收入的獲利。</p></div>
+          </div>
+          <p class="mt-5 text-sm leading-relaxed text-stone-600">Broadcom是值得追蹤的間接受益者：HPE先前公布的Helios網路架構包含與Broadcom合作的交換晶片方案；但現有資料不足以把本次訂單換算成Broadcom具體營收。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="agents" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">五～六、Agent經濟：從回答品質轉向工作完成率</h2>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="text-xl font-bold text-stone-900">OpenAI dots：持續追蹤工作，但成熟度仍待驗證</h3>
+            <span class="rounded-full bg-violet-100 px-3 py-1 text-xs font-bold text-violet-800">2026/9/29 美國時間發表</span>
+          </div>
+          <p class="mt-4 leading-relaxed">dots被描述為可持續追蹤目標、使用自己的雲端電腦與已連結應用程式工作，並可透過Slack、Teams等管道互動。一般dots開始推出，企業專用specialist dots仍從限定試點起步。</p>
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-lg bg-violet-50 p-4 text-sm leading-relaxed text-violet-950"><strong>「全天候」的合理解讀：</strong>持續可用與追蹤任務，不等於每個帳號都能無限制執行。</div>
+            <div class="rounded-lg bg-amber-50 p-4 text-sm leading-relaxed text-amber-950"><strong>可靠度仍需驗證：</strong>現場展示出現語音回應與操作不順，提醒投資人產品展示與企業長期穩定使用仍有距離。</div>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-stone-900">Agent商業化的雙重條件</h3>
+          <div class="mt-5 space-y-4">
+            <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-4"><div class="font-bold text-emerald-900">客戶端</div><p class="mt-1 text-sm">節省時間、降低錯誤或增加收入，效益必須可衡量。</p></div>
+            <div class="rounded-lg border border-sky-200 bg-sky-50 p-4"><div class="font-bold text-sky-900">供應商端</div><p class="mt-1 text-sm">費用必須覆蓋推理、資料、工具操作、重試、支援與安全成本，並保留合理利潤。</p></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-bold text-stone-900">新的KPI：比下載量更接近企業付費意願</h3>
+        <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-lg bg-stone-50 p-5"><div class="text-2xl font-black text-stone-900">01</div><div class="mt-2 font-bold">工作完成率</div><p class="mt-2 text-sm">真正完成交付，而不是只產生看似合理的內容。</p></div>
+          <div class="rounded-lg bg-stone-50 p-5"><div class="text-2xl font-black text-stone-900">02</div><div class="mt-2 font-bold">人工介入次數</div><p class="mt-2 text-sm">越常需要人類救援，單位經濟與規模化越受壓。</p></div>
+          <div class="rounded-lg bg-stone-50 p-5"><div class="text-2xl font-black text-stone-900">03</div><div class="mt-2 font-bold">錯誤重做比例</div><p class="mt-2 text-sm">重做不只影響體驗，也增加運算與支援成本。</p></div>
+          <div class="rounded-lg bg-stone-50 p-5"><div class="text-2xl font-black text-stone-900">04</div><div class="mt-2 font-bold">再次授權／付費留存</div><p class="mt-2 text-sm">企業願不願再次讓Agent承擔同一責任，是價值的重要驗證。</p></div>
+        </div>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-lg font-bold text-stone-900">OpenAI</h3>
+          <p class="mt-3 text-sm leading-relaxed">機會在於把模型、程式開發、研究與文件工作整合成持續協作產品；挑戰在可靠度、企業導入與持續運作成本。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-lg font-bold text-stone-900">Microsoft</h3>
+          <p class="mt-3 text-sm leading-relaxed">新版Copilot整合Home、Code與Autopilot，優勢在既有辦公環境、權限與治理體系；產品方向仍需使用與付費數據驗證。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-lg font-bold text-stone-900">Meta</h3>
+          <p class="mt-3 text-sm leading-relaxed">Muse for Small Business接入Facebook、Instagram商業帳號與工作工具；功能進步不等於已增加廣告收入。</p>
+        </article>
+      </div>
+      <div class="rounded-xl bg-stone-900 p-6 text-stone-100">
+        <p class="font-bold">競爭與合作可以並存。</p>
+        <p class="mt-2 text-sm leading-relaxed text-stone-300">OpenAI已宣布與Microsoft合作，讓企業專用dots接入Microsoft Agent 365的治理與安全控制。未來的收入分配，可能分散在使用者入口、模型、雲端、資料權限與管理層，而不一定由聊天機器人的知名度決定。</p>
+      </div>
+    </section>
+
+    <section id="governance" class="scroll-mt-24 bg-white py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">七、企業治理：安全成本正在進入AI投資模型</h2>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+            <h3 class="text-xl font-bold text-stone-900">自願AI安全協議：四層控制</h3>
+            <ol class="mt-5 space-y-3 text-sm leading-relaxed">
+              <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sky-100 font-bold text-sky-800">1</span><span>訓練與部署過程建立內部安全控制。</span></li>
+              <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sky-100 font-bold text-sky-800">2</span><span>由內部團隊檢查控制是否有效。</span></li>
+              <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sky-100 font-bold text-sky-800">3</span><span>引入外部獨立評估。</span></li>
+              <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sky-100 font-bold text-sky-800">4</span><span>由董事會的獨立委員會接收報告並監督。</span></li>
+            </ol>
+            <div class="mt-5 rounded-lg bg-amber-50 p-4 text-sm leading-relaxed text-amber-950"><strong>法律性質：</strong>這些是自願性承諾，不等同國會通過的法律，也不是一套新成立、具完整執法機制的強制AI監管制度。</div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+            <h3 class="text-xl font-bold text-stone-900">治理支出既是成本，也可能是採用門檻</h3>
+            <p class="mt-4 leading-relaxed">能持續操作工具的AI，可能因資料判讀、權限誤用或惡意指令造成損失。企業是否願意擴大授權，取決於能否追蹤行為、限制權限、及時停止並釐清責任。</p>
+            <div class="mt-5 grid gap-3 sm:grid-cols-2">
+              <div class="rounded-lg bg-rose-50 p-4 text-sm"><strong class="text-rose-900">短期壓力</strong><p class="mt-1">測試、稽核、安全與責任管理會增加部署成本，可能壓低短期利潤。</p></div>
+              <div class="rounded-lg bg-emerald-50 p-4 text-sm"><strong class="text-emerald-900">長期價值</strong><p class="mt-1">若治理功能縮短企業審查、降低事故與重工，就可能加快正式採用。</p></div>
+            </div>
+            <p class="mt-5 text-sm leading-relaxed text-stone-600">報告截點前，另有媒體報導FTC可能擴大對OpenAI、Anthropic等AI業者的調查，但獨立確認程度不一致，因此只應視為待官方確認的風險訊號，而非已確認的裁罰或違法結論。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="value-chain" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">八～九、投資機會沿供應鏈擴散，但驗證節奏不同</h2>
+      <div class="soft-grid rounded-2xl border border-stone-200 bg-white p-5 sm:p-7">
+        <div class="grid gap-4 lg:grid-cols-4">
+          <div class="rounded-xl border border-sky-200 bg-sky-50/90 p-5"><div class="text-xs font-black uppercase tracking-wider text-sky-700">第一層</div><h3 class="mt-2 text-lg font-bold text-stone-900">硬體與系統</h3><p class="mt-2 text-sm leading-relaxed">AMD、HPE、Nvidia。驗證交貨、毛利、現金回收與後續訂單。</p></div>
+          <div class="rounded-xl border border-cyan-200 bg-cyan-50/90 p-5"><div class="text-xs font-black uppercase tracking-wider text-cyan-700">第二層</div><h3 class="mt-2 text-lg font-bold text-stone-900">網路、記憶體、電力、散熱</h3><p class="mt-2 text-sm leading-relaxed">Agent使用增加可能推升需求，但電力接入、施工與融資可能限制資料中心同時完工。</p></div>
+          <div class="rounded-xl border border-violet-200 bg-violet-50/90 p-5"><div class="text-xs font-black uppercase tracking-wider text-violet-700">第三層</div><h3 class="mt-2 text-lg font-bold text-stone-900">資安與資料治理</h3><p class="mt-2 text-sm leading-relaxed">Microsoft、PANW、CRWD可從權限、監控與安全預算追蹤，但不能因此斷言已取得新增AI訂單。</p></div>
+          <div class="rounded-xl border border-emerald-200 bg-emerald-50/90 p-5"><div class="text-xs font-black uppercase tracking-wider text-emerald-700">較晚受益</div><h3 class="mt-2 text-lg font-bold text-stone-900">把Agent導入流程的企業</h3><p class="mt-2 text-sm leading-relaxed">必須先調整流程，再觀察效率改善是否真正反映到營業利益。</p></div>
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="text-xs font-bold text-sky-700">短期｜數天～3個月</div>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">交易預期</h3>
+          <p class="mt-3 text-sm leading-relaxed">市場主要反應訂單、展望與新產品。新聞利多與投資報酬仍有距離，尤其當股價已提前反映高成長時。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="text-xs font-bold text-violet-700">中期｜3個月～1.5年</div>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">驗證交付與付費</h3>
+          <p class="mt-3 text-sm leading-relaxed">看AMD是否取得更多客戶、HPE網路展望是否落地、Agent是否提高續約與付費、雲端設備是否具足夠使用率。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="text-xs font-bold text-emerald-700">長期｜1.5～5年以上</div>
+          <h3 class="mt-2 text-xl font-bold text-stone-900">形成生產力循環</h3>
+          <p class="mt-3 text-sm leading-relaxed">若每項合格工作的成本下降，AI可從少量試用擴大至日常流程，讓軟體、基礎建設與實際使用者共同受益。</p>
+        </article>
+      </div>
+
+      <div class="rounded-xl border border-rose-200 bg-rose-50 p-6">
+        <h3 class="font-bold text-rose-950">可能承壓的商業模式</h3>
+        <p class="mt-2 text-sm leading-relaxed text-rose-900">缺乏差異化的軟體可能承受價格壓力；若運算供應快速擴張且服務同質化，雲端業者也可能面臨租金與使用率壓力。但成本下降也可能刺激更多需求，因此應分開觀察單價、使用量與總收入。</p>
+      </div>
+    </section>
+
+    <section id="evidence" class="scroll-mt-24 bg-white py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">十、接下來應追蹤的六項證據</h2>
+        <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <article class="bg-white rounded-lg shadow-lg p-6"><div class="text-3xl font-black text-sky-600">01</div><h3 class="mt-2 font-bold text-stone-900">AMD訂單是否擴散與追加</h3><p class="mt-2 text-sm leading-relaxed">更多互不相關客戶採用，比單一客戶的大額採購更能支持平台成熟。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6"><div class="text-3xl font-black text-sky-600">02</div><h3 class="mt-2 font-bold text-stone-900">HPE成長是否伴隨利潤與現金流</h3><p class="mt-2 text-sm leading-relaxed">追蹤網路業務獲利、整合節省、存貨與應收帳款，檢驗訂單品質。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6"><div class="text-3xl font-black text-sky-600">03</div><h3 class="mt-2 font-bold text-stone-900">雲端設備是否形成付費使用</h3><p class="mt-2 text-sm leading-relaxed">觀察上線速度、使用率、租用價格與客戶合約，避免把容量建置直接等同終端需求。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6"><div class="text-3xl font-black text-sky-600">04</div><h3 class="mt-2 font-bold text-stone-900">Agent是否完成足夠多的有價值工作</h3><p class="mt-2 text-sm leading-relaxed">核心是付費留存、任務完成率與人工介入程度，而不只是使用人數。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6"><div class="text-3xl font-black text-sky-600">05</div><h3 class="mt-2 font-bold text-stone-900">安全控制是否提高部署效率</h3><p class="mt-2 text-sm leading-relaxed">若治理功能能降低錯誤與審查成本，企業才可能擴大授權。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6"><div class="text-3xl font-black text-sky-600">06</div><h3 class="mt-2 font-bold text-stone-900">金融條件是否支持擴張</h3><p class="mt-2 text-sm leading-relaxed">持續看利率、雲端融資成本、設備融資與合約承諾，檢查市場預期與資本負擔的落差。</p></article>
+        </div>
+
+        <div class="mt-10 bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100">
+          <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-stone-900">公司／平台追蹤表</h3>
+              <p class="mt-2 text-sm text-stone-600">依報告中的角色、已知進展與待驗證項目整理；搜尋可輸入公司、代號、角色或關鍵字。</p>
+            </div>
+            <label class="block w-full md:max-w-sm">
+              <span class="sr-only">搜尋追蹤表</span>
+              <input id="tableSearch" type="search" placeholder="搜尋：AMD、Agent、治理、現金流…" class="w-full rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm outline-none ring-sky-500 focus:ring-2" />
+            </label>
+          </div>
+          <div class="table-scroll mt-5 max-h-[540px] overflow-auto rounded-lg border border-stone-200">
+            <table class="min-w-[920px] w-full text-left text-sm">
+              <thead class="sticky top-0 z-10 bg-stone-100 text-stone-700">
+                <tr><th class="px-4 py-3 font-bold">公司／平台</th><th class="px-4 py-3 font-bold">角色</th><th class="px-4 py-3 font-bold">報告中的已知進展</th><th class="px-4 py-3 font-bold">主要待驗證</th></tr>
+              </thead>
+              <tbody id="companyTableBody" class="divide-y divide-stone-100 bg-white"></tbody>
+            </table>
+          </div>
+          <p id="tableEmpty" class="hidden py-8 text-center text-sm text-stone-500">沒有符合搜尋條件的項目。</p>
+        </div>
+
+        <div class="rounded-xl border border-amber-200 bg-amber-50 p-6">
+          <p class="font-bold text-amber-950">估值紀律</p>
+          <p class="mt-2 text-sm leading-relaxed text-amber-900">報告目前沒有足夠的同時點估值、盈利預測與資金條件比較，支持精確目標價或個股報酬排序。較適合的做法是按不同機制追蹤交付、獲利、付費與融資證據，再評估價格是否提供足夠空間。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">十一、結論：AI下一輪價值，要由成果與現金流證明</h2>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm font-bold text-sky-700">設備</div><p class="mt-3 leading-relaxed">HPE與Vultr的大型AMD訂單顯示替代平台已取得實質採購，但仍需證明交貨、使用率、毛利與現金回收。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm font-bold text-violet-700">軟體</div><p class="mt-3 leading-relaxed">dots、Autopilot與Muse把競爭推進持續工作，但功能進步不等於客戶會長期付費，工作完成率與單位經濟更重要。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm font-bold text-emerald-700">信任</div><p class="mt-3 leading-relaxed">安全治理正在成為部署條件。能把權限、監控、停止與責任控制做進產品，才更有機會讓企業放大授權。</p></div>
+      </div>
+      <div class="rounded-2xl bg-stone-900 p-7 text-white">
+        <p class="text-xl font-black">長期價值鏈只有一個共同檢驗：把成長轉成可持續的自由現金流。</p>
+        <p class="mt-3 max-w-4xl leading-relaxed text-stone-300">更有說服力的公司，會把設備轉成付費使用、把軟體轉成可重複的工作成果，並在安全與人工成本可控的前提下提高利潤。這些證據，比產品名稱、舞台展示或單日股價反應更重要。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI交付經濟的新戰場。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中AI交付經濟與相關公司公開資料 (2026年09月30日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    const sectionIds = ['thesis', 'infrastructure', 'agents', 'governance', 'value-chain', 'evidence'];
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+    const setActiveNav = (id) => {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+      });
+    };
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) setActiveNav(visible[0].target.id);
+    }, { rootMargin: '-20% 0px -62% 0px', threshold: [0.05, 0.2, 0.5] });
+    sections.forEach(section => observer.observe(section));
+    setActiveNav('thesis');
+
+    const savingsCtx = document.getElementById('savingsChart');
+    new Chart(savingsCtx, {
+      type: 'bar',
+      data: {
+        labels: ['原目標（至少）', '修訂目標'],
+        datasets: [{
+          label: 'FY2028末年度化成本節省目標（百萬美元）',
+          data: [600, 800],
+          backgroundColor: ['rgba(14,165,233,.45)', 'rgba(3,105,161,.78)'],
+          borderColor: ['rgba(14,165,233,1)', 'rgba(3,105,161,1)'],
+          borderWidth: 1.5,
+          borderRadius: 8,
+          maxBarThickness: 72
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => `US$${ctx.raw}M / 年（目標）` } }
+        },
+        scales: {
+          y: { beginAtZero: true, suggestedMax: 900, ticks: { callback: (v) => `US$${v}M` }, grid: { color: 'rgba(120,113,108,.12)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    const productData = [
+      { company: 'AMD (AMD)', role: 'AI加速器與運算平台', progress: 'Helios平台取得Vultr大型整合機櫃採購驗證。', verify: '更多獨立客戶、準時交付、ROCm可重複部署能力、工作總成本。' },
+      { company: 'HPE (HPE)', role: 'AI系統、網路與整合', progress: '取得約US$12億Helios訂單，並上調網路業務展望。', verify: '訂單認列節奏、毛利、網路獲利、存貨／應收與現金回收。' },
+      { company: 'Nvidia (NVDA)', role: 'AI平台與GPU生態系', progress: 'Vultr先前亦選用HPE＋Nvidia GB300 NVL72，顯示多平台並存。', verify: '在客戶增加替代選項下的價格、平台黏著度、利潤率與整體需求成長。' },
+      { company: 'Broadcom (AVGO)', role: '網路交換晶片', progress: 'HPE先前公布的Helios網路架構包含Broadcom合作方案。', verify: 'AMD平台擴張是否形成可量化的新增營收貢獻。' },
+      { company: 'OpenAI', role: '模型、工作型AI與Agent', progress: '推出dots；Codex＋ChatGPT Work合計每週使用者逾3,500萬。', verify: 'dots可靠度、工作完成率、付費留存、人工介入與單位成本。' },
+      { company: 'Microsoft (MSFT)', role: '企業工作入口與治理', progress: '新版Copilot整合Home、Code、Autopilot；並與OpenAI合作Agent 365治理。', verify: '實際使用、付費、權限治理是否降低企業導入成本。' },
+      { company: 'Meta (META)', role: '商家工作Agent與社群入口', progress: '推出Muse for Small Business並接入商業帳號及工作工具。', verify: '訂閱、商家效率與留存是否轉化為可量化財務效益；不能先視為廣告增收。' },
+      { company: 'Palo Alto Networks (PANW)', role: '資安與權限治理追蹤標的', progress: '報告將其列入企業AI權限與安全預算的潛在追蹤公司。', verify: '是否形成新增AI安全需求、額外收費或只是整合進既有產品。' },
+      { company: 'CrowdStrike (CRWD)', role: '資安與監控追蹤標的', progress: '報告將其列入Agent治理與安全支出的觀察名單。', verify: 'AI相關需求能否形成增量訂單與利潤，而非僅屬既有功能延伸。' }
+    ];
+
+    const tableBody = document.getElementById('companyTableBody');
+    const tableSearch = document.getElementById('tableSearch');
+    const tableEmpty = document.getElementById('tableEmpty');
+    const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+    const renderTable = (rows) => {
+      tableBody.innerHTML = rows.map(row => `
+        <tr class="align-top hover:bg-sky-50/50">
+          <td class="px-4 py-3 font-bold text-stone-900">${escapeHtml(row.company)}</td>
+          <td class="px-4 py-3">${escapeHtml(row.role)}</td>
+          <td class="px-4 py-3 leading-relaxed">${escapeHtml(row.progress)}</td>
+          <td class="px-4 py-3 leading-relaxed">${escapeHtml(row.verify)}</td>
+        </tr>`).join('');
+      tableEmpty.classList.toggle('hidden', rows.length !== 0);
+    };
+    renderTable(productData);
+    tableSearch.addEventListener('input', (event) => {
+      const q = event.target.value.trim().toLowerCase();
+      const filtered = productData.filter(row => Object.values(row).some(value => String(value).toLowerCase().includes(q)));
+      renderTable(filtered);
+    });
+  </script>
+</body>
+</html>
