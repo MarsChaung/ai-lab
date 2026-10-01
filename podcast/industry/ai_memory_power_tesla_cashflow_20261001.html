@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI 搶供應時代的美股投資分析：從 Micron 記憶體現金流、Amazon 與 Constellation 核電長約，到 Tesla 歐洲掛牌回升，拆解承諾、交付與收益。" />
+  <title>巴菲特AI價值投資-AI搶供應：記憶體、核電與現金流</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { overflow-x: hidden; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: rgb(3 105 161); background: rgb(240 249 255); }
+    .inactive-nav-link { color: rgb(68 64 60); background: transparent; }
+    .chart-shell { position: relative; min-height: 320px; height: 320px; width: 100%; }
+    .metric-card { backdrop-filter: blur(6px); }
+    .section-anchor { scroll-margin-top: 88px; }
+    .table-wrap { max-height: 560px; overflow: auto; }
+    @media (max-width: 640px) {
+      .chart-shell { min-height: 290px; height: 290px; }
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-16 flex items-center justify-between gap-4">
+        <a href="#overview" class="font-extrabold text-stone-900 tracking-tight whitespace-nowrap">巴菲特AI價值投資</a>
+        <nav class="hidden lg:flex items-center gap-1 text-sm font-semibold" aria-label="主要章節">
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#overview">核心主軸</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#micron">Micron</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#energy">能源長約</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#tesla">Tesla</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#framework">投資框架</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#risks">風險檢查</a>
+        </nav>
+        <button id="menuButton" type="button" class="lg:hidden inline-flex items-center justify-center rounded-md border border-stone-300 p-2 text-stone-700 hover:bg-stone-100" aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟導覽選單">
+          <svg id="menuIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6" aria-hidden="true"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+      </div>
+      <nav id="mobileMenu" class="hidden lg:hidden pb-3 grid grid-cols-2 gap-2 text-sm font-semibold" aria-label="手機版章節">
+        <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#overview">核心主軸</a>
+        <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#micron">Micron</a>
+        <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#energy">能源長約</a>
+        <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#tesla">Tesla</a>
+        <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#framework">投資框架</a>
+        <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#risks">風險檢查</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold leading-tight">AI 搶供應：記憶體、核電與現金流</h1>
+        <p class="mt-6 max-w-4xl text-sky-50/90 leading-relaxed text-lg">AI 需求正從成長預期轉化為真實資金承諾：Micron 已反映在營收與營運現金流，Amazon 與 Constellation 以二十年核電長約換取未來供應確定性，Tesla 的歐洲掛牌則只是需求改善線索。投資判斷必須分開檢查「承諾、交付、收益」三個階段。</p>
+        <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="metric-card rounded-xl border border-white/15 bg-white/10 p-5">
+            <p class="text-sm text-sky-100">Micron FY2026 Q4 營收</p>
+            <p class="mt-2 text-3xl font-extrabold">$54.23B</p>
+            <p class="mt-1 text-xs text-sky-100/80">已實現業績</p>
+          </div>
+          <div class="metric-card rounded-xl border border-white/15 bg-white/10 p-5">
+            <p class="text-sm text-sky-100">策略客戶財務承諾</p>
+            <p class="mt-2 text-3xl font-extrabold">約 $32B</p>
+            <p class="mt-1 text-xs text-sky-100/80">其中季底已收現金存款約 $12.7B</p>
+          </div>
+          <div class="metric-card rounded-xl border border-white/15 bg-white/10 p-5">
+            <p class="text-sm text-sky-100">核電採購協議</p>
+            <p class="mt-2 text-3xl font-extrabold">20 年</p>
+            <p class="mt-1 text-xs text-sky-100/80">涉及 690MW，其中新增約 190MW</p>
+          </div>
+          <div class="metric-card rounded-xl border border-white/15 bg-white/10 p-5">
+            <p class="text-sm text-sky-100">Tesla 法國 9 月掛牌</p>
+            <p class="mt-2 text-3xl font-extrabold">+61.9%</p>
+            <p class="mt-1 text-xs text-sky-100/80">年增；不等同全球交車或獲利</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心主軸：企業開始用資金換取供應確定性</h2>
+      <div class="grid lg:grid-cols-3 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <div class="w-10 h-10 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-extrabold">1</div>
+          <h3 class="mt-4 text-xl font-bold text-stone-900">承諾</h3>
+          <p class="mt-3 leading-relaxed">客戶願意交付存款、簽署採購義務或長期電力合約，代表稀缺供應已重要到足以占用資金與未來履約彈性。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <div class="w-10 h-10 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-extrabold">2</div>
+          <h3 class="mt-4 text-xl font-bold text-stone-900">交付</h3>
+          <p class="mt-3 leading-relaxed">簽約不等於產能已上線。記憶體仍受認證、良率與擴產節奏影響；核電新增容量預計要到 2030–2032 年才上線。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6">
+          <div class="w-10 h-10 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-extrabold">3</div>
+          <h3 class="mt-4 text-xl font-bold text-stone-900">收益</h3>
+          <p class="mt-3 leading-relaxed">真正支撐估值的是可持續現金流。上游收到承諾、供應商完成建設，與下游客戶把成本轉成收入，必須分開驗證。</p>
+        </article>
+      </div>
+      <div class="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-6">
+        <p class="font-bold text-amber-900">主導變數</p>
+        <p class="mt-2 leading-relaxed text-amber-900/90">記憶體與電力的供應速度，能否跟上客戶投入資金的速度。供給持續落後有利稀缺資源持有者維持議價能力；一旦產能追上需求，投資焦點可能轉向資本支出、價格與現金流壓力。</p>
+      </div>
+    </section>
+
+    <section id="micron" class="section-anchor bg-white/60 border-y border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Micron：財報驗證需求，但價格與現金流來源要拆開看</h2>
+        <div class="grid xl:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 xl:mb-0">
+            <h3 class="text-xl font-bold text-stone-900">FY2026 Q4 已實現財務表現</h3>
+            <p class="mt-2 text-sm text-stone-500">單位：十億美元；調整後自由現金流與淨資本支出依公司公布口徑。</p>
+            <div class="chart-shell mt-5"><canvas id="micronCashChart" aria-label="Micron第四季營收與現金流圖表" role="img"></canvas></div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-900">財務承諾 ≠ 已收現金 ≠ 產品營收</h3>
+            <p class="mt-2 text-sm text-stone-500">策略供應協議的財務承諾與資產負債表上的已收現金存款是不同數字。</p>
+            <div class="chart-shell mt-5"><canvas id="micronCommitmentChart" aria-label="Micron客戶財務承諾與已收存款圖表" role="img"></canvas></div>
+          </article>
+        </div>
+
+        <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <article class="rounded-lg border border-stone-200 bg-white p-5">
+            <p class="text-sm font-semibold text-sky-700">出貨與價格</p>
+            <h3 class="mt-2 font-bold text-stone-900">營收成長並非等於用量同比例上升</h3>
+            <p class="mt-3 text-sm leading-relaxed">第四季 DRAM 位元出貨季增約中個位數，平均價格接近 +20%；NAND 位元出貨約 +10%，價格約 +30%。短缺定價是成長的重要來源。</p>
+          </article>
+          <article class="rounded-lg border border-stone-200 bg-white p-5">
+            <p class="text-sm font-semibold text-sky-700">現金流口徑</p>
+            <h3 class="mt-2 font-bold text-stone-900">客戶存款列入融資活動</h3>
+            <p class="mt-3 text-sm leading-relaxed">策略供應協議存款不列入營業現金流，也沒有增加該季調整後自由現金流，因此不能把預收存款誤認為營運獲利。</p>
+          </article>
+          <article class="rounded-lg border border-stone-200 bg-white p-5">
+            <p class="text-sm font-semibold text-sky-700">下一季展望</p>
+            <h3 class="mt-2 font-bold text-stone-900">營收指引約 $61.5B ± $1.5B</h3>
+            <p class="mt-3 text-sm leading-relaxed">這是管理層展望，不是已完成營收；中期仍需用定價、出貨量、客戶履約、產品認證與擴產進度驗證。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="memory" class="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI 記憶體瓶頸：不是只有 HBM</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+          <p class="text-xs font-bold uppercase tracking-wider text-sky-600">Compute</p>
+          <h3 class="mt-2 text-lg font-bold text-stone-900">GPU</h3>
+          <p class="mt-2 text-sm leading-relaxed">負責大量計算，是 AI 伺服器運算核心。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+          <p class="text-xs font-bold uppercase tracking-wider text-sky-600">Bandwidth</p>
+          <h3 class="mt-2 text-lg font-bold text-stone-900">HBM</h3>
+          <p class="mt-2 text-sm leading-relaxed">屬於 DRAM，讓運算晶片快速取得資料，涉及認證、封裝、良率與平台切換。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+          <p class="text-xs font-bold uppercase tracking-wider text-sky-600">Workspace</p>
+          <h3 class="mt-2 text-lg font-bold text-stone-900">伺服器 DRAM</h3>
+          <p class="mt-2 text-sm leading-relaxed">支援更大的工作空間，需求可能隨模型規模、長上下文與並行工作量增加。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+          <p class="text-xs font-bold uppercase tracking-wider text-sky-600">Storage</p>
+          <h3 class="mt-2 text-lg font-bold text-stone-900">NAND / SSD</h3>
+          <p class="mt-2 text-sm leading-relaxed">保留模型、資料與運算過程所需內容，可能在推論與大量實際使用階段擴大需求。</p>
+        </article>
+      </div>
+      <div class="mt-8 bg-sky-50 border border-sky-200 rounded-xl p-6">
+        <p class="font-bold text-sky-900">產業含義</p>
+        <p class="mt-2 leading-relaxed text-sky-900/90">第一階受惠者是能交付合格產品的記憶體供應商；第二階是設備、材料與封裝供應商；供應增加後，較晚受惠者可能轉向能用更合理成本部署 AI 的雲端與應用業者。這並不代表 Micron 在每一類產品都具有相同競爭優勢，也不能用單一供應商財報證明所有 AI 應用已具備成熟商業模式。</p>
+      </div>
+    </section>
+
+    <section id="energy" class="section-anchor bg-white/60 border-y border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Amazon × Constellation：二十年長約把電力需求轉成投資依據</h2>
+        <div class="grid xl:grid-cols-2 gap-6 items-stretch">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 xl:mb-0">
+            <h3 class="text-xl font-bold text-stone-900">Calvert Cliffs 協議容量</h3>
+            <p class="mt-2 text-sm text-stone-500">690MW 為協議涉及電力，其中約 190MW 是新增容量；新增部分預計 2030–2032 年上線。</p>
+            <div class="chart-shell mt-5"><canvas id="energyChart" aria-label="Amazon與Constellation協議容量圖表" role="img"></canvas></div>
+          </article>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+              <p class="text-sm font-semibold text-sky-700">Constellation</p>
+              <h3 class="mt-2 text-lg font-bold text-stone-900">長約提高收入能見度</h3>
+              <p class="mt-3 text-sm leading-relaxed">大型客戶的長期需求支持既有核電廠升級與超過 30 億美元的基礎建設投資，但最終股東收益仍須扣除工程、維護、停機與資金成本。</p>
+            </article>
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+              <p class="text-sm font-semibold text-sky-700">Amazon</p>
+              <h3 class="mt-2 text-lg font-bold text-stone-900">取得未來部署選擇權</h3>
+              <p class="mt-3 text-sm leading-relaxed">長期供電有助降低資料中心規劃不確定性，但合約價格與付款節奏未完整公開，不能直接推論 AWS 毛利一定改善。</p>
+            </article>
+            <article class="sm:col-span-2 rounded-lg border border-amber-200 bg-amber-50 p-6">
+              <h3 class="font-bold text-amber-900">不能把 690MW 寫成「已新建完成」</h3>
+              <p class="mt-2 text-sm leading-relaxed text-amber-900/90">這是既有核電廠的持續營運與升級安排；新增容量約 190MW，且距離上線仍有數年。長約與某座資料中心已取得全部接電條件，也不是同一件事。</p>
+            </article>
+          </div>
+        </div>
+        <div class="mt-8 rounded-xl bg-stone-900 text-stone-100 p-6">
+          <p class="font-bold">第二階效應</p>
+          <p class="mt-2 text-sm sm:text-base leading-relaxed text-stone-300">AI 用電需求 → 長期供電合約 → 發電投資更可預測 → 輸配電、變壓器、配電系統與工程服務需求增加。Eaton、GE Vernova 可作為產業曝險觀察例子，但報告未確認它們取得本案訂單，因此不能把產業需求直接寫成個別公司已實現營收。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tesla" class="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Tesla：歐洲掛牌回升，是基本面線索而非 AI 估值證明</h2>
+      <div class="grid xl:grid-cols-3 gap-6">
+        <article class="xl:col-span-2 bg-white rounded-lg shadow-lg p-6 mb-6 xl:mb-0">
+          <h3 class="text-xl font-bold text-stone-900">2026 年 9 月部分歐洲市場掛牌年增率</h3>
+          <p class="mt-2 text-sm text-stone-500">各國掛牌數據不可直接視為 Tesla 全球交車、營收或獲利。</p>
+          <div class="chart-shell mt-5"><canvas id="teslaChart" aria-label="Tesla歐洲市場掛牌年增率圖表" role="img"></canvas></div>
+        </article>
+        <div class="space-y-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <p class="text-sm font-semibold text-sky-700">瑞典對照</p>
+            <p class="mt-2 text-3xl font-extrabold text-stone-900">Tesla +38.4%</p>
+            <p class="mt-1 text-sm text-stone-500">當地純電車市場約 +46%</p>
+            <p class="mt-4 text-sm leading-relaxed">在統計口徑可比的前提下，Tesla 當月在瑞典純電市場的份額承受下降壓力，說明「賣得更多」不等於「競爭地位變強」。</p>
+          </article>
+          <article class="rounded-lg border border-sky-200 bg-sky-50 p-6">
+            <h3 class="font-bold text-sky-900">真正影響現金流的變數</h3>
+            <p class="mt-2 text-sm leading-relaxed text-sky-900/90">全球交車、庫存、實際成交價格，以及排除監管積分後的汽車毛利率。若掛牌回升依賴折扣或低利率貸款，營收與獲利改善幅度可能不同。</p>
+          </article>
+          <article class="rounded-lg border border-violet-200 bg-violet-50 p-6">
+            <h3 class="font-bold text-violet-900">Robotaxi 仍需另外驗證</h3>
+            <p class="mt-2 text-sm leading-relaxed text-violet-900/90">9 月掛牌無法證明自動駕駛已達所需安全標準，也不能證明 Robotaxi 已形成可擴張的單車獲利模式。AI 估值仍需服務規模、監管條件、每車成本與實際收入支持。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="framework" class="section-anchor bg-white/60 border-y border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資框架：供應商能見度提高，下游客戶彈性可能下降</h2>
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <p class="text-xs font-bold tracking-wider text-sky-700">短期｜數日至 3 個月</p>
+            <h3 class="mt-2 text-lg font-bold text-stone-900">看預期差與交易價格</h3>
+            <p class="mt-3 text-sm leading-relaxed">Micron 要比較獲利預估調整與股價反應；Constellation 要警惕估值變化快於實際現金流；Tesla 若交車或毛利未同步改善，單月掛牌的權重應下降。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <p class="text-xs font-bold tracking-wider text-sky-700">中期｜3–18 個月</p>
+            <h3 class="mt-2 text-lg font-bold text-stone-900">驗證承諾能否成為交付與收益</h3>
+            <p class="mt-3 text-sm leading-relaxed">Micron 看價格、出貨、履約、認證與擴產；Amazon／Constellation 看工程、監管、供電安排與投資成本；Tesla 看核心汽車現金流及自駕投入是否轉成可衡量收入。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <p class="text-xs font-bold tracking-wider text-sky-700">長期｜18 個月至 5 年以上</p>
+            <h3 class="mt-2 text-lg font-bold text-stone-900">追蹤稀缺溢價如何轉移</h3>
+            <p class="mt-3 text-sm leading-relaxed">供應短缺時重視交付與議價能力；擴產時看設備訂單與資本效率；供應改善後，焦點可能轉向應用付費需求與利潤。</p>
+          </article>
+        </div>
+
+        <div class="mt-8 grid lg:grid-cols-2 gap-6">
+          <article class="rounded-xl border border-stone-200 bg-white p-6">
+            <h3 class="text-xl font-bold text-stone-900">成本的第二階傳導</h3>
+            <p class="mt-3 leading-relaxed">上游收入能見度提高，往往意味下游先鎖定晶片、記憶體、建築、租賃與電力，財務彈性下降。如果最終 AI 服務需求不如預期，成本未必能同步縮減。</p>
+          </article>
+          <article class="rounded-xl border border-stone-200 bg-white p-6">
+            <h3 class="text-xl font-bold text-stone-900">資金成本仍是估值約束</h3>
+            <p class="mt-3 leading-relaxed">10 月 1 日市場報導顯示，美國 10 年期公債殖利率一度約 5.34%，後回落至約 5.27%；這不是當日收盤值。較高融資成本可能壓縮長期建設回報，也對依賴遠期收益的股票估值形成壓力。</p>
+          </article>
+        </div>
+
+        <div class="mt-10 bg-white rounded-lg shadow-lg p-6 mb-0">
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-bold text-stone-900">公司事件追蹤表</h3>
+              <p class="mt-1 text-sm text-stone-500">僅列報告中已有依據的事件與待驗證項目。</p>
+            </div>
+            <label class="block sm:w-80">
+              <span class="sr-only">搜尋追蹤表</span>
+              <input id="tableSearch" type="search" placeholder="搜尋公司、事件或指標…" class="w-full rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200" />
+            </label>
+          </div>
+          <div class="table-wrap mt-5 rounded-lg border border-stone-200">
+            <table class="min-w-[980px] w-full text-sm text-left">
+              <thead class="sticky top-0 z-10 bg-stone-100 text-stone-700">
+                <tr>
+                  <th class="px-4 py-3 font-bold">公司／主題</th>
+                  <th class="px-4 py-3 font-bold">已確認</th>
+                  <th class="px-4 py-3 font-bold">仍待驗證</th>
+                  <th class="px-4 py-3 font-bold">時間／數字</th>
+                </tr>
+              </thead>
+              <tbody id="trackerTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+            </table>
+          </div>
+          <p id="tableCount" class="mt-3 text-xs text-stone-500" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="risks" class="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">什麼情況會讓投資論點轉弱？</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-l-4 border-rose-400">
+          <h3 class="text-lg font-bold text-stone-900">Micron</h3>
+          <p class="mt-3 text-sm leading-relaxed">價格漲幅放緩時，出貨量與產品組合無法接手成長；或客戶調整採購、庫存上升，資本支出增加卻沒有相稱的營運現金流。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-l-4 border-rose-400">
+          <h3 class="text-lg font-bold text-stone-900">Constellation</h3>
+          <p class="mt-3 text-sm leading-relaxed">工程成本或進度偏離規劃、營運執照延續遇阻，或長約扣除成本後的回報低於市場原先期待。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-l-4 border-rose-400">
+          <h3 class="text-lg font-bold text-stone-900">Amazon</h3>
+          <p class="mt-3 text-sm leading-relaxed">取得更多供應承諾後，雲端收入與設備利用率沒有相應改善，而資本支出、履約責任與融資成本持續增加。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-l-4 border-rose-400">
+          <h3 class="text-lg font-bold text-stone-900">Tesla</h3>
+          <p class="mt-3 text-sm leading-relaxed">歐洲回升主要靠折扣、低基期或集中交付，完整市場數據與毛利沒有改善；或 AI 相關投入持續超前於可驗證收入。</p>
+        </article>
+      </div>
+      <div class="mt-8 rounded-xl bg-sky-900 p-6 sm:p-8 text-white">
+        <p class="text-xl sm:text-2xl font-bold">最後仍回到三個問題：誰掌握稀缺資源、誰承擔成本、誰最後留下現金？</p>
+        <p class="mt-3 text-sky-100 leading-relaxed">只有「承諾 → 交付 → 收益」三個環節持續成立，今天的需求驗證才有機會轉成長期投資回報。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI搶供應：記憶體、核電與現金流。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中AI供應鏈相關公開資料 (2026年10月1日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const observedSections = ['overview', 'micron', 'energy', 'tesla', 'framework', 'risks']
+      .map(id => document.getElementById(id));
+
+    function setActiveNav(id) {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveNav(visible.target.id);
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.05, 0.2, 0.5] });
+
+    observedSections.forEach(section => observer.observe(section));
+    setActiveNav('overview');
+
+    Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    Chart.defaults.color = '#57534e';
+
+    const commonBarOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { intersect: false, mode: 'index' }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#57534e' } },
+        y: { beginAtZero: true, grid: { color: 'rgba(120,113,108,.15)' }, ticks: { color: '#57534e' } }
+      }
+    };
+
+    new Chart(document.getElementById('micronCashChart'), {
+      type: 'bar',
+      data: {
+        labels: ['營收', '營業現金流', '淨資本支出', '調整後自由現金流'],
+        datasets: [{ data: [54.23, 43.97, 10.77, 33.20], backgroundColor: ['#0284c7', '#0ea5e9', '#a8a29e', '#0369a1'], borderRadius: 6 }]
+      },
+      options: {
+        ...commonBarOptions,
+        plugins: { ...commonBarOptions.plugins, tooltip: { callbacks: { label: ctx => `$${ctx.raw.toFixed(2)}B` } } },
+        scales: { ...commonBarOptions.scales, y: { ...commonBarOptions.scales.y, title: { display: true, text: '十億美元' } } }
+      }
+    });
+
+    new Chart(document.getElementById('micronCommitmentChart'), {
+      type: 'bar',
+      data: {
+        labels: ['策略客戶財務承諾', '季底已收現金存款'],
+        datasets: [{ data: [32, 12.7], backgroundColor: ['#0284c7', '#38bdf8'], borderRadius: 6 }]
+      },
+      options: {
+        ...commonBarOptions,
+        plugins: { ...commonBarOptions.plugins, tooltip: { callbacks: { label: ctx => `約 $${ctx.raw}B` } } },
+        scales: { ...commonBarOptions.scales, y: { ...commonBarOptions.scales.y, max: 36, title: { display: true, text: '十億美元' } } }
+      }
+    });
+
+    new Chart(document.getElementById('energyChart'), {
+      type: 'bar',
+      data: {
+        labels: ['協議涉及電力', '其中新增容量'],
+        datasets: [{ data: [690, 190], backgroundColor: ['#0369a1', '#7dd3fc'], borderRadius: 6 }]
+      },
+      options: {
+        ...commonBarOptions,
+        plugins: { ...commonBarOptions.plugins, tooltip: { callbacks: { label: ctx => `${ctx.raw} MW` } } },
+        scales: { ...commonBarOptions.scales, y: { ...commonBarOptions.scales.y, title: { display: true, text: 'MW' } } }
+      }
+    });
+
+    new Chart(document.getElementById('teslaChart'), {
+      type: 'bar',
+      data: {
+        labels: ['法國', '瑞典', '西班牙', '挪威', '丹麥'],
+        datasets: [{ data: [61.9, 38.4, 24.8, 2.2, 2.9], backgroundColor: ['#0284c7', '#0ea5e9', '#38bdf8', '#7dd3fc', '#bae6fd'], borderRadius: 6 }]
+      },
+      options: {
+        ...commonBarOptions,
+        plugins: { ...commonBarOptions.plugins, tooltip: { callbacks: { label: ctx => `年增 ${ctx.raw}%` } } },
+        scales: { ...commonBarOptions.scales, y: { ...commonBarOptions.scales.y, suggestedMax: 70, title: { display: true, text: '年增率 (%)' } } }
+      }
+    });
+
+    const productData = [
+      { company: 'Micron', confirmed: 'FY2026 Q4 營收約 $54.23B；營業現金流約 $43.97B；調整後自由現金流約 $33.20B。', verify: '價格漲幅能否由出貨量與產品組合接手；客戶履約、產品認證與擴產進度。', timing: '下一季營收指引約 $61.5B ± $1.5B（管理層展望）' },
+      { company: 'Micron 策略供應協議', confirmed: '已簽 26 份協議；客戶財務承諾約 $32B；季底已收現金存款約 $12.7B。', verify: '採購義務、定價、退款條件與客戶履約；存款返還安排。', timing: '承諾金額不等於已收現金，也不等於產品營收' },
+      { company: 'Amazon × Constellation', confirmed: '宣布 20 年電力採購協議，涉及 690MW，支持 Calvert Cliffs 持續營運與升級。', verify: '合約價格、付款節奏、風險分擔、工程與監管進度。', timing: '新增容量約 190MW，預計 2030–2032 上線' },
+      { company: 'Constellation Energy', confirmed: '協議支持超過 $3B 基礎建設投資。', verify: '扣除工程、維護、停機與資金成本後的實際回報。', timing: '長約提高收入能見度，但不等於即時現金流提升' },
+      { company: 'Amazon / AWS', confirmed: '長期供電安排有助降低未來營運規劃不確定性。', verify: '雲端需求、設備利用率與現金流是否足以覆蓋供應承諾成本。', timing: '20 年合約不代表一定取得便宜電或 AWS 毛利已改善' },
+      { company: 'Tesla 法國', confirmed: '2026 年 9 月新車掛牌年增 61.9%。', verify: '是否來自自然需求、促銷或低基期；全球交車、成交價與汽車毛利。', timing: '單月掛牌 ≠ 全球交車 ≠ 營收／獲利' },
+      { company: 'Tesla 瑞典', confirmed: '2026 年 9 月新車掛牌年增 38.4%；當地純電市場約年增 46%。', verify: '多月市場份額與完整市場數據。', timing: '在口徑可比前提下，當月份額承受下降壓力' },
+      { company: 'Tesla AI / Robotaxi', confirmed: '汽車需求回升可改善核心業務觀察。', verify: '安全標準、監管條件、服務規模、每車成本與實際收入。', timing: '掛牌回升不能直接驗證 AI 估值' },
+      { company: '資金成本', confirmed: '10 月 1 日報導時點，美國 10 年期公債殖利率一度約 5.34%，後回落至約 5.27%。', verify: '長期利率、企業融資成本及自由現金流的後續變化。', timing: '報導時點水準，非當日收盤值' }
+    ];
+
+    const tableBody = document.getElementById('trackerTableBody');
+    const tableSearch = document.getElementById('tableSearch');
+    const tableCount = document.getElementById('tableCount');
+
+    function renderTable(rows) {
+      tableBody.innerHTML = rows.map(row => `
+        <tr class="align-top hover:bg-stone-50">
+          <td class="px-4 py-4 font-bold text-stone-900">${row.company}</td>
+          <td class="px-4 py-4 leading-relaxed">${row.confirmed}</td>
+          <td class="px-4 py-4 leading-relaxed">${row.verify}</td>
+          <td class="px-4 py-4 leading-relaxed text-stone-600">${row.timing}</td>
+        </tr>
+      `).join('');
+      tableCount.textContent = `顯示 ${rows.length} / ${productData.length} 筆`;
+    }
+
+    tableSearch.addEventListener('input', event => {
+      const query = event.target.value.trim().toLowerCase();
+      const rows = productData.filter(row => Object.values(row).some(value => value.toLowerCase().includes(query)));
+      renderTable(rows);
+    });
+
+    renderTable(productData);
+  </script>
+</body>
+</html>
