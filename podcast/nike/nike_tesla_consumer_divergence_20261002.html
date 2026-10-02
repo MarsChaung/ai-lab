@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nike、Tesla與Costco的消費分化與投資驗證框架：聚焦定價能力、汽車獲利、現金流與Robotaxi商業化。">
+    <title>巴菲特AI價值投資-Nike與Tesla的付費能力考驗</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif; }
+        .hero-mesh {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+        }
+        .hero-mesh::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+            background-size: 36px 36px;
+        }
+        .hero-mesh > .hero-content { position: relative; z-index: 1; }
+        .active-nav-link { color: #0369a1; background: #e0f2fe; }
+        .inactive-nav-link { color: #57534e; background: transparent; }
+        .inactive-nav-link:hover { color: #0369a1; background: #f0f9ff; }
+        .chart-shell { position: relative; width: 100%; height: 340px; }
+        .metric-value { font-variant-numeric: tabular-nums; }
+        .table-scroll { scrollbar-width: thin; }
+        @media (max-width: 640px) {
+            .chart-shell { height: 300px; }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased">
+    <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between gap-4">
+                <a href="#top" class="font-bold text-stone-900 whitespace-nowrap">巴菲特AI價值投資</a>
+                <nav class="hidden lg:flex items-center gap-1" aria-label="主要章節">
+                    <a data-nav href="#overview" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">核心結論</a>
+                    <a data-nav href="#numbers" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">關鍵數字</a>
+                    <a data-nav href="#nike" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">Nike</a>
+                    <a data-nav href="#costco" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">Costco</a>
+                    <a data-nav href="#tesla" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">Tesla</a>
+                    <a data-nav href="#robotaxi" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">Robotaxi</a>
+                    <a data-nav href="#signals" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">追蹤訊號</a>
+                    <a data-nav href="#strategy" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">投資框架</a>
+                </nav>
+                <button id="menuButton" type="button" class="lg:hidden inline-flex items-center justify-center rounded-md border border-stone-300 p-2 text-stone-700" aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟章節選單">
+                    <svg id="menuIcon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <nav id="mobileMenu" class="hidden lg:hidden border-t border-stone-200 py-3" aria-label="手機章節選單">
+                <div class="grid grid-cols-2 gap-2">
+                    <a data-nav href="#overview" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">核心結論</a>
+                    <a data-nav href="#numbers" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">關鍵數字</a>
+                    <a data-nav href="#nike" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">Nike</a>
+                    <a data-nav href="#costco" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">Costco</a>
+                    <a data-nav href="#tesla" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">Tesla</a>
+                    <a data-nav href="#robotaxi" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">Robotaxi</a>
+                    <a data-nav href="#signals" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">追蹤訊號</a>
+                    <a data-nav href="#strategy" class="inactive-nav-link rounded-md px-3 py-2 text-sm font-medium">投資框架</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+            <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+                <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight max-w-5xl">Nike失速、Tesla交車優於預期：消費分化下的品牌與AI估值考驗</h1>
+                <p class="mt-6 max-w-4xl text-sky-50/90 leading-relaxed text-lg">Nike需要證明消費者重新願意為品牌付出溢價；Tesla則要證明交車回穩能轉成汽車獲利與現金，並為Robotaxi等新事業提供可持續的資金來源。報告的共同觀察軸線，是定價能力與現金流，而不是單看營收、交車或技術進度。</p>
+                <div class="mt-8 grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-lg border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-sm text-sky-100">Nike FY2027 Q1 營收</p>
+                        <p class="metric-value mt-1 text-3xl font-bold">US$11.21B</p>
+                        <p class="mt-1 text-sm text-sky-100">年減約 4%</p>
+                    </div>
+                    <div class="rounded-lg border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-sm text-sky-100">Tesla 2026 Q3 交車</p>
+                        <p class="metric-value mt-1 text-3xl font-bold">486,532</p>
+                        <p class="mt-1 text-sm text-sky-100">高於兩組市場預估</p>
+                    </div>
+                    <div class="rounded-lg border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+                        <p class="text-sm text-sky-100">Costco 商品淨銷售</p>
+                        <p class="metric-value mt-1 text-3xl font-bold">+11.2%</p>
+                        <p class="mt-1 text-sm text-sky-100">提供消費韌性的對照</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心結論：消費沒有單向變弱，而是在重新分配</h2>
+            <div class="grid gap-6 lg:grid-cols-3">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <p class="text-xs font-semibold tracking-wide text-sky-700">NIKE</p>
+                    <h3 class="mt-2 text-xl font-bold text-stone-900">品牌修復的標準不是省多少，而是少打折仍能賣</h3>
+                    <p class="mt-3 leading-relaxed">毛利率改善顯示成本效率回升，但更關鍵的是新品能否以正常售價被消費者接受。大中華區的持續下滑，也使產品吸引力、通路價格秩序與在地競爭成為主要驗證點。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <p class="text-xs font-semibold tracking-wide text-sky-700">TESLA</p>
+                    <h3 class="mt-2 text-xl font-bold text-stone-900">交車驚喜只是第一步，汽車毛利與自由現金流才是第二步</h3>
+                    <p class="mt-3 leading-relaxed">第三季交車高於預估，但仍低於去年同期。若銷量改善主要靠促銷或融資補貼，獲利未必同步回升，因此後續財報需核對售價、毛利與現金流。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <p class="text-xs font-semibold tracking-wide text-sky-700">共同框架</p>
+                    <h3 class="mt-2 text-xl font-bold text-stone-900">真正的共同指標：客戶是否願意持續付錢</h3>
+                    <p class="mt-3 leading-relaxed">Nike與Tesla的轉型方式不同，但都必須在更少折扣、補貼或示範性投入下，證明客戶願付價格與企業現金創造能力能夠延續。</p>
+                </article>
+            </div>
+            <div class="rounded-lg border border-amber-200 bg-amber-50 p-6">
+                <h3 class="font-bold text-amber-900">事實與推演需分開</h3>
+                <p class="mt-2 leading-relaxed text-amber-950/80">報告把已公布數字、管理層目標與後續情境分開處理。例如 Nike 的 US$2.5B 是至 2031 會計年度的累計節省目標，不是每年新增獲利；Tesla 的 Robotaxi 局部部署是進展，但不代表已具備全面複製與持續獲利能力。</p>
+            </div>
+        </section>
+
+        <section id="numbers" class="scroll-mt-24 bg-white/70 border-y border-stone-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+                <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵數字：先釐清口徑，再判讀市場訊號</h2>
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <p class="text-sm text-stone-500">Nike 大中華區</p>
+                        <p class="metric-value mt-2 text-3xl font-extrabold text-rose-700">-26%</p>
+                        <p class="mt-2 text-sm">排除匯率影響；美元報表口徑約 -22%。</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <p class="text-sm text-stone-500">Nike 毛利率</p>
+                        <p class="metric-value mt-2 text-3xl font-extrabold text-emerald-700">42.8%</p>
+                        <p class="mt-2 text-sm">年增 0.6 個百分點，主要受物流與倉儲成本下降帶動。</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <p class="text-sm text-stone-500">Tesla Q3 產量</p>
+                        <p class="metric-value mt-2 text-3xl font-extrabold text-stone-900">464,391</p>
+                        <p class="mt-2 text-sm">交車比產量多 22,141 輛，但不等同財報存貨金額減少。</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <p class="text-sm text-stone-500">Tesla 儲能部署</p>
+                        <p class="metric-value mt-2 text-3xl font-extrabold text-stone-900">13.7 GWh</p>
+                        <p class="mt-2 text-sm">仍需由後續財報核對營收與獲利品質。</p>
+                    </div>
+                </div>
+
+                <div class="grid gap-8 lg:grid-cols-2">
+                    <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-bold text-stone-900">Tesla Q3 交車：實際值高於兩組預估</h3>
+                        <p class="mt-2 text-sm text-stone-500">不同預估來源樣本與時間不同，應各自比較。</p>
+                        <div class="chart-shell mt-5"><canvas id="teslaDeliveryChart" aria-label="Tesla第三季實際交車與兩組預估比較" role="img"></canvas></div>
+                    </article>
+                    <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-bold text-stone-900">消費分化：Nike 與 Costco 的成長率對照</h3>
+                        <p class="mt-2 text-sm text-stone-500">各項數據涵蓋不同地區與口徑，僅用於呈現報告中的分化現象，不視為直接同口徑比較。</p>
+                        <div class="chart-shell mt-5"><canvas id="consumerDivergenceChart" aria-label="Nike與Costco選定營收及同店銷售成長率" role="img"></canvas></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="nike" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Nike：品牌溢價能否重新建立</h2>
+            <div class="grid gap-6 lg:grid-cols-3">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+                    <h3 class="text-xl font-bold text-stone-900">需求修復與成本改善是兩條不同路徑</h3>
+                    <p class="mt-3 leading-relaxed">本季毛利率升至 42.8%，主要受益於倉儲與物流成本下降；但成本下降不能直接證明品牌需求已修復。更重要的測試，是新品能否降低折扣依賴、恢復正常售價銷售與通路信心。</p>
+                    <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                        <div class="rounded-lg bg-sky-50 p-4">
+                            <p class="font-semibold text-sky-900">中國市場</p>
+                            <p class="mt-1 text-sm leading-relaxed">大中華區營收已連續第九季下滑；成功標準應是「少打折仍能賣得動」，而非僅看清庫存或提高直營占比。</p>
+                        </div>
+                        <div class="rounded-lg bg-stone-100 p-4">
+                            <p class="font-semibold text-stone-900">Pace 重整</p>
+                            <p class="mt-1 text-sm leading-relaxed">至 FY2031 累計節省目標約 US$2.5B，另有約 US$1B 稅前重整費用；節省目標不是每年新增獲利。</p>
+                        </div>
+                    </div>
+                </article>
+                <aside class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900">Nike 要回答的問題</h3>
+                    <ul class="mt-4 space-y-3 text-sm leading-relaxed">
+                        <li>新品能否從局部成功擴展到更多市場？</li>
+                        <li>大中華區降幅縮小時，是否同時伴隨更少促銷？</li>
+                        <li>庫存改善後，是否能避免再度累積？</li>
+                        <li>毛利改善有多少來自產品組合與減少折扣，而非單純降成本？</li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <section id="costco" class="scroll-mt-24 bg-stone-100/70 border-y border-stone-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+                <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Costco：消費者仍在花錢，但更重視價值感</h2>
+                <div class="grid gap-6 md:grid-cols-3">
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <p class="text-sm text-stone-500">第四季總營收</p>
+                        <p class="metric-value mt-2 text-3xl font-extrabold text-stone-900">US$95.72B</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <p class="text-sm text-stone-500">商品淨銷售額</p>
+                        <p class="metric-value mt-2 text-3xl font-extrabold text-emerald-700">+11.2%</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <p class="text-sm text-stone-500">美國同店銷售</p>
+                        <p class="metric-value mt-2 text-3xl font-extrabold text-emerald-700">+7.2%</p>
+                        <p class="mt-1 text-sm">排除汽油價格與匯率影響。</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900">對 Nike 的真正啟示不是「必需品強、非必需品弱」</h3>
+                    <p class="mt-3 leading-relaxed">報告更偏向「消費正在分化」：具備價格與購物效率優勢的通路，可以承接重新分配的預算；產品差異不足的品牌則可能失去份額。Nike 中國壓力與 Costco 美國零售也不是同一市場，因此不能直接把兩者差異當成整體美國消費衰退的證據。</p>
+                    <p class="mt-3 leading-relaxed">產業傳導上，若零售商提高庫存效率，弱勢品牌可能先面臨備貨縮減，再影響鞋材與代工訂單；但這需要由實際訂單驗證，不能把 Nike 流失的銷售直接分配給特定競爭對手。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tesla" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Tesla：交車改善能否帶回每輛車的獲利</h2>
+            <div class="grid gap-6 lg:grid-cols-3">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+                    <h3 class="text-xl font-bold text-stone-900">交車優於預期，但尚未證明需求重回高速成長</h3>
+                    <p class="mt-3 leading-relaxed">第三季交車 486,532 輛，高於 Visible Alpha 的 456,896 輛預估約 6.5%，也高於 Tesla 自行彙整分析師平均 461,974 輛約 5.3%。然而，交車仍較去年同期減少約 2.1%，較第二季增加約 1.3%。</p>
+                    <div class="mt-5 rounded-lg bg-sky-50 p-5">
+                        <p class="font-semibold text-sky-900">下一個驗證點：2026 年 10 月 21 日第三季財報</p>
+                        <p class="mt-2 text-sm leading-relaxed text-sky-950/80">應核對汽車毛利率、平均售價與自由現金流，確認交車改善是否主要來自更健康的需求，而非價格優惠或低利率融資補貼。</p>
+                    </div>
+                </article>
+                <aside class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900">全年持平門檻</h3>
+                    <p class="metric-value mt-4 text-4xl font-extrabold text-stone-900">311,448 輛</p>
+                    <p class="mt-3 text-sm leading-relaxed">Tesla 前三季累計交車 1,324,681 輛；去年全年為 1,636,129 輛。第四季交付 311,448 輛可追平去年全年，但這只代表停止年度下滑，不等同需求已轉強。</p>
+                </aside>
+            </div>
+            <div class="grid gap-6 md:grid-cols-2">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900">歐洲需求改善</h3>
+                    <p class="mt-3 leading-relaxed">歐盟前八個月掛牌量 142,165 輛，年增 65.9%；若把英國與歐洲自由貿易聯盟納入，增幅為 43.3%。兩者統計範圍不同，不能混用。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900">上海出口與中國壓力並存</h3>
+                    <p class="mt-3 leading-relaxed">上海工廠七、八月出口合計 102,449 輛，較去年同期 53,309 輛增加約 92%；但中國本地零售在七、八月仍年減。出口改善不能直接推論中國競爭壓力已消失。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="robotaxi" class="scroll-mt-24 bg-white/70 border-y border-stone-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+                <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Robotaxi：部署進展已出現，商業模式仍待驗證</h2>
+                <div class="grid gap-6 lg:grid-cols-3">
+                    <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-lg font-bold text-stone-900">已發生</h3>
+                        <p class="mt-3 leading-relaxed text-sm">截至報告截點，Tesla 已在德州與佛州部分地區提供取消車內安全監督員的 Robotaxi 服務；Cybercab 也於九月加入 Austin 部分區域的服務。</p>
+                    </article>
+                    <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-lg font-bold text-stone-900">仍待驗證</h3>
+                        <p class="mt-3 leading-relaxed text-sm">一輛車每天的付費乘客數、空車移動占比、遠端支援、充電、清潔、維修、保險與事故責任成本，才決定低硬體成本能否轉成低服務成本。</p>
+                    </article>
+                    <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-lg font-bold text-stone-900">監管與複製性</h3>
+                        <p class="mt-3 leading-relaxed text-sm">美國監管機關九月已就 Cybercab 的安全標準認證要求 Tesla 提供說明；服務上線不能視為所有認證問題已解決。Waymo 的多城市商業營運則提供一個營運累積的比較基準。</p>
+                    </article>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold text-stone-900">Tesla 的三層價值，需要三種證據</h3>
+                    <div class="mt-5 grid gap-4 md:grid-cols-3">
+                        <div class="rounded-lg border border-stone-200 p-5">
+                            <p class="font-bold text-stone-900">汽車</p>
+                            <p class="mt-2 text-sm">交車、售價、毛利、自由現金流。</p>
+                        </div>
+                        <div class="rounded-lg border border-stone-200 p-5">
+                            <p class="font-bold text-stone-900">儲能</p>
+                            <p class="mt-2 text-sm">部署量之外，還要核對營收與獲利。</p>
+                        </div>
+                        <div class="rounded-lg border border-stone-200 p-5">
+                            <p class="font-bold text-stone-900">Robotaxi／機器人</p>
+                            <p class="mt-2 text-sm">付費使用、完整營運成本與跨市場可複製性。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="signals" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">追蹤訊號：哪些證據會強化或削弱投資論點</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-stone-900">可搜尋的驗證清單</h3>
+                        <p class="mt-1 text-sm text-stone-500">搜尋公司、指標或關鍵字，例如「中國」、「現金流」、「Robotaxi」。</p>
+                    </div>
+                    <label class="block sm:w-80">
+                        <span class="sr-only">搜尋追蹤指標</span>
+                        <input id="tableSearch" type="search" placeholder="搜尋追蹤指標..." class="w-full rounded-md border border-stone-300 bg-white px-4 py-2.5 text-sm outline-none ring-sky-500 focus:ring-2">
+                    </label>
+                </div>
+                <div class="table-scroll mt-5 max-h-[520px] overflow-auto rounded-lg border border-stone-200">
+                    <table class="min-w-full text-left text-sm">
+                        <thead class="sticky top-0 z-10 bg-stone-100 text-stone-700">
+                            <tr>
+                                <th class="px-4 py-3 font-semibold">公司／主題</th>
+                                <th class="px-4 py-3 font-semibold">指標</th>
+                                <th class="px-4 py-3 font-semibold">目前證據</th>
+                                <th class="px-4 py-3 font-semibold">下一步驗證</th>
+                            </tr>
+                        </thead>
+                        <tbody id="signalTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+                    </table>
+                </div>
+                <p id="noResults" class="hidden py-6 text-center text-sm text-stone-500">沒有符合條件的追蹤指標。</p>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+                <article class="rounded-lg bg-emerald-50 p-6">
+                    <h3 class="font-bold text-emerald-900">品牌修復論點增強</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-emerald-950/80">Nike 中國降幅縮小、庫存健康、新品在較少促銷下仍能銷售。</p>
+                </article>
+                <article class="rounded-lg bg-sky-50 p-6">
+                    <h3 class="font-bold text-sky-900">Tesla 營運論點增強</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-sky-950/80">汽車交車、獲利與現金流同步改善，且 Robotaxi 付費使用隨擴張增加。</p>
+                </article>
+                <article class="rounded-lg bg-rose-50 p-6">
+                    <h3 class="font-bold text-rose-900">需要重新評估</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-rose-950/80">Nike 費用下降但需求仍弱；或 Tesla 交車增加卻沒有帶來現金，自駕服務仍高度依賴補貼與人工支援。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="strategy" class="scroll-mt-24 bg-stone-100/70 border-y border-stone-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+                <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資框架：區分品牌修復、營運回穩與成長選擇權</h2>
+                <div class="grid gap-6 lg:grid-cols-2">
+                    <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-bold text-stone-900">時間尺度要分開</h3>
+                        <div class="mt-4 space-y-4">
+                            <div>
+                                <p class="font-semibold text-stone-900">短期｜數日至三個月</p>
+                                <p class="mt-1 text-sm leading-relaxed">觀察 Nike 下修展望後的獲利預估修正，以及 Tesla 交車驚喜能否在 Q3 財報轉化為毛利與現金流改善。</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-stone-900">中期｜三至十八個月</p>
+                                <p class="mt-1 text-sm leading-relaxed">驗證 Nike 正常售價銷售、中國庫存與新品擴散；Tesla 則驗證歐洲延續性、中國競爭與 Robotaxi 營運指標透明度。</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-stone-900">長期｜十八個月至五年以上</p>
+                                <p class="mt-1 text-sm leading-relaxed">Nike 看品牌、創新與信任；Tesla 看技術能否轉成可規模化服務收入，以及汽車與新事業之間的資本配置紀律。</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-bold text-stone-900">不同公司用不同證據</h3>
+                        <ul class="mt-4 space-y-4 text-sm leading-relaxed">
+                            <li><span class="font-semibold text-stone-900">Nike：</span>以品牌修復角度追蹤，重點是新品、定價與中國市場，而不是把重整本身當成復甦完成。</li>
+                            <li><span class="font-semibold text-stone-900">Costco：</span>可作為消費韌性與通路競爭力的參考，但營運穩健不代表任何估值都合理。</li>
+                            <li><span class="font-semibold text-stone-900">Tesla：</span>汽車／儲能與自駕／機器人應分開評估；汽車回穩需要汽車獲利證據，Robotaxi 需要服務規模、成本與監管證據。</li>
+                            <li><span class="font-semibold text-stone-900">Alphabet／Waymo：</span>可作為自駕商業化比較，但 Waymo 的進展不能直接等比例映射成 Alphabet 整體獲利。</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="rounded-lg border border-sky-200 bg-sky-50 p-6">
+                    <p class="text-lg font-semibold text-sky-950">報告最終落點：需求改善若能留下現金，而且取得這些現金的競爭優勢可以持續，才是比單一利多、交車數字或技術展示更具投資意義的進展。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-Nike與Tesla的付費能力考驗。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中Nike、Tesla、Costco與自駕產業相關公開資料 (2026年10月02日)。</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuButton.addEventListener('click', () => {
+            const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-expanded', String(!expanded));
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobileMenu a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuButton.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        const navLinks = [...document.querySelectorAll('[data-nav]')];
+        const observedSections = [...document.querySelectorAll('section[id]')];
+
+        function setActiveNav(id) {
+            navLinks.forEach((link) => {
+                const isActive = link.getAttribute('href') === `#${id}`;
+                link.classList.toggle('active-nav-link', isActive);
+                link.classList.toggle('inactive-nav-link', !isActive);
+                if (isActive) link.setAttribute('aria-current', 'page');
+                else link.removeAttribute('aria-current');
+            });
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            const visible = entries
+                .filter((entry) => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+            if (visible.length) setActiveNav(visible[0].target.id);
+        }, { rootMargin: '-20% 0px -60% 0px', threshold: [0.01, 0.2, 0.5] });
+
+        observedSections.forEach((section) => observer.observe(section));
+        setActiveNav('overview');
+
+        Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif';
+        Chart.defaults.color = '#57534e';
+
+        const teslaDeliveryCtx = document.getElementById('teslaDeliveryChart');
+        new Chart(teslaDeliveryCtx, {
+            type: 'bar',
+            data: {
+                labels: ['實際交車', 'Visible Alpha 預估', 'Tesla 彙整分析師平均'],
+                datasets: [{
+                    label: '輛',
+                    data: [486532, 456896, 461974],
+                    backgroundColor: ['rgba(2,132,199,.78)', 'rgba(120,113,108,.55)', 'rgba(120,113,108,.72)'],
+                    borderColor: ['rgb(2,132,199)', 'rgb(120,113,108)', 'rgb(120,113,108)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: (ctx) => `${ctx.raw.toLocaleString()} 輛` } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { callback: (value) => `${Math.round(value / 1000)}k` },
+                        grid: { color: 'rgba(120,113,108,.12)' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        const consumerDivergenceCtx = document.getElementById('consumerDivergenceChart');
+        new Chart(consumerDivergenceCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Nike 總營收',
+                    'Nike 大中華區（排除匯率）',
+                    'Nike 北美',
+                    'Costco 商品淨銷售',
+                    'Costco 全公司同店（排除油價/匯率）',
+                    'Costco 美國同店'
+                ],
+                datasets: [{
+                    label: '年增率 / 同店銷售成長率 (%)',
+                    data: [-4, -26, 2, 11.2, 6.7, 7.2],
+                    backgroundColor: (ctx) => ctx.raw < 0 ? 'rgba(190,24,93,.68)' : 'rgba(5,150,105,.68)',
+                    borderColor: (ctx) => ctx.raw < 0 ? 'rgb(190,24,93)' : 'rgb(5,150,105)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: (ctx) => `${ctx.raw}%` } }
+                },
+                scales: {
+                    x: {
+                        ticks: { callback: (value) => `${value}%` },
+                        grid: { color: 'rgba(120,113,108,.12)' }
+                    },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        const productData = [
+            { company: 'Nike', metric: '大中華區營收', evidence: '排除匯率年減 26%；美元報表口徑約年減 22%，且已連續第九季下滑。', next: '觀察降幅是否收斂，且是否同時伴隨較少促銷與更健康庫存。' },
+            { company: 'Nike', metric: '正常售價銷售', evidence: '報告未提供單一量化指標；被列為品牌修復的主要驗證點。', next: '新品能否在正常售價下擴展至更多市場，降低等待促銷的消費習慣。' },
+            { company: 'Nike', metric: '毛利率', evidence: 'FY2027 Q1 毛利率 42.8%，年增 0.6 個百分點，主要受物流與倉儲成本下降帶動。', next: '拆解後續改善有多少來自產品組合、減少折扣，而非單純降成本。' },
+            { company: 'Nike', metric: 'Pace 重整', evidence: '至 FY2031 累計節省目標約 US$2.5B；另有約 US$1B 稅前重整費用。', next: '確認組織精簡是否加快產品決策，而非削弱研發、設計與在地能力。' },
+            { company: 'Costco', metric: '美國同店銷售', evidence: '排除汽油價格與匯率後年增 7.2%。', next: '作為消費韌性與通路競爭力的對照，同時留意估值是否與成長相稱。' },
+            { company: 'Tesla', metric: '2026 Q3 交車', evidence: '486,532 輛；高於兩組市場預估，但較去年同期減少約 2.1%。', next: '核對 10 月 21 日財報中的汽車毛利、平均售價與自由現金流。' },
+            { company: 'Tesla', metric: '產量與交車差', evidence: 'Q3 產量 464,391 輛；交車比產量多 22,141 輛。', next: '觀察周轉改善是否反映到存貨、產品組合與現金流；不可把產銷差直接等同存貨金額下降。' },
+            { company: 'Tesla', metric: '歐洲需求', evidence: '歐盟前八月掛牌 142,165 輛，年增 65.9%；納入英國與 EFTA 後增幅為 43.3%。', next: '確認成長能否延續，且不需要更大幅價格優惠。' },
+            { company: 'Tesla', metric: '上海出口', evidence: '七、八月出口 102,449 輛，較去年同期 53,309 輛增加約 92%；中國本地零售同期仍年減。', next: '區分出口配置改善與中國本地競爭，避免把兩者混為同一需求訊號。' },
+            { company: 'Tesla', metric: '全年交車持平門檻', evidence: '前三季累計 1,324,681 輛；Q4 交付 311,448 輛即可追平去年全年 1,636,129 輛。', next: '即使全年持平，也要分開檢查 Q4 季度需求與獲利是否健康。' },
+            { company: 'Tesla Robotaxi', metric: '付費使用與完整成本', evidence: '部分地區已出現取消車內安全監督員的服務部署；報告未提供完整單位經濟數字。', next: '追蹤每車每日付費乘客、空車里程，以及遠端支援、充電、清潔、維修、保險等成本。' },
+            { company: 'Tesla Robotaxi', metric: '監管與可複製性', evidence: 'Cybercab 已加入 Austin 部分區域服務；美國監管機關九月要求 Tesla 就安全標準認證提供說明。', next: '確認監管範圍、城市擴張速度與服務品質能否跨地區複製。' },
+            { company: '跨市場', metric: '融資利率、美元與企業融資條件', evidence: '報告列為背景指標，但未宣稱最新走勢已支持特定方向。', next: '用於解讀購車負擔、跨國營收與估值環境，不取代產品與服務需求驗證。' }
+        ];
+
+        const tableBody = document.getElementById('signalTableBody');
+        const searchInput = document.getElementById('tableSearch');
+        const noResults = document.getElementById('noResults');
+
+        function renderTable(query = '') {
+            const normalized = query.trim().toLowerCase();
+            const filtered = productData.filter((row) =>
+                Object.values(row).some((value) => String(value).toLowerCase().includes(normalized))
+            );
+
+            tableBody.innerHTML = filtered.map((row) => `
+                <tr class="align-top hover:bg-stone-50">
+                    <td class="whitespace-nowrap px-4 py-3 font-semibold text-stone-900">${row.company}</td>
+                    <td class="px-4 py-3 font-medium">${row.metric}</td>
+                    <td class="min-w-[280px] px-4 py-3 leading-relaxed">${row.evidence}</td>
+                    <td class="min-w-[280px] px-4 py-3 leading-relaxed">${row.next}</td>
+                </tr>
+            `).join('');
+
+            noResults.classList.toggle('hidden', filtered.length !== 0);
+        }
+
+        searchInput.addEventListener('input', (event) => renderTable(event.target.value));
+        renderTable();
+    </script>
+</body>
+</html>
