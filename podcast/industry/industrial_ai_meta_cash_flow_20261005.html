@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="分析施耐德收購PTC與Meta Muse熱潮，聚焦工業AI資料資產、AI使用者入口、融資成本、資本支出與自由現金流。" />
+  <title>巴菲特AI價值投資-AI資料入口與現金流考驗</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #f8fafc; color: #292524; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0369a1; background: #e0f2fe; font-weight: 700; }
+    .inactive-nav-link { color: #57534e; }
+    .inactive-nav-link:hover { color: #0369a1; background: #f0f9ff; }
+    .chart-shell { position: relative; width: 100%; height: 320px; }
+    .metric-number { font-variant-numeric: tabular-nums; }
+    .table-wrap { max-width: 100%; overflow-x: auto; }
+    section { scroll-margin-top: 92px; }
+    @media (max-width: 640px) {
+      .chart-shell { height: 290px; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200 bg-white/95 backdrop-blur">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="章節導航">
+      <div class="h-16 flex items-center justify-between gap-4">
+        <a href="#overview" class="font-extrabold text-stone-800 whitespace-nowrap">巴菲特AI價值投資</a>
+        <div class="hidden lg:flex items-center gap-1 text-sm">
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#overview">核心判斷</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#ptc-deal">PTC交易</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#industrial-ai">工業AI</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#muse">Meta Muse</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#meta-cash">現金流</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#second-order">二階影響</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2 transition" href="#strategy">投資策略</a>
+        </div>
+        <button id="menuButton" type="button" class="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-stone-700 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-sky-500" aria-controls="mobileMenu" aria-expanded="false" aria-label="開啟導航選單">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div id="mobileMenu" class="hidden lg:hidden pb-3">
+        <div class="grid grid-cols-2 gap-2 text-sm">
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#overview">核心判斷</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#ptc-deal">PTC交易</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#industrial-ai">工業AI</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#muse">Meta Muse</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#meta-cash">現金流</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#second-order">二階影響</a>
+          <a class="nav-link inactive-nav-link rounded-md px-3 py-2" href="#strategy">投資策略</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">AI開始為資料與入口定價</h1>
+        <p class="mt-6 max-w-3xl text-sky-50/90 leading-relaxed text-lg">
+          施耐德以高溢價買下PTC，押注工程資料與工業流程；Meta以Muse爭取消費者AI入口，但龐大資本支出正吸收現金。AI價值正從硬體延伸到資料與應用，最終仍要回到一個問題：投入的資金能否換回持續、足夠且可驗證的現金流。
+        </p>
+        <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl">
+          <div class="rounded-lg bg-white/10 border border-white/15 p-4 backdrop-blur-sm">
+            <div class="text-sm text-sky-100">PTC股權價值</div>
+            <div class="metric-number mt-1 text-2xl font-bold">約 226 億美元</div>
+            <div class="mt-1 text-xs text-sky-100/80">已簽正式協議，尚待交割</div>
+          </div>
+          <div class="rounded-lg bg-white/10 border border-white/15 p-4 backdrop-blur-sm">
+            <div class="text-sm text-sky-100">公告前收購溢價</div>
+            <div class="metric-number mt-1 text-2xl font-bold">42.3%</div>
+            <div class="mt-1 text-xs text-sky-100/80">相對 10/2 收盤價</div>
+          </div>
+          <div class="rounded-lg bg-white/10 border border-white/15 p-4 backdrop-blur-sm">
+            <div class="text-sm text-sky-100">Meta Q2營業現金流</div>
+            <div class="metric-number mt-1 text-2xl font-bold">318.6 億美元</div>
+            <div class="mt-1 text-xs text-sky-100/80">廣告仍是主要現金來源</div>
+          </div>
+          <div class="rounded-lg bg-white/10 border border-white/15 p-4 backdrop-blur-sm">
+            <div class="text-sm text-sky-100">Meta Q2自由現金流</div>
+            <div class="metric-number mt-1 text-2xl font-bold">7.84 億美元</div>
+            <div class="mt-1 text-xs text-sky-100/80">年減約 91%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <section id="overview" aria-labelledby="overview-title">
+        <h2 id="overview-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心判斷：AI價值往資料、入口與流程延伸</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-lg leading-relaxed text-stone-700">
+            這份報告把施耐德收購PTC與Meta Muse放在同一條AI價值鏈上觀察：前者買的是可追溯的工程資料與企業工作流程，後者爭的是使用者委託AI完成任務的高頻入口。兩者都可能強化長期產業位置，但「位置重要」並不等於「任何價格都值得買」。
+          </p>
+          <div class="mt-5 rounded-md border-l-4 border-amber-500 bg-amber-50 p-4 text-amber-950">
+            <strong>資訊時點：</strong>報告資料截至台灣時間 2026 年 10 月 5 日 22:24，美股當日交易尚未結束；文中的當日股價漲跌不能視為最終收盤結果。
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5 mb-10">
+          <article class="bg-sky-50 rounded-lg p-5 border border-sky-100">
+            <h3 class="font-bold text-sky-900">資料</h3>
+            <p class="mt-2 text-sm leading-relaxed text-stone-700">工業AI若要提出可執行建議，需要版本一致、可追溯的產品設計、設備運作與安全限制資料。</p>
+          </article>
+          <article class="bg-emerald-50 rounded-lg p-5 border border-emerald-100">
+            <h3 class="font-bold text-emerald-900">入口</h3>
+            <p class="mt-2 text-sm leading-relaxed text-stone-700">Muse若能讓使用者持續把寄信、旅行與跨應用任務交給AI，Meta可能取得社群服務之外的新入口。</p>
+          </article>
+          <article class="bg-rose-50 rounded-lg p-5 border border-rose-100">
+            <h3 class="font-bold text-rose-900">現金</h3>
+            <p class="mt-2 text-sm leading-relaxed text-stone-700">收購融資、資料中心與運算投入都會先消耗現金；真正的股東報酬仍取決於商業化後能留下多少自由現金流。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="ptc-deal" aria-labelledby="ptc-title">
+        <h2 id="ptc-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、施耐德收購PTC：先看交易條件，再看剩餘報酬</h2>
+        <div class="grid lg:grid-cols-3 gap-6 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <div class="text-sm font-semibold text-sky-700">每股收購價</div>
+            <div class="metric-number mt-2 text-3xl font-extrabold text-stone-900">205 美元</div>
+            <p class="mt-3 text-sm text-stone-600">全現金支付給PTC股東；不等於施耐德只用手上現金籌資。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <div class="text-sm font-semibold text-sky-700">企業價值</div>
+            <div class="metric-number mt-2 text-3xl font-extrabold text-stone-900">約 237 億美元</div>
+            <p class="mt-3 text-sm text-stone-600">計入淨負債等項目，與226億美元股權價值屬不同估值口徑。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <div class="text-sm font-semibold text-sky-700">預計完成</div>
+            <div class="metric-number mt-2 text-3xl font-extrabold text-stone-900">2027 Q3</div>
+            <p class="mt-3 text-sm text-stone-600">仍須PTC股東與監管機關批准，因此目前是已簽約、等待交割。</p>
+          </div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6 mb-10">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-800 mb-4">公告後市場反應</h3>
+            <div class="chart-shell"><canvas id="dealReactionChart" aria-label="PTC收購溢價與當日市場反應圖" role="img"></canvas></div>
+            <p class="mt-3 text-xs leading-relaxed text-stone-500">口徑不同：42.3%為收購價相對10/2收盤價的溢價；PTC約+34%為盤前漲幅；施耐德約-10%為歐洲交易時段跌幅，均非10/5最終收盤。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-800 mb-4">事件套利不能只看42.3%</h3>
+            <p class="leading-relaxed text-stone-700">公告前持股者取得明確溢價，但公告後才進場的投資人只擁有「剩餘價差」。報告用假設情境說明：若以195美元買入、最後以205美元交割，未計費用的價差報酬約5.1%。</p>
+            <div class="mt-5 grid grid-cols-2 gap-4">
+              <div class="rounded-lg bg-stone-50 p-4 border border-stone-200">
+                <div class="text-xs text-stone-500">假設買入價</div>
+                <div class="metric-number text-2xl font-bold text-stone-800">195 美元</div>
+              </div>
+              <div class="rounded-lg bg-stone-50 p-4 border border-stone-200">
+                <div class="text-xs text-stone-500">示例價差報酬</div>
+                <div class="metric-number text-2xl font-bold text-stone-800">約 5.1%</div>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-rose-700">這只是計算方式示例，不是即時報價、報酬保證或交易建議；延後交割與交易失敗都會改變結果。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="industrial-ai" aria-labelledby="industrial-title">
+        <h2 id="industrial-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、三、工業AI的稀缺資產與收購回收壓力</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <h3 class="font-bold text-lg text-stone-800">PTC補上什麼</h3>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">PTC把產品設計、工程與生命週期資料帶入施耐德既有的設備、能源與AVEVA工業軟體版圖，讓工業AI有機會連接「如何設計、如何使用、如何耗能」。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <h3 class="font-bold text-lg text-stone-800">真正的護城河</h3>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">價值不在「有AI功能」本身，而在掌握難搬移、版本一致、能嵌入既有流程的工程資料。容易被新工具取代的繪圖、報表或操作功能，未必有相同議價能力。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0 md:col-span-2 lg:col-span-1">
+            <h3 class="font-bold text-lg text-stone-800">整合不是自動發生</h3>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">資料權限、系統相容性、客戶採用與銷售協作仍要逐項完成。模型進步可以提高整合的潛在價值，但不能代替組織與系統整合。</p>
+          </article>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
+          <h3 class="text-xl font-bold text-stone-800">買方成本與管理層目標</h3>
+          <div class="mt-5 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="rounded-lg bg-amber-50 border border-amber-100 p-4">
+              <div class="text-xs text-amber-800">計畫增資</div>
+              <div class="metric-number mt-1 text-2xl font-bold">50–60 億歐元</div>
+              <p class="mt-2 text-xs text-stone-600">可能稀釋既有股東權益。</p>
+            </div>
+            <div class="rounded-lg bg-amber-50 border border-amber-100 p-4">
+              <div class="text-xs text-amber-800">計畫新債</div>
+              <div class="metric-number mt-1 text-2xl font-bold">160–170 億歐元</div>
+              <p class="mt-2 text-xs text-stone-600">利息與償債負擔可能早於綜效出現。</p>
+            </div>
+            <div class="rounded-lg bg-sky-50 border border-sky-100 p-4">
+              <div class="text-xs text-sky-800">交割後第3年目標</div>
+              <div class="metric-number mt-1 text-2xl font-bold">2.5 億歐元</div>
+              <p class="mt-2 text-xs text-stone-600">管理層預期的年度成本綜效。</p>
+            </div>
+            <div class="rounded-lg bg-sky-50 border border-sky-100 p-4">
+              <div class="text-xs text-sky-800">收入綜效目標</div>
+              <div class="metric-number mt-1 text-2xl font-bold">約 8 億歐元</div>
+              <p class="mt-2 text-xs text-stone-600">屬公司目標，不等於同額利潤。</p>
+            </div>
+          </div>
+          <div class="mt-5 rounded-md bg-rose-50 border border-rose-100 p-4 text-sm leading-relaxed text-rose-900">
+            公告估值約為2027年預估調整後EBITA的21倍；計入完整綜效後約13倍。13倍仰賴未來綜效實現，不能直接用來證明今天的收購價格便宜。管理層另預期交割後第5年、計入完整綜效後的交易資本報酬高於資金成本，這同樣屬待驗證目標。
+          </div>
+        </div>
+      </section>
+
+      <section id="muse" aria-labelledby="muse-title">
+        <h2 id="muse-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、Meta Muse：從回答問題走向替使用者完成事情</h2>
+        <div class="grid lg:grid-cols-2 gap-6 mb-10">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-800">產品機會</h3>
+            <p class="mt-3 leading-relaxed text-stone-700">Muse於9月8日在美國推出，可協助寄信、訂旅行與處理跨應用任務。初期有免費方案，以及每月20美元與100美元的付費方案。下載排名快速上升，代表市場注意力已經形成。</p>
+            <div class="mt-5 grid grid-cols-3 gap-3 text-center">
+              <div class="rounded-lg bg-stone-50 p-3 border border-stone-200">
+                <div class="text-xs text-stone-500">方案一</div><div class="font-bold mt-1">免費</div>
+              </div>
+              <div class="rounded-lg bg-stone-50 p-3 border border-stone-200">
+                <div class="text-xs text-stone-500">方案二</div><div class="metric-number font-bold mt-1">$20/月</div>
+              </div>
+              <div class="rounded-lg bg-stone-50 p-3 border border-stone-200">
+                <div class="text-xs text-stone-500">方案三</div><div class="metric-number font-bold mt-1">$100/月</div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-800">投資上還缺的證據</h3>
+            <ul class="mt-3 space-y-3 text-stone-700 text-sm leading-relaxed">
+              <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-sky-500 shrink-0"></span><span><strong>留存：</strong>新鮮感消退後，使用者是否持續回來？</span></li>
+              <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-sky-500 shrink-0"></span><span><strong>任務價值：</strong>是否反覆完成真正有價值的跨應用工作？</span></li>
+              <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-sky-500 shrink-0"></span><span><strong>付費：</strong>使用者是否願意為便利與代理能力持續付費？</span></li>
+              <li class="flex gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-sky-500 shrink-0"></span><span><strong>單位經濟：</strong>每位持續使用者的收入能否覆蓋運算、客服、安全與維護成本？</span></li>
+            </ul>
+            <div class="mt-5 rounded-md bg-amber-50 border border-amber-100 p-4 text-sm text-amber-950">近一個月股價約+25.5%、年初至今約+10%，以及全年盈餘預估成長33.6%，都不能解讀為Muse已帶來同等營收或獲利。</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="meta-cash" aria-labelledby="cash-title">
+        <h2 id="cash-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">五、Meta的現金帳：廣告強，但AI基建先吸收現金</h2>
+        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-800 mb-4">第二季收入結構</h3>
+            <div class="chart-shell"><canvas id="metaRevenueChart" aria-label="Meta第二季營收與廣告收入圖" role="img"></canvas></div>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">第二季營收約608億美元、年增28%；廣告收入約593.6億美元，顯示支撐公司營運與AI投資的核心現金來源仍是廣告。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-stone-800 mb-4">第二季現金流壓力</h3>
+            <div class="chart-shell"><canvas id="metaCashChart" aria-label="Meta第二季營業現金流、資本支出與自由現金流圖" role="img"></canvas></div>
+            <p class="mt-3 text-xs leading-relaxed text-stone-500">單位：億美元。資本支出包含融資租賃本金支付；去年同期自由現金流約85.49億美元。</p>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 mb-10">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <h3 class="font-bold text-lg text-stone-800">全年資本支出指引</h3>
+            <div class="metric-number mt-2 text-3xl font-extrabold text-stone-900">1,300–1,450 億美元</div>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">上半年未進行股票買回，第二季仍有股息支付，顯示現金配置明顯偏向AI與核心業務建設；但這不代表公司永久停止回購。</p>
+          </div>
+          <div class="bg-rose-50 rounded-lg border border-rose-100 p-6">
+            <h3 class="font-bold text-lg text-rose-900">時間順序不能混淆</h3>
+            <p class="mt-3 text-sm leading-relaxed text-rose-900">這些第二季現金流數字來自6月底以前，而Muse在9月才推出。因此，第二季自由現金流下降不能歸因於Muse，也不能用來證明Muse商業化失敗；它只說明新產品必須在既有龐大投資負擔下證明回報。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="second-order" aria-labelledby="second-title">
+        <h2 id="second-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">六、二階影響：受惠者、受壓者與成本承擔者</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <div class="text-xs font-semibold text-sky-700">較直接受惠</div>
+            <h3 class="mt-2 font-bold text-stone-800">收購對價與基建訂單</h3>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">PTC原有股東獲得明確對價；當AI基建支出真正落地，電力、冷卻與運算供應商可能取得訂單。</p>
+            <p class="mt-3 text-xs text-stone-500">報告列出Eaton、Vertiv、NVIDIA、AMD作為觀察方向，不代表已驗證最新訂單或估值合理性。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <div class="text-xs font-semibold text-emerald-700">第二階段</div>
+            <h3 class="mt-2 font-bold text-stone-800">工程資料與自動化平台</h3>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">如Autodesk等平台，更值得追蹤的是AI是否提高使用深度、續約率與付費意願，而非猜測誰會成為下一個收購標的。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <div class="text-xs font-semibold text-amber-700">可能受壓</div>
+            <h3 class="mt-2 font-bold text-stone-800">搜尋與比較型中介入口</h3>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">Agent若能替使用者比較並完成交易，部分中介平台的獲客成本與佣金模式可能改變；但庫存、支付、履約與信任仍可能形成防線。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <div class="text-xs font-semibold text-rose-700">隱藏成本</div>
+            <h3 class="mt-2 font-bold text-stone-800">股東、債權人與導入企業</h3>
+            <p class="mt-3 text-sm leading-relaxed text-stone-600">它們承擔稀釋、利息、整合與流程改造成本，受益時間可能晚於硬體供應商，解釋了為何產業成長與股票報酬可能不同步。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="strategy" aria-labelledby="strategy-title">
+        <h2 id="strategy-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">七、投資策略：分清交割報酬、商業化報酬與估值風險</h2>
+        <div class="grid md:grid-cols-3 gap-6 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <div class="text-sm font-semibold text-sky-700">短期｜數日至3個月</div>
+            <p class="mt-3 text-sm leading-relaxed text-stone-700"><strong>PTC：</strong>收購價、剩餘價差與交割機率主導。<br><strong>Meta：</strong>產品熱度、財報與支出展望主導，需防範多年成功過早反映在估值中。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <div class="text-sm font-semibold text-emerald-700">中期｜3至18個月</div>
+            <p class="mt-3 text-sm leading-relaxed text-stone-700"><strong>PTC：</strong>股東／監管批准、融資與交易進度。<br><strong>Meta：</strong>Muse留存與付費、廣告收入與利潤率、資本支出是否再次提高。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <div class="text-sm font-semibold text-amber-700">長期｜18個月以上</div>
+            <p class="mt-3 text-sm leading-relaxed text-stone-700"><strong>施耐德：</strong>資料整合能否形成可收費的新價值。<br><strong>Meta：</strong>AI入口能否轉為持續收入，同時控制每次服務成本。</p>
+          </article>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
+            <div>
+              <h3 class="text-xl font-bold text-stone-800">五項驗證指標與風險追蹤</h3>
+              <p class="mt-1 text-sm text-stone-500">輸入公司、主題、期限或關鍵字，即時篩選報告提出的追蹤項目。</p>
+            </div>
+            <label class="block w-full md:w-80">
+              <span class="sr-only">搜尋追蹤項目</span>
+              <input id="tableSearch" type="search" placeholder="搜尋：Meta、PTC、現金流、融資…" class="w-full rounded-md border border-stone-300 bg-white px-4 py-2 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100" />
+            </label>
+          </div>
+          <div class="table-wrap rounded-lg border border-stone-200">
+            <table class="min-w-[860px] w-full text-sm text-left">
+              <thead class="sticky top-0 bg-stone-100 text-stone-700">
+                <tr>
+                  <th class="px-4 py-3 font-semibold">期限</th>
+                  <th class="px-4 py-3 font-semibold">對象</th>
+                  <th class="px-4 py-3 font-semibold">追蹤指標</th>
+                  <th class="px-4 py-3 font-semibold">目前狀態</th>
+                  <th class="px-4 py-3 font-semibold">論點削弱條件</th>
+                </tr>
+              </thead>
+              <tbody id="trackingTableBody" class="divide-y divide-stone-100 bg-white"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-stone-900 text-stone-100 rounded-lg shadow-lg p-6 mb-4">
+          <h3 class="text-xl font-bold">最後的估值紀律</h3>
+          <p class="mt-3 leading-relaxed text-stone-200">較有紀律的做法，是用已確認的收入與現金流做估值基礎，把尚未實現的AI商業化成果視為待驗證的額外機會。PTC收購利多已部分反映在跳升後價格；Meta產品突破也已觸發重新評價。下一步不是只問「AI是否成長」，而是問剩餘報酬是否足以補償交割、融資、執行與估值風險。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI資料入口與現金流考驗。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中工業AI、施耐德PTC收購與Meta相關公開資料 (2026年10月5日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const observedSections = Array.from(document.querySelectorAll('main section[id]'));
+    const setActiveNav = (id) => {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveNav(visible.target.id);
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.05, 0.15, 0.3] });
+    observedSections.forEach(section => observer.observe(section));
+    setActiveNav('overview');
+
+    Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    Chart.defaults.color = '#57534e';
+
+    new Chart(document.getElementById('dealReactionChart'), {
+      type: 'bar',
+      data: {
+        labels: ['收購溢價', 'PTC盤前', '施耐德歐洲時段'],
+        datasets: [{ label: '百分比', data: [42.3, 34, -10], borderWidth: 1 }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.raw}%` } } },
+        scales: {
+          y: { ticks: { callback: v => `${v}%` }, grid: { color: 'rgba(120,113,108,.12)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('metaRevenueChart'), {
+      type: 'bar',
+      data: {
+        labels: ['總營收', '廣告收入'],
+        datasets: [{ label: '億美元', data: [608, 593.6], borderWidth: 1 }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.raw} 億美元` } } },
+        scales: {
+          y: { beginAtZero: true, ticks: { callback: v => `${v}` }, title: { display: true, text: '億美元' }, grid: { color: 'rgba(120,113,108,.12)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('metaCashChart'), {
+      type: 'bar',
+      data: {
+        labels: ['營業現金流', '資本支出', '自由現金流', '去年同期FCF'],
+        datasets: [{ label: '億美元', data: [318.6, 310.8, 7.84, 85.49], borderWidth: 1 }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.raw} 億美元` } } },
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: '億美元' }, grid: { color: 'rgba(120,113,108,.12)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    const productData = [
+      {
+        horizon: '中期',
+        subject: 'PTC / 施耐德',
+        indicator: 'PTC股東與監管批准、交割時程是否按計畫推進',
+        status: '已簽正式協議；預計2027年第三季完成，尚未交割',
+        risk: '交割延後、交易失敗或客戶流失'
+      },
+      {
+        horizon: '中期',
+        subject: '施耐德',
+        indicator: '新增債務利率、信用評等與融資進度',
+        status: '規劃約50–60億歐元增資與160–170億歐元新債',
+        risk: '融資成本提高、稀釋或償債壓力侵蝕回報'
+      },
+      {
+        horizon: '中期',
+        subject: 'Meta Muse',
+        indicator: '留存、重複任務使用與付費採用',
+        status: '下載排名快速上升，但商業化成效仍待驗證',
+        risk: '留存或付費表現不佳，單位經濟無法成立'
+      },
+      {
+        horizon: '中長期',
+        subject: 'Meta',
+        indicator: '廣告收入、利潤率與自由現金流是否改善',
+        status: 'Q2營收608億美元；Q2自由現金流7.84億美元、年減約91%',
+        risk: '廣告成長不足以支撐持續上修的支出'
+      },
+      {
+        horizon: '長期',
+        subject: 'AI資本投入',
+        indicator: '企業借款成本、設備利用率與投資回收',
+        status: 'Meta全年資本支出指引1,300–1,450億美元；市場亦關注信用壓力',
+        risk: '借款成本上升、設備利用率或更新週期不如預期'
+      }
+    ];
+
+    const trackingTableBody = document.getElementById('trackingTableBody');
+    const tableSearch = document.getElementById('tableSearch');
+    const renderTable = (rows) => {
+      trackingTableBody.innerHTML = rows.length
+        ? rows.map(row => `
+          <tr class="align-top">
+            <td class="px-4 py-3 whitespace-nowrap font-semibold text-stone-700">${row.horizon}</td>
+            <td class="px-4 py-3 whitespace-nowrap text-stone-800">${row.subject}</td>
+            <td class="px-4 py-3 leading-relaxed text-stone-700">${row.indicator}</td>
+            <td class="px-4 py-3 leading-relaxed text-stone-600">${row.status}</td>
+            <td class="px-4 py-3 leading-relaxed text-rose-700">${row.risk}</td>
+          </tr>`).join('')
+        : '<tr><td colspan="5" class="px-4 py-8 text-center text-stone-500">沒有符合的追蹤項目。</td></tr>';
+    };
+    tableSearch.addEventListener('input', (event) => {
+      const keyword = event.target.value.trim().toLowerCase();
+      const filtered = productData.filter(row => Object.values(row).some(value => value.toLowerCase().includes(keyword)));
+      renderTable(filtered);
+    });
+    renderTable(productData);
+  </script>
+</body>
+</html>
