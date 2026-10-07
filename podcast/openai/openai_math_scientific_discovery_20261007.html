@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="解析 OpenAI 722 篇數學手稿事件，從 AI for Science、reasoning compute、雲端與半導體供應鏈到驗證風險與投資追蹤指標。" />
+  <title>巴菲特AI價值投資-AI科學發現重塑投資邏輯</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0284c7; border-bottom-color: #0284c7; font-weight: 700; }
+    .inactive-nav-link { color: #57534e; border-bottom-color: transparent; }
+    .nav-link { border-bottom-width: 2px; transition: color .2s ease, border-color .2s ease; }
+    .chart-shell { position: relative; width: 100%; min-height: 320px; }
+    @media (max-width: 640px) { .chart-shell { min-height: 280px; } }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .metric-number { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#top" class="font-extrabold text-stone-900 tracking-tight">巴菲特AI價值投資</a>
+        <nav class="hidden lg:flex items-center gap-5 text-sm" aria-label="主要導覽">
+          <a class="nav-link inactive-nav-link py-5" href="#event">事件規模</a>
+          <a class="nav-link inactive-nav-link py-5" href="#science">AI for Science</a>
+          <a class="nav-link inactive-nav-link py-5" href="#compute">推理算力</a>
+          <a class="nav-link inactive-nav-link py-5" href="#stocks">美股映射</a>
+          <a class="nav-link inactive-nav-link py-5" href="#risks">風險</a>
+          <a class="nav-link inactive-nav-link py-5" href="#watch">追蹤指標</a>
+          <a class="nav-link inactive-nav-link py-5" href="#conclusion">結論</a>
+        </nav>
+        <button id="menuButton" class="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-stone-700 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-sky-500" aria-controls="mobileMenu" aria-expanded="false" aria-label="切換導覽選單">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <nav id="mobileMenu" class="hidden lg:hidden pb-4 border-t border-stone-100" aria-label="行動版導覽">
+        <div class="grid grid-cols-2 gap-x-3 gap-y-1 pt-3 text-sm">
+          <a class="mobile-nav-link rounded px-3 py-2 hover:bg-sky-50" href="#event">事件規模</a>
+          <a class="mobile-nav-link rounded px-3 py-2 hover:bg-sky-50" href="#science">AI for Science</a>
+          <a class="mobile-nav-link rounded px-3 py-2 hover:bg-sky-50" href="#compute">推理算力</a>
+          <a class="mobile-nav-link rounded px-3 py-2 hover:bg-sky-50" href="#stocks">美股映射</a>
+          <a class="mobile-nav-link rounded px-3 py-2 hover:bg-sky-50" href="#risks">風險</a>
+          <a class="mobile-nav-link rounded px-3 py-2 hover:bg-sky-50" href="#watch">追蹤指標</a>
+          <a class="mobile-nav-link rounded px-3 py-2 hover:bg-sky-50" href="#conclusion">結論</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight">AI 科學發現重塑投資邏輯</h1>
+        <p class="mt-6 max-w-3xl text-sky-50/90 leading-relaxed text-lg">
+          OpenAI 公開 722 篇由內部前沿模型產生的數學手稿，重點不在把它們視為 722 個已被驗證的新突破，而在於 AI 開始展現大量、持續產生研究級數學成果，並把部分結果送入形式化驗證流程的能力。對投資人而言，真正的新變數是 AI for Science 與長時間 reasoning compute 能否成為新的高價值工作負載與可商業化市場。
+        </p>
+        <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl">
+          <div class="rounded-xl bg-white/10 border border-white/15 backdrop-blur p-4">
+            <div class="text-3xl font-extrabold metric-number">722</div>
+            <div class="mt-1 text-sm text-sky-100">數學手稿</div>
+          </div>
+          <div class="rounded-xl bg-white/10 border border-white/15 backdrop-blur p-4">
+            <div class="text-3xl font-extrabold metric-number">372</div>
+            <div class="mt-1 text-sm text-sky-100">成果家族</div>
+          </div>
+          <div class="rounded-xl bg-white/10 border border-white/15 backdrop-blur p-4">
+            <div class="text-3xl font-extrabold metric-number">約 4,000</div>
+            <div class="mt-1 text-sm text-sky-100">研究問題測試</div>
+          </div>
+          <div class="rounded-xl bg-white/10 border border-white/15 backdrop-blur p-4">
+            <div class="text-3xl font-extrabold metric-number">約 3 小時</div>
+            <div class="mt-1 text-sm text-sky-100">每項保留成果平均推理算力</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section id="event" class="scroll-mt-24 mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">事件規模：從 benchmark 走向研究級問題</h2>
+        <div class="grid lg:grid-cols-3 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+            <h3 class="text-xl font-bold text-stone-900">這次事件真正重要的是什麼？</h3>
+            <p class="mt-4 leading-7">
+              過去常見 benchmark 大多測試模型是否能完成「已知答案」的任務；這批數學研究則要求模型提出新的定理、證明方法、反例或推導，再接受數學家與形式化工具檢驗。若後續大量結果能通過獨立驗證，AI 的價值主張將從「提升知識工作效率」進一步跨向「直接提高新知識產出的速度」。
+            </p>
+            <div class="mt-6 grid sm:grid-cols-2 gap-4">
+              <div class="rounded-lg bg-sky-50 p-5 border border-sky-100">
+                <div class="text-sm font-semibold text-sky-700">已成立的能力訊號</div>
+                <p class="mt-2 text-stone-700">AI 已可大量產生具有研究形式的數學內容，且部分成果已進入 Lean 等形式化證明流程。</p>
+              </div>
+              <div class="rounded-lg bg-amber-50 p-5 border border-amber-100">
+                <div class="text-sm font-semibold text-amber-700">尚未成立的結論</div>
+                <p class="mt-2 text-stone-700">不能把 722 篇手稿等同 722 個已被數學界接受的新定理，也不能直接推算為任何上市公司的新增營收。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">數字怎麼讀</h3>
+            <ul class="mt-4 space-y-4 text-sm leading-6">
+              <li><strong class="text-stone-900">722 篇手稿</strong>：研究產出量，不代表 722 個完全獨立的新定理。</li>
+              <li><strong class="text-stone-900">372 個成果家族</strong>：可能包含主要結果、延伸論證、推論或替代證明。</li>
+              <li><strong class="text-stone-900">約 4,000 個問題</strong>：是整體測試池規模，不代表所有問題皆成功解決。</li>
+              <li><strong class="text-stone-900">約 3 小時</strong>：描述每項保留成果的平均推理算力等量，不等於公開的實際美元成本。</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-xl font-bold text-stone-900">公開規模量化</h3>
+              <p class="mt-1 text-sm text-stone-500">僅呈現報告明確提供的計數資料；推理時間因單位不同，另以卡片呈現。</p>
+            </div>
+          </div>
+          <div class="chart-shell"><canvas id="scaleChart" aria-label="OpenAI 數學研究公開規模長條圖" role="img"></canvas></div>
+        </div>
+      </section>
+
+      <section id="science" class="scroll-mt-24 mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI for Science：TAM 從生產文字走向生產知識</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="leading-7">
+            數學可能成為 AI 進入科學研究最早成熟的領域之一，原因在於成果相對容易透過專家審查與 proof assistant 嚴格驗證。若這套能力擴散到製藥、材料、晶片、能源與工程，AI 的定價邏輯就可能從節省工時，升級到為高價值科研結果付費。
+          </p>
+          <div class="mt-6 flex flex-wrap items-center gap-2 text-sm font-semibold">
+            <span class="rounded-full bg-stone-100 px-3 py-2">聊天機器人</span><span>→</span>
+            <span class="rounded-full bg-stone-100 px-3 py-2">程式設計</span><span>→</span>
+            <span class="rounded-full bg-stone-100 px-3 py-2">Copilot</span><span>→</span>
+            <span class="rounded-full bg-stone-100 px-3 py-2">Agent</span><span>→</span>
+            <span class="rounded-full bg-stone-100 px-3 py-2">企業流程自動化</span><span>→</span>
+            <span class="rounded-full bg-sky-100 text-sky-800 px-3 py-2">科學研究與新知識創造</span>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-stone-900">製藥與材料</h3><p class="mt-3 text-sm leading-6">新藥分子設計、新材料探索若能被加速，單一成功成果的經濟價值可能遠高於一般 SaaS 工作流程節省。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-stone-900">半導體與演算法</h3><p class="mt-3 text-sm leading-6">晶片設計、演算法最佳化與形式驗證，可能成為長時間推理與可驗證研究的高價值場景。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-stone-900">能源與工程</h3><p class="mt-3 text-sm leading-6">能源系統、物理模擬與工業工程若能把數月研究壓縮到數小時或數天，可能創造新的 AI 商業市場。</p></article>
+        </div>
+      </section>
+
+      <section id="compute" class="scroll-mt-24 mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Reasoning Compute：AI 商業模式的新變數</h2>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">從 Token 經濟轉向任務經濟</h3>
+            <p class="mt-4 leading-7">
+              如果高價值任務願意消耗數小時甚至更長推理時間，AI 服務未來可能不只按 Token 計價，而是更多依據任務價值、推理時間、成功率與結果品質收費。這使 test-time compute 成為新的經濟變數。
+            </p>
+            <div class="mt-5 rounded-lg bg-sky-50 border border-sky-100 p-5">
+              <div class="text-sm font-semibold text-sky-700">核心投資含義</div>
+              <p class="mt-2 text-stone-800">模型效率提升，不必然等於總算力需求下降；若每個高價值問題使用更多計算，總體推理需求仍可能上升。</p>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">仍缺少的關鍵經濟數據</h3>
+            <div class="mt-4 space-y-4">
+              <div class="rounded-lg border border-stone-200 p-4"><div class="font-semibold text-stone-900">每項成功成果的實際成本</div><p class="mt-1 text-sm">報告只有「約三小時 ChatGPT Pro thinking 等量」描述，沒有公開美元成本。</p></div>
+              <div class="rounded-lg border border-stone-200 p-4"><div class="font-semibold text-stone-900">成功率與重試成本</div><p class="mt-1 text-sm">若高階 reasoning 成功率低，即使成果價值高，仍可能面臨龐大成本壓力。</p></div>
+              <div class="rounded-lg border border-stone-200 p-4"><div class="font-semibold text-stone-900">科研產品定價</div><p class="mt-1 text-sm">外部企業願意為何種研究結果付多少錢，目前尚無答案。</p></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="stocks" class="scroll-mt-24 mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">對美股的映射：受益邏輯存在，但不是短期營收驗證</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm font-semibold text-sky-700">Microsoft</div><h3 class="mt-2 text-xl font-bold text-stone-900">最直接的上市公司 read-through</h3><p class="mt-3 text-sm leading-6">潛在受益在於 Azure 可能新增長時間科研推理工作負載；但 OpenAI 的雲端合作已非完全排他，不能假設新增需求全部流向 Azure。</p><div class="mt-4 text-sm font-semibold">判斷：中長期偏正面，非短期財報催化。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm font-semibold text-sky-700">Nvidia / AMD / Broadcom</div><h3 class="mt-2 text-xl font-bold text-stone-900">每個問題使用更多計算</h3><p class="mt-3 text-sm leading-6">若 AI 科研擴張，GPU、accelerator、高速網路與記憶體需求可獲長期支撐；但報告無法直接推定此次數學研究使用何種晶片或形成多少訂單。</p><div class="mt-4 text-sm font-semibold">判斷：長期偏正面，短期影響有限。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm font-semibold text-sky-700">Alphabet / Amazon</div><h3 class="mt-2 text-xl font-bold text-stone-900">競爭升級為研究能力競爭</h3><p class="mt-3 text-sm leading-6">Alphabet 可受益於 DeepMind 與 AI for Science 既有研究基礎；Amazon 則可能透過 AWS、Anthropic 與 AI 基礎建設需求受益。</p><div class="mt-4 text-sm font-semibold">判斷：整體市場擴張可能大於單一產品輸贏。</div></article>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
+            <div>
+              <h3 class="text-xl font-bold text-stone-900">上市公司投資映射表</h3>
+              <p class="mt-1 text-sm text-stone-500">可搜尋公司、角色、投資含義與短期判斷。</p>
+            </div>
+            <label class="block w-full md:w-80">
+              <span class="sr-only">搜尋公司</span>
+              <input id="companySearch" type="search" placeholder="搜尋，例如 Microsoft、GPU、AWS…" class="w-full rounded-lg border border-stone-300 px-4 py-2.5 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none" />
+            </label>
+          </div>
+          <div class="table-scroll rounded-lg border border-stone-200">
+            <table class="min-w-full text-sm">
+              <thead class="sticky top-0 bg-stone-100 text-stone-800">
+                <tr>
+                  <th class="px-4 py-3 text-left font-semibold">公司</th>
+                  <th class="px-4 py-3 text-left font-semibold">角色</th>
+                  <th class="px-4 py-3 text-left font-semibold">投資 read-through</th>
+                  <th class="px-4 py-3 text-left font-semibold">報告判斷</th>
+                </tr>
+              </thead>
+              <tbody id="companyTableBody" class="divide-y divide-stone-200 bg-white"></tbody>
+            </table>
+          </div>
+          <p id="tableEmpty" class="hidden text-center text-sm text-stone-500 py-6">沒有符合搜尋條件的公司。</p>
+        </div>
+      </section>
+
+      <section id="risks" class="scroll-mt-24 mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三層風險框架：能力、品質、商業化不能混為一談</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-xs font-bold tracking-wide text-emerald-700">第一層</div><h3 class="mt-2 text-xl font-bold text-stone-900">能力訊號</h3><p class="mt-3 leading-6 text-sm">AI 能大量產生具有研究形式的數學內容，這一點基本成立，也是本次事件最直接的新訊號。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-xs font-bold tracking-wide text-amber-700">第二層</div><h3 class="mt-2 text-xl font-bold text-stone-900">結果品質</h3><p class="mt-3 leading-6 text-sm">正確性、原創性與研究價值仍需數學界逐篇驗證；未形式化結果仍可能存在問題。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-xs font-bold tracking-wide text-rose-700">第三層</div><h3 class="mt-2 text-xl font-bold text-stone-900">商業價值</h3><p class="mt-3 leading-6 text-sm">即使能力成立，也尚未證明能以合理成本轉化為企業願意付費的科研產品與持續性現金流。</p></article>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">驗證瓶頸</h3>
+            <p class="mt-4 leading-7">若 AI 產生研究成果的速度開始超過人類驗證速度，新的瓶頸將轉移到形式化驗證、自動找錯、引用檢查與獨立模型交叉驗證。長期可商業化的科研系統，很可能必須同時具備「生成」與「驗證」。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h3 class="text-xl font-bold text-stone-900">對 AI 泡沫論的雙向含義</h3>
+            <div class="mt-4 grid sm:grid-cols-2 gap-4">
+              <div class="rounded-lg bg-emerald-50 border border-emerald-100 p-4"><div class="font-semibold text-emerald-800">多方論點</div><p class="mt-2 text-sm">AI 應用市場可能遠大於訂閱、廣告與企業 Copilot，科研突破可提高長期 TAM 上限。</p></div>
+              <div class="rounded-lg bg-rose-50 border border-rose-100 p-4"><div class="font-semibold text-rose-800">空方論點</div><p class="mt-2 text-sm">高階 reasoning 可能非常耗算力，產業仍須證明成果價值足以覆蓋成本。</p></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="watch" class="scroll-mt-24 mb-14">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">未來十二到二十四個月：五項關鍵追蹤指標</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-3xl font-extrabold text-sky-600">01</div><h3 class="mt-2 font-bold text-stone-900">722 篇手稿的獨立驗證率</h3><p class="mt-2 text-sm leading-6">數學界確認多少成果真正成立，將決定這次能力展示的含金量。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-3xl font-extrabold text-sky-600">02</div><h3 class="mt-2 font-bold text-stone-900">Lean 形式化比例</h3><p class="mt-2 text-sm leading-6">若大量結果最終完成機器驗證，可信度與可擴張性都會顯著提高。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-3xl font-extrabold text-sky-600">03</div><h3 class="mt-2 font-bold text-stone-900">模型是否公開或商業化</h3><p class="mt-2 text-sm leading-6">真正的商業轉折點是外部研究機構與企業能否以 API、企業版或科研產品使用。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-3xl font-extrabold text-sky-600">04</div><h3 class="mt-2 font-bold text-stone-900">Reasoning compute 成本</h3><p class="mt-2 text-sm leading-6">投資人需要的不是推理時間本身，而是每項成功成果的實際成本與成功率。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:col-span-2 lg:col-span-2"><div class="text-3xl font-extrabold text-sky-600">05</div><h3 class="mt-2 font-bold text-stone-900">數學以外是否出現可商業化科研成果</h3><p class="mt-2 text-sm leading-6">製藥、材料、晶片、能源與工程領域若開始出現可驗證且可付費的成果，才可能真正改變產業估值框架。</p></article>
+        </div>
+      </section>
+
+      <section id="conclusion" class="scroll-mt-24 mb-6">
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論：提高 TAM 上限，但尚未提高近期現金流確定性</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="text-lg leading-8 text-stone-800">
+            OpenAI 這次大量公開數學手稿的核心投資意義，不是「AI 已解出 722 個數學難題」，而是前沿模型第一次大規模展示自主產生研究級新知識的可能性。若未來結果能被廣泛驗證、模型能產品化，而且科研成果的經濟價值足以覆蓋高階推理成本，AI 的估值框架可能從節省人力，逐步轉向衡量它能增加多少科學發現。
+          </p>
+          <div class="mt-6 rounded-xl bg-stone-900 text-white p-6">
+            <p class="text-xl md:text-2xl font-bold leading-relaxed">這次事件提高了 AI 長期市場規模的上限，但還沒有提高對近期 AI 產業現金流的確定性。</p>
+          </div>
+          <div class="mt-6 grid md:grid-cols-3 gap-4 text-sm">
+            <div class="rounded-lg bg-stone-50 border border-stone-200 p-4"><strong class="text-stone-900">短期：</strong>能力敘事強化，不應單獨視為 Microsoft、Nvidia 等股票的買進理由。</div>
+            <div class="rounded-lg bg-stone-50 border border-stone-200 p-4"><strong class="text-stone-900">中期：</strong>若正式推出可長時間自主研究的模型與企業產品，才是重新估算市場規模的重要節點。</div>
+            <div class="rounded-lg bg-stone-50 border border-stone-200 p-4"><strong class="text-stone-900">長期：</strong>最重要的問題是 AI 能否從「生產文字」進化為可驗證、可付費的「生產知識」。</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI科學發現重塑投資邏輯。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中OpenAI數學研究與AI科學發現相關公開資料 (2026年10月7日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const desktopLinks = [...document.querySelectorAll('.nav-link')];
+    const linkBySection = new Map(desktopLinks.map(link => [link.getAttribute('href').slice(1), link]));
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      desktopLinks.forEach(link => {
+        link.classList.remove('active-nav-link');
+        link.classList.add('inactive-nav-link');
+      });
+      const active = linkBySection.get(visible.target.id);
+      if (active) {
+        active.classList.remove('inactive-nav-link');
+        active.classList.add('active-nav-link');
+      }
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.05, 0.2, 0.5] });
+    sections.forEach(section => observer.observe(section));
+
+    const scaleCtx = document.getElementById('scaleChart');
+    new Chart(scaleCtx, {
+      type: 'bar',
+      data: {
+        labels: ['測試研究問題', '公開數學手稿', '成果家族'],
+        datasets: [{
+          label: '數量',
+          data: [4000, 722, 372],
+          backgroundColor: ['rgba(2,132,199,.72)', 'rgba(14,165,233,.72)', 'rgba(56,189,248,.72)'],
+          borderColor: ['rgb(2,132,199)', 'rgb(14,165,233)', 'rgb(56,189,248)'],
+          borderWidth: 1,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y.toLocaleString()} 項` } }
+        },
+        scales: {
+          y: { beginAtZero: true, ticks: { callback: (value) => Number(value).toLocaleString() }, grid: { color: 'rgba(120,113,108,.12)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    const productData = [
+      { company: 'Microsoft', role: 'OpenAI 主要雲端合作夥伴、重要股權與模型/產品 IP 授權關聯', thesis: '科研型長時間推理可能為 Azure 創造新的高單價雲端工作負載，但新增需求不會必然全部流向 Azure。', view: '中長期偏正面；非短期財報催化' },
+      { company: 'Nvidia', role: 'GPU 與 AI 加速運算核心供應商', thesis: '若每個高價值科研問題消耗更多 reasoning compute，GPU 與整體 AI 基礎建設需求可獲長期支撐。', view: '長期偏正面；短期影響有限' },
+      { company: 'AMD', role: 'AI accelerator 供應商', thesis: '科研推理工作負載若擴張，可能間接受益於加速運算需求增加；目前無法從本事件直接換算為訂單。', view: '長期偏正面；短期影響有限' },
+      { company: 'Broadcom', role: 'AI 網路與客製化基礎建設供應商', thesis: '高階推理需求可支撐高速網路與 AI 基礎建設需求，但本事件並無直接營收驗證。', view: '長期偏正面；短期影響有限' },
+      { company: 'Alphabet', role: 'DeepMind、AI for Science 與數學推理研究能力', thesis: '若競爭從聊天產品升級到解決未解問題，Alphabet 既有科研基礎可能受惠於整體市場擴張。', view: '市場擴張機會；非單一事件催化' },
+      { company: 'Amazon', role: 'AWS、Anthropic 與 AI 基礎建設', thesis: '科研與工業研究若成為新 AI 工作負載，可增加 hyperscaler 資本支出與雲端需求的長期支撐。', view: '中長期具潛在受益' }
+    ];
+
+    const tableBody = document.getElementById('companyTableBody');
+    const searchInput = document.getElementById('companySearch');
+    const tableEmpty = document.getElementById('tableEmpty');
+
+    function renderTable(rows) {
+      tableBody.innerHTML = rows.map(row => `
+        <tr class="align-top">
+          <td class="px-4 py-4 font-semibold text-stone-900 whitespace-nowrap">${row.company}</td>
+          <td class="px-4 py-4 min-w-64">${row.role}</td>
+          <td class="px-4 py-4 min-w-80 leading-6">${row.thesis}</td>
+          <td class="px-4 py-4 min-w-56 font-medium">${row.view}</td>
+        </tr>
+      `).join('');
+      tableEmpty.classList.toggle('hidden', rows.length !== 0);
+    }
+
+    searchInput.addEventListener('input', (event) => {
+      const term = event.target.value.trim().toLowerCase();
+      const filtered = productData.filter(row => Object.values(row).some(value => value.toLowerCase().includes(term)));
+      renderTable(filtered);
+    });
+    renderTable(productData);
+  </script>
+</body>
+</html>
