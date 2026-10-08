@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c253a">
+  <meta name="description" content="從紐約聯準銀行通膨預期、PepsiCo第三季獲利品質到Starbucks與Chipotle未證實併購傳聞，分析美國消費股的三重考驗與關鍵追蹤指標。">
+  <title>巴菲特AI價值投資-通膨與美國消費股三重考驗</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; --ink: #1c3140; --blue: #0369a1; --muted: #64748b; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { font-family: ui-sans-serif,system-ui,-apple-system,"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif; color:var(--ink); background:#f6f8fb; }
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color:#0369a1; font-weight:700; border-bottom:2px solid #0284c7; }
+    .inactive-nav-link { color:#57534e; border-bottom:2px solid transparent; }
+    .inactive-nav-link:hover { color:#0369a1; border-bottom-color:#bae6fd; }
+    .nav-link { display:inline-flex; align-items:center; padding:11px 2px 9px; white-space:nowrap; transition:color .2s, border-color .2s; }
+    .mobile-nav-link { display:block; padding:12px 16px; border-left:3px solid transparent; }
+    .mobile-nav-link.active-nav-link { border-left-color:#0284c7; border-bottom-color:transparent; background:#f0f9ff; }
+    .mobile-nav-link.inactive-nav-link { border-bottom-color:transparent; }
+    .section-anchor { scroll-margin-top:90px; }
+    .chart-shell { position:relative; height:290px; min-width:0; width:100%; }
+    .chart-shell.tall { height:335px; }
+    .chart-shell canvas { width:100% !important; height:100% !important; }
+    .eyebrow { font-size:.74rem; font-weight:700; letter-spacing:.10em; text-transform:uppercase; color:#64748b; }
+    .metric-value { font-variant-numeric:tabular-nums; letter-spacing:-.045em; }
+    .section-desc { color:#64748b; line-height:1.85; max-width:58rem; margin-top:-.55rem; margin-bottom:1.6rem; }
+    .pill { display:inline-flex; align-items:center; border-radius:999px; font-weight:700; font-size:.75rem; padding:.28rem .65rem; }
+    .note { font-size:.84rem; line-height:1.75; color:#64748b; }
+    .story-line { position:relative; padding-left:22px; border-left:2px solid #cbd5e1; }
+    .story-line:before { content:""; position:absolute; left:-6px; top:1px; width:10px; height:10px; border-radius:50%; background:#0284c7; border:2px solid #e0f2fe; }
+    .table-scroll { max-width:100%; overflow-x:auto; }
+    .table-scroll th { position:sticky; top:0; z-index:1; background:#eaf5fc; }
+    .table-scroll td,.table-scroll th { padding:14px 16px; text-align:left; vertical-align:top; }
+    .table-scroll tr:not(:last-child) td { border-bottom:1px solid #e2e8f0; }
+    .table-scroll tbody tr:hover { background:#f8fafc; }
+    .table-scroll table { min-width:820px; border-collapse:separate; border-spacing:0; }
+    :focus-visible { outline:3px solid #38bdf8; outline-offset:3px; }
+    @media (max-width:640px) { .chart-shell {height:260px;} .chart-shell.tall {height:320px;} .section-anchor {scroll-margin-top:80px;} }
+    @media (prefers-reduced-motion:reduce) {html { scroll-behavior:auto; } * { transition-duration:.01ms !important; animation-duration:.01ms !important; }}
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="報告章節導覽">
+      <div class="min-h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-sky-700 text-white font-extrabold text-sm" aria-hidden="true">AI</span>
+          <span class="font-bold tracking-tight text-slate-800 text-sm sm:text-base">巴菲特AI價值投資</span>
+        </div>
+        <div class="hidden xl:flex items-center gap-5 text-[13px]" id="desktop-nav">
+          <a href="#inflation" data-nav="inflation" class="nav-link inactive-nav-link">通膨預期</a>
+          <a href="#pepsico" data-nav="pepsico" class="nav-link inactive-nav-link">PepsiCo財報</a>
+          <a href="#merger" data-nav="merger" class="nav-link inactive-nav-link">併購傳聞</a>
+          <a href="#framework" data-nav="framework" class="nav-link inactive-nav-link">產業脈絡</a>
+          <a href="#strategy" data-nav="strategy" class="nav-link inactive-nav-link">投資策略</a>
+          <a href="#scenarios" data-nav="scenarios" class="nav-link inactive-nav-link">情境推演</a>
+          <a href="#dashboard" data-nav="dashboard" class="nav-link inactive-nav-link">指標總覽</a>
+        </div>
+        <button id="menu-toggle" type="button" class="xl:hidden inline-flex items-center justify-center rounded-lg w-11 h-11 border border-slate-200 bg-white text-slate-700 hover:bg-slate-50" aria-label="開啟章節選單" aria-controls="mobile-nav" aria-expanded="false">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <div id="mobile-nav" class="hidden xl:hidden border-t border-slate-200 py-2 max-h-[70vh] overflow-y-auto" aria-hidden="true">
+        <a href="#inflation" data-nav="inflation" class="mobile-nav-link inactive-nav-link">通膨預期</a>
+        <a href="#pepsico" data-nav="pepsico" class="mobile-nav-link inactive-nav-link">PepsiCo財報</a>
+        <a href="#merger" data-nav="merger" class="mobile-nav-link inactive-nav-link">併購傳聞</a>
+        <a href="#framework" data-nav="framework" class="mobile-nav-link inactive-nav-link">產業脈絡</a>
+        <a href="#strategy" data-nav="strategy" class="mobile-nav-link inactive-nav-link">投資策略</a>
+        <a href="#scenarios" data-nav="scenarios" class="mobile-nav-link inactive-nav-link">情境推演</a>
+        <a href="#dashboard" data-nav="dashboard" class="mobile-nav-link inactive-nav-link">指標總覽</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+    <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight max-w-5xl">通膨與美國消費股三重考驗</h1>
+      <p class="mt-6 max-w-4xl text-sky-50/90 leading-relaxed text-base md:text-lg">家庭對物價愈加敏感、PepsiCo營收成長卻難以帶動核心獲利，而Starbucks與Chipotle的未證實併購傳聞突顯資本配置壓力。核心問題已從「品牌能否漲價」轉向「扣除成本後，成長能否轉化為每股盈餘與自由現金流」。</p>
+      <div class="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl" aria-label="報告三項重點數據">
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 sm:p-5"><div class="text-xs font-semibold text-sky-100">一年期通膨預期中位數</div><div class="metric-value text-3xl font-extrabold mt-2">3.9%</div><div class="text-xs text-sky-100/90 mt-1">九月調查｜前月 3.6%</div></div>
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 sm:p-5"><div class="text-xs font-semibold text-sky-100">PepsiCo 第三季有機營收</div><div class="metric-value text-3xl font-extrabold mt-2">+3.1%</div><div class="text-xs text-sky-100/90 mt-1">總營收年增 5.6%</div></div>
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 sm:p-5"><div class="text-xs font-semibold text-sky-100">PepsiCo 第三季核心 EPS</div><div class="metric-value text-3xl font-extrabold mt-2">+2%</div><div class="text-xs text-sky-100/90 mt-1">年增率｜GAAP EPS 年增 17%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-16 md:space-y-20">
+    <section id="inflation" class="section-anchor" aria-labelledby="inflation-heading">
+      <h2 id="inflation-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">01｜通膨預期：短期升溫，長期尚未失控</h2>
+      <p class="section-desc">紐約聯準銀行 10 月 7 日發布的 9 月消費者預期調查，衡量的是家庭對未來物價的主觀預估，<strong class="text-slate-800">不是已實現 CPI，也不是未來通膨的確定結果</strong>。</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4"><h3 class="text-lg font-bold text-slate-800">不同期限通膨預期</h3><span class="pill bg-sky-50 text-sky-800">中位數 · %</span></div>
+          <div class="chart-shell"><canvas id="inflationChart" role="img" aria-label="一年期由3.6%升至3.9%，三年期由3.2%升至3.3%，五年期維持3.0%"></canvas></div>
+          <p class="note mt-3">比較前月與 2026 年 9 月調查；一年期預期創 2023 年 5 月以來最高。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4"><h3 class="text-lg font-bold text-slate-800">未來一年家庭支出項目預期漲幅</h3><span class="pill bg-amber-50 text-amber-800">預期值 · %</span></div>
+          <div class="chart-shell tall"><canvas id="expenseChart" role="img" aria-label="汽油4.8%、食品5.5%、房租6.8%、醫療9.2%、大學教育7.5%"></canvas></div>
+          <p class="note mt-3">食品、居住與醫療支出可能排擠餐飲、休閒及其他非必要消費預算。</p>
+        </article>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">短期訊號</div><h3 class="text-xl font-bold mt-2">物價焦慮增強</h3><p class="text-slate-600 mt-3 leading-relaxed">一年期通膨預期 3.9%，而個人薪資成長預期中位數為 2.6%；兩者口徑不同，<strong>不可直接相減推算實質薪資</strong>。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">消費結構</div><h3 class="text-xl font-bold mt-2">工作預期相對改善</h3><p class="text-slate-600 mt-3 leading-relaxed">受訪者對失業與失去工作的擔憂下降。這更接近「仍有支出，但對價格敏感」，而非失業急升帶動的全面消費緊縮。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">估值含意</div><h3 class="text-xl font-bold mt-2">利率風險不容忽視</h3><p class="text-slate-600 mt-3 leading-relaxed">若通膨壓力持續，利率可能維持較高更久；但五年期預期未上升，不能僅憑單次調查斷定聯準會必然升息。</p></div>
+      </div>
+    </section>
+
+    <section id="pepsico" class="section-anchor" aria-labelledby="pepsico-heading">
+      <h2 id="pepsico-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">02｜PepsiCo：營收成長與獲利品質脫鉤</h2>
+      <p class="section-desc">PepsiCo（NASDAQ：PEP）10 月 8 日公布第三季財報。營收與每股盈餘數字表面亮眼，但核心利益率與下修的全年獲利展望揭露更具投資意義的壓力。</p>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-7">
+        <article class="rounded-lg bg-white shadow-lg p-5 sm:p-6"><div class="text-xs sm:text-sm text-slate-500 font-semibold">第三季營收</div><div class="metric-value text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">252.7<span class="text-base font-bold ml-1">億美元</span></div><p class="text-sm text-sky-700 font-bold mt-2">年增 5.6%</p></article>
+        <article class="rounded-lg bg-white shadow-lg p-5 sm:p-6"><div class="text-xs sm:text-sm text-slate-500 font-semibold">有機營收成長</div><div class="metric-value text-3xl font-extrabold text-slate-900 mt-2">3.1%</div><p class="text-xs text-slate-500 mt-2">排除匯率與併購、處分</p></article>
+        <article class="rounded-lg bg-white shadow-lg p-5 sm:p-6"><div class="text-xs sm:text-sm text-slate-500 font-semibold">GAAP 稀釋 EPS</div><div class="metric-value text-3xl font-extrabold text-slate-900 mt-2">$2.23</div><p class="text-sm text-sky-700 font-bold mt-2">年增 17%</p></article>
+        <article class="rounded-lg bg-white shadow-lg p-5 sm:p-6"><div class="text-xs sm:text-sm text-slate-500 font-semibold">核心 EPS</div><div class="metric-value text-3xl font-extrabold text-slate-900 mt-2">$2.34</div><p class="text-sm text-amber-700 font-bold mt-2">僅年增 2%</p></article>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="font-bold text-lg text-slate-800">第三季營業利益率：兩種口徑走向不同</h3>
+          <div class="chart-shell mt-5"><canvas id="marginChart" role="img" aria-label="GAAP營業利益率2025年14.9%、2026年16.9%；核心營業利益率2025年17.3%、2026年16.9%"></canvas></div>
+          <p class="note mt-3">圖中採報告四捨五入後的比率。報告指出核心利益率實際年減約 0.35 個百分點，與圖示整數小數位計算有四捨五入差異。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="font-bold text-lg text-slate-800 mb-4">營收成長組成與全年展望</h3>
+          <div class="space-y-4">
+            <div><div class="flex justify-between gap-2 text-sm font-semibold mb-1"><span>有機營收貢獻</span><span class="metric-value">約 3.1 個百分點</span></div><div class="rounded-full bg-slate-100 h-2.5 overflow-hidden"><div class="h-full bg-sky-600 rounded-full" style="width:55.4%"></div></div></div>
+            <div><div class="flex justify-between gap-2 text-sm font-semibold mb-1"><span>併購與處分淨影響</span><span class="metric-value">約 1.7 個百分點</span></div><div class="rounded-full bg-slate-100 h-2.5 overflow-hidden"><div class="h-full bg-cyan-500 rounded-full" style="width:30.4%"></div></div></div>
+            <div><div class="flex justify-between gap-2 text-sm font-semibold mb-1"><span>匯率換算</span><span class="metric-value">約 0.7 個百分點</span></div><div class="rounded-full bg-slate-100 h-2.5 overflow-hidden"><div class="h-full bg-teal-500 rounded-full" style="width:12.5%"></div></div></div>
+          </div>
+          <p class="note mt-3">上述是約略成長貢獻，不是各項收入占比；個別數字與總增幅 5.6% 可能因四捨五入而未完全相加。</p>
+          <div class="border-t border-slate-200 mt-5 pt-5">
+            <div class="eyebrow">2026 年全年公司展望｜非已實現成果</div>
+            <p class="font-bold mt-2 text-slate-800">核心 EPS 預估成長 <span class="text-rose-700 text-xl">2.5%–3.5%</span></p>
+            <p class="text-sm text-slate-600 leading-relaxed mt-2">低於先前「5%–7% 區間低端」的預估；固定匯率核心 EPS 成長展望為 1%–2%，全年淨營收預估成長約 6%。</p>
+          </div>
+        </article>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">北美飲料</div><div class="metric-value text-3xl font-bold text-rose-700 mt-2">約 −2%</div><p class="text-slate-600 leading-relaxed mt-3">第三季銷售量仍下降；部分低糖與機能性補水產品較佳，尚未帶動整體改善。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">北美食品</div><div class="metric-value text-3xl font-bold text-rose-700 mt-2">約 −2.8<span class="text-base ml-1">百分點</span></div><p class="text-slate-600 leading-relaxed mt-3">第三季核心營業利益率年減；反映促銷與爭取市占可能犧牲短期獲利。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">國際業務</div><div class="metric-value text-3xl font-bold text-sky-700 mt-2">約 +8%</div><p class="text-slate-600 leading-relaxed mt-3">第三季有機營收成長。年初至今國際業務約占淨營收 41%、核心部門營業利益 45%。</p></div>
+      </div>
+      <div class="rounded-lg border-l-4 border-sky-600 bg-sky-50 px-5 py-5 mt-1 leading-relaxed text-slate-700"><strong class="text-slate-900">財報重點：</strong>營收展望仍穩健，但核心 EPS 展望下修。下一步不應只觀察短期股價反彈，更要確認北美飲料銷量、食品促銷與核心營業利益率是否連續改善，以及國際成長是否延續。</div>
+    </section>
+
+    <section id="merger" class="section-anchor" aria-labelledby="merger-heading">
+      <h2 id="merger-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">03｜Starbucks × Chipotle：傳聞不等於交易</h2>
+      <p class="section-desc">10 月 8 日媒體引述知情人士，指 Starbucks 近期曾與顧問研究收購 Chipotle 的可能性。此消息涉及資本配置、融資與整合風險，<strong class="text-slate-800">截至報告觀察時點尚未獲雙方正式確認</strong>。</p>
+      <div class="bg-amber-50 border border-amber-200 rounded-lg px-5 py-4 mb-7" role="note"><div class="flex items-start gap-3"><span aria-hidden="true" class="text-amber-700 text-xl">!</span><p class="text-amber-950 leading-relaxed"><strong>事件狀態：未確認的媒體傳聞。</strong>沒有正式公告的收購報價、價格、交易條件、董事會決議或完成時間。市場價格反應不代表雙方已達成協議。</p></div></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex items-center justify-between gap-3"><div><div class="eyebrow">潛在收購方 · NASDAQ: SBUX</div><h3 class="text-2xl font-bold mt-2">Starbucks</h3></div><span class="pill bg-rose-50 text-rose-800">早盤約 −3%</span></div>
+          <div class="mt-5 border-t pt-4"><div class="text-sm text-slate-500">當時市值</div><div class="metric-value text-3xl font-bold mt-1">約 1,070 億美元</div></div>
+          <p class="leading-relaxed text-slate-600 mt-4">2026 會計年度第三季全球與美國同店銷售皆約年增 <strong>7.9%</strong>，連續四個季度同店銷售成長，轉型已有可觀察進展，但持續性仍待驗證。</p>
+          <p class="text-sm text-slate-600 leading-relaxed mt-3">市場疑慮可能集中在收購價格、資金來源、股東稀釋、整合責任，以及核心咖啡業務轉型是否受到分心。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex items-center justify-between gap-3"><div><div class="eyebrow">潛在標的 · NYSE: CMG</div><h3 class="text-2xl font-bold mt-2">Chipotle</h3></div><span class="pill bg-emerald-50 text-emerald-800">早盤約 +4%</span></div>
+          <div class="mt-5 border-t pt-4"><div class="text-sm text-slate-500">當時市值</div><div class="metric-value text-3xl font-bold mt-1">約 390 億美元</div></div>
+          <p class="leading-relaxed text-slate-600 mt-4">第二季營收年增約 <strong>9.3%</strong>、同店銷售年增 <strong>2.2%</strong>，具備獨立成長潛力，但來客數與食材、人力成本仍是風險。</p>
+          <p class="text-sm text-slate-600 leading-relaxed mt-3">消息驅動的股價上漲可能反映市場臆測收購溢價；若傳聞消退，這部分溢價可能回吐。</p>
+        </article>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">管理連結</div><h3 class="font-bold text-lg mt-2">Brian Niccol 的經驗</h3><p class="text-slate-600 leading-relaxed mt-3">Starbucks 執行長曾帶領 Chipotle 成長，熟悉餐飲營運與數位訂購；這讓傳聞受到關注，但不代表交易已進行。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">規模參考</div><h3 class="font-bold text-lg mt-2">高額資本配置</h3><p class="text-slate-600 leading-relaxed mt-3">標的公司約 390 億美元市值，已相當於 Starbucks 當時市值的三成以上；<strong>市值比例不是正式收購估值</strong>。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="eyebrow">綜效待證</div><h3 class="font-bold text-lg mt-2">品牌知名度不足以證明效益</h3><p class="text-slate-600 leading-relaxed mt-3">咖啡與墨西哥速食的設備、供應鏈、門市節奏不同；會員、採購與營運綜效需要以新增收入和節省成本的實際數據支持。</p></div>
+      </div>
+      <p class="note mt-1">早盤漲跌幅及市值為報告描述的 2026 年 10 月 8 日美東上午時點，非收盤資料。Starbucks 同店銷售與 Chipotle 財報分屬不同期間，不宜直接作同期績效比較。</p>
+    </section>
+
+    <section id="framework" class="section-anchor" aria-labelledby="framework-heading">
+      <h2 id="framework-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">04｜產業脈絡：從定價能力到利潤留存</h2>
+      <p class="section-desc">三件事背後是同一條邏輯：家庭面對物價壓力調整支出，企業增加促銷與投資維持競爭力，利率與融資成本則提高大型併購的執行門檻。</p>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="story-line"><div class="eyebrow">短期 · 需求</div><h3 class="text-xl font-bold mt-2">價格敏感度上升</h3><p class="text-slate-600 leading-relaxed mt-3">家庭傾向尋找促銷、較便宜的替代商品，削減部分非必要開支，品牌需要兼顧定價與銷量。</p></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="story-line"><div class="eyebrow">中期 · 獲利</div><h3 class="text-xl font-bold mt-2">營收未必轉為盈餘</h3><p class="text-slate-600 leading-relaxed mt-3">折扣、原料、工資、行銷及門市效率投入可能吞噬成長；能同步維持流量與生產力的業者才可能拉開差距。</p></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="story-line"><div class="eyebrow">長期 · 資本</div><h3 class="text-xl font-bold mt-2">併購容錯率下降</h3><p class="text-slate-600 leading-relaxed mt-3">高融資成本使企業必須證明，新增收入扣除利息、整合費與資本支出後，仍可提升每股自由現金流。</p></div></article>
+      </div>
+      <div class="bg-slate-900 text-white rounded-xl p-6 md:p-8 mt-2"><p class="text-lg md:text-xl font-semibold leading-relaxed">「防禦性」不應只由消費必需品或餐飲等產業分類決定，而要看<strong class="text-sky-300">現金流品質、財務槓桿、銷量韌性與淨定價能力</strong>。</p></div>
+    </section>
+
+    <section id="strategy" class="section-anchor" aria-labelledby="strategy-heading">
+      <h2 id="strategy-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">05｜投資策略：區分總體、基本面與事件風險</h2>
+      <p class="section-desc">報告提出依時間尺度追蹤不同變數的研究框架，重點不是用單次新聞判定買賣，而是區分訊號與確定結果。</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-sky-50 text-sky-800">短期 · 未來數週</span><h3 class="text-xl font-bold mt-4">控管利率與消息波動</h3><p class="text-slate-600 mt-3 leading-relaxed">觀察已實現通膨、不同期限預期、十年期美債殖利率與能源價格；避免僅因 PepsiCo 單日反彈或未證實併購傳聞追逐股價。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-cyan-50 text-cyan-800">中期 · 一至三季</span><h3 class="text-xl font-bold mt-4">檢驗獲利品質</h3><p class="text-slate-600 mt-3 leading-relaxed">拆分銷量、定價、併購及匯率的成長來源；追蹤核心營業利益率、促銷費用、原料成本與現金流覆蓋能力。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill bg-indigo-50 text-indigo-800">長期 · 估值與資本配置</span><h3 class="text-xl font-bold mt-4">為競爭優勢付合理價格</h3><p class="text-slate-600 mt-3 leading-relaxed">評估品牌能否在價格敏感期維持盈利，檢查資產負債表與自由現金流；大型併購應等待正式條件及量化綜效再評價。</p></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-bold mb-5">三家公司應分開檢視</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div><div class="text-sm font-bold text-sky-800">PEP · PepsiCo</div><p class="mt-2 leading-relaxed text-slate-600">北美飲料量能否止跌？促銷能否穩定市占？核心利益率能否連續回升？國際業務能否維持成長？</p></div>
+          <div><div class="text-sm font-bold text-sky-800">SBUX · Starbucks</div><p class="mt-2 leading-relaxed text-slate-600">同店銷售改善能否持續？門市效率、現金流有無同步改善？是否投入高財務成本的外部成長？</p></div>
+          <div><div class="text-sm font-bold text-sky-800">CMG · Chipotle</div><p class="mt-2 leading-relaxed text-slate-600">在沒有併購的假設下，同店交易量、新店投資報酬率及餐廳利益率能否支撐獨立估值？</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scenarios" class="section-anchor" aria-labelledby="scenarios-heading">
+      <h2 id="scenarios-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">06｜三種情境：用指標而非猜測判斷方向</h2>
+      <p class="section-desc">以下是報告的條件式分析情境，並非已發生的結果、機率預測或報酬承諾。</p>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500"><span class="pill bg-emerald-50 text-emerald-800">情境 A · 相對有利</span><h3 class="text-xl font-bold mt-4">通膨預期緩和、利益率修復</h3><p class="leading-relaxed text-slate-600 mt-3">油價與其他成本趨穩，價格焦慮下降；北美銷量與核心利益率同時改善，優質消費股可能獲估值修復機會。</p><div class="border-t mt-5 pt-4 text-sm"><strong>確認條件：</strong><span class="text-slate-600"> 預期通膨回落、投入成本穩定、量與利同步回升。</span></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-amber-500"><span class="pill bg-amber-50 text-amber-800">情境 B · 分化延續</span><h3 class="text-xl font-bold mt-4">消費有韌性、利潤承壓</h3><p class="leading-relaxed text-slate-600 mt-3">就業穩定且營收維持成長，但促銷、原料、工資及行銷成本侵蝕利潤，投資表現更仰賴個別企業選擇。</p><div class="border-t mt-5 pt-4 text-sm"><strong>確認條件：</strong><span class="text-slate-600"> 銷量有支撐，但核心利益率持續低迷。</span></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-rose-500"><span class="pill bg-rose-50 text-rose-800">情境 C · 壓力升高</span><h3 class="text-xl font-bold mt-4">通膨與長期利率同升</h3><p class="leading-relaxed text-slate-600 mt-3">購買力與融資條件同步惡化，可能觸發獲利預測和估值倍數雙重下修，放大槓桿與大型現金併購風險。</p><div class="border-t mt-5 pt-4 text-sm"><strong>確認條件：</strong><span class="text-slate-600"> 多期期待通膨及長期殖利率持續上行。</span></div></article>
+      </div>
+    </section>
+
+    <section id="dashboard" class="section-anchor" aria-labelledby="dashboard-heading">
+      <h2 id="dashboard-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">07｜報告指標總覽與追蹤清單</h2>
+      <p class="section-desc">下表只使用報告明列的數字，並保留「消費者預期」「已公布財報」「公司展望」「當時市場反應」等不同統計口徑。輸入公司名稱、指標、數字或類別即可搜尋。</p>
+      <div class="bg-white rounded-lg shadow-lg p-5 md:p-6 mb-6">
+        <div class="flex flex-col md:flex-row md:items-end gap-4 md:justify-between mb-5">
+          <div class="flex-1 max-w-xl"><label for="data-search" class="block text-sm font-bold text-slate-700 mb-2">搜尋報告數據</label><input id="data-search" type="search" autocomplete="off" placeholder="例如：核心、PepsiCo、通膨、Chipotle、3.9" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-800 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200" /></div>
+          <div class="flex items-center gap-2"><label for="data-category" class="text-sm font-semibold text-slate-700">類別</label><select id="data-category" class="rounded-lg border border-slate-300 bg-white px-3 py-3 text-sm text-slate-700 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"><option value="all">全部</option><option value="通膨預期">通膨預期</option><option value="PepsiCo 財報">PepsiCo 財報</option><option value="PepsiCo 展望">PepsiCo 展望</option><option value="餐飲企業與消息">餐飲企業與消息</option></select></div>
+        </div>
+        <div class="table-scroll rounded-lg border border-slate-200"><table class="w-full text-sm text-slate-700"><thead><tr><th scope="col">類別</th><th scope="col">指標</th><th scope="col">數值</th><th scope="col">時點／口徑</th><th scope="col">性質</th></tr></thead><tbody id="data-table-body"></tbody></table></div>
+        <div class="flex flex-wrap gap-2 items-center justify-between mt-4"><p id="result-count" class="text-sm text-slate-500" role="status" aria-live="polite"></p><p class="note">本表數值不應跨期間或口徑直接相加比較。</p></div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold mb-4">未來應持續追蹤</h3><ul class="space-y-3 text-slate-600 leading-relaxed list-disc pl-5"><li>紐約聯準銀行 1／3／5 年通膨預期是否同步走高，及美國實際通膨、十年期美債殖利率。</li><li>PEP 北美銷量、市占、促銷負擔、核心營業利益率與國際有機成長。</li><li>SBUX 同店銷售與現金流、CMG 交易量與新店投資回報。</li><li>如有正式併購公告，再檢查價格、融資方式、淨負債、股權稀釋及量化綜效。</li></ul></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold mb-4">研究結論</h3><p class="leading-loose text-slate-700">在消費者更重視價格、品牌增加促銷與投資、融資成本高企的背景下，<strong class="text-slate-900">真正的護城河不是單純有能力漲價，而是漲價、降價與持續投入之間仍能獲利</strong>。應聚焦成長的來源、核心獲利率及新增資本是否增加每股自由現金流，而非只根據單日漲跌或未確認的交易消息做判斷。</p><div class="mt-5 rounded-lg bg-sky-50 px-4 py-3 text-sm text-slate-700"><strong>報告觀察截止：</strong>2026 年 10 月 8 日，美東上午交易時段。</div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-通膨與美國消費股三重考驗。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中美國通膨預期、PepsiCo財報與美國餐飲業相關公開資料 (2026年10月08日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 數據皆來自上傳報告，不以假設案例填充。
+    const productData = [
+      {category:'通膨預期', metric:'一年期通膨預期', value:'3.9%', period:'2026 年 9 月調查', status:'消費者預期中位數'},
+      {category:'通膨預期', metric:'一年期通膨預期（前月）', value:'3.6%', period:'2026 年 8 月調查', status:'消費者預期中位數'},
+      {category:'通膨預期', metric:'三年期通膨預期', value:'3.3%', period:'2026 年 9 月調查', status:'消費者預期中位數'},
+      {category:'通膨預期', metric:'三年期通膨預期（前月）', value:'3.2%', period:'2026 年 8 月調查', status:'消費者預期中位數'},
+      {category:'通膨預期', metric:'五年期通膨預期', value:'3.0%', period:'2026 年 9 月調查；前月持平', status:'消費者預期中位數'},
+      {category:'通膨預期', metric:'個人薪資成長預期', value:'2.6%', period:'未來一年', status:'消費者預期中位數'},
+      {category:'通膨預期', metric:'汽油價格預期漲幅', value:'4.8%', period:'未來一年', status:'消費者預期'},
+      {category:'通膨預期', metric:'食品價格預期漲幅', value:'5.5%', period:'未來一年', status:'消費者預期'},
+      {category:'通膨預期', metric:'房租預期漲幅', value:'6.8%', period:'未來一年', status:'消費者預期'},
+      {category:'通膨預期', metric:'醫療費用預期漲幅', value:'9.2%', period:'未來一年', status:'消費者預期'},
+      {category:'通膨預期', metric:'大學教育費用預期漲幅', value:'7.5%', period:'未來一年', status:'消費者預期'},
+      {category:'PepsiCo 財報', metric:'第三季營收', value:'約 252.7 億美元', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'第三季營收年增率', value:'+5.6%', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'第三季有機營收成長', value:'+3.1%', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'併購及處分淨影響', value:'約 +1.7 個百分點', period:'2026 年第三季營收成長貢獻', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'外匯換算影響', value:'約 +0.7 個百分點', period:'2026 年第三季營收成長貢獻', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'GAAP 稀釋 EPS', value:'2.23 美元；年增 17%', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'核心 EPS', value:'2.34 美元；年增 2%', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'GAAP 營業利益率', value:'16.9%；去年同期 14.9%', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'核心營業利益率', value:'16.9%；去年同期 17.3%', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'北美飲料銷售量', value:'約 −2%', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'北美食品核心營業利益率變化', value:'約 −2.8 個百分點', period:'2026 年第三季年變化', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'國際業務有機營收成長', value:'約 +8%', period:'2026 年第三季', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'國際業務營收占比', value:'約 41%', period:'2026 年初至今', status:'已公布財報'},
+      {category:'PepsiCo 財報', metric:'國際業務核心部門營業利益占比', value:'約 45%', period:'2026 年初至今', status:'已公布財報'},
+      {category:'PepsiCo 展望', metric:'全年核心 EPS 成長展望', value:'+2.5%～+3.5%', period:'2026 全年', status:'公司預估，非已實現'},
+      {category:'PepsiCo 展望', metric:'全年固定匯率核心 EPS 成長展望', value:'+1%～+2%', period:'2026 全年', status:'公司預估，非已實現'},
+      {category:'PepsiCo 展望', metric:'全年淨營收成長展望', value:'約 +6%', period:'2026 全年', status:'公司預估，非已實現'},
+      {category:'餐飲企業與消息', metric:'Starbucks 全球同店銷售成長', value:'約 +7.9%', period:'2026 會計年度第三季', status:'已公布財報'},
+      {category:'餐飲企業與消息', metric:'Starbucks 美國同店銷售成長', value:'約 +7.9%', period:'2026 會計年度第三季', status:'已公布財報'},
+      {category:'餐飲企業與消息', metric:'Chipotle 營收成長', value:'約 +9.3%', period:'2026 年第二季', status:'已公布財報'},
+      {category:'餐飲企業與消息', metric:'Chipotle 同店銷售成長', value:'+2.2%', period:'2026 年第二季', status:'已公布財報'},
+      {category:'餐飲企業與消息', metric:'Starbucks 當時市值', value:'約 1,070 億美元', period:'2026/10/08 美東上午', status:'消息時點市場數據'},
+      {category:'餐飲企業與消息', metric:'Chipotle 當時市值', value:'約 390 億美元', period:'2026/10/08 美東上午', status:'消息時點市場數據'},
+      {category:'餐飲企業與消息', metric:'Starbucks 早盤股價反應', value:'約 −3%', period:'2026/10/08 美東上午', status:'傳聞時點市場反應'},
+      {category:'餐飲企業與消息', metric:'Chipotle 早盤股價反應', value:'約 +4%', period:'2026/10/08 美東上午', status:'傳聞時點市場反應'}
+    ];
+
+    const escapeHTML = (value) => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const tableBody = document.getElementById('data-table-body');
+    const searchField = document.getElementById('data-search');
+    const categorySelect = document.getElementById('data-category');
+    const countField = document.getElementById('result-count');
+    function renderTable() {
+      const keyword = searchField.value.trim().toLocaleLowerCase('zh-Hant');
+      const category = categorySelect.value;
+      const rows = productData.filter(row => (category === 'all' || row.category === category) && (!keyword || Object.values(row).some(v => String(v).toLocaleLowerCase('zh-Hant').includes(keyword))));
+      tableBody.innerHTML = rows.length ? rows.map(row => `<tr><td class="font-medium text-slate-700">${escapeHTML(row.category)}</td><td class="font-semibold text-slate-800">${escapeHTML(row.metric)}</td><td class="font-bold text-sky-800 whitespace-nowrap">${escapeHTML(row.value)}</td><td class="text-slate-600">${escapeHTML(row.period)}</td><td class="text-slate-500">${escapeHTML(row.status)}</td></tr>`).join('') : '<tr><td colspan="5" class="text-center text-slate-500 py-8">沒有符合條件的指標，請更換關鍵字或類別。</td></tr>';
+      countField.textContent = `顯示 ${rows.length}／${productData.length} 筆真實報告指標`;
+    }
+    searchField.addEventListener('input', renderTable);
+    categorySelect.addEventListener('change', renderTable);
+    renderTable();
+
+    const menuButton = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    function closeMobileNav() {
+      mobileNav.classList.add('hidden');
+      mobileNav.setAttribute('aria-hidden','true');
+      menuButton.setAttribute('aria-expanded','false');
+      menuButton.setAttribute('aria-label','開啟章節選單');
+    }
+    menuButton.addEventListener('click', () => {
+      const isClosed = mobileNav.classList.toggle('hidden');
+      mobileNav.setAttribute('aria-hidden', String(isClosed));
+      menuButton.setAttribute('aria-expanded', String(!isClosed));
+      menuButton.setAttribute('aria-label', isClosed ? '開啟章節選單' : '關閉章節選單');
+    });
+    mobileNav.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', closeMobileNav));
+    document.addEventListener('keydown', event => { if(event.key === 'Escape') closeMobileNav(); });
+    window.addEventListener('resize', () => { if(window.innerWidth >= 1280) closeMobileNav(); });
+
+    const ids = ['inflation','pepsico','merger','framework','strategy','scenarios','dashboard'];
+    const sections = ids.map(id => document.getElementById(id));
+    const navLinks = document.querySelectorAll('[data-nav]');
+    function setActiveNav(id) {
+      navLinks.forEach(link => {
+        const isActive = link.dataset.nav === id;
+        link.classList.toggle('active-nav-link', isActive);
+        link.classList.toggle('inactive-nav-link', !isActive);
+        if (isActive) link.setAttribute('aria-current','location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      const visibleSections = new Map();
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if(entry.isIntersecting) visibleSections.set(entry.target.id, entry.boundingClientRect.top); else visibleSections.delete(entry.target.id); });
+        if(visibleSections.size) {
+          const nearest = [...visibleSections.entries()].sort((a,b) => Math.abs(a[1] - 105) - Math.abs(b[1] - 105))[0];
+          setActiveNav(nearest[0]);
+        }
+      }, {rootMargin:'-80px 0px -60% 0px', threshold:0});
+      sections.forEach(s => observer.observe(s));
+    }
+    setActiveNav(ids.includes(location.hash.substring(1)) ? location.hash.substring(1) : 'inflation');
+    window.addEventListener('hashchange', () => { const id=location.hash.slice(1); if(ids.includes(id)) setActiveNav(id); });
+
+    if (typeof Chart !== 'undefined') {
+      const fontFamily = 'ui-sans-serif, system-ui, "Microsoft JhengHei", sans-serif';
+      Chart.defaults.font.family = fontFamily;
+      Chart.defaults.color = '#475569';
+      const base = {responsive:true, maintainAspectRatio:false, animation:{duration:350}, plugins:{legend:{labels:{boxWidth:12, usePointStyle:true}},tooltip:{callbacks:{label:context=>`${context.dataset.label ? context.dataset.label + '：' : ''}${context.parsed.y ?? context.parsed.x}%`}}}};
+      new Chart(document.getElementById('inflationChart'), {
+        type:'bar', data:{labels:['一年期','三年期','五年期'],datasets:[{label:'前月',data:[3.6,3.2,3.0],backgroundColor:'#94a3b8',borderRadius:5,maxBarThickness:42},{label:'2026 年 9 月',data:[3.9,3.3,3.0],backgroundColor:'#0284c7',borderRadius:5,maxBarThickness:42}]},
+        options:{...base,scales:{y:{beginAtZero:true,suggestedMax:5,grid:{color:'#e2e8f0'},ticks:{callback:v=>`${v}%`}},x:{grid:{display:false}}}}
+      });
+      new Chart(document.getElementById('expenseChart'), {
+        type:'bar',data:{labels:['汽油','食品','房租','醫療','大學教育'],datasets:[{label:'預期漲幅',data:[4.8,5.5,6.8,9.2,7.5],backgroundColor:['#38bdf8','#0284c7','#0e7490','#d97706','#64748b'],borderRadius:6,maxBarThickness:26}]},
+        options:{...base,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:context=>`未來一年預期：${context.parsed.x}%`}}},scales:{x:{beginAtZero:true,suggestedMax:10,grid:{color:'#e2e8f0'},ticks:{callback:v=>`${v}%`}},y:{grid:{display:false}}}}
+      });
+      new Chart(document.getElementById('marginChart'), {
+        type:'bar',data:{labels:['GAAP 營業利益率','核心營業利益率'],datasets:[{label:'去年同期',data:[14.9,17.3],backgroundColor:'#94a3b8',borderRadius:5,maxBarThickness:48},{label:'2026 年第三季',data:[16.9,16.9],backgroundColor:'#0284c7',borderRadius:5,maxBarThickness:48}]},
+        options:{...base,scales:{y:{beginAtZero:true,suggestedMax:20,grid:{color:'#e2e8f0'},ticks:{callback:v=>`${v}%`}},x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:false}}}}
+      });
+    } else {
+      document.querySelectorAll('.chart-shell').forEach(el => {
+        const note=document.createElement('p'); note.className='note mt-2'; note.textContent='圖表元件暫時未載入；可使用上方數據卡與下方指標總覽查看數值。'; el.parentNode.appendChild(note);
+      });
+    }
+  </script>
+</body>
+</html>
