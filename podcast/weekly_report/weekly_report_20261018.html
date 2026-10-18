@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="2026年10月12日至16日美股市場週報：美股指數分化、通膨升溫、台積電與ASML財報、AI資料中心融資風險、能源及投資觀察。">
+  <title>巴菲特AI價值投資-美股市場週報 (2026/10/12~10/16)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif; background:#f6f7f8; color:#334155; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .nav-link { transition: color .18s ease, background .18s ease; white-space: nowrap; }
+    .active-nav-link { color:#0369a1; background:#e0f2fe; }
+    .inactive-nav-link { color:#57534e; background:transparent; }
+    .inactive-nav-link:hover { color:#0369a1; background:#f0f9ff; }
+    .chart-shell { height:294px; position:relative; width:100%; min-width:0; }
+    .chart-shell-sm { height:258px; }
+    .metric-glass { background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.19); backdrop-filter:blur(7px); }
+    .section-anchor { scroll-margin-top:86px; }
+    .eyeline { width:30px; height:3px; border-radius:9px; background:#0ea5e9; display:inline-block; flex-shrink:0; }
+    .kicker { font-size:.73rem; letter-spacing:.12em; font-weight:800; }
+    .event-num { font-size:2.55rem; font-weight:800; line-height:1; letter-spacing:-.08em; color:#dbeafe; }
+    .feature-rule { border-left:3px solid #38bdf8; }
+    .table-scroll { overflow-x:auto; max-width:100%; }
+    .data-table { width:100%; min-width:930px; border-collapse:separate; border-spacing:0; }
+    .data-table th { position:sticky; top:0; background:#eaf4fc; z-index:2; white-space:nowrap; font-weight:750; color:#075985; }
+    .data-table th, .data-table td { padding:15px 14px; border-bottom:1px solid #e7edf3; text-align:left; vertical-align:top; }
+    .data-table tbody tr:nth-child(even) { background:#fafcfe; }
+    .data-table tbody tr:hover { background:#eef8ff; }
+    .pill { display:inline-flex; align-items:center; border-radius:999px; font-weight:750; font-size:.72rem; padding:5px 10px; }
+    .pill-blue { background:#e0f2fe; color:#0369a1; }
+    .pill-amber { background:#fef3c7; color:#92400e; }
+    .pill-green { background:#dcfce7; color:#166534; }
+    .pill-violet { background:#ede9fe; color:#6d28d9; }
+    .pill-rose { background:#ffe4e6; color:#9f1239; }
+    .muted-label { color:#64748b; font-size:.78rem; font-weight:650; }
+    .footnote { font-size:.79rem; color:#64748b; line-height:1.8; }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid #38bdf8; outline-offset:3px; }
+    @media(max-width:640px) { .chart-shell{height:255px;} .chart-shell-sm{height:230px;} .event-num{font-size:2.1rem;} }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{transition:none!important;}}
+  </style>
+</head>
+<body class="min-w-0 antialiased">
+  <header class="sticky top-0 z-50 border-b border-stone-200/90 bg-white/95 shadow-sm backdrop-blur-md">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="主要章節導覽">
+      <div class="flex items-center justify-between gap-3 min-h-[68px]">
+        <a href="#top" class="flex items-center gap-2.5 min-w-0 text-stone-800 font-black tracking-tight shrink-0" aria-label="回到報告頂端">
+          <span class="flex justify-center items-center rounded-lg bg-sky-900 text-white w-9 h-9 text-sm shadow">AI</span>
+          <span class="text-sm md:text-base">巴菲特AI價值投資</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-1" id="desktop-nav">
+          <a class="nav-link inactive-nav-link px-3 py-2 rounded-lg text-sm font-bold" data-nav="overview" href="#overview">週報重點</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 rounded-lg text-sm font-bold" data-nav="market" href="#market">市場表現</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 rounded-lg text-sm font-bold" data-nav="macro" href="#macro">總經與能源</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 rounded-lg text-sm font-bold" data-nav="events" href="#events">十大焦點</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 rounded-lg text-sm font-bold" data-nav="earnings" href="#earnings">財報比較</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 rounded-lg text-sm font-bold" data-nav="milestones" href="#milestones">進度辨識</a>
+          <a class="nav-link inactive-nav-link px-3 py-2 rounded-lg text-sm font-bold" data-nav="outlook" href="#outlook">投資觀察</a>
+        </div>
+        <button id="mobile-menu-button" type="button" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border border-stone-200 text-sky-900 hover:bg-sky-50" aria-expanded="false" aria-controls="mobile-menu" aria-label="開啟章節選單">
+          <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden lg:hidden border-t border-stone-100 pb-3" aria-label="手機章節導覽">
+        <div class="grid grid-cols-2 gap-1 pt-3">
+          <a class="nav-link inactive-nav-link px-3 py-3 rounded-lg text-sm font-semibold" data-nav="overview" href="#overview">週報重點</a>
+          <a class="nav-link inactive-nav-link px-3 py-3 rounded-lg text-sm font-semibold" data-nav="market" href="#market">市場表現</a>
+          <a class="nav-link inactive-nav-link px-3 py-3 rounded-lg text-sm font-semibold" data-nav="macro" href="#macro">總經與能源</a>
+          <a class="nav-link inactive-nav-link px-3 py-3 rounded-lg text-sm font-semibold" data-nav="events" href="#events">十大焦點</a>
+          <a class="nav-link inactive-nav-link px-3 py-3 rounded-lg text-sm font-semibold" data-nav="earnings" href="#earnings">財報比較</a>
+          <a class="nav-link inactive-nav-link px-3 py-3 rounded-lg text-sm font-semibold" data-nav="milestones" href="#milestones">進度辨識</a>
+          <a class="nav-link inactive-nav-link px-3 py-3 rounded-lg text-sm font-semibold col-span-2" data-nav="outlook" href="#outlook">投資觀察</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-[3.65rem] font-extrabold leading-[1.18] max-w-4xl tracking-tight">AI 熱潮迎來資金考驗</h1>
+        <p class="mt-6 max-w-3xl text-sky-50/90 leading-relaxed text-base sm:text-lg">2026 年 10 月 12～16 日，美股走勢分化：那斯達克重挫，道瓊相對抗跌。台積電與 ASML 財報顯示先進晶片需求仍強，但通膨、油價及 AI 資料中心融資成本正在改變市場的估值標準。關鍵不再只是成長速度，而是獲利品質與現金流。</p>
+        <div class="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl" aria-label="週報三項重點數據">
+          <div class="metric-glass rounded-xl px-5 py-4"><p class="text-sky-100/80 text-xs font-bold tracking-wide">那斯達克｜週變動</p><p class="text-3xl font-black mt-1 tabular-nums">−4.48<span class="text-lg ml-1">%</span></p><p class="text-xs mt-1 text-sky-100/70">科技股估值承壓</p></div>
+          <div class="metric-glass rounded-xl px-5 py-4"><p class="text-sky-100/80 text-xs font-bold tracking-wide">9 月 CPI｜年增率</p><p class="text-3xl font-black mt-1 tabular-nums">3.7<span class="text-lg ml-1">%</span></p><p class="text-xs mt-1 text-sky-100/70">高於前月 3.4%</p></div>
+          <div class="metric-glass rounded-xl px-5 py-4"><p class="text-sky-100/80 text-xs font-bold tracking-wide">布蘭特原油｜週五收盤</p><p class="text-3xl font-black mt-1 tabular-nums">109.86</p><p class="text-xs mt-1 text-sky-100/70">美元／桶</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="overview" class="section-anchor pt-12 md:pt-16" aria-labelledby="overview-title">
+        <div class="flex flex-wrap justify-between items-end gap-3 mb-5">
+          <h2 id="overview-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">本週核心判讀</h2>
+          <p class="text-stone-500 text-sm mb-6">觀察週期：2026/10/12—10/16</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500">
+          <div class="grid lg:grid-cols-[1.25fr_.75fr] gap-7 items-start">
+            <div>
+              <p class="kicker text-sky-700">MARKET THESIS</p>
+              <h3 class="text-2xl md:text-[1.7rem] font-extrabold text-slate-800 mt-3 leading-snug">不是 AI 需求突然消失，而是市場重新計算「成長的成本」。</h3>
+              <p class="text-slate-600 leading-8 mt-4">台積電與 ASML 的第三季成績支持上游需求仍強；相較之下，CoreWeave 的股債壓力顯示，以大量負債建設算力的企業更易受到高利率衝擊。通膨、能源與地緣政治風險同時抬升折現率和營運成本，使投資焦點由題材轉向財務耐久性。</p>
+            </div>
+            <div class="rounded-xl bg-sky-50 border border-sky-100 p-5">
+              <p class="text-sky-800 font-black text-sm mb-3">本週要回答的三個問題</p>
+              <ol class="space-y-3 text-sm leading-6 text-slate-700">
+                <li class="flex gap-3"><span class="font-black text-sky-600">01</span><span>營收增加，能否實際轉成自由現金流？</span></li>
+                <li class="flex gap-3"><span class="font-black text-sky-600">02</span><span>資本支出與負債，是否超出營運承受力？</span></li>
+                <li class="flex gap-3"><span class="font-black text-sky-600">03</span><span>現有股價，是否已充分反映未來成長？</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex gap-3 items-center mb-3"><span class="eyeline"></span><span class="text-xs font-bold text-sky-700 tracking-widest">需求面</span></div><h3 class="font-bold text-lg text-stone-800">先進製程與設備需求仍強</h3><p class="mt-2 text-sm text-slate-600 leading-7">台積電營收年增 50.9%，ASML 第三季毛利率 57.5%，提供基本面支持。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex gap-3 items-center mb-3"><span class="eyeline"></span><span class="text-xs font-bold text-sky-700 tracking-widest">資金面</span></div><h3 class="font-bold text-lg text-stone-800">高槓桿的算力建設更脆弱</h3><p class="mt-2 text-sm text-slate-600 leading-7">CoreWeave 單週股價約跌 25%，部分公司債殖利率超過 15%，市場聚焦償債能力。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex gap-3 items-center mb-3"><span class="eyeline"></span><span class="text-xs font-bold text-sky-700 tracking-widest">政策面</span></div><h3 class="font-bold text-lg text-stone-800">通膨與油價限制降息想像</h3><p class="mt-2 text-sm text-slate-600 leading-7">9 月 CPI 年增 3.7%；市場評估聯準會後續政策以及能源供應風險。</p></div>
+        </div>
+      </section>
+
+      <section id="market" class="section-anchor pt-8 md:pt-12" aria-labelledby="market-title">
+        <h2 id="market-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場表現：股市內部分化</h2>
+        <div class="grid sm:grid-cols-3 gap-5 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-400"><p class="muted-label">標普 500 S&amp;P 500</p><p class="text-3xl font-extrabold text-stone-800 tabular-nums mt-2">7,659.44</p><p class="text-rose-600 font-bold mt-2">▼ 1.95% <span class="text-xs text-slate-500 font-normal ml-1">週跌幅</span></p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-rose-500"><p class="muted-label">那斯達克綜合指數</p><p class="text-3xl font-extrabold text-stone-800 tabular-nums mt-2">26,140.03</p><p class="text-rose-600 font-bold mt-2">▼ 4.48% <span class="text-xs text-slate-500 font-normal ml-1">週跌幅</span></p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500"><p class="muted-label">道瓊工業指數</p><p class="text-3xl font-extrabold text-stone-800 tabular-nums mt-2">52,002.41</p><p class="text-emerald-700 font-bold mt-2">▲ 0.67% <span class="text-xs text-slate-500 font-normal ml-1">週漲幅</span></p></div>
+        </div>
+        <div class="grid lg:grid-cols-[1.5fr_1fr] gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0"><div class="mb-4"><h3 class="text-lg font-bold text-stone-800">美股三大指數｜週報酬率</h3><p class="text-xs text-slate-500 mt-1">單位：%；2026/10/12～10/16，依原報告約數</p></div><div class="chart-shell"><canvas id="indexChart" role="img" aria-label="本週道瓊上漲約0.67%，標普500下跌約1.95%，那斯達克下跌約4.48%"></canvas></div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill pill-blue">估值重新定價</span><h3 class="text-xl font-extrabold text-stone-800 mt-4">科技跌得更多，不等於所有企業基本面同步惡化</h3><p class="mt-4 leading-8 text-sm text-slate-600">道瓊小幅上漲，科技股權重較高的那斯達克卻顯著下跌。這反映投資人在通膨與融資成本抬升的背景下，對高成長資產更為挑剔。</p><div class="mt-5 p-4 rounded-lg bg-amber-50 border border-amber-100"><p class="font-bold text-amber-900 text-sm">觀察指標</p><p class="text-sm leading-7 text-amber-900/90 mt-1">企業的自由現金流、估值倍數、融資條件及下一季財報是否支持市場預期。</p></div></div>
+        </div>
+      </section>
+
+      <section id="macro" class="section-anchor pt-8 md:pt-12" aria-labelledby="macro-title">
+        <h2 id="macro-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">總經、地緣政治與區域安全</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-5"><p class="muted-label">9月 PPI 月增</p><p class="text-2xl font-black text-slate-800 mt-2">+1.3%</p><p class="text-xs text-slate-500 mt-2">年增 6.3%</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-5"><p class="muted-label">聯準會政策利率區間</p><p class="text-2xl font-black text-slate-800 mt-2">3.75–4.00%</p><p class="text-xs text-slate-500 mt-2">依報告截至 10/18</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-5"><p class="muted-label">美國10年期公債殖利率</p><p class="text-2xl font-black text-slate-800 mt-2">約 5.10%</p><p class="text-xs text-slate-500 mt-2">上週走低</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-5"><p class="muted-label">汽油平均價格</p><p class="text-2xl font-black text-slate-800 mt-2">$4.33</p><p class="text-xs text-slate-500 mt-2">美元／加侖</p></div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6 mb-1">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0"><h3 class="text-lg font-bold text-stone-800">美國消費者物價指數年增率</h3><p class="text-xs text-slate-500 mt-1">單位：%；9 月 3.7%，前月 3.4%</p><div class="chart-shell chart-shell-sm mt-4"><canvas id="cpiChart" role="img" aria-label="CPI年增率由前月3.4%上升至9月3.7%"></canvas></div><p class="footnote mt-2">另據報告：9 月核心 CPI 年增 2.6%，當月整體 CPI 月增 0.6%，核心 CPI 月增 0.3%。不同統計口徑未混入圖表。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold text-stone-800 mb-4">油價與地緣衝突的傳導路徑</h3><div class="space-y-3"><div class="rounded-xl bg-rose-50 border border-rose-100 px-4 py-4"><p class="text-sm font-bold text-rose-900">區域安全風險</p><p class="text-sm leading-7 mt-1">沙烏地阿拉伯相關設施遇襲；荷姆茲海峽航運安全受關注。</p></div><div class="flex justify-center text-sky-600 text-xl" aria-hidden="true">↓</div><div class="rounded-xl bg-amber-50 border border-amber-100 px-4 py-4"><p class="text-sm font-bold text-amber-900">能源供給與成本</p><p class="text-sm leading-7 mt-1">布蘭特原油收在約 109.86 美元／桶，上週五單日漲約 3.7%。</p></div><div class="flex justify-center text-sky-600 text-xl" aria-hidden="true">↓</div><div class="rounded-xl bg-sky-50 border border-sky-100 px-4 py-4"><p class="text-sm font-bold text-sky-900">企業利潤與通膨</p><p class="text-sm leading-7 mt-1">上游能源企業有機會受惠；航空、物流、零售與消費者支出承壓。</p></div></div></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-stone-800 text-lg">零售總額不等於購買量</h3><p class="mt-2 text-2xl font-black text-sky-700">7,450 億美元</p><p class="text-sm leading-7 mt-3">美國 9 月零售與餐飲銷售月增 0.8%，加油站銷售月增 6.4%；部分名目成長可能來自價格，而非實質需求。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-stone-800 text-lg">出口成長與貿易摩擦</h3><p class="mt-2 text-2xl font-black text-sky-700">+36.3%</p><p class="text-sm leading-7 mt-3">中國 9 月出口年增率。AI 相關商品需求強勁，但龐大順差可能增加與美歐的貿易摩擦。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-stone-800 text-lg">資金移動訊號</h3><p class="mt-2 text-2xl font-black text-sky-700">約 5.10%</p><p class="text-sm leading-7 mt-3">美國 10 年期公債殖利率上週下降，報告解讀為部分資金轉向債券尋求保護。</p></div>
+        </div>
+      </section>
+
+      <section id="events" class="section-anchor pt-8 md:pt-12" aria-labelledby="events-title">
+        <h2 id="events-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">上週十大投資焦點</h2>
+        <p class="text-sm text-slate-600 mb-6 leading-7">依原報告的十件大事整理。每張卡片區分事件資訊與投資觀察，避免把市場討論、企業目標與正式業績混為一談。</p>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">01</span><div><span class="pill pill-rose">貨幣政策</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">通膨升溫，聯準會降息期待降溫</h3></div></div><p class="mt-4 text-sm leading-8">9 月 CPI 年增 3.7%、月增 0.6%；PPI 月增 1.3%、年增 6.3%。能源價格逐步影響企業成本及終端物價，市場開始重新衡量後續利率路徑。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>高利率提高資金成本並壓低高成長股估值；營收、獲利與自由現金流必須一起看。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">02</span><div><span class="pill pill-amber">能源 / 地緣</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">中東衝突推升油價，產業受影響不一</h3></div></div><p class="mt-4 text-sm leading-8">沙烏地阿拉伯重要設施遇襲，荷姆茲海峽航運風險受到關注。布蘭特原油收約每桶 109.86 美元，美國汽油平均約每加侖 4.33 美元。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>能源生產商可能受惠，運輸與消費產業承壓；重點是供應中斷的持續性與成本轉嫁能力。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">03</span><div><span class="pill pill-green">消費 / 餐飲</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">零售成長掩蓋消費壓力，達美樂同店放緩</h3></div></div><p class="mt-4 text-sm leading-8">美國 9 月零售與餐飲銷售月增 0.8%，但加油站銷售月增 6.4%。達美樂（DPZ）第三季 EPS 4.60 美元、營收年增 3.4%，美國同店銷售僅增 0.3%，低於前一年的 5.2%。星巴克否認收購 Chipotle 的傳聞。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>客流、同店銷售與利潤率比名目營收更能衡量終端需求；未證實併購不可作為成長前提。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">04</span><div><span class="pill pill-rose">AI 資金風險</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">CoreWeave 債務壓力，Anthropic 估值轉審慎</h3></div></div><p class="mt-4 text-sm leading-8">CoreWeave（CRWV）單週股價約跌 25%，部分公司債殖利率升至 15% 以上。Anthropic 的潛在 IPO 估值由約 2 兆美元調整至 1.5 兆美元，為投資人討論及媒體報導，<strong>並非確定定價</strong>。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>比較算力公司時，債務期限、資本支出、客戶集中度與現金流可能比營收增速更關鍵。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">05</span><div><span class="pill pill-blue">半導體 / 財報</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">台積電獲利成長強勁，估值仍須檢驗</h3></div></div><p class="mt-4 text-sm leading-8">台積電（TSM）第三季營收約新台幣 1.494 兆元，年增 50.9%；稅後淨利約 7,631 億元，年增 68.7%。公司預估第四季美元營收 523～543 億美元，屬<strong>未來指引</strong>，不是已實現收入。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>先進製程成長支持 AI 需求，但股價仍受估值、地緣政治與資本支出變化左右。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">06</span><div><span class="pill pill-blue">設備 / 長期需求</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">ASML 財報強勁，遠期需求仍需轉化為交貨</h3></div></div><p class="mt-4 text-sm leading-8">ASML 第三季營收約 117 億歐元、淨利 50 億歐元、毛利率 57.5%；第四季營收指引 142～152 億歐元。部分客戶對 2029～2030 年設備表示興趣，<strong>不等於已完成出貨</strong>。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>留意訂單轉交貨、毛利率、擴產成本，以及客戶是否延後建廠。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">07</span><div><span class="pill pill-violet">金融 / 財報</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">銀行財報分歧，高利率不是全面利多</h3></div></div><p class="mt-4 text-sm leading-8">高盛（GS）第三季 EPS 17.01 美元、營收約 186.8 億美元，花旗獲利優於預期；摩根大通（JPM）EPS 5.57 美元低於預期。美國銀行（BAC）因合規缺失認列 12 億美元罰款，EPS 0.91 美元。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>應拆解交易收入、資產品質、存款成本、法遵費用及一次性損益。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">08</span><div><span class="pill pill-green">醫療 / 財報</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">聯合健康改善，嬌生醫材業務仍有壓力</h3></div></div><p class="mt-4 text-sm leading-8">聯合健康（UNH）第三季營收約 1,127 億美元，<strong>調整後</strong> EPS 4.69 美元並上調年度展望。嬌生（JNJ）營收約 254 億美元，<strong>調整後</strong> EPS 2.59 美元；醫療器材成長不如預期，且 GAAP EPS 受到一次性費用影響。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>分別追蹤醫療成本、器材區域需求與一次性項目；調整後及 GAAP 盈餘不得混用。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">09</span><div><span class="pill pill-violet">科技平台 / AI 變現</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">Meta、蘋果、微軟展開不同收費路線</h3></div></div><p class="mt-4 text-sm leading-8">Meta 10/12 推出 Muse Wonder 模型，計畫強化助理與付費服務；蘋果 10/13 發表 HomeView 智慧家庭裝置；微軟 10/12 市值重返 4 兆美元門檻。AI 發布與商業化成果仍須分開看待。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>付費用戶、雲端、廣告、訂閱收入與資本支出的獲利回收才是核心驗證項目。</div></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-start gap-4"><span class="event-num">10</span><div><span class="pill pill-amber">衛星 / 電動車</span><h3 class="text-xl font-extrabold text-stone-800 mt-2">Starlink Mobile 與 Roadster：計畫不等於收入</h3></div></div><p class="mt-4 text-sm leading-8">據報告，SpaceX（SPCX）同意以接近 80 億美元取得美國 800 MHz 頻譜，<strong>仍待監管核准</strong>；全國網路建置費用可能超過 800 億美元（分析機構估計）。特斯拉於 10/15 展示新一代 Roadster，<strong>預計 2028 年生產</strong>。報告並記載 SpaceX 10/20 預定公告第三季結果。</p><div class="feature-rule bg-sky-50/70 pl-4 pr-3 py-3 mt-4 text-sm leading-7"><strong class="text-sky-800">投資觀察：</strong>追蹤監管進度、Starlink 收入、資本支出及真實現金流；技術合作不代表已宣布公司合併。</div></article>
+        </div>
+      </section>
+
+      <section id="earnings" class="section-anchor pt-8 md:pt-12" aria-labelledby="earnings-title">
+        <h2 id="earnings-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">企業財報與量化比較</h2>
+        <div class="grid lg:grid-cols-[1fr_1fr] gap-6 mb-2">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0"><h3 class="text-lg font-bold text-stone-800">台積電第三季成長率</h3><p class="text-xs text-slate-500 mt-1">兩項均為年增率（%），第三季實績；非季度營收金額</p><div class="chart-shell chart-shell-sm mt-5"><canvas id="tsmChart" role="img" aria-label="台積電第三季營收年增50.9%、稅後淨利年增68.7%"></canvas></div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold text-stone-800">半導體上游：實績與未來展望</h3><div class="mt-4 space-y-4"><div class="rounded-xl border border-sky-100 bg-sky-50 px-4 py-4"><div class="flex items-center justify-between gap-2"><strong class="text-sky-900">台積電 TSM</strong><span class="pill pill-green">Q3 已公布</span></div><p class="text-sm mt-2 leading-7">第三季營收約新台幣 1.494 兆元，稅後淨利約 7,631 億元。</p><p class="text-sm text-sky-800 mt-2 font-semibold">Q4 指引：523～543 億美元營收</p></div><div class="rounded-xl border border-violet-100 bg-violet-50 px-4 py-4"><div class="flex items-center justify-between gap-2"><strong class="text-violet-900">ASML</strong><span class="pill pill-green">Q3 已公布</span></div><p class="text-sm mt-2 leading-7">第三季營收約 117 億歐元、淨利約 50 億歐元、毛利率 57.5%。</p><p class="text-sm text-violet-800 mt-2 font-semibold">Q4 指引：142～152 億歐元營收</p></div><p class="footnote">兩家公司使用不同幣別；未做未經報告支持的匯率換算。指引不屬於已實現營收。</p></div></div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-5"><div><h3 class="text-lg font-bold text-stone-800">第三季公司財報速覽</h3><p class="text-sm text-slate-500 mt-1">搜尋公司、股票代號、產業或財報觀察，僅收錄原報告有明確資訊的公司。</p></div><span class="pill pill-blue" id="result-count" role="status" aria-live="polite">顯示 8 筆</span></div>
+          <div class="flex flex-col md:flex-row gap-3 mb-5"><label class="flex-1"><span class="block text-xs font-bold text-stone-600 mb-2">關鍵字搜尋</span><input id="table-search" type="search" placeholder="例如：台積電、JPM、調整後 EPS、罰款" autocomplete="off" class="border border-slate-300 rounded-lg px-4 py-3 w-full text-sm focus:ring-2 focus:ring-sky-200" aria-label="搜尋財報資料"></label><label class="w-full md:w-52"><span class="block text-xs font-bold text-stone-600 mb-2">產業篩選</span><select id="sector-filter" class="border border-slate-300 rounded-lg px-4 py-3 w-full bg-white text-sm" aria-label="選擇產業"><option value="all">全部產業</option><option value="半導體">半導體</option><option value="餐飲">餐飲</option><option value="金融">金融</option><option value="醫療">醫療</option></select></label></div>
+          <div class="table-scroll rounded-lg border border-slate-200" role="region" aria-label="可橫向捲動的財報比較表" tabindex="0"><table class="data-table text-sm"><caption class="sr-only">公司名稱、產業、營收、每股盈餘、關鍵觀察</caption><thead><tr><th scope="col">公司 / 代號</th><th scope="col">產業</th><th scope="col">第三季營收</th><th scope="col">第三季 EPS</th><th scope="col">本季關鍵資訊</th></tr></thead><tbody id="earnings-table-body"></tbody></table></div>
+          <p class="footnote mt-4">「—」表示原報告未提供該項數字，並非零。財報數字依原報告所載；每股盈餘均為美元／股，惟 UNH、JNJ 特別註明調整後口徑。其他 EPS 的 GAAP／調整後性質，若原文未說明則不自行判定。</p>
+        </div>
+      </section>
+
+      <section id="milestones" class="section-anchor pt-8 md:pt-12" aria-labelledby="milestones-title">
+        <h2 id="milestones-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">事件進度辨識：已發生、指引與待驗證</h2>
+        <p class="text-sm leading-7 text-slate-600 mb-6">同樣屬於「AI 成長故事」，會計認列與執行風險卻可能大不相同。以下依報告措辭標示進度，不預設未來目標一定達成。</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill pill-green">已公布實績</span><h3 class="text-lg font-bold text-stone-800 mt-3">TSM、ASML 第三季財報</h3><p class="text-sm mt-3 leading-7">財務數字已於 10/14～10/15 公布。這些數字代表既有季度業績，而非未來訂單保證。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill pill-amber">企業預測／指引</span><h3 class="text-lg font-bold text-stone-800 mt-3">TSM、ASML 第四季營收</h3><p class="text-sm mt-3 leading-7">TSM：523～543 億美元；ASML：142～152 億歐元。均為公司預估，尚非已入帳金額。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill pill-violet">需求意向</span><h3 class="text-lg font-bold text-stone-800 mt-3">ASML 2029～2030 年設備興趣</h3><p class="text-sm mt-3 leading-7">部分客戶表達未來需求興趣，不宜直接視為確定訂單、交貨或營收。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill pill-amber">監管核准待決</span><h3 class="text-lg font-bold text-stone-800 mt-3">Starlink Mobile 頻譜布局</h3><p class="text-sm mt-3 leading-7">SpaceX 擬取得／同意取得相關無線頻譜，交易仍需監管核准；全國網路建置資金為機構估計。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill pill-violet">市場討論，非定價</span><h3 class="text-lg font-bold text-stone-800 mt-3">Anthropic 潛在 IPO 估值</h3><p class="text-sm mt-3 leading-7">約 2 兆降至 1.5 兆美元屬報導中的投資人估值討論，並非已確定上市價格。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="pill pill-amber">產品展示／生產計畫</span><h3 class="text-lg font-bold text-stone-800 mt-3">Tesla 新一代 Roadster</h3><p class="text-sm mt-3 leading-7">10/15 展示技術概念，預計 2028 年生產；尚不可當作已交付或已實現收入。</p></div>
+        </div>
+      </section>
+
+      <section id="outlook" class="section-anchor pt-8 md:pt-12 pb-8" aria-labelledby="outlook-title">
+        <h2 id="outlook-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資結語與下一步追蹤</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500"><p class="kicker text-sky-700">CAPITAL DISCIPLINE</p><h3 class="text-xl md:text-2xl font-bold text-stone-800 mt-3">從「市場有多大」，回到「需要花多少錢、多久收得回來」。</h3><p class="mt-4 leading-8 text-slate-600">原報告的核心判斷是：AI 需求仍在，但需求不等於每家公司都能交出良好的股東報酬。台積電與 ASML 提供上游需求強勁的證據；CoreWeave 的債務壓力與 Anthropic 的估值討論，則凸顯資金條件與風險溢酬的重要性。檢視持股時，應一起衡量競爭優勢、負債、自由現金流、估值以及投資組合集中度。</p></div>
+        <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-stone-800 mb-5">後續事件追蹤清單</h3><div class="space-y-5"><div class="flex gap-4"><div class="shrink-0 w-20 text-center rounded-lg bg-sky-50 py-3 text-sky-800"><p class="text-xs font-bold">10 月</p><p class="text-xl font-black">20</p></div><div class="min-w-0"><h4 class="font-bold text-stone-800">SpaceX 第三季財務與營運結果</h4><p class="text-sm leading-7 text-slate-600 mt-1">報告記載的預定公布日期；關注 Starlink 營收、資本支出及獲利能力，而非事先假定結果。</p></div></div><div class="border-t border-slate-100"></div><div class="flex gap-4"><div class="shrink-0 w-20 text-center rounded-lg bg-sky-50 py-3 text-sky-800"><p class="text-xs font-bold">10 月</p><p class="text-xl font-black">底</p></div><div class="min-w-0"><h4 class="font-bold text-stone-800">聯準會政策預期</h4><p class="text-sm leading-7 text-slate-600 mt-1">觀察下一次利率決策前的通膨與市場預期變化；週報未提供特定會議日。</p></div></div><div class="border-t border-slate-100"></div><div class="flex gap-4"><div class="shrink-0 w-20 text-center rounded-lg bg-sky-50 py-3 text-sky-800"><p class="text-xs font-bold">後續</p><p class="text-base font-black">財報</p></div><div class="min-w-0"><h4 class="font-bold text-stone-800">科技龍頭業績與 AI 變現</h4><p class="text-sm leading-7 text-slate-600 mt-1">聚焦 Meta、Tesla 等公司後續財報，追蹤雲端、訂閱、廣告及 AI 資本支出的效益。</p></div></div><div class="border-t border-slate-100"></div><div class="flex gap-4"><div class="shrink-0 w-20 text-center rounded-lg bg-sky-50 py-3 text-sky-800"><p class="text-xs font-bold">持續</p><p class="text-base font-black">觀察</p></div><div class="min-w-0"><h4 class="font-bold text-stone-800">油價、中東航運與 AI 融資成本</h4><p class="text-sm leading-7 text-slate-600 mt-1">追蹤供應中斷是否延續，以及高槓桿公司的債券殖利率、資金需求與信用壓力。</p></div></div></div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-stone-800 mb-5">持股檢視：五個關鍵問題</h3><ol class="space-y-4 text-sm leading-7"><li class="flex gap-3"><span class="shrink-0 rounded-full bg-sky-100 text-sky-800 font-black w-7 h-7 text-center leading-7">1</span><span>營收成長是否轉為<strong class="text-slate-800">獲利與自由現金流</strong>？</span></li><li class="flex gap-3"><span class="shrink-0 rounded-full bg-sky-100 text-sky-800 font-black w-7 h-7 text-center leading-7">2</span><span>資本支出與<strong class="text-slate-800">舉債規模</strong>是否合理？</span></li><li class="flex gap-3"><span class="shrink-0 rounded-full bg-sky-100 text-sky-800 font-black w-7 h-7 text-center leading-7">3</span><span>財報中的實績、公司指引、外部預估是否已<strong class="text-slate-800">正確區分</strong>？</span></li><li class="flex gap-3"><span class="shrink-0 rounded-full bg-sky-100 text-sky-800 font-black w-7 h-7 text-center leading-7">4</span><span>目前估值能否承受<strong class="text-slate-800">高利率與獲利不如預期</strong>的情境？</span></li><li class="flex gap-3"><span class="shrink-0 rounded-full bg-sky-100 text-sky-800 font-black w-7 h-7 text-center leading-7">5</span><span>整體投資組合是否過度集中於<strong class="text-slate-800">高估值科技股</strong>？</span></li></ol><div class="mt-7 rounded-xl bg-slate-900 text-white p-5"><p class="text-sm text-sky-200 font-bold">本週一句話</p><p class="text-lg font-bold mt-2 leading-relaxed">有前景的產業，仍要以能承受風險的價格買進。</p></div></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/10/12~10/16)。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中美股市場相關公開資料 (2026年10月18日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 原報告第三季財報資訊：未載明的數值保留為「—」，避免任意補值。
+    const productData = [
+      {name:'台積電',symbol:'TSM',sector:'半導體',revenue:'新台幣 1.494 兆元',eps:'—',detail:'營收年增 50.9%；稅後淨利約新台幣 7,631 億元，年增 68.7%。'},
+      {name:'ASML',symbol:'ASML',sector:'半導體',revenue:'117 億歐元',eps:'—',detail:'淨利約 50 億歐元；毛利率 57.5%。'},
+      {name:'達美樂披薩',symbol:'DPZ',sector:'餐飲',revenue:'—',eps:'4.60 美元',detail:'營收年增 3.4%；美國同店銷售成長 0.3%。'},
+      {name:'高盛',symbol:'GS',sector:'金融',revenue:'186.8 億美元',eps:'17.01 美元',detail:'股票交易業務表現突出。'},
+      {name:'摩根大通',symbol:'JPM',sector:'金融',revenue:'—',eps:'5.57 美元',detail:'EPS 低於市場預估；債券交易及投資銀行業務動能減弱。'},
+      {name:'美國銀行',symbol:'BAC',sector:'金融',revenue:'—',eps:'0.91 美元',detail:'防制洗錢相關合規缺失認列 12 億美元罰款。'},
+      {name:'聯合健康',symbol:'UNH',sector:'醫療',revenue:'1,127 億美元',eps:'調整後 4.69 美元',detail:'提高全年獲利展望；營運改善。'},
+      {name:'嬌生',symbol:'JNJ',sector:'醫療',revenue:'254 億美元',eps:'調整後 2.59 美元',detail:'醫材業務成長不如預期；GAAP EPS 受一次性費用影響。'}
+    ];
+
+    const tableBody = document.getElementById('earnings-table-body');
+    const searchInput = document.getElementById('table-search');
+    const sectorFilter = document.getElementById('sector-filter');
+    const countEl = document.getElementById('result-count');
+    function createTextCell(value) {
+      const td = document.createElement('td');
+      td.textContent = value;
+      return td;
+    }
+    function renderTable() {
+      const query = searchInput.value.trim().toLocaleLowerCase('zh-Hant');
+      const sector = sectorFilter.value;
+      const filtered = productData.filter(item => (sector === 'all' || item.sector === sector) && Object.values(item).some(value => String(value).toLocaleLowerCase('zh-Hant').includes(query)));
+      tableBody.replaceChildren();
+      if (filtered.length === 0) {
+        const tr = document.createElement('tr');
+        const td = createTextCell('沒有符合條件的財報資料，請嘗試其他關鍵字或產業。');
+        td.colSpan = 5;
+        td.className = 'text-center text-slate-500 py-10';
+        tr.append(td); tableBody.append(tr);
+      } else {
+        filtered.forEach(item => {
+          const tr = document.createElement('tr');
+          const nameCell = document.createElement('td');
+          const name = document.createElement('div'); name.textContent = item.name; name.className = 'font-bold text-slate-800';
+          const ticker = document.createElement('div'); ticker.textContent = item.symbol; ticker.className = 'text-xs font-semibold text-sky-700 mt-1';
+          nameCell.append(name,ticker);
+          tr.append(nameCell,createTextCell(item.sector),createTextCell(item.revenue),createTextCell(item.eps),createTextCell(item.detail));
+          tableBody.append(tr);
+        });
+      }
+      countEl.textContent = `顯示 ${filtered.length} / ${productData.length} 筆`;
+    }
+    searchInput.addEventListener('input',renderTable);
+    sectorFilter.addEventListener('change',renderTable);
+    renderTable();
+
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function setMenuOpen(isOpen) {
+      mobileMenu.classList.toggle('hidden',!isOpen);
+      menuButton.setAttribute('aria-expanded',String(isOpen));
+      menuButton.setAttribute('aria-label',isOpen?'關閉章節選單':'開啟章節選單');
+      document.getElementById('hamburger-icon').innerHTML = isOpen ? '<path d="M5 5l14 14M19 5L5 19"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+    menuButton.addEventListener('click',()=>setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true'));
+    document.querySelectorAll('#mobile-menu a').forEach(link => link.addEventListener('click',()=>setMenuOpen(false)));
+    document.addEventListener('keydown',event=>{if(event.key==='Escape' && menuButton.getAttribute('aria-expanded')==='true'){setMenuOpen(false);menuButton.focus();}});
+    window.addEventListener('resize',()=>{if(window.innerWidth >= 1024 && menuButton.getAttribute('aria-expanded')==='true')setMenuOpen(false);});
+
+    function setActiveLink(sectionId) {
+      document.querySelectorAll('[data-nav]').forEach(link => {
+        const active = link.dataset.nav === sectionId;
+        link.classList.toggle('active-nav-link',active);
+        link.classList.toggle('inactive-nav-link',!active);
+        if (active) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current');
+      });
+    }
+    const sections = [...document.querySelectorAll('main section[id]')];
+    if ('IntersectionObserver' in window) {
+      const visible = new Map();
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {if(entry.isIntersecting) visible.set(entry.target.id,entry.boundingClientRect.top); else visible.delete(entry.target.id);});
+        if (visible.size) {
+          const nearest = [...visible.entries()].sort((a,b)=>Math.abs(a[1]-100)-Math.abs(b[1]-100))[0];
+          setActiveLink(nearest[0]);
+        }
+      },{rootMargin:'-90px 0px -62% 0px',threshold:0});
+      sections.forEach(section=>observer.observe(section));
+    }
+    setActiveLink('overview');
+    document.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click',()=>{
+      const id = link.getAttribute('href').slice(1); if (sections.some(section=>section.id===id)) setActiveLink(id);
+    }));
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+      Chart.defaults.color = '#64748b';
+      const tooltipStyle = { backgroundColor:'#0c253a',padding:12,titleFont:{weight:'bold'},bodyFont:{size:12},displayColors:false };
+      const gridStyle = { color:'#e8edf2',drawBorder:false };
+      new Chart(document.getElementById('indexChart'),{
+        type:'bar',
+        data:{labels:['道瓊工業','標普 500','那斯達克'],datasets:[{label:'週漲跌幅 (%)',data:[0.67,-1.95,-4.48],backgroundColor:['#059669','#f59e0b','#e11d48'],borderRadius:6,barThickness:'flex',maxBarThickness:54}]},
+        options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{...tooltipStyle,callbacks:{label:c=>`${c.parsed.x>0?'+':''}${c.parsed.x.toFixed(2)}%`}}},scales:{x:{min:-5,max:2,grid:gridStyle,ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{color:'#334155',font:{weight:'bold'}}}}}
+      });
+      new Chart(document.getElementById('cpiChart'),{
+        type:'line',
+        data:{labels:['前月（8 月）','9 月'],datasets:[{label:'CPI 年增率',data:[3.4,3.7],borderColor:'#0284c7',backgroundColor:'rgba(14,165,233,.13)',pointBackgroundColor:'#0284c7',pointRadius:6,pointHoverRadius:8,borderWidth:3,tension:.15,fill:true}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltipStyle,callbacks:{label:c=>`CPI 年增率：${c.parsed.y.toFixed(1)}%`}}},scales:{x:{grid:{display:false},ticks:{font:{weight:'bold'}}},y:{min:3,max:4,grid:gridStyle,ticks:{stepSize:.2,callback:v=>Number(v).toFixed(1)+'%'}}}}
+      });
+      new Chart(document.getElementById('tsmChart'),{
+        type:'bar',
+        data:{labels:['營收年增率','稅後淨利年增率'],datasets:[{label:'第三季年增率',data:[50.9,68.7],backgroundColor:['#0ea5e9','#6366f1'],borderRadius:7,maxBarThickness:70}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltipStyle,callbacks:{label:c=>`${c.parsed.y.toFixed(1)}%`}}},scales:{y:{beginAtZero:true,suggestedMax:80,grid:gridStyle,ticks:{callback:v=>v+'%'}},x:{grid:{display:false},ticks:{font:{weight:'bold'}}}}}
+      });
+    } else {
+      // CDN 無法載入時保留上方的文字指標與財報表格，不渲染虛構圖表。
+      document.querySelectorAll('.chart-shell').forEach(shell => {
+        const message = document.createElement('p');
+        message.className='text-sm text-slate-500 rounded-lg bg-slate-50 p-4';
+        message.textContent='圖表需要網路載入 Chart.js；頁面上的數據卡片與文字仍可正常閱讀。';
+        shell.replaceChildren(message);
+      });
+    }
+  </script>
+</body>
+</html>
