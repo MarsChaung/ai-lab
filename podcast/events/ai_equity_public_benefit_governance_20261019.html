@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="解析 Anthropic 公益基金與 Musk SpaceX 兒童贈股構想，區分股權承諾、潛在稀釋、治理權利及獲利基本面。依 2026 年 10 月 19 日投資專題製作。">
+  <meta name="theme-color" content="#0c253a">
+  <title>巴菲特AI價值投資-AI公益股權與股東權益</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root{color-scheme:light;--ink:#243445;--stone:#f8fafc;--blue:#0284c7;--line:#dbe7ee}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:#f8fafc;color:#334155;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
+    section[id],article[id]{scroll-margin-top:104px}button,input,select{font:inherit}
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content {position:relative;z-index:1}
+    .active-nav-link{background:#e0f2fe;color:#075985!important;font-weight:700;box-shadow:inset 0 0 0 1px #bae6fd}
+    .inactive-nav-link{color:#475569;font-weight:600}
+    .nav-link{display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;border-radius:9px;font-size:13px;transition:background .18s,color .18s;white-space:nowrap}
+    .nav-link:hover{background:#f0f9ff;color:#0369a1}
+    .chart-shell{position:relative;width:100%;height:282px;min-height:230px}
+    .number{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+    .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#0284c7}
+    .mini-rule{width:36px;height:3px;background:linear-gradient(90deg,#0284c7,#38bdf8);border-radius:8px}
+    .factline{border-left:3px solid #38bdf8;padding-left:1rem}
+    .dot{display:inline-block;width:8px;height:8px;border-radius:100%;margin-right:7px;vertical-align:1px}
+    .dot-blue{background:#38bdf8}.dot-amber{background:#f59e0b}.dot-emerald{background:#10b981}
+    .table-wrap{overflow:auto;max-width:100%;max-height:560px;border-radius:12px;border:1px solid #e2e8f0;scrollbar-color:#94a3b8 #f1f5f9}
+    .research-table{border-collapse:separate;border-spacing:0;min-width:820px;width:100%;font-size:.88rem}
+    .research-table th{position:sticky;top:0;background:#eaf4fb;color:#0f3f5d;text-align:left;font-size:.77rem;letter-spacing:.035em;white-space:nowrap;padding:13px 15px;border-bottom:1px solid #cbdde9;z-index:1}
+    .research-table td{padding:15px;border-bottom:1px solid #e2e8f0;vertical-align:top;line-height:1.65}
+    .research-table tr:last-child td{border-bottom:0}.research-table tbody tr:hover{background:#f5faff}
+    .pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:800;white-space:nowrap}
+    .pill-fact{background:#d1fae5;color:#065f46}.pill-plan{background:#fef3c7;color:#92400e}.pill-model{background:#e0e7ff;color:#3730a3}
+    .quiet-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 8px 24px rgba(15,35,60,.035)}
+    .section-kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:13px;color:#0369a1;font-size:.75rem;font-weight:800;letter-spacing:.06em}
+    .section-kicker::before{content:"";width:17px;height:2px;background:#0284c7}
+    .metric-card{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.075);border-radius:15px;backdrop-filter:blur(8px)}
+    .card-hover{transition:transform .2s,box-shadow .2s}.card-hover:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(22,54,83,.1)}
+    .timeline-rail{border-left:2px solid #cbd5e1;margin-left:8px;padding-left:23px}
+    .timeline-dot{position:relative}.timeline-dot::before{content:"";position:absolute;width:12px;height:12px;left:-30px;top:6px;background:#0ea5e9;border:3px solid #fff;outline:2px solid #bae6fd;border-radius:50%}
+    .caution{background:linear-gradient(105deg,#fff7ed,#fffdf7);border:1px solid #fed7aa;border-left:4px solid #f59e0b;border-radius:12px}
+    .data-note{font-size:.78rem;line-height:1.65;color:#64748b}
+    .comparison-header{background:#eff6ff;border-bottom:1px solid #dbeafe}
+    .num-graphic{height:13px;border-radius:999px;overflow:hidden;background:#e2e8f0;display:flex}
+    .num-graphic .kept{background:#0284c7}.num-graphic .new{background:#f59e0b}
+    .filter-input:focus,.filter-select:focus{outline:3px solid rgba(56,189,248,.24);border-color:#0ea5e9}
+    .highlights strong{color:#0c4a6e}
+    @media(max-width:767px){html{scroll-padding-top:78px}section[id],article[id]{scroll-margin-top:78px}.chart-shell{height:245px}.nav-link{justify-content:flex-start;width:100%;padding:12px}.hero-title{font-size:2rem;line-height:1.22}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card-hover{transition:none}}
+    @media print{nav,.filters-panel{display:none!important}.hero-mesh{-webkit-print-color-adjust:exact;print-color-adjust:exact}.card-hover{box-shadow:none}section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-white focus:p-3 focus:rounded-lg">跳至主要內容</a>
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <nav aria-label="章節導航" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex min-h-[72px] items-center justify-between gap-3">
+        <a href="#top" aria-label="回到頁首" class="shrink-0 flex items-center gap-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+          <span class="inline-flex w-10 h-10 items-center justify-center rounded-xl bg-[#0c253a] text-white shadow-md" aria-hidden="true">
+            <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M4 18l5-5 4 3 7-10" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6h5v5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="block leading-tight"><span class="block text-[15px] font-extrabold tracking-tight text-slate-800">巴菲特AI價值投資</span><span class="block text-[11px] tracking-wide text-slate-500 mt-1">投資專題 · 2026.10.19</span></span>
+        </a>
+        <div id="desktopNav" class="hidden lg:flex flex-wrap justify-end items-center gap-0.5">
+          <a href="#overview" class="nav-link active-nav-link" data-nav="overview">全局摘要</a>
+          <a href="#anthropic" class="nav-link inactive-nav-link" data-nav="anthropic">Anthropic</a>
+          <a href="#dilution" class="nav-link inactive-nav-link" data-nav="dilution">稀釋與治理</a>
+          <a href="#spacex" class="nav-link inactive-nav-link" data-nav="spacex">SpaceX</a>
+          <a href="#models" class="nav-link inactive-nav-link" data-nav="models">公益模式</a>
+          <a href="#fundamentals" class="nav-link inactive-nav-link" data-nav="fundamentals">財務基本面</a>
+          <a href="#strategy" class="nav-link inactive-nav-link" data-nav="strategy">投資策略</a>
+          <a href="#watchlist" class="nav-link inactive-nav-link" data-nav="watchlist">追蹤清單</a>
+        </div>
+        <button id="menuButton" type="button" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-sky-500" aria-label="開啟章節選單" aria-controls="mobileNav" aria-expanded="false">
+          <svg id="menuIcon" width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div id="mobileNav" class="lg:hidden hidden pb-4 border-t border-slate-100" aria-hidden="true">
+        <div class="grid grid-cols-2 gap-1 pt-3">
+          <a href="#overview" class="nav-link active-nav-link" data-nav="overview">全局摘要</a>
+          <a href="#anthropic" class="nav-link inactive-nav-link" data-nav="anthropic">Anthropic</a>
+          <a href="#dilution" class="nav-link inactive-nav-link" data-nav="dilution">稀釋與治理</a>
+          <a href="#spacex" class="nav-link inactive-nav-link" data-nav="spacex">SpaceX</a>
+          <a href="#models" class="nav-link inactive-nav-link" data-nav="models">公益模式</a>
+          <a href="#fundamentals" class="nav-link inactive-nav-link" data-nav="fundamentals">財務基本面</a>
+          <a href="#strategy" class="nav-link inactive-nav-link" data-nav="strategy">投資策略</a>
+          <a href="#watchlist" class="nav-link inactive-nav-link" data-nav="watchlist">追蹤清單</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div id="top"></div>
+  <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+    <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-[76px]">
+      <h1 id="hero-heading" class="hero-title max-w-5xl text-4xl sm:text-5xl lg:text-[56px] lg:leading-[1.16] font-extrabold tracking-tight">當公益走進股權結構：<br class="hidden sm:block"><span class="text-sky-200">Anthropic 與 SpaceX</span> 的資本新課題</h1>
+      <p class="mt-6 max-w-4xl text-base sm:text-lg leading-[1.9] text-sky-50/90">Anthropic 擬設公益基金配置 5% 股權，Musk 提出 2027 年向美國兒童每人贈送一股 SpaceX 的構想。公益承諾可能改變治理與社會信任，但投資人仍須先確認股份來源、控制權、稀釋風險，再檢驗實際營收與現金流。</p>
+      <div class="mt-9 grid gap-3 sm:grid-cols-3" aria-label="關鍵摘要數據">
+        <div class="metric-card p-5"><div class="text-xs text-sky-100/80 font-semibold">Anthropic 擬議基金持股</div><div class="mt-2 text-[34px] leading-none font-extrabold number">5<span class="text-2xl">%</span></div><div class="mt-3 text-xs text-sky-50/85 leading-relaxed"><span class="dot dot-amber"></span>尚待股東批准，未完成交付</div></div>
+        <div class="metric-card p-5"><div class="text-xs text-sky-100/80 font-semibold">Musk 的 SpaceX 贈股構想</div><div class="mt-2 text-[34px] leading-none font-extrabold number">1<span class="text-xl ml-1">股／人</span></div><div class="mt-3 text-xs text-sky-50/85 leading-relaxed"><span class="dot dot-amber"></span>規劃 2027 年，條款未公布</div></div>
+        <div class="metric-card p-5"><div class="text-xs text-sky-100/80 font-semibold">Anthropic 公益相關股權承諾總估算</div><div class="mt-2 text-[34px] leading-none font-extrabold number">約 20<span class="text-2xl">%</span></div><div class="mt-3 text-xs text-sky-50/85 leading-relaxed"><span class="dot dot-blue"></span>包括公司、創辦人與員工承諾；非已交割比率</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
+    <!-- 前言 -->
+    <section id="overview" data-nav-section="overview" class="pt-14 md:pt-16" aria-labelledby="overview-heading">
+      <div class="section-kicker">THE BIG PICTURE · 前言</div>
+      <h2 id="overview-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">關鍵不是捐多少，而是股份如何轉移</h2>
+      <div class="grid lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 bg-white rounded-lg shadow-lg p-6 mb-6 highlights">
+          <div class="eyebrow mb-3">核心投資命題</div>
+          <p class="text-[1.18rem] sm:text-[1.35rem] font-bold leading-[1.65] text-slate-800">公益能否創造長期信任價值，足以抵銷治理成本與潛在股權稀釋？</p>
+          <div class="mini-rule mt-5 mb-5"></div>
+          <p class="leading-[1.9] text-slate-600">兩項聲明反映兩種不同的分配機制：Anthropic 傾向透過公司控制的基金集中管理公益股權；Musk 的構想則是將個人持股分配給兒童。<strong>承諾不等於已交付，名目股權價值不等於可支用現金。</strong></p>
+          <div class="mt-5 grid sm:grid-cols-3 gap-3 text-sm">
+            <div class="rounded-xl bg-sky-50 p-4"><div class="font-bold text-sky-900 mb-1">01 股份來源</div><div class="text-slate-600 leading-relaxed">舊股轉讓還是新增發行？</div></div>
+            <div class="rounded-xl bg-sky-50 p-4"><div class="font-bold text-sky-900 mb-1">02 控制權</div><div class="text-slate-600 leading-relaxed">表決、出售與收益歸誰？</div></div>
+            <div class="rounded-xl bg-sky-50 p-4"><div class="font-bold text-sky-900 mb-1">03 現金流</div><div class="text-slate-600 leading-relaxed">對每股經濟權益有何影響？</div></div>
+          </div>
+        </div>
+        <div class="lg:col-span-5 bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="eyebrow mb-5">事件進程 · 依報告時點</div>
+          <div class="timeline-rail space-y-7">
+            <div class="timeline-dot"><div class="flex flex-wrap items-center gap-2"><span class="font-bold text-slate-800">10 月 18 日</span><span class="pill pill-fact">已宣布</span></div><p class="mt-1 text-sm leading-relaxed">Anthropic 公告籌設 Public Benefit Fund，提出 5% 持股配置計畫，仍待股東批准。</p></div>
+            <div class="timeline-dot"><div class="flex flex-wrap items-center gap-2"><span class="font-bold text-slate-800">10 月 19 日</span><span class="pill pill-plan">公開構想</span></div><p class="mt-1 text-sm leading-relaxed">Musk 提出 2027 年為美國兒童每人贈送一股 SpaceX 的個人計畫。</p></div>
+            <div class="timeline-dot"><div class="flex flex-wrap items-center gap-2"><span class="font-bold text-slate-800">10 月 20 日（美東）</span><span class="pill pill-model">預定</span></div><p class="mt-1 text-sm leading-relaxed">SpaceX 預定公布第三季財報；營收與 EPS 目前皆為分析師預測。</p></div>
+          </div>
+          <p class="data-note mt-5 pt-4 border-t border-slate-100">資料截點：2026 年 10 月 19 日美股交易時段內；不包含後續財報或執行結果。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第一章 -->
+    <section id="anthropic" data-nav-section="anthropic" class="pt-9 md:pt-12" aria-labelledby="anthropic-heading">
+      <div class="section-kicker">01 · ANTHROPIC</div>
+      <h2 id="anthropic-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">5% 公益基金：與估值連動的承諾</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="quiet-card p-5 card-hover"><div class="text-xs font-bold text-slate-500">初步規劃</div><div class="mt-2 text-3xl font-extrabold text-sky-800 number">5%</div><p class="text-sm mt-2 leading-relaxed">擬配置公司股份；<strong class="text-amber-700">須股東批准</strong>。</p></div>
+        <div class="quiet-card p-5 card-hover"><div class="text-xs font-bold text-slate-500">有條件增配</div><div class="mt-2 text-3xl font-extrabold text-sky-800 number">+2%</div><p class="text-sm mt-2 leading-relaxed">估值較未公開基準上升 50% 時，董事會<strong class="text-amber-700">可酌情</strong>再配置；非自動。</p></div>
+        <div class="quiet-card p-5 card-hover"><div class="text-xs font-bold text-slate-500">公益相關整體承諾估計</div><div class="mt-2 text-3xl font-extrabold text-sky-800 number">約 20%</div><p class="text-sm mt-2 leading-relaxed">包括公司、創辦人及員工計畫；<strong class="text-amber-700">不代表已交割</strong>。</p></div>
+        <div class="quiet-card p-5 card-hover"><div class="text-xs font-bold text-slate-500">既有就業影響相關承諾</div><div class="mt-2 text-3xl font-extrabold text-sky-800 number">約 2 億<span class="text-base ml-1">美元</span></div><p class="text-sm mt-2 leading-relaxed">先前既有承諾，<strong class="text-amber-700">不能重算為新基金注資</strong>。</p></div>
+      </div>
+      <div class="grid lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4"><h3 class="text-lg font-extrabold text-slate-800">市場估值情境下的 5% 名目股權價值</h3><span class="pill pill-model">情境試算</span></div>
+          <div class="chart-shell"><canvas id="anthropicValueChart" role="img" aria-label="市場假設 Anthropic IPO 估值 1.5 兆美元與 2 兆美元時，5% 名目股權價值分別為 750 億及 1,000 億美元"></canvas></div>
+          <p class="data-note mt-3">單位：億美元。IPO 估值 1.5–2 兆美元為報告所述市場討論情境，非 IPO 成交估值；5% 名目價值 750–1,000 億美元，<strong>不是基金已取得的現金或已支出的公益款項</strong>。</p>
+        </div>
+        <div class="lg:col-span-5 bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-lg font-extrabold text-slate-800 mb-4">基金結構與承諾來源</h3>
+          <div class="space-y-4 text-sm leading-[1.8]">
+            <div class="factline"><strong class="block text-sky-900">全資 LLC，而非典型 501(c)(3)</strong>保留公益資源分配彈性；對受影響群體、研究及勞動轉型等用途提供支持。</div>
+            <div class="factline"><strong class="block text-sky-900">創辦人個人股份</strong>承諾捐出其個人持股的 80%，資金來源不同於公司發股。</div>
+            <div class="factline"><strong class="block text-sky-900">員工捐股與公司配比</strong>約半數員工參與捐股配比機制，須與公司基金計畫分開辨識。</div>
+            <div class="factline"><strong class="block text-sky-900">政治活動限制</strong>公司承諾基金所持股份不會用於遊說或政治捐獻。</div>
+          </div>
+        </div>
+      </div>
+      <div class="caution p-5 mb-6 leading-relaxed text-sm"><strong class="text-amber-900">重要口徑：</strong> 5% 的交付方式、基準估值、2% 增配裁量及未來上限仍待正式揭露；「約 20% 公益相關持股」不是已移轉的現金或已完成交割的股權比例。</div>
+    </section>
+
+    <!-- 第二章 -->
+    <section id="dilution" data-nav-section="dilution" class="pt-9 md:pt-12" aria-labelledby="dilution-heading">
+      <div class="section-kicker">02 · SHAREHOLDER ECONOMICS</div>
+      <h2 id="dilution-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">是否稀釋？先辨識股份來源</h2>
+      <div class="grid lg:grid-cols-3 gap-4 mb-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-center gap-3 mb-3"><span class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-extrabold">A</span><h3 class="font-extrabold text-slate-800">既有股份移轉</h3></div><p class="text-sm leading-[1.85]">由創辦人或投資人轉讓原有股份，總股數通常不因移轉本身增加；主要改變持有人、受益權及可能的控制權。</p><p class="mt-3 text-xs font-bold text-emerald-700">通常不構成新增發股稀釋</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-center gap-3 mb-3"><span class="w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold">B</span><h3 class="font-extrabold text-slate-800">公司新增發行</h3></div><p class="text-sm leading-[1.85]">若公司無等值對價地增發股份給外部受益人，原股東持股比例及每股經濟權益可能下降，幅度取決於發行條件。</p><p class="mt-3 text-xs font-bold text-amber-700">可能產生稀釋，仍需確認交易條款</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-center gap-3 mb-3"><span class="w-9 h-9 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-extrabold">C</span><h3 class="font-extrabold text-slate-800">公司控制的 LLC 持股</h3></div><p class="text-sm leading-[1.85]">涉及合併報表、表決權與權益認列；受控制實體持有本公司股份未必享有對應票權，不能直接視作外部獨立基金。</p><p class="mt-3 text-xs font-bold text-indigo-700">權利與會計結果須看正式法律文件</p></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex items-start justify-between gap-4 flex-wrap"><div><h3 class="font-extrabold text-slate-800 text-lg">5% 稀釋機制示意</h3><p class="text-sm mt-2 text-slate-600 leading-relaxed">假設企業無等值對價發行占增資後 5% 的新股，原股東合計占比由 100% 降為 95%。</p></div><span class="pill pill-model">純假設，非 Anthropic 實際方案</span></div>
+        <div class="mt-6 space-y-5">
+          <div><div class="flex justify-between text-sm font-bold mb-2"><span>發行前</span><span class="number">原股東 100%</span></div><div class="num-graphic"><span class="kept" style="width:100%"></span></div></div>
+          <div><div class="flex justify-between text-sm font-bold mb-2"><span>發行後（假設）</span><span class="number">原股東 95%／新股 5%</span></div><div class="num-graphic"><span class="kept" style="width:95%"></span><span class="new" style="width:5%"></span></div></div>
+          <div class="flex flex-wrap gap-5 text-xs text-slate-600"><span><i class="dot dot-blue"></i>原股東合計占比</span><span><i class="dot dot-amber"></i>假設新發行股份</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三章 -->
+    <section id="governance" data-nav-section="dilution" class="pt-9 md:pt-12" aria-labelledby="governance-heading">
+      <div class="section-kicker">03 · CORPORATE GOVERNANCE</div>
+      <h2 id="governance-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Anthropic 的雙層治理：PBC 與 LTBT</h2>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-xs font-bold text-sky-700 mb-2">法定公司形式</div><h3 class="text-xl font-extrabold text-slate-800 mb-3">PBC · 公益公司</h3><p class="text-sm leading-[1.9]">仍是可營利、引進資本與上市的企業。董事會應兼顧股東財務利益、重大受影響利害關係人與明定的公益目標；並非非營利機構。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-xs font-bold text-sky-700 mb-2">董事會席次控制</div><div class="flex flex-wrap gap-4 items-end mb-3"><h3 class="text-xl font-extrabold text-slate-800">LTBT · 長期利益信託</h3><span class="text-3xl font-extrabold number text-sky-800">4 <span class="text-base text-slate-400">/ 7 席</span></span></div><p class="text-sm leading-[1.9]">透過特殊 T 類股具部分董事選任及撤換權；報告引述最新公開報導指出，可選任七位董事中的四位。<strong>LTBT 與新設公益基金是不同機構。</strong></p></div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6">
+        <div class="rounded-xl bg-emerald-50 border border-emerald-100 p-5"><h3 class="font-bold text-emerald-900 mb-2">可能創造的治理價值</h3><p class="text-sm leading-[1.85] text-slate-700">將模型安全、監管與品牌信任納入長期決策，可能降低重大事故、訴訟及聲譽受損的經濟成本。</p></div>
+        <div class="rounded-xl bg-amber-50 border border-amber-100 p-5"><h3 class="font-bold text-amber-900 mb-2">必須反映的治理風險</h3><p class="text-sm leading-[1.85] text-slate-700">外部經濟持股未必對應控制權；商業化取捨、安全成本或揭露不足可能帶來治理折價。</p></div>
+      </div>
+      <p class="text-sm leading-relaxed text-slate-600">投資判斷：公益使命本身不等於良好治理。應觀察董事會控制、獨立監督、關係人交易、表決權與財務揭露。</p>
+    </section>
+
+    <!-- 第四章 -->
+    <section id="spacex" data-nav-section="spacex" class="pt-12" aria-labelledby="spacex-heading">
+      <div class="section-kicker">04 · SPACEX</div>
+      <h2 id="spacex-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">每位兒童一股：是贈股構想，不是現金發放</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="quiet-card p-5 card-hover"><p class="text-xs font-bold text-slate-500">擬議受贈對象</p><div class="text-[30px] sm:text-3xl font-extrabold mt-2 text-sky-800 number">約 7,300 萬<span class="text-base">人</span></div><p class="mt-2 text-sm leading-relaxed">美國未滿 18 歲兒童人口估計，非已確認受贈名冊。</p></div>
+        <div class="quiet-card p-5 card-hover"><p class="text-xs font-bold text-slate-500">10/16 收盤價</p><div class="text-[30px] sm:text-3xl font-extrabold mt-2 text-sky-800 number">$146.03</div><p class="mt-2 text-sm leading-relaxed">報告採用的試算股價，非 10/19 最終收盤。</p></div>
+        <div class="quiet-card p-5 card-hover"><p class="text-xs font-bold text-slate-500">假設股票總價值</p><div class="text-[30px] sm:text-3xl font-extrabold mt-2 text-sky-800 number">106.6 <span class="text-base">億美元</span></div><p class="mt-2 text-sm leading-relaxed">約 7,300 萬股 × $146.03；<strong>非已發生支出</strong>。</p></div>
+        <div class="quiet-card p-5 card-hover"><p class="text-xs font-bold text-slate-500">2026 年 6 月 IPO 發行價</p><div class="text-[30px] sm:text-3xl font-extrabold mt-2 text-sky-800 number">$135</div><p class="mt-2 text-sm leading-relaxed">報告記載已上市，交易代號 SPCX。</p></div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="font-extrabold text-lg text-slate-800 mb-3">贈與的權益與執行條件</h3>
+        <div class="grid md:grid-cols-3 gap-4 text-sm leading-[1.85]">
+          <div class="rounded-xl bg-slate-50 p-5"><div class="font-bold text-sky-900 mb-2">股權，不是現金</div><p>每人一股意味受贈者可能分享股價波動；不代表保證報酬或即時可提領現金。</p></div>
+          <div class="rounded-xl bg-slate-50 p-5"><div class="font-bold text-sky-900 mb-2">帳戶管道未確定</div><p>是否採用既有 Trump Accounts、由誰管理、如何核定資格與交付，皆待正式文件。</p></div>
+          <div class="rounded-xl bg-slate-50 p-5"><div class="font-bold text-sky-900 mb-2">與其他計畫不等同</div><p>Shotwell 夫婦先前提出涵蓋逾 200 萬兒童的贈股安排，不能直接與 Musk 全國性構想合併計算。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第五章 -->
+    <section id="equity" data-nav-section="spacex" class="pt-9 md:pt-12" aria-labelledby="equity-heading">
+      <div class="section-kicker">05 · EXECUTION SCENARIOS</div>
+      <h2 id="equity-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">SpaceX 三種可能的贈股路徑</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-xs text-emerald-700 font-bold mb-2">情境 01 · 較貼近公開表態</div><h3 class="font-extrabold text-lg text-slate-800 mb-3">Musk 個人舊股轉讓</h3><p class="text-sm leading-[1.8]">由既有個人持股提供，屬私人財富移轉，原則上不會因贈與本身增加公司股數或減少營運現金。</p><div class="bg-emerald-50 rounded-lg mt-4 p-3 text-sm text-emerald-900">若按報告所述 Musk 約持有 64.2 億股，7,300 萬股約占其持股 <strong>1.14%</strong>，僅為估計。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-xs text-amber-700 font-bold mb-2">情境 02 · 需重新評估稀釋</div><h3 class="font-extrabold text-lg text-slate-800 mb-3">SpaceX 新股發行</h3><p class="text-sm leading-[1.8]">若由公司配發新股，須精算總股數、每股盈餘、股權比例及市場流通量變化，並檢查授權與會計處理。</p><div class="bg-amber-50 rounded-lg mt-4 p-3 text-sm text-amber-900"><strong>目前不能假設</strong> SpaceX 將以此方案執行。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-xs text-indigo-700 font-bold mb-2">情境 03 · 帳戶／信託機制</div><h3 class="font-extrabold text-lg text-slate-800 mb-3">間接分配與託管</h3><p class="text-sm leading-[1.8]">可能涉及分期交付、持有和出售限制、兒童資格認定、監護人權限、稅務與跨州規範。</p><div class="bg-indigo-50 rounded-lg mt-4 p-3 text-sm text-indigo-900">關鍵是<strong>受益權與控制權</strong>何時移轉、如何執行。</div></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex flex-col md:flex-row gap-6 md:items-center"><div class="md:w-1/2"><h3 class="text-lg font-extrabold text-slate-800 mb-2">股數不等於投票權</h3><p class="text-sm leading-[1.9]">根據報告，SpaceX 上市後的 A 類普通股每股 1 票，B 類普通股每股 10 票，且 B 類股東另有特殊董事選任權。未確認贈與股別與轉換條件前，不能推斷 Musk 控制權減少程度。</p></div><div class="md:w-1/2 grid grid-cols-2 gap-3"><div class="rounded-xl border border-sky-100 bg-sky-50 text-center px-4 py-6"><p class="text-xs font-bold text-slate-500">A 類</p><div class="text-4xl font-extrabold text-sky-800 my-2 number">1</div><p class="text-xs font-bold text-slate-600">票／股</p></div><div class="rounded-xl border border-indigo-100 bg-indigo-50 text-center px-4 py-6"><p class="text-xs font-bold text-slate-500">B 類</p><div class="text-4xl font-extrabold text-indigo-800 my-2 number">10</div><p class="text-xs font-bold text-slate-600">票／股</p></div></div></div>
+        <p class="mt-4 data-note">轉贈並不代表同日賣出：受贈者年齡、帳戶限制、交付節奏及市場交易量都會影響後續出售行為。</p>
+      </div>
+    </section>
+
+    <!-- 第六章 -->
+    <section id="models" data-nav-section="models" class="pt-9 md:pt-12" aria-labelledby="models-heading">
+      <div class="section-kicker">06 · CAPITAL PHILOSOPHY</div>
+      <h2 id="models-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">兩種公益模式，兩種資本哲學</h2>
+      <div class="grid md:grid-cols-2 gap-5 mb-6">
+        <article class="overflow-hidden quiet-card card-hover"><div class="comparison-header px-6 py-5"><div class="eyebrow">ANTHROPIC</div><h3 class="text-xl font-extrabold text-slate-800 mt-1">集中管理 · 政策性分配</h3></div><div class="px-6 py-5 space-y-4 text-sm leading-[1.85]"><p><strong class="text-slate-800">運作邏輯：</strong>透過具特定使命的基金集中持有股權，由治理機制決定資源分配。</p><p><strong class="text-slate-800">可能用途：</strong>就業轉型、AI 影響研究、資安能力建設及弱勢支持。</p><p><strong class="text-slate-800">核心風險：</strong>配置透明度、利益衝突、受益對象與執行成效難衡量。</p><div class="border-t border-slate-100 pt-4 font-bold text-sky-800">應追蹤：基金治理、權利揭露與公益成效</div></div></article>
+        <article class="overflow-hidden quiet-card card-hover"><div class="comparison-header px-6 py-5"><div class="eyebrow">SPACEX / MUSK</div><h3 class="text-xl font-extrabold text-slate-800 mt-1">分散持有 · 個人分享價值</h3></div><div class="px-6 py-5 space-y-4 text-sm leading-[1.85]"><p><strong class="text-slate-800">運作邏輯：</strong>由個人提出將科技企業股權直接交給兒童與家庭的分配構想。</p><p><strong class="text-slate-800">可能效果：</strong>擴大投資參與，使下一代分享企業未來價值的漲跌。</p><p><strong class="text-slate-800">核心風險：</strong>單一股票價格波動、帳戶規定、受贈資格與交付成本。</p><div class="border-t border-slate-100 pt-4 font-bold text-sky-800">應追蹤：股份來源、法律執行、實際涵蓋率</div></div></article>
+      </div>
+      <div class="bg-sky-50 border border-sky-100 rounded-xl p-5 text-sm leading-[1.85]"><strong class="text-sky-900">判斷重點：</strong>這不是「誰比較重視公益」的競賽。集中式機制適合公共議題但須治理監督；個人式分配擴大持股參與，但無法替代職訓、教育或社會保障。</div>
+    </section>
+
+    <!-- 第七章 -->
+    <section id="trust" data-nav-section="models" class="pt-12" aria-labelledby="trust-heading">
+      <div class="section-kicker">07 · SOCIAL LICENSE</div>
+      <h2 id="trust-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第二層影響：AI 企業的社會信任成本</h2>
+      <div class="grid md:grid-cols-12 gap-5 mb-6"><div class="md:col-span-4 bg-white rounded-lg shadow-lg p-6 mb-0"><p class="eyebrow mb-2">美國民意調查（報告引述）</p><div class="text-5xl font-black text-sky-800 number my-4">約 64%</div><p class="text-sm leading-[1.9]">受訪者認為 AI 發展速度過快。社會接受度可能影響部署、政策及企業品牌。</p><p class="data-note mt-3">調查統計口徑依原始報告摘要，非本網頁自行蒐集。</p></div><div class="md:col-span-8 bg-white rounded-lg shadow-lg p-6 mb-0"><h3 class="text-lg font-extrabold text-slate-800 mb-3">社會信任可能成為一項長期資本成本</h3><p class="text-sm leading-[1.9]">大型 AI 公司除晶片、電力及融資成本外，也須處理就業替代、資安、重大事故與監管接受度。若社會信任不足，可能增加產品限制、政府採購阻礙及訴訟風險。</p><div class="grid sm:grid-cols-3 gap-3 mt-5 text-sm"><div class="rounded-xl p-4 bg-slate-50"><strong class="text-sky-800 block mb-1">① 制度化承諾</strong>公益承諾可能變成正式資本配置政策。</div><div class="rounded-xl p-4 bg-slate-50"><strong class="text-sky-800 block mb-1">② 治理定價</strong>投資人可能反映治理溢價或折價。</div><div class="rounded-xl p-4 bg-slate-50"><strong class="text-sky-800 block mb-1">③ 潛在服務需求</strong>券商託管、股務、金融教育可能受益，但<strong>不是已取得訂單</strong>。</div></div></div></div>
+    </section>
+
+    <!-- 第八章 -->
+    <section id="fundamentals" data-nav-section="fundamentals" class="pt-12" aria-labelledby="fundamentals-heading">
+      <div class="section-kicker">08 · FUNDAMENTALS</div>
+      <h2 id="fundamentals-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">回到基本面：營收、獲利與自由現金流</h2>
+      <div class="grid lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex justify-between flex-wrap gap-3 mb-2"><h3 class="font-extrabold text-lg text-slate-800">SpaceX：前季營收 vs. 第三季市場預期</h3><span class="pill pill-model">含未公布預測</span></div><div class="chart-shell"><canvas id="spacexRevenueChart" role="img" aria-label="SpaceX 前季營收 78 億美元，2026 年第三季營收市場預測 127.4 億美元，兩者不同揭露狀態"></canvas></div><p class="data-note mt-3">單位：億美元。前季營收 78 為報告所述歷史資料；2026 年第三季 127.4 為財報前分析師預估，<strong>不得當作已實現營收或推導已確認年增率</strong>。</p></div>
+        <div class="lg:col-span-5 bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-extrabold text-lg text-slate-800 mb-4">SpaceX 財報前重點</h3><div class="grid grid-cols-2 gap-3 mb-4"><div class="rounded-xl bg-sky-50 p-4"><p class="text-xs font-bold text-slate-500">Q3 EPS 預測</p><div class="mt-2 font-extrabold text-2xl number text-sky-800">$0.14</div><p class="text-xs text-slate-500 mt-2">分析師預期</p></div><div class="rounded-xl bg-sky-50 p-4"><p class="text-xs font-bold text-slate-500">前季淨損</p><div class="mt-2 font-extrabold text-2xl number text-sky-800">5.41 億</div><p class="text-xs text-slate-500 mt-2">美元，報告所述</p></div><div class="rounded-xl bg-slate-50 p-4"><p class="text-xs font-bold text-slate-500">前季 AI 相關資本支出</p><div class="mt-2 font-extrabold text-2xl number text-slate-800">158 億</div><p class="text-xs text-slate-500 mt-2">美元，報告所述</p></div><div class="rounded-xl bg-slate-50 p-4"><p class="text-xs font-bold text-slate-500">Q3 財報預定</p><div class="mt-2 font-extrabold text-2xl number text-slate-800">10/20</div><p class="text-xs text-slate-500 mt-2">美東時間</p></div></div><p class="text-sm leading-[1.85]">觀察 Starlink／連線業務成長能否支撐衛星通訊、AI 算力與頻譜擴張所需投資；需要財報結果，而非以贈股消息替代。</p></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-6"><div class="rounded-xl border border-sky-100 bg-sky-50 p-5"><h3 class="font-extrabold text-sky-900 mb-2">Anthropic：潛在 IPO 的估值門檻</h3><p class="text-sm leading-[1.85]">市場報導討論可能於 11 月啟動 IPO，但仍未正式上市。應檢視企業客戶續約、推論成本、毛利、算力合約、現金消耗及長期資本支出。</p></div><div class="rounded-xl border border-amber-100 bg-amber-50 p-5"><h3 class="font-extrabold text-amber-900 mb-2">SpaceX：不能誤讀短期行情</h3><p class="text-sm leading-[1.85]">10/19 美股早盤報告記載約 +2.5% 盤中漲幅，既非當日收盤漲幅，也不能歸因於贈股承諾；與 Tesla 整合尚屬未確認的投行推測。</p></div></div>
+    </section>
+
+    <!-- 第九章 -->
+    <section id="strategy" data-nav-section="strategy" class="pt-9 md:pt-12" aria-labelledby="strategy-heading">
+      <div class="section-kicker">09 · INVESTMENT FRAMEWORK</div>
+      <h2 id="strategy-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略：短、中、長期分層檢驗</h2>
+      <div class="grid lg:grid-cols-3 gap-4 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 card-hover"><div class="flex items-center justify-between mb-4"><span class="text-sky-800 font-extrabold">短期</span><span class="pill pill-fact">事件 vs. 基本面</span></div><h3 class="text-lg font-extrabold text-slate-800 mb-3">不要單靠承諾追價</h3><p class="text-sm leading-[1.85]">SpaceX 觀察 10/20 財報、Starlink 增長與 AI 投資回收；Anthropic 仍未正式上市，其基金消息主要影響潛在 IPO 的治理定價。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 card-hover"><div class="flex items-center justify-between mb-4"><span class="text-sky-800 font-extrabold">中期</span><span class="pill pill-plan">正式揭露</span></div><h3 class="text-lg font-extrabold text-slate-800 mb-3">以文件取代宏大敘事</h3><p class="text-sm leading-[1.85]">Anthropic 確認股東批准、股權來源及基金權利；SpaceX 確認股票類別、受贈資格、帳戶管理者、稅務與交付節奏。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 card-hover"><div class="flex items-center justify-between mb-4"><span class="text-sky-800 font-extrabold">長期</span><span class="pill pill-model">社會價值 × 資本報酬</span></div><h3 class="text-lg font-extrabold text-slate-800 mb-3">公益能否保護企業價值</h3><p class="text-sm leading-[1.85]">衡量安全、社會信任與治理機制是否降低經濟損失，並確認自由現金流與股東權益沒有被不透明承諾侵蝕。</p></div>
+      </div>
+      <div class="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 mb-6"><p class="text-sky-200 text-xs font-bold tracking-widest mb-2">投資紀律</p><p class="text-xl sm:text-2xl font-extrabold leading-[1.65]">不能因為公益規模龐大就直接提高目標價，也不能在股權來源未明前，認定既有股東已被稀釋。</p></div>
+    </section>
+
+    <!-- 第十章 -->
+    <section id="watchlist" data-nav-section="watchlist" class="pt-9 md:pt-12" aria-labelledby="watchlist-heading">
+      <div class="section-kicker">10 · WHAT TO WATCH</div>
+      <h2 id="watchlist-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">六個重要問題與可搜尋追蹤表</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div class="quiet-card p-5"><div class="text-xs font-extrabold text-sky-700 mb-2">01 · ANTHROPIC</div><p class="text-sm leading-[1.8]">5% 配置是否獲批准？股份來自新股、庫藏股還是既有持股移轉？</p></div>
+        <div class="quiet-card p-5"><div class="text-xs font-extrabold text-sky-700 mb-2">02 · ANTHROPIC</div><p class="text-sm leading-[1.8]">全資 LLC 的受益、表決及出售權歸誰？與 LTBT 如何區隔？</p></div>
+        <div class="quiet-card p-5"><div class="text-xs font-extrabold text-sky-700 mb-2">03 · ANTHROPIC</div><p class="text-sm leading-[1.8]">追加 2% 的基準估值、觸發標準、董事會裁量與上限何時公布？</p></div>
+        <div class="quiet-card p-5"><div class="text-xs font-extrabold text-sky-700 mb-2">04 · ANTHROPIC</div><p class="text-sm leading-[1.8]">IPO 文件將如何揭露公益安排、董事會控制、算力成本與現金流？</p></div>
+        <div class="quiet-card p-5"><div class="text-xs font-extrabold text-sky-700 mb-2">05 · SPACEX</div><p class="text-sm leading-[1.8]">贈股是否完全取自 Musk 舊股？股別、稅務、託管和交付限制為何？</p></div>
+        <div class="quiet-card p-5"><div class="text-xs font-extrabold text-sky-700 mb-2">06 · SPACEX</div><p class="text-sm leading-[1.8]">第三季財報能否證明 Starlink 與 AI 運算收入增長足以支撐資本支出？</p></div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-5 sm:p-6 mb-6">
+        <div class="flex justify-between items-start flex-wrap gap-3 mb-5"><div><h3 class="text-xl font-extrabold text-slate-800">報告數據與聲明狀態檢索</h3><p class="text-sm text-slate-500 mt-2">依上傳報告整理；「已知」或「歷史」不表示本網頁進行外部獨立查證。</p></div><span class="pill pill-fact">真實報告條目 · 無示例資料</span></div>
+        <div class="filters-panel grid sm:grid-cols-[1fr_190px] gap-3 mb-4">
+          <div><label for="tableSearch" class="block text-xs font-bold text-slate-600 mb-2">搜尋公司、項目、數字、說明</label><input id="tableSearch" class="filter-input w-full rounded-xl border border-slate-300 px-4 py-3 text-sm bg-white" type="search" placeholder="例如：Anthropic、5%、Q3、贈股" autocomplete="off"></div>
+          <div><label for="statusFilter" class="block text-xs font-bold text-slate-600 mb-2">類型篩選</label><select id="statusFilter" class="filter-select w-full rounded-xl border border-slate-300 px-4 py-3 text-sm bg-white"><option value="all">全部類型</option><option value="fact">報告載明／既有承諾</option><option value="plan">待核准／尚待落地</option><option value="model">估算／市場預測</option></select></div>
+        </div>
+        <div class="flex items-center justify-between gap-3 mb-3"><p id="resultCount" class="text-xs text-slate-500" aria-live="polite">正在載入資料列…</p><button id="resetFilters" type="button" class="text-xs font-bold text-sky-700 hover:text-sky-900 underline underline-offset-4">清除篩選</button></div>
+        <div class="table-wrap"><table class="research-table"><thead><tr><th scope="col" style="min-width:105px">公司</th><th scope="col" style="min-width:160px">項目</th><th scope="col" style="min-width:195px">數值／內容</th><th scope="col" style="min-width:105px">狀態</th><th scope="col" style="min-width:260px">口徑與注意事項</th></tr></thead><tbody id="dataTableBody"></tbody></table></div>
+        <div id="noResults" class="hidden text-center rounded-xl bg-slate-50 p-8 text-sm text-slate-500 mt-3" role="status">沒有符合的報告資料，請調整搜尋條件。</div>
+      </div>
+    </section>
+
+    <section id="conclusion" data-nav-section="watchlist" class="pt-9 md:pt-12" aria-labelledby="conclusion-heading">
+      <div class="section-kicker">CONCLUSION · 結論</div>
+      <h2 id="conclusion-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">先查股份來源，再看控制權，最後回到現金流</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-6"><p class="text-base sm:text-lg leading-[1.95] text-slate-700">Anthropic 的基金與 Musk 的 SpaceX 兒童贈股構想，讓公益從企業敘事延伸到股權結構；但兩者分別是公司治理型公益與個人股權型公益，法律、資金與稀釋效果不相同。公益或能建立長期社會信任，<strong class="text-sky-900">卻不能取代營收品質、資本紀律與每股現金流的驗證</strong>。</p><div class="mt-6 border-t border-slate-100 pt-5 flex flex-wrap gap-3"><span class="pill pill-plan">配置／贈股尚待落地</span><span class="pill pill-model">估值與財報預測非實績</span><span class="pill pill-fact">核對正式文件與財務結果</span></div></div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI公益股權與股東權益。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中 Anthropic 與 SpaceX 公益股權治理相關公開資料 (2026年10月19日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    const menuButton = document.getElementById('menuButton');
+    const mobileNav = document.getElementById('mobileNav');
+    const menuIcon = document.getElementById('menuIcon');
+    function setMenuOpen(open) {
+      mobileNav.classList.toggle('hidden', !open);
+      mobileNav.setAttribute('aria-hidden', String(!open));
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      menuIcon.innerHTML = open
+        ? '<path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+        : '<path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+    }
+    menuButton.addEventListener('click', () => setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true'));
+    document.querySelectorAll('#mobileNav a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1024 && menuButton.getAttribute('aria-expanded') === 'true') setMenuOpen(false); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') { setMenuOpen(false); menuButton.focus(); } });
+
+    const navLinks = [...document.querySelectorAll('[data-nav]')];
+    function markActiveNav(id) {
+      navLinks.forEach(link => {
+        const current = link.dataset.nav === id;
+        link.classList.toggle('active-nav-link', current);
+        link.classList.toggle('inactive-nav-link', !current);
+        if (current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    navLinks.forEach(link => link.addEventListener('click', () => markActiveNav(link.dataset.nav)));
+    const observedSections = [...document.querySelectorAll('[data-nav-section]')];
+    if ('IntersectionObserver' in window) {
+      const visible = new Map();
+      const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) visible.set(entry.target.id, entry); else visible.delete(entry.target.id); });
+        if (visible.size) {
+          const sorted = [...visible.values()].sort((a,b) => Math.abs(a.boundingClientRect.top-110) - Math.abs(b.boundingClientRect.top-110));
+          markActiveNav(sorted[0].target.dataset.navSection);
+        }
+      }, {rootMargin:'-95px 0px -54% 0px', threshold:0});
+      observedSections.forEach(section => navObserver.observe(section));
+    }
+
+    // All entries below are drawn from the uploaded report; no illustrative or fabricated rows.
+    const productData = [
+      {company:'Anthropic', item:'公益基金初步配置', value:'5% 公司股份', category:'plan', status:'待股東批准', note:'籌設已公告，但交付與股份來源尚未確定。'},
+      {company:'Anthropic', item:'有條件增配機制', value:'估值較未公開基準 +50% 時，可再配 2%', category:'plan', status:'待揭露條款', note:'由董事會裁量，非自動觸發；基準估值與上限未公開。'},
+      {company:'Anthropic', item:'公益相關持股總估算', value:'約 20%', category:'model', status:'公司估算', note:'包含公司、創辦人與員工承諾，不代表完成交割。'},
+      {company:'Anthropic', item:'就業衝擊相關承諾', value:'約 2 億美元', category:'fact', status:'既有承諾', note:'先前提出的研究與回應投入，不是本次新基金已支付的現金。'},
+      {company:'Anthropic', item:'創辦人個人捐贈', value:'個人持股的 80%', category:'plan', status:'個人承諾', note:'與公司 5% 基金配置、員工捐股的股份來源不同。'},
+      {company:'Anthropic', item:'潛在 IPO 估值', value:'1.5–2 兆美元', category:'model', status:'市場討論', note:'非已完成的 IPO 定價；推算 5% 名目價值約 750–1,000 億美元。'},
+      {company:'Anthropic', item:'LTBT 董事席次', value:'7 席中的 4 席', category:'fact', status:'報告引述', note:'最新公開報導所述；LTBT 並非新設公益基金。'},
+      {company:'SpaceX', item:'2026 年 6 月 IPO 發行價', value:'135 美元／股', category:'fact', status:'歷史資料', note:'報告記載已於 2026 年 6 月上市，代號 SPCX。'},
+      {company:'SpaceX', item:'2026/10/16 收盤股價', value:'146.03 美元／股', category:'fact', status:'歷史資料', note:'作為贈股名目價值試算價格；不是 10/19 收盤。'},
+      {company:'SpaceX', item:'Musk 兒童贈股構想', value:'2027 年，每位美國兒童 1 股', category:'plan', status:'公開構想', note:'Musk 個人公開表態；尚無完整分配執行文件。'},
+      {company:'SpaceX', item:'未滿 18 歲涵蓋人口', value:'約 7,300 萬人', category:'model', status:'人口估算', note:'另有約 7,200 萬的統計口徑；非實際核定受贈人數。'},
+      {company:'SpaceX', item:'擬議贈股價值', value:'約 106.6 億美元', category:'model', status:'情境試算', note:'7,300 萬股 × 10/16 收盤 $146.03，非實際交付或支出。'},
+      {company:'SpaceX', item:'A、B 類投票權', value:'A 類 1 票／股；B 類 10 票／股', category:'fact', status:'治理資料', note:'B 類另有特殊董事選任權；尚未確認捐贈股類別。'},
+      {company:'SpaceX', item:'第三季營收', value:'預估 127.4 億美元', category:'model', status:'分析師預測', note:'預定 10/20（美東）公布財報，非已公布的實績。'},
+      {company:'SpaceX', item:'第三季每股盈餘', value:'預估 0.14 美元', category:'model', status:'分析師預測', note:'尚非第三季實際公布的 EPS。'},
+      {company:'SpaceX', item:'前一季營收／淨損', value:'營收 78 億／淨損 5.41 億美元', category:'fact', status:'歷史資料', note:'報告所述上一季數據，與第三季預測不得混淆。'},
+      {company:'SpaceX', item:'前一季 AI 相關資本支出', value:'約 158 億美元', category:'fact', status:'歷史資料', note:'報告所述上一季 AI 相關資本投入。'},
+      {company:'SpaceX', item:'10/19 美股早盤股價波動', value:'盤中曾上漲約 2.5%', category:'fact', status:'盤中觀察', note:'不能視為收盤報酬，亦不能證明由贈股消息單獨驅動。'}
+    ];
+    const statusClasses = {fact:'pill-fact', plan:'pill-plan', model:'pill-model'};
+    const tbody = document.getElementById('dataTableBody');
+    const searchInput = document.getElementById('tableSearch');
+    const statusFilter = document.getElementById('statusFilter');
+    const resultCount = document.getElementById('resultCount');
+    const noResults = document.getElementById('noResults');
+    function renderTable() {
+      const q = searchInput.value.trim().toLocaleLowerCase('zh-Hant');
+      const type = statusFilter.value;
+      const matches = productData.filter(row => (type === 'all' || row.category === type) && [row.company,row.item,row.value,row.status,row.note].some(s => s.toLocaleLowerCase('zh-Hant').includes(q)));
+      tbody.replaceChildren();
+      const fragment = document.createDocumentFragment();
+      matches.forEach(row => {
+        const tr = document.createElement('tr');
+        [row.company,row.item,row.value].forEach((value,i) => { const td=document.createElement('td'); td.textContent=value; if(i===0)td.className='font-extrabold text-slate-800'; if(i===2)td.className='font-bold text-sky-900'; tr.appendChild(td); });
+        const statusTd = document.createElement('td'); const statusSpan = document.createElement('span'); statusSpan.className='pill '+statusClasses[row.category]; statusSpan.textContent=row.status; statusTd.appendChild(statusSpan); tr.appendChild(statusTd);
+        const noteTd=document.createElement('td'); noteTd.textContent=row.note; noteTd.className='text-slate-600'; tr.appendChild(noteTd);
+        fragment.appendChild(tr);
+      });
+      tbody.appendChild(fragment);
+      noResults.classList.toggle('hidden', matches.length !== 0);
+      resultCount.textContent = `顯示 ${matches.length} / ${productData.length} 筆報告資料`;
+    }
+    searchInput.addEventListener('input', renderTable);
+    statusFilter.addEventListener('change', renderTable);
+    document.getElementById('resetFilters').addEventListener('click', () => {searchInput.value='';statusFilter.value='all';renderTable();searchInput.focus();});
+    renderTable();
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = 'ui-sans-serif,system-ui,"Noto Sans TC","PingFang TC",sans-serif';
+      Chart.defaults.color = '#475569';
+      const commonPlugins = {legend:{display:false},tooltip:{backgroundColor:'#0c253a',padding:12,cornerRadius:9,titleFont:{weight:'bold'},callbacks:{label: ctx => ` ${new Intl.NumberFormat('zh-TW',{maximumFractionDigits:1}).format(ctx.raw)} 億美元`}}};
+      new Chart(document.getElementById('anthropicValueChart'), {type:'bar',data:{labels:[['假設 IPO 估值','1.5 兆美元'],['假設 IPO 估值','2 兆美元']],datasets:[{label:'5% 名目股權價值（億美元）',data:[750,1000],backgroundColor:['#38bdf8','#0369a1'],borderRadius:9,maxBarThickness:72}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:450},plugins:commonPlugins,scales:{x:{grid:{display:false},ticks:{maxRotation:0,font:{size:11}}},y:{beginAtZero:true,suggestedMax:1100,grid:{color:'#e2e8f0'},ticks:{callback:v=>v.toLocaleString('zh-TW')},title:{display:true,text:'名目價值（億美元）',font:{size:11}}}}}});
+      new Chart(document.getElementById('spacexRevenueChart'), {type:'bar',data:{labels:[['前一季','（報告所述實績）'],['2026 Q3','（分析師預測）']],datasets:[{label:'營收（億美元）',data:[78,127.4],backgroundColor:['#0ea5e9','#f59e0b'],borderRadius:9,maxBarThickness:72}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:450},plugins:commonPlugins,scales:{x:{grid:{display:false},ticks:{maxRotation:0,font:{size:11}}},y:{beginAtZero:true,suggestedMax:140,grid:{color:'#e2e8f0'},title:{display:true,text:'營收（億美元）',font:{size:11}}}}}});
+    }
+  </script>
+</body>
+</html>
