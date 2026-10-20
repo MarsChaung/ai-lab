@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c253a">
+  <meta name="description" content="解析AI算力需求與商業化落差：中國RTX PRO 5500供需、NVIDIA Vera CPU、Anthropic與Nscale算力租約，以及美股投資者應追蹤的交付、獲利與現金流。">
+  <title>巴菲特AI價值投資-AI算力交付與現金流</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --ink:#243545; --muted:#62748a; --line:#dfe9f0; --sky:#0284c7; --deep:#0c253a; }
+    * {box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;background:#f5f8fb;color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased}
+    button,input,select{font:inherit}
+    a{text-decoration:none}
+    section[id]{scroll-margin-top:104px}
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content {position:relative;z-index:1}
+    .nav-link{display:inline-flex;align-items:center;min-height:43px;padding:.38rem .72rem;border-radius:.55rem;font-size:.87rem;font-weight:700;white-space:nowrap;transition:background-color .15s ease,color .15s ease}
+    .active-nav-link{background:#e0f2fe;color:#0369a1}
+    .inactive-nav-link{color:#475569}
+    .inactive-nav-link:hover{background:#f1f5f9;color:#0369a1}
+    .mobile-link{display:block;padding:.72rem .8rem;border-radius:.55rem;font-weight:700;font-size:.92rem}
+    .tag{display:inline-flex;align-items:center;border-radius:999px;padding:.19rem .68rem;font-size:.73rem;font-weight:800;letter-spacing:.012em}
+    .tag-blue{background:#e0f2fe;color:#075985}
+    .tag-amber{background:#fef3c7;color:#92400e}
+    .tag-green{background:#dcfce7;color:#166534}
+    .tag-slate{background:#e9eef5;color:#475569}
+    .tag-violet{background:#ede9fe;color:#6d28d9}
+    .hero-stat{background:rgba(255,255,255,.085);border:1px solid rgba(255,255,255,.17);border-radius:1rem;padding:1rem 1.15rem;backdrop-filter:blur(4px);min-width:0}
+    .hero-stat .figure{font-size:clamp(1.5rem,3.2vw,2.15rem);font-weight:800;letter-spacing:-.035em;color:#fff;line-height:1.2}
+    .hero-stat .desc{color:#e0f2fe;font-size:.82rem;margin-top:.44rem;line-height:1.5}
+    .eyeline{font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;color:#64748b;font-weight:800}
+    .metric-value{font-size:clamp(1.6rem,3.3vw,2.4rem);font-weight:800;letter-spacing:-.04em;line-height:1.25;color:#0c4a6e}
+    .quiet{color:#62748a}
+    .body-text{font-size:.965rem;color:#475569;line-height:1.95}
+    .card-top{border-top:4px solid #38bdf8}
+    .step{border-left:3px solid #7dd3fc;padding-left:1rem}
+    .chart-shell{position:relative;width:100%;height:305px;min-width:0}
+    .chart-shell canvas{max-width:100%;display:block}
+    .table-outer{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border:1px solid #e2e8f0;border-radius:.75rem}
+    .data-table{width:100%;min-width:850px;border-collapse:separate;border-spacing:0;font-size:.88rem}
+    .data-table thead th{position:sticky;top:0;background:#eff6fb;z-index:1;text-align:left;padding:14px 17px;color:#334155;font-size:.8rem;letter-spacing:.02em;border-bottom:1px solid #dbe7f0}
+    .data-table tbody td{vertical-align:top;padding:15px 17px;border-bottom:1px solid #edf2f7;line-height:1.7;color:#475569}
+    .data-table tbody tr:last-child td{border-bottom:0}
+    .data-table tbody tr:nth-child(even){background:#fafcfe}
+    .data-table tbody tr:hover{background:#f0f9ff}
+    .data-table td:first-child{font-weight:800;color:#0f3852;white-space:nowrap}
+    .input-control{border:1px solid #cbd5e1;border-radius:.7rem;background:white;padding:.75rem 1rem;outline:0;color:#334155;width:100%;min-height:48px;transition:box-shadow .15s,border-color .15s}
+    .input-control:focus{border-color:#0284c7;box-shadow:0 0 0 3px rgba(14,165,233,.14)}
+    .circle-number{width:2.3rem;height:2.3rem;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:#e0f2fe;color:#0369a1;font-weight:900}
+    .track-pill{background:#eff6ff;color:#075985;border:1px solid #bfdbfe;font-size:.74rem;white-space:nowrap;border-radius:999px;padding:.18rem .7rem;font-weight:800}
+    .legend-square{display:inline-block;width:.7rem;height:.7rem;border-radius:.2rem;margin-right:.3rem;vertical-align:-.03rem}
+    .fine-separator{height:1px;background:linear-gradient(90deg,#cbd5e1,transparent)}
+    .mobile-menu-hidden{display:none}
+    .research-note{border-left:4px solid #eab308;background:#fffbeb;color:#854d0e;border-radius:0 .75rem .75rem 0;padding:1rem 1.25rem;line-height:1.8}
+    .outcome{border-radius:1rem;padding:1.2rem;background:#f8fafc;border:1px solid #e2e8f0}
+    @media(max-width:767px){
+      html{scroll-padding-top:76px}
+      section[id]{scroll-margin-top:80px}
+      .hero-stat{padding:.92rem}
+      .chart-shell{height:295px}
+      .nav-link{font-size:.82rem}
+      .data-table{min-width:760px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    /* Critical responsive fallback, preserving a readable layout if CDN resources cannot load. */
+    .page-container{max-width:80rem;margin-left:auto;margin-right:auto;padding-left:1rem;padding-right:1rem}
+    .main-content{padding-top:2.7rem}
+    .section-block{margin-bottom:3.5rem}
+    @media(min-width:640px){.page-container{padding-left:1.5rem;padding-right:1.5rem}}
+    @media(min-width:1024px){.page-container{padding-left:2rem;padding-right:2rem}}
+    /* Lightweight in-file utility fallback when external Tailwind CDN is unavailable. */
+    h1,h2,h3,h4,p{margin-top:0;margin-bottom:0}
+    .hidden{display:none!important}.block{display:block}.inline-flex{display:inline-flex}.flex{display:flex}.grid{display:grid}
+    .flex-col{flex-direction:column}.flex-wrap{flex-wrap}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.min-w-0{min-width:0}
+    .items-center{align-items:center}.items-start{align-items:flex-start}.justify-between{justify-content:space-between}.justify-center{justify-content:center}
+    .grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}
+    .w-full{width:100%}.w-9{width:2.25rem}.h-9{height:2.25rem}.w-11{width:2.75rem}.h-11{height:2.75rem}
+    .max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-7xl{max-width:80rem}
+    .p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-8{padding-top:2rem;padding-bottom:2rem}.py-14{padding-top:3.5rem;padding-bottom:3.5rem}
+    .px-4{padding-left:1rem;padding-right:1rem}.pl-4{padding-left:1rem}
+    .mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-9{margin-top:2.25rem}.mt-12{margin-top:3rem}
+    .mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.my-4{margin-top:1rem;margin-bottom:1rem}
+    .bg-white{background:#fff}.bg-slate-50{background:#f8fafc}.bg-sky-50{background:#f0f9ff}.bg-sky-900{background:#0c4a6e}.bg-stone-800{background:#292524}
+    .text-white{color:#fff}.text-stone-800{color:#292524}.text-stone-300{color:#d6d3d1}.text-slate-700{color:#334155}.text-slate-600{color:#475569}.text-slate-500{color:#64748b}.text-sky-900{color:#0c4a6e}.text-sky-800{color:#075985}.text-sky-200{color:#bae6fd}.text-sky-50\/90{color:rgba(240,249,255,.9)}
+    .text-xs{font-size:.75rem;line-height:1.55}.text-sm{font-size:.875rem;line-height:1.6}.text-base{font-size:1rem;line-height:1.6}.text-lg{font-size:1.125rem;line-height:1.65}.text-xl{font-size:1.25rem;line-height:1.5}.text-2xl{font-size:1.5rem;line-height:1.4}.text-3xl{font-size:1.875rem;line-height:1.3}.text-4xl{font-size:2.25rem;line-height:1.2}
+    .font-normal{font-weight:400}.font-semibold{font-weight:600}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-black{font-weight:900}
+    .leading-tight{line-height:1.18}.leading-relaxed{line-height:1.8}.leading-loose{line-height:2}.tracking-tight{letter-spacing:-.025em}.truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-full{border-radius:9999px}
+    .shadow-lg{box-shadow:0 9px 20px -9px rgba(15,23,42,.16),0 5px 9px -6px rgba(15,23,42,.10)}.shadow-sm{box-shadow:0 1px 3px rgba(15,23,42,.09)}
+    .border{border-width:1px;border-style:solid}.border-b{border-bottom:1px solid}.border-t{border-top:1px solid}.border-t-4{border-top:4px solid}.border-b-2{border-bottom:2px solid}
+    .border-slate-200{border-color:#e2e8f0}.border-sky-100{border-color:#e0f2fe}.border-sky-500{border-color:#0ea5e9}.border-emerald-500{border-top-color:#10b981}.border-amber-400{border-top-color:#fbbf24}.border-rose-400{border-top-color:#fb7185}
+    .pb-2{padding-bottom:.5rem}.text-center{text-align:center}
+    .sticky{position:sticky}.top-0{top:0}.z-50{z-index:50}
+    .bg-white\/95{background:rgba(255,255,255,.95)}.backdrop-blur-md{backdrop-filter:blur(12px)}
+    @media(min-width:640px){
+      .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .sm\:text-5xl{font-size:3rem}.sm\:text-lg{font-size:1.125rem}.sm\:text-base{font-size:1rem}
+      .sm\:gap-4{gap:1rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}
+    }
+    @media(min-width:768px){
+      .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .md\:py-20{padding-top:5rem;padding-bottom:5rem}
+    }
+    @media(min-width:1024px){
+      .lg\:hidden{display:none!important}.lg\:flex{display:flex!important}.lg\:flex-row{flex-direction:row}
+      .lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+      .lg\:col-span-2{grid-column:span 2/span 2}.lg\:col-span-3{grid-column:span 3/span 3}
+      .lg\:items-end{align-items:flex-end}.lg\:justify-between{justify-content:space-between}.lg\:max-w-xl{max-width:36rem}
+      .lg\:px-8{padding-left:2rem;padding-right:2rem}
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm" id="site-header">
+    <div class="page-container flex items-center justify-between gap-3" style="min-height:69px">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="inline-flex shrink-0 items-center justify-center w-9 h-9 rounded-xl bg-sky-900 text-white font-black" aria-hidden="true">AI</span>
+        <span class="font-extrabold text-stone-800 text-sm sm:text-base truncate">巴菲特AI價值投資</span>
+      </div>
+      <nav class="hidden lg:flex items-center gap-1" aria-label="報告章節導覽" id="desktop-nav">
+        <a href="#overview" data-section="overview" class="nav-link active-nav-link" aria-current="location">總覽</a>
+        <a href="#gpu" data-section="gpu" class="nav-link inactive-nav-link">GPU與出口</a>
+        <a href="#vera" data-section="vera" class="nav-link inactive-nav-link">Vera CPU</a>
+        <a href="#contracts" data-section="contracts" class="nav-link inactive-nav-link">算力租約</a>
+        <a href="#equities" data-section="equities" class="nav-link inactive-nav-link">美股影響</a>
+        <a href="#scenarios" data-section="scenarios" class="nav-link inactive-nav-link">情境策略</a>
+        <a href="#watchlist" data-section="watchlist" class="nav-link inactive-nav-link">追蹤指標</a>
+      </nav>
+      <button id="mobile-menu-button" class="lg:hidden inline-flex items-center justify-center w-11 h-11 text-slate-700 border border-slate-200 rounded-lg hover:bg-slate-100" type="button" aria-label="開啟章節選單" aria-controls="mobile-nav" aria-expanded="false">
+        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="mobile-menu-hidden lg:hidden border-t border-slate-200 bg-white" aria-label="行動版報告章節導覽" hidden>
+      <div class="page-container py-3 grid grid-cols-2 gap-1">
+        <a href="#overview" data-section="overview" class="mobile-link active-nav-link" aria-current="location">總覽</a>
+        <a href="#gpu" data-section="gpu" class="mobile-link inactive-nav-link">GPU與出口</a>
+        <a href="#vera" data-section="vera" class="mobile-link inactive-nav-link">Vera CPU</a>
+        <a href="#contracts" data-section="contracts" class="mobile-link inactive-nav-link">算力租約</a>
+        <a href="#equities" data-section="equities" class="mobile-link inactive-nav-link">美股影響</a>
+        <a href="#scenarios" data-section="scenarios" class="mobile-link inactive-nav-link">情境策略</a>
+        <a href="#watchlist" data-section="watchlist" class="mobile-link inactive-nav-link">追蹤指標</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content page-container py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight max-w-5xl">AI算力需求仍強，<span class="text-sky-200">交付與現金流</span>成為勝負關鍵</h1>
+        <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">中國企業持續追逐NVIDIA GPU，Vera CPU切入AI Agent基礎設施，Anthropic與Nscale再洽談大型算力租約。需求訊號依然強勁，但訂購、部署、交付與認列收入之間存在重大落差；投資判斷應回到資本成本與可回收的自由現金流。</p>
+        <div class="grid sm:grid-cols-3 gap-3 sm:gap-4 mt-9" aria-label="報告三大量化焦點">
+          <div class="hero-stat"><div class="figure">逾 600 萬張</div><div class="desc">RTX PRO 5500中國整體需求｜匿名消息，非確定出貨</div></div>
+          <div class="hero-stat"><div class="figure">約 200 億美元</div><div class="desc">整體伺服器CPU需求展望｜非Vera已認列營收</div></div>
+          <div class="hero-stat"><div class="figure">約 450 億美元</div><div class="desc">Anthropic–Nscale第二座設施擬議協議｜仍在磋商</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="page-container main-content">
+      <section id="overview" class="section-block" aria-labelledby="overview-heading">
+        <h2 id="overview-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">01｜投資總覽：從搶算力轉向算現金流</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="body-text">三則消息指向同一個問題：AI需求不等於供應商立即獲利。必須依序檢驗<span class="font-bold text-sky-900">實際交貨、算力上線、商業使用與現金回收</span>，才能辨別哪家公司能將技術需求轉成股東報酬。報告不認為AI需求突然消失，也不認為高額名目訂單能保證股價與獲利。</p>
+          <div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3" aria-label="需求至現金流的驗證流程">
+            <div class="rounded-xl bg-sky-50 px-4 py-4 border border-sky-100"><div class="eyeline">第一關</div><div class="text-xl font-extrabold text-sky-900 mt-1">訂單意願</div><p class="text-xs text-slate-600 mt-1">需求是否獲正式確認</p></div>
+            <div class="rounded-xl bg-sky-50 px-4 py-4 border border-sky-100"><div class="eyeline">第二關</div><div class="text-xl font-extrabold text-sky-900 mt-1">設備交付</div><p class="text-xs text-slate-600 mt-1">政策、產能與時程</p></div>
+            <div class="rounded-xl bg-sky-50 px-4 py-4 border border-sky-100"><div class="eyeline">第三關</div><div class="text-xl font-extrabold text-sky-900 mt-1">算力啟用</div><p class="text-xs text-slate-600 mt-1">電力、部署與利用率</p></div>
+            <div class="rounded-xl bg-sky-50 px-4 py-4 border border-sky-100"><div class="eyeline">最終驗證</div><div class="text-xl font-extrabold text-sky-900 mt-1">自由現金流</div><p class="text-xs text-slate-600 mt-1">收益覆蓋折舊與融資成本</p></div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-top"><span class="tag tag-amber">訂單 → 交貨</span><h3 class="text-xl font-bold text-stone-800 mt-3 mb-2">中國GPU供需落差</h3><p class="body-text">大額需求主要出自匿名報導；潛在採購金額不是公司正式確定訂單，更不是當期營收。供貨量與出口政策才是核心。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-top"><span class="tag tag-blue">測試 → 商業採用</span><h3 class="text-xl font-bold text-stone-800 mt-3 mb-2">Vera帶動CPU競爭</h3><p class="body-text">Modal的高負載測試顯示特定優勢，但尚須觀察多客戶部署、移植成本及CPU業務正式財務貢獻。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-top"><span class="tag tag-violet">協議 → 現金流</span><h3 class="text-xl font-bold text-stone-800 mt-3 mb-2">巨額租約的資金壓力</h3><p class="body-text">Nscale第二座設施尚在磋商；電力取得、融資條件、工期與最終客戶付款決定其可實現程度。</p></article>
+        </div>
+      </section>
+
+      <section id="gpu" class="section-block" aria-labelledby="gpu-heading">
+        <h2 id="gpu-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">02｜中國GPU需求與出口限制：強勁不等於交付</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6"><div class="eyeline">三家中國企業報導訂購</div><div class="metric-value mt-2">超過 300 萬張</div><p class="text-xs quiet mt-2">字節跳動、阿里巴巴、騰訊；未獲各公司逐一確認</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6"><div class="eyeline">報導單張價格</div><div class="metric-value mt-2">11,400 美元</div><p class="text-xs quiet mt-2">估計牌價／客戶採購價，非NVIDIA淨售價</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6"><div class="eyeline">潛在牌價需求</div><div class="metric-value mt-2">超過 350 億美元</div><p class="text-xs quiet mt-2">概略估算，非已認列或確定銷售金額</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6"><div class="eyeline">RTX PRO 5500規格</div><div class="metric-value mt-2">84 GB</div><p class="text-xs quiet mt-2">Blackwell／GDDR7，專業工作站與推論用途</p></div>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-6 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 lg:col-span-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3"><h3 class="text-xl font-bold text-stone-800">RTX PRO 5500：潛在需求與全球規劃產量</h3><span class="tag tag-amber">比較的是報導界限值</span></div>
+            <p class="text-sm quiet mb-4">單位：百萬張。中國整體需求報導為<strong>超過 6</strong>；2027年全球規劃產量報導為<strong>不超過 3</strong>。圖中的6與3分別用作下限和上限標示。</p>
+            <div class="chart-shell"><canvas id="gpuDemandChart" aria-label="RTX PRO 5500中國潛在需求超過六百萬張，2027年全球規劃產量不超過三百萬張的對照圖" role="img"></canvas></div>
+            <div id="chart-fallback" class="hidden text-sm p-3 rounded-lg bg-sky-50 text-sky-900" role="status">中國整體需求：超過600萬張；2027年全球規劃產量：不超過300萬張。以上均屬報導資訊。</div>
+            <p class="text-xs quiet mt-3">註：兩者地理範圍與時間口徑不同，且均非正式實際出貨。不能由本圖推算實際交付率、缺口確切規模或營收。</p>
+          </div>
+          <div class="lg:col-span-2 flex flex-col gap-5">
+            <article class="bg-white rounded-lg shadow-lg p-6 flex-1"><div class="flex justify-between gap-2 flex-wrap"><h3 class="text-xl font-bold text-stone-800">產品定位：專業GPU≠訓練旗艦</h3><span class="tag tag-blue">用途區分</span></div><p class="body-text mt-3">RTX PRO 5500的記憶體容量有利於模型載入和AI推論，但不能據此認定其訓練效能、互連和系統效率可等量取代B300等最高階資料中心GPU。</p></article>
+            <article class="bg-white rounded-lg shadow-lg p-6 flex-1"><div class="flex justify-between gap-2 flex-wrap"><h3 class="text-xl font-bold text-stone-800">單一通路的配貨風險</h3><span class="tag tag-amber">非統一配額</span></div><div class="metric-value mt-3">5%–10%</div><p class="text-sm quiet mt-2">部分合作夥伴可能僅獲原需求量的比例，並非NVIDIA正式公告所有中國客戶的交貨率。</p></article>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-stone-800 mb-4">從報價到財報，仍有多道關卡</h3>
+          <div class="grid md:grid-cols-3 gap-5">
+            <div class="step"><span class="tag tag-amber">2026年12月｜預計</span><h4 class="font-extrabold mt-2 text-stone-800">早期樣品</h4><p class="body-text text-sm">報導指出預計提供樣品，非已量產、出貨或收入認列。</p></div>
+            <div class="step"><span class="tag tag-amber">2027年第1季起｜預計</span><h4 class="font-extrabold mt-2 text-stone-800">商業交付</h4><p class="body-text text-sm">需確認真實數量、產品組合、客戶接受與會計認列時點。</p></div>
+            <div class="step"><span class="tag tag-slate">待財報驗證</span><h4 class="font-extrabold mt-2 text-stone-800">毛利與淨營收</h4><p class="body-text text-sm">通路牌價未必等於NVIDIA淨銷售額，不能直接預灌下一季營收。</p></div>
+          </div>
+          <div class="research-note mt-5"><strong>量價口徑提醒：</strong>300萬張 × 11,400美元約為342億美元；報導所稱「超過350億美元」反映估計數量或價格取整差異，不宜將兩者當成精確一致的已簽收入。</div>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-5"><h4 class="font-extrabold text-stone-800">出口政策改變採購</h4><p class="text-sm quiet mt-2">高階GPU受限制後，合規替代品可能承受集中購買壓力。</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-5"><h4 class="font-extrabold text-stone-800">Rubin排產優先順序</h4><p class="text-sm quiet mt-2">製程、封裝、記憶體與組裝資源可能向高價值平台移轉。</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-5"><h4 class="font-extrabold text-stone-800">中國供應鏈在地化</h4><p class="text-sm quiet mt-2">限制可能加速華為等本土替代方案評估，長期市占不可直接外推。</p></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-5"><h4 class="font-extrabold text-stone-800">監管與出貨雙重變數</h4><p class="text-sm quiet mt-2">未來許可、進口政策與實際交貨節奏，均可能改變收入實現。</p></div>
+        </div>
+      </section>
+
+      <section id="vera" class="section-block" aria-labelledby="vera-heading">
+        <h2 id="vera-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">03｜Vera CPU：AI Agent重新定義效能瓶頸</h2>
+        <div class="grid lg:grid-cols-3 gap-5 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+            <div class="flex gap-2 flex-wrap"><span class="tag tag-blue">2026年10月19日公告</span><span class="tag tag-amber">計畫導入，不代表全面完成</span></div>
+            <h3 class="text-2xl font-bold text-stone-800 mt-4 mb-3">Modal計畫將Vera納入Agent執行環境</h3>
+            <p class="body-text">AI Agent除了模型推論，還會執行程式、編譯、搜尋檔案、操作版本控制與工具。當數千個容器並行，CPU與記憶體吞吐量會左右回應時間，也可能決定GPU是否因等待而閒置。Vera採Arm相容架構，讓NVIDIA進一步進入以Intel與AMD為主要競爭者的資料中心CPU市場。</p>
+            <div class="mt-5 grid sm:grid-cols-3 gap-3">
+              <div class="p-4 bg-sky-50 rounded-lg"><div class="font-extrabold text-sky-900">編譯與執行</div><p class="text-sm text-slate-600 mt-1">多容器同時處理任務</p></div>
+              <div class="p-4 bg-sky-50 rounded-lg"><div class="font-extrabold text-sky-900">檔案與版本控制</div><p class="text-sm text-slate-600 mt-1">搜尋、讀寫及Git操作</p></div>
+              <div class="p-4 bg-sky-50 rounded-lg"><div class="font-extrabold text-sky-900">整體系統效率</div><p class="text-sm text-slate-600 mt-1">衡量每任務成本而非單顆晶片速度</p></div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="tag tag-violet">有條件的測試結果</span><div class="metric-value mt-5">最高約 2 倍</div><p class="font-bold text-stone-800 mt-2">Modal自訂高併發工作負載下，Vera相對受測x86平台的吞吐量</p><div class="fine-separator my-4"></div><p class="text-sm quiet">單一任務與低負載未普遍達到兩倍，部分項目Vera不領先。這不是所有使用情境的通用效能結論。</p></article>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6"><h3 class="text-xl font-bold text-stone-800 mb-3">漸進式混合部署</h3><p class="body-text">Modal須調整軟體、容器映像與底層基礎設施；公司並未打算淘汰既有Intel及AMD硬體，而是依工作負載採用Arm與x86並存架構。</p><span class="tag tag-slate mt-4">單一客戶採用 ≠ x86立即被取代</span></div>
+          <div class="bg-white rounded-lg shadow-lg p-6"><h3 class="text-xl font-bold text-stone-800 mb-3">從GPU擴至整機櫃平台</h3><p class="body-text">Vera可用於獨立CPU伺服器，亦規劃整合Vera Rubin平台。NVIDIA追求的策略價值包含晶片、記憶體、互連與軟體協同，最終仍須證實總持有成本、毛利率與現金流改善。</p></div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-wrap gap-3 items-center justify-between"><h3 class="text-xl font-bold text-stone-800">200億美元CPU敘事：財務口徑不可混淆</h3><span class="tag tag-amber">需求／展望，非已認列</span></div>
+          <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-slate-50 rounded-xl p-5 border border-slate-200"><div class="text-xs font-extrabold text-slate-500 mb-2">Reuters對Modal事件的相關說法</div><div class="text-lg font-bold text-stone-800">Vera相關銷售預期至少 200 億美元</div><p class="text-sm quiet mt-2">屬媒體轉述的前瞻表述，非已完成銷售確認。</p></div>
+            <div class="bg-sky-50 rounded-xl p-5 border border-sky-100"><div class="text-xs font-extrabold text-sky-800 mb-2">NVIDIA八月財報電話會議表述</div><div class="text-lg font-bold text-stone-800">整體伺服器CPU需求約 200 億美元</div><p class="text-sm quiet mt-2">可能涵蓋Grace與Vera等CPU業務，亦提及2028財年收入可望再成長。</p></div>
+          </div>
+          <p class="research-note mt-5"><strong>本頁採保守口徑：</strong>以「整體伺服器CPU需求／業務展望訊號」理解200億美元，不將其寫成Vera單一產品已實現營收。下一步應觀察獨立伺服器客戶、Grace轉換與正式財報揭露。</p>
+        </div>
+      </section>
+
+      <section id="contracts" class="section-block" aria-labelledby="contracts-heading">
+        <h2 id="contracts-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">04｜Anthropic × Nscale：租約金額背後的資本成本</h2>
+        <div class="grid md:grid-cols-2 gap-5 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500"><span class="tag tag-green">2026年8月｜已達成合作</span><div class="metric-value mt-4">約 450 億美元</div><h3 class="font-bold text-xl text-stone-800 mt-2">既有算力合作</h3><p class="body-text mt-2">報告記載雙方已達成另一筆合作，但未提供完整付款、取消與履約條款；不可視為已付款或全額收入認列。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-amber-400"><span class="tag tag-amber">2026年10月｜磋商中</span><div class="metric-value mt-4">約 450 億美元</div><h3 class="font-bold text-xl text-stone-800 mt-2">第二座設施擬議算力協議</h3><p class="body-text mt-2">新協議仍在談判；金額、履約條件、融資架構均可能變化。不能把兩筆相加就視為900億美元不可取消的確定承諾。</p></article>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex justify-between flex-wrap gap-3 items-center"><h3 class="text-xl font-bold text-stone-800">Monarch園區：規劃與可交付容量是兩回事</h3><span class="tag tag-amber">尚非已上線產能</span></div>
+          <div class="grid sm:grid-cols-3 gap-4 mt-5">
+            <div class="p-5 bg-sky-50 rounded-xl"><div class="eyeline">預計規劃容量</div><div class="metric-value mt-2">約 460 MW</div><p class="text-xs quiet mt-2">運算相關容量；不是已供電負載</p></div>
+            <div class="p-5 bg-sky-50 rounded-xl"><div class="eyeline">選定區位</div><div class="text-xl font-extrabold text-sky-900 mt-2">西維吉尼亞州</div><p class="text-xs quiet mt-2">美國Monarch園區的第二座設施規劃</p></div>
+            <div class="p-5 bg-sky-50 rounded-xl"><div class="eyeline">規劃使用平台</div><div class="text-xl font-extrabold text-sky-900 mt-2">Vera Rubin</div><p class="text-xs quiet mt-2">擬採NVIDIA新平台，並非已完成安裝</p></div>
+          </div>
+          <div class="mt-6 grid lg:grid-cols-5 sm:grid-cols-2 gap-3" aria-label="大型算力租約實現流程">
+            <div class="outcome"><span class="circle-number">1</span><h4 class="font-bold text-stone-800 mt-3">談判及簽約</h4><p class="text-xs quiet mt-1">額度與義務待確認</p></div>
+            <div class="outcome"><span class="circle-number">2</span><h4 class="font-bold text-stone-800 mt-3">融資到位</h4><p class="text-xs quiet mt-1">借款利率、資本成本</p></div>
+            <div class="outcome"><span class="circle-number">3</span><h4 class="font-bold text-stone-800 mt-3">取得電力及建設</h4><p class="text-xs quiet mt-1">電網、環評、冷卻和工期</p></div>
+            <div class="outcome"><span class="circle-number">4</span><h4 class="font-bold text-stone-800 mt-3">設備交付與啟用</h4><p class="text-xs quiet mt-1">Rubin部署及可用率</p></div>
+            <div class="outcome"><span class="circle-number">5</span><h4 class="font-bold text-stone-800 mt-3">使用與付款</h4><p class="text-xs quiet mt-1">租費回收、折舊及利息</p></div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-stone-800 mb-3">關鍵履約條款</h3><p class="body-text">多年名目金額不等於一次付款。需逐項檢查容量可用起算點、交付延誤、終止權、最低採購量、客戶保證及融資契約，才能估算可收回現金。</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-stone-800 mb-3">電網接入的現實考驗</h3><p class="body-text">Microsoft因電網接入嚴重延誤退出Nscale另一項英國合作；不代表Monarch必然失敗，卻足以提醒投資人：租戶意願並不能取代實際電力與建設進度。第三座設施據報僅有優先洽談權，並非正式承諾。</p></div>
+        </div>
+      </section>
+
+      <section id="equities" class="section-block" aria-labelledby="equities-heading">
+        <h2 id="equities-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">05｜美股影響：各公司的受益與風險不同</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-stone-800 mb-3">三種落差，可能造成個股重新定價</h3><div class="grid md:grid-cols-3 gap-4"><div class="p-4 bg-sky-50 rounded-lg"><p class="font-extrabold text-sky-900">需求 vs. 供應</p><p class="text-sm text-slate-700 mt-1">出口限制、產能分配及實際出貨決定GPU業務兌現。</p></div><div class="p-4 bg-sky-50 rounded-lg"><p class="font-extrabold text-sky-900">效能 vs. 營收</p><p class="text-sm text-slate-700 mt-1">CPU測試優勢仍須轉為客戶採購、部署與獲利。</p></div><div class="p-4 bg-sky-50 rounded-lg"><p class="font-extrabold text-sky-900">合約 vs. 現金流</p><p class="text-sm text-slate-700 mt-1">大型算力合約受建設、折舊、融資與客戶償付影響。</p></div></div><p class="body-text mt-4">晶片供應商投資雲端業者、雲端業者採購設備並向模型公司出租、模型公司依未來收入付租，可能放大成長，也可能讓應收款、借款、租賃及設備殘值風險沿供應鏈傳遞。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col lg:flex-row gap-3 lg:items-end lg:justify-between mb-4"><div><h3 class="text-xl font-bold text-stone-800">上市公司追蹤矩陣</h3><p class="text-sm quiet mt-1">依原報告整理；可搜尋代碼、公司名稱、機會、風險或指標。</p></div><div class="grid sm:grid-cols-2 gap-3 w-full lg:max-w-xl"><div><label class="block text-sm font-semibold text-slate-600 mb-1" for="company-search">即時搜尋</label><input id="company-search" class="input-control" type="search" placeholder="例如 NVDA、Vera、現金流" autocomplete="off"></div><div><label class="block text-sm font-semibold text-slate-600 mb-1" for="company-category">公司類型</label><select id="company-category" class="input-control"><option value="全部">全部類型</option><option value="半導體與平台">半導體與平台</option><option value="大型雲端平台">大型雲端平台</option><option value="AI算力服務">AI算力服務</option><option value="中國平台">中國平台</option></select></div></div></div>
+          <div class="flex items-center justify-between gap-3 mb-3"><p id="table-count" class="text-sm font-bold text-sky-800" aria-live="polite">顯示 9 家上市公司</p><p class="text-xs quiet">手機可左右滑動表格</p></div>
+          <div class="table-outer" role="region" aria-label="可搜尋的上市公司研究表格" tabindex="0"><table class="data-table"><thead><tr><th scope="col">股票</th><th scope="col">類別</th><th scope="col">潛在受益／競爭重點</th><th scope="col">主要風險與觀察指標</th></tr></thead><tbody id="company-table-body"></tbody></table></div>
+          <p id="table-empty" class="hidden p-6 text-center text-sm quiet" role="status">沒有符合條件的公司，請調整搜尋或分類。</p>
+          <p class="text-xs quiet mt-3">補充：字節跳動與Anthropic依本報告研究時點並非一般投資人可直接透過美股購買的普通上市股票，故未加入代碼清單；此表並非買賣建議。</p>
+        </div>
+      </section>
+
+      <section id="scenarios" class="section-block" aria-labelledby="scenarios-heading">
+        <h2 id="scenarios-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">06｜未來6–12個月：三種市場情境與投資策略</h2>
+        <div class="grid md:grid-cols-3 gap-5 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500"><span class="tag tag-green">樂觀情境</span><h3 class="text-xl font-bold text-stone-800 mt-3 mb-2">交付與效率同步改善</h3><p class="body-text">RTX PRO 5500依計畫交付、Vera擴大商業客戶、Monarch工程與融資逐步落實。較有利於NVIDIA、優勢供應鏈及財務較強的算力服務業者；仍須控制估值風險。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500"><span class="tag tag-blue">基準情境</span><h3 class="text-xl font-bold text-stone-800 mt-3 mb-2">需求穩健，兌現不均</h3><p class="body-text">中國客戶等待供貨，Vera逐步與x86共存，部分資料中心延遲。AI產業獲利可以成長，但不同公司的報酬更受交付品質、客戶信用與現金流左右。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-rose-400"><span class="tag tag-amber">悲觀情境</span><h3 class="text-xl font-bold text-stone-800 mt-3 mb-2">建設及融資壓力升高</h3><p class="body-text">出口限制收緊、電力短缺、利率升高或AI營收跟不上固定成本。高槓桿業者先承壓，再可能回傳至設備訂單和估值，並不等於技術需求消失。</p></article>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-stone-800 mb-4">以財務性質，而非AI題材熱度分類</h3>
+          <div class="grid md:grid-cols-3 gap-5">
+            <div class="rounded-xl bg-slate-50 p-5 border border-slate-200"><div class="text-xs font-black text-sky-700">01 / 技術供應商</div><h4 class="font-extrabold text-stone-800 text-lg mt-2">已具規模與自由現金流</h4><p class="text-sm quiet mt-2">核心驗證：出貨認列、產品毛利、市占、集團現金流，以及成長預期是否已反映在估值。</p></div>
+            <div class="rounded-xl bg-slate-50 p-5 border border-slate-200"><div class="text-xs font-black text-sky-700">02 / 算力營運商</div><h4 class="font-extrabold text-stone-800 text-lg mt-2">高資本支出與融資需求</h4><p class="text-sm quiet mt-2">核心驗證：已簽約品質、終止條款、債務期限、利息、資產殘值及自由現金流。</p></div>
+            <div class="rounded-xl bg-slate-50 p-5 border border-slate-200"><div class="text-xs font-black text-sky-700">03 / AI應用與平台</div><h4 class="font-extrabold text-stone-800 text-lg mt-2">運算支出的真正變現</h4><p class="text-sm quiet mt-2">核心驗證：單位運算支出的營收與利潤、續約、留存，以及AI Agent是否改善企業流程。</p></div>
+          </div>
+          <p class="text-sm quiet mt-5">報告並未為情境指派機率或報酬率，本頁亦不額外假設。</p>
+        </div>
+      </section>
+
+      <section id="watchlist" class="section-block" aria-labelledby="watchlist-heading">
+        <h2 id="watchlist-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">07｜後續催化事件：用可驗證事實更新判斷</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+          <div class="flex items-start gap-4"><span class="circle-number">1</span><div><div class="flex flex-wrap gap-2 items-center"><h3 class="font-extrabold text-stone-800">RTX PRO 5500交貨</h3><span class="track-pill">2026/12 → 2027 Q1</span></div><p class="body-text text-sm mt-1">確認樣品、商業出貨時點與實際數量，並核對出口許可及Rubin排產優先序。</p></div></div>
+          <div class="flex items-start gap-4"><span class="circle-number">2</span><div><div class="flex flex-wrap gap-2 items-center"><h3 class="font-extrabold text-stone-800">Vera獨立伺服器部署</h3><span class="track-pill">後續客戶公告</span></div><p class="body-text text-sm mt-1">觀察Modal計畫執行、新客戶採用、Arm移植成本與x86混合部署。</p></div></div>
+          <div class="flex items-start gap-4"><span class="circle-number">3</span><div><div class="flex flex-wrap gap-2 items-center"><h3 class="font-extrabold text-stone-800">CPU正式財務揭露</h3><span class="track-pill">後續財報</span></div><p class="body-text text-sm mt-1">釐清Vera、Grace及整體CPU需求與收入的口徑，並追蹤毛利與自由現金流。</p></div></div>
+          <div class="flex items-start gap-4"><span class="circle-number">4</span><div><div class="flex flex-wrap gap-2 items-center"><h3 class="font-extrabold text-stone-800">Anthropic–Nscale協議</h3><span class="track-pill">等待正式簽署</span></div><p class="body-text text-sm mt-1">確認十月擬議合約是否簽定、承諾額度、付款起始時點及終止條件。</p></div></div>
+          <div class="flex items-start gap-4"><span class="circle-number">5</span><div><div class="flex flex-wrap gap-2 items-center"><h3 class="font-extrabold text-stone-800">Monarch電力與融資</h3><span class="track-pill">工程里程碑</span></div><p class="body-text text-sm mt-1">核對460MW規劃如何落地成實際可供電容量，以及建設資金、機櫃啟用節奏。</p></div></div>
+          <div class="flex items-start gap-4"><span class="circle-number">6</span><div><div class="flex flex-wrap gap-2 items-center"><h3 class="font-extrabold text-stone-800">雲端業者資本紀律</h3><span class="track-pill">每季財報／信用市場</span></div><p class="body-text text-sm mt-1">追蹤資本支出、折舊、利息、負債到期、現金流及客戶集中風險。</p></div></div>
+        </div></div>
+      </section>
+
+      <section id="conclusion" class="section-block" aria-labelledby="conclusion-heading">
+        <h2 id="conclusion-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論｜下一輪AI投資競賽，勝負不只在晶片</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="text-lg leading-loose text-stone-800">中國AI晶片搶購、Vera切入Agent CPU工作負載，以及Anthropic規劃數百億美元級的算力需求，都顯示運算需求仍在擴張。然而，<strong class="text-sky-900">需求不是出貨、效能不是營收、合約也不是現金。</strong></p><p class="body-text mt-4">未來更值得重視的企業，是那些能穿越供應、電力、折舊及融資限制，持續把AI運算需求轉換為合理毛利和穩定自由現金流、且不以財務安全換取表面成長的企業。</p></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI算力交付與現金流。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中AI算力、NVIDIA、Anthropic及Nscale相關公開資料 (2026年10月20日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    const productData = [
+      { ticker:'NVDA',name:'NVIDIA',category:'半導體與平台',opportunity:'GPU需求延續；Vera切入CPU；Vera Rubin平台生態與整機櫃議價力',watch:'實際交貨、出口限制、產品組合、毛利率、客戶信用及自由現金流' },
+      { ticker:'AMD',name:'AMD',category:'半導體與平台',opportunity:'x86生態與新平台仍有競爭力；另具AI加速器業務',watch:'高併發Agent每任務成本、CPU競爭力、AI加速器業務表現' },
+      { ticker:'INTC',name:'Intel',category:'半導體與平台',opportunity:'既有x86部署與軟體相容性仍具優勢',watch:'Vera在真實場域的成本效率、下一代CPU平台競爭與價格壓力' },
+      { ticker:'TSM',name:'台積電',category:'半導體與平台',opportunity:'先進製程及封裝受AI晶片需求支撐',watch:'Rubin與其他產品的產能配置、先進封裝擴張、客戶投片節奏' },
+      { ticker:'MSFT',name:'Microsoft',category:'大型雲端平台',opportunity:'財務與客戶資源有助在競爭者建設延後時爭取份額',watch:'資料中心電力交付、資本支出、雲端收入與現金回報' },
+      { ticker:'ORCL',name:'Oracle',category:'大型雲端平台',opportunity:'大型雲端與AI基建需求可能帶來擴張機會',watch:'建置進度、客戶品質、資本支出與自由現金流' },
+      { ticker:'CRWV',name:'CoreWeave',category:'AI算力服務',opportunity:'可作新型AI算力供應商需求與風險溢價觀察樣本',watch:'槓桿、客戶集中、設備折舊、再融資與現金流' },
+      { ticker:'NBIS',name:'Nebius',category:'AI算力服務',opportunity:'可作AI雲端服務資本成本與估值重估觀察樣本',watch:'槓桿、客戶集中、設備殘值、再融資條件與現金流' },
+      { ticker:'BABA',name:'Alibaba',category:'中國平台',opportunity:'中國雲端、推論與AI應用需求持續存在',watch:'替代GPU採購成本、雲端收入、企業服務、廣告效率與獲利' }
+    ];
+
+    const tableBody = document.getElementById('company-table-body');
+    const companySearch = document.getElementById('company-search');
+    const companyCategory = document.getElementById('company-category');
+    const countText = document.getElementById('table-count');
+    const emptyText = document.getElementById('table-empty');
+    function renderTable() {
+      const query = companySearch.value.trim().toLocaleLowerCase();
+      const category = companyCategory.value;
+      const filtered = productData.filter(item => (category === '全部' || item.category === category) && [item.ticker,item.name,item.category,item.opportunity,item.watch].join(' ').toLocaleLowerCase().includes(query));
+      tableBody.replaceChildren();
+      const fragment = document.createDocumentFragment();
+      for(const item of filtered) {
+        const row = document.createElement('tr');
+        const companyCell = document.createElement('td');
+        const ticker = document.createElement('div');
+        ticker.textContent = item.ticker;
+        const name = document.createElement('div');
+        name.className = 'text-xs font-normal text-slate-500';
+        name.textContent = item.name;
+        companyCell.append(ticker,name);
+        row.append(companyCell);
+        for(const value of [item.category,item.opportunity,item.watch]) {
+          const td = document.createElement('td');
+          td.textContent = value;
+          row.appendChild(td);
+        }
+        fragment.appendChild(row);
+      }
+      tableBody.appendChild(fragment);
+      countText.textContent = `顯示 ${filtered.length} / ${productData.length} 家上市公司`;
+      emptyText.classList.toggle('hidden', filtered.length !== 0);
+      emptyText.hidden = filtered.length !== 0;
+    }
+    companySearch.addEventListener('input',renderTable);
+    companyCategory.addEventListener('change',renderTable);
+    renderTable();
+
+    const mobileButton = document.getElementById('mobile-menu-button');
+    const mobileNav = document.getElementById('mobile-nav');
+    function setMenuOpen(open) {
+      mobileButton.setAttribute('aria-expanded', String(open));
+      mobileButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      mobileNav.hidden = !open;
+      mobileNav.classList.toggle('mobile-menu-hidden', !open);
+      mobileButton.querySelector('svg').innerHTML = open ? '<path d="M6 6l12 12M18 6L6 18"/>' : '<path d="M4 6h16M4 12h16M4 18h16"/>';
+    }
+    mobileButton.addEventListener('click', () => setMenuOpen(mobileButton.getAttribute('aria-expanded') !== 'true'));
+    mobileNav.addEventListener('click', event => {if(event.target.closest('a[href^="#"]')) setMenuOpen(false);});
+    document.addEventListener('keydown', event => {if(event.key === 'Escape') setMenuOpen(false);});
+    window.addEventListener('resize', () => {if(window.innerWidth >= 1024 && mobileButton.getAttribute('aria-expanded') === 'true') setMenuOpen(false);});
+
+    const navigationLinks = [...document.querySelectorAll('[data-section]')];
+    const navigatedSectionIds = [...new Set(navigationLinks.map(link => link.dataset.section))];
+    const navigatedSections = navigatedSectionIds.map(id => document.getElementById(id)).filter(Boolean);
+    function activateNav(id) {
+      navigationLinks.forEach(link => {
+        const active = link.dataset.section === id;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if(active) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current');
+      });
+    }
+    navigationLinks.forEach(link => link.addEventListener('click', () => activateNav(link.dataset.section)));
+    if('IntersectionObserver' in window) {
+      const inView = new Map();
+      const observer = new IntersectionObserver(entries => {
+        for(const entry of entries) inView.set(entry.target.id, entry);
+        const candidates = [...inView.values()].filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top-b.boundingClientRect.top);
+        if(candidates.length) activateNav(candidates[0].target.id);
+      }, {rootMargin:'-90px 0px -55% 0px',threshold:[0,0.05,0.25]});
+      navigatedSections.forEach(section => observer.observe(section));
+    }
+    if(location.hash && navigatedSectionIds.includes(location.hash.slice(1))) activateNav(location.hash.slice(1));
+
+    function initChart() {
+      const canvas = document.getElementById('gpuDemandChart');
+      if(!canvas || typeof Chart === 'undefined') {document.getElementById('chart-fallback').classList.remove('hidden'); if(canvas) canvas.style.display='none'; return;}
+      new Chart(canvas,{
+        type:'bar',
+        data:{
+          labels:['中國整體潛在需求（> 6）','2027全球規劃產量（≤ 3）'],
+          datasets:[{data:[6,3],backgroundColor:['#0284c7','#f59e0b'],borderRadius:7,maxBarThickness:64}]
+        },
+        options:{
+          indexAxis:'y',responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{display:false},tooltip:{callbacks:{label:context=>context.dataIndex===0?'報導：中國需求超過600萬張（顯示其下限6）':'報導：全球2027年計畫產量不超過300萬張（顯示其上限3）'}}},
+          scales:{x:{beginAtZero:true,max:7,grid:{color:'#edf2f7'},border:{display:false},ticks:{stepSize:1,color:'#64748b'},title:{display:true,text:'百萬張｜比較界限值，非實際成交量',color:'#64748b',font:{size:12}}},y:{grid:{display:false},border:{display:false},ticks:{color:'#334155',font:{size:12,weight:'bold'},autoSkip:false}}}
+        }
+      });
+    }
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded',initChart,{once:true}); else initChart();
+  </script>
+</body>
+</html>
