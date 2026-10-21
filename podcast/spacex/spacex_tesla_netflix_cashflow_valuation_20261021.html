@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="解析 SpaceX、Tesla 與 Netflix 的2026年第三季財報、資本支出、自由現金流與合併評估，區分營收成長、獲利品質與估值風險。">
+  <meta name="theme-color" content="#0c253a">
+  <title>巴菲特AI價值投資-科技巨頭現金流估值</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style id="local-utility-fallback">
+/* Offline-friendly subset of layout utilities; CDN Tailwind remains primary when available. */
+*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0}h1,h2,h3,h4,p,ul{margin:0}ul{list-style:none;padding:0}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}svg,canvas{vertical-align:middle}
+.hidden{display:none}
+.flex{display:flex}
+.inline-flex{display:inline-flex}
+.grid{display:grid}
+.block{display:block}
+.relative{position:relative}
+.sticky{position:sticky}
+.top-0{top:0}
+.z-50{z-index:50}
+.flex-col{flex-direction:column}
+.flex-wrap{flex-wrap:wrap}
+.flex-shrink-0{flex-shrink:0}
+.min-w-0{min-width:0}
+.items-center{align-items:center}
+.items-start{align-items:flex-start}
+.justify-center{justify-content:center}
+.justify-between{justify-content:space-between}
+.justify-end{justify-content:flex-end}
+.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}
+.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.w-full{width:100%}
+.w-8{width:2rem}
+.w-10{width:2.5rem}
+.h-8{height:2rem}
+.h-10{height:2.5rem}
+.h-\[68px\]{height:68px}
+.max-w-7xl{max-width:80rem}
+.max-w-5xl{max-width:64rem}
+.max-w-4xl{max-width:56rem}
+.max-h-\[72vh\]{max-height:72vh}
+.overflow-y-auto{overflow-y:auto}
+.mx-auto{margin-left:auto;margin-right:auto}
+.rounded-lg{border-radius:.5rem}
+.rounded-xl{border-radius:.75rem}
+.border{border-width:1px;border-style:solid}
+.border-b{border-bottom-width:1px;border-bottom-style:solid}
+.border-b-2{border-bottom-width:2px;border-bottom-style:solid}
+.border-t{border-top-width:1px;border-top-style:solid}
+.border-t-4{border-top-width:4px;border-top-style:solid}
+.border-l-4{border-left-width:4px;border-left-style:solid}
+.shadow-sm{box-shadow:0 1px 2px rgba(15,23,42,.07)}
+.shadow-lg{box-shadow:0 10px 15px -3px rgba(15,23,42,.10),0 4px 6px -4px rgba(15,23,42,.10)}
+.backdrop-blur-lg{-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.font-black{font-weight:900}
+.font-extrabold{font-weight:800}
+.font-bold{font-weight:700}
+.font-semibold{font-weight:600}
+.font-normal{font-weight:400}
+.text-center{text-align:center}
+.text-right{text-align:right}
+.text-xs{font-size:.75rem;line-height:1rem}
+.text-sm{font-size:.875rem;line-height:1.25rem}
+.text-base{font-size:1rem;line-height:1.5rem}
+.text-lg{font-size:1.125rem;line-height:1.75rem}
+.text-xl{font-size:1.25rem;line-height:1.75rem}
+.text-2xl{font-size:1.5rem;line-height:2rem}
+.text-3xl{font-size:1.875rem;line-height:2.25rem}
+.text-4xl{font-size:2.25rem;line-height:2.5rem}
+.text-5xl{font-size:3rem;line-height:1}
+.leading-tight{line-height:1.25}
+.leading-relaxed{line-height:1.625}
+.leading-loose{line-height:2}
+.tracking-tight{letter-spacing:-.025em}
+.whitespace-nowrap{white-space:nowrap}
+.scroll-mt-24{scroll-margin-top:6rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.gap-0\.5{gap:.125rem}
+.mt-0\.5{margin-top:.125rem}
+.mb-0\.5{margin-bottom:.125rem}
+.ml-0\.5{margin-left:.125rem}
+.p-0\.5{padding:.125rem}
+.px-0\.5{padding-left:.125rem;padding-right:.125rem}
+.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}
+.pb-0\.5{padding-bottom:.125rem}
+.pl-0\.5{padding-left:.125rem}
+.space-y-0.5 > :not([hidden]) ~ :not([hidden]){margin-top:.125rem}
+.gap-1{gap:.25rem}
+.mt-1{margin-top:.25rem}
+.mb-1{margin-bottom:.25rem}
+.ml-1{margin-left:.25rem}
+.p-1{padding:.25rem}
+.px-1{padding-left:.25rem;padding-right:.25rem}
+.py-1{padding-top:.25rem;padding-bottom:.25rem}
+.pb-1{padding-bottom:.25rem}
+.pl-1{padding-left:.25rem}
+.space-y-1 > :not([hidden]) ~ :not([hidden]){margin-top:.25rem}
+.gap-2{gap:.5rem}
+.mt-2{margin-top:.5rem}
+.mb-2{margin-bottom:.5rem}
+.ml-2{margin-left:.5rem}
+.p-2{padding:.5rem}
+.px-2{padding-left:.5rem;padding-right:.5rem}
+.py-2{padding-top:.5rem;padding-bottom:.5rem}
+.pb-2{padding-bottom:.5rem}
+.pl-2{padding-left:.5rem}
+.space-y-2 > :not([hidden]) ~ :not([hidden]){margin-top:.5rem}
+.gap-2\.5{gap:.625rem}
+.mt-2\.5{margin-top:.625rem}
+.mb-2\.5{margin-bottom:.625rem}
+.ml-2\.5{margin-left:.625rem}
+.p-2\.5{padding:.625rem}
+.px-2\.5{padding-left:.625rem;padding-right:.625rem}
+.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}
+.pb-2\.5{padding-bottom:.625rem}
+.pl-2\.5{padding-left:.625rem}
+.space-y-2.5 > :not([hidden]) ~ :not([hidden]){margin-top:.625rem}
+.gap-3{gap:.75rem}
+.mt-3{margin-top:.75rem}
+.mb-3{margin-bottom:.75rem}
+.ml-3{margin-left:.75rem}
+.p-3{padding:.75rem}
+.px-3{padding-left:.75rem;padding-right:.75rem}
+.py-3{padding-top:.75rem;padding-bottom:.75rem}
+.pb-3{padding-bottom:.75rem}
+.pl-3{padding-left:.75rem}
+.space-y-3 > :not([hidden]) ~ :not([hidden]){margin-top:.75rem}
+.gap-4{gap:1rem}
+.mt-4{margin-top:1rem}
+.mb-4{margin-bottom:1rem}
+.ml-4{margin-left:1rem}
+.p-4{padding:1rem}
+.px-4{padding-left:1rem;padding-right:1rem}
+.py-4{padding-top:1rem;padding-bottom:1rem}
+.pb-4{padding-bottom:1rem}
+.pl-4{padding-left:1rem}
+.space-y-4 > :not([hidden]) ~ :not([hidden]){margin-top:1rem}
+.gap-5{gap:1.25rem}
+.mt-5{margin-top:1.25rem}
+.mb-5{margin-bottom:1.25rem}
+.ml-5{margin-left:1.25rem}
+.p-5{padding:1.25rem}
+.px-5{padding-left:1.25rem;padding-right:1.25rem}
+.py-5{padding-top:1.25rem;padding-bottom:1.25rem}
+.pb-5{padding-bottom:1.25rem}
+.pl-5{padding-left:1.25rem}
+.space-y-5 > :not([hidden]) ~ :not([hidden]){margin-top:1.25rem}
+.gap-6{gap:1.5rem}
+.mt-6{margin-top:1.5rem}
+.mb-6{margin-bottom:1.5rem}
+.ml-6{margin-left:1.5rem}
+.p-6{padding:1.5rem}
+.px-6{padding-left:1.5rem;padding-right:1.5rem}
+.py-6{padding-top:1.5rem;padding-bottom:1.5rem}
+.pb-6{padding-bottom:1.5rem}
+.pl-6{padding-left:1.5rem}
+.space-y-6 > :not([hidden]) ~ :not([hidden]){margin-top:1.5rem}
+.gap-8{gap:2rem}
+.mt-8{margin-top:2rem}
+.mb-8{margin-bottom:2rem}
+.ml-8{margin-left:2rem}
+.p-8{padding:2rem}
+.px-8{padding-left:2rem;padding-right:2rem}
+.py-8{padding-top:2rem;padding-bottom:2rem}
+.pb-8{padding-bottom:2rem}
+.pl-8{padding-left:2rem}
+.space-y-8 > :not([hidden]) ~ :not([hidden]){margin-top:2rem}
+.gap-10{gap:2.5rem}
+.mt-10{margin-top:2.5rem}
+.mb-10{margin-bottom:2.5rem}
+.ml-10{margin-left:2.5rem}
+.p-10{padding:2.5rem}
+.px-10{padding-left:2.5rem;padding-right:2.5rem}
+.py-10{padding-top:2.5rem;padding-bottom:2.5rem}
+.pb-10{padding-bottom:2.5rem}
+.pl-10{padding-left:2.5rem}
+.space-y-10 > :not([hidden]) ~ :not([hidden]){margin-top:2.5rem}
+.gap-12{gap:3rem}
+.mt-12{margin-top:3rem}
+.mb-12{margin-bottom:3rem}
+.ml-12{margin-left:3rem}
+.p-12{padding:3rem}
+.px-12{padding-left:3rem;padding-right:3rem}
+.py-12{padding-top:3rem;padding-bottom:3rem}
+.pb-12{padding-bottom:3rem}
+.pl-12{padding-left:3rem}
+.space-y-12 > :not([hidden]) ~ :not([hidden]){margin-top:3rem}
+.gap-14{gap:3.5rem}
+.mt-14{margin-top:3.5rem}
+.mb-14{margin-bottom:3.5rem}
+.ml-14{margin-left:3.5rem}
+.p-14{padding:3.5rem}
+.px-14{padding-left:3.5rem;padding-right:3.5rem}
+.py-14{padding-top:3.5rem;padding-bottom:3.5rem}
+.pb-14{padding-bottom:3.5rem}
+.pl-14{padding-left:3.5rem}
+.space-y-14 > :not([hidden]) ~ :not([hidden]){margin-top:3.5rem}
+.gap-16{gap:4rem}
+.mt-16{margin-top:4rem}
+.mb-16{margin-bottom:4rem}
+.ml-16{margin-left:4rem}
+.p-16{padding:4rem}
+.px-16{padding-left:4rem;padding-right:4rem}
+.py-16{padding-top:4rem;padding-bottom:4rem}
+.pb-16{padding-bottom:4rem}
+.pl-16{padding-left:4rem}
+.space-y-16 > :not([hidden]) ~ :not([hidden]){margin-top:4rem}
+.bg-white{background-color:#fff}
+.text-white{color:#fff}
+.border-white{border-color:#fff}
+.bg-slate-50{background-color:#f8fafc}
+.text-slate-50{color:#f8fafc}
+.border-slate-50{border-color:#f8fafc}
+.bg-slate-100{background-color:#f1f5f9}
+.text-slate-100{color:#f1f5f9}
+.border-slate-100{border-color:#f1f5f9}
+.bg-slate-200{background-color:#e2e8f0}
+.text-slate-200{color:#e2e8f0}
+.border-slate-200{border-color:#e2e8f0}
+.bg-slate-300{background-color:#cbd5e1}
+.text-slate-300{color:#cbd5e1}
+.border-slate-300{border-color:#cbd5e1}
+.bg-slate-400{background-color:#94a3b8}
+.text-slate-400{color:#94a3b8}
+.border-slate-400{border-color:#94a3b8}
+.bg-slate-500{background-color:#64748b}
+.text-slate-500{color:#64748b}
+.border-slate-500{border-color:#64748b}
+.bg-slate-600{background-color:#475569}
+.text-slate-600{color:#475569}
+.border-slate-600{border-color:#475569}
+.bg-slate-700{background-color:#334155}
+.text-slate-700{color:#334155}
+.border-slate-700{border-color:#334155}
+.bg-slate-800{background-color:#1e293b}
+.text-slate-800{color:#1e293b}
+.border-slate-800{border-color:#1e293b}
+.bg-slate-900{background-color:#0f172a}
+.text-slate-900{color:#0f172a}
+.border-slate-900{border-color:#0f172a}
+.bg-stone-300{background-color:#d6d3d1}
+.text-stone-300{color:#d6d3d1}
+.border-stone-300{border-color:#d6d3d1}
+.bg-stone-800{background-color:#292524}
+.text-stone-800{color:#292524}
+.border-stone-800{border-color:#292524}
+.bg-sky-50{background-color:#f0f9ff}
+.text-sky-50{color:#f0f9ff}
+.border-sky-50{border-color:#f0f9ff}
+.bg-sky-100{background-color:#e0f2fe}
+.text-sky-100{color:#e0f2fe}
+.border-sky-100{border-color:#e0f2fe}
+.bg-sky-500{background-color:#0ea5e9}
+.text-sky-500{color:#0ea5e9}
+.border-sky-500{border-color:#0ea5e9}
+.bg-sky-700{background-color:#0369a1}
+.text-sky-700{color:#0369a1}
+.border-sky-700{border-color:#0369a1}
+.bg-sky-800{background-color:#075985}
+.text-sky-800{color:#075985}
+.border-sky-800{border-color:#075985}
+.bg-sky-900{background-color:#0c4a6e}
+.text-sky-900{color:#0c4a6e}
+.border-sky-900{border-color:#0c4a6e}
+.bg-rose-50{background-color:#fff1f2}
+.text-rose-50{color:#fff1f2}
+.border-rose-50{border-color:#fff1f2}
+.bg-rose-200{background-color:#fecdd3}
+.text-rose-200{color:#fecdd3}
+.border-rose-200{border-color:#fecdd3}
+.bg-rose-700{background-color:#be123c}
+.text-rose-700{color:#be123c}
+.border-rose-700{border-color:#be123c}
+.bg-rose-800{background-color:#9f1239}
+.text-rose-800{color:#9f1239}
+.border-rose-800{border-color:#9f1239}
+.bg-emerald-500{background-color:#10b981}
+.text-emerald-500{color:#10b981}
+.border-emerald-500{border-color:#10b981}
+.bg-emerald-700{background-color:#047857}
+.text-emerald-700{color:#047857}
+.border-emerald-700{border-color:#047857}
+.bg-emerald-800{background-color:#065f46}
+.text-emerald-800{color:#065f46}
+.border-emerald-800{border-color:#065f46}
+.bg-amber-50{background-color:#fffbeb}
+.text-amber-50{color:#fffbeb}
+.border-amber-50{border-color:#fffbeb}
+.bg-amber-100{background-color:#fef3c7}
+.text-amber-100{color:#fef3c7}
+.border-amber-100{border-color:#fef3c7}
+.bg-amber-200{background-color:#fde68a}
+.text-amber-200{color:#fde68a}
+.border-amber-200{border-color:#fde68a}
+.bg-amber-900{background-color:#78350f}
+.text-amber-900{color:#78350f}
+.border-amber-900{border-color:#78350f}
+.bg-violet-50{background-color:#f5f3ff}
+.text-violet-50{color:#f5f3ff}
+.border-violet-50{border-color:#f5f3ff}
+.bg-violet-200{background-color:#ddd6fe}
+.text-violet-200{color:#ddd6fe}
+.border-violet-200{border-color:#ddd6fe}
+.bg-violet-500{background-color:#8b5cf6}
+.text-violet-500{color:#8b5cf6}
+.border-violet-500{border-color:#8b5cf6}
+.bg-violet-700{background-color:#6d28d9}
+.text-violet-700{color:#6d28d9}
+.border-violet-700{border-color:#6d28d9}
+.bg-violet-800{background-color:#5b21b6}
+.text-violet-800{color:#5b21b6}
+.border-violet-800{border-color:#5b21b6}
+.bg-violet-900{background-color:#4c1d95}
+.text-violet-900{color:#4c1d95}
+.border-violet-900{border-color:#4c1d95}
+.bg-white\/95{background:rgba(255,255,255,.95)}
+.text-sky-50\/90{color:rgba(240,249,255,.9)}
+.text-sky-100\/80{color:rgba(224,242,254,.8)}
+.text-amber-950\/80{color:rgba(69,26,3,.8)}
+@media(min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:640px){.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:640px){.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:640px){.sm\:flex-row{flex-direction:row}}
+@media(min-width:640px){.sm\:items-center{align-items:center}}
+@media(min-width:640px){.sm\:justify-between{justify-content:space-between}}
+@media(min-width:640px){.sm\:gap-4{gap:1rem}}
+@media(min-width:640px){.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}}
+@media(min-width:640px){.sm\:p-6{padding:1.5rem}}
+@media(min-width:640px){.sm\:p-8{padding:2rem}}
+@media(min-width:640px){.sm\:max-w-xs{max-width:20rem}}
+@media(min-width:640px){.sm\:text-2xl{font-size:1.5rem;line-height:2rem}}
+@media(min-width:640px){.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}}
+@media(min-width:640px){.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}}
+@media(min-width:640px){.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}
+@media(min-width:768px){.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:768px){.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:768px){.md\:col-span-2{grid-column:span 2 / span 2}}
+@media(min-width:768px){.md\:py-14{padding-top:3.5rem;padding-bottom:3.5rem}}
+@media(min-width:768px){.md\:py-16{padding-top:4rem;padding-bottom:4rem}}
+@media(min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1024px){.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:1024px){.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(min-width:1024px){.lg\:col-span-2{grid-column:span 2 / span 2}}
+@media(min-width:1024px){.lg\:col-span-3{grid-column:span 3 / span 3}}
+@media(min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}
+@media(min-width:1024px){.lg\:text-5xl{font-size:3rem;line-height:1}}
+@media(min-width:1024px){.lg\:text-base{font-size:1rem;line-height:1.5rem}}
+@media(min-width:1280px){.xl\:flex{display:flex}}
+@media(min-width:1280px){.xl\:hidden{display:none}}
+@media(min-width:768px){.md\:space-y-18 > :not([hidden]) ~ :not([hidden]){margin-top:4.5rem}}
+.hover\:bg-slate-100:hover{background:#f1f5f9}.focus\:outline-none:focus{outline:0}.focus\:border-sky-500:focus{border-color:#0ea5e9}.focus\:ring-2:focus{box-shadow:0 0 0 2px #bae6fd}.focus\:ring-sky-200:focus{box-shadow:0 0 0 2px #bae6fd}
+  </style>
+  <style>
+    :root { color-scheme: light; --ink: #1e293b; --sky: #0284c7; --muted: #64748b; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif; background:#f8fafc; color:var(--ink); }
+    body, html { max-width: 100%; overflow-x: clip; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color:#0369a1; background:#e0f2fe; font-weight:700; }
+    .inactive-nav-link { color:#475569; background:transparent; }
+    .nav-link { display:inline-flex; align-items:center; white-space:nowrap; padding:9px 11px; border-radius:8px; font-size:13px; transition:background .2s,color .2s; }
+    .nav-link:hover, .nav-link:focus-visible { background:#e0f2fe; color:#0369a1; }
+    .chart-shell { width:100%; position:relative; height:310px; min-height:310px; }
+    .chart-shell.tall { height:355px; min-height:355px; }
+    .chart-shell canvas { display:block; max-width:100%; }
+    .chart-fallback { display:none; }
+    .chart-fallback.show { display:block; }
+    .stat-glass { background:rgba(255,255,255,.095); border:1px solid rgba(255,255,255,.19); backdrop-filter:blur(5px); }
+    .eyebrow { font-size:11px; font-weight:750; letter-spacing:.095em; text-transform:uppercase; }
+    .status-real { background:#ecfdf5;color:#065f46; }
+    .status-plan { background:#fff7ed;color:#9a3412; }
+    .status-est { background:#eff6ff;color:#1e40af; }
+    .status-event { background:#f5f3ff;color:#6d28d9; }
+    .status-snap { background:#f1f5f9;color:#334155; }
+    .status-tag { display:inline-block; padding:4px 10px; border-radius:100px; font-size:12px; line-height:1.3; font-weight:700; }
+    .section-intro { color:#475569; line-height:1.9; max-width: 930px; }
+    .note { font-size:13px;color:#64748b;line-height:1.75; }
+    .metric-label { font-size:13px; color:#64748b; }
+    .metric-value { font-variant-numeric:tabular-nums; font-feature-settings:"tnum"; letter-spacing:-.025em; }
+    .table-wrap { max-width:100%; overflow-x:auto; border:1px solid #e2e8f0; border-radius:12px; }
+    .table-wrap table { border-collapse:separate; border-spacing:0; min-width:920px; width:100%; }
+    .table-wrap th { position:sticky; top:0; z-index:2; background:#eaf4fb; font-size:12px; color:#334155; letter-spacing:.03em; }
+    .table-wrap th,.table-wrap td { padding:15px 16px; text-align:left; vertical-align:top; border-bottom:1px solid #e2e8f0; }
+    .table-wrap tr:last-child td { border-bottom:0; }
+    .table-wrap tbody tr:nth-child(2n) { background:#f8fafc; }
+    .table-wrap tbody tr:hover { background:#f0f9ff; }
+    .track-num { width:34px;height:34px;min-width:34px;border-radius:10px;background:#e0f2fe;color:#0369a1;font-weight:800;display:flex;align-items:center;justify-content:center; }
+    .risk-dot { width:8px;height:8px;border-radius:50%;background:#0284c7;flex-shrink:0;margin-top:10px; }
+    :focus-visible { outline:3px solid #38bdf8; outline-offset:3px; }
+    @media (max-width:640px) {
+      .chart-shell { height:275px;min-height:275px; }
+      .chart-shell.tall { height:300px; min-height:300px; }
+      html { scroll-padding-top:76px; }
+      .mobile-link { display:block; padding:11px 14px; border-radius:8px; font-size:14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .nav-link { transition:none; } }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-slate-200 shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="頁面章節導覽">
+      <div class="flex h-[68px] items-center justify-between gap-4">
+        <a href="#top" class="inline-flex items-center gap-2 min-w-0 flex-shrink-0" aria-label="返回報告頂部">
+          <span class="w-8 h-8 rounded-lg bg-sky-700 text-white flex items-center justify-center font-black">AI</span>
+          <span class="font-extrabold text-slate-800 text-sm lg:text-base whitespace-nowrap">巴菲特AI價值投資</span>
+        </a>
+        <div class="hidden xl:flex items-center justify-end gap-0.5" id="desktop-nav">
+          <a class="nav-link inactive-nav-link" data-nav href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#spacex">SpaceX 營收</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#cashflow">現金流</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#starlink">星鏈／星艦</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#merger">合併評估</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#netflix">Netflix</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#market">市場反應</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#strategy">投資策略</a>
+          <a class="nav-link inactive-nav-link" data-nav href="#watchlist">驗證清單</a>
+        </div>
+        <button id="menu-button" type="button" class="xl:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100" aria-label="開啟章節選單" aria-expanded="false" aria-controls="mobile-menu">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden xl:hidden border-t border-slate-200 py-3 max-h-[72vh] overflow-y-auto" aria-hidden="true">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-1">
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#overview">核心觀點</a>
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#spacex">SpaceX 營收</a>
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#cashflow">現金流</a>
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#starlink">星鏈／星艦</a>
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#merger">合併評估</a>
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#netflix">Netflix</a>
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#market">市場反應</a>
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#strategy">投資策略</a>
+          <a class="mobile-link nav-link inactive-nav-link" data-nav href="#watchlist">驗證清單</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-16">
+        <h1 id="hero-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold max-w-5xl leading-tight tracking-tight">營收不是現金流，獲利不等於成長：<span class="block mt-2 text-sky-100">SpaceX、Tesla 與 Netflix 的估值分水嶺</span></h1>
+        <p class="mt-6 max-w-4xl text-sky-50/90 leading-relaxed text-base sm:text-lg">SpaceX 的 AI 營收大幅躍升，卻仍處於重資本支出階段；Tesla 與 SpaceX 的合併僅進入委員會評估，尚無確定交易；Netflix 已具備穩健自由現金流，廣告與第四季展望卻令成長預期降溫。三種企業處境，指向同一道估值考題：<strong class="text-white">成長最終能留下多少現金？</strong></p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-8 max-w-5xl">
+          <div class="stat-glass rounded-xl px-5 py-4"><div class="text-sm text-sky-100">SpaceX 2026 Q3 營收年增</div><div class="metric-value text-3xl sm:text-4xl font-extrabold mt-1">+161%</div><div class="text-xs text-sky-100/80 mt-1">約數｜已實現財報</div></div>
+          <div class="stat-glass rounded-xl px-5 py-4"><div class="text-sm text-sky-100">SpaceX 前三季簡化自由現金流</div><div class="metric-value text-3xl sm:text-4xl font-extrabold mt-1">−349.72<span class="text-lg ml-1">億美元</span></div><div class="text-xs text-sky-100/80 mt-1">營業現金流減資本支出｜估算</div></div>
+          <div class="stat-glass rounded-xl px-5 py-4"><div class="text-sm text-sky-100">Netflix 2026 Q3 自由現金流</div><div class="metric-value text-3xl sm:text-4xl font-extrabold mt-1">28.84<span class="text-lg ml-1">億美元</span></div><div class="text-xs text-sky-100/80 mt-1">已實現財報</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-14 md:space-y-18">
+      <section id="overview" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心觀點｜成長、現金流與交易事件的三條路</h2>
+        <p class="section-intro mb-5">本報告觀察至美東時間 2026 年 10 月 21 日上午。以下數據區分財報實績、依據財報的簡化估算、管理層財測與待議交易事件；股價為當時盤中資訊，不是收盤價。</p>
+        <div class="flex flex-wrap gap-2 mb-6" aria-label="數據狀態說明"><span class="status-tag status-real">已實現／財報實績</span><span class="status-tag status-est">分析估算</span><span class="status-tag status-plan">公司預測／規劃</span><span class="status-tag status-event">尚待確認的交易</span><span class="status-tag status-snap">盤中快照</span></div>
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500">
+            <div class="flex items-center justify-between gap-2"><h3 class="text-xl font-extrabold text-slate-800">SpaceX <span class="text-sm font-normal text-slate-500">SPCX</span></h3><span class="status-tag status-real">財報實績</span></div>
+            <p class="text-sm font-bold text-sky-700 mt-4">需求成立，回收待驗證</p><p class="text-slate-600 leading-relaxed mt-2">SI 已占集團營收 51.9%，但 AI 部門利益率與龐大建設支出仍是估值關鍵。Starlink 連線業務承擔主要營業獲利。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-violet-500">
+            <div class="flex items-center justify-between gap-2"><h3 class="text-xl font-extrabold text-slate-800">Tesla <span class="text-sm font-normal text-slate-500">TSLA</span></h3><span class="status-tag status-event">評估階段</span></div>
+            <p class="text-sm font-bold text-violet-700 mt-4">協同可能，不等於公平交易</p><p class="text-slate-600 leading-relaxed mt-2">雙方獨立特別委員會已評估合併可能性，但未有正式協議、換股比率、對價或完成時程，須將本業價值與事件選擇權分開。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
+            <div class="flex items-center justify-between gap-2"><h3 class="text-xl font-extrabold text-slate-800">Netflix <span class="text-sm font-normal text-slate-500">NFLX</span></h3><span class="status-tag status-real">財報實績</span></div>
+            <p class="text-sm font-bold text-emerald-700 mt-4">現金流成熟，成長預期遭修正</p><p class="text-slate-600 leading-relaxed mt-2">第三季營業利益率達 34.6%，自由現金流為正；廣告年營收預估下修及第四季 EPS 指引落後市場預期。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="spacex" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">01｜SpaceX：AI 已成最大營收來源</h2>
+        <p class="section-intro mb-6">2026 年第三季，SpaceX 集團營收為 <strong>145.75 億美元</strong>，上年同期 55.76 億美元，年增約 161%；營業利益 27.91 億美元，淨利 44.04 億美元。營業外收入與所得稅利益影響淨利，不能將其全部視為經常性本業獲利。</p>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">第三季集團營收</div><div class="metric-value text-2xl sm:text-3xl font-extrabold mt-2">145.75</div><div class="text-sm text-slate-500 mt-1">億美元｜年增約 161%</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">第三季營業利益</div><div class="metric-value text-2xl sm:text-3xl font-extrabold mt-2">27.91</div><div class="text-sm text-slate-500 mt-1">億美元｜已實現</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">第三季淨利</div><div class="metric-value text-2xl sm:text-3xl font-extrabold mt-2">44.04</div><div class="text-sm text-slate-500 mt-1">億美元｜含非營業項目</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">調整後 EBITDA</div><div class="metric-value text-2xl sm:text-3xl font-extrabold mt-2">88.09</div><div class="text-sm text-slate-500 mt-1">億美元｜非 GAAP、非 FCF</div></div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-start justify-between gap-2 flex-wrap"><div><h3 class="text-lg font-bold">第三季營收組成</h3><p class="note mt-1">單位：億美元｜2026 Q3 財報實績</p></div><span class="status-tag status-real">實績</span></div>
+            <div class="chart-shell mt-4"><canvas id="segmentRevenueChart" role="img" aria-label="SpaceX第三季各部門營收，SI 75.60、連線52.48、太空17.67億美元"></canvas></div>
+            <div class="chart-fallback note mt-3" data-fallback="segmentRevenueChart">SI 75.60、Connectivity 52.48、Space 17.67 億美元。</div>
+            <p class="note mt-3">SI（超級智慧）營收占集團約 51.9%，年增約 830%；Connectivity 包含 Starlink。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-start justify-between gap-2 flex-wrap"><div><h3 class="text-lg font-bold">第三季部門營業利益</h3><p class="note mt-1">單位：億美元｜2026 Q3 財報實績</p></div><span class="status-tag status-real">實績</span></div>
+            <div class="chart-shell mt-4"><canvas id="segmentProfitChart" role="img" aria-label="部門營業利益，SI 4.31、連線23.67、太空負0.07億美元"></canvas></div>
+            <div class="chart-fallback note mt-3" data-fallback="segmentProfitChart">SI 4.31、Connectivity 23.67、Space −0.07 億美元。</div>
+            <p class="note mt-3">SI 營業利益率約 5.7%；Connectivity 約 45.1%，仍是主要營業獲利來源。</p>
+          </article>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div class="rounded-xl bg-sky-50 border border-sky-100 p-5"><h3 class="font-bold text-sky-900">SI 的成長來自哪裡？</h3><p class="mt-2 text-slate-700 leading-relaxed">SI 解決方案與基礎設施營收約 <strong>70.22 億美元</strong>，廣告約 <strong>5.38 億美元</strong>。貢獻來源包括雲端運算合約、AI 運算基礎建設、Grok 相關應用與收購 Cursor 後併入業務；不能簡化為 Grok 訂閱收入爆發。</p></div>
+          <div class="rounded-xl bg-amber-50 border border-amber-100 p-5"><h3 class="font-bold text-amber-900">營收不等於高品質盈餘</h3><p class="mt-2 text-slate-700 leading-relaxed">必須區分內生成長與併購增量。Cursor 相關股權獎酬也有稀釋成本；調整後 EBITDA 排除折舊攤銷等項目，不代表 GPU、資料中心與衛星未來不需更新。</p></div>
+        </div>
+      </section>
+
+      <section id="cashflow" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">02｜現金流壓力測試：資本支出跑得比現金快</h2>
+        <p class="section-intro mb-6">SpaceX 的新增 AI 運算需求伴隨巨額設備建設。2026 年前三季營業現金流不足以覆蓋不動產、廠房及設備購置支出；這是九個月累計口徑，不能誤寫為第三季單季數字。</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">前三季營業活動現金流</div><div class="metric-value text-3xl font-extrabold mt-2 text-sky-800">130.97</div><div class="text-sm text-slate-500 mt-1">億美元｜累計實績</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">前三季購建資本支出</div><div class="metric-value text-3xl font-extrabold mt-2 text-slate-800">480.69</div><div class="text-sm text-slate-500 mt-1">億美元｜累計實績</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">前三季簡化自由現金流</div><div class="metric-value text-3xl font-extrabold mt-2 text-rose-700">−349.72</div><div class="text-sm text-slate-500 mt-1">億美元｜依公式估算</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">第三季資本支出</div><div class="metric-value text-3xl font-extrabold mt-2 text-slate-800">195.93</div><div class="text-sm text-slate-500 mt-1">億美元｜SI 約 164.44</div></div>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3">
+            <div class="flex items-start justify-between gap-2 flex-wrap"><div><h3 class="text-lg font-bold">SpaceX 2026 年前三季現金流對照</h3><p class="note mt-1">單位：億美元｜1–9 月累計；絕非第三季單季值</p></div><span class="status-tag status-est">包含估算</span></div>
+            <div class="chart-shell tall mt-4"><canvas id="cashflowChart" role="img" aria-label="前三季營業現金流130.97億美元、資本支出480.69億美元、簡化自由現金流負349.72億美元"></canvas></div>
+            <div class="chart-fallback note mt-3" data-fallback="cashflowChart">前三季營業現金流 130.97 億美元，資本支出 480.69 億美元，簡化自由現金流 −349.72 億美元。</div>
+            <p class="note mt-3"><strong>簡化自由現金流＝營業活動現金流 − 購置不動產、廠房及設備支出。</strong> 此為分析估算，未包含其他投資性現金流項目，也不是公司公布的單季 FCF。</p>
+          </article>
+          <div class="lg:col-span-2 space-y-4">
+            <div class="rounded-xl border border-amber-200 bg-amber-50 p-5"><div class="flex gap-2 items-center flex-wrap"><h3 class="font-extrabold text-amber-900">第四季資本支出預期</h3><span class="status-tag status-plan">公司規劃</span></div><p class="metric-value text-3xl font-extrabold text-amber-900 mt-3">350–400 <span class="text-lg">億美元</span></p><p class="text-sm text-amber-950/80 mt-2 leading-relaxed">這是公司法說會提出的未來支出預期，<strong>不是已完成的投資</strong>。</p></div>
+            <div class="rounded-xl border border-slate-200 bg-slate-50 p-5"><h3 class="font-bold">2026 年 9 月底流動資源</h3><p class="mt-3 text-slate-700">現金及約當現金 <strong>512.94 億美元</strong></p><p class="mt-1 text-slate-700">有價證券 <strong>385.61 億美元</strong></p><p class="note mt-3">有資金緩衝不表示持續支出沒有代價；應追蹤新增舉債、融資與股權稀釋。</p></div>
+            <div class="rounded-xl border border-rose-200 bg-rose-50 p-5"><h3 class="font-bold text-rose-800">不可只看第三季淨利</h3><p class="text-slate-700 mt-2 leading-relaxed">第三季淨利 44.04 億美元，但前三季累計仍約 <strong>淨損 4.13 億美元</strong>。非營業收益與所得稅項目不宜直接年化。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="starlink" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">03｜Starlink 與 Starship：兩條不同回收期的價值曲線</h2>
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+            <div class="flex justify-between items-center flex-wrap gap-2"><h3 class="text-xl font-extrabold">Starlink：成熟現金創造的基礎</h3><span class="status-tag status-real">2026 Q3 實績</span></div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
+              <div class="rounded-xl bg-sky-50 p-4"><div class="metric-label">期末消費訂戶</div><div class="metric-value text-2xl font-bold text-sky-900 mt-2">1,360 萬</div></div>
+              <div class="rounded-xl bg-sky-50 p-4"><div class="metric-label">較 Q2 新增</div><div class="metric-value text-2xl font-bold text-sky-900 mt-2">160 萬</div></div>
+              <div class="rounded-xl bg-sky-50 p-4"><div class="metric-label">Connectivity 營收年增</div><div class="metric-value text-2xl font-bold text-sky-900 mt-2">+69%</div></div>
+              <div class="rounded-xl bg-sky-50 p-4"><div class="metric-label">Connectivity 營業利益年增</div><div class="metric-value text-2xl font-bold text-sky-900 mt-2">+99%</div></div>
+            </div>
+            <p class="mt-5 text-slate-700 leading-relaxed">Starlink 每月每位消費者平均收入約 <strong>69 美元</strong>。消費訂戶穩定增加，但往較低價市場擴張可能拉低平均收入；企業、航空、海事與政府服務有望改善營收組合與附加價值。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex justify-between items-center flex-wrap gap-2"><h3 class="text-xl font-extrabold">Starship：技術里程碑</h3><span class="status-tag status-real">已揭露事件</span></div>
+            <div class="metric-value text-4xl font-extrabold text-sky-800 mt-5">26 <span class="text-xl">顆</span></div><div class="text-sm text-slate-500 mt-1">Flight 14 運送 Starlink V3 衛星</div>
+            <p class="mt-4 text-slate-700 leading-relaxed">公司揭露 Flight 14 於第三季完成首次軌道飛行；但<strong>不等於</strong>已具備穩定、低成本、例行化的商業發射能力。仍需核對重複使用可靠度、每次任務成本與發射頻率。</p>
+          </article>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold mb-4">三個業務、三種時間尺度</h3>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="border-l-4 border-emerald-500 pl-4"><div class="font-bold text-emerald-800">現在｜Connectivity</div><div class="mt-2 text-sm leading-relaxed text-slate-600">主要營業利益來源，關注訂戶與高價值服務。</div></div>
+            <div class="border-l-4 border-sky-500 pl-4"><div class="font-bold text-sky-800">擴張期｜SI 算力</div><div class="mt-2 text-sm leading-relaxed text-slate-600">營收大幅成長，需驗證利潤率與投資回收。</div></div>
+            <div class="border-l-4 border-violet-500 pl-4"><div class="font-bold text-violet-800">長期｜Starship</div><div class="mt-2 text-sm leading-relaxed text-slate-600">運輸成本與規模經濟仍需多次任務證明。</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="merger" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">04｜Tesla × SpaceX：委員會評估，不是已簽約合併</h2>
+        <div class="rounded-xl bg-violet-50 border border-violet-200 p-5 sm:p-6 mb-6">
+          <div class="flex items-center gap-3 flex-wrap"><span class="status-tag status-event">進入治理審查程序</span><strong class="text-violet-900 text-lg">尚未公告正式交易協議</strong></div>
+          <p class="mt-3 text-slate-700 leading-relaxed">依報告，兩家公司各自由獨立董事組成特別委員會，研究合併可行性；Elon Musk 表示不參與雙方委員會討論。此屬公司治理進展，<strong>尚無交換比率、收購價格、融資安排、完成日期</strong>，也可能不會達成交易。</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-emerald-800">潛在產業協同效益</h3><ul class="mt-4 space-y-3 text-slate-700 leading-relaxed"><li class="flex gap-3"><span class="risk-dot"></span><span>Tesla 自駕、機器人、晶片、能源與 SpaceX AI 運算、衛星通訊、發射系統可能共用研發基礎。</span></li><li class="flex gap-3"><span class="risk-dot"></span><span>資源整合可能減少重複建設，擴大供應鏈採購與資金調度效益。</span></li><li class="flex gap-3"><span class="risk-dot"></span><span>以上均屬潛在協同情境，並非已實現成本節省或營收。</span></li></ul></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-rose-800">股東公平性與額外負擔</h3><ul class="mt-4 space-y-3 text-slate-700 leading-relaxed"><li class="flex gap-3"><span class="risk-dot"></span><span>股東結構、Musk 持股、表決權不同，換股交易會重新分配合併後的每股經濟權益。</span></li><li class="flex gap-3"><span class="risk-dot"></span><span>若包含現金、負債或特殊權利，須重新評估槓桿、控制權與股權稀釋。</span></li><li class="flex gap-3"><span class="risk-dot"></span><span>Tesla 股東可能承擔 AI 資料中心／火箭資本負擔；SpaceX 股東則可能承擔汽車產業週期風險。</span></li></ul></article>
+        </div>
+        <div class="bg-slate-800 text-slate-100 rounded-xl p-5 sm:p-6"><h3 class="text-lg font-bold">正式交易條款公布前的估值原則</h3><p class="mt-2 leading-relaxed text-slate-200">先衡量 Tesla 汽車、能源、自駕與機器人業務本身的現金流，再將合併視為尚無法精確定價的事件選擇權。評估重點：獨立第三方估值、交換比率、利益衝突處理、適用的股東表決與監管核准。</p></div>
+      </section>
+
+      <section id="netflix" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">05｜Netflix：獲利仍強，廣告成長預期降溫</h2>
+        <p class="section-intro mb-6">Netflix 第三季呈現營收、營業利益及現金流的正向表現。市場疑慮不在已實現獲利衰退，而是廣告產品推出延遲及第四季 EPS 財測未達市場期待。</p>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">2026 Q3 營收</div><div class="metric-value text-3xl font-extrabold text-slate-800 mt-2">128.74</div><div class="text-sm text-slate-500 mt-1">億美元｜年增 11.8%</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">Q3 營業利益率</div><div class="metric-value text-3xl font-extrabold text-emerald-700 mt-2">34.6%</div><div class="text-sm text-slate-500 mt-1">去年同期 28.2%</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">Q3 稀釋後 EPS</div><div class="metric-value text-3xl font-extrabold text-slate-800 mt-2">$0.87</div><div class="text-sm text-slate-500 mt-1">去年同期 $0.59</div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">Q3 自由現金流</div><div class="metric-value text-3xl font-extrabold text-emerald-700 mt-2">28.84</div><div class="text-sm text-slate-500 mt-1">億美元｜已實現</div></div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex justify-between gap-2 flex-wrap"><h3 class="text-lg font-bold">廣告全年營收預估修正</h3><span class="status-tag status-plan">2026 年財測</span></div><p class="note mt-1">單位：億美元｜管理層預估，非已實現收入</p><div class="chart-shell mt-4"><canvas id="adGuidanceChart" role="img" aria-label="Netflix 2026年廣告營收預估由30億美元下修至27億美元"></canvas></div><div class="chart-fallback note mt-3" data-fallback="adGuidanceChart">2026 年廣告營收預估：原約 30 億美元；修正後約 27 億美元（下修約 10%）。</div><p class="note mt-3">修正幅度約 −10%（差額 3 億美元）。相較全年公司預估營收約 511 億美元，關鍵在市場對下一階段成長加速器的信心。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold">已實現績效與前瞻指引要分開</h3><div class="space-y-4 mt-5">
+            <div class="flex justify-between gap-3 border-b border-slate-100 pb-4"><div><div class="font-bold text-slate-800">Q3 營業利益／淨利</div><div class="note">2026 Q3 已實現</div></div><div class="text-right font-extrabold metric-value whitespace-nowrap">44.59 / 36.64 <span class="font-normal text-sm">億美元</span></div></div>
+            <div class="flex justify-between gap-3 border-b border-slate-100 pb-4"><div><div class="font-bold text-slate-800">Q3 營業現金流</div><div class="note">2026 Q3 已實現</div></div><div class="text-right font-extrabold metric-value whitespace-nowrap">31.62 <span class="font-normal text-sm">億美元</span></div></div>
+            <div class="flex justify-between gap-3 border-b border-slate-100 pb-4"><div><div class="font-bold text-slate-800">Q4 營收預估</div><div class="note">管理層公司指引</div></div><div class="text-right font-extrabold metric-value whitespace-nowrap">134.42 <span class="font-normal text-sm">億美元</span></div></div>
+            <div class="flex justify-between gap-3"><div><div class="font-bold text-slate-800">Q4 EPS 預估 vs 市場預期</div><div class="note">兩者皆屬預估，非實績</div></div><div class="text-right font-extrabold metric-value whitespace-nowrap">$0.67 <span class="text-slate-400 font-normal">vs</span> $0.73</div></div>
+          </div></article>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div class="rounded-xl bg-amber-50 border border-amber-100 p-5"><div class="flex gap-2 items-center flex-wrap"><h3 class="font-bold text-amber-900">全年自由現金流指引下修</h3><span class="status-tag status-plan">公司財測</span></div><p class="text-xl font-extrabold text-slate-800 mt-2">約 125 → 約 120 億美元</p><p class="text-slate-700 leading-relaxed mt-2">公司指出主要與預計第四季完成的不動產交易有關，不宜把調整全部歸因於廣告業務疲弱。該交易為未來預期，不是已完成交易。</p></div>
+          <div class="rounded-xl bg-sky-50 border border-sky-100 p-5"><h3 class="font-bold text-sky-900">從價格到觀看參與度</h3><p class="text-slate-700 leading-relaxed mt-2">觀看時數影響廣告庫存，廣告技術與銷售能力影響變現效率。應追蹤訂閱留存、觀看時間、廣告方案滲透率。近期約 6% 裁員與管理調整可能改善效率，但費用節省無法永久取代內容競爭力。</p></div>
+        </div>
+      </section>
+
+      <section id="market" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">06｜盤中市場反應：價格反映的是預期變化</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex justify-between gap-2 flex-wrap"><div><h3 class="text-lg font-bold">三家公司股價盤中變動</h3><p class="note mt-1">2026/10/21 美東約 09:54 附近新聞市場截面｜漲跌幅 %</p></div><span class="status-tag status-snap">盤中，非收盤價</span></div>
+          <div class="chart-shell tall mt-4"><canvas id="marketChart" role="img" aria-label="2026年10月21日上午盤中 SpaceX上漲10.7%，Tesla上漲3.7%，Netflix下跌2.5%"></canvas></div>
+          <div class="chart-fallback note mt-3" data-fallback="marketChart">盤中漲跌幅：SPCX +10.7%、TSLA +3.7%、NFLX −2.5%，非收盤價。</div>
+          <div class="rounded-xl bg-slate-50 p-4 mt-4 text-sm text-slate-700 leading-relaxed">SpaceX 同時受惠 AI 營收及合併題材，Netflix 遭遇廣告變現進度與財測落差。<strong>單一盤中價格不代表長期企業價值已獲證明</strong>；市場可在高資本支出企業提前定價未來，也可對現金流成熟企業下修成長倍數。</div>
+        </div>
+      </section>
+
+      <section id="strategy" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">07｜投資策略：把本業、資本需求與估值情境拆開</h2>
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex gap-2 items-center justify-between flex-wrap"><h3 class="font-extrabold text-xl">SpaceX <span class="font-normal text-sm text-slate-500">SPCX</span></h3><span class="status-tag status-est">肯定需求，審慎估價</span></div><p class="text-slate-700 mt-4 leading-relaxed"><strong>正面條件：</strong>SI 合約持續轉為營收、營業利益率擴張、Starlink 獲利穩健，算力投資效率改善。</p><p class="text-slate-700 mt-3 leading-relaxed"><strong>風險：</strong>折舊、集中客戶、算力價格競爭、工期延誤、FCF 缺口與再融資稀釋。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex gap-2 items-center justify-between flex-wrap"><h3 class="font-extrabold text-xl">Tesla <span class="font-normal text-sm text-slate-500">TSLA</span></h3><span class="status-tag status-event">本業與交易分拆</span></div><p class="text-slate-700 mt-4 leading-relaxed"><strong>優先評價：</strong>汽車與能源現金流、自駕與機器人商業化進度。</p><p class="text-slate-700 mt-3 leading-relaxed"><strong>事件風險：</strong>在正式交易條款公布之前，無法可靠定價合併選擇權；換股比率、稀釋、完成機率皆待確認。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex gap-2 items-center justify-between flex-wrap"><h3 class="font-extrabold text-xl">Netflix <span class="font-normal text-sm text-slate-500">NFLX</span></h3><span class="status-tag status-real">檢視現金流品質</span></div><p class="text-slate-700 mt-4 leading-relaxed"><strong>正面條件：</strong>高營業利益率、正自由現金流、定價能力及全球內容發行規模。</p><p class="text-slate-700 mt-3 leading-relaxed"><strong>風險：</strong>美國觀看時數、廣告功能上線、競爭與內容成本。留意利益率是否過度依賴一次性費用節省。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex gap-2 items-center justify-between flex-wrap"><h3 class="font-extrabold text-xl">AI 供應鏈</h3><span class="status-tag status-plan">需求與承受力分開</span></div><p class="text-slate-700 mt-4 leading-relaxed">SpaceX 增加資本支出，可能為加速器、伺服器、網通、電力與散熱業者帶來訂單，但設備出貨不等於終端 AI 服務已能產生足夠現金。</p><p class="text-slate-700 mt-3 leading-relaxed">觀察 NVDA、AMD、DELL、HPE 與 CRWV 時，區分設備商、算力出租商及 AI 應用業者的財務風險。</p></article>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3"><div><h3 class="text-lg font-bold">三家公司：事實與待驗證事項對照表</h3><p class="note mt-1">按公司、股票代號、關鍵字或情境搜尋。Tesla 缺少的財報數據不以假設填補。</p></div><div class="relative w-full sm:max-w-xs"><label for="table-search" class="sr-only">搜尋公司與指標</label><input id="table-search" type="search" placeholder="搜尋：SPCX、廣告、合併…" autocomplete="off" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-sky-500 focus:ring-2 focus:ring-sky-200 focus:outline-none" /></div></div>
+          <div class="table-wrap mt-5" role="region" aria-label="可搜尋公司資訊表" tabindex="0"><table><thead><tr><th scope="col">公司／代碼</th><th scope="col">資料性質</th><th scope="col">報告關鍵事實</th><th scope="col">現金流現況</th><th scope="col">後續驗證重點</th></tr></thead><tbody id="company-table-body"></tbody></table></div>
+          <p id="table-count" class="note mt-3" aria-live="polite"></p>
+        </div>
+        <p class="section-intro">三家公司不能使用同一套估值倍數直接比較。應以各自的自由現金流成熟度、資本支出需求、未來成長可驗證性及股東權益稀釋風險，設定合理安全邊際。</p>
+      </section>
+
+      <section id="watchlist" class="scroll-mt-24" data-section>
+        <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">08｜未來兩季：五個最重要的驗證問題</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex gap-4"><div class="track-num">01</div><div><h3 class="font-bold text-lg">SI 利益率能否超過 5.7%？</h3><p class="text-slate-600 leading-relaxed mt-2">觀察擴張投入能否轉化為可持續核心營業利潤，而非只看調整後 EBITDA。</p><p class="text-xs text-sky-800 mt-3 font-semibold">SpaceX｜營業利益率</p></div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex gap-4"><div class="track-num">02</div><div><h3 class="font-bold text-lg">營業現金流能否追上資本支出？</h3><p class="text-slate-600 leading-relaxed mt-2">逐季核對實際現金流與資本投入，勿將公司第四季預期視為已支出。</p><p class="text-xs text-sky-800 mt-3 font-semibold">SpaceX｜現金流與融資</p></div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex gap-4"><div class="track-num">03</div><div><h3 class="font-bold text-lg">Starlink 訂戶成長能帶動多少利潤？</h3><p class="text-slate-600 leading-relaxed mt-2">關注消費 ARPU 與企業、航空、政府等高附加價值服務的營收結構。</p><p class="text-xs text-sky-800 mt-3 font-semibold">SpaceX｜訂戶及業務組合</p></div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex gap-4"><div class="track-num">04</div><div><h3 class="font-bold text-lg">合併委員會會否提出可審查條款？</h3><p class="text-slate-600 leading-relaxed mt-2">交易對價、換股比例、治理與核准程序未公開前，不把合併計入確定獲利。</p><p class="text-xs text-violet-800 mt-3 font-semibold">Tesla × SpaceX｜事件條件</p></div></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 flex gap-4 md:col-span-2"><div class="track-num">05</div><div><h3 class="font-bold text-lg">Netflix 廣告與觀看時數能否重新加速？</h3><p class="text-slate-600 leading-relaxed mt-2">驗證廣告功能落地、觀看參與度、第四季財測與營業利益率；只靠回購與費用節省支撐 EPS，仍難保證估值擴張。</p><p class="text-xs text-emerald-800 mt-3 font-semibold">Netflix｜廣告變現與留存</p></div></div>
+        </div>
+        <div class="mt-5 rounded-xl bg-slate-900 text-white p-6 sm:p-8"><h3 class="text-xl sm:text-2xl font-extrabold">結論｜競爭的終點，是經過投資後留下的現金</h3><p class="text-slate-200 leading-loose mt-3">SpaceX 證明 AI 運算可以重塑營收，但回收資本仍是另一項考驗；Tesla 的合併選項伴隨股東公平性與控制權風險；Netflix 顯示即使有高品質現金流，也可能因未來成長預期被修正而重估。<strong class="text-white">長期價值不只在營收與盈餘的成長，更在必要資本投入後，能否持續為股東創造可分配的現金。</strong></p></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-科技巨頭現金流估值。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中SpaceX、Tesla與Netflix相關公開資料 (2026年10月21日)。</p>
+    </div>
+  </footer>
+
+  <script>
+  'use strict';
+  const productData = [
+    { name:'SpaceX', ticker:'SPCX', type:'2026 Q3 財報實績／九個月分析估算', fact:'Q3 營收 145.75 億美元，SI 占 51.9%；SI 營業利益率約 5.7%。', cash:'2026 前三季簡化自由現金流 −349.72 億美元（估算；非單季公司正式數字）。', watch:'SI 利益率、OCF 與資本支出差距、算力利用率及股權稀釋。'},
+    { name:'Tesla', ticker:'TSLA', type:'事件評估中／尚無正式合併協議', fact:'Tesla 與 SpaceX 各自成立獨立特別委員會評估潛在合併；尚無交易價格或換股比率。', cash:'本報告未提供 Tesla 2026 Q3 現金流數值，不以推估補足。', watch:'本業獲利、交易對價、第三方估值、股東表決與監管核准。'},
+    { name:'Netflix', ticker:'NFLX', type:'2026 Q3 財報實績／2026 財測修正', fact:'Q3 營收 128.74 億美元、營業利益率 34.6%；廣告年營收預估 30 → 27 億美元。', cash:'Q3 自由現金流 28.84 億美元（已實現）。', watch:'廣告功能推出、觀看時數、Q4 EPS 指引及現金流品質。'}
+  ];
+
+  const menuButton = document.getElementById('menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function setMenu(open) {
+    mobileMenu.classList.toggle('hidden', !open);
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+    document.getElementById('menu-icon').innerHTML = open
+      ? '<path d="M6 6l12 12M18 6L6 18"/>'
+      : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+  }
+  menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+  mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth >= 1280 && menuButton.getAttribute('aria-expanded') === 'true') setMenu(false); });
+
+  const sections = Array.from(document.querySelectorAll('[data-section]'));
+  const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+  function markActive(id) {
+    navLinks.forEach(link => {
+      const active = link.getAttribute('href') === '#' + id;
+      link.classList.toggle('active-nav-link', active);
+      link.classList.toggle('inactive-nav-link', !active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    const visibleSections = new Map();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) visibleSections.set(entry.target.id, entry.boundingClientRect.top); else visibleSections.delete(entry.target.id); });
+      if (visibleSections.size) {
+        const current = Array.from(visibleSections.entries()).sort((a,b) => Math.abs(a[1]-100)-Math.abs(b[1]-100))[0][0];
+        markActive(current);
+      }
+    }, { rootMargin:'-90px 0px -62% 0px', threshold:0 });
+    sections.forEach(section => observer.observe(section));
+  }
+  markActive(location.hash && document.getElementById(location.hash.slice(1)) ? location.hash.slice(1) : 'overview');
+  window.addEventListener('hashchange', () => { const target = location.hash.slice(1); if (document.getElementById(target)) markActive(target); });
+
+  function renderCompanyTable(query = '') {
+    const keyword = query.trim().toLocaleLowerCase('zh-Hant');
+    const filtered = productData.filter(item => Object.values(item).join(' ').toLocaleLowerCase('zh-Hant').includes(keyword));
+    const tbody = document.getElementById('company-table-body');
+    tbody.replaceChildren();
+    for (const item of filtered) {
+      const tr = document.createElement('tr');
+      const values = [item.name + '（' + item.ticker + '）', item.type, item.fact, item.cash, item.watch];
+      values.forEach((value, index) => {
+        const td = document.createElement('td');
+        td.className = index === 0 ? 'font-bold text-slate-900 whitespace-nowrap' : 'text-sm text-slate-700 leading-relaxed';
+        td.textContent = value;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+    if (!filtered.length) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 5; td.className = 'text-center text-slate-500 py-8'; td.textContent = '沒有符合搜尋條件的公司或指標。'; tr.appendChild(td); tbody.appendChild(tr); }
+    document.getElementById('table-count').textContent = '顯示 ' + filtered.length + ' / ' + productData.length + ' 家公司。';
+  }
+  renderCompanyTable();
+  document.getElementById('table-search').addEventListener('input', (event) => renderCompanyTable(event.target.value));
+
+  function chartFallback(id) { const el = document.querySelector('[data-fallback="' + id + '"]'); if (el) el.classList.add('show'); const canvas = document.getElementById(id); if (canvas && canvas.parentElement) canvas.parentElement.style.display='none'; }
+  function makeChart(id, config) {
+    const canvas = document.getElementById(id);
+    if (!canvas || typeof window.Chart === 'undefined') { chartFallback(id); return; }
+    try { return new Chart(canvas, config); } catch(error) { console.error('Chart initialization failed:', id, error); chartFallback(id); }
+  }
+  if (typeof window.Chart !== 'undefined') {
+    Chart.defaults.font.family = 'ui-sans-serif, system-ui, "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = '#475569';
+  }
+  const gridColor = 'rgba(148,163,184,.20)';
+  const barStyle = { borderRadius:7, borderSkipped:false, maxBarThickness:64 };
+  const axis = { x:{ grid:{ display:false }, ticks:{ color:'#475569', maxRotation:0, autoSkip:false } }, y:{ beginAtZero:true, grid:{ color:gridColor }, ticks:{ color:'#64748b' } } };
+  const common = { responsive:true, maintainAspectRatio:false, animation:{ duration:500 }, plugins:{legend:{display:false},tooltip:{callbacks:{label:context => ' ' + context.dataset.label + '：' + context.parsed.y.toLocaleString('zh-TW', {maximumFractionDigits:2}) + (context.dataset.unit || ' 億美元')}}} };
+
+  makeChart('segmentRevenueChart', {type:'bar',data:{labels:['SI 超級智慧','Connectivity','Space 太空'],datasets:[{label:'營收',unit:' 億美元',data:[75.60,52.48,17.67],backgroundColor:['#0284c7','#0f766e','#94a3b8'],...barStyle}]},options:{...common,scales:axis}});
+  makeChart('segmentProfitChart', {type:'bar',data:{labels:['SI 超級智慧','Connectivity','Space 太空'],datasets:[{label:'營業利益',unit:' 億美元',data:[4.31,23.67,-0.07],backgroundColor:['#0284c7','#0f766e','#f97373'],...barStyle}]},options:{...common,scales:{...axis,y:{...axis.y,beginAtZero:false,suggestedMin:-2}}}});
+  makeChart('cashflowChart', {type:'bar',data:{labels:['營業現金流\n（累計實績）','資本支出\n（累計實績）','簡化自由現金流\n（分析估算）'],datasets:[{label:'金額',unit:' 億美元',data:[130.97,480.69,-349.72],backgroundColor:['#0284c7','#475569','#e11d48'],...barStyle}]},options:{...common,scales:{x:{...axis.x,ticks:{...axis.x.ticks,callback:function(value){ return this.getLabelForValue(value).split('\n'); }}},y:{...axis.y,beginAtZero:false}}}});
+  makeChart('adGuidanceChart', {type:'bar',data:{labels:['原先全年預估','修正後全年預估'],datasets:[{label:'廣告營收預估',unit:' 億美元（預估）',data:[30,27],backgroundColor:['#64748b','#0284c7'],...barStyle}]},options:{...common,scales:{...axis,y:{...axis.y,beginAtZero:true,suggestedMax:35}}}});
+  makeChart('marketChart', {type:'bar',data:{labels:['SpaceX · SPCX','Tesla · TSLA','Netflix · NFLX'],datasets:[{label:'盤中漲跌幅',unit:'%',data:[10.7,3.7,-2.5],backgroundColor:['#0284c7','#0f766e','#e11d48'],...barStyle}]},options:{...common,scales:{...axis,y:{...axis.y,beginAtZero:false,ticks:{callback:value=>value+'%'}}},plugins:{...common.plugins,tooltip:{callbacks:{label:context => ' 盤中漲跌：' + (context.parsed.y>0?'+':'') + context.parsed.y + '%'}}}}});
+  </script>
+</body>
+</html>
