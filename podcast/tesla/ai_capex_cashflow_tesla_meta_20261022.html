@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="2026 年第三季 Tesla 與 Meta 財報、自由現金流、AI 資本支出、SpaceX 潛在合併及 NVIDIA 先進封裝載板供應鏈的投資分析。">
+  <title>巴菲特AI價值投資-AI資本支出與現金流考驗</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --ink:#173247; --muted:#536678; --sky:#0284c7; --line:#dce7ee; }
+    html { scroll-behavior:smooth; scroll-padding-top:92px; }
+    body { color:var(--ink); background:#f6f9fb; -webkit-font-smoothing:antialiased; }
+    body, button, input, select { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+    [id] { scroll-margin-top:96px; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color:#0369a1; background:#e0f2fe; font-weight:750; }
+    .inactive-nav-link { color:#536778; background:transparent; }
+    .nav-link { transition: color .2s ease,background .2s ease; white-space:nowrap; border-radius:8px; padding:9px 11px; display:inline-flex; align-items:center; font-size:.86rem; }
+    .nav-link:hover { color:#0369a1; background:#f0f9ff; }
+    .metric-card { background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.19); box-shadow:0 12px 28px rgba(2,18,32,.09); backdrop-filter:blur(6px); }
+    .kpi-number { font-variant-numeric:tabular-nums; letter-spacing:-.03em; }
+    .eyebrow { font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; font-weight:750; color:#0284c7; }
+    .chart-shell { height:290px; width:100%; position:relative; }
+    .chart-shell canvas { display:block; width:100% !important; height:100% !important; }
+    .soft-rule { border-top:1px solid #e5edf2; }
+    .info-heading { font-weight:750; color:#23485f; }
+    .body-copy { color:#4f6374; line-height:1.85; }
+    .small-label { display:inline-block; border-radius:99px; padding:4px 9px; font-size:.73rem; font-weight:750; letter-spacing:.01em; }
+    .label-confirmed { background:#e1f4ec;color:#13634b; }
+    .label-reported { background:#fff1d7;color:#955f08; }
+    .label-plan { background:#e8f1ff;color:#2757a6; }
+    .label-observe { background:#eff1f4;color:#526276; }
+    .negative { color:#c24145; }
+    .positive { color:#087f66; }
+    .data-table th { background:#ecf5fa; font-weight:750; color:#315468; white-space:nowrap; }
+    .data-table td { padding:13px 14px; vertical-align:top; line-height:1.6; border-bottom:1px solid #edf1f4; }
+    .data-table th { padding:13px 14px; text-align:left; }
+    .data-table tbody tr:nth-child(even) { background:#fbfdff; }
+    .data-table tbody tr:hover { background:#eff9ff; }
+    .data-table { min-width:820px; }
+    .sticky-table-heading { position:sticky;top:0;z-index:2; }
+    .step-line { height:2px; background:linear-gradient(90deg,#bae6fd,#d1fae5); flex:1; margin:0 12px; }
+    .chapter-index { display:inline-flex; align-items:center; justify-content:center; width:31px; height:31px; border-radius:9px; background:#e0f2fe; color:#0369a1; font-size:.85rem; font-weight:850; flex-shrink:0; }
+    .focus-ring:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid #38bdf8; outline-offset:3px; }
+    .footer { background:#292524; }
+    @media (max-width:640px) { .chart-shell { height:260px; } .hero-content { padding-top:48px; padding-bottom:52px; } }
+    @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto;} *,*::before,*::after { transition:none !important; animation:none !important; } }
+  </style>
+</head>
+<body class="min-w-0">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[80] focus:bg-white focus:rounded focus:px-4 focus:py-3">跳至主要內容</a>
+  <header class="sticky top-0 z-50 border-b border-slate-200/90 bg-white/95 shadow-sm backdrop-blur-xl" id="site-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between min-h-[68px] gap-4">
+        <div class="flex items-center gap-3 min-w-0 shrink-0">
+          <span aria-hidden="true" class="w-9 h-9 shrink-0 flex items-center justify-center rounded-xl bg-sky-800 text-white shadow-sm">
+            <svg viewBox="0 0 24 24" fill="none" width="22" height="22" aria-hidden="true"><path d="M3 16.5 9 10l4 4 7-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 6h4v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <span class="font-extrabold text-stone-800 text-sm sm:text-base tracking-tight">巴菲特AI價值投資</span>
+        </div>
+        <nav class="hidden xl:flex items-center justify-end gap-0.5 min-w-0" aria-label="章節導覽" id="desktop-nav">
+          <a href="#overview" class="nav-link inactive-nav-link" data-nav-link>核心總覽</a>
+          <a href="#tesla" class="nav-link inactive-nav-link" data-nav-link>Tesla</a>
+          <a href="#merger" class="nav-link inactive-nav-link" data-nav-link>合併治理</a>
+          <a href="#supply" class="nav-link inactive-nav-link" data-nav-link>封裝供應鏈</a>
+          <a href="#meta" class="nav-link inactive-nav-link" data-nav-link>Meta</a>
+          <a href="#capital" class="nav-link inactive-nav-link" data-nav-link>資金鏈</a>
+          <a href="#strategy" class="nav-link inactive-nav-link" data-nav-link>投資策略</a>
+          <a href="#watchlist" class="nav-link inactive-nav-link" data-nav-link>追蹤指標</a>
+        </nav>
+        <button type="button" id="menu-toggle" class="xl:hidden inline-flex items-center justify-center rounded-lg w-10 h-10 border border-slate-200 bg-white text-slate-700" aria-controls="mobile-nav" aria-expanded="false" aria-label="開啟章節選單">
+          <svg id="menu-open-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="menu-close-icon" class="hidden" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <nav id="mobile-nav" class="hidden xl:hidden border-t border-slate-100 py-3" aria-label="手機章節導覽">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-1">
+          <a href="#overview" class="nav-link inactive-nav-link" data-nav-link>核心總覽</a>
+          <a href="#tesla" class="nav-link inactive-nav-link" data-nav-link>Tesla</a>
+          <a href="#merger" class="nav-link inactive-nav-link" data-nav-link>合併治理</a>
+          <a href="#supply" class="nav-link inactive-nav-link" data-nav-link>封裝供應鏈</a>
+          <a href="#meta" class="nav-link inactive-nav-link" data-nav-link>Meta</a>
+          <a href="#capital" class="nav-link inactive-nav-link" data-nav-link>資金鏈</a>
+          <a href="#strategy" class="nav-link inactive-nav-link" data-nav-link>投資策略</a>
+          <a href="#watchlist" class="nav-link inactive-nav-link" data-nav-link>追蹤指標</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+    <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <h1 id="hero-heading" class="max-w-5xl text-4xl sm:text-5xl md:text-[3.4rem] font-extrabold leading-tight tracking-tight">AI投資進入現金流考驗</h1>
+      <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">Tesla 營收停滯且獲利下滑，Meta 廣告業務持續成長，兩家公司卻在 AI 投資下呈現截然不同的自由現金流；NVIDIA 與三星電機的載板合作，則讓資本支出壓力沿供應鏈擴散。下一階段，市場關注的不只是成長潛力，更是誰能把投入轉化為可持續的現金回報。</p>
+      <div class="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4" aria-label="第三季重點數字">
+        <div class="metric-card rounded-xl px-5 py-5"><p class="text-sky-100/80 text-sm">Tesla Q3 自由現金流</p><p class="kpi-number mt-2 text-3xl sm:text-[2rem] font-extrabold">+15.31 <span class="text-base font-semibold">億美元</span></p><p class="mt-2 text-sm text-sky-50/80">較去年同期減少約 62%</p></div>
+        <div class="metric-card rounded-xl px-5 py-5"><p class="text-sky-100/80 text-sm">Meta Q3 自由現金流</p><p class="kpi-number mt-2 text-3xl sm:text-[2rem] font-extrabold">−21.20 <span class="text-base font-semibold">億美元</span></p><p class="mt-2 text-sm text-sky-50/80">去年同期為 +106.25 億美元</p></div>
+        <div class="metric-card rounded-xl px-5 py-5"><p class="text-sky-100/80 text-sm">Meta Q3 營收年增</p><p class="kpi-number mt-2 text-3xl sm:text-[2rem] font-extrabold">+26<span class="text-base font-semibold">%</span></p><p class="mt-2 text-sm text-sky-50/80">廣告量價同步成長</p></div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-14 md:space-y-20">
+    <section id="overview" class="scroll-mt-24" aria-labelledby="overview-heading">
+      <h2 id="overview-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心總覽｜從 AI 敘事轉向資本回報</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-500">
+        <p class="text-lg font-bold text-slate-800">同一輪 AI 成長，三種不同的財務考驗。</p>
+        <p class="body-copy mt-3">Tesla 的核心產品銷售規模大，但獲利受到研發投入與非經常項目影響；Meta 的廣告生意仍強，AI 建設卻暫時吃掉營業現金；NVIDIA 與載板供應商正擴大產能承諾，但正式合作、媒體估算與實際收現必須分開看。</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5 mb-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><p class="eyebrow">01 · 營運與獲利</p><h3 class="mt-2 text-xl font-bold text-slate-800">規模不等於獲利</h3><p class="body-copy mt-3">Tesla 營收近乎持平、營業利益年減約 56%；Meta 營收年增 26%，但 GAAP 利益率降至 20%，其中包括大額法律和解費用。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><p class="eyebrow">02 · 現金流</p><h3 class="mt-2 text-xl font-bold text-slate-800">投入與回收錯位</h3><p class="body-copy mt-3">Tesla 本季 FCF 轉正並不代表長期資本效率已改善；Meta 的大額資本支出使 FCF 轉負，也不等於當下缺乏流動性。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><p class="eyebrow">03 · 供應鏈</p><h3 class="mt-2 text-xl font-bold text-slate-800">承諾不等於收現</h3><p class="body-copy mt-3">晶片封裝與載板需求強化長期合作誘因；但擴廠計畫、媒體披露資金、正式合約及量產出貨，仍屬不同階段。</p></article>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0 min-w-0">
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-4"><div><p class="eyebrow">圖表 01 · 2025 Q3 vs 2026 Q3</p><h3 class="text-lg font-bold text-slate-800 mt-1">自由現金流年度比較</h3></div><span class="text-xs text-slate-500 mt-1">單位：億美元</span></div>
+          <div class="chart-shell"><canvas id="fcfChart" role="img" aria-label="Tesla 自由現金流由 39.90 降至 15.31 億美元，Meta 由 106.25 轉為負 21.20 億美元"></canvas></div>
+          <p class="text-sm text-slate-500 leading-relaxed mt-3">2026 Q3：Tesla +15.31、Meta −21.20；對照 2025 Q3：Tesla +39.90、Meta +106.25。負值代表該季度現金支出大於營業現金流。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0 min-w-0">
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-4"><div><p class="eyebrow">圖表 02 · 2026 Q3</p><h3 class="text-lg font-bold text-slate-800 mt-1">營業現金流與資本支出</h3></div><span class="text-xs text-slate-500 mt-1">單位：億美元</span></div>
+          <div class="chart-shell"><canvas id="cashChart" role="img" aria-label="Tesla 營業現金流 62.63 億美元、資本支出 47.32 億美元；Meta 營業現金流 327.86 億美元、資本支出約 349.10 億美元"></canvas></div>
+          <p class="text-sm text-slate-500 leading-relaxed mt-3">Meta 資本支出含融資租賃本金支付；兩家公司現金流口徑依報告列示。圖示數字四捨五入，FCF 採報告公布值。</p>
+        </article>
+      </div>
+
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-7">
+        <div class="flex flex-wrap items-end justify-between gap-3"><div><p class="eyebrow">財務資料庫 · 依報告數字建置</p><h3 class="text-xl font-bold text-stone-800 mt-1">Tesla 與 Meta 第三季關鍵指標</h3></div><p id="table-count" class="text-sm text-slate-500" aria-live="polite">載入指標…</p></div>
+        <div class="grid sm:grid-cols-[minmax(0,1fr)_160px_160px] gap-3 mt-5 mb-4">
+          <label class="min-w-0"><span class="block text-xs font-semibold text-slate-600 mb-1.5">關鍵字搜尋</span><input id="metric-search" type="search" placeholder="搜尋公司、財務指標、備註…" autocomplete="off" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 focus:ring-2 focus:ring-sky-200 focus:border-sky-500 focus:outline-none"></label>
+          <label><span class="block text-xs font-semibold text-slate-600 mb-1.5">公司</span><select id="metric-company" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800"><option value="all">全部公司</option><option value="Tesla">Tesla</option><option value="Meta">Meta</option></select></label>
+          <label><span class="block text-xs font-semibold text-slate-600 mb-1.5">類型</span><select id="metric-group" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800"><option value="all">全部類型</option><option value="營運">營運</option><option value="獲利">獲利</option><option value="現金流">現金流</option></select></label>
+        </div>
+        <div class="max-h-[465px] overflow-auto rounded-lg border border-slate-200" tabindex="0" aria-label="可捲動的第三季指標資料表">
+          <table class="data-table w-full text-sm"><thead><tr><th scope="col" class="sticky-table-heading">公司</th><th scope="col" class="sticky-table-heading">類型</th><th scope="col" class="sticky-table-heading">財務指標</th><th scope="col" class="sticky-table-heading">2026 Q3 數值</th><th scope="col" class="sticky-table-heading">比較基準</th><th scope="col" class="sticky-table-heading">解讀</th></tr></thead><tbody id="metric-rows"></tbody></table>
+        </div>
+        <p class="mt-3 text-xs leading-relaxed text-slate-500">數字依原報告；部分項目為約數或管理層調整後口徑，已在欄位標示。表格為搜尋用資料，不包含推估數據。</p>
+      </article>
+    </section>
+
+    <section id="tesla" aria-labelledby="tesla-heading">
+      <h2 id="tesla-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Tesla｜交付規模與現金流品質</h2>
+      <div class="flex items-center gap-3 mb-5"><span class="chapter-index">一</span><h3 class="text-xl md:text-2xl font-bold text-slate-800">高交付量未轉成高獲利</h3></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500">Q3 營收</p><p class="kpi-number text-2xl font-extrabold mt-2">280.46 <span class="text-sm">億美元</span></p><p class="mt-2 text-sm text-slate-500">去年同期 280.95 億</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500">車輛交付</p><p class="kpi-number text-2xl font-extrabold mt-2">486,532 <span class="text-sm">輛</span></p><p class="mt-2 text-sm text-red-600">年減約 2%</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500">營業利益</p><p class="kpi-number text-2xl font-extrabold mt-2">7.18 <span class="text-sm">億美元</span></p><p class="mt-2 text-sm text-red-600">年減約 56%</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500">研發費用</p><p class="kpi-number text-2xl font-extrabold mt-2">27.61 <span class="text-sm">億美元</span></p><p class="mt-2 text-sm text-slate-500">年增約 69%</p></div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><h4 class="info-heading text-lg">營收結構的變化</h4><div class="mt-4 space-y-4">
+          <div><div class="flex justify-between gap-2 text-sm"><span>汽車業務</span><span class="font-bold">205.60 億美元</span></div><div class="h-2.5 mt-2 rounded-full bg-slate-100 overflow-hidden"><div class="h-full bg-sky-700 rounded-full" style="width:73.31%"></div></div><p class="mt-1 text-xs text-slate-500">約占第三季總營收 73.3%；年減約 3%</p></div>
+          <div><div class="flex justify-between gap-2 text-sm"><span>服務及其他</span><span class="font-bold">46.05 億美元</span></div><div class="h-2.5 mt-2 rounded-full bg-slate-100 overflow-hidden"><div class="h-full bg-teal-500 rounded-full" style="width:16.42%"></div></div><p class="mt-1 text-xs text-slate-500">約占 16.4%；年增約 33%</p></div>
+          <div><div class="flex justify-between gap-2 text-sm"><span>能源發電與儲能</span><span class="font-bold">28.81 億美元</span></div><div class="h-2.5 mt-2 rounded-full bg-slate-100 overflow-hidden"><div class="h-full bg-cyan-300 rounded-full" style="width:10.27%"></div></div><p class="mt-1 text-xs text-slate-500">約占 10.3%；年減約 16%，儲能部署 13.7 GWh</p></div>
+        </div><p class="mt-4 text-xs text-slate-500">營收占比依報告三項數字計算後約整；為視覺化輔助，非公司單獨公布之占比。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><h4 class="info-heading text-lg">不能只看 19.6% 毛利率</h4><p class="body-copy mt-3">整體 GAAP 毛利率自去年同期約 18% 提高至 19.6%，但其中包含關稅退款與客戶退款的淨效果。報告估算，關稅退款減少成本 7.86 億美元，部分儲能客戶退款減少營收 3.39 億美元，對當期毛利的淨正面影響約 <strong class="text-slate-800">4.47 億美元</strong>。</p>
+          <div class="mt-4 rounded-xl bg-amber-50 border border-amber-100 p-4"><p class="font-bold text-amber-950">口徑提醒</p><p class="text-sm text-amber-900 leading-relaxed mt-1">4.47 億美元是報告分析用淨影響估算，<strong>不是</strong> Tesla 正式公布的調整後毛利率。GAAP EPS 為 0.22 美元；調整後 EPS 為 0.48 美元，兩者不能混用。</p></div>
+          <p class="body-copy mt-4">汽車法規積分收入由 4.17 億降至 1.13 億美元，年減約 73%；汽車實際獲利與新業務商業化將更重要。</p>
+        </article>
+      </div>
+      <div class="flex items-center gap-3 mt-10 mb-5"><span class="chapter-index">二</span><h3 class="text-xl md:text-2xl font-bold text-slate-800">自由現金流轉正：效率提升，還是支出遞延？</h3></div>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><p class="eyebrow">Q3 營運現金流</p><p class="text-3xl font-extrabold kpi-number mt-2">62.63 <span class="text-base">億美元</span></p><div class="soft-rule my-4"></div><p class="eyebrow">Q3 資本支出</p><p class="text-3xl font-extrabold kpi-number mt-2">47.32 <span class="text-base">億美元</span></p><div class="soft-rule my-4"></div><p class="eyebrow">Q3 自由現金流</p><p class="text-3xl font-extrabold kpi-number mt-2 positive">+15.31 <span class="text-base">億美元</span></p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0 lg:col-span-2"><h4 class="info-heading text-lg">資本支出展望的兩種表述</h4><p class="body-copy mt-3">管理層在財報電話會議中，將全年資本支出展望由「超過 250 億美元」調整為「約 200 億美元」；但同期 10-Q 仍寫「超過 200 億美元」。因此不應把 200 億視為固定上限。</p><div class="grid sm:grid-cols-3 gap-3 mt-5">
+            <div class="bg-sky-50 rounded-lg p-4"><p class="text-sm text-slate-500">前三季累計 CapEx</p><p class="font-extrabold text-xl mt-2">約 130.1 億美元</p></div>
+            <div class="bg-sky-50 rounded-lg p-4"><p class="text-sm text-slate-500">Q2 → Q3 FCF</p><p class="font-extrabold text-xl mt-2">−10.92 → +15.31</p><p class="text-xs text-slate-500 mt-1">億美元</p></div>
+            <div class="bg-sky-50 rounded-lg p-4"><p class="text-sm text-slate-500">期末流動資產</p><p class="font-extrabold text-xl mt-2">約 454.47 億美元</p><p class="text-xs text-slate-500 mt-1">現金、約當現金、短期投資</p></div>
+          </div><p class="body-copy mt-4"><strong class="text-slate-800">判讀重點：</strong>若支出減少只因設備驗收或工程款延後，現金流改善可能無法持續；若能降低每單位算力與產品的資本需求，才是長期價值提升。</p></article>
+      </div>
+    </section>
+
+    <section id="merger" aria-labelledby="merger-heading">
+      <h2 id="merger-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Tesla × SpaceX｜潛在合併與股東治理</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex flex-wrap justify-between items-center gap-3"><div class="flex items-center gap-3"><span class="chapter-index">三</span><h3 class="font-bold text-lg md:text-xl">交易尚在研究階段</h3></div><span class="small-label label-plan">尚無正式合併協議</span></div>
+        <p class="body-copy mt-4">兩家公司已各自成立特別委員會研究可能交易，Musk 認為具策略吸引力；<strong class="text-slate-800">但交易條件尚未定案，也沒有完成合併</strong>。任何合理估值都不應預先將未來綜效當成已實現收入。</p></div>
+      <div class="grid lg:grid-cols-2 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><h4 class="info-heading text-lg">報告已揭露的現有往來</h4><div class="grid sm:grid-cols-2 gap-3 mt-4"><div class="rounded-xl bg-sky-50 p-4"><p class="text-sm text-slate-600">Tesla 投資 SpaceX 普通股</p><p class="mt-2 text-2xl font-extrabold">20 億美元</p><p class="mt-1 text-xs text-slate-500">2026 年 3 月，持股低於 1%</p></div><div class="rounded-xl bg-sky-50 p-4"><p class="text-sm text-slate-600">SpaceX 購買 Megapack</p><p class="mt-2 text-2xl font-extrabold">2.21 億美元</p><p class="mt-1 text-xs text-slate-500">Tesla 第三季認列的相關收入</p></div></div><p class="body-copy mt-4">現有資本與業務往來可以證明關聯，但<strong class="text-slate-800">不能直接證明合併條件公平</strong>或未來綜效必然發生。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><h4 class="info-heading text-lg">值得獨立審視的四個門檻</h4><ul class="mt-4 space-y-3 text-sm text-slate-700 leading-relaxed">
+          <li class="flex gap-3"><span class="font-bold text-sky-700">01</span><span><strong>獨立估值與換股比例：</strong>避免 Tesla 現有股東的經濟權益遭不合理稀釋。</span></li>
+          <li class="flex gap-3"><span class="font-bold text-sky-700">02</span><span><strong>監管與國安：</strong>國防航太、資料安全及跨境供應鏈整合可能觸及審查。</span></li>
+          <li class="flex gap-3"><span class="font-bold text-sky-700">03</span><span><strong>關係人交易：</strong>Musk 同時涉及雙方持股與管理，公平程序不可省略。</span></li>
+          <li class="flex gap-3"><span class="font-bold text-sky-700">04</span><span><strong>現金需求：</strong>合併後建設支出、債務及股權融資可能稀釋綜效。</span></li>
+        </ul></article>
+      </div>
+    </section>
+
+    <section id="supply" aria-labelledby="supply-heading">
+      <h2 id="supply-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">NVIDIA 與三星電機｜先進載板擴產</h2>
+      <div class="flex items-center gap-3 mb-5"><span class="chapter-index">四</span><h3 class="text-xl md:text-2xl font-bold text-slate-800">需求訊號明確，但資金條件須分層核對</h3></div>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><span class="small-label label-confirmed">正式公告的合作</span><p class="mt-3 font-bold text-xl">NVIDIA × 三星電機</p><p class="mt-3 body-copy">2026 年 10 月 21 日公告多年期 ABF 載板合作；世宗、釜山將擴充專用產線，部分供貨自 2026 年開始。</p><div class="mt-4 bg-emerald-50 rounded-lg p-4"><p class="text-sm text-emerald-900">NVIDIA 相關載板供應鏈</p><p class="font-extrabold text-2xl mt-2 text-emerald-900">約 2.5 倍</p><p class="text-xs text-emerald-800 mt-1">未來三年產能擴張「目標」，非已實現結果</p></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><span class="small-label label-confirmed">正式公告的擴產計畫</span><p class="mt-3 font-bold text-xl">世宗 FC-BGA 擴建</p><p class="mt-3 body-copy">三星電機於 2026 年 9 月底公布擬投入約 <strong class="text-slate-800">4.27 兆韓元</strong>，計畫 2028 年 9 月開始量產。</p><div class="mt-4 bg-sky-50 rounded-lg p-4"><p class="text-sm font-semibold text-sky-900">進度屬未來計畫</p><p class="text-sm text-sky-900 mt-2">良率、稼動率、折舊及實際出貨才會決定獲利。</p></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><span class="small-label label-reported">10 月 22 日媒體引述</span><p class="mt-3 font-bold text-xl">約 3.7 兆韓元</p><p class="mt-3 body-copy">報導稱 Tesla 約 1.1 兆、NVIDIA 約 2.6 兆韓元的資金支持，總額約 28 億美元；<strong class="text-slate-800">個別金額及契約結構尚未共同正式確認</strong>。</p><div class="mt-4 bg-amber-50 rounded-lg p-4"><p class="text-sm font-semibold text-amber-950">避免重複計算</p><p class="text-sm text-amber-900 mt-2">不能將 3.7 兆與 4.27 兆直接相加，宣稱均為新增投資。</p></div></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-2"><h4 class="info-heading text-lg">GPU 之外，為何封裝與載板會成為瓶頸？</h4>
+        <div class="grid md:grid-cols-4 gap-4 mt-5 text-sm">
+          <div class="p-4 bg-slate-50 rounded-xl"><p class="font-bold text-sky-800">晶片運算</p><p class="text-slate-600 mt-2 leading-relaxed">GPU / AI 加速器對功率、頻寬與互連密度提出更高要求。</p></div>
+          <div class="p-4 bg-slate-50 rounded-xl"><p class="font-bold text-sky-800">ABF 與 FC-BGA</p><p class="text-slate-600 mt-2 leading-relaxed">高階封裝載板支援更大封裝面積、訊號完整性與電力傳輸。</p></div>
+          <div class="p-4 bg-slate-50 rounded-xl"><p class="font-bold text-sky-800">製造與驗證</p><p class="text-slate-600 mt-2 leading-relaxed">客戶認證、良率、測試、產線爬坡會影響真正可交付的數量。</p></div>
+          <div class="p-4 bg-slate-50 rounded-xl"><p class="font-bold text-sky-800">出貨與現金</p><p class="text-slate-600 mt-2 leading-relaxed">採購承諾、產品交付、收入認列與收現不是同一時間點。</p></div>
+        </div><p class="body-copy mt-4">除 NVIDIA（NVDA）外，可追蹤 Amkor（AMKR）等先進封裝供應商；但擴產不代表每家廠商都會等比例受惠。</p>
+      </div>
+    </section>
+
+    <section id="meta" aria-labelledby="meta-heading">
+      <h2 id="meta-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta｜廣告強勁與 AI 建設並行</h2>
+      <div class="flex items-center gap-3 mb-5"><span class="chapter-index">五</span><h3 class="text-xl md:text-2xl font-bold text-slate-800">核心營收成長，法律費用壓低 GAAP 利潤</h3></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500">Q3 營收</p><p class="text-2xl font-extrabold mt-2 kpi-number">646.01 <span class="text-sm">億美元</span></p><p class="mt-2 text-sm positive">年增 26%</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500">廣告曝光次數</p><p class="text-2xl font-extrabold mt-2 kpi-number">+10%</p><p class="mt-2 text-sm text-slate-500">年增幅</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500">平均廣告價格</p><p class="text-2xl font-extrabold mt-2 kpi-number">+14%</p><p class="mt-2 text-sm text-slate-500">年增幅</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500">GAAP 營業利益率</p><p class="text-2xl font-extrabold mt-2 kpi-number">20%</p><p class="mt-2 text-sm negative">去年同期為 40%</p></div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><h4 class="info-heading text-lg">報表上的獲利與一次性費用</h4><div class="space-y-3 mt-4">
+          <div class="flex justify-between border-b border-slate-100 pb-3 gap-3 text-sm"><span class="text-slate-600">GAAP 營業利益</span><strong>129.88 億美元</strong></div>
+          <div class="flex justify-between border-b border-slate-100 pb-3 gap-3 text-sm"><span class="text-slate-600">法律和解相關費用</span><strong>約 98.90 億美元</strong></div>
+          <div class="flex justify-between border-b border-slate-100 pb-3 gap-3 text-sm"><span class="text-slate-600">排除該費用的營業利益估算</span><strong>約 228.78 億美元</strong></div>
+          <div class="flex justify-between gap-3 text-sm"><span class="text-slate-600">排除該費用的營業利益率估算</span><strong>約 35.4%</strong></div>
+        </div><div class="mt-5 rounded-xl bg-amber-50 p-4 border border-amber-100"><p class="text-sm text-amber-950 leading-relaxed">排除一次性法律費用後，利潤率仍低於去年同期 40%。估算不代表法律成本可以忽略，且實際付款時間可能不同於費用認列時間。</p></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><h4 class="info-heading text-lg">EPS 與有效稅率：避免誤判成長</h4><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-sky-50 rounded-xl p-4"><p class="text-xs text-slate-500">GAAP EPS</p><p class="text-2xl font-extrabold mt-2">3.83 <span class="text-sm">美元</span></p></div><div class="bg-sky-50 rounded-xl p-4"><p class="text-xs text-slate-500">排除法律費用後 EPS 估算</p><p class="text-2xl font-extrabold mt-2">7.40 <span class="text-sm">美元</span></p></div></div>
+          <p class="body-copy mt-4">今年 Q3 有效稅率約 24%，去年同期約 87%；本季 GAAP 淨利 98.60 億美元，高於去年同期 27.09 億美元，但<strong class="text-slate-800">淨利增幅受稅率基期影響</strong>，不可視同核心營業利益同步大增。</p>
+          <p class="body-copy mt-3">廣告量與價同增，也受景氣、廣告主預算、產品組合與競爭影響，不能全數歸因於 AI。</p></article>
+      </div>
+      <div class="flex items-center gap-3 mt-10 mb-5"><span class="chapter-index">六</span><h3 class="text-xl md:text-2xl font-bold text-slate-800">自由現金流轉負，但非立即流動性危機</h3></div>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><p class="eyebrow">第三季現金流</p><div class="mt-4 space-y-4"><div><p class="text-sm text-slate-500">營業活動現金流</p><p class="text-2xl font-extrabold">327.86 <span class="text-sm">億美元</span></p></div><div class="soft-rule"></div><div><p class="text-sm text-slate-500">資本支出（含融資租賃本金）</p><p class="text-2xl font-extrabold">約 349.10 <span class="text-sm">億美元</span></p></div><div class="soft-rule"></div><div><p class="text-sm text-slate-500">自由現金流</p><p class="text-2xl font-extrabold negative">−21.20 <span class="text-sm">億美元</span></p></div></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0 lg:col-span-2"><h4 class="info-heading text-lg">公司指引與資本效率</h4><div class="grid sm:grid-cols-2 gap-3 mt-4"><div class="bg-sky-50 p-4 rounded-xl"><p class="text-sm text-slate-600">2026 全年 CapEx 指引</p><p class="text-xl sm:text-2xl font-extrabold mt-2">1,350–1,450 <span class="text-sm">億美元</span></p><p class="text-xs text-slate-500 mt-2">原為 1,300–1,450 億，屬下限上調，不是縮減</p></div><div class="bg-sky-50 p-4 rounded-xl"><p class="text-sm text-slate-600">2026 Q4 營收展望</p><p class="text-xl sm:text-2xl font-extrabold mt-2">730–760 <span class="text-sm">億美元</span></p><p class="text-xs text-slate-500 mt-2">管理層預估，非已實現業績</p></div></div>
+          <p class="body-copy mt-4">Meta 於九月底持有約 <strong class="text-slate-800">824.50 億美元</strong>現金、約當現金與有價證券；廣告業務仍能持續產生現金。真正需要驗證的是 AI 算力、折舊與維運成本能否由新增毛利充分覆蓋。</p>
+          <div class="mt-4 rounded-xl border border-slate-200 p-4"><div class="flex flex-wrap items-center justify-between gap-2"><strong class="text-sm text-slate-800">2027 年 C 類普通股安排</strong><span class="small-label label-plan">已宣布、尚待實施</span></div><p class="mt-2 text-sm text-slate-600 leading-relaxed">擬於 2027 年 1 月建立無投票權 C 類股，規劃 A／B 類股各配一股 C 類股；經濟效果類似一拆二。這<strong>不是現金股利，也不是已完成募資</strong>，未來增發才涉及潛在經濟權益稀釋。</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="capital" aria-labelledby="capital-heading">
+      <h2 id="capital-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">資金鏈｜從需求、擴產到股東報酬</h2>
+      <div class="flex items-center gap-3 mb-5"><span class="chapter-index">七</span><h3 class="text-xl md:text-2xl font-bold text-slate-800">同一條 AI 資金鏈上的三個層次</h3></div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><div class="flex items-center justify-between"><span class="eyebrow">Layer 01</span><span class="rounded-full bg-sky-100 text-sky-800 p-2" aria-hidden="true">↗</span></div><h4 class="mt-4 text-xl font-bold">資本支出決策者</h4><p class="body-copy mt-3">Meta 使用廣告營運現金建置算力；Tesla 投入自駕、機器人、晶片與產能。現金流壓力取決於新收入形成的速度。</p><p class="mt-4 text-sm text-sky-800 font-bold">Tesla · Meta</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><div class="flex items-center justify-between"><span class="eyebrow">Layer 02</span><span class="rounded-full bg-teal-100 text-teal-800 p-2" aria-hidden="true">↗</span></div><h4 class="mt-4 text-xl font-bold">上游供應商</h4><p class="body-copy mt-3">NVIDIA、封裝與載板企業需擴增設備與良率。長約降低需求不確定性，但供貨與實際收款仍待完成。</p><p class="mt-4 text-sm text-sky-800 font-bold">NVIDIA · 三星電機 · AMKR 等</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><div class="flex items-center justify-between"><span class="eyebrow">Layer 03</span><span class="rounded-full bg-indigo-100 text-indigo-800 p-2" aria-hidden="true">↗</span></div><h4 class="mt-4 text-xl font-bold">融資與治理</h4><p class="body-copy mt-3">預付款移轉流動性負擔、舉債增加利息成本，增發股份可能稀釋股東權益；關係人合併另有治理門檻。</p><p class="mt-4 text-sm text-sky-800 font-bold">預付款 · 債務 · 股本 · 治理</p></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-5 border-l-4 border-teal-500"><p class="font-bold text-slate-800">判斷投資品質的共同尺標</p><p class="body-copy mt-2">不是比較誰公布最大預算，而是核對<strong class="text-slate-900">需求承諾 → 實際出貨 → 營業利益 → 自由現金流</strong>的轉化率。任何中間環節延遲，都可能使估值提前透支未來回報。</p></div>
+    </section>
+
+    <section id="strategy" aria-labelledby="strategy-heading">
+      <h2 id="strategy-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">美股投資策略｜核心業務與 AI 選擇權分開估</h2>
+      <div class="flex items-center gap-3 mb-5"><span class="chapter-index">八</span><h3 class="text-xl md:text-2xl font-bold text-slate-800">三個標的群的估值優先順序</h3></div>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><p class="eyebrow">TSLA</p><h4 class="text-xl font-bold mt-2">先證明車業獲利，再評估 AI 產品</h4><p class="body-copy mt-3">拆解汽車毛利、法規積分、關稅退款與研發成本；確認自駕及機器人是否形成可驗證、可重複收入。SpaceX 合併仍須獨立於基本面估值。</p><div class="mt-4 pt-3 border-t border-slate-100 text-sm text-slate-600"><strong class="text-slate-800">重點風險：</strong>毛利品質、CapEx 反彈、產品量產延誤、潛在交易稀釋。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><p class="eyebrow">META</p><h4 class="text-xl font-bold mt-2">評估廣告增量能否覆蓋算力支出</h4><p class="body-copy mt-3">廣告變現仍是現金引擎，但須追蹤 AI 服務營收、資本支出與折舊，以及自由現金流重返正值的速度。C 類股提高未來治理監測重要性。</p><div class="mt-4 pt-3 border-t border-slate-100 text-sm text-slate-600"><strong class="text-slate-800">重點風險：</strong>CapEx 續增、折舊侵蝕回報、法律成本與潛在股權稀釋。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0"><p class="eyebrow">NVDA / AMKR / 載板鏈</p><h4 class="text-xl font-bold mt-2">用合約、良率與出貨檢驗擴產</h4><p class="body-copy mt-3">上游載板合作透露 AI 需求仍具韌性，但不可直接把媒體所述資金、產能承諾或量產目標當成收入與利潤。需持續核對採購條款與供給競爭。</p><div class="mt-4 pt-3 border-t border-slate-100 text-sm text-slate-600"><strong class="text-slate-800">重點風險：</strong>客戶驗證、設備爬坡、報價、折舊及庫存。</div></article>
+      </div>
+      <div class="bg-slate-900 rounded-2xl p-6 sm:p-8 mt-5 text-white"><h4 class="font-bold text-xl">兩層式投資框架</h4><div class="grid md:grid-cols-2 gap-4 mt-5"><div class="rounded-xl border border-white/20 p-5 bg-white/5"><p class="text-sm text-sky-200">已實現的核心業務</p><p class="text-lg font-bold mt-2">可持續營業利益與現金流</p><p class="mt-2 text-sm text-slate-200 leading-relaxed">採用目前已實現的營運、毛利與現金流指標作估值基礎。</p></div><div class="rounded-xl border border-white/20 p-5 bg-white/5"><p class="text-sm text-sky-200">尚待驗證的 AI 選擇權</p><p class="text-lg font-bold mt-2">依里程碑與成功機率評估</p><p class="mt-2 text-sm text-slate-200 leading-relaxed">對量產、監管、交易成立、客戶驗證及新收入設定獨立風險，不視作已入帳獲利。</p></div></div></div>
+    </section>
+
+    <section id="watchlist" aria-labelledby="watchlist-heading">
+      <h2 id="watchlist-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">後續追蹤｜關鍵驗證訊號</h2>
+      <div class="flex items-center gap-3 mb-5"><span class="chapter-index">九</span><h3 class="text-xl md:text-2xl font-bold text-slate-800">下一季與合約披露應看什麼？</h3></div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><div class="flex flex-wrap justify-between gap-2"><h4 class="font-bold text-lg">Tesla 的營收、毛利與支出</h4><span class="small-label label-observe">待驗證</span></div><ul class="mt-3 text-sm text-slate-600 space-y-2 leading-relaxed list-disc pl-5"><li>第四季汽車毛利與營業利益率是否同時回升。</li><li>排除關稅退款等特殊項目後的毛利品質。</li><li>全年資本支出實際金額、自駕與 Optimus 量產時程。</li></ul></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><div class="flex flex-wrap justify-between gap-2"><h4 class="font-bold text-lg">Meta 的廣告與投資回報</h4><span class="small-label label-observe">待驗證</span></div><ul class="mt-3 text-sm text-slate-600 space-y-2 leading-relaxed list-disc pl-5"><li>第四季曝光量與廣告價格是否持續成長。</li><li>2027 年 AI 預算、折舊與自由現金流展望。</li><li>C 類股發行安排及未來股本變化。</li></ul></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><div class="flex flex-wrap justify-between gap-2"><h4 class="font-bold text-lg">NVIDIA × 三星電機資金條款</h4><span class="small-label label-reported">部分金額未確認</span></div><ul class="mt-3 text-sm text-slate-600 space-y-2 leading-relaxed list-disc pl-5"><li>1.1 兆與 2.6 兆韓元分別是預付款、產能保留或其他安排。</li><li>正式長約、量產時間、客戶驗證與實際供貨。</li><li>新廠良率、稼動率和折舊支出。</li></ul></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><div class="flex flex-wrap justify-between gap-2"><h4 class="font-bold text-lg">Tesla × SpaceX 交易條件</h4><span class="small-label label-plan">交易未定</span></div><ul class="mt-3 text-sm text-slate-600 space-y-2 leading-relaxed list-disc pl-5"><li>是否公布正式協議、獨立估值與換股比例。</li><li>董事會、股東表決與監管審查進展。</li><li>關係人交易透明度及合併後融資負擔。</li></ul></article>
+      </div>
+    </section>
+
+    <section id="conclusion" aria-labelledby="conclusion-heading" class="pb-2">
+      <h2 id="conclusion-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論｜AI 投資進入現金流驗證期</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="body-copy text-lg">Tesla 的車業停滯與研發壓力、Meta 的高速廣告成長及龐大算力建設，以及 NVIDIA 上游載板合作，反映同一現象：<strong class="text-slate-900">AI 需求可以持續成長，但支出、營收、利潤與現金回收不會自動同步。</strong></p><p class="body-copy mt-4">更值得投資人重視的，是誰能讓高額資本投入轉為高利用率、持續營業利益和可分配給股東的自由現金流；對未簽定的交易、尚未量產的產能及尚未實現的 AI 收入，應保留相應的估值折扣。</p></div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI資本支出與現金流考驗。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中Tesla、Meta、NVIDIA及先進封裝供應鏈相關公開資料 (2026年10月22日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // Actual values and annotations transcribed from the supplied report. No fabricated sample rows.
+    const productData = [{"company":"Tesla","group":"營運","metric":"總營收","value":"280.46 億美元","comparison":"去年同期 280.95 億美元","context":"幾乎持平，並未與交車規模同步擴張"},{"company":"Tesla","group":"營運","metric":"汽車業務營收","value":"205.60 億美元","comparison":"年減約 3%","context":"仍是營收主體"},{"company":"Tesla","group":"營運","metric":"能源發電與儲能營收","value":"28.81 億美元","comparison":"年減約 16%","context":"出貨量與收入成長並不等同"},{"company":"Tesla","group":"營運","metric":"服務及其他營收","value":"46.05 億美元","comparison":"去年同期 34.75 億美元；年增約 33%","context":"少數明顯擴張業務"},{"company":"Tesla","group":"營運","metric":"汽車交付量","value":"486,532 輛","comparison":"年減約 2%","context":"交付高檔，但利潤率承壓"},{"company":"Tesla","group":"營運","metric":"儲能部署","value":"13.7 GWh","comparison":"報告未提供同比數值","context":"第三季部署量"},{"company":"Tesla","group":"獲利","metric":"GAAP 營業利益","value":"7.18 億美元","comparison":"年減約 56%","context":"研發與其他費用增加"},{"company":"Tesla","group":"獲利","metric":"GAAP 淨利（歸屬普通股股東）","value":"7.87 億美元","comparison":"年減約 43%","context":"勿與調整後口徑混用"},{"company":"Tesla","group":"獲利","metric":"GAAP 稀釋 EPS","value":"0.22 美元","comparison":"調整後 EPS：0.48 美元","context":"兩者屬不同會計口徑"},{"company":"Tesla","group":"獲利","metric":"研發費用","value":"27.61 億美元","comparison":"去年同期 16.30 億美元；年增約 69%","context":"AI、自駕、Optimus 等研發投入"},{"company":"Tesla","group":"獲利","metric":"整體 GAAP 毛利率","value":"19.6%","comparison":"去年同期約 18%","context":"包含非經常項目影響，不能全歸因於製造效率"},{"company":"Tesla","group":"獲利","metric":"汽車法規積分收入","value":"1.13 億美元","comparison":"去年同期 4.17 億美元；年減約 73%","context":"高利潤收入縮減"},{"company":"Tesla","group":"現金流","metric":"營業活動現金流","value":"62.63 億美元","comparison":"2026 年第三季","context":"自由現金流計算基礎"},{"company":"Tesla","group":"現金流","metric":"資本支出","value":"47.32 億美元","comparison":"年增約 110%","context":"低於市場原先預估，不等於長期縮減投資"},{"company":"Tesla","group":"現金流","metric":"自由現金流","value":"+15.31 億美元","comparison":"去年同期 +39.90 億美元；年減約 62%","context":"較第二季 -10.92 億美元轉正"},{"company":"Tesla","group":"現金流","metric":"期末現金與短期投資","value":"454.47 億美元","comparison":"截至 2026 年 9 月底","context":"現金、約當現金與短期投資合計"},{"company":"Meta","group":"營運","metric":"總營收","value":"646.01 億美元","comparison":"年增 26%","context":"廣告業務持續強勁"},{"company":"Meta","group":"營運","metric":"廣告曝光次數","value":"+10%","comparison":"年增幅","context":"旗下應用程式廣告曝光量"},{"company":"Meta","group":"營運","metric":"平均廣告價格","value":"+14%","comparison":"年增幅","context":"並非所有增量均能歸因於 AI"},{"company":"Meta","group":"獲利","metric":"GAAP 營業利益","value":"129.88 億美元","comparison":"年減 37%","context":"受到法律和解費用影響"},{"company":"Meta","group":"獲利","metric":"GAAP 營業利益率","value":"20%","comparison":"去年同期 40%","context":"排除法律費用後估算約 35.4%"},{"company":"Meta","group":"獲利","metric":"GAAP 淨利","value":"98.60 億美元","comparison":"去年同期 27.09 億美元","context":"同比受有效稅率差異干擾"},{"company":"Meta","group":"獲利","metric":"GAAP EPS","value":"3.83 美元","comparison":"排除法律費用後公司估算 7.40 美元","context":"調整估算不取代 GAAP"},{"company":"Meta","group":"獲利","metric":"法律和解相關支出","value":"約 98.90 億美元","comparison":"2026 年第三季認列","context":"扣除後的營業利益估算約 228.78 億美元"},{"company":"Meta","group":"現金流","metric":"營業活動現金流","value":"327.86 億美元","comparison":"2026 年第三季","context":"仍具有強大現金產生能力"},{"company":"Meta","group":"現金流","metric":"資本支出（含融資租賃本金）","value":"約 349.10 億美元","comparison":"2026 年第三季","context":"大於營業現金流"},{"company":"Meta","group":"現金流","metric":"自由現金流","value":"-21.20 億美元","comparison":"去年同期 +106.25 億美元","context":"投資支出壓過本季營運現金流"},{"company":"Meta","group":"現金流","metric":"期末現金與有價證券","value":"824.50 億美元","comparison":"截至 2026 年 9 月底","context":"未顯示立即流動性危機"}];
+
+    const menuButton = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const openIcon = document.getElementById('menu-open-icon');
+    const closeIcon = document.getElementById('menu-close-icon');
+    function setMobileMenu(open) {
+      mobileNav.classList.toggle('hidden', !open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      openIcon.classList.toggle('hidden', open);
+      closeIcon.classList.toggle('hidden', !open);
+    }
+    menuButton.addEventListener('click', () => setMobileMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMobileMenu(false)));
+    window.addEventListener('keydown', e => { if (e.key === 'Escape') setMobileMenu(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1280) setMobileMenu(false); });
+
+    const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
+    const trackedIds = [...new Set(navLinks.map(a => a.hash.slice(1)))];
+    function markNav(id) {
+      navLinks.forEach(a => {
+        const active = a.hash === '#' + id;
+        a.classList.toggle('active-nav-link', active);
+        a.classList.toggle('inactive-nav-link', !active);
+        if (active) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
+      });
+    }
+    markNav(location.hash.slice(1) && trackedIds.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview');
+    if ('IntersectionObserver' in window) {
+      const sections = trackedIds.map(id => document.getElementById(id)).filter(Boolean);
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length) markNav(visible[0].target.id);
+      }, { rootMargin: '-85px 0px -62% 0px', threshold:0 });
+      sections.forEach(s => observer.observe(s));
+    }
+    navLinks.forEach(a => a.addEventListener('click', () => markNav(a.hash.slice(1))));
+    window.addEventListener('hashchange', () => {const id = location.hash.slice(1); if (trackedIds.includes(id)) markNav(id);});
+
+    const searchInput = document.getElementById('metric-search');
+    const companySelect = document.getElementById('metric-company');
+    const groupSelect = document.getElementById('metric-group');
+    const tableBody = document.getElementById('metric-rows');
+    const rowCount = document.getElementById('table-count');
+    const textCell = (value, className = '') => {
+      const el = document.createElement('td');
+      if (className) el.className = className;
+      el.textContent = value;
+      return el;
+    };
+    function renderMetrics() {
+      const query = searchInput.value.normalize('NFKC').trim().toLocaleLowerCase();
+      const company = companySelect.value;
+      const group = groupSelect.value;
+      const rows = productData.filter(row => (company === 'all' || row.company === company) && (group === 'all' || row.group === group) && (!query || Object.values(row).join(' ').normalize('NFKC').toLocaleLowerCase().includes(query)));
+      const frag = document.createDocumentFragment();
+      if (rows.length === 0) {
+        const tr = document.createElement('tr');
+        const td = textCell('沒有符合搜尋條件的資料，請調整關鍵字或篩選條件。', 'text-center text-slate-500 py-8');
+        td.colSpan = 6;
+        tr.appendChild(td); frag.appendChild(tr);
+      } else {
+        rows.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.appendChild(textCell(row.company, 'font-bold text-sky-800'));
+          tr.appendChild(textCell(row.group));
+          tr.appendChild(textCell(row.metric, 'font-semibold text-slate-800'));
+          tr.appendChild(textCell(row.value, 'font-bold text-slate-900 whitespace-nowrap'));
+          tr.appendChild(textCell(row.comparison));
+          tr.appendChild(textCell(row.context, 'text-slate-600'));
+          frag.appendChild(tr);
+        });
+      }
+      tableBody.replaceChildren(frag);
+      rowCount.textContent = `顯示 ${rows.length} / ${productData.length} 筆指標`;
+    }
+    [searchInput,companySelect,groupSelect].forEach(el => el.addEventListener(el.tagName === 'INPUT' ? 'input' : 'change', renderMetrics));
+    renderMetrics();
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, "Noto Sans TC", sans-serif';
+      Chart.defaults.color = '#526778';
+      const baseOptions = {
+        responsive:true, maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:9,padding:18}}, tooltip:{callbacks:{label:ctx => `${ctx.dataset.label}：${Number(ctx.parsed.y).toFixed(2)} 億美元`}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:12}}},y:{grid:{color:'#e9f0f5'},ticks:{callback:v => v + ' 億'}}}
+      };
+      new Chart(document.getElementById('fcfChart'), {
+        type:'bar', data:{labels:['Tesla','Meta'],datasets:[
+          {label:'2025 Q3', data:[39.90,106.25],backgroundColor:'#a2cbe0',borderRadius:5,maxBarThickness:64},
+          {label:'2026 Q3', data:[15.31,-21.20],backgroundColor:'#0369a1',borderRadius:5,maxBarThickness:64}
+        ]}, options: structuredClone(baseOptions)
+      });
+      new Chart(document.getElementById('cashChart'), {
+        type:'bar', data:{labels:['Tesla','Meta'],datasets:[
+          {label:'營業活動現金流',data:[62.63,327.86],backgroundColor:'#0284c7',borderRadius:5,maxBarThickness:64},
+          {label:'資本支出',data:[47.32,349.10],backgroundColor:'#0f766e',borderRadius:5,maxBarThickness:64}
+        ]}, options: structuredClone(baseOptions)
+      });
+    }
+  </script>
+</body>
+</html>
