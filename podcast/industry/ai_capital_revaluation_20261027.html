@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI資本重估投資專題：解析Anthropic IPO財務與股權結構、Microsoft自願離職及資本支出、SpaceX／Starlink資安事件，以及美股投資觀察。">
+  <meta name="theme-color" content="#0c253a">
+  <title>巴菲特AI價值投資-AI資本重估與投資考驗</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background:#f8fafc; color:#334155; overflow-x: hidden; }
+    section[id] { scroll-margin-top: 84px; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color:#0369a1; border-bottom:2px solid #0284c7; font-weight:700; }
+    .inactive-nav-link { color:#475569; border-bottom:2px solid transparent; font-weight:500; }
+    .inactive-nav-link:hover { color:#0369a1; }
+    .nav-link { display:inline-flex; align-items:center; min-height:44px; padding:0 0.1rem; transition: color .2s, border-color .2s; }
+    .mobile-nav-link { display:block; padding:.8rem 1rem; border-left:3px solid transparent; border-radius:.25rem; }
+    .mobile-nav-link.active-nav-link { background:#eff6ff; color:#075985; border-bottom:0; border-left-color:#0284c7; }
+    .mobile-nav-link.inactive-nav-link { border-bottom:0; }
+    .chart-shell { position:relative; width:100%; height:286px; min-width:0; }
+    .chart-shell canvas { display:block; max-width:100%; }
+    .chart-fallback { display:none; margin-top:1rem; padding:.75rem; background:#f1f5f9; color:#475569; border-radius:.5rem; font-size:.875rem; }
+    .tag { display:inline-block; font-size:.73rem; font-weight:650; border-radius:9999px; padding:.18rem .6rem; }
+    .tag-actual { background:#e0f2fe; color:#075985; }
+    .tag-planned { background:#fef3c7; color:#92400e; }
+    .tag-context { background:#f1f5f9; color:#475569; }
+    .tag-watch { background:#ede9fe; color:#5b21b6; }
+    .card-accent { border-left:4px solid #0ea5e9; }
+    .numeric { font-variant-numeric: tabular-nums; }
+    .prose-copy { line-height:1.85; }
+    .prose-copy p + p { margin-top:.8rem; }
+    .focus-ring:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid #38bdf8; outline-offset:2px; }
+    @media(max-width:640px) { .chart-shell { height:244px; } .table-shell { max-width:calc(100vw - 2rem); } }
+    @media(prefers-reduced-motion:reduce){ html { scroll-behavior:auto; } .nav-link { transition:none; } }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="主要章節導航">
+      <div class="flex items-center justify-between h-16 gap-5">
+        <div class="font-extrabold text-sky-900 tracking-tight text-base sm:text-lg shrink-0">巴菲特AI價值投資</div>
+        <div class="hidden lg:flex items-center gap-4 xl:gap-6 text-sm" id="desktop-nav">
+          <a class="nav-link inactive-nav-link" data-nav-link href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link" data-nav-link href="#anthropic">Anthropic</a>
+          <a class="nav-link inactive-nav-link" data-nav-link href="#microsoft">Microsoft</a>
+          <a class="nav-link inactive-nav-link" data-nav-link href="#starlink">Starlink</a>
+          <a class="nav-link inactive-nav-link" data-nav-link href="#effects">因果鏈</a>
+          <a class="nav-link inactive-nav-link" data-nav-link href="#strategy">投資策略</a>
+          <a class="nav-link inactive-nav-link" data-nav-link href="#watchlist">追蹤指標</a>
+          <a class="nav-link inactive-nav-link" data-nav-link href="#conclusion">結論</a>
+        </div>
+        <button id="menuToggle" type="button" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-md text-slate-700 hover:bg-slate-100 focus-ring" aria-label="開啟章節選單" aria-controls="mobileMenu" aria-expanded="false">
+          <svg id="menuIcon" aria-hidden="true" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-100 py-2 max-h-[70vh] overflow-y-auto" aria-label="行動版章節導航">
+        <a class="mobile-nav-link inactive-nav-link" data-nav-link href="#overview">核心觀點</a>
+        <a class="mobile-nav-link inactive-nav-link" data-nav-link href="#anthropic">Anthropic</a>
+        <a class="mobile-nav-link inactive-nav-link" data-nav-link href="#microsoft">Microsoft</a>
+        <a class="mobile-nav-link inactive-nav-link" data-nav-link href="#starlink">Starlink</a>
+        <a class="mobile-nav-link inactive-nav-link" data-nav-link href="#effects">因果鏈</a>
+        <a class="mobile-nav-link inactive-nav-link" data-nav-link href="#strategy">投資策略</a>
+        <a class="mobile-nav-link inactive-nav-link" data-nav-link href="#watchlist">追蹤指標</a>
+        <a class="mobile-nav-link inactive-nav-link" data-nav-link href="#conclusion">結論</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+    <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight max-w-4xl">AI資本重估：估值、效率與信任</h1>
+      <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">Anthropic公開IPO申報凸顯高速成長與股權稀釋的拉鋸；Microsoft透過自願離職方案重配資源；Starlink廣告資料風險顯示可信任連網的隱藏成本。AI投資正從追逐營收增速，轉向驗證增量利潤、自由現金流與客戶信任。</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-8 max-w-5xl" aria-label="三項核心報告數據">
+        <div class="rounded-lg bg-white/10 border border-white/20 p-4 backdrop-blur-sm">
+          <p class="text-sm text-sky-100">Anthropic｜2026上半年營收</p>
+          <p class="numeric text-2xl sm:text-3xl font-bold mt-2">162.86<span class="text-base font-medium ml-1">億美元</span></p>
+          <p class="text-xs text-sky-100 mt-2">申報數據，年增約1,300%</p>
+        </div>
+        <div class="rounded-lg bg-white/10 border border-white/20 p-4 backdrop-blur-sm">
+          <p class="text-sm text-sky-100">Microsoft｜2026曆年CapEx</p>
+          <p class="numeric text-2xl sm:text-3xl font-bold mt-2">1,750<span class="text-base font-medium ml-1">億美元</span></p>
+          <p class="text-xs text-sky-100 mt-2">市場關注的公司支出預估，非已執行金額</p>
+        </div>
+        <div class="rounded-lg bg-white/10 border border-white/20 p-4 backdrop-blur-sm">
+          <p class="text-sm text-sky-100">Starlink｜消費者服務線數</p>
+          <p class="numeric text-2xl sm:text-3xl font-bold mt-2">1,360<span class="text-base font-medium ml-1">萬條</span></p>
+          <p class="text-xs text-sky-100 mt-2">截至2026/09/30，約年增89%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 space-y-14 md:space-y-16">
+    <section id="overview" aria-labelledby="overview-heading">
+      <h2 id="overview-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心觀點｜從成長速度到價值留存</h2>
+      <p class="text-slate-600 prose-copy max-w-5xl mb-6">三項企業事件指向同一問題：需求擴張背後，誰承擔融資、算力與合規成本？評估AI資本回報，必須同時看可持續營收、現金轉換、合約品質與治理能力，而不能把媒體估值、計畫投資或新聞指控視為既定財務結果。</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-accent">
+          <div class="flex justify-between items-center gap-2"><h3 class="font-bold text-lg text-slate-900">金融與治理成本</h3><span class="tag tag-actual">Anthropic</span></div>
+          <p class="text-slate-600 prose-copy mt-3">巨額非現金公允價值損失不是等額現金流出，但轉股可能稀釋普通股；估值也受股權權利與客戶集中度影響。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-accent">
+          <div class="flex justify-between items-center gap-2"><h3 class="font-bold text-lg text-slate-900">算力與組織成本</h3><span class="tag tag-actual">Microsoft</span></div>
+          <p class="text-slate-600 prose-copy mt-3">資本支出先消耗現金，折舊分期反映；員工自願離職的適用資格也不能直接換算成已實現節流。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-accent">
+          <div class="flex justify-between items-center gap-2"><h3 class="font-bold text-lg text-slate-900">資安與信任成本</h3><span class="tag tag-actual">Starlink</span></div>
+          <p class="text-slate-600 prose-copy mt-3">第三方廣告資料可能暴露位置與行為線索；需觀察是否轉化為採購門檻、合約限制或新增整改支出。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="anthropic" aria-labelledby="anthropic-heading">
+      <h2 id="anthropic-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、Anthropic｜高速成長背後的財務結構</h2>
+      <div class="flex flex-wrap items-center gap-2 mb-5"><span class="tag tag-actual">2026/10/26提交S-1</span><span class="tag tag-planned">ANT擬掛牌，尚未上市</span><span class="tag tag-context">發行價格、股數與日期待定</span></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm text-slate-500">上半年營業虧損</div><div class="numeric text-xl sm:text-2xl font-bold text-rose-700 mt-2">−6.93億</div><div class="text-xs text-slate-500 mt-2">美元，約占同期營收4.3%</div></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm text-slate-500">上半年會計淨虧損</div><div class="numeric text-xl sm:text-2xl font-bold text-rose-700 mt-2">−807.48億</div><div class="text-xs text-slate-500 mt-2">美元，不等於現金消耗</div></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm text-slate-500">金融工具評價損失</div><div class="numeric text-xl sm:text-2xl font-bold text-amber-700 mt-2">723.88億</div><div class="text-xs text-slate-500 mt-2">美元，公平價值變動</div></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="text-sm text-slate-500">上半年營業活動現金流</div><div class="numeric text-xl sm:text-2xl font-bold text-emerald-700 mt-2">＋39.29億</div><div class="text-xs text-slate-500 mt-2">美元，不等同自由現金流</div></div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-slate-900">上半年營收加速</h3>
+          <p class="text-sm text-slate-500 mt-1">2025與2026上半年比較｜單位：億美元</p>
+          <div class="chart-shell mt-4"><canvas id="anthropicRevenueChart" role="img" aria-label="Anthropic 2025上半年營收11.63億美元，2026上半年營收162.86億美元"></canvas></div>
+          <p class="chart-fallback">2025上半年：11.63億美元；2026上半年：162.86億美元，年增約1,300%。</p>
+          <p class="text-sm text-slate-600 leading-relaxed mt-3">第二季單季營收約115.55億美元，單季營業利益約9.74億美元；單季表現不可直接推定為全年獲利。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-slate-900">收入來源以使用量計價為主</h3>
+          <p class="text-sm text-slate-500 mt-1">2026上半年營收結構｜單位：億美元</p>
+          <div class="chart-shell mt-4"><canvas id="anthropicMixChart" role="img" aria-label="使用量計價收入130.64億美元，訂閱收入32.22億美元"></canvas></div>
+          <p class="chart-fallback">使用量計價130.64億美元（約80%）；訂閱收入32.22億美元（約20%）。</p>
+          <p class="text-sm text-slate-600 leading-relaxed mt-3">使用量收入約占80%，反映商業化動能，也意味營收對企業用量與預算週期更敏感，並非全數已鎖定多年合約。</p>
+        </article>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+        <article class="bg-sky-50 border border-sky-100 rounded-lg p-6">
+          <h3 class="font-bold text-lg text-sky-950">運算效率</h3>
+          <div class="numeric text-3xl font-extrabold text-sky-800 mt-2">約55%</div>
+          <p class="text-sm text-slate-700 mt-2 prose-copy">2026上半年運算與基礎建設費用約89.45億美元，占同期營收約55%；2025同期該費用曾高於營收兩倍。<strong>此比率不是標準軟體毛利率。</strong></p>
+        </article>
+        <article class="bg-violet-50 border border-violet-100 rounded-lg p-6">
+          <h3 class="font-bold text-lg text-violet-950">客戶／通路集中</h3>
+          <div class="numeric text-3xl font-extrabold text-violet-800 mt-2">25% / 48%</div>
+          <p class="text-sm text-slate-700 mt-2 prose-copy">前五大客戶約占2026年前九個月營收25%；雲端Marketplace約占2026上半年營收48%。<strong>兩項比例期間不同，不可直接加總。</strong></p>
+        </article>
+        <article class="bg-amber-50 border border-amber-100 rounded-lg p-6">
+          <h3 class="font-bold text-lg text-amber-950">IPO治理結構</h3>
+          <div class="numeric text-3xl font-extrabold text-amber-800 mt-2">50.1%</div>
+          <p class="text-sm text-slate-700 mt-2 prose-copy">申報規劃中，創辦人相關股份掌握50.1%特定表決權，公益信託有董事會多數席次選任權；一般股東治理影響力需納入折價。</p>
+        </article>
+      </div>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex items-center flex-wrap gap-2 mb-4"><h3 class="text-xl font-bold text-slate-900">約1.5兆美元估值的敏感度</h3><span class="tag tag-planned">僅為市場情境</span></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-4"><div class="text-sm text-slate-500">2026上半年營收 × 2（年化）</div><p class="numeric text-2xl font-bold text-slate-900 mt-1">325.72億美元</p><p class="mt-2 text-sm text-slate-600">以1.5兆美元股權估值假設：概略市銷率 <strong>約46倍</strong></p></div>
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-4"><div class="text-sm text-slate-500">2026第二季營收 × 4（年化）</div><p class="numeric text-2xl font-bold text-slate-900 mt-1">462.20億美元</p><p class="mt-2 text-sm text-slate-600">以相同估值假設：概略市銷率 <strong>約32.5倍</strong></p></div>
+        </div>
+        <p class="text-sm text-slate-600 leading-relaxed">兩種分母均屬簡化年化，不是未來十二個月財測，也未計入上市後實際完全稀釋股數、現金部位與不同股份權利。估值情境不代表已核定發行價或公司已正式上市。</p>
+      </article>
+      <p class="bg-sky-50 border-l-4 border-sky-600 px-5 py-4 text-slate-800 prose-copy"><strong>投資判讀：</strong>營收成長與經營效率改善是模型商業化的正面訊號；但長期算力承諾、金融工具轉股、治理權安排及客戶集中，都要求對未定的上市估值保留折價。關鍵追蹤單位運算收入、實際使用率、單位成本和營業現金流是否同步改善。</p>
+    </section>
+
+    <section id="microsoft" aria-labelledby="microsoft-heading">
+      <h2 id="microsoft-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、Microsoft｜人力重整與資本效率</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-4">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <span class="tag tag-context">報導方案適用人數</span><p class="numeric text-3xl font-extrabold text-sky-800 mt-3">約6萬人</p><h3 class="font-semibold text-slate-900 mt-2">自願離職資格</h3><p class="mt-2 text-sm text-slate-600 leading-relaxed">10/26宣布限時Voluntary Exit Offer，涵蓋美國、加拿大、英國與印度的部分團隊與職等。<strong>不是已離職6萬人。</strong></p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <span class="tag tag-actual">員工基數</span><p class="numeric text-3xl font-extrabold text-sky-800 mt-3">22.3萬人</p><h3 class="font-semibold text-slate-900 mt-2">2026年6月底全球員工</h3><p class="mt-2 text-sm text-slate-600 leading-relaxed">約6萬人符合資格，相當於全球員工數約27%；這不能用來直接推算離職率或永久成本節省。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <span class="tag tag-planned">2026曆年預估</span><p class="numeric text-3xl font-extrabold text-sky-800 mt-3">1,750億美元</p><h3 class="font-semibold text-slate-900 mt-2">整體資本支出（CapEx）</h3><p class="mt-2 text-sm text-slate-600 leading-relaxed">涉及資料中心、設備、網路與電力，不可視為全部用於單一AI模型，亦非已全數實現支出。</p>
+        </article>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-slate-900">不要混淆營業費用與資本支出</h3><div class="mt-4 space-y-4 text-sm text-slate-700 leading-relaxed"><div class="border-l-4 border-sky-400 pl-4"><p class="font-semibold text-slate-900">人力費用</p><p>實際自願離職接受率未公開；一次性支援成本、後續補聘及核心團隊效率尚待觀察。</p></div><div class="border-l-4 border-amber-400 pl-4"><p class="font-semibold text-slate-900">算力投資</p><p>現金支出與折舊攤銷發生於不同期間，不能以預期節省薪酬直接沖銷CapEx。</p></div><div class="border-l-4 border-emerald-400 pl-4"><p class="font-semibold text-slate-900">價值轉換</p><p>檢查Azure增量收入、Copilot付費使用、資產利用率、折舊及自由現金流變化。</p></div></div></article>
+        <article class="bg-slate-900 text-slate-100 rounded-lg shadow-lg p-6 mb-6"><span class="tag bg-sky-800 text-sky-100">近期事件</span><h3 class="text-2xl font-bold mt-4">2026年10月28日<br>美股收盤後</h3><p class="text-sky-200 mt-2 font-semibold">預定公布 FY2027 Q1 財報</p><p class="text-slate-300 mt-4 leading-relaxed">最重要的驗證不是單季EPS本身，而是管理層對Azure供需、算力上線、Copilot商業化及未來資本支出的展望。以上為報告所列預定時程，非已發布的財報結果。</p><div class="mt-5 flex flex-wrap gap-2"><span class="tag bg-white/10 text-slate-100">Azure成長</span><span class="tag bg-white/10 text-slate-100">Copilot變現</span><span class="tag bg-white/10 text-slate-100">CapEx／FCF</span></div></article>
+      </div>
+      <p class="bg-sky-50 border-l-4 border-sky-600 px-5 py-4 text-slate-800 prose-copy"><strong>投資判讀：</strong>Microsoft具有企業訂閱生態系及資金調度彈性，但決勝點是「每一筆增量投入創造多少利潤與現金」。應等待10/28財報指引確認，而不是因六萬名適用資格員工的新聞，直接推論確定裁員或獲利成長。</p>
+    </section>
+
+    <section id="starlink" aria-labelledby="starlink-heading">
+      <h2 id="starlink-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、SpaceX／Starlink｜連網成長與資安信任</h2>
+      <div class="flex gap-2 flex-wrap mb-5"><span class="tag tag-actual">依報告：SPCX於2026/06/12上市</span><span class="tag tag-watch">第三方廣告監控調查</span></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-slate-900">Starlink消費者服務線數</h3>
+          <p class="text-sm text-slate-500 mt-1">截至各年9月30日｜單位：萬條</p>
+          <div class="chart-shell mt-4"><canvas id="starlinkLinesChart" role="img" aria-label="Starlink 2025年9月30日消費者服務線數720萬，2026年9月30日1360萬"></canvas></div>
+          <p class="chart-fallback">2025/09/30：約720萬條；2026/09/30：約1,360萬條，約年增89%。</p>
+          <p class="text-sm text-slate-600 leading-relaxed mt-3">服務線數成長呈現規模擴張，不等同於等比例ARPU或利潤成長。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-slate-900">調查涉及的資料鏈與證據界線</h3>
+          <div class="space-y-4 mt-4 text-sm text-slate-700 prose-copy">
+            <div class="p-4 rounded-lg bg-amber-50 border border-amber-100"><span class="tag tag-watch">研究／報導</span><p class="mt-2">TrendAI資料指向「Shadow-Earth-79」在逾100國Starlink相關流量上有異常廣泛的廣告競價；知情人士將其與Discover-Tech聯繫。其他研究指出Discover-Tech相關基礎設施在特定環境被利用的證據。</p></div>
+            <div class="p-4 rounded-lg bg-rose-50 border border-rose-100"><span class="tag tag-planned">尚未證實</span><p class="mt-2">大量廣告競價<strong>不等於</strong>全部用戶遭監控成功、裝置感染或SpaceX核心網路遭入侵；目前也不能由此推算確定營收減損或大規模用戶流失。</p></div>
+            <div class="p-4 rounded-lg bg-sky-50 border border-sky-100"><span class="tag tag-actual">技術機制</span><p class="mt-2">可能受濫用的是即時廣告競價中攜帶的裝置、環境與網路識別線索，防護範圍跨及終端、瀏覽器、App與第三方資料供應鏈。</p></div>
+          </div>
+        </article>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-lg text-slate-900">短期｜確認事件事實</h3><p class="mt-3 text-slate-600 prose-copy text-sm">等待技術鑑識、公司說明與責任範圍釐清；不能把單則爭議當作已完成的財務損失。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-lg text-slate-900">中期｜採購與整改成本</h3><p class="mt-3 text-slate-600 prose-copy text-sm">追蹤政府及企業資安規格、流量隔離、裝置管控、招標條件、續約與單位用戶成本。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-bold text-lg text-slate-900">長期｜可信任連網</h3><p class="mt-3 text-slate-600 prose-copy text-sm">資安與可稽核性若得到驗證，可能成為國防、航空、海事和關鍵任務連網的差異化能力。</p></div>
+      </div>
+      <p class="bg-sky-50 border-l-4 border-sky-600 px-5 py-4 text-slate-800 prose-copy"><strong>投資判讀：</strong>SPCX成長主軸仍是連網覆蓋、企業與政府客戶及行動通訊。此事件應列入風險監控，但是否變為可量化財務衝擊，要由合約變動、監管處置與整改費用驗證。</p>
+    </section>
+
+    <section id="effects" aria-labelledby="effects-heading">
+      <h2 id="effects-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、產業因果鏈｜從需求到估值分化</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 relative"><div class="w-10 h-10 rounded-full bg-sky-100 text-sky-900 font-bold flex items-center justify-center">01</div><h3 class="font-bold text-lg text-slate-900 mt-4">第一階：需求擴張</h3><p class="text-slate-600 prose-copy mt-2">模型營收、雲端資本投入、衛星網路覆蓋持續擴張，晶片、記憶體、伺服器、電力及冷卻供應鏈率先收到需求訊號。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 relative"><div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-900 font-bold flex items-center justify-center">02</div><h3 class="font-bold text-lg text-slate-900 mt-4">第二階：資本密集化</h3><p class="text-slate-600 prose-copy mt-2">模型業者購買算力且依賴雲端通路；雲端業者承擔折舊、長約及電力義務，需求疲弱時壓力可能回傳設備供應鏈。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 relative"><div class="w-10 h-10 rounded-full bg-amber-100 text-amber-900 font-bold flex items-center justify-center">03</div><h3 class="font-bold text-lg text-slate-900 mt-4">第三階：風險重新定價</h3><p class="text-slate-600 prose-copy mt-2">融資與稀釋、自由現金流、組織效率、治理與資安信任被納入估值，同樣增速的企業可能獲得不同倍數。</p></article>
+      </div>
+      <div class="bg-slate-900 rounded-lg p-6 md:p-8 text-white">
+        <h3 class="text-lg font-bold">跨市場傳導觀察</h3><p class="text-slate-200 mt-3 leading-relaxed">若CapEx持續上升，同時信用利差、融資成本與現金回報要求也提高，市場對營收增長的估值回饋可能下降；若付費需求、資產利用率、續約及現金流均改善，AI硬體與基建景氣的持續性才更有支撐。</p>
+      </div>
+    </section>
+
+    <section id="strategy" aria-labelledby="strategy-heading">
+      <h2 id="strategy-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">五、美股投資策略｜分層配置與事件驗證</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-7">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="tag tag-actual">短期｜1–4週</p><h3 class="text-xl font-bold text-slate-900 mt-3">優先確認事件</h3><div class="text-sm text-slate-600 prose-copy mt-4 space-y-3"><p><strong>MSFT：</strong>比對10/28財報中的Azure、Copilot、FCF、折舊與CapEx指引。</p><p><strong>ANT：</strong>發行價、股數、完全稀釋資本額未定，不能設定可執行的IPO買入價格。</p><p><strong>SPCX：</strong>等待公司說明、合約變化、後續監管或資安鑑識。</p></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="tag tag-actual">中期｜3–12個月</p><h3 class="text-xl font-bold text-slate-900 mt-3">需求驗證優先</h3><div class="text-sm text-slate-600 prose-copy mt-4 space-y-3"><p>觀察<strong>Nvidia（NVDA）、AMD（AMD）、Broadcom（AVGO）</strong>及記憶體、伺服器、電力等供應鏈的終端付費使用、GPU租用率與回款品質。</p><p>合約宣告不等於交付營收；平台須證明AI增加高毛利收入，資安供應商須證明採購需求轉成經常性營收。</p></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="tag tag-actual">長期｜1–2年</p><h3 class="text-xl font-bold text-slate-900 mt-3">情境與財務韌性</h3><div class="text-sm text-slate-600 prose-copy mt-4 space-y-3"><p>根據AI滲透率、推論成本、雲端利用率、長約負擔與融資條件，持續修正資本報酬的判斷。</p><p>關注高估值、負自由現金流與高度客戶集中企業在壓力情境下的承受能力。</p></div></article>
+      </div>
+      <h3 class="text-xl font-bold text-slate-900 mb-4">長期三種情境（非報酬率預測）</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="rounded-lg bg-emerald-50 border border-emerald-100 p-5"><div class="font-bold text-emerald-800">樂觀情境</div><p class="text-sm text-slate-700 mt-2 leading-relaxed">企業AI滲透增加、單位推論成本下降、算力高利用率，模型與平台自由現金流共同改善；價值可能擴散至模型與企業軟體。</p></div>
+        <div class="rounded-lg bg-sky-50 border border-sky-100 p-5"><div class="font-bold text-sky-800">基準情境</div><p class="text-sm text-slate-700 mt-2 leading-relaxed">營收持續成長，但合約費用與折舊加速認列，產業獲利明顯分化；偏重財務韌性及合理買入估值。</p></div>
+        <div class="rounded-lg bg-rose-50 border border-rose-100 p-5"><div class="font-bold text-rose-800">悲觀情境</div><p class="text-sm text-slate-700 mt-2 leading-relaxed">需求放緩但長約仍須履行，價格競爭壓縮毛利，融資或監管成本上升；高估值與負現金流公司可能先承壓。</p></div>
+      </div>
+    </section>
+
+    <section id="watchlist" aria-labelledby="watchlist-heading">
+      <h2 id="watchlist-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">六、七項追蹤指標與可搜尋數據</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-9">
+        <div class="rounded-lg border border-slate-200 bg-white p-5 flex gap-4"><span class="numeric text-2xl font-bold text-sky-700">01</span><div><h3 class="font-bold text-slate-900">ANT正式IPO定價與稀釋股本</h3><p class="text-sm text-slate-600 mt-1">納入可轉換工具、特別股、RSU與其他權利，再評估上市估值。</p></div></div>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 flex gap-4"><span class="numeric text-2xl font-bold text-sky-700">02</span><div><h3 class="font-bold text-slate-900">ANT運算費用比率與現金流</h3><p class="text-sm text-slate-600 mt-1">判斷收入成長是否持續快於運算成本擴張。</p></div></div>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 flex gap-4"><span class="numeric text-2xl font-bold text-sky-700">03</span><div><h3 class="font-bold text-slate-900">ANT客戶與Marketplace集中度</h3><p class="text-sm text-slate-600 mt-1">監測雲端通路的議價能力、營收集中與模型替換風險。</p></div></div>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 flex gap-4"><span class="numeric text-2xl font-bold text-sky-700">04</span><div><h3 class="font-bold text-slate-900">MSFT Azure、Copilot、CapEx／FCF</h3><p class="text-sm text-slate-600 mt-1">追蹤每單位增量資本能否轉成收入、毛利與現金。</p></div></div>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 flex gap-4"><span class="numeric text-2xl font-bold text-sky-700">05</span><div><h3 class="font-bold text-slate-900">MSFT實際自願離職參與率</h3><p class="text-sm text-slate-600 mt-1">區分一次性費用、後續人力淨變化及研發／產品效率。</p></div></div>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 flex gap-4"><span class="numeric text-2xl font-bold text-sky-700">06</span><div><h3 class="font-bold text-slate-900">SPCX合約、整改與監管</h3><p class="text-sm text-slate-600 mt-1">重點是續約、採購延後、契約限制與可量化的安全成本。</p></div></div>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 flex gap-4 md:col-span-2"><span class="numeric text-2xl font-bold text-sky-700">07</span><div><h3 class="font-bold text-slate-900">AI產業資本成本與回款品質</h3><p class="text-sm text-slate-600 mt-1">觀察利率、信用利差、融資條件與硬體訂單、價格及應收款是否背離。</p></div></div>
+      </div>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6" aria-labelledby="data-table-heading">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5"><div><h3 id="data-table-heading" class="text-xl font-bold text-slate-900">報告數據檢索表</h3><p class="text-sm text-slate-500 mt-1">只收錄原報告明列的指標；期間與「申報、預估、情境、媒體報導」分開顯示。</p></div><p class="text-sm text-slate-500" id="rowCount" aria-live="polite"></p></div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4"><div class="sm:col-span-2"><label for="metricSearch" class="block text-sm font-semibold text-slate-700 mb-1">搜尋公司、指標、日期或備註</label><input id="metricSearch" type="search" placeholder="例如：現金流、Marketplace、2026上半年" class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm bg-white focus:ring-2 focus:ring-sky-400 focus:outline-none" autocomplete="off"></div><div><label for="companyFilter" class="block text-sm font-semibold text-slate-700 mb-1">公司篩選</label><select id="companyFilter" class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm bg-white focus:ring-2 focus:ring-sky-400 focus:outline-none"><option value="all">全部公司</option><option value="Anthropic">Anthropic</option><option value="Microsoft">Microsoft</option><option value="Starlink">SpaceX／Starlink</option></select></div></div>
+        <div class="table-shell overflow-x-auto rounded-lg border border-slate-200" tabindex="0" role="region" aria-label="可橫向捲動的報告數據表">
+          <table class="w-full min-w-[820px] text-sm text-left border-collapse"><thead class="sticky top-0 z-10 bg-slate-100 text-slate-800"><tr><th class="py-3 px-4 font-semibold">公司</th><th class="py-3 px-4 font-semibold">指標</th><th class="py-3 px-4 font-semibold">期間／日期</th><th class="py-3 px-4 font-semibold">數值</th><th class="py-3 px-4 font-semibold">資料性質</th><th class="py-3 px-4 font-semibold min-w-[220px]">口徑與提示</th></tr></thead><tbody id="metricsBody" class="divide-y divide-slate-100 bg-white"></tbody></table>
+        </div>
+        <p id="noMetrics" class="hidden text-sm text-slate-500 py-5 text-center" role="status">找不到符合條件的數據，請調整關鍵字或公司篩選。</p>
+      </article>
+    </section>
+
+    <section id="conclusion" aria-labelledby="conclusion-heading">
+      <h2 id="conclusion-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論｜從投資承諾到現金回報</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6 md:p-8 prose-copy text-slate-700">
+        <p>Anthropic揭露模型業務成長及財務工具評價的差異，提醒投資人「淨虧損不等於現金流出」，但仍須評估未來股權稀釋。Microsoft的人力重整展示算力時代的資源配置壓力，適用資格人數不能當作已發生的節流。Starlink事件則讓資安、隱私、合約信任進入衛星網路的估值框架。</p>
+        <p class="mt-4 font-semibold text-sky-900">下一階段，市場更可能獎勵能把可持續營收轉成增量獲利、自由現金流與可靠客戶關係的企業，而不是單純宣布最大資本投入的企業。</p>
+      </div>
+      <p class="text-sm text-slate-500 leading-relaxed">分析時點：2026年10月27日。IPO發行條件、Microsoft預定財報及Starlink調查後續均有待新資訊驗證；頁面數據與情境均依所提供的當日投資報告整理。</p>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI資本重估與投資考驗。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中Anthropic、Microsoft與SpaceX／Starlink相關公開資料 (2026年10月27日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 行動版選單與無障礙狀態
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const openIcon = '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />';
+    const closeIcon = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />';
+    function setMenuOpen(open) {
+      mobileMenu.classList.toggle('hidden', !open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      menuIcon.innerHTML = open ? closeIcon : openIcon;
+    }
+    menuToggle.addEventListener('click', () => setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true'));
+    document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenuOpen(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1024) setMenuOpen(false); });
+
+    // IntersectionObserver依實際捲動位置更新桌面與行動版導覽
+    const sectionIds = ['overview', 'anthropic', 'microsoft', 'starlink', 'effects', 'strategy', 'watchlist', 'conclusion'];
+    const navLinks = [...document.querySelectorAll('[data-nav-link]')];
+    function activateNav(id) {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === '#' + id;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    activateNav('overview');
+    if ('IntersectionObserver' in window) {
+      const visibleSections = new Map();
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) visibleSections.set(entry.target.id, entry.boundingClientRect.top);
+          else visibleSections.delete(entry.target.id);
+        });
+        if (visibleSections.size) {
+          const selected = [...visibleSections.entries()].sort((a,b) => Math.abs(a[1]-90) - Math.abs(b[1]-90))[0][0];
+          activateNav(selected);
+        }
+      }, { rootMargin: '-80px 0px -62% 0px', threshold: 0 });
+      sectionIds.forEach(id => observer.observe(document.getElementById(id)));
+    }
+
+    // 原報告可核對數字：不同期間或性質不相互混算
+    const productData = [
+      { company:'Anthropic', metric:'營收', period:'2025上半年', value:'11.63 億美元', kind:'申報數據', note:'2026同期成長率比較基期' },
+      { company:'Anthropic', metric:'營收', period:'2026上半年', value:'162.86 億美元', kind:'申報數據', note:'較2025同期年增約1,300%' },
+      { company:'Anthropic', metric:'營業虧損', period:'2026上半年', value:'6.93 億美元', kind:'申報數據', note:'虧損金額，約占同期營收4.3%' },
+      { company:'Anthropic', metric:'會計淨虧損', period:'2026上半年', value:'807.48 億美元', kind:'申報數據', note:'含非現金評價項目，不等於燒掉的現金' },
+      { company:'Anthropic', metric:'金融工具公平價值變動損失', period:'2026上半年', value:'723.88 億美元', kind:'申報數據', note:'可轉換票據、衍生負債與未來股權協議等' },
+      { company:'Anthropic', metric:'營業活動現金流', period:'2026上半年', value:'＋39.29 億美元', kind:'申報數據', note:'為正值；不能直接視為自由現金流' },
+      { company:'Anthropic', metric:'單季營收', period:'2026第二季', value:'約115.55 億美元', kind:'申報數據', note:'僅供單季年化估值示意' },
+      { company:'Anthropic', metric:'單季營業利益', period:'2026第二季', value:'約9.74 億美元', kind:'申報數據', note:'不能直接外推全年穩定獲利' },
+      { company:'Anthropic', metric:'運算及基礎建設費用', period:'2026上半年', value:'約89.45 億美元', kind:'申報數據', note:'約占營收55%，不可直接當軟體毛利率' },
+      { company:'Anthropic', metric:'使用量計價收入', period:'2026上半年', value:'約130.64 億美元', kind:'申報數據', note:'約占同期營收80%' },
+      { company:'Anthropic', metric:'訂閱制收入', period:'2026上半年', value:'約32.22 億美元', kind:'申報數據', note:'約占同期營收20%' },
+      { company:'Anthropic', metric:'前五大客戶營收占比', period:'2026前九個月', value:'約25%', kind:'申報數據', note:'與Marketplace占比統計期間不同' },
+      { company:'Anthropic', metric:'Marketplace銷售占比', period:'2026上半年', value:'約48%', kind:'申報數據', note:'經大型雲端平台銷售之營收占比' },
+      { company:'Anthropic', metric:'創辦人相關特定表決權', period:'IPO申報規劃', value:'50.1%', kind:'擬議安排', note:'公益信託亦有董事會多數席次選任權' },
+      { company:'Anthropic', metric:'市場討論股權估值', period:'2026/10/27情境', value:'約1.5 兆美元', kind:'市場情境', note:'非核定IPO定價；概略市銷率依分母約46倍／32.5倍' },
+      { company:'Microsoft', metric:'符合自願離職資格員工', period:'2026/10/26宣布', value:'約6 萬人', kind:'媒體報導', note:'為資格人數，非實際離職或確定裁員' },
+      { company:'Microsoft', metric:'全球員工', period:'2026/06底', value:'22.3 萬人', kind:'報告數據', note:'自願離職資格約占27%' },
+      { company:'Microsoft', metric:'整體資本支出 CapEx', period:'2026曆年預估', value:'約1,750 億美元', kind:'預估', note:'整體支出預估，非已完成支出或單一模型成本' },
+      { company:'Microsoft', metric:'FY2027 Q1 財報日', period:'預定2026/10/28', value:'美股收盤後', kind:'預定事件', note:'追蹤Azure、Copilot、CapEx與自由現金流指引' },
+      { company:'Starlink', metric:'消費者服務線數', period:'2025/09/30', value:'約720 萬條', kind:'申報數據', note:'2026年同期成長比較基期' },
+      { company:'Starlink', metric:'消費者服務線數', period:'2026/09/30', value:'約1,360 萬條', kind:'申報數據', note:'較去年同期增長約89%' },
+      { company:'Starlink', metric:'SpaceX Nasdaq上市', period:'2026/06/12', value:'SPCX', kind:'報告數據', note:'報告所述SpaceX掛牌資訊' },
+      { company:'Starlink', metric:'異常廣告競價所涉範圍', period:'2026/10/27報導', value:'超過100國', kind:'技術研究', note:'競價活動不等於已確認監控成功或網路入侵' }
+    ];
+    const bodyEl = document.getElementById('metricsBody');
+    const searchEl = document.getElementById('metricSearch');
+    const companyEl = document.getElementById('companyFilter');
+    const rowCount = document.getElementById('rowCount');
+    const noMetrics = document.getElementById('noMetrics');
+    function renderMetrics() {
+      const query = searchEl.value.normalize('NFKC').toLocaleLowerCase().trim();
+      const company = companyEl.value;
+      const rows = productData.filter(item => (company === 'all' || item.company === company) &&
+        [item.company, item.metric, item.period, item.value, item.kind, item.note].join(' ').normalize('NFKC').toLocaleLowerCase().includes(query));
+      bodyEl.replaceChildren();
+      const fragment = document.createDocumentFragment();
+      rows.forEach(item => {
+        const row = document.createElement('tr');
+        row.className = 'hover:bg-sky-50/60';
+        [item.company === 'Starlink' ? 'SpaceX／Starlink' : item.company, item.metric, item.period, item.value, item.kind, item.note].forEach((value, index) => {
+          const cell = document.createElement('td');
+          cell.className = 'py-3 px-4 align-top ' + (index === 3 ? 'font-semibold text-slate-900 whitespace-nowrap numeric' : 'text-slate-700');
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        fragment.appendChild(row);
+      });
+      bodyEl.appendChild(fragment);
+      rowCount.textContent = '顯示 ' + rows.length + ' / ' + productData.length + ' 筆';
+      noMetrics.classList.toggle('hidden', rows.length > 0);
+    }
+    searchEl.addEventListener('input', renderMetrics);
+    companyEl.addEventListener('change', renderMetrics);
+    renderMetrics();
+
+    // 僅用原始報告之有依據數值繪圖；離線或CDN載入失敗時提供數字替代文字
+    function showChartFallback() {
+      document.querySelectorAll('.chart-shell').forEach(shell => shell.style.display = 'none');
+      document.querySelectorAll('.chart-fallback').forEach(el => el.style.display = 'block');
+    }
+    if (typeof Chart === 'undefined') {
+      showChartFallback();
+    } else {
+      try {
+        Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+        Chart.defaults.color = '#64748b';
+        const baseOptions = (unit, max) => ({ responsive: true, maintainAspectRatio: false,
+          plugins: { legend: {display: false}, tooltip: {callbacks: {label: ctx => ctx.dataset.label + '：' + ctx.parsed.y.toLocaleString('zh-TW') + ' ' + unit}} },
+          scales: { x: {grid: {display: false}, ticks:{maxRotation:0, minRotation:0}}, y: {beginAtZero: true, suggestedMax: max, title:{display:true,text:unit}, ticks:{callback: value => Number(value).toLocaleString('zh-TW')} } }
+        });
+        new Chart(document.getElementById('anthropicRevenueChart'), { type:'bar', data:{labels:['2025上半年','2026上半年'],datasets:[{label:'營收',data:[11.63,162.86],backgroundColor:['#94a3b8','#0284c7'],borderRadius:6,maxBarThickness:90}]}, options:baseOptions('億美元',180) });
+        new Chart(document.getElementById('anthropicMixChart'), { type:'bar', data:{labels:['使用量計價','訂閱制'],datasets:[{label:'營收',data:[130.64,32.22],backgroundColor:['#0369a1','#7dd3fc'],borderRadius:6,maxBarThickness:90}]}, options:baseOptions('億美元',145) });
+        new Chart(document.getElementById('starlinkLinesChart'), { type:'bar', data:{labels:['2025/09/30','2026/09/30'],datasets:[{label:'消費者服務線數',data:[720,1360],backgroundColor:['#94a3b8','#0f766e'],borderRadius:6,maxBarThickness:90}]}, options:baseOptions('萬條',1500) });
+      } catch (err) { showChartFallback(); }
+    }
+  </script>
+</body>
+</html>
