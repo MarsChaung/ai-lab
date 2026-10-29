@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="tailwind-fallback">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2026年10月29日Alphabet與Microsoft AI現金流投資分析：比較Google Cloud、Azure、資本支出、自由現金流與AI商業化風險。">
+  <meta name="theme-color" content="#0c253a">
+  <title>巴菲特AI價值投資-AI現金流驗證：雙巨頭財報</title>
+  <script src="https://cdn.tailwindcss.com" onload="document.documentElement.classList.remove('tailwind-fallback')"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0369a1; background: #e0f2fe; font-weight: 700; }
+    .inactive-nav-link { color: #57534e; background: transparent; font-weight: 500; }
+    .inactive-nav-link:hover { background: #f1f5f9; color: #075985; }
+    .nav-link { border-radius: 0.55rem; padding: 0.52rem 0.68rem; display: inline-flex; align-items: center; white-space: nowrap; transition: color .2s, background-color .2s; }
+    .metric-hero { background: rgba(255,255,255,.10); border: 1px solid rgba(186,230,253,.24); backdrop-filter: blur(8px); }
+    .chart-shell { width: 100%; height: 355px; position: relative; }
+    .chart-shell-tall { height: 390px; }
+    .section-number { color: #0284c7; letter-spacing: .08em; font-weight: 800; font-size: .75rem; }
+    .pill { display: inline-flex; align-items: center; padding: .2rem .65rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .01em; }
+    .pill-fact { background: #dbeafe; color: #1e40af; }
+    .pill-forward { background: #fef3c7; color: #92400e; }
+    .pill-risk { background: #fee2e2; color: #991b1b; }
+    .eyebrow { font-size: .72rem; letter-spacing: .09em; font-weight: 800; color: #64748b; }
+    .soft-rule { border-top: 1px solid #e2e8f0; }
+    .table-wrap { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .data-table { border-collapse: separate; border-spacing: 0; min-width: 790px; width: 100%; }
+    .data-table thead th { position: sticky; top: 0; background: #eaf4fc; z-index: 2; }
+    .data-table th, .data-table td { padding: .85rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid #e5e7eb; }
+    .data-table tbody tr:hover { background: #f8fafc; }
+    .data-table td:nth-child(3) { font-variant-numeric: tabular-nums; font-weight: 700; color: #0c4a6e; white-space: nowrap; }
+    .skeleton-fallback { display: none; }
+    .callout-edge { border-left: 4px solid #0ea5e9; }
+    section[id] { scroll-margin-top: 84px; }
+    @media (max-width: 640px) {
+      .chart-shell { height: 305px; }
+      .chart-shell-tall { height: 335px; }
+      .nav-link { padding: .76rem 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* 關鍵版面備援：CDN無法載入時，仍可閱讀完整頁面、操作導航與資料表。 */
+    .tailwind-fallback body { margin:0; background:#fafaf9; color:#44403c; font:16px/1.65 ui-sans-serif,system-ui,"Noto Sans TC","Microsoft JhengHei",sans-serif; }
+    .tailwind-fallback * { box-sizing:border-box; }
+    .tailwind-fallback h1,.tailwind-fallback h2,.tailwind-fallback h3,.tailwind-fallback h4,.tailwind-fallback p { margin-top:0; }
+    .tailwind-fallback a { text-decoration:none; }
+    .tailwind-fallback .max-w-7xl { max-width:80rem; margin-left:auto; margin-right:auto; }
+    .tailwind-fallback .max-w-5xl { max-width:64rem; }
+    .tailwind-fallback .max-w-4xl { max-width:56rem; }
+    .tailwind-fallback .max-w-sm { max-width:24rem; }
+    .tailwind-fallback .min-w-0 { min-width:0; }
+    .tailwind-fallback .bg-white { background:#fff; }
+    .tailwind-fallback .bg-stone-50 { background:#fafaf9; }
+    .tailwind-fallback .bg-stone-800 { background:#292524; }
+    .tailwind-fallback .bg-slate-900 { background:#0f172a; }
+    .tailwind-fallback .bg-sky-50 { background:#f0f9ff; }
+    .tailwind-fallback .bg-slate-50 { background:#f8fafc; }
+    .tailwind-fallback .bg-slate-100 { background:#f1f5f9; }
+    .tailwind-fallback .bg-amber-50 { background:#fffbeb; }
+    .tailwind-fallback .bg-emerald-50 { background:#ecfdf5; }
+    .tailwind-fallback .text-white { color:#fff; }
+    .tailwind-fallback .text-stone-800 { color:#292524; }
+    .tailwind-fallback .text-stone-700 { color:#44403c; }
+    .tailwind-fallback .text-stone-600 { color:#57534e; }
+    .tailwind-fallback .text-stone-500 { color:#78716c; }
+    .tailwind-fallback .text-stone-300 { color:#d6d3d1; }
+    .tailwind-fallback .text-sky-800 { color:#075985; }
+    .tailwind-fallback .text-sky-900 { color:#0c4a6e; }
+    .tailwind-fallback .text-sky-950 { color:#082f49; }
+    .tailwind-fallback .text-sky-700 { color:#0369a1; }
+    .tailwind-fallback .text-sky-200 { color:#bae6fd; }
+    .tailwind-fallback .text-sky-100 { color:#e0f2fe; }
+    .tailwind-fallback .text-slate-500 { color:#64748b; }
+    .tailwind-fallback .text-slate-600 { color:#475569; }
+    .tailwind-fallback .text-slate-700 { color:#334155; }
+    .tailwind-fallback .text-slate-200 { color:#e2e8f0; }
+    .tailwind-fallback .text-rose-700 { color:#be123c; }
+    .tailwind-fallback .text-rose-200 { color:#fecdd3; }
+    .tailwind-fallback .text-emerald-200 { color:#a7f3d0; }
+    .tailwind-fallback .text-amber-950 { color:#451a03; }
+    .tailwind-fallback .text-amber-900 { color:#78350f; }
+    .tailwind-fallback .text-emerald-950 { color:#022c22; }
+    .tailwind-fallback .font-bold { font-weight:700; }
+    .tailwind-fallback .font-extrabold { font-weight:800; }
+    .tailwind-fallback .font-black { font-weight:900; }
+    .tailwind-fallback .font-semibold { font-weight:600; }
+    .tailwind-fallback .text-xs { font-size:.75rem; }
+    .tailwind-fallback .text-sm { font-size:.875rem; }
+    .tailwind-fallback .text-base { font-size:1rem; }
+    .tailwind-fallback .text-lg { font-size:1.125rem; }
+    .tailwind-fallback .text-xl { font-size:1.25rem; }
+    .tailwind-fallback .text-2xl { font-size:1.5rem; }
+    .tailwind-fallback .text-3xl { font-size:1.875rem; }
+    .tailwind-fallback .text-4xl { font-size:2.25rem; }
+    .tailwind-fallback .leading-7 { line-height:1.75rem; }
+    .tailwind-fallback .leading-8 { line-height:2rem; }
+    .tailwind-fallback .text-center { text-align:center; }
+    .tailwind-fallback .text-right { text-align:right; }
+    .tailwind-fallback .rounded-lg { border-radius:.5rem; }
+    .tailwind-fallback .rounded-xl { border-radius:.75rem; }
+    .tailwind-fallback .rounded-2xl { border-radius:1rem; }
+    .tailwind-fallback .rounded-full { border-radius:9999px; }
+    .tailwind-fallback .shadow-lg { box-shadow:0 10px 15px -3px rgba(0,0,0,.09),0 4px 6px -4px rgba(0,0,0,.09); }
+    .tailwind-fallback .border { border:1px solid #e7e5e4; }
+    .tailwind-fallback .border-b { border-bottom:1px solid #e7e5e4; }
+    .tailwind-fallback .border-t { border-top:1px solid #e7e5e4; }
+    .tailwind-fallback .border-b-2 { border-bottom:2px solid #0ea5e9; }
+    .tailwind-fallback .pb-2 { padding-bottom:.5rem; }
+    .tailwind-fallback .p-4 { padding:1rem; }
+    .tailwind-fallback .p-5 { padding:1.25rem; }
+    .tailwind-fallback .p-6 { padding:1.5rem; }
+    .tailwind-fallback .px-3 { padding-left:.75rem; padding-right:.75rem; }
+    .tailwind-fallback .px-4 { padding-left:1rem; padding-right:1rem; }
+    .tailwind-fallback .py-2\.5 { padding-top:.625rem; padding-bottom:.625rem; }
+    .tailwind-fallback .py-8 { padding-top:2rem; padding-bottom:2rem; }
+    .tailwind-fallback .py-12 { padding-top:3rem; padding-bottom:3rem; }
+    .tailwind-fallback .py-14 { padding-top:3.5rem; padding-bottom:3.5rem; }
+    .tailwind-fallback .pt-14 { padding-top:3.5rem; }
+    .tailwind-fallback .pb-7 { padding-bottom:1.75rem; }
+    .tailwind-fallback .mt-1 { margin-top:.25rem; }
+    .tailwind-fallback .mt-2 { margin-top:.5rem; }
+    .tailwind-fallback .mt-3 { margin-top:.75rem; }
+    .tailwind-fallback .mt-4 { margin-top:1rem; }
+    .tailwind-fallback .mt-5 { margin-top:1.25rem; }
+    .tailwind-fallback .mt-6 { margin-top:1.5rem; }
+    .tailwind-fallback .mt-9 { margin-top:2.25rem; }
+    .tailwind-fallback .mt-12 { margin-top:3rem; }
+    .tailwind-fallback .mb-2 { margin-bottom:.5rem; }
+    .tailwind-fallback .mb-3 { margin-bottom:.75rem; }
+    .tailwind-fallback .mb-4 { margin-bottom:1rem; }
+    .tailwind-fallback .mb-5 { margin-bottom:1.25rem; }
+    .tailwind-fallback .mb-6 { margin-bottom:1.5rem; }
+    .tailwind-fallback .mb-7 { margin-bottom:1.75rem; }
+    .tailwind-fallback .pt-3 { padding-top:.75rem; }
+    .tailwind-fallback .pt-4 { padding-top:1rem; }
+    .tailwind-fallback .gap-1 { gap:.25rem; }
+    .tailwind-fallback .gap-2 { gap:.5rem; }
+    .tailwind-fallback .gap-3 { gap:.75rem; }
+    .tailwind-fallback .gap-4 { gap:1rem; }
+    .tailwind-fallback .gap-5 { gap:1.25rem; }
+    .tailwind-fallback .gap-6 { gap:1.5rem; }
+    .tailwind-fallback .grid { display:grid; }
+    .tailwind-fallback .grid-cols-1 { grid-template-columns:repeat(1,minmax(0,1fr)); }
+    .tailwind-fallback .grid-cols-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .tailwind-fallback .flex { display:flex; }
+    .tailwind-fallback .inline-flex { display:inline-flex; }
+    .tailwind-fallback .items-center { align-items:center; }
+    .tailwind-fallback .items-start { align-items:flex-start; }
+    .tailwind-fallback .justify-between { justify-content:space-between; }
+    .tailwind-fallback .justify-center { justify-content:center; }
+    .tailwind-fallback .flex-wrap { flex-wrap:wrap; }
+    .tailwind-fallback .flex-col { flex-direction:column; }
+    .tailwind-fallback .shrink-0 { flex-shrink:0; }
+    .tailwind-fallback .hidden { display:none; }
+    .tailwind-fallback .w-full { width:100%; }
+    .tailwind-fallback .w-5 { width:1.25rem; }
+    .tailwind-fallback .h-5 { height:1.25rem; }
+    .tailwind-fallback .w-6 { width:1.5rem; }
+    .tailwind-fallback .h-6 { height:1.5rem; }
+    .tailwind-fallback .w-9 { width:2.25rem; }
+    .tailwind-fallback .h-9 { height:2.25rem; }
+    .tailwind-fallback .w-11 { width:2.75rem; }
+    .tailwind-fallback .h-11 { height:2.75rem; }
+    .tailwind-fallback .w-12 { width:3rem; }
+    .tailwind-fallback .h-12 { height:3rem; }
+    .tailwind-fallback .h-2 { height:.5rem; }
+    .tailwind-fallback .min-h-\[66px\] { min-height:66px; }
+    .tailwind-fallback .overflow-x-hidden { overflow-x:hidden; }
+    .tailwind-fallback .tabular-nums { font-variant-numeric:tabular-nums; }
+    .tailwind-fallback .bg-sky-900 { background:#0c4a6e; }
+    .tailwind-fallback .bg-sky-100 { background:#e0f2fe; }
+    .tailwind-fallback .bg-stone-100 { background:#f5f5f4; }
+    .tailwind-fallback .bg-rose-300 { background:#fda4af; }
+    .tailwind-fallback .bg-rose-600 { background:#e11d48; }
+    .tailwind-fallback header { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.97); box-shadow:0 2px 8px #00000010; }
+    .tailwind-fallback #site-header nav > div:first-child { min-height:66px; }
+    .tailwind-fallback #mobile-menu-button { cursor:pointer; border:1px solid #ddd; background:white; }
+    .tailwind-fallback #desktop-nav { display:none; }
+    .tailwind-fallback .hero-mesh { color:white; }
+    .tailwind-fallback .hero-content h1 { font-size:clamp(2rem,4.4vw,3.5rem); font-weight:800; line-height:1.24; color:#fff; }
+    .tailwind-fallback .hero-content p { color:#e0f2fe; max-width:62rem; }
+    .tailwind-fallback .hero-content > div[aria-label] { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+    .tailwind-fallback .hero-content .metric-hero { padding:1.25rem; }
+    .tailwind-fallback .hero-content .metric-hero p:nth-child(2) { font-size:1.65rem; font-weight:800; line-height:1.5; }
+    .tailwind-fallback main > section:not(.hero-mesh) { max-width:80rem; margin:0 auto; }
+    .tailwind-fallback main h2 { font-size:1.875rem; color:#292524; font-weight:700; line-height:1.3; }
+    .tailwind-fallback main h3 { color:#292524; }
+    .tailwind-fallback .data-table th { background:#eaf4fc; }
+    .tailwind-fallback #data-search { width:100%; border:1px solid #d6d3d1; border-radius:.5rem; padding:.65rem 1rem; }
+    .tailwind-fallback .chart-shell { min-height:300px; }
+    .tailwind-fallback footer { text-align:center; background:#292524; color:#d6d3d1; }
+    @media (min-width:640px) {
+      .tailwind-fallback .sm\:grid-cols-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .tailwind-fallback .sm\:grid-cols-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .tailwind-fallback .sm\:px-6 { padding-left:1.5rem; padding-right:1.5rem; }
+      .tailwind-fallback .sm\:text-5xl { font-size:3rem; }
+      .tailwind-fallback .sm\:flex-row { flex-direction:row; }
+      .tailwind-fallback .sm\:items-end { align-items:flex-end; }
+      .tailwind-fallback .sm\:justify-between { justify-content:space-between; }
+    }
+    @media (min-width:768px) {
+      .tailwind-fallback .md\:grid-cols-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .tailwind-fallback .md\:grid-cols-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .tailwind-fallback .md\:py-20 { padding-top:5rem; padding-bottom:5rem; }
+    }
+    @media (min-width:1024px) {
+      .tailwind-fallback .lg\:grid-cols-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .tailwind-fallback .lg\:grid-cols-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .tailwind-fallback .lg\:grid-cols-4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .tailwind-fallback .lg\:px-8 { padding-left:2rem; padding-right:2rem; }
+    }
+    @media (min-width:1280px) {
+      .tailwind-fallback .xl\:flex { display:flex; }
+      .tailwind-fallback #desktop-nav { display:flex; }
+      .tailwind-fallback .xl\:hidden { display:none; }
+    }
+    @media (max-width:639px) {
+      .tailwind-fallback .hero-content > div[aria-label] { grid-template-columns:1fr; }
+      .tailwind-fallback .hero-content { padding-top:3rem; padding-bottom:3rem; }
+      .tailwind-fallback .hero-content h1 { font-size:2.05rem; }
+      .tailwind-fallback main h2 { font-size:1.55rem; }
+      .tailwind-fallback .grid-cols-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased overflow-x-hidden">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm" id="site-header">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="主要章節導覽">
+      <div class="flex justify-between items-center gap-3 min-h-[66px]">
+        <a href="#top" class="flex items-center gap-3 flex-shrink-0 group" aria-label="回到報告頂部">
+          <span class="w-9 h-9 rounded-xl bg-sky-900 flex items-center justify-center text-sky-100 font-black text-sm" aria-hidden="true">AI</span>
+          <span class="font-bold text-stone-800 leading-tight text-sm lg:text-base">巴菲特AI價值投資<span class="hidden sm:inline text-sky-700"> · 財報視覺化</span></span>
+        </a>
+        <div class="hidden xl:flex items-center gap-0.5 text-[13px]" id="desktop-nav">
+          <a class="nav-link inactive-nav-link" href="#overview" data-section="overview">核心總覽</a>
+          <a class="nav-link inactive-nav-link" href="#cashflow" data-section="cashflow">現金流比較</a>
+          <a class="nav-link inactive-nav-link" href="#alphabet" data-section="alphabet">Alphabet</a>
+          <a class="nav-link inactive-nav-link" href="#microsoft" data-section="microsoft">Microsoft</a>
+          <a class="nav-link inactive-nav-link" href="#market" data-section="market">市場反應</a>
+          <a class="nav-link inactive-nav-link" href="#industry" data-section="industry">產業影響</a>
+          <a class="nav-link inactive-nav-link" href="#scenarios" data-section="scenarios">未來情境</a>
+          <a class="nav-link inactive-nav-link" href="#strategy" data-section="strategy">策略追蹤</a>
+        </div>
+        <button id="mobile-menu-button" class="xl:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border border-stone-200 text-stone-800 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-sky-400" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="開啟章節選單">
+          <svg id="icon-menu" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="icon-close" class="hidden w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden xl:hidden pb-4 pt-2 border-t border-stone-100" aria-hidden="true">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-1 text-sm">
+          <a class="nav-link inactive-nav-link" href="#overview" data-section="overview">核心總覽</a>
+          <a class="nav-link inactive-nav-link" href="#cashflow" data-section="cashflow">現金流比較</a>
+          <a class="nav-link inactive-nav-link" href="#alphabet" data-section="alphabet">Alphabet</a>
+          <a class="nav-link inactive-nav-link" href="#microsoft" data-section="microsoft">Microsoft</a>
+          <a class="nav-link inactive-nav-link" href="#market" data-section="market">市場反應</a>
+          <a class="nav-link inactive-nav-link" href="#industry" data-section="industry">產業影響</a>
+          <a class="nav-link inactive-nav-link" href="#scenarios" data-section="scenarios">未來情境</a>
+          <a class="nav-link inactive-nav-link" href="#strategy" data-section="strategy">策略追蹤</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight max-w-5xl leading-[1.22]">AI投資進入現金流驗證期：<span class="text-sky-200">Alphabet 與 Microsoft</span> 財報解讀</h1>
+        <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-[1.95]">AI需求持續高成長，但市場不再只獎勵資本支出規模。Google Cloud營收年增103%，Alphabet本季自由現金流卻轉為負90.65億美元；Azure年增48%的Microsoft仍保有正186.33億美元自由現金流。兩份財報凸顯的差異，是AI投資能否形成可持續的現金回收。</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-9 max-w-5xl" aria-label="核心量化指標">
+          <div class="metric-hero rounded-2xl p-5">
+            <p class="text-sky-100/85 text-xs font-semibold tracking-wide">Alphabet 單季自由現金流</p>
+            <p class="mt-2 text-3xl font-extrabold tabular-nums text-rose-200">−90.65 <span class="text-base font-semibold">億美元</span></p>
+            <p class="mt-2 text-xs text-sky-100/80">2026 Q3 · 現金流量表口徑</p>
+          </div>
+          <div class="metric-hero rounded-2xl p-5">
+            <p class="text-sky-100/85 text-xs font-semibold tracking-wide">Microsoft 單季自由現金流</p>
+            <p class="mt-2 text-3xl font-extrabold tabular-nums text-emerald-200">+186.33 <span class="text-base font-semibold">億美元</span></p>
+            <p class="mt-2 text-xs text-sky-100/80">2027 財年 Q1 · 現金流量表口徑</p>
+          </div>
+          <div class="metric-hero rounded-2xl p-5">
+            <p class="text-sky-100/85 text-xs font-semibold tracking-wide">Google Cloud 營收年增</p>
+            <p class="mt-2 text-3xl font-extrabold tabular-nums text-white">+103<span class="text-base font-semibold">%</span></p>
+            <p class="mt-2 text-xs text-sky-100/80">含TPU系統銷售，非純訂閱成長</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 md:pt-16 pb-7" aria-labelledby="overview-heading">
+      <div class="flex flex-wrap gap-2 mb-5 text-xs font-semibold text-slate-600">
+        <span class="px-3 py-1.5 rounded-full border border-slate-200 bg-white">報告日期：2026年10月29日</span>
+        <span class="px-3 py-1.5 rounded-full border border-slate-200 bg-white">兩家公司財報期間皆截至2026年9月30日</span>
+        <span class="px-3 py-1.5 rounded-full border border-slate-200 bg-white">財報於10月28日公布</span>
+      </div>
+      <p class="section-number mb-2">INVESTMENT THESIS · 核心觀點</p>
+      <h2 id="overview-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">真正的新評價標準：從AI成長走向現金回收</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6 callout-edge">
+        <p class="text-lg text-stone-800 leading-8 font-semibold">這不是「一家AI成功、一家AI失敗」的二元故事，而是單季資本密集程度和現金流承受能力的差異。<span class="text-sky-800">需求 → 營收 → 營業利益 → 現金回收</span>，已成為判斷AI商業化品質的核心鏈條。</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex justify-between items-start gap-3"><span class="eyebrow">01 · 需求仍在</span><span class="pill pill-fact">已公布</span></div>
+          <h3 class="text-xl text-stone-800 font-bold mt-4 mb-3">高增長不代表現金一定增加</h3>
+          <p class="text-sm leading-7">Google Cloud年增103%、Azure年增48%，但資本支出增加的速度，可能快於短期營運現金回收。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex justify-between items-start gap-3"><span class="eyebrow">02 · 支出強度</span><span class="pill pill-fact">已公布</span></div>
+          <h3 class="text-xl text-stone-800 font-bold mt-4 mb-3">現金設備投資占營運現金流</h3>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><p class="text-xs text-slate-500">Alphabet</p><p class="text-2xl font-extrabold text-rose-700 tabular-nums">約121%</p></div>
+            <div><p class="text-xs text-slate-500">Microsoft</p><p class="text-2xl font-extrabold text-sky-800 tabular-nums">約68%</p></div>
+          </div>
+          <p class="text-xs text-slate-500 mt-4">僅代表當季現金流承受能力，非AI投資報酬率比較。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex justify-between items-start gap-3"><span class="eyebrow">03 · 估值焦點</span><span class="pill pill-risk">風險評估</span></div>
+          <h3 class="text-xl text-stone-800 font-bold mt-4 mb-3">下一波競爭在單位經濟</h3>
+          <p class="text-sm leading-7">算力利用率、推論成本、折舊、能源、客戶信用與AI搜尋廣告變現，將更直接影響自由現金流品質。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="cashflow" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" aria-labelledby="cashflow-heading">
+      <p class="section-number mb-2">FINANCIAL COMPARISON · 財報比較</p>
+      <h2 id="cashflow-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">同樣擴建AI，現金流結果截然不同</h2>
+      <p class="leading-8 mb-7 text-stone-600">以下均以報告記載的當季已實現數據呈現；金額單位為<span class="font-bold text-stone-800">億美元</span>。Alphabet採2026年第三季，Microsoft採2027財年第一季，兩者均截至2026年9月30日。</p>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0">
+          <div class="flex items-center justify-between gap-3 flex-wrap mb-2"><h3 class="text-lg sm:text-xl font-bold text-stone-800">營運現金流、現金設備投資與FCF</h3><span class="pill pill-fact">實際數據</span></div>
+          <p class="text-sm text-stone-500 mb-5">FCF = 營業活動現金流 − 當季實際現金設備購置</p>
+          <div class="chart-shell chart-shell-tall"><canvas id="cashFlowChart" role="img" aria-label="Alphabet營業活動現金流422.90、現金設備投資513.55、自由現金流負90.65；Microsoft分別為580、393.67、正186.33，單位均為億美元。"></canvas></div>
+          <p class="mt-4 text-xs text-stone-500 leading-6">Microsoft廣義資本支出452億美元含部分融資租賃，<strong>不可</strong>替代此圖的現金設備購置393.67億美元計算自由現金流。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0">
+          <div class="flex items-center justify-between gap-3 flex-wrap mb-2"><h3 class="text-lg sm:text-xl font-bold text-stone-800">營收年增率：整體與雲端業務</h3><span class="pill pill-fact">實際數據</span></div>
+          <p class="text-sm text-stone-500 mb-5">不同公司／部門基期不同，增幅不可直接視為絕對營收貢獻</p>
+          <div class="chart-shell chart-shell-tall"><canvas id="growthChart" role="img" aria-label="Alphabet整體營收年增25%、Google Cloud年增103%、Microsoft整體營收年增19%、Azure年增48%。"></canvas></div>
+          <p class="mt-4 text-xs text-stone-500 leading-6">Google Cloud的103%增長包含自研TPU系統銷售，<strong>不全等於可逐季重複的雲端租金收入</strong>。</p>
+        </article>
+      </div>
+      <div class="bg-sky-50 border border-sky-100 rounded-xl p-5 mb-7 flex gap-3 items-start">
+        <svg class="w-5 h-5 text-sky-700 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 10v6m0-9h.01"/></svg>
+        <p class="text-sm leading-7 text-sky-950">口徑重點：<strong>FCF比較採現金流量表實際現金設備購置</strong>，不是各家公司對外使用的廣義資本支出指標。訂單積壓與RPO亦不等於現金、交付或已認列營收，且兩家公司定義不完全一致。</p>
+      </div>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-5">
+          <div><h3 class="text-xl font-bold text-stone-800">關鍵財報指標速查</h3><p class="text-sm text-stone-500 mt-1">搜尋公司、業務、指標或會計口徑；僅收錄報告真實數據。</p></div>
+          <div class="w-full sm:max-w-sm"><label class="block text-sm font-semibold text-stone-700 mb-1.5" for="data-search">搜尋指標</label><input type="search" id="data-search" placeholder="例如：Azure、自由現金流、融資…" autocomplete="off" class="w-full border border-stone-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-sky-500" aria-describedby="search-count"></div>
+        </div>
+        <div class="table-wrap border border-stone-200 rounded-lg max-h-[510px] overflow-y-auto" tabindex="0" aria-label="可水平捲動的財報數據表">
+          <table class="data-table text-sm"><thead><tr><th scope="col" class="font-bold text-sky-950">公司</th><th scope="col" class="font-bold text-sky-950">指標</th><th scope="col" class="font-bold text-sky-950">數值</th><th scope="col" class="font-bold text-sky-950">統計口徑／判讀</th></tr></thead><tbody id="data-body"></tbody></table>
+        </div>
+        <p id="search-count" role="status" aria-live="polite" class="text-xs text-stone-500 mt-3"></p>
+        <noscript><p class="text-sm mt-4 text-amber-900">啟用JavaScript可使用搜尋功能；核心財報數據與分析亦呈現於上述圖表對應文字及下方各章節。</p></noscript>
+      </article>
+    </section>
+
+    <section id="alphabet" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" aria-labelledby="alphabet-heading">
+      <p class="section-number mb-2">COMPANY FOCUS · NASDAQ: GOOGL / GOOG</p>
+      <h2 id="alphabet-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Alphabet：雲端飛速成長，現金流與搜尋變現承壓</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="eyebrow">合併營收 · 年增25%</p><p class="text-2xl font-extrabold mt-2 text-stone-800 tabular-nums">1,275.77 <span class="text-xs font-medium">億美元</span></p><p class="text-xs mt-2 text-stone-500">低於部分市場預測約1,282億美元</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="eyebrow">Google Cloud · 年增103%</p><p class="text-2xl font-extrabold mt-2 text-stone-800 tabular-nums">307.09 <span class="text-xs font-medium">億美元</span></p><p class="text-xs mt-2 text-stone-500">含TPU系統銷售</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="eyebrow">Google Cloud 營業利益率</p><p class="text-2xl font-extrabold mt-2 text-sky-800 tabular-nums">36.2%</p><p class="text-xs mt-2 text-stone-500">去年同期約23.7%</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="eyebrow">合併營業利益率</p><p class="text-2xl font-extrabold mt-2 text-stone-800 tabular-nums">約31.8%</p><p class="text-xs mt-2 text-stone-500">營業利益405.76億美元</p></div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex items-center justify-between gap-3"><h3 class="text-xl font-bold text-stone-800">營收結構：核心業務沒有全面惡化</h3><span class="pill pill-fact">已公布</span></div>
+          <dl class="mt-5 space-y-4 text-sm">
+            <div class="flex justify-between gap-4 soft-rule pt-3"><dt>Google Services</dt><dd class="font-bold text-stone-800 text-right">963.02 億美元 <span class="text-sky-700">· +11%</span></dd></div>
+            <div class="flex justify-between gap-4 soft-rule pt-3"><dt>Google Search及其他</dt><dd class="font-bold text-stone-800 text-right">633.50 億美元 <span class="text-sky-700">· +12%</span></dd></div>
+            <div class="flex justify-between gap-4 soft-rule pt-3"><dt>YouTube 廣告</dt><dd class="font-bold text-stone-800 text-right">112.07 億美元 <span class="text-sky-700">· 約+9%</span></dd></div>
+            <div class="flex justify-between gap-4 soft-rule pt-3"><dt>Google Cloud 營業利益</dt><dd class="font-bold text-stone-800 text-right">111.21 億美元</dd></div>
+            <div class="flex justify-between gap-4 soft-rule pt-3"><dt>稀釋每股盈餘</dt><dd class="font-bold text-stone-800 text-right">2.12 美元</dd></div>
+          </dl>
+          <p class="mt-5 text-sm leading-7 text-stone-600">淨利約261.70億美元，受到營業外投資評價損失等因素影響；不能把EPS走弱全數歸因於搜尋、雲端經常性獲利衰退。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex items-center justify-between gap-3"><h3 class="text-xl font-bold text-stone-800">現金流缺口：連兩季負值</h3><span class="pill pill-risk">現金壓力</span></div>
+          <div class="mt-5 space-y-3">
+            <div class="flex justify-between text-sm"><span>前一季FCF</span><strong class="tabular-nums text-rose-700">約−58.55億美元</strong></div>
+            <div class="w-full bg-stone-100 rounded-full h-2 overflow-hidden"><div class="h-full bg-rose-300 rounded-full" style="width:64.6%"></div></div>
+            <div class="flex justify-between text-sm"><span>本季FCF</span><strong class="tabular-nums text-rose-700">−90.65億美元</strong></div>
+            <div class="w-full bg-stone-100 rounded-full h-2 overflow-hidden"><div class="h-full bg-rose-600 rounded-full" style="width:100%"></div></div>
+          </div>
+          <p class="text-xs text-stone-500 mt-2">視覺條長以兩季負FCF絕對值為基準，非營收占比。</p>
+          <div class="mt-6 rounded-xl bg-emerald-50 p-4 text-sm leading-7 text-emerald-950"><strong>不可誤判為流動性危機：</strong>截至本季最近十二個月FCF仍約為正197.47億美元。</div>
+          <p class="mt-4 text-sm leading-7">當季現金設備投資513.55億美元，超過營運現金流422.90億美元，是需持續追蹤的投資強度訊號。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex items-center justify-between gap-3"><h3 class="text-xl font-bold text-stone-800">AI搜尋：查詢量與變現效率背離</h3><span class="pill pill-risk">商業模式風險</span></div>
+          <p class="mt-4 text-sm leading-8">管理層表示AI功能推動搜尋查詢成長，但<strong>AI Mode當下廣告變現效率低於傳統搜尋</strong>；匯率及部分廣告產業需求變化亦影響營收增速，不宜全數歸因於AI搜尋。</p>
+          <div class="bg-slate-50 rounded-xl p-4 mt-4"><p class="text-sm font-bold text-slate-800">後續應驗證</p><p class="text-sm leading-7 mt-2">單次查詢推論成本、每千次查詢廣告收入、轉換率與每位使用者價值，而非僅看查詢量。</p></div>
+          <p class="mt-4 text-xs leading-6 text-stone-500">AI Overviews、AI Mode廣告與代理式購物改善變現，屬未來情境，尚非本季已證明成果。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex items-center justify-between gap-3"><h3 class="text-xl font-bold text-stone-800">雲端積壓訂單與擴產</h3><span class="pill pill-forward">待轉化</span></div>
+          <p class="eyebrow mt-5">Google Cloud 訂單積壓</p><p class="text-3xl font-black text-sky-800 mt-1 tabular-nums">約5,610 <span class="text-base font-semibold">億美元</span></p>
+          <p class="mt-3 text-sm leading-7">管理層<strong>預期</strong>其中略高於55%可於未來24個月轉為營收，非已交付、非已收現；各項目利潤率也不保證等同當季36.2%。</p>
+          <div class="soft-rule mt-4 pt-4"><p class="text-sm leading-7">自有算力受限，第三季末已開始採用第三方運算容量，預期第四季擴大，可能短期壓抑雲端利潤率。</p></div>
+        </article>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="border border-amber-200 bg-amber-50 rounded-xl p-5"><div class="flex items-center justify-between gap-3 mb-3"><h3 class="font-bold text-amber-950">資本支出指引與後續成本</h3><span class="pill pill-forward">公司展望</span></div><p class="text-sm leading-7 text-amber-950">維持2026全年資本支出<strong>1,950～2,050億美元</strong>預測，並預告2027年將顯著增加。折舊、能源、運維與設備汰換將持續考驗現金流。</p></div>
+        <div class="border border-slate-200 bg-slate-100 rounded-xl p-5"><div class="flex items-center justify-between gap-3 mb-3"><h3 class="font-bold text-stone-800">本季融資及稀釋觀察</h3><span class="pill pill-fact">已發生</span></div><p class="text-sm leading-7">普通股市價發行淨募資約<strong>124億美元</strong>；無擔保優先債淨募資約<strong>287億美元</strong>。不可逕認兩者全數用於AI擴產，惟應納入融資成本與股東稀釋評估。</p></div>
+      </div>
+    </section>
+
+    <section id="microsoft" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" aria-labelledby="microsoft-heading">
+      <p class="section-number mb-2">COMPANY FOCUS · NASDAQ: MSFT</p>
+      <h2 id="microsoft-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Microsoft：企業付費基礎成熟，但支出遞延非永久節省</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="eyebrow">合併營收 · 年增19%</p><p class="text-2xl font-extrabold mt-2 text-stone-800 tabular-nums">922.79 <span class="text-xs font-medium">億美元</span></p><p class="text-xs mt-2 text-stone-500">2027財年第一季</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="eyebrow">Azure · 年增48%</p><p class="text-2xl font-extrabold mt-2 text-stone-800 tabular-nums">331.65 <span class="text-xs font-medium">億美元</span></p><p class="text-xs mt-2 text-stone-500">雲端需求強勁</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="eyebrow">Microsoft Cloud · 年增30%</p><p class="text-2xl font-extrabold mt-2 text-sky-800 tabular-nums">639 <span class="text-xs font-medium">億美元</span></p><p class="text-xs mt-2 text-stone-500">含多項商用雲業務</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><p class="eyebrow">合併營業利益率</p><p class="text-2xl font-extrabold mt-2 text-stone-800 tabular-nums">約50%</p><p class="text-xs mt-2 text-stone-500">營業利益459.15億美元</p></div>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-center justify-between gap-3"><h3 class="text-xl font-bold text-stone-800">AI商業化：不只出售算力</h3><span class="pill pill-fact">已公布</span></div>
+          <p class="text-sm leading-8 mt-4">Azure及Microsoft 365企業軟體、資安、資料、開發工具與生產力產品形成多元付費通路；本季營業利益年增21%，反映強勁整體獲利。</p>
+          <div class="mt-5 grid grid-cols-2 gap-3"><div class="bg-slate-50 rounded-lg p-4"><p class="text-xs text-stone-500">GAAP 稀釋EPS</p><p class="text-2xl font-extrabold text-stone-800 mt-1">4.92 <span class="text-xs">美元</span></p></div><div class="bg-slate-50 rounded-lg p-4"><p class="text-xs text-stone-500">非GAAP 稀釋EPS</p><p class="text-2xl font-extrabold text-stone-800 mt-1">4.89 <span class="text-xs">美元</span></p><p class="text-xs text-stone-500 mt-2">排除OpenAI投資影響</p></div></div>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-center justify-between gap-3"><h3 class="text-xl font-bold text-stone-800">合約可見度，不等於保證獲利</h3><span class="pill pill-forward">未來履約</span></div>
+          <p class="eyebrow mt-6">Commercial RPO · 年增73%</p><p class="text-3xl font-extrabold text-sky-800 mt-1">6,770 <span class="text-base font-semibold">億美元</span></p>
+          <p class="text-sm leading-8 mt-4">商用剩餘履約義務代表未來依合約認列收入的能見度，<strong>不是本期現金或保證獲利</strong>。大客戶集中與信用風險不可忽略；與Google Cloud積壓訂單定義不同，不宜只比較總額。</p>
+          <div class="border-t mt-4 pt-4"><span class="pill pill-forward">下季指引</span><p class="text-sm leading-7 mt-2">管理層預期Azure固定匯率成長約<strong>49%～50%</strong>，尚未實現。</p></div>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-center justify-between gap-3"><h3 class="text-xl font-bold text-stone-800">資本支出：認清兩個口徑</h3><span class="pill pill-fact">已公布</span></div>
+          <div class="mt-5 space-y-4"><div class="bg-sky-50 rounded-lg p-4"><p class="text-xs font-semibold text-sky-700">較廣義資本支出口徑</p><p class="text-2xl font-extrabold text-sky-950 mt-1">452 <span class="text-sm">億美元</span></p><p class="text-xs text-sky-800 mt-1">包含部分融資租賃</p></div><div class="bg-slate-50 rounded-lg p-4"><p class="text-xs font-semibold text-slate-600">計算FCF的現金設備購置</p><p class="text-2xl font-extrabold text-stone-800 mt-1">393.67 <span class="text-sm">億美元</span></p><p class="text-xs text-stone-600 mt-1">從580億美元營運現金流扣除</p></div></div>
+          <p class="text-sm leading-7 mt-4">兩個數字有會計口徑差異，不能混用；本季正186.33億美元FCF並不意味未來每季均有同樣安全邊際。</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex items-center justify-between gap-3"><h3 class="text-xl font-bold text-stone-800">設備交付延遲：壓力可能後移</h3><span class="pill pill-risk">需持續觀察</span></div>
+          <p class="text-sm leading-8 mt-4">廣義資本支出452億美元低於原先約500億美元規劃，主要涉及<strong>第三方資料中心容量交付延遲</strong>，不等於永久節省。</p>
+          <div class="mt-4 rounded-xl bg-amber-50 p-4"><p class="text-3xl text-amber-950 font-extrabold">約3/4</p><p class="text-sm leading-7 mt-1 text-amber-900">本季資本支出用於較短使用年限設備，包括CPU、GPU、記憶體與儲存相關設施；日後折舊與再投資需求仍高。</p></div>
+          <p class="text-sm leading-7 mt-4">若遞延設備恢復交付，而Azure成長與單位算力定價未能同步跟上，現金流仍可能轉弱。</p>
+        </article>
+      </div>
+      <div class="bg-slate-100 border border-slate-200 rounded-xl p-5"><p class="font-bold text-stone-800 mb-2">Microsoft的關鍵驗證</p><p class="text-sm leading-8">待設備支出回升之後，Azure需求、客戶分散度、毛利率與現金回收是否仍可支撐正FCF；大型模型客戶集中、供能及設備汰換風險仍需計價。</p></div>
+    </section>
+
+    <section id="market" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" aria-labelledby="market-heading">
+      <p class="section-number mb-2">MARKET REACTION · 2026/10/29 美東上午</p>
+      <h2 id="market-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">開盤後市場反應：營收增長不再足夠</h2>
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-sm text-amber-950 leading-7"><strong>時間口徑：</strong>下列均為美東時間2026年10月29日上午正常交易時段的<strong>盤中截點，並非收盤價</strong>；兩檔股票時間不同，不能當作精確同步報價。</div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex justify-between items-start gap-4"><div><span class="eyebrow">GOOGL · Alphabet A類股</span><p class="text-4xl font-extrabold mt-3 text-stone-800 tabular-nums">286.18 <span class="text-sm font-medium">美元</span></p></div><div class="text-right"><span class="text-2xl font-extrabold text-rose-700 tabular-nums">−11.91%</span><p class="text-xs text-stone-500 mt-1">較前一交易日</p></div></div><p class="text-xs text-stone-500 mt-4">截點：美東11:11:54</p><div class="soft-rule mt-4 pt-4 grid grid-cols-2 gap-4 text-sm"><div><p class="text-stone-500">當日開盤</p><p class="font-bold text-stone-800 mt-1">約286.88美元</p></div><div><p class="text-stone-500">截至截點盤中低點</p><p class="font-bold text-stone-800 mt-1">280.36美元</p></div></div><p class="mt-4 text-sm leading-7">市場對營收略低於預期、FCF為負以及AI搜尋變現成本的擔憂顯著升溫；但單日跌幅本身不足以證明估值已便宜。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex justify-between items-start gap-4"><div><span class="eyebrow">MSFT · Microsoft</span><p class="text-4xl font-extrabold mt-3 text-stone-800 tabular-nums">524.55 <span class="text-sm font-medium">美元</span></p></div><div class="text-right"><span class="text-2xl font-extrabold text-rose-700 tabular-nums">−1.22%</span><p class="text-xs text-stone-500 mt-1">較前一交易日</p></div></div><p class="text-xs text-stone-500 mt-4">截點：美東10:59:38</p><div class="soft-rule mt-4 pt-4 grid grid-cols-2 gap-4 text-sm"><div><p class="text-stone-500">當日開盤</p><p class="font-bold text-stone-800 mt-1">約540.22美元</p></div><div><p class="text-stone-500">截至截點盤中高點</p><p class="font-bold text-stone-800 mt-1">541.29美元</p></div></div><p class="mt-4 text-sm leading-7">盤前一度上漲約3.6%，盤中反而走弱；除財報解讀外，科技股整體賣壓、通膨與利率預期也可能影響股價。</p></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-lg font-bold text-stone-800 mb-4">股價行為反映的三個訊號</h3><div class="grid md:grid-cols-3 gap-5 text-sm leading-7"><p><strong class="text-sky-800">01 / 成長：</strong>高營收增速不再保證估值維持。</p><p><strong class="text-sky-800">02 / 資本：</strong>FCF、折舊與投資可見度權重上升。</p><p><strong class="text-sky-800">03 / 價格：</strong>即使營運品質較佳，昂貴估值與整體去風險化也能導致下跌。</p></div></div>
+    </section>
+
+    <section id="industry" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" aria-labelledby="industry-heading">
+      <p class="section-number mb-2">INDUSTRY READ-THROUGH · 三階傳導</p>
+      <h2 id="industry-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">從科技巨頭到AI供應鏈的三階影響</h2>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 relative"><div class="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center text-sky-900 font-black text-2xl">1</div><h3 class="text-xl font-bold text-stone-800 mt-5 mb-3">需求擴張：基建設備受惠</h3><p class="text-sm leading-8">雲端及AI需求支持GPU、TPU、伺服器、記憶體、光通訊、網路交換器、供電與散熱等長期需求論點；但議價能力、利潤及股價反映程度不盡相同。</p><span class="pill pill-fact mt-4">已見營收增長</span></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 relative"><div class="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center text-sky-900 font-black text-2xl">2</div><h3 class="text-xl font-bold text-stone-800 mt-5 mb-3">資本密集化：成本與融資前移</h3><p class="text-sm leading-8">設備支出、折舊、能源與再投資可能壓縮FCF並增加融資或稀釋需求。投資重點轉向新增資產毛利、現金回收期與資本報酬。</p><span class="pill pill-risk mt-4">成本風險</span></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 relative"><div class="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center text-sky-900 font-black text-2xl">3</div><h3 class="text-xl font-bold text-stone-800 mt-5 mb-3">客戶經濟性：向上游反向傳導</h3><p class="text-sm leading-8">若模型商無法將推論用量變現，可能縮減算力承諾，牽動資料中心租賃、設備殘值、融資及供應商；若應用成熟、利用率提高，則可能增強現金回報。</p><span class="pill pill-forward mt-4">條件式推演</span></article>
+      </div>
+      <div class="bg-sky-50 rounded-xl p-6 border border-sky-100"><h3 class="font-bold text-sky-950">觀察Nvidia、Broadcom、AMD與記憶體／伺服器鏈時，問題需要改變</h3><p class="mt-2 text-sm leading-8 text-sky-950">不只問「客戶還要追加多少AI資本支出」，更要問：<strong>誰負責融資、何時交付、客戶何時付款、現金如何沿供應鏈回收</strong>。供應鏈受惠是投資論點，不代表各廠商已實現同幅度獲利。</p></div>
+    </section>
+
+    <section id="scenarios" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" aria-labelledby="scenarios-heading">
+      <p class="section-number mb-2">SCENARIO ANALYSIS · 未來6至12個月</p>
+      <h2 id="scenarios-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三種投資情境：區分已發生與未來可能</h2>
+      <p class="text-sm text-stone-600 leading-7 mb-6">以下均為報告推演的可能路徑，不是已發生事件、機率預測或確定報酬。</p>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-sky-500"><div class="flex justify-between items-center gap-3"><h3 class="text-xl font-bold text-stone-800">基準情境</h3><span class="pill pill-forward">推演</span></div><p class="text-xs text-sky-700 font-bold mt-2">AI續增 · 資本支出仍高 · 估值分化</p><p class="text-sm leading-8 mt-5">Google Cloud與Azure增長逐步正常化；Alphabet FCF仍有季節性或投資性波動，AI搜尋變現改善不足以立即抵銷新成本。Microsoft維持正FCF，但遞延設備交付後安全邊際縮小。</p><div class="soft-rule mt-5 pt-4 text-sm leading-7"><strong>估值含意：</strong>市場更重視資本配置紀律與正現金流。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500"><div class="flex justify-between items-center gap-3"><h3 class="text-xl font-bold text-stone-800">樂觀情境</h3><span class="pill pill-forward">推演</span></div><p class="text-xs text-emerald-700 font-bold mt-2">AI變現加速 · 使用率提升 · 現金流改善</p><p class="text-sm leading-8 mt-5">AI Mode出現可衡量的廣告、交易轉化；Google Cloud維持獲利品質。Microsoft藉Azure、Foundry及Microsoft 365提高客戶收入與算力利用率，兩家公司FCF逐季改善、外部融資需求降低。</p><div class="soft-rule mt-5 pt-4 text-sm leading-7"><strong>估值含意：</strong>垂直整合平台的可持續獲利能力可能獲得重估。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-rose-500"><div class="flex justify-between items-center gap-3"><h3 class="text-xl font-bold text-stone-800">悲觀情境</h3><span class="pill pill-forward">推演</span></div><p class="text-xs text-rose-700 font-bold mt-2">價格競爭 · 搜尋替代 · 折舊同步升高</p><p class="text-sm leading-8 mt-5">雲端算力降價、AI需求弱於預期或搜尋向較低變現的AI介面轉移；微軟遞延設備交付後Azure成長不及展望，折舊、固定成本及再投資侵蝕FCF。</p><div class="soft-rule mt-5 pt-4 text-sm leading-7"><strong>估值含意：</strong>市場可能改以高資本需求、高折舊框架評價科技股。</div></article>
+      </div>
+    </section>
+
+    <section id="strategy" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" aria-labelledby="strategy-heading">
+      <p class="section-number mb-2">INVESTMENT FRAMEWORK · 策略與檢驗</p>
+      <h2 id="strategy-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略：先驗證現金流，再評估估值安全邊際</h2>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="eyebrow">GOOGL / GOOG</p><h3 class="text-xl font-bold text-stone-800 mt-3 mb-3">等待現金流轉折驗證</h3><p class="text-sm leading-8">Google Cloud利潤及積壓訂單提供長期基本面支撐，但單日大跌不等於便宜。觀察FCF能否回穩、AI Mode變現是否改善，以及2027年資本支出增加後的財務承受能力。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="eyebrow">MSFT</p><h3 class="text-xl font-bold text-stone-800 mt-3 mb-3">營運品質較穩，價格仍要紀律</h3><p class="text-sm leading-8">Azure和企業軟體具現金回收基礎，但不能為單季財報支付無限制溢價。觀察下季Azure是否達49%～50%固定匯率指引，以及遞延設備交付之後FCF的變化。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><p class="eyebrow">AI PORTFOLIO</p><h3 class="text-xl font-bold text-stone-800 mt-3 mb-3">從出貨成長轉向現金流品質</h3><p class="text-sm leading-8">重點研究正現金流雲端／應用平台、具長單與定價能力的基建供應商；對高槓桿、客戶集中或設備殘值風險較高者，提高安全邊際要求。</p></article>
+      </div>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex flex-wrap justify-between items-center gap-3 mb-5"><div><h3 class="text-xl font-bold text-stone-800">接下來四季：七項重點追蹤訊號</h3><p class="text-sm text-stone-500 mt-2">以後續正式財報逐季驗證，而非把展望視為既成事實。</p></div><span class="pill pill-forward">待驗證</span></div>
+        <div class="grid md:grid-cols-2 gap-3">
+          <div class="rounded-xl bg-slate-50 border border-slate-100 p-4 flex gap-3"><span class="shrink-0 text-sky-800 font-black">01</span><div><h4 class="font-bold text-stone-800 text-sm">Alphabet FCF</h4><p class="text-sm leading-7 mt-1">營運現金能否超過現金設備支出，負值是否收斂。</p></div></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-100 p-4 flex gap-3"><span class="shrink-0 text-sky-800 font-black">02</span><div><h4 class="font-bold text-stone-800 text-sm">Google AI搜尋變現</h4><p class="text-sm leading-7 mt-1">AI Mode廣告效率、搜尋收入增速與查詢單位經濟。</p></div></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-100 p-4 flex gap-3"><span class="shrink-0 text-sky-800 font-black">03</span><div><h4 class="font-bold text-stone-800 text-sm">Google Cloud 利潤率</h4><p class="text-sm leading-7 mt-1">36.2%能否抵抗第三方算力、折舊與TPU銷售組合變動。</p></div></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-100 p-4 flex gap-3"><span class="shrink-0 text-sky-800 font-black">04</span><div><h4 class="font-bold text-stone-800 text-sm">Alphabet 融資需求</h4><p class="text-sm leading-7 mt-1">債務、股權發行、回購、現金餘額及資本成本。</p></div></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-100 p-4 flex gap-3"><span class="shrink-0 text-sky-800 font-black">05</span><div><h4 class="font-bold text-stone-800 text-sm">Microsoft Azure</h4><p class="text-sm leading-7 mt-1">下一季固定匯率成長能否達49%～50%展望，客戶結構是否多元。</p></div></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-100 p-4 flex gap-3"><span class="shrink-0 text-sky-800 font-black">06</span><div><h4 class="font-bold text-stone-800 text-sm">Microsoft FCF</h4><p class="text-sm leading-7 mt-1">資料中心延遲交付解除後，現金投資與FCF能否維持平衡。</p></div></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-100 p-4 flex gap-3 md:col-span-2"><span class="shrink-0 text-sky-800 font-black">07</span><div><h4 class="font-bold text-stone-800 text-sm">共同營運與資本指標</h4><p class="text-sm leading-7 mt-1">新增算力利用率、單位推論成本、雲端價格、合約轉營收速度、設備折舊與能源限制。</p></div></div>
+        </div>
+      </article>
+      <div class="rounded-2xl bg-slate-900 text-slate-50 p-6 sm:p-8">
+        <h3 class="text-xl sm:text-2xl font-extrabold mb-3">最終判準：AI支出不是成果，現金回收才是驗證</h3>
+        <p class="leading-8 text-slate-200">Alphabet的挑戰是讓搜尋、Gemini、TPU與Google Cloud整合能力轉化為穩定FCF；Microsoft的考驗則是面對遞延設備交付及快速汰換後，仍能維持企業付費與現金流優勢。未來估值分化更可能取決於現金流、資本報酬與融資可持續性，而非資本支出規模本身。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI現金流驗證：雙巨頭財報。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中Alphabet與Microsoft AI現金流投資分析相關公開資料 (2026年10月29日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+
+    // 原始數據僅取自2026-10-29報告，金額一律保留其億美元口徑。
+    const productData = [
+      {company:'Alphabet', metric:'合併營收', value:'1,275.77 億美元', note:'2026 Q3；年增25%；低於部分市場調查約1,282億美元預測'},
+      {company:'Alphabet', metric:'Google Services營收', value:'963.02 億美元', note:'2026 Q3；年增11%'},
+      {company:'Alphabet', metric:'Google Search及其他營收', value:'633.50 億美元', note:'2026 Q3；年增12%'},
+      {company:'Alphabet', metric:'YouTube廣告營收', value:'112.07 億美元', note:'2026 Q3；年增約9%'},
+      {company:'Alphabet', metric:'Google Cloud營收', value:'307.09 億美元', note:'2026 Q3；年增103%；包含TPU系統銷售'},
+      {company:'Alphabet', metric:'Google Cloud營業利益', value:'111.21 億美元', note:'2026 Q3；營業利益率36.2%；去年同期約23.7%'},
+      {company:'Alphabet', metric:'合併營業利益', value:'405.76 億美元', note:'2026 Q3；年增約30%；營業利益率約31.8%'},
+      {company:'Alphabet', metric:'淨利及稀釋EPS', value:'261.70 億美元／2.12 美元', note:'2026 Q3；淨利約數；受到部分營業外投資評價損失影響'},
+      {company:'Alphabet', metric:'營業活動現金流', value:'422.90 億美元', note:'2026 Q3；自由現金流計算起點'},
+      {company:'Alphabet', metric:'現金設備購置', value:'513.55 億美元', note:'2026 Q3；約占營業活動現金流121%'},
+      {company:'Alphabet', metric:'自由現金流 FCF', value:'−90.65 億美元', note:'2026 Q3；前季約−58.55億美元；最近十二個月約+197.47億美元'},
+      {company:'Alphabet', metric:'Google Cloud積壓訂單', value:'約5,610 億美元', note:'管理層預期略高於55%未來24個月轉營收；非現金或已交付收入'},
+      {company:'Alphabet', metric:'2026年全年資本支出指引', value:'1,950～2,050 億美元', note:'公司預測；2027年預期顯著增加，尚未發生'},
+      {company:'Alphabet', metric:'股權融資淨資金', value:'約124 億美元', note:'2026 Q3；普通股市價發行計畫；不得認定全數用於AI'},
+      {company:'Alphabet', metric:'債券融資淨資金', value:'約287 億美元', note:'2026 Q3；無擔保優先債券；不得認定全數用於AI'},
+      {company:'Microsoft', metric:'合併營收', value:'922.79 億美元', note:'2027財年 Q1；年增19%；截至2026/09/30'},
+      {company:'Microsoft', metric:'合併營業利益', value:'459.15 億美元', note:'2027財年 Q1；年增21%；營業利益率約50%'},
+      {company:'Microsoft', metric:'GAAP／非GAAP稀釋EPS', value:'4.92／4.89 美元', note:'2027財年 Q1；非GAAP口徑排除OpenAI投資影響'},
+      {company:'Microsoft', metric:'Azure營收', value:'331.65 億美元', note:'2027財年 Q1；年增48%'},
+      {company:'Microsoft', metric:'Microsoft Cloud營收', value:'639 億美元', note:'2027財年 Q1；年增30%'},
+      {company:'Microsoft', metric:'商用剩餘履約義務 RPO', value:'6,770 億美元', note:'年增73%；未來合約營收可見度；非現金或保證利潤'},
+      {company:'Microsoft', metric:'營業活動現金流', value:'580 億美元', note:'2027財年 Q1；自由現金流計算起點'},
+      {company:'Microsoft', metric:'現金設備購置', value:'393.67 億美元', note:'2027財年 Q1；約占營業活動現金流68%；計算FCF採此口徑'},
+      {company:'Microsoft', metric:'自由現金流 FCF', value:'+186.33 億美元', note:'2027財年 Q1；580－393.67＝186.33'},
+      {company:'Microsoft', metric:'廣義資本支出', value:'452 億美元', note:'2027財年 Q1；包含部分融資租賃；原規劃約500億美元，部分因交付延遲'},
+      {company:'Microsoft', metric:'短壽命設備支出比重', value:'約75%', note:'本季資本支出中，CPU、GPU、記憶體與儲存等設備約占四分之三'},
+      {company:'Microsoft', metric:'下季Azure固定匯率年增展望', value:'49%～50%', note:'管理層前瞻指引；尚未實現'}
+    ];
+
+    const dataSearch = document.getElementById('data-search');
+    const dataBody = document.getElementById('data-body');
+    const searchCount = document.getElementById('search-count');
+    function renderTable(query = '') {
+      const q = String(query).normalize('NFKC').trim().toLocaleLowerCase();
+      const rows = productData.filter(row => Object.values(row).join(' ').normalize('NFKC').toLocaleLowerCase().includes(q));
+      const frag = document.createDocumentFragment();
+      rows.forEach(row => {
+        const tr = document.createElement('tr');
+        for (const key of ['company','metric','value','note']) {
+          const cell = document.createElement('td');
+          cell.textContent = row[key];
+          if (key === 'company') cell.className = 'font-semibold text-stone-800';
+          tr.appendChild(cell);
+        }
+        frag.appendChild(tr);
+      });
+      if (!rows.length) {
+        const tr = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 4;
+        cell.textContent = '找不到符合條件的項目，請調整搜尋字詞。';
+        cell.className = 'text-center text-stone-500 py-8';
+        tr.appendChild(cell);
+        frag.appendChild(tr);
+      }
+      dataBody.replaceChildren(frag);
+      searchCount.textContent = `顯示 ${rows.length} / ${productData.length} 筆真實報告數據`;
+    }
+    dataSearch.addEventListener('input', event => renderTable(event.target.value));
+    renderTable();
+
+    const mobileButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
+    function setMobileMenu(open) {
+      mobileMenu.classList.toggle('hidden', !open);
+      mobileMenu.setAttribute('aria-hidden', String(!open));
+      mobileButton.setAttribute('aria-expanded', String(open));
+      mobileButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      iconMenu.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+    }
+    mobileButton.addEventListener('click', () => setMobileMenu(mobileButton.getAttribute('aria-expanded') !== 'true'));
+    document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => setMobileMenu(false)));
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') setMobileMenu(false); });
+    window.matchMedia('(min-width: 1280px)').addEventListener('change', event => { if (event.matches) setMobileMenu(false); });
+
+    const navLinks = Array.from(document.querySelectorAll('[data-section]'));
+    function setActiveSection(sectionId) {
+      navLinks.forEach(a => {
+        const active = a.dataset.section === sectionId;
+        a.classList.toggle('active-nav-link', active);
+        a.classList.toggle('inactive-nav-link', !active);
+        if (active) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
+    }
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+    if ('IntersectionObserver' in window) {
+      const seen = new Map();
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) seen.set(entry.target.id, entry.boundingClientRect.top); else seen.delete(entry.target.id); });
+        if (seen.size) {
+          const next = [...seen.entries()].sort((a,b) => Math.abs(a[1]) - Math.abs(b[1]))[0][0];
+          setActiveSection(next);
+        }
+      }, {rootMargin:'-75px 0px -62% 0px', threshold:0});
+      sections.forEach(section => observer.observe(section));
+    }
+    navLinks.forEach(a => a.addEventListener('click', () => setActiveSection(a.dataset.section)));
+    setActiveSection('overview');
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = 'ui-sans-serif, system-ui, "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+      Chart.defaults.color = '#57534e';
+      const cashFlowCtx = document.getElementById('cashFlowChart');
+      new Chart(cashFlowCtx, {
+        type:'bar',
+        data: {
+          labels:['營業活動現金流','現金設備購置','自由現金流 FCF'],
+          datasets:[
+            {label:'Alphabet', data:[422.90,513.55,-90.65], backgroundColor:'#0ea5e9', hoverBackgroundColor:'#0284c7', borderRadius:4, borderSkipped:false},
+            {label:'Microsoft', data:[580,393.67,186.33], backgroundColor:'#334155', hoverBackgroundColor:'#0f172a', borderRadius:4, borderSkipped:false}
+          ]
+        },
+        options:{responsive:true, maintainAspectRatio:false, indexAxis:'y', interaction:{mode:'index',intersect:false},
+          plugins:{legend:{position:'bottom',labels:{boxWidth:12,padding:16}}, tooltip:{callbacks:{label:(ctx)=>`${ctx.dataset.label}：${ctx.parsed.x.toLocaleString('zh-TW',{minimumFractionDigits:0,maximumFractionDigits:2})} 億美元`}}},
+          scales:{x:{beginAtZero:true,grid:{color:'#e7edf3'},ticks:{callback:(value)=>value+' 億'}},y:{grid:{display:false},ticks:{font:{size:12}}}}}
+      });
+      new Chart(document.getElementById('growthChart'), {
+        type:'bar',
+        data:{labels:['Alphabet 合併','Google Cloud','Microsoft 合併','Azure'],datasets:[{label:'年增率',data:[25,103,19,48],backgroundColor:['#38bdf8','#0284c7','#94a3b8','#334155'],borderRadius:6, maxBarThickness:56}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:(ctx)=>`營收年增 ${ctx.parsed.y}%`}}},scales:{y:{beginAtZero:true,suggestedMax:110,ticks:{callback:value=>value+'%'},grid:{color:'#e7edf3'}},x:{grid:{display:false},ticks:{font:{size:11},maxRotation:30,minRotation:0}}}}
+      });
+    } else {
+      document.querySelectorAll('.chart-shell').forEach(container => {
+        container.style.height = 'auto';
+        const note = document.createElement('p');
+        note.className = 'text-sm leading-8 text-slate-700 bg-slate-50 rounded-lg p-4';
+        note.textContent = container.querySelector('canvas').getAttribute('aria-label') + '（圖表需要網路連線載入Chart.js）';
+        container.replaceChildren(note);
+      });
+    }
+  </script>
+</body>
+</html>
