@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>巴菲特AI價值投資-美股市場週報 (2026/10/26~10/30)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+            background: #f5f5f4
+        }
+
+        .hero-mesh {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background: radial-gradient(circle at 76% 16%, rgba(14, 165, 233, .25), transparent 35%), radial-gradient(circle at 5% 85%, rgba(56, 189, 248, .19), transparent 40%), linear-gradient(130deg, #0c253a, #0f3852 53%, #075985)
+        }
+
+        .hero-mesh::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+            background-size: 36px 36px
+        }
+
+        .hero-mesh>.hero-content {
+            position: relative;
+            z-index: 1
+        }
+
+        .active-nav-link {
+            color: #0284c7;
+            border-bottom: 2px solid #0284c7
+        }
+
+        .inactive-nav-link {
+            color: #57534e;
+            border-bottom: 2px solid transparent
+        }
+
+        .chart-shell {
+            position: relative;
+            height: 320px;
+            width: 100%
+        }
+
+        section[id] {
+            scroll-margin-top: 88px
+        }
+    </style>
+</head>
+
+<body class="text-stone-700">
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between min-h-16"><span
+                class="font-bold text-sky-900">巴菲特AI價值投資 · 美股週報</span>
+            <div class="hidden md:flex gap-5 text-sm" id="desktopNav"><a href="#market"
+                    class="inactive-nav-link py-2">市場總覽</a><a href="#macro" class="inactive-nav-link py-2">總體經濟</a><a
+                    href="#news" class="inactive-nav-link py-2">十大新聞</a><a href="#analysis"
+                    class="inactive-nav-link py-2">投資解讀</a><a href="#watch" class="inactive-nav-link py-2">後續追蹤</a>
+            </div><button id="menuBtn" class="md:hidden rounded-lg border px-3 py-2" aria-label="切換導覽選單"
+                aria-controls="mobileNav" aria-expanded="false">☰</button>
+        </nav>
+        <div id="mobileNav" class="hidden md:hidden bg-white border-t px-4 py-3 space-y-3"><a class="block"
+                href="#market">市場總覽</a><a class="block" href="#macro">總體經濟</a><a class="block" href="#news">十大新聞</a><a
+                class="block" href="#analysis">投資解讀</a><a class="block" href="#watch">後續追蹤</a></div>
+    </header>
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+        <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+            <h1 id="hero-heading" class="text-4xl sm:text-5xl font-extrabold leading-tight">美股市場週報｜AI 投資熱潮遭遇現金流考驗</h1>
+            <p class="mt-6 max-w-3xl text-sky-50/90 leading-relaxed text-lg">上週科技股因資本支出與現金流壓力承壓，Nasdaq 下跌約 2.0%，羅素 2000
+                則上漲約 1.3%。雲端業務維持成長，但市場更加重視 AI 投資回報、利率與能源風險。</p>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
+                <div class="rounded-lg bg-white/10 p-4">
+                    <div class="text-sm text-sky-100">標普 500 週漲跌</div>
+                    <div class="text-2xl font-bold mt-1">−0.6%</div>
+                </div>
+                <div class="rounded-lg bg-white/10 p-4">
+                    <div class="text-sm text-sky-100">Nasdaq 週漲跌</div>
+                    <div class="text-2xl font-bold mt-1">−2.0%</div>
+                </div>
+                <div class="rounded-lg bg-white/10 p-4">
+                    <div class="text-sm text-sky-100">羅素 2000 週漲跌</div>
+                    <div class="text-2xl font-bold mt-1">+1.3%</div>
+                </div>
+                <div class="rounded-lg bg-white/10 p-4">
+                    <div class="text-sm text-sky-100">財報 EPS 優於預期占比</div>
+                    <div class="text-2xl font-bold mt-1">約 82%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <section id="market" class="mb-14">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、上週美股市場總覽</h2>
+            <div class="grid lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-3">主要指數週表現</h3>
+                    <div class="chart-shell"><canvas id="indicesChart" aria-label="美股主要指數週漲跌幅圖"></canvas></div>
+                    <p class="text-sm text-stone-500 mt-3">週漲跌幅為報告約數；觀察期間 2026/10/26–10/30。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4">10 月 30 日收盤與市場訊號</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-stone-100">
+                                <tr>
+                                    <th class="p-3">指數</th>
+                                    <th class="p-3">收盤</th>
+                                    <th class="p-3">週漲跌</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-3">標普 500</td>
+                                    <td class="p-3">7,580.07</td>
+                                    <td class="p-3">約 −0.6%</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3">Nasdaq</td>
+                                    <td class="p-3">約 25,437</td>
+                                    <td class="p-3">約 −2.0%</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3">道瓊工業</td>
+                                    <td class="p-3">51,770.31</td>
+                                    <td class="p-3">約 −0.9%</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3">羅素 2000</td>
+                                    <td class="p-3">未列</td>
+                                    <td class="p-3">約 +1.3%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="mt-5 leading-7">Nasdaq 於 10 月 30 日單日下跌約 2.9%；小型股相對走強，反映資金輪動。約 82% 已公布第三季業績的標普 500 企業 EPS
+                        優於預期，但市場對成長估值、借貸及資本支出更為敏感。</p>
+                </div>
+            </div>
+        </section>
+        <section id="macro" class="mb-14">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、總體經濟與地緣政治</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sm text-stone-500">聯準會基準利率 · 10/28</div>
+                    <div class="text-3xl font-bold text-sky-800 mt-2">3.75%–4.00%</div>
+                    <p class="mt-3 leading-7">維持不變；10 位官員支持維持，2 位傾向升息。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sm text-stone-500">美國第三季 GDP 年化初值</div>
+                    <div class="text-3xl font-bold text-sky-800 mt-2">+3.4%</div>
+                    <p class="mt-3 leading-7">第二季為 +2.2%；投資與消費支撐成長。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sm text-stone-500">9 月 PCE 通膨年增</div>
+                    <div class="text-3xl font-bold text-sky-800 mt-2">3.6%</div>
+                    <p class="mt-3 leading-7">核心 PCE 年增 3.1%，仍高於 2% 目標。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sm text-stone-500">布蘭特原油期貨 · 10/30</div>
+                    <div class="text-3xl font-bold text-sky-800 mt-2">117.64 美元/桶</div>
+                    <p class="mt-3 leading-7">美伊衝突及荷莫茲海峽運輸風險推升能源成本疑慮。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6 md:col-span-2">
+                    <h3 class="font-bold text-xl mb-3">宏觀環境對估值的傳導</h3>
+                    <p class="leading-8">經濟成長強勁並不代表寬鬆政策即將到來。高通膨、能源運輸風險及 11 月 3 日美國期中選舉的不確定性，可能共同推升企業成本、限制降息空間，並放大市場波動。
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="news" class="mb-14">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、上週十大投資新聞</h2>
+            <div class="grid lg:grid-cols-2 gap-x-6">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 01</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">聯準會按兵不動：經濟強，不代表降息即將到來</h3>
+                    <p class="leading-8 text-stone-600">10 月 28 日，聯準會把利率維持在 3.75% 至 4.00%。隔日公布的第三季經濟成長率達
+                        3.4%，顯示美國需求未明顯失速，但 9 月整體與核心個人消費支出物價指數年增率分別為 3.6% 和
+                        3.1%。當成長強、物價又偏高，聯準會就較難快速轉向寬鬆政策；市場甚至必須評估再次升息的可能性。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7">
+                        <strong>投資觀察：</strong>高利率特別影響負債較多、獲利還在遠期的公司，因為借錢更貴，未來賺到的錢也較難支撐過高股價。投資時宜優先注意企業是否具備穩定獲利、足夠現金及合理負債，而不是單憑降息期待布局。
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 02</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">Alphabet：雲端營收翻倍，Google 搜尋與現金流卻成為疑慮</h3>
+                    <p class="leading-8 text-stone-600">Alphabet 於 10 月 28 日公布第三季營收 1,276 億美元，年增 25%；Google Cloud 營收約
+                        307 億美元，年增 103%，表現非常亮眼。相較之下，Google 搜尋相關業務年增約 12%，廣告收入低於市場預期；整體營收也略低於分析師預估。公司當季每股盈餘為 2.12
+                        美元，而自由現金流出約 91 億美元，凸顯 AI 設備和雲端擴張的資金壓力。財報後市場對其廣告成長、支出規模及獲利品質提出更嚴格的要求。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7"><strong>投資觀察：</strong>雲端成長證明
+                        Google 在 AI 市場具有競爭力，但投資人仍需確認新的 AI 搜尋服務能否有效變現，以及雲端擴張何時帶來持續的現金流。營收高速成長不一定等於股東立即受益。</div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 03</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">微軟：Azure 成長 48%，示範 AI 投資如何帶動實際收入</h3>
+                    <p class="leading-8 text-stone-600">微軟同樣在 10 月 28 日公布財報，2027 會計年度第一季營收約 923 億美元，年增 19%；Azure
+                        雲端業務營收年增 48%，達約 332 億美元，優於市場預期。微軟整體每股盈餘為 4.92 美元。從企業雲端服務到辦公軟體，微軟已有成熟的收費渠道，較容易讓企業的 AI
+                        支出轉化為自己的業務收入。不過，雲端成長仍須持續與設備建置成本相互比較。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7"><strong>投資觀察：</strong>AI
+                        趨勢未必消失，而是公司之間開始分化。比起只宣布大型投資計畫，具備客戶、訂閱服務和明確營收成長的企業，可能更容易獲得市場支持。仍須留意估值，避免將優秀公司誤認為任何價格都值得買進。</div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 04</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">亞馬遜：AWS 加速，但 2,200 億美元資本支出引發擔憂</h3>
+                    <p class="leading-8 text-stone-600">亞馬遜於 10 月 29 日公布第三季營收約 2,019 億美元，年增 12%，但仍未達部分分析師預期；AWS 雲端服務營收年增
+                        39.3%，約 460 億美元，創近五年最快增速。公司的 2026 年資本支出計畫約 2,200 億美元，受資料中心與 AI 建設影響，最近十二個月自由現金流為負 424
+                        億美元。公司預估第四季營收介於 2,400 億至 2,470 億美元，市場特別關注旺季展望和現金支出速度。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7">
+                        <strong>投資觀察：</strong>亞馬遜同時擁有大型零售平台與成長快速的雲端服務，但設備投資若長時間超過營運產生的現金，可能加大借貸需求。未來關鍵不是 AWS
+                        有沒有成長，而是成長能否抵銷建設成本，以及零售業務能否維持良好利潤。</div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 05</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">SpaceX：與 Apollo 達成約 400 億美元 AI 晶片融資承諾</h3>
+                    <p class="leading-8 text-stone-600">10 月 26 日，SpaceX 宣布與由 Apollo 管理的實體達成約 400 億美元的設備融資租賃承諾，規劃取得
+                        NVIDIA 新世代 Vera Rubin 晶片與相關設備，用於地面 AI 運算建設。這是具條件的融資租賃安排，預計於 2026 年底前完成，租賃將隨 2027
+                        年上半年設備交付陸續開始，不能視為所有資金與設備已經到位。SpaceX 的業務已從火箭及 Starlink 擴展至更大量的 AI 運算投資。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7"><strong>投資觀察：</strong>這項交易對 NVIDIA
+                        及 AI 基礎設施供應鏈具有需求上的正面訊號，同時也代表 SpaceX 承擔龐大且長期的固定付款義務。需要追蹤運算設備實際使用率、租賃負擔，以及 AI 服務收入能否與支出同步成長。</div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 06</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">英特爾暴跌，連帶拖累 NVIDIA：晶片需求旺盛也可能賺不到預期的錢</h3>
+                    <p class="leading-8 text-stone-600">英特爾 10 月 29 日公布第三季營收約 165 億美元，年增 21%，調整後每股盈餘 0.52
+                        美元，當季結果優於市場預期；但第四季營收預測只有 150 億至 160 億美元，低於市場約 171
+                        億美元的預估。公司指出記憶體價格上漲壓抑個人電腦需求，且以色列工廠事故影響產能與供貨，預估相關收入衝擊約 6 億美元。10 月 30 日英特爾股價下跌約 28.6%，NVIDIA 下跌約
+                        4.2%，AMD 下跌約 10.9%。NVIDIA 已宣布將於 11 月 17 日公布下一次財報，不能將尚未發布的成績視為既定結果。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7"><strong>投資觀察：</strong>AI
+                        基礎建設推升部分晶片需求，但也可能造成記憶體漲價、產能失衡與客戶資金壓力。投資半導體不只看訂單，還要看供貨能力、未來指引和估值。單日大跌亦不代表股票一定已經便宜。</div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 07</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">禮來：減重與糖尿病藥物支撐營收成長 39%</h3>
+                    <p class="leading-8 text-stone-600">禮來於 10 月 29 日公布第三季營收約 244 億美元，年增 39%，主要由 Mounjaro 與 Zepbound
+                        帶動。調整後每股盈餘為 7.48 美元，公司也將全年營收展望上修至 910 億至 920
+                        億美元。不過，因近期收購與研發相關費用，調整後每股盈餘的全年預測受到一次性支出影響，不能只看營收上修就認定所有獲利指標同步提升。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7">
+                        <strong>投資觀察：</strong>肥胖症與糖尿病治療市場仍是醫療產業的重要成長來源。投資人除了觀察銷量，還應注意藥價、保險給付、產能擴張及競爭對手的新藥進展。營收成長快速，但股價合理性仍取決於未來幾年的獲利兌現。
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 08</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">PayPal：獲利優於預期，但支付業務成長仍待加速</h3>
+                    <p class="leading-8 text-stone-600">PayPal 於 10 月 27 日公布第三季營收約 85.8 億美元，年增 2%，略低於市場預期；調整後每股盈餘 1.45
+                        美元，高於市場預估的約 1.31 美元。總支付金額達約 4,871 億美元，年增 6%，公司也將全年調整後每股盈餘展望從約 5.38 美元提高至 5.60
+                        美元。獲利改善反映成本控制及支付交易效率逐步改善，但營收增速仍偏溫和。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7">
+                        <strong>投資觀察：</strong>金融科技公司即使營收成長不快，也可能透過提升效率創造較好的獲利；但若長期無法吸引更多活躍客戶和交易量，改善空間終究會受限。應同時檢視交易規模、利潤率與現金流，而不是只看單季獲利超標。
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 09</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">eBay：二手交易需求推動線上零售成長</h3>
+                    <p class="leading-8 text-stone-600">eBay 於 10 月 28 日公布第三季營收約 32 億美元，年增 14%；平台商品交易總額約 232 億美元，年增
+                        15%；調整後每股盈餘為 1.51 美元。公司指出二手與再銷售市場需求持續成長，讓網路交易平台在消費者重視價格的環境下，仍能維持業務動能。作為消費需求的另一項觀察，可口可樂在 10 月 27
+                        日公布季度營收約 134 億美元，並提高全年獲利成長目標，顯示不同消費類型公司的韌性存在差異。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7">
+                        <strong>投資觀察：</strong>當物價與能源支出偏高，消費者可能更偏好性價比高的商品，二手交易和價格較容易負擔的日常消費品因而受惠。不過，投資人需區分交易總額和平台實際收入，也應觀察需求成長是否能轉化成持續獲利。
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="text-sky-700 font-bold text-sm mb-2">焦點 10</div>
+                    <h3 class="font-bold text-xl text-stone-800 mb-3">Chipotle：同店銷售恢復成長，餐飲業成本壓力仍在</h3>
+                    <p class="leading-8 text-stone-600">Chipotle 於 10 月 28 日公布第三季營收約 33 億美元，年增 9.6%，同店銷售年增
+                        2.1%，並連續第三季出現來客交易成長。消息公布後，股價在盤後交易一度上漲約 7%。然而，營業利益率從去年同期的 15.9% 降至 13.7%，每股盈餘也從 0.29 美元降至 0.27
+                        美元，說明增加的客流與營收不一定能立即轉為更高利潤。</p>
+                    <div class="mt-4 rounded-lg bg-sky-50 p-4 text-sky-950 leading-7">
+                        <strong>投資觀察：</strong>餐飲股應同時關注來客數、菜單價格及食材與人力成本。若高油價進一步推升配送和原物料支出，未來獲利能力將面臨更大考驗。短線市場可能獎勵營收好轉，但長線估值仍須由獲利率支持。
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="analysis" class="mb-14">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、投資人如何解讀市場</h2>
+            <div class="grid lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="font-bold text-xl mb-4">AI 雲端營收成長比較</h3>
+                    <div class="chart-shell"><canvas id="cloudChart" aria-label="雲端業務年增率比較圖"></canvas></div>
+                    <p class="text-sm text-stone-500 mt-3">各公司財報所列業務：Google Cloud、Azure、AWS；統計口徑與會計期間可能不同，僅比較報告列示的年增率。
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="font-bold text-xl mb-4">市場重新定價的三個核心</h3>
+                    <div class="space-y-5 leading-8">
+                        <p><strong class="text-sky-800">從成長到現金流：</strong>AI 需求仍在成長，但高額資本支出必須與實際營收、自由現金流及付款義務共同評估。</p>
+                        <p><strong class="text-sky-800">從單一題材到多元企業：</strong>禮來、PayPal、eBay、Chipotle 顯示非科技領域也有不同的營運改善機會。
+                        </p>
+                        <p><strong class="text-sky-800">從好公司到合理價格：</strong>穩定獲利、負債可控與估值紀律，比追逐熱門敘事更重要。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="watch" class="mb-8">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">五、後續追蹤重點</h2>
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="font-bold text-lg mb-3">利率與通膨</h3>
+                    <p class="leading-7">追蹤就業、PCE 與聯準會政策訊號，觀察高利率是否持續壓抑估值。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="font-bold text-lg mb-3">AI 投資回收</h3>
+                    <p class="leading-7">比較雲端收入、資本支出、自由現金流與 SpaceX 設備租賃的實際交付及使用情況。</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="font-bold text-lg mb-3">能源與財報</h3>
+                    <p class="leading-7">留意中東局勢與油價，以及蘋果、AMD、Palantir 後續財報；NVIDIA 預定 11 月 17 日公布業績。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/10/26~10/30)。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美股市場及相關公司公開資料 (2026年11月1日)。</p>
+        </div>
+    </footer>
+    <script>const menuBtn = document.getElementById('menuBtn'), mobileNav = document.getElementById('mobileNav'); menuBtn.addEventListener('click', () => { const expanded = menuBtn.getAttribute('aria-expanded') === 'true'; menuBtn.setAttribute('aria-expanded', String(!expanded)); mobileNav.classList.toggle('hidden', expanded) }); mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileNav.classList.add('hidden'); menuBtn.setAttribute('aria-expanded', 'false') })); const navLinks = document.querySelectorAll('#desktopNav a'); const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { navLinks.forEach(a => { const active = a.getAttribute('href') === '#' + entry.target.id; a.classList.toggle('active-nav-link', active); a.classList.toggle('inactive-nav-link', !active) }) } }) }, { rootMargin: '-90px 0px -55% 0px', threshold: 0 }); document.querySelectorAll('main section[id]').forEach(s => observer.observe(s)); if (typeof Chart !== 'undefined') { new Chart(document.getElementById('indicesChart'), { type: 'bar', data: { labels: ['標普 500', 'Nasdaq', '道瓊', '羅素 2000'], datasets: [{ label: '週漲跌幅 (%)', data: [-.6, -2, -.9, 1.3], backgroundColor: ['#f87171', '#f87171', '#f87171', '#38bdf8'], borderRadius: 5 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + '%' } } }, scales: { y: { ticks: { callback: v => v + '%' } } } } }); new Chart(document.getElementById('cloudChart'), { type: 'bar', data: { labels: ['Google Cloud', 'Azure', 'AWS'], datasets: [{ label: '營收年增率 (%)', data: [103, 48, 39.3], backgroundColor: ['#0369a1', '#0284c7', '#38bdf8'], borderRadius: 5 }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x + '%' } } }, scales: { x: { beginAtZero: true, ticks: { callback: v => v + '%' } } } } }) }</script>
+</body>
+
+</html>
