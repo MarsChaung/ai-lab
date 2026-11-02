@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#0c253a">
+  <meta name="description" content="2026年11月2日美股投資深度分析：Marvell與Lumentum的光通訊併購、Microsoft自由現金流、SpaceX與Boost Mobile洽談，以及油價與製造業的投資訊號。">
+  <title>巴菲特AI價值投資-從算力競賽到現金流考驗</title>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --navy:#0c253a; --deep:#123146; --sky:#0284c7; --ink:#1c2a37; --muted:#5b6774; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:102px}
+    body{margin:0;background:#f8fafc;color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.7}
+    section[id]{scroll-margin-top:105px}
+    a{color:inherit} a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #38bdf8;outline-offset:3px}
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before { content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:36px 36px }
+    .hero-mesh > .hero-content{position:relative;z-index:1}
+    .text-white{color:#fff}.hero-mesh h1{letter-spacing:-.035em;line-height:1.18;text-wrap:balance}.hero-mesh p{max-width:64rem}
+    .hero-kpi{border:1px solid rgba(255,255,255,.19);background:rgba(255,255,255,.085);backdrop-filter:blur(6px);border-radius:16px;padding:20px 21px;min-height:130px}
+    .hero-kpi .stat{font-size:clamp(1.6rem,2.6vw,2.25rem);font-weight:850;line-height:1.15;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+    .hero-kpi .label{font-size:.79rem;color:#e0f2fe;margin-top:9px;line-height:1.45}
+    .hero-kpi .context{font-size:.72rem;color:#c0dbec;margin-top:6px;line-height:1.4}
+    #mobileNav.hidden{display:none}
+    .active-nav-link{color:#0369a1!important;background:#e0f2fe!important;font-weight:750!important}
+    .inactive-nav-link{color:#475569;background:transparent;font-weight:600}
+    .nav-link{display:inline-flex;align-items:center;white-space:nowrap;text-decoration:none;padding:9px 11px;border-radius:9px;font-size:.82rem;transition:background-color .18s,color .18s}
+    .nav-link:hover{background:#e0f2fe;color:#075985}
+    .section-heading{letter-spacing:-.02em}.card-accent{border-top:4px solid #0284c7}
+    .card-ivory{background:#f1f5f9}.soft-blue{background:#eff6ff}.soft-amber{background:#fffbeb}.soft-green{background:#f0fdf4}
+    .eyebrow{font-size:.73rem;letter-spacing:.1em;font-weight:800;color:#0369a1;text-transform:uppercase}
+    .metric-label{font-size:.79rem;font-weight:700;color:#526375}.metric-value{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:850;line-height:1.15;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+    .metric-sub{font-size:.82rem;color:#64748b;line-height:1.55}
+    .status{display:inline-flex;align-items:center;border-radius:100px;padding:3px 10px;font-size:.72rem;font-weight:800;line-height:1.7;white-space:nowrap}
+    .status-agreed{background:#dbeafe;color:#1d4ed8}.status-talks{background:#fef3c7;color:#92400e}.status-result{background:#dcfce7;color:#166534}.status-ahead{background:#ede9fe;color:#6d28d9}.status-view{background:#e2e8f0;color:#475569}
+    .inset-rule{border-left:4px solid #0ea5e9;padding:16px 19px;background:#f0f9ff;border-radius:0 12px 12px 0}
+    .chart-shell{position:relative;height:285px;width:100%;min-width:0}
+    .chart-shell canvas{display:block;max-width:100%;max-height:100%}
+    .chart-fallback{display:none;color:#475569;font-size:.85rem;background:#f1f5f9;border-radius:8px;padding:12px;margin-top:10px}
+    .simple-table{width:100%;border-collapse:separate;border-spacing:0;text-align:left;min-width:700px;font-size:.89rem}
+    .simple-table thead th{position:sticky;top:0;z-index:1;background:#eaf1f8;color:#334155;padding:13px 15px;white-space:nowrap;font-size:.77rem;text-transform:none;letter-spacing:.02em;border-bottom:1px solid #cbd5e1}
+    .simple-table tbody td{padding:14px 15px;vertical-align:top;border-bottom:1px solid #e2e8f0}
+    .simple-table tbody tr:nth-child(even){background:#f8fafc}
+    .simple-table tbody tr:hover{background:#f0f9ff}
+    .flow-node{border:1px solid #cbd5e1;background:#fff;border-radius:13px;padding:15px;flex:1;min-width:0;text-align:center}
+    .flow-node strong{display:block;color:#0c4a6e;font-size:.91rem}.flow-node span{display:block;font-size:.75rem;color:#64748b;margin-top:3px}
+    .flow-arrow{color:#0284c7;font-weight:900;align-self:center;flex:0 0 auto}
+    .phase{position:relative;border-left:2px solid #bae6fd;padding:0 0 25px 24px;margin-left:10px}
+    .phase::before{content:"";position:absolute;top:2px;left:-7px;background:#0284c7;border:3px solid #e0f2fe;border-radius:50%;height:12px;width:12px}
+    .phase:last-child{padding-bottom:0}
+    .mini-pill{display:inline-block;background:#e0f2fe;color:#075985;border-radius:999px;padding:4px 10px;font-size:.72rem;font-weight:800}
+    .numbers{font-variant-numeric:tabular-nums}.section-intro{color:#5b6774;max-width:890px;margin:-12px 0 26px}
+    .section-separator{background:linear-gradient(90deg,#e0f2fe,rgba(224,242,254,0));height:1px;margin:28px 0}
+    @media(min-width:768px){.phase{padding-bottom:30px}}
+    @media(max-width:767px){html{scroll-padding-top:80px}section[id]{scroll-margin-top:80px}.hero-kpi{padding:15px;min-height:112px}.hero-kpi .stat{font-size:1.58rem}.chart-shell{height:235px}.flow-arrow{transform:rotate(90deg)}.simple-table{min-width:680px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body class="antialiased">
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm" aria-label="章節導覽">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 min-h-[70px]">
+      <a href="#top" class="flex flex-col shrink-0 no-underline" aria-label="返回頁面頂部">
+        <span class="font-black text-slate-900 text-base sm:text-lg tracking-tight">巴菲特<span class="text-sky-700">AI</span>價值投資</span>
+        <span class="text-[10px] sm:text-xs text-slate-500 tracking-wider">深度投資觀察 · 2026.11.02</span>
+      </a>
+      <div id="desktopNav" class="hidden xl:flex flex-wrap items-center gap-0.5">
+        <a class="nav-link inactive-nav-link" href="#overview" data-nav>市場概覽</a>
+        <a class="nav-link inactive-nav-link" href="#ai" data-nav>AI 與現金流</a>
+        <a class="nav-link inactive-nav-link" href="#spacex" data-nav>衛星電信</a>
+        <a class="nav-link inactive-nav-link" href="#macro" data-nav>油價與景氣</a>
+        <a class="nav-link inactive-nav-link" href="#connection" data-nav>三線連動</a>
+        <a class="nav-link inactive-nav-link" href="#scenarios" data-nav>投資情境</a>
+        <a class="nav-link inactive-nav-link" href="#watchlist" data-nav>追蹤清單</a>
+      </div>
+      <button id="menuButton" class="xl:hidden inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-slate-700 text-sm font-bold" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="開啟章節選單">
+        <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>選單</span>
+      </button>
+    </div>
+    <div id="mobileNav" class="hidden xl:hidden border-t border-slate-100 bg-white shadow-lg" aria-hidden="true">
+      <div class="max-w-7xl mx-auto px-4 py-3 grid grid-cols-2 sm:grid-cols-3 gap-1">
+        <a class="nav-link inactive-nav-link" href="#overview" data-nav>市場概覽</a>
+        <a class="nav-link inactive-nav-link" href="#ai" data-nav>AI 與現金流</a>
+        <a class="nav-link inactive-nav-link" href="#spacex" data-nav>衛星電信</a>
+        <a class="nav-link inactive-nav-link" href="#macro" data-nav>油價與景氣</a>
+        <a class="nav-link inactive-nav-link" href="#connection" data-nav>三線連動</a>
+        <a class="nav-link inactive-nav-link" href="#scenarios" data-nav>投資情境</a>
+        <a class="nav-link inactive-nav-link" href="#watchlist" data-nav>追蹤清單</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold max-w-5xl">從算力競賽到現金流考驗</h1>
+        <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">AI投資主軸正從設備採購轉向資本效率。Marvell與Lumentum的光通訊整合、SpaceX可能延伸至地面電信，以及油價急跌與製造業成本壓力，正共同檢驗企業能否把成長化為可持續的現金回報。</p>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mt-9" aria-label="報告四項關鍵數字">
+          <div class="hero-kpi"><div class="stat">1,150億<span class="text-sm sm:text-base font-semibold">美元</span></div><div class="label">Lumentum 隱含企業價值</div><div class="context">全股票併購協議；含負債，尚未完成</div></div>
+          <div class="hero-kpi"><div class="stat">670億<span class="text-sm sm:text-base font-semibold">美元</span></div><div class="label">Microsoft 2026年度傳統自由現金流</div><div class="context">營業現金流減購置固定資產現金支出</div></div>
+          <div class="hero-kpi"><div class="stat">738萬<span class="text-sm sm:text-base font-semibold">戶</span></div><div class="label">EchoStar 無線用戶</div><div class="context">2026年Q2末旗下業務總數，非Boost單品牌</div></div>
+          <div class="hero-kpi"><div class="stat">−3.7%</div><div class="label">布蘭特原油盤中一度跌幅</div><div class="context">11/2倫敦時段；非美股收盤價</div></div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+    <section id="overview" class="mb-16" aria-labelledby="overview-heading">
+      <h2 id="overview-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">市場概覽：科技修正，不等於全面撤退</h2>
+      <p class="section-intro">10月市場呈現明顯分化：科技股承壓，資金卻未同步退出所有美股。核心問題從「需求是否成長」轉向「新增投資的回報何時兌現」。</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-accent"><div class="metric-label">2026年10月 · 標普500科技類股</div><div class="metric-value text-rose-700 mt-3">−6.8%</div><p class="metric-sub mt-3">約略跌幅。反映資本密集型成長股與高估值科技股面臨重新定價。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-accent"><div class="metric-label">標普500的11個主要產業</div><div class="metric-value text-sky-800 mt-3">9 / 11</div><p class="metric-sub mt-3">當月收漲產業數，說明修正主要呈現產業輪動而非普遍性賣壓。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-accent"><div class="metric-label">標普500成分股</div><div class="metric-value text-emerald-700 mt-3">超過 70%</div><p class="metric-sub mt-3">10月股價收漲比例；不可與科技類股跌幅混為同一統計口徑。</p></article>
+      </div>
+      <div class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 shadow-lg">
+        <p class="text-sky-300 text-xs font-black tracking-widest mb-2">本篇核心判斷</p>
+        <p class="text-xl md:text-2xl font-bold leading-relaxed">AI需求尚未證明反轉，但企業必須沿著「需求 → 部署 → 利用率 → 收費 → 現金流」證明其投資價值。</p>
+        <p class="text-slate-300 mt-3 text-sm">估值不只看成長率，也要看利潤率、折舊、付款時差與股東資本成本。</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 mt-7">
+        <div class="rounded-xl border border-sky-100 bg-sky-50 p-5"><span class="status status-agreed">已公告協議 · 尚待核准</span><h3 class="font-bold text-slate-900 text-lg mt-3">AI光通訊整合</h3><p class="text-sm text-slate-600 mt-2">MRVL／LITE：關鍵不是買下多少設備，而是整合後能否提高資料中心利用率。</p></div>
+        <div class="rounded-xl border border-amber-100 bg-amber-50 p-5"><span class="status status-talks">媒體披露洽談 · 未成交</span><h3 class="font-bold text-slate-900 text-lg mt-3">衛星與地面電信</h3><p class="text-sm text-slate-600 mt-2">SPCX／ECHO：用衛星補覆蓋，透過地面網路與訂閱建立可重複收入。</p></div>
+        <div class="rounded-xl border border-slate-200 bg-white p-5"><span class="status status-view">盤中市場觀察</span><h3 class="font-bold text-slate-900 text-lg mt-3">油價與利率</h3><p class="text-sm text-slate-600 mt-2">油價下跌不等於通膨消失；ISM成本指數仍高，影響Fed政策與折現率。</p></div>
+      </div>
+    </section>
+
+    <section id="ai" class="mb-16" aria-labelledby="ai-heading">
+      <h2 id="ai-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">01｜AI併購與資本效率：買的是資料傳輸能力</h2>
+      <p class="section-intro">光學互連可能成為AI算力擴張的瓶頸解方；但交易估值、整合成本、股權稀釋，以及雲端業者的現金回報，必須同時檢驗。</p>
+      <div class="grid lg:grid-cols-5 gap-6 items-stretch">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3">
+          <div class="flex flex-wrap gap-2 items-center mb-3"><span class="status status-agreed">11/2 已宣布全股票協議</span><span class="text-xs font-bold text-slate-500">MRVL × LITE</span></div>
+          <h3 class="text-2xl font-bold text-slate-900">Marvell × Lumentum</h3>
+          <p class="text-slate-600 mt-3">整合客製化AI晶片、高速網路與雷射／光學元件，尋求從單點設備供應走向系統級互連。交易預計於<strong>2028年上半年</strong>完成，但仍待股東及監管批准。</p>
+          <div class="grid grid-cols-2 gap-4 mt-6">
+            <div class="p-4 rounded-xl bg-sky-50"><div class="metric-label">換股比率</div><div class="text-2xl sm:text-3xl font-extrabold numbers text-sky-800">4.5 : 1</div><div class="text-xs text-slate-500 mt-1">每1股LITE換4.5股MRVL</div></div>
+            <div class="p-4 rounded-xl bg-slate-50"><div class="metric-label">公告隱含收購溢價</div><div class="text-2xl sm:text-3xl font-extrabold numbers text-slate-900">23.9%</div><div class="text-xs text-slate-500 mt-1">相對2026/10/28收盤價</div></div>
+          </div>
+          <div class="mt-6"><div class="flex justify-between text-sm font-bold text-slate-700 mb-2"><span>預計合併後股權</span><span>100%</span></div><div class="flex rounded-full overflow-hidden h-5"><div class="bg-sky-600" style="width:67%" title="原Marvell股東約67%"></div><div class="bg-cyan-300" style="width:33%" title="原Lumentum股東約33%"></div></div><div class="flex flex-wrap justify-between gap-2 text-xs text-slate-600 mt-2"><span><span class="inline-block w-2 h-2 rounded-full bg-sky-600 mr-1"></span>原Marvell股東約67%</span><span><span class="inline-block w-2 h-2 rounded-full bg-cyan-300 mr-1"></span>原Lumentum股東約33%</span></div></div>
+        </article>
+        <aside class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+          <h3 class="font-bold text-xl mb-4 text-slate-900">交易價值的兩面</h3>
+          <div class="rounded-xl bg-emerald-50 border border-emerald-100 p-4 mb-4"><h4 class="font-extrabold text-emerald-900">潛在價值</h4><p class="text-sm text-slate-700 mt-1">光學化提升帶寬、降低資料搬運能耗與延遲，可能改善GPU與資料中心的整體利用率，並帶動大型訂單。</p></div>
+          <div class="rounded-xl bg-rose-50 border border-rose-100 p-4 mb-4"><h4 class="font-extrabold text-rose-900">資本風險</h4><p class="text-sm text-slate-700 mt-1">估值過高、併購整合費用、換股稀釋、客戶延後部署及光學設備價格快速下降，都可能壓縮投資回報。</p></div>
+          <p class="text-xs text-slate-500">1,150億美元為<strong>含負債的隱含企業價值</strong>，不是立刻付出的現金金額；固定換股比率的市場價值會隨股價變動。</p>
+        </aside>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-2">AI系統級回報：不只比晶片速度</h3>
+        <p class="text-sm text-slate-600 mb-5">資料中心競爭已延伸至運算、網路、光學與軟體，真正的衡量標準是能否形成經濟效益。</p>
+        <div class="flex flex-col md:flex-row gap-2 md:gap-2 items-stretch">
+          <div class="flow-node"><strong>AI需求</strong><span>模型／推論需求</span></div><span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-node"><strong>算力部署</strong><span>晶片與資料中心</span></div><span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-node"><strong>互連效率</strong><span>交換器／光元件／雷射</span></div><span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-node"><strong>利用率與收費</strong><span>客戶願付價格</span></div><span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-node"><strong>現金回報</strong><span>新增毛利與自由現金流</span></div>
+        </div>
+        <p class="text-xs text-slate-500 mt-4">競爭觀察：AVGO、NVDA相關網路生態系，以及光元件、封裝、測試與高速網路設備供應鏈。</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex flex-wrap items-start justify-between gap-3 mb-4"><div><p class="eyebrow">Microsoft · FY2026</p><h3 class="text-xl md:text-2xl font-bold text-slate-900 mt-1">營業現金流強勁，不代表AI投資已全部回收</h3></div><span class="status status-result">已揭露年報數據</span></div>
+        <div class="grid lg:grid-cols-2 gap-7 items-start">
+          <div>
+            <p class="font-bold text-sm text-slate-800 mb-3">2026會計年度現金流概況（億美元）</p>
+            <div class="chart-shell"><canvas id="cashFlowChart" role="img" aria-label="Microsoft 2026財年營業現金流1829億美元，購置固定資產現金支出1159億美元，傳統自由現金流670億美元"></canvas></div>
+            <div class="chart-fallback" id="cashFlowFallback">營業活動現金流：1,829億美元；購置固定資產現金支出：1,159億美元；傳統自由現金流：670億美元。</div>
+            <p class="text-xs text-slate-500 mt-2">傳統自由現金流 = 營業活動現金流 − 購置固定資產現金支出，計算口徑不等於AI專案投資報酬。</p>
+          </div>
+          <div>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div class="rounded-xl bg-slate-50 p-4"><div class="metric-label">期末設備應付款 · 2026/6</div><div class="text-2xl md:text-3xl font-black text-sky-800 numbers mt-2">267億</div><div class="text-xs text-slate-500 mt-1">前一年同期約69億美元</div></div>
+              <div class="rounded-xl bg-slate-50 p-4"><div class="metric-label">員工股票薪酬費用</div><div class="text-2xl md:text-3xl font-black text-sky-800 numbers mt-2">124億</div><div class="text-xs text-slate-500 mt-1">FY2026；非現金費用，可能稀釋</div></div>
+            </div>
+            <div class="inset-rule text-sm text-slate-800"><strong>會計上的關鍵差異：</strong>期末設備應付款是時點餘額，不能全額再次扣減當年自由現金流；租賃與延後付款也會改變付款時點及資本支出分類。</div>
+            <p class="text-sm text-slate-600 mt-4">真正的追蹤問題：Azure與AI服務新增毛利，能否隨設備折舊、租賃及未來付款逐步發生，持續覆蓋其經濟成本？相同方法亦適用AMZN、GOOGL及META。</p>
+          </div>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="mini-pill">短期 · 1–5交易日</span><h4 class="font-bold text-lg text-slate-900 mt-3">評估交易價格</h4><p class="text-sm text-slate-600 mt-2">觀察MRVL、LITE相對股價與AVGO、NVDA連動，判斷市場更在意整合效益還是股權稀釋。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="mini-pill">中期 · 1–3個月</span><h4 class="font-bold text-lg text-slate-900 mt-3">比對實際部署</h4><p class="text-sm text-slate-600 mt-2">查看雲端資本支出、設備交付、AI營收、折舊與現金流；區分展示與可重複的大型訂單。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="mini-pill">長期 · 6–12個月</span><h4 class="font-bold text-lg text-slate-900 mt-3">驗證投資回報</h4><p class="text-sm text-slate-600 mt-2">選擇同時證明收入成長、利潤率、現金轉換率及資本效率的企業。</p></div>
+      </div>
+    </section>
+
+    <section id="spacex" class="mb-16" aria-labelledby="spacex-heading">
+      <h2 id="spacex-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">02｜SpaceX與Boost：衛星覆蓋如何變成電信收入？</h2>
+      <p class="section-intro">媒體披露SpaceX與EchoStar洽談Boost Mobile交易或地面網路安排；尚無正式完成的併購、確定價格或權利移轉。關鍵在於訂閱模式與用戶單位經濟效益。</p>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+          <div class="flex flex-wrap gap-2 items-center mb-3"><span class="status status-talks">媒體報導洽談 · 未簽成定案</span><span class="text-xs text-slate-500 font-semibold">SPCX · ECHO · Boost Mobile</span></div>
+          <h3 class="text-2xl font-bold text-slate-900">從連線供應，走向終端用戶訂閱</h3>
+          <p class="mt-3 text-slate-600">Boost主要仰賴AT&amp;T與T-Mobile的地面網路租用服務。SpaceX若能結合Starlink衛星覆蓋與地面網路容量，或可延伸為整合品牌、帳單及客戶關係的行動通訊服務商。</p>
+          <div class="grid md:grid-cols-3 gap-3 mt-6">
+            <div class="rounded-xl p-4 bg-sky-50"><div class="text-2xl mb-2" aria-hidden="true">🛰️</div><h4 class="font-extrabold text-slate-900">衛星補覆蓋</h4><p class="text-xs text-slate-600 mt-1">偏遠地區、海域與部分訊號死角</p></div>
+            <div class="rounded-xl p-4 bg-blue-50"><div class="text-2xl mb-2" aria-hidden="true">📡</div><h4 class="font-extrabold text-slate-900">地面網路保容量</h4><p class="text-xs text-slate-600 mt-1">城市、室內與高密度使用場景</p></div>
+            <div class="rounded-xl p-4 bg-emerald-50"><div class="text-2xl mb-2" aria-hidden="true">📱</div><h4 class="font-extrabold text-slate-900">訂閱支撐收入</h4><p class="text-xs text-slate-600 mt-1">ARPU、留存率、交叉銷售與現金回收</p></div>
+          </div>
+          <p class="text-xs text-slate-500 mt-4">收購品牌不等於自動獲得既有批發網路租約的可轉讓權利；此為關鍵的商業與法律限制。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <p class="metric-label">EchoStar 2026年第二季末</p><div class="metric-value text-sky-800 mt-3">738萬</div><p class="font-semibold text-slate-900 mt-2">旗下無線業務用戶總數</p><p class="text-sm text-slate-600 mt-3">此數字<strong>不是</strong>Boost品牌單獨的、可隨交易直接移轉的用戶數。</p><div class="h-px bg-slate-200 my-5"></div>
+          <p class="metric-label">SpaceX報告所載上市資料</p><p class="text-xl font-black text-slate-900 mt-2">2026/06/12</p><p class="text-sm text-slate-600 mt-1">報告記載於Nasdaq以SPCX掛牌，討論可納入上市公司資本配置及估值框架。</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-4">不同行業的二階影響</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="border border-slate-200 rounded-xl p-5"><h4 class="font-bold text-slate-900">傳統電信商 · T／TMUS／VZ</h4><p class="text-sm text-slate-600 mt-2">潛在的新對手可能壓低價格、增加促銷與流失風險；但網路出租也可能產生批發收入，不能一概判為利空。</p></div>
+          <div class="border border-slate-200 rounded-xl p-5"><h4 class="font-bold text-slate-900">基地台及相關REIT</h4><p class="text-sm text-slate-600 mt-2">衛星可能改變偏遠站點的價值，混合網路也可能需要更多地面設施；應檢查真實站點契約與租金變化。</p></div>
+          <div class="border border-slate-200 rounded-xl p-5"><h4 class="font-bold text-slate-900">SpaceX股東</h4><p class="text-sm text-slate-600 mt-2">新訂閱收入有吸引力，但客服、通路、用戶取得、補貼、資本支出與監管，可能使故事先於現金回報擴張。</p></div>
+        </div>
+      </div>
+      <h3 class="text-xl font-bold text-slate-900 mb-4">三種可能的商業進展（情境，非既成事實）</h3>
+      <div class="grid md:grid-cols-3 gap-4">
+        <article class="rounded-xl bg-emerald-50 border border-emerald-200 p-5"><h4 class="font-extrabold text-emerald-900">正向｜取得長期網路權利</h4><p class="text-sm text-slate-700 mt-3">合理的獲客成本與地面網路使用條件，帶動持續訂閱收入與較佳單位經濟效益。</p></article>
+        <article class="rounded-xl bg-sky-50 border border-sky-200 p-5"><h4 class="font-extrabold text-sky-900">中性｜有限批發或合作</h4><p class="text-sm text-slate-700 mt-3">取得部分服務能力，但短期獲利貢獻有限，仍需驗證用戶採用及網路使用成本。</p></article>
+        <article class="rounded-xl bg-rose-50 border border-rose-200 p-5"><h4 class="font-extrabold text-rose-900">風險｜合約與成本受阻</h4><p class="text-sm text-slate-700 mt-3">租約無法轉讓、監管要求提高或獲客成本過高，拖慢計畫並推升資本需求。</p></article>
+      </div>
+      <div class="inset-rule mt-6 text-sm"><strong>投資判斷前應確認：</strong>具法律拘束力的公告、網路權利與合約條件、監管進度、ARPU、用戶取得成本、流失率及自由現金流指引。</div>
+    </section>
+
+    <section id="macro" class="mb-16" aria-labelledby="macro-heading">
+      <h2 id="macro-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">03｜油價、製造業與利率：成本下降仍需驗證</h2>
+      <p class="section-intro">美伊間接磋商引發油價回落預期，但正式和平協議與能源供應正常化尚未發生；同時美國製造業擴張，投入價格仍偏高。</p>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">11/2倫敦時段 · Brent原油</div><div class="metric-value text-rose-700 mt-3">−3.7%</div><p class="font-bold text-slate-800 mt-2">一度下跌至約 109.23美元／桶</p><p class="metric-sub mt-2">盤中觀察值，不是美股收盤價格；外交緩和不等於供應已恢復。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">2026年10月 · ISM製造業PMI</div><div class="metric-value text-sky-800 mt-3">55.5</div><p class="font-bold text-slate-800 mt-2">9月：54.5 → 10月：55.5</p><p class="metric-sub mt-2">製造業延續擴張；10月生產指數為59.0。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="metric-label">2026年10月 · ISM投入價格指數</div><div class="metric-value text-amber-700 mt-3">75.2</div><p class="font-bold text-slate-800 mt-2">9月：77.9 → 10月：75.2</p><p class="metric-sub mt-2">雖較前月下降，但仍處高檔；成本壓力尚未消散。</p></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex flex-wrap items-center justify-between gap-2"><h3 class="text-xl font-bold text-slate-900">美國製造業訊號：景氣擴張與價格壓力並存</h3><span class="status status-result">已公布 · 9至10月</span></div>
+        <div class="grid lg:grid-cols-5 gap-6 mt-4 items-center">
+          <div class="lg:col-span-3"><div class="chart-shell"><canvas id="ismChart" role="img" aria-label="ISM製造業PMI由2026年9月54.5升到10月55.5，投入價格指數由77.9降至75.2"></canvas></div><div class="chart-fallback" id="ismFallback">製造業PMI：9月54.5、10月55.5；投入價格指數：9月77.9、10月75.2。</div></div>
+          <div class="lg:col-span-2"><div class="rounded-xl bg-amber-50 p-5 border border-amber-100"><h4 class="font-extrabold text-amber-900">為何不能直接交易「油價跌＝Fed立即降息」？</h4><p class="text-sm text-slate-700 mt-2">燃料避險、存貨成本與油輪保險可能延後企業毛利改善；ISM擴張與就業若偏強，Fed仍可能維持審慎，利率下行並非必然。</p></div><p class="text-sm text-slate-600 mt-4">請同時觀察荷姆茲海峽通航、能源產能、10年期美債殖利率與美元走勢，判別通膨與成長預期。</p></div>
+        </div>
+        <p class="text-xs text-slate-500 mt-3">兩條線皆為ISM指數點數，非百分比；50為PMI的常用榮枯分界，非投入價格壓力消失的門檻。</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-slate-900">成本變動的產業傳導</h3><div class="mt-4 space-y-4"><div class="flex gap-3"><span class="text-emerald-700 font-extrabold text-lg">＋</span><p class="text-sm text-slate-600"><strong class="text-slate-900">航空、郵輪、旅宿、運輸與部分零售：</strong>若油價與運輸成本持續下降，成本展望可能改善。</p></div><div class="flex gap-3"><span class="text-rose-700 font-extrabold text-lg">−</span><p class="text-sm text-slate-600"><strong class="text-slate-900">能源生產商：</strong>原油價格走弱可能壓低預期獲利。</p></div><div class="flex gap-3"><span class="text-sky-700 font-extrabold text-lg">↔</span><p class="text-sm text-slate-600"><strong class="text-slate-900">長天期成長股：</strong>僅當通膨與殖利率下降趨勢能持續時，估值壓力才可能緩和。</p></div></div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-bold text-slate-900">報告觀察時點後的事件</h3><div class="mt-4"><div class="phase"><span class="status status-ahead">11月2日 · 美股盤後（當時待公布）</span><p class="font-bold text-slate-900 mt-2">Apple（AAPL）／Palantir（PLTR）財報</p><p class="text-sm text-slate-600">驗證裝置生態成本轉嫁，以及企業AI軟體的實際付費採用。</p></div><div class="phase"><span class="status status-ahead">11月3日 · 未來事件</span><p class="font-bold text-slate-900 mt-2">美國期中選舉／AMD（AMD）盤後財報</p><p class="text-sm text-slate-600">關注政策路徑與非Nvidia AI晶片收入、毛利率。</p></div><div class="phase"><span class="status status-ahead">11月6日 · 預定公布</span><p class="font-bold text-slate-900 mt-2">美國10月非農就業報告</p><p class="text-sm text-slate-600">就業、薪資與通膨共同影響利率預期；本文不含公布結果。</p></div></div></article>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-bold text-slate-900">資金輪動：非科技企業也必須驗證獲利品質</h3>
+        <p class="text-sm text-slate-600 mt-2 mb-5">以下為報告記載之11月2日財報觀察；財務期間及統計口徑依各家公司不同，不能直接將EPS及現金流視為等價。</p>
+        <div class="overflow-x-auto border border-slate-200 rounded-xl" tabindex="0" aria-label="非科技公司財報摘要，表格可左右捲動">
+          <table class="simple-table"><thead><tr><th>公司／股票代號</th><th>報告記載的財務表現</th><th>需要留意的限制</th></tr></thead><tbody>
+            <tr><td><strong>Marriott</strong><br><span class="text-xs text-slate-500">MAR · 第三季</span></td><td>全球RevPAR +6.5%；美加 +7.4%；調整後EPS 3.02美元；全年RevPAR成長展望上調至4.5%–5%</td><td>能源運輸中斷與國際旅遊成本仍可能侵蝕利潤</td></tr>
+            <tr><td><strong>Estée Lauder</strong><br><span class="text-xs text-slate-500">EL · FY2027 Q1</span></td><td>營收37.15億美元、年增7%；調整後EPS 0.72美元</td><td>當季自由現金流仍為負值；EPS改善不等於現金回收</td></tr>
+            <tr><td><strong>IDEXX Laboratories</strong><br><span class="text-xs text-slate-500">IDXX · 第三季</span></td><td>營收12.14億美元、年增10%；EPS 4.01美元；經常性診斷收入成長</td><td>全年營業利益率展望略下修，需留意成本變化</td></tr>
+            <tr><td><strong>Loews</strong><br><span class="text-xs text-slate-500">L</span></td><td>報告指出保險準備金重新估算造成獲利壓力</td><td>金融與防禦股亦有會計估計及負債結構風險</td></tr>
+          </tbody></table>
+        </div>
+        <p class="text-sm text-slate-700 mt-4"><strong>選股原則：</strong>輪動不是全面買進低本益比股票，而是辨識需求韌性、定價能力與現金轉換品質。</p>
+      </div>
+    </section>
+
+    <section id="connection" class="mb-16" aria-labelledby="connection-heading">
+      <h2 id="connection-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">三條主線如何連動？看資本成本與現金回收</h2>
+      <p class="section-intro">乍看是AI併購、電信布局與國際油價三個故事，實際上都在問：企業能否以合理成本取得持續性現金收入？</p>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow">01 · 技術整合</span><h3 class="text-xl font-bold text-slate-900 mt-2">Marvell / Lumentum</h3><p class="text-sm text-slate-600 mt-3">資本投入形式是併購與股權交換；回報取決於光學技術能否提升客戶GPU利用率、擴大營收與利潤。</p><div class="section-separator"></div><p class="text-sm font-extrabold text-sky-800">驗證：整合回報 > 收購溢價及稀釋成本？</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow">02 · 客戶經濟</span><h3 class="text-xl font-bold text-slate-900 mt-2">SpaceX / EchoStar</h3><p class="text-sm text-slate-600 mt-3">資本投入可能轉向地面網路、銷售與客服；收入成長需扣除獲客、維護、補貼及合約成本。</p><div class="section-separator"></div><p class="text-sm font-extrabold text-sky-800">驗證：訂閱毛利 > 取得與維護客戶的成本？</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow">03 · 宏觀折現率</span><h3 class="text-xl font-bold text-slate-900 mt-2">油價 / Fed / 美債</h3><p class="text-sm text-slate-600 mt-3">能源成本、通膨與利率影響所有長期投資的現值；現金回收越晚，估值越依賴折現率假設。</p><div class="section-separator"></div><p class="text-sm font-extrabold text-sky-800">驗證：成本與殖利率是否持續下降？</p></article>
+      </div>
+      <div class="bg-sky-50 border border-sky-100 rounded-2xl p-6 md:p-7"><h3 class="text-xl font-bold text-slate-900 mb-4">投資評估的兩個維度</h3><div class="grid md:grid-cols-2 gap-5"><div class="bg-white rounded-xl p-5 border border-sky-100"><h4 class="font-extrabold text-sky-900">需求確定性</h4><p class="text-sm text-slate-600 mt-2">訂單是否真實、客戶是否重複採購、部署與採用是否持續？</p></div><div class="bg-white rounded-xl p-5 border border-sky-100"><h4 class="font-extrabold text-sky-900">現金回收可驗證性</h4><p class="text-sm text-slate-600 mt-2">收入能否轉為毛利及自由現金流？折舊、租賃、應付款與股東稀釋是否被充分考慮？</p></div></div><p class="text-sm text-slate-700 mt-4">成長快、現金流弱不必然失去長期價值，但需要更強的商業可驗證性與估值安全邊際。</p></div>
+    </section>
+
+    <section id="scenarios" class="mb-16" aria-labelledby="scenarios-heading">
+      <h2 id="scenarios-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">投資情境：先界定條件，再安排策略</h2>
+      <p class="section-intro">以下是報告提出的條件式情境，並非價格預測，也未給予主觀機率。</p>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-t-slate-500"><span class="status status-view">基準情境</span><h3 class="text-xl font-bold text-slate-900 mt-4">AI分化、產業輪動持續</h3><p class="text-sm text-slate-600 mt-3">AI需求成長但高資本支出及融資成本壓抑估值，資金移向訂單、毛利與現金流較明確的企業。</p><div class="section-separator"></div><p class="font-bold text-sm text-slate-800">策略：</p><p class="text-sm text-slate-600 mt-1">保留長期成長產業研究與配置，降低對單一高估值敘事的依賴。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-t-emerald-500"><span class="status status-result">正向情境</span><h3 class="text-xl font-bold text-slate-900 mt-4">油價續跌、AI回報改善</h3><p class="text-sm text-slate-600 mt-3">能源供應恢復，Apple、AMD、Palantir及雲端公司實績證明新增AI收入能逐步覆蓋投資成本。</p><div class="section-separator"></div><p class="font-bold text-sm text-slate-800">策略：</p><p class="text-sm text-slate-600 mt-1">優先研究技術優勢能轉為現金流的高品質企業，不以跌幅排名選股。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border-t-4 border-t-rose-500"><span class="status status-talks">風險情境</span><h3 class="text-xl font-bold text-slate-900 mt-4">油價反彈、殖利率走升</h3><p class="text-sm text-slate-600 mt-3">航運風險升高、成本與就業數據偏強，降息期待下降，AI現金回報又落後資本支出。</p><div class="section-separator"></div><p class="font-bold text-sm text-slate-800">策略：</p><p class="text-sm text-slate-600 mt-1">控管個股及產業集中度，避免以短期槓桿承受多年回收期。</p></article>
+      </div>
+    </section>
+
+    <section id="watchlist" class="mb-6" aria-labelledby="watchlist-heading">
+      <h2 id="watchlist-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">觀察清單與時間表</h2>
+      <p class="section-intro">依報告列示的企業、事件及後續指標建立可搜尋資料表。表格為研究追蹤用途，不代表買進名單；所有事件狀態維持11月2日開盤初期的資訊截點。</p>
+      <div class="grid md:grid-cols-3 gap-4 mb-7">
+        <div class="bg-white rounded-lg shadow-lg p-6"><div class="mini-pill">未來一週</div><p class="font-bold mt-3 text-slate-900">事件與價格反應</p><p class="text-sm text-slate-600 mt-1">油價、10年期美債、11/3期中選舉與AMD財報、11/6非農就業，以及AAPL／PLTR盤後結果。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><div class="mini-pill">未來1–3個月</div><p class="font-bold mt-3 text-slate-900">合約、設備與訂單</p><p class="text-sm text-slate-600 mt-1">MRVL／LITE監管與整合、雲端資本支出及應付款、光學互連大單、SPCX／ECHO正式合作條件。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6"><div class="mini-pill">未來6–12個月</div><p class="font-bold mt-3 text-slate-900">單位經濟與現金流</p><p class="text-sm text-slate-600 mt-1">對比新增AI營收、折舊與現金流，以及衛星電信用戶經濟與能源成本對毛利率的傳導。</p></div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-5 sm:p-6 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-5">
+          <div><h3 class="text-xl font-bold text-slate-900">企業與事件追蹤表</h3><p class="text-xs text-slate-500 mt-1">搜尋股票代號、企業、事件或追蹤指標；亦可按主題篩選。</p></div>
+          <span class="text-sm text-slate-500" role="status" aria-live="polite" id="resultCount"></span>
+        </div>
+        <div class="grid sm:grid-cols-[minmax(0,1fr)_190px] gap-3 mb-5">
+          <label class="block"><span class="sr-only">搜尋股票或事件</span><input id="tableSearch" type="search" autocomplete="off" placeholder="搜尋：MRVL、AI、自由現金流…" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-sky-300 outline-none" aria-label="搜尋股票、公司或追蹤項目"></label>
+          <label class="block"><span class="sr-only">篩選主題</span><select id="tableCategory" class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm bg-white focus:ring-2 focus:ring-sky-300 outline-none" aria-label="篩選追蹤主題"><option value="all">全部主題</option><option value="AI與雲端">AI與雲端</option><option value="衛星與電信">衛星與電信</option><option value="宏觀與事件">宏觀與事件</option><option value="非科技財報">非科技財報</option></select></label>
+        </div>
+        <div class="overflow-x-auto rounded-xl border border-slate-200" tabindex="0" aria-label="可搜尋追蹤表，表格可左右捲動">
+          <table class="simple-table" aria-describedby="tableHelp"><thead><tr><th style="min-width:150px">企業／事件</th><th style="min-width:120px">主題</th><th style="min-width:160px">11/2資訊狀態</th><th style="min-width:280px">重要事實／下一個驗證點</th><th style="min-width:130px">追蹤期間</th></tr></thead><tbody id="watchlistBody"></tbody></table>
+        </div>
+        <p id="tableHelp" class="text-xs text-slate-500 mt-3">表格資料來自本次報告，沒有即時股價或報告之後的更新。若無符合條件的項目，請清除搜尋或切換主題。</p>
+      </div>
+      <div class="rounded-2xl bg-slate-900 p-6 md:p-8 text-white">
+        <h3 class="text-xl md:text-2xl font-bold">結語：下一輪贏家，未必是投資金額最大的公司</h3>
+        <p class="mt-4 text-slate-200 leading-relaxed">光通訊整合需要證明利用率與整合回報，AI資本支出需要考慮付款及折舊的時間差，衛星電信需要把覆蓋能力變成留得住的付費客戶；油價與利率則決定投資人願意為未來現金流支付多少估值。</p>
+        <p class="mt-4 text-sky-200 font-bold">重點不是預測每次反彈，而是持續驗證：技術優勢能否轉化為現金回報，以及股東是否承擔合理風險。</p>
+        <p class="mt-4 text-xs text-slate-400">資訊截止：2026年11月2日美股開盤初期。尚未將當日晚間盤後財報、11月3日選舉或11月6日就業報告結果視為已發生。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-從算力競賽到現金流考驗。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中AI投資、SpaceX電信布局及美股市場相關公開資料 (2026年11月02日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // Source-grounded watch items. These are neither real-time quotes nor synthetic observations.
+    const productData = [
+      {name:'Marvell Technology',symbol:'MRVL',category:'AI與雲端',status:'已公告併購協議',detail:'與LITE全股票換股4.5:1；預估2028年上半年完成，待監管及股東批准；追蹤整合價值與股權稀釋。',horizon:'1–3個月／長期'},
+      {name:'Lumentum',symbol:'LITE',category:'AI與雲端',status:'已公告併購協議',detail:'隱含企業價值約1,150億美元（含負債）；公告隱含溢價約23.9%；觀察交易股價、光學訂單。',horizon:'1–3個月／長期'},
+      {name:'Microsoft',symbol:'MSFT',category:'AI與雲端',status:'2026年度年報數據',detail:'營業現金流1,829億、購置固定資產現金支出1,159億、傳統自由現金流670億美元；關注設備應付款及Azure AI毛利。',horizon:'1–12個月'},
+      {name:'Broadcom',symbol:'AVGO',category:'AI與雲端',status:'競爭影響觀察',detail:'觀察AI網路與光學互連整合的競爭效應及客戶實際部署。',horizon:'1–3個月'},
+      {name:'Nvidia',symbol:'NVDA',category:'AI與雲端',status:'競爭影響觀察',detail:'追蹤網路生態系、GPU利用率與資料中心系統級投資回報。',horizon:'1–12個月'},
+      {name:'Amazon／Alphabet／Meta',symbol:'AMZN／GOOGL／META',category:'AI與雲端',status:'資本效率追蹤',detail:'對比AI服務新增營收與資料中心資本支出、租賃、折舊、設備應付款及自由現金流。',horizon:'1–12個月'},
+      {name:'Apple',symbol:'AAPL',category:'AI與雲端',status:'11/2盤後財報待公布',detail:'關注裝置生態需求及AI成本轉嫁能力；發布前預測不可混同事後實績。',horizon:'本週'},
+      {name:'Palantir',symbol:'PLTR',category:'AI與雲端',status:'11/2盤後財報待公布',detail:'關注企業AI軟體付費採用與營收轉換。',horizon:'本週'},
+      {name:'AMD',symbol:'AMD',category:'AI與雲端',status:'11/3盤後財報待公布',detail:'關注非Nvidia AI晶片的實際營收與毛利率。',horizon:'本週'},
+      {name:'SpaceX',symbol:'SPCX',category:'衛星與電信',status:'媒體披露洽談',detail:'報告記載2026/6/12上市；正洽談Boost收購或地面網路安排，尚無完成交易；需看合約權利、ARPU與獲客成本。',horizon:'1–12個月'},
+      {name:'EchoStar',symbol:'ECHO',category:'衛星與電信',status:'媒體披露洽談',detail:'旗下無線業務截至2026 Q2末約738萬戶，不能當成Boost可轉移用戶；追蹤正式協議與網路租約。',horizon:'1–3個月'},
+      {name:'AT&T／T-Mobile／Verizon',symbol:'T／TMUS／VZ',category:'衛星與電信',status:'潛在產業影響',detail:'追蹤網路批發契約、門號淨增、ARPU、客戶流失率與現金股利保障。',horizon:'1–12個月'},
+      {name:'布蘭特原油／美國10年期公債',symbol:'Brent／UST10Y',category:'宏觀與事件',status:'11/2盤中觀察',detail:'布蘭特盤中一度跌3.7%至約109.23美元/桶；留意荷姆茲通航、運輸保險、殖利率及美元。',horizon:'本週／1–3個月'},
+      {name:'ISM製造業',symbol:'PMI',category:'宏觀與事件',status:'10月數據已公布',detail:'製造業PMI 55.5，生產59.0，投入價格75.2；景氣擴張但成本壓力仍高。',horizon:'本週／每月'},
+      {name:'美國期中選舉',symbol:'11/03',category:'宏觀與事件',status:'11/2時尚未發生',detail:'觀察議席結果及政策可行性，不預設特定政黨勝選的必然股市方向。',horizon:'本週'},
+      {name:'美國10月非農就業',symbol:'11/06',category:'宏觀與事件',status:'預定11/6公布',detail:'觀察新增就業、薪資與利率預期；不預先當成已公布數據。',horizon:'本週'},
+      {name:'Marriott',symbol:'MAR',category:'非科技財報',status:'11/2已公布財報',detail:'Q3全球RevPAR +6.5%、美加+7.4%，調整後EPS 3.02美元；觀察旅遊需求與成本。',horizon:'1–3個月'},
+      {name:'Estée Lauder',symbol:'EL',category:'非科技財報',status:'11/2已公布財報',detail:'FY2027 Q1營收37.15億美元、年增7%，調整後EPS 0.72美元；當季自由現金流仍為負。',horizon:'1–3個月'},
+      {name:'IDEXX Laboratories',symbol:'IDXX',category:'非科技財報',status:'11/2已公布財報',detail:'Q3營收12.14億美元、年增10%，EPS 4.01美元；全年營業利益率展望略下修。',horizon:'1–3個月'},
+      {name:'Loews',symbol:'L',category:'非科技財報',status:'保險會計壓力',detail:'保險準備金重新估算造成獲利壓力；追蹤會計假設及負債結構。',horizon:'1–3個月'}
+    ];
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    }
+    const tableBody = document.getElementById('watchlistBody');
+    const searchInput = document.getElementById('tableSearch');
+    const categorySelect = document.getElementById('tableCategory');
+    const countEl = document.getElementById('resultCount');
+    function renderTable() {
+      const q = searchInput.value.trim().toLocaleLowerCase('zh-Hant');
+      const cat = categorySelect.value;
+      const records = productData.filter(item => (cat==='all'||item.category===cat) &&
+        [item.name,item.symbol,item.category,item.status,item.detail,item.horizon].join(' ').toLocaleLowerCase('zh-Hant').includes(q));
+      tableBody.innerHTML = records.length ? records.map(item => `<tr>
+        <td><strong class="text-slate-900">${escapeHtml(item.name)}</strong><div class="text-xs font-bold text-sky-800 mt-1">${escapeHtml(item.symbol)}</div></td>
+        <td>${escapeHtml(item.category)}</td>
+        <td>${escapeHtml(item.status)}</td>
+        <td>${escapeHtml(item.detail)}</td>
+        <td>${escapeHtml(item.horizon)}</td>
+      </tr>`).join('') : '<tr><td colspan="5" class="text-center text-slate-500 py-8">沒有符合條件的項目，請調整關鍵字或主題。</td></tr>';
+      countEl.textContent = `顯示 ${records.length} / ${productData.length} 筆項目`;
+    }
+    searchInput.addEventListener('input',renderTable);
+    categorySelect.addEventListener('change',renderTable);
+    renderTable();
+
+    const menuButton = document.getElementById('menuButton');
+    const mobileNav = document.getElementById('mobileNav');
+    function setMenuOpen(open) {
+      mobileNav.classList.toggle('hidden', !open);
+      mobileNav.setAttribute('aria-hidden', String(!open));
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+    }
+    menuButton.addEventListener('click',()=>setMenuOpen(menuButton.getAttribute('aria-expanded')!=='true'));
+    mobileNav.querySelectorAll('a').forEach(anchor=>anchor.addEventListener('click',()=>setMenuOpen(false)));
+    document.addEventListener('keydown',event=>{if(event.key==='Escape')setMenuOpen(false);});
+    window.addEventListener('resize',()=>{if(window.innerWidth>=1280)setMenuOpen(false);});
+
+    const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+    const sections = Array.from(document.querySelectorAll('main > section[id]'));
+    function setActiveNav(id) {
+      navLinks.forEach(link=>{
+        const active=link.getAttribute('href')==='#'+id;
+        link.classList.toggle('active-nav-link',active);
+        link.classList.toggle('inactive-nav-link',!active);
+        if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');
+      });
+    }
+    if('IntersectionObserver' in window) {
+      const visibility = new Map();
+      const observer = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{if(entry.isIntersecting)visibility.set(entry.target.id,entry.boundingClientRect.top);else visibility.delete(entry.target.id);});
+        if(visibility.size){const nearest=[...visibility.entries()].sort((a,b)=>Math.abs(a[1]-100)-Math.abs(b[1]-100))[0];setActiveNav(nearest[0]);}
+      }, {rootMargin:'-85px 0px -58% 0px',threshold:0});
+      sections.forEach(section=>observer.observe(section));
+    }
+    navLinks.forEach(link=>link.addEventListener('click',()=>setActiveNav(link.getAttribute('href').slice(1))));
+    setActiveNav('overview');
+
+    function setupCharts() {
+      if(typeof Chart==='undefined') {
+        document.querySelectorAll('.chart-fallback').forEach(el=>el.style.display='block');
+        document.querySelectorAll('.chart-shell').forEach(el=>el.style.display='none');
+        return;
+      }
+      Chart.defaults.font.family = 'ui-sans-serif, system-ui, "PingFang TC", "Microsoft JhengHei", sans-serif';
+      Chart.defaults.color = '#475569';
+      const labelFont = {size:12};
+      try {
+        new Chart(document.getElementById('cashFlowChart'), {
+          type:'bar',
+          data:{labels:['營業活動現金流','購置固定資產現金支出','傳統自由現金流'],datasets:[{data:[1829,1159,670],backgroundColor:['#0284c7','#94a3b8','#10b981'],borderRadius:7,maxBarThickness:68}]},
+          options:{responsive:true,maintainAspectRatio:false,animation:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x.toLocaleString('zh-TW')} 億美元`}}},scales:{x:{beginAtZero:true,grid:{color:'#e2e8f0'},title:{display:true,text:'億美元',font:labelFont},ticks:{callback:value=>Number(value).toLocaleString('zh-TW')}},y:{grid:{display:false},ticks:{font:labelFont}}}}
+        });
+        new Chart(document.getElementById('ismChart'), {
+          type:'line',data:{labels:['2026年9月','2026年10月'],datasets:[{label:'ISM製造業PMI',data:[54.5,55.5],borderColor:'#0284c7',backgroundColor:'#0284c7',pointRadius:5,pointHoverRadius:7,borderWidth:3,tension:.18},{label:'ISM投入價格指數',data:[77.9,75.2],borderColor:'#d97706',backgroundColor:'#d97706',pointRadius:5,pointHoverRadius:7,borderWidth:3,tension:.18}]},
+          options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}：${ctx.parsed.y} 點`}}},scales:{y:{min:45,max:85,grid:{color:'#e2e8f0'},title:{display:true,text:'ISM指數點數'}},x:{grid:{display:false}}}}
+        });
+      } catch(error) {
+        console.warn('圖表載入失敗，改用文字數據：',error);
+        document.querySelectorAll('.chart-fallback').forEach(el=>el.style.display='block');
+        document.querySelectorAll('.chart-shell').forEach(el=>el.style.display='none');
+      }
+    }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setupCharts);
+    else setupCharts();
+  </script>
+</body>
+</html>
