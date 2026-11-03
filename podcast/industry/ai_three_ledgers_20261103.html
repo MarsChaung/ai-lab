@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="2026年11月3日美股投資分析：解析Oracle資本成本、Palantir營收與訂單品質、Apple記憶體成本及AI產業資本報酬。">
+  <title>巴菲特AI價值投資-AI的三本帳與資本報酬</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; --sky: #0284c7; --ink:#173044; }
+    *, *::before, *::after {box-sizing:border-box;}
+    html {scroll-behavior:smooth; scroll-padding-top:88px;}
+    body {font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif; color:#334155; background:#f8fafc; line-height:1.75;}
+    section[id] {scroll-margin-top:92px;}
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content {position:relative;z-index:1;}
+    #mobile-nav.hidden {display:none !important;}
+    .nav-link {display:inline-flex;align-items:center;white-space:nowrap;border-radius:999px;padding:7px 11px;font-size:13px;font-weight:650;line-height:1.3;transition:color .18s ease,background-color .18s ease;}
+    .active-nav-link {color:#0369a1;background:#e0f2fe;}
+    .inactive-nav-link {color:#64748b;background:transparent;}
+    .inactive-nav-link:hover {background:#f1f5f9;color:#0f3852;}
+    .chart-shell {position:relative;width:100%;height:300px;min-height:240px;}
+    .chart-shell canvas {display:block;max-width:100%;}
+    .soft-border {border:1px solid #e2e8f0;}
+    .eyebrow {font-size:12px;font-weight:750;letter-spacing:.12em;color:#0369a1;}
+    .stat-number {font-variant-numeric:tabular-nums;letter-spacing:-.045em;line-height:1.1;}
+    .prose-copy {line-height:1.92;color:#475569;}
+    .prose-copy strong {color:#0f3852;font-weight:750;}
+    .ledger-rail {position:relative;}
+    .ledger-rail::before {content:"";position:absolute;top:25px;bottom:25px;left:18px;width:1px;background:#cbd5e1;}
+    .ledger-dot {z-index:1;position:relative;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#e0f2fe;color:#075985;font-size:13px;font-weight:850;flex-shrink:0;border:3px solid #f8fafc;}
+    .data-table {border-collapse:separate;border-spacing:0;width:100%;min-width:860px;font-size:13px;line-height:1.6;}
+    .data-table thead th {position:sticky;top:0;z-index:2;background:#f1f5f9;color:#334155;text-align:left;padding:13px 14px;font-size:12px;font-weight:800;letter-spacing:.01em;border-bottom:1px solid #cbd5e1;white-space:nowrap;}
+    .data-table td {padding:13px 14px;border-bottom:1px solid #e2e8f0;vertical-align:top;background:white;}
+    .data-table tbody tr:hover td {background:#f8fafc;}
+    .data-table td:nth-child(3) {font-variant-numeric:tabular-nums;font-weight:750;color:#0f3852;white-space:nowrap;}
+    .tag {display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:750;white-space:nowrap;line-height:1.65;}
+    .tag-known {background:#e0f2fe;color:#075985;}
+    .tag-pending {background:#fef3c7;color:#92400e;}
+    .tag-forward {background:#f3e8ff;color:#6b21a8;}
+    .tag-math {background:#e2e8f0;color:#334155;}
+    .tag-time {background:#ecfdf5;color:#166534;}
+    .tag-risk {background:#fee2e2;color:#991b1b;}
+    .metric-bar-track {height:10px;border-radius:100px;background:#e2e8f0;overflow:hidden;}
+    .metric-bar-fill {height:100%;border-radius:100px;}
+    .small-p {font-size:13px;color:#64748b;line-height:1.78;}
+    .table-input {min-width:0;width:100%;padding:11px 13px;border:1px solid #cbd5e1;border-radius:12px;background:white;outline:0;font-size:14px;color:#334155;}
+    .table-input:focus {border-color:#0284c7;box-shadow:0 0 0 3px rgba(14,165,233,.15);}
+    ::selection {background:#bae6fd;color:#0c253a;}
+    @media (max-width:640px) {
+      .chart-shell {height:245px;min-height:245px;}
+      .ledger-rail::before {left:17px;}
+      .stat-number {letter-spacing:-.03em;}
+    }
+    @media (prefers-reduced-motion:reduce) {html{scroll-behavior:auto!important;}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;}}
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50 border-b border-slate-200/90 bg-white/95 backdrop-blur-lg shadow-sm" id="site-header">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-[70px] items-center justify-between gap-4">
+        <div class="flex items-center gap-3 min-w-0" aria-label="巴菲特AI價值投資">
+          <span class="w-9 h-9 flex shrink-0 items-center justify-center bg-sky-900 rounded-xl text-white font-black text-base">AI</span>
+          <div class="min-w-0 leading-tight">
+            <div class="font-bold text-slate-800 text-[15px] sm:text-base truncate">巴菲特AI價值投資</div>
+            <div class="text-[11px] text-slate-500">美股深度投資分析</div>
+          </div>
+        </div>
+        <nav aria-label="主要章節" class="hidden xl:flex items-center gap-0.5" id="desktop-nav">
+          <a href="#overview" class="nav-link active-nav-link" data-nav="overview" aria-current="location">導讀</a>
+          <a href="#oracle" class="nav-link inactive-nav-link" data-nav="oracle">Oracle</a>
+          <a href="#palantir" class="nav-link inactive-nav-link" data-nav="palantir">Palantir</a>
+          <a href="#apple" class="nav-link inactive-nav-link" data-nav="apple">Apple</a>
+          <a href="#industry" class="nav-link inactive-nav-link" data-nav="industry">產業延伸</a>
+          <a href="#macro" class="nav-link inactive-nav-link" data-nav="macro">宏觀</a>
+          <a href="#strategy" class="nav-link inactive-nav-link" data-nav="strategy">策略</a>
+          <a href="#scenarios" class="nav-link inactive-nav-link" data-nav="scenarios">情境</a>
+          <a href="#indicators" class="nav-link inactive-nav-link" data-nav="indicators">數據總覽</a>
+          <a href="#conclusion" class="nav-link inactive-nav-link" data-nav="conclusion">結論</a>
+        </nav>
+        <button type="button" id="menu-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="開啟章節選單" class="xl:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+          <svg id="menu-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+          <svg id="menu-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <nav id="mobile-nav" aria-label="行動版章節" class="hidden xl:hidden border-t border-slate-100 py-3 grid grid-cols-2 sm:grid-cols-5 gap-1.5">
+        <a href="#overview" class="nav-link active-nav-link" data-nav="overview">導讀</a>
+        <a href="#oracle" class="nav-link inactive-nav-link" data-nav="oracle">Oracle</a>
+        <a href="#palantir" class="nav-link inactive-nav-link" data-nav="palantir">Palantir</a>
+        <a href="#apple" class="nav-link inactive-nav-link" data-nav="apple">Apple</a>
+        <a href="#industry" class="nav-link inactive-nav-link" data-nav="industry">產業延伸</a>
+        <a href="#macro" class="nav-link inactive-nav-link" data-nav="macro">宏觀</a>
+        <a href="#strategy" class="nav-link inactive-nav-link" data-nav="strategy">策略</a>
+        <a href="#scenarios" class="nav-link inactive-nav-link" data-nav="scenarios">情境</a>
+        <a href="#indicators" class="nav-link inactive-nav-link" data-nav="indicators">數據總覽</a>
+        <a href="#conclusion" class="nav-link inactive-nav-link" data-nav="conclusion">結論</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+    <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <h1 id="hero-heading" class="text-4xl sm:text-5xl md:text-[3.55rem] font-extrabold leading-[1.18] tracking-tight max-w-5xl">AI的三本帳：<br class="hidden sm:block">資金、現金流與成本轉嫁</h1>
+      <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">Oracle以股債籌資支撐算力擴張，Palantir營收高增長卻需驗證新簽訂單，Apple則在記憶體漲價下承受毛利壓力。AI投資焦點正從「誰成長最快」轉向「誰能將成長留為股東報酬」。</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mt-9 max-w-5xl" aria-label="三大核心觀察數字">
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-5 py-4">
+          <p class="text-xs text-sky-100/80 font-semibold mb-2">Oracle · 已定價／預計籌資</p>
+          <p class="stat-number text-3xl md:text-4xl font-extrabold">200<span class="text-base font-semibold ml-1">億美元</span></p>
+          <p class="text-xs text-sky-100/80 mt-2">股權與公司債各約100億；預計11/4交割</p>
+        </div>
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-5 py-4">
+          <p class="text-xs text-sky-100/80 font-semibold mb-2">Palantir · 已公布2026年第三季</p>
+          <p class="stat-number text-3xl md:text-4xl font-extrabold">+96<span class="text-base font-semibold ml-1">%</span></p>
+          <p class="text-xs text-sky-100/80 mt-2">營收年增；新簽合約成長需持續追蹤</p>
+        </div>
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-5 py-4">
+          <p class="text-xs text-sky-100/80 font-semibold mb-2">Apple · 假期季度公司展望</p>
+          <p class="stat-number text-3xl md:text-4xl font-extrabold">45–46<span class="text-base font-semibold ml-1">%</span></p>
+          <p class="text-xs text-sky-100/80 mt-2">預估毛利率；前季實績為47.9%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="overview" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-16" aria-labelledby="overview-title">
+      <h2 id="overview-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心觀點｜AI進入資本報酬競賽</h2>
+      <div class="grid lg:grid-cols-[1.45fr_0.75fr] gap-6 items-start">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <p class="prose-copy text-[15px] sm:text-base">11月初的市場訊號並非「AI需求突然消失」，而是市場開始評價投入資本後的<strong>回收速度、資金成本、訂單延續性與最終自由現金流</strong>。雲端算力商需要先花錢、軟體商開始收取企業付費，而晶片供給的重新配置可能抬升消費電子的成本。</p>
+          <div class="grid sm:grid-cols-3 gap-3 mt-7">
+            <div class="rounded-xl bg-sky-50 border border-sky-100 p-4">
+              <div class="text-[11px] font-bold text-sky-700">帳本 01 · Oracle</div>
+              <div class="text-lg font-extrabold mt-2 text-slate-800">資本成本</div>
+              <p class="small-p mt-1">發股稀釋與舉債利息，能否由未來算力回收？</p>
+            </div>
+            <div class="rounded-xl bg-teal-50 border border-teal-100 p-4">
+              <div class="text-[11px] font-bold text-teal-700">帳本 02 · Palantir</div>
+              <div class="text-lg font-extrabold mt-2 text-slate-800">訂單品質</div>
+              <p class="small-p mt-1">高營收和高現金流，能否延續到下一批合約？</p>
+            </div>
+            <div class="rounded-xl bg-amber-50 border border-amber-100 p-4">
+              <div class="text-[11px] font-bold text-amber-800">帳本 03 · Apple</div>
+              <div class="text-lg font-extrabold mt-2 text-slate-800">成本轉嫁</div>
+              <p class="small-p mt-1">品牌、定價與產品組合能否守住獲利率？</p>
+            </div>
+          </div>
+        </div>
+        <aside class="rounded-lg bg-slate-900 p-6 text-slate-100 shadow-lg" aria-label="報告時點與口徑">
+          <p class="text-xs tracking-widest text-sky-300 font-bold">研究範圍</p>
+          <div class="mt-4 space-y-4 text-sm">
+            <div><p class="text-slate-400 text-xs">研究日期</p><p class="font-semibold text-base mt-0.5">2026年11月3日</p></div>
+            <div><p class="text-slate-400 text-xs">資訊涵蓋</p><p class="font-semibold mt-0.5">11月2日至11月3日</p></div>
+            <div><p class="text-slate-400 text-xs">市場資料截點</p><p class="font-semibold mt-0.5">台灣時間 11/3 22:21 左右</p></div>
+          </div>
+          <p class="mt-5 pt-4 border-t border-slate-700 text-sm text-slate-300">報告截點在11/3美股常規交易預定開盤（台灣時間22:30）之前；文內盤前與即時價格<strong class="text-white">不視為當日收盤</strong>。</p>
+        </aside>
+      </div>
+      <div class="mt-8 rounded-2xl bg-white soft-border p-5 md:p-6">
+        <p class="eyebrow mb-5">一條相連的資本傳導鏈</p>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-4"><div class="text-xs font-extrabold text-sky-700">01 / 資本市場</div><div class="font-bold text-slate-800 mt-1">提供股債資金</div><p class="small-p mt-1">融資成本與股權稀釋</p></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-4"><div class="text-xs font-extrabold text-sky-700">02 / 雲端業者</div><div class="font-bold text-slate-800 mt-1">建置算力設施</div><p class="small-p mt-1">上線、利用率與折舊</p></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-4"><div class="text-xs font-extrabold text-sky-700">03 / 軟體平台</div><div class="font-bold text-slate-800 mt-1">將AI使用變收入</div><p class="small-p mt-1">合約、續約與現金流</p></div>
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-4"><div class="text-xs font-extrabold text-sky-700">04 / 終端品牌</div><div class="font-bold text-slate-800 mt-1">承擔零組件壓力</div><p class="small-p mt-1">產能分配與毛利率</p></div>
+        </div>
+        <p class="small-p mt-4">這是報告描述的經濟傳導關係，不代表四類公司都會以相同速度認列營收或改善現金流。</p>
+      </div>
+    </section>
+
+    <section id="oracle" class="bg-slate-50 border-y border-slate-200/80 py-14 md:py-16" aria-labelledby="oracle-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="oracle-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第一本帳｜Oracle：資金到位不等於報酬到位</h2>
+        <div class="flex flex-wrap items-center gap-2 mb-6 text-sm"><span class="tag tag-pending">股債發行已定價，待交割</span><span class="text-slate-500">ORCL · 2026/11/2公告 · 預計11/4交割</span></div>
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <div class="flex items-center justify-between gap-2 flex-wrap"><h3 class="font-extrabold text-xl text-slate-800">股權與債務，兩種不同的成本</h3><span class="tag tag-pending">預計籌資</span></div>
+            <div class="chart-shell mt-5"><canvas id="oracleFundingChart" role="img" aria-label="Oracle已定價擬發行股權約100億美元及公司債約100億美元的圖表"></canvas></div>
+            <p class="small-p mt-3">單位：億美元。兩者均為已定價、預計交割的發行安排，並非截至報告截點已全部入帳；資金用途包含一般企業用途，不全等於新增資料中心資本支出。</p>
+          </article>
+          <div class="grid grid-cols-2 gap-3 content-start">
+            <div class="bg-white rounded-lg shadow-lg p-5"><p class="text-xs font-bold text-slate-500">股票發行價</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">116<span class="text-base ml-1">美元/股</span></p><p class="small-p mt-2">約8,620.7萬股，稀釋原股東持股比例</p></div>
+            <div class="bg-white rounded-lg shadow-lg p-5"><p class="text-xs font-bold text-slate-500">債券票面利率</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">7.00–<br>8.65<span class="text-base ml-1">%</span></p><p class="small-p mt-2">多批次債券，到期2029–2046年</p></div>
+            <div class="bg-white rounded-lg shadow-lg p-5"><p class="text-xs font-bold text-slate-500">推算年度名目票息</p><p class="stat-number text-3xl font-extrabold text-sky-800 mt-2">7.77<span class="text-base ml-1">億美元</span></p><p class="small-p mt-2">假設五批債券全數發行且全年存續</p></div>
+            <div class="bg-white rounded-lg shadow-lg p-5"><p class="text-xs font-bold text-slate-500">2029年券到期殖利率</p><p class="stat-number text-3xl font-extrabold text-sky-800 mt-2">7.062<span class="text-base ml-1">%</span></p><p class="small-p mt-2">較公債基準約高240個基點</p></div>
+          </div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <h3 class="text-lg font-extrabold text-slate-800 mb-4">算力投資的回收時差</h3>
+            <div class="ledger-rail space-y-5">
+              <div class="flex items-start gap-3"><span class="ledger-dot">1</span><div><h4 class="font-bold text-slate-800">前期資本支出</h4><p class="small-p">機房、GPU、網路、供電與相關設施需要預先投入。</p></div></div>
+              <div class="flex items-start gap-3"><span class="ledger-dot">2</span><div><h4 class="font-bold text-slate-800">資金成本持續發生</h4><p class="small-p">利息、折舊與維護不會等到客戶收入成熟才開始。</p></div></div>
+              <div class="flex items-start gap-3"><span class="ledger-dot">3</span><div><h4 class="font-bold text-slate-800">部署與利用率爬升</h4><p class="small-p">長期訂單不直接等於交付完成、營收認列或自由現金流。</p></div></div>
+              <div class="flex items-start gap-3"><span class="ledger-dot">4</span><div><h4 class="font-bold text-slate-800">檢驗投入資本報酬</h4><p class="small-p">觀察電力、維護、利息、折舊與持續性資本支出後的回收。</p></div></div>
+            </div>
+          </div>
+          <div class="bg-sky-50 rounded-lg border border-sky-100 p-6">
+            <p class="eyebrow">研究判斷</p>
+            <h3 class="font-extrabold text-xl text-slate-800 mt-2">訂單總額與股東價值，不能劃上等號</h3>
+            <p class="prose-copy mt-3 text-sm">既有合約仍涉及交付進度、利用率、付款條件與履約成本。若後續每增加一美元收入都需要高額持續投入，甚至連利息都難以覆蓋，成長未必創造每股價值。反之，設施上線後單位運算成本下降、邊際現金貢獻提高，才可能逐步改善自由現金流。</p>
+            <div class="mt-5 pt-4 border-t border-sky-200"><p class="font-bold text-slate-800 text-sm">持續驗證</p><p class="small-p mt-1">資料中心上線時程、資本支出、淨借款、利息保障、客戶集中度、每股盈餘稀釋與自由現金流。</p></div>
+            <p class="mt-4 text-xs font-semibold text-amber-900 bg-amber-100 border border-amber-200 rounded-lg px-3 py-2">Oracle管理層對雲端成長及未來自由現金流的目標屬展望，不是已實現獲利。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="palantir" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-16" aria-labelledby="palantir-title">
+      <h2 id="palantir-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第二本帳｜Palantir：營收強勁，前瞻訂單不同步</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-xs font-bold text-slate-500">第三季營收</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">23.13<span class="text-base ml-1">億美元</span></p><p class="text-sm font-bold text-teal-700 mt-2">年增 96%</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-xs font-bold text-slate-500">美國商業營收</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">9.84<span class="text-base ml-1">億美元</span></p><p class="text-sm font-bold text-teal-700 mt-2">年增 148%；高於美國政府9.53億美元</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-xs font-bold text-slate-500">營業活動現金流</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">12.05<span class="text-base ml-1">億美元</span></p><p class="text-sm text-slate-500 mt-2">約為當季營收的52%</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-xs font-bold text-slate-500">調整後自由現金流</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">12.16<span class="text-base ml-1">億美元</span></p><p class="text-sm text-slate-500 mt-2">調整後FCF率約53% · non-GAAP</p></div>
+      </div>
+      <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-6 mb-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+          <h3 class="text-xl font-extrabold text-slate-800">新簽TCV：第二季與第三季比較</h3>
+          <p class="small-p mt-1">同一指標同一口徑比較，季別為2026年第二季／第三季。</p>
+          <div class="chart-shell mt-5"><canvas id="palantirTcvChart" role="img" aria-label="Palantir 2026年第二季與第三季美國商業TCV及全公司TCV比較，單位億美元"></canvas></div>
+          <p class="small-p mt-3">單位：億美元；新簽合約總價值（TCV）不是當期認列營收。美國商業TCV季減約31%，但新合約期限及大型交易時點會影響單季數字。</p>
+        </article>
+        <div class="space-y-4">
+          <div class="rounded-lg border border-amber-200 bg-amber-50 p-6">
+            <p class="eyebrow !text-amber-800">領先指標拉警報</p>
+            <p class="font-extrabold text-3xl text-slate-800 mt-2">+11<span class="text-lg ml-1">%</span></p>
+            <p class="text-sm font-semibold text-slate-800 mt-1">第三季美國商業新簽TCV年增率</p>
+            <p class="small-p mt-2">前一季同指標年增率為153%。增速下滑值得追蹤，卻不能單靠一季TCV認定需求逆轉。</p>
+          </div>
+          <div class="rounded-lg border border-teal-200 bg-teal-50 p-6">
+            <p class="eyebrow !text-teal-800">存量及既有客戶擴張</p>
+            <div class="grid grid-cols-2 gap-4 mt-3"><div><p class="stat-number font-extrabold text-2xl text-slate-800">65.17<span class="text-xs ml-1">億美元</span></p><p class="small-p mt-1">美國商業RDV<br>年增79%、季增4%</p></div><div><p class="stat-number font-extrabold text-2xl text-slate-800">165<span class="text-xs ml-1">%</span></p><p class="small-p mt-1">淨美元留存率<br>依公司指標定義</p></div></div>
+            <p class="small-p mt-3">當季新簽增速放緩，尚未伴隨剩餘合約價值收縮；應觀察是否持續。</p>
+          </div>
+        </div>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="bg-white soft-border rounded-xl p-5"><p class="text-xs font-bold text-sky-700">已公布 · 第三季</p><h3 class="font-bold text-slate-800 mt-1">獲利與現金轉換</h3><p class="small-p mt-2">營業活動現金流約12.05億美元；調整後FCF約12.16億美元，兩者定義不同，不能互換。</p></div>
+        <div class="bg-white soft-border rounded-xl p-5"><p class="text-xs font-bold text-violet-700">公司展望 · 第四季／全年</p><h3 class="font-bold text-slate-800 mt-1">仍預期收入增長</h3><p class="small-p mt-2">第四季營收展望26.49–26.53億美元；全年展望85.30–85.34億美元，尚未實現。</p></div>
+        <div class="bg-white soft-border rounded-xl p-5"><p class="text-xs font-bold text-amber-700">待驗證 · 未來數季</p><h3 class="font-bold text-slate-800 mt-1">合約能否轉成經常性收入</h3><p class="small-p mt-2">同步追蹤TCV、RDV、續約與擴約、淨留存及實際營運現金流，避免只看一季營收年增。</p></div>
+      </div>
+    </section>
+
+    <section id="apple" class="bg-slate-50 border-y border-slate-200/80 py-14 md:py-16" aria-labelledby="apple-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="apple-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第三本帳｜Apple：營收創高仍面臨毛利擠壓</h2>
+        <div class="grid sm:grid-cols-3 gap-4 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500 font-semibold">FY2026 第四季營收</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">1,145<span class="text-base ml-1">億美元</span></p><p class="text-sm text-teal-700 font-bold mt-2">年增12%</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500 font-semibold">FY2026 第四季iPhone營收</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">575.8<span class="text-base ml-1">億美元</span></p><p class="text-sm text-slate-500 mt-2">服務業務亦創新高</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="text-sm text-slate-500 font-semibold">FY2026 第四季稀釋EPS</p><p class="stat-number text-3xl font-extrabold text-slate-800 mt-2">2.10<span class="text-base ml-1">美元</span></p><p class="text-sm text-slate-500 mt-2">已公布季度實績</p></div>
+        </div>
+        <div class="grid lg:grid-cols-[1.12fr_0.88fr] gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-0">
+            <h3 class="text-xl font-extrabold text-slate-800">毛利率：實績、單一調整與未來展望</h3>
+            <p class="small-p mt-2">以下分開呈現已實現財報、研究者算術調整及公司指引，避免把不同口徑混成一個數值。</p>
+            <div class="mt-7 space-y-7">
+              <div><div class="flex justify-between gap-3 items-end mb-2"><div><span class="tag tag-known">已公布</span><span class="font-semibold text-sm ml-2 text-slate-700">FY2026 Q4 毛利率</span></div><strong class="stat-number text-2xl text-slate-800">47.9%</strong></div><div class="metric-bar-track"><div class="metric-bar-fill bg-sky-600" style="width:95.8%"></div></div><p class="small-p mt-1">含約1個百分點關稅退稅正面效果。</p></div>
+              <div><div class="flex justify-between gap-3 items-end mb-2"><div><span class="tag tag-math">研究算術示意</span><span class="font-semibold text-sm ml-2 text-slate-700">扣除上述退稅因素</span></div><strong class="stat-number text-2xl text-slate-800">約46.9%</strong></div><div class="metric-bar-track"><div class="metric-bar-fill bg-slate-400" style="width:93.8%"></div></div><p class="small-p mt-1">非Apple正式公布的調整後毛利率。</p></div>
+              <div><div class="flex justify-between gap-3 items-end mb-2"><div><span class="tag tag-forward">公司展望</span><span class="font-semibold text-sm ml-2 text-slate-700">截至2026年12月假期季度</span></div><strong class="stat-number text-2xl text-slate-800">45–46%</strong></div><div class="metric-bar-track"><div class="metric-bar-fill bg-amber-500" style="width:91%"></div></div><p class="small-p mt-1">色條以區間中點45.5%示意；實際指引是45%–46%的範圍。</p></div>
+            </div>
+            <p class="text-xs text-slate-500 mt-6 border-t border-slate-100 pt-4">色條採50%為共同參照上限，僅供同一毛利率口徑直觀比較。從47.9%至指引區間的差距，不能全數歸因於記憶體漲價。</p>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-amber-50 rounded-lg border border-amber-200 p-6">
+              <p class="eyebrow !text-amber-800">成本如何傳導？</p>
+              <h3 class="font-extrabold text-xl text-slate-800 mt-2">AI產能優先配置，改變零組件議價力</h3>
+              <p class="prose-copy text-sm mt-3">資料中心對HBM、DRAM及儲存元件的需求，可能改變記憶體業者的<strong>投資優先順序、產能配置與價格談判能力</strong>，使消費電子供應成本受到擠壓。HBM與手機記憶體並非完全可替代，不能把兩者簡化成同一產線的直接搶貨。</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-0">
+              <h3 class="font-extrabold text-lg text-slate-800">關鍵不只在記憶體</h3>
+              <p class="prose-copy mt-2 text-sm">基期包含一次性關稅退稅效果；未來毛利率也受到產品組合及AI版Siri等功能投入影響。Apple可運用服務收入、品牌力與供應鏈效率緩衝成本，但仍須檢驗消費者對提價與升級需求的反應。</p>
+              <div class="mt-4 rounded-lg bg-sky-50 border border-sky-100 p-4"><p class="font-bold text-slate-800 text-sm">追蹤重點</p><p class="small-p mt-1">記憶體成本、iPhone需求、服務收入占比、產品毛利率，以及假期季度之後的回穩速度。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="industry" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-16" aria-labelledby="industry-title">
+      <h2 id="industry-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">產業延伸｜融資與光連接重塑AI供應鏈</h2>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+          <div class="flex justify-between flex-wrap items-start gap-2"><div><p class="eyebrow">Alphabet · GOOGL / GOOG</p><h3 class="text-xl font-extrabold text-slate-800 mt-1">發債規模與現金流緩衝</h3></div><span class="tag tag-pending">發行安排</span></div>
+          <div class="grid grid-cols-2 gap-3 my-5"><div class="rounded-xl bg-sky-50 p-4"><p class="small-p">安排公司債規模</p><p class="stat-number font-extrabold text-2xl text-slate-800 mt-1">60<span class="text-xs ml-1">億歐元</span></p></div><div class="rounded-xl bg-sky-50 p-4"><p class="small-p">初步認購需求</p><p class="stat-number font-extrabold text-2xl text-slate-800 mt-1">&gt;170<span class="text-xs ml-1">億歐元</span></p></div></div>
+          <p class="prose-copy text-sm">此次債券分七批；資金可用於一般企業用途，包括債務償還。公司對2026年資本支出的預期約<strong>1,950–2,050億美元</strong>，並表示2027年投資仍將顯著增加。Alphabet已有成熟廣告與雲端現金流，不能把其信用風險與Oracle直接等同。</p>
+          <div class="mt-4 rounded-lg border border-violet-100 bg-violet-50 p-3 text-xs text-violet-900">2026年資本支出為公司預期值，並非已完成全年支出。</div>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0">
+          <div class="flex justify-between flex-wrap items-start gap-2"><div><p class="eyebrow">Marvell × Lumentum · MRVL / LITE</p><h3 class="text-xl font-extrabold text-slate-800 mt-1">把股權作為產業整合對價</h3></div><span class="tag tag-pending">協議公告／待核准</span></div>
+          <div class="grid grid-cols-2 gap-3 my-5"><div class="rounded-xl bg-sky-50 p-4"><p class="small-p">隱含企業價值</p><p class="stat-number font-extrabold text-2xl text-slate-800 mt-1">1,150<span class="text-xs ml-1">億美元</span></p></div><div class="rounded-xl bg-sky-50 p-4"><p class="small-p">每股LITE對價</p><p class="stat-number font-extrabold text-2xl text-slate-800 mt-1">4.5<span class="text-xs ml-1">股MRVL</span></p></div></div>
+          <p class="prose-copy text-sm">公告的是<strong>全股票收購協議</strong>，整合客製化晶片、高速互連、雷射及光學技術；反映AI競爭從單顆GPU延伸到機櫃間與資料中心間傳輸。</p>
+          <div class="mt-4 rounded-lg bg-amber-50 border border-amber-200 p-3 text-xs text-amber-900">交易預期2028年上半年完成，仍須股東及主管機關核准；合併效益尚待實現，不能視作既有獲利。</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="macro" class="bg-slate-50 border-y border-slate-200/80 py-14 md:py-16" aria-labelledby="macro-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="macro-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">宏觀變數｜資金成本能否鬆動？</h2>
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="eyebrow">01 · 政策不確定性</p><h3 class="text-xl font-extrabold text-slate-800 mt-2">美國期中選舉</h3><p class="prose-copy text-sm mt-3">報告截點時，美國11月3日期中選舉正在進行，國會最終席次尚未確定。政策、監管與財政談判可能變動，但選舉結果並非股市漲跌的機械公式。</p><p class="mt-4 text-xs font-bold text-sky-700">關注：選後政策訊號與利率反應</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="eyebrow">02 · 能源風險</p><h3 class="text-xl font-extrabold text-slate-800 mt-2">布蘭特原油波動</h3><div class="mt-4 flex items-end justify-between gap-2"><div><p class="text-xs text-slate-500">11/2 收盤</p><p class="stat-number font-extrabold text-2xl text-slate-800">104.77<span class="text-xs ml-1">美元/桶</span></p></div><div><p class="text-xs text-slate-500">11/3 倫敦10:43</p><p class="stat-number font-extrabold text-2xl text-slate-800">106.13<span class="text-xs ml-1">美元/桶</span></p></div></div><p class="prose-copy text-sm mt-3">11/2單日跌約7.63%，隔日特定時點回升。報價不能作為11/3收盤價；能源供應與荷莫茲海峽運輸穩定性更關鍵。</p><p class="mt-4 text-xs font-bold text-sky-700">關注：油價、供應風險與通膨</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="eyebrow">03 · 製造業與投入成本</p><h3 class="text-xl font-extrabold text-slate-800 mt-2">美國10月ISM製造業</h3><div class="grid grid-cols-2 gap-3 mt-4"><div class="rounded-xl bg-sky-50 p-3"><p class="text-xs text-slate-500">製造業PMI</p><p class="stat-number font-extrabold text-3xl text-slate-800 mt-1">55.5</p></div><div class="rounded-xl bg-amber-50 p-3"><p class="text-xs text-slate-500">價格指數</p><p class="stat-number font-extrabold text-3xl text-slate-800 mt-1">75.2</p></div></div><p class="prose-copy text-sm mt-3">製造業擴張與投入成本壓力並存；不能因經濟活動改善便假設利率將快速下降。</p><p class="mt-4 text-xs font-bold text-sky-700">關注：實質利率、信用利差與資本支出</p></article>
+        </div>
+        <div class="bg-slate-900 text-white p-6 rounded-xl mt-6"><div class="grid lg:grid-cols-2 gap-5"><div><p class="text-xs uppercase tracking-widest text-sky-300 font-bold">風險緩和時</p><p class="text-sm text-slate-200 mt-2">若能源價格回落、通膨緩和、融資利差收斂，資本密集型AI公司可能同時改善資金成本與需求預期。</p></div><div class="lg:border-l lg:border-slate-700 lg:pl-5"><p class="text-xs uppercase tracking-widest text-amber-300 font-bold">風險升高時</p><p class="text-sm text-slate-200 mt-2">若油價反彈、利率維持高檔，市場可能更嚴格要求自由現金流、利息保障與資產負債表韌性。</p></div></div></div>
+      </div>
+    </section>
+
+    <section id="strategy" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-16" aria-labelledby="strategy-title">
+      <h2 id="strategy-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略｜以時間軸驗證三種能力</h2>
+      <div class="grid lg:grid-cols-3 gap-5 mb-8">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-t-4 border-sky-500"><p class="eyebrow">短期 · 未來1–2週</p><h3 class="font-extrabold text-xl text-slate-800 mt-2">避免事件驅動的過度交易</h3><p class="prose-copy mt-3 text-sm">區分選舉、油價與財報後重新估值，不把單日股價變動等同基本面。檢查Oracle交割結果、PLTR簽約說明和Apple獲利預期調整。控制部位上限，採分批執行。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-t-4 border-teal-500"><p class="eyebrow">中期 · 未來1–3個月</p><h3 class="font-extrabold text-xl text-slate-800 mt-2">把成長轉成經營數據</h3><p class="prose-copy mt-3 text-sm">雲端看新機房與資本支出；軟體看TCV、RDV、留存與營運現金流；終端看記憶體成本與銷售組合。研究哪些公司擁有較佳議價能力，不直接等同買入訊號。</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-t-4 border-violet-500"><p class="eyebrow">長期 · 未來6–24個月</p><h3 class="font-extrabold text-xl text-slate-800 mt-2">資本報酬優先於成長率</h3><p class="prose-copy mt-3 text-sm">評估外部融資依賴、續約與擴約、供應鏈定價能力、估值是否提前反映樂觀情境。對每家公司設定論點成立與失效的可驗證條件。</p></article>
+      </div>
+      <h3 class="text-xl font-extrabold text-slate-800 mb-4">三家公司：上行條件與失效訊號</h3>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="rounded-xl bg-sky-50 border border-sky-200 p-5"><p class="text-sm font-extrabold text-sky-900">ORCL · 建設報酬</p><p class="font-bold text-slate-800 mt-3 text-sm">論點成立</p><p class="small-p mt-1">設施如期上線、使用率提升、單位運算成本下降、自由現金流改善。</p><p class="font-bold text-rose-800 mt-3 text-sm">失效訊號</p><p class="small-p mt-1">資本支出與融資成本持續攀升，但利用率、現金流未跟進。</p></div>
+        <div class="rounded-xl bg-teal-50 border border-teal-200 p-5"><p class="text-sm font-extrabold text-teal-900">PLTR · 訂單可持續性</p><p class="font-bold text-slate-800 mt-3 text-sm">論點成立</p><p class="small-p mt-1">企業AI持續擴大部署、續約與擴約強勁，營收轉為高品質現金流。</p><p class="font-bold text-rose-800 mt-3 text-sm">失效訊號</p><p class="small-p mt-1">未來數季TCV與RDV同步走弱，估值對成長放緩敏感。</p></div>
+        <div class="rounded-xl bg-amber-50 border border-amber-200 p-5"><p class="text-sm font-extrabold text-amber-900">AAPL · 守住毛利</p><p class="font-bold text-slate-800 mt-3 text-sm">論點成立</p><p class="small-p mt-1">服務占比、品牌與產品升級帶動毛利在旺季後回穩。</p><p class="font-bold text-rose-800 mt-3 text-sm">失效訊號</p><p class="small-p mt-1">記憶體與AI功能成本壓力持續，提價反應轉弱、毛利率無法恢復。</p></div>
+      </div>
+    </section>
+
+    <section id="scenarios" class="bg-slate-50 border-y border-slate-200/80 py-14 md:py-16" aria-labelledby="scenarios-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="scenarios-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場情境｜比方向更重要的是因果鏈</h2>
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><div class="flex items-center gap-2"><span class="w-3 h-3 bg-sky-500 rounded-full"></span><h3 class="text-xl font-extrabold text-slate-800">基準情境</h3></div><p class="text-sm font-semibold text-sky-700 mt-2">需求延續，現金流轉換仍有時差</p><p class="prose-copy text-sm mt-3">雲端調整融資與建設進度，軟體營收依然強勁但新簽約未必季季加速，記憶體供應偏緊且終端品牌努力消化成本。選股分化程度提高。</p><p class="mt-4 text-xs text-slate-500 border-t pt-3">驗證：利用率、TCV與RDV、毛利率</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><div class="flex items-center gap-2"><span class="w-3 h-3 bg-teal-500 rounded-full"></span><h3 class="text-xl font-extrabold text-slate-800">偏多情境</h3></div><p class="text-sm font-semibold text-teal-700 mt-2">部署與現金回收超預期</p><p class="prose-copy text-sm mt-3">機房利用率提升、企業AI合約重新擴張，記憶體供需緩解；油價與信用利差同步回落，企業基本面及估值可能同向改善。</p><p class="mt-4 text-xs text-slate-500 border-t pt-3">驗證：FCF改善、擴約恢復、信用利差收斂</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><div class="flex items-center gap-2"><span class="w-3 h-3 bg-rose-500 rounded-full"></span><h3 class="text-xl font-extrabold text-slate-800">偏空情境</h3></div><p class="text-sm font-semibold text-rose-700 mt-2">延期與成本同時施壓</p><p class="prose-copy text-sm mt-3">資料中心上線延誤與高成本再融資，軟體TCV減速擴散至RDV及營收；終端無法轉嫁記憶體成本，能源高價又使實質利率維持壓力。</p><p class="mt-4 text-xs text-slate-500 border-t pt-3">驗證：交付延遲、RDV轉弱、毛利率持續下降</p></article>
+        </div>
+        <p class="small-p mt-5">以上是定性情境，不包含機率預測，也不代表已實現的公司業績或股價路徑。</p>
+      </div>
+    </section>
+
+    <section id="indicators" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-16" aria-labelledby="indicators-title">
+      <h2 id="indicators-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">指標總覽｜搜尋報告核心數據</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="grid sm:grid-cols-[minmax(0,1fr)_200px] gap-3 mb-4">
+          <div><label class="block text-sm font-bold text-slate-700 mb-2" for="indicator-search">搜尋公司、指標或期間</label><input id="indicator-search" class="table-input" type="search" autocomplete="off" placeholder="例如：TCV、毛利率、Oracle、11/3、現金流" aria-controls="indicator-table"></div>
+          <div><label class="block text-sm font-bold text-slate-700 mb-2" for="indicator-company">公司／主題</label><select id="indicator-company" class="table-input" aria-controls="indicator-table"><option value="all">全部</option><option value="Oracle">Oracle</option><option value="Palantir">Palantir</option><option value="Apple">Apple</option><option value="Alphabet">Alphabet</option><option value="Marvell / Lumentum">Marvell / Lumentum</option><option value="宏觀">宏觀</option></select></div>
+        </div>
+        <div class="flex items-start justify-between gap-3 flex-wrap mb-3"><p class="text-sm text-slate-500">已公布、待交割、公司展望與研究推算分別標示，避免不同性質的數據混用。</p><p class="text-xs font-bold text-sky-800" id="indicator-count" aria-live="polite">載入數據中</p></div>
+        <div class="max-h-[525px] overflow-auto rounded-xl border border-slate-200" tabindex="0" role="region" aria-label="可捲動的公司指標資料表">
+          <table id="indicator-table" class="data-table">
+            <thead><tr><th scope="col">公司／主題</th><th scope="col">指標</th><th scope="col">數值</th><th scope="col">期間／時點</th><th scope="col">資料狀態</th><th scope="col">閱讀重點</th></tr></thead>
+            <tbody id="indicator-table-body"><tr><td colspan="6">表格資料載入中…</td></tr></tbody>
+          </table>
+        </div>
+        <p id="indicator-empty" class="hidden text-center text-slate-500 text-sm py-5" role="status">沒有符合條件的資料，請調整搜尋文字或公司篩選。</p>
+        <p class="small-p mt-4">所有幣別、單位、數值及預測狀態依本次上傳報告整理；不同公司財報期間與指標口徑不應直接相加或作為同類估值比較。</p>
+      </div>
+    </section>
+
+    <section id="conclusion" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-4" aria-labelledby="conclusion-title">
+      <h2 id="conclusion-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論｜贏家不一定是營收成長最快的公司</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 md:p-9 mb-6">
+        <div class="grid lg:grid-cols-[0.35fr_1fr] gap-6 lg:gap-10 items-start"><div><p class="eyebrow">投資核心提問</p><p class="text-3xl md:text-4xl font-extrabold text-sky-900 mt-2 leading-tight">誰能把<br>成長留下來？</p></div><div class="prose-copy text-[15px] sm:text-base space-y-4"><p><strong>Oracle</strong>需要證明建設回收足以支付高昂的融資與資本支出；<strong>Palantir</strong>需要證明本季高速成長可以成為未來可重複的合約與現金流；<strong>Apple</strong>需要證明上游供應鏈重新定價時，品牌和服務能力仍能守住毛利。</p><p>Alphabet的融資安排與Marvell、Lumentum的待核准全股票併購，進一步說明AI競爭不只限於算力晶片，而已深入資本市場、高速連接與供應鏈配置。</p><p><strong>從追逐AI題材，轉向檢驗每股現金流、投入資本報酬率、訂單持續性、定價能力與估值安全邊際。</strong>這才是報告所強調的下一階段投資紀律。</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI的三本帳與資本報酬。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中Oracle、Palantir、Apple與AI產業相關公開資料 (2026年11月3日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 數值與其狀態均取自本次上傳的2026年11月3日研究報告。
+    const productData = [
+      {company:'Oracle', indicator:'股票及公司債合計擬籌資', value:'約200億美元', period:'2026/11/2定價；預計11/4交割', status:'已定價／待交割', note:'股權與債券各約100億美元；不可視為全部已入帳'},
+      {company:'Oracle', indicator:'股票發行安排', value:'116美元／股；約8,620.7萬股', period:'2026/11/2', status:'已定價／待交割', note:'約100億美元擬籌資，伴隨股權稀釋'},
+      {company:'Oracle', indicator:'公司債發行本金', value:'約100億美元', period:'2026/11/2', status:'已定價／待交割', note:'五批公司債，到期2029–2046年'},
+      {company:'Oracle', indicator:'公司債票面利率', value:'7.00%–8.65%', period:'2029–2046年到期', status:'已定價／待交割', note:'必須支付利息並償付或再融資'},
+      {company:'Oracle', indicator:'新增債券名目年票息推算', value:'約7.77億美元／年', period:'假設全部發行且全年存續', status:'研究推算', note:'不等於全公司利息支出；未調整費用與稅務'},
+      {company:'Oracle', indicator:'2029年到期券殖利率', value:'約7.062%', period:'2026/11/2定價條件', status:'已定價／待交割', note:'較相應美國公債基準約高240基點'},
+      {company:'Palantir', indicator:'第三季營收', value:'23.13億美元', period:'2026 Q3', status:'已公布', note:'年增96%'},
+      {company:'Palantir', indicator:'美國商業業務營收', value:'9.84億美元', period:'2026 Q3', status:'已公布', note:'年增148%，超越美國政府業務'},
+      {company:'Palantir', indicator:'美國政府業務營收', value:'9.53億美元', period:'2026 Q3', status:'已公布', note:'與美國商業營收比較'},
+      {company:'Palantir', indicator:'營業活動現金流', value:'12.05億美元', period:'2026 Q3', status:'已公布', note:'約為季度營收的52%'},
+      {company:'Palantir', indicator:'調整後自由現金流（non-GAAP）', value:'12.16億美元', period:'2026 Q3', status:'已公布', note:'調整後自由現金流率約53%'},
+      {company:'Palantir', indicator:'美國商業新簽TCV', value:'21.32億 → 14.63億美元', period:'2026 Q2 → Q3', status:'已公布', note:'Q3年增11%，Q2年增153%；季減約31%'},
+      {company:'Palantir', indicator:'全公司新簽TCV', value:'33.73億 → 29.18億美元', period:'2026 Q2 → Q3', status:'已公布', note:'Q3年增約6%；TCV不是認列營收'},
+      {company:'Palantir', indicator:'美國商業RDV', value:'65.17億美元', period:'2026 Q3', status:'已公布', note:'年增79%、季增4%'},
+      {company:'Palantir', indicator:'淨美元留存率', value:'165%', period:'2026 Q3', status:'已公布', note:'反映既有客戶收入擴張，依公司指標定義'},
+      {company:'Palantir', indicator:'第四季營收展望', value:'26.49–26.53億美元', period:'2026 Q4', status:'公司展望', note:'預估收入，並非已實現'},
+      {company:'Palantir', indicator:'全年營收展望', value:'85.30–85.34億美元', period:'2026全年', status:'公司展望', note:'預估收入，並非已實現'},
+      {company:'Apple', indicator:'第四季營收', value:'1,145億美元', period:'FY2026 Q4', status:'已公布', note:'年增12%；服務業務創新高'},
+      {company:'Apple', indicator:'第四季iPhone營收', value:'575.8億美元', period:'FY2026 Q4', status:'已公布', note:'終端產品需求仍有支撐'},
+      {company:'Apple', indicator:'第四季稀釋每股盈餘', value:'2.10美元', period:'FY2026 Q4', status:'已公布', note:'已實現季度EPS'},
+      {company:'Apple', indicator:'第四季整體毛利率', value:'47.9%', period:'FY2026 Q4', status:'已公布', note:'含約1個百分點的關稅退稅正面效果'},
+      {company:'Apple', indicator:'扣單一退稅因素示意毛利率', value:'約46.9%', period:'FY2026 Q4', status:'研究推算', note:'非公司正式調整後毛利率'},
+      {company:'Apple', indicator:'假期季度毛利率展望', value:'45%–46%', period:'截至2026年12月季度', status:'公司展望', note:'記憶體漲價、退稅效果、產品組合與AI相關費用都可能影響'},
+      {company:'Alphabet', indicator:'公司債發行安排', value:'約60億歐元', period:'2026/11/2', status:'已公布', note:'七批；初步認購需求超過170億歐元'},
+      {company:'Alphabet', indicator:'2026年資本支出預期', value:'1,950–2,050億美元', period:'2026全年', status:'公司展望', note:'2027年亦表示將顯著增加投資'},
+      {company:'Marvell / Lumentum', indicator:'全股票收購隱含企業價值', value:'約1,150億美元', period:'預計2028上半年完成', status:'交易待核准', note:'交易仍須股東與主管機關批准'},
+      {company:'Marvell / Lumentum', indicator:'每股Lumentum換股比例', value:'4.5股Marvell', period:'收購協議條件', status:'交易待核准', note:'非現金收購對價；協同效益尚未實現'},
+      {company:'宏觀', indicator:'布蘭特原油收盤', value:'104.77美元／桶', period:'2026/11/2收盤', status:'特定時點', note:'單日下跌約7.63%'},
+      {company:'宏觀', indicator:'布蘭特原油盤中／即時', value:'約106.13美元／桶', period:'2026/11/3倫敦10:43', status:'特定時點', note:'非11/3收盤價'},
+      {company:'宏觀', indicator:'ISM製造業PMI', value:'55.5', period:'2026年10月', status:'已公布', note:'製造業仍擴張'},
+      {company:'宏觀', indicator:'ISM製造業價格指數', value:'75.2', period:'2026年10月', status:'已公布', note:'投入成本壓力仍明顯'}
+    ];
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    function setMenuOpen(isOpen) {
+      mobileNav.classList.toggle('hidden', !isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? '關閉章節選單' : '開啟章節選單');
+      document.getElementById('menu-icon-open').classList.toggle('hidden', isOpen);
+      document.getElementById('menu-icon-close').classList.toggle('hidden', !isOpen);
+    }
+    menuToggle.addEventListener('click', () => setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true'));
+    document.querySelectorAll('#mobile-nav a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+    document.addEventListener('keydown', evt => { if (evt.key === 'Escape') setMenuOpen(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1280) setMenuOpen(false); });
+
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    const sections = [...document.querySelectorAll('main section[id]')];
+    function activateNav(id) {
+      navLinks.forEach(link => {
+        const active = link.dataset.nav === id;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      const sectionObserver = new IntersectionObserver(entries => {
+        const eligible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+        if (eligible.length) activateNav(eligible[0].target.id);
+      }, {rootMargin:'-90px 0px -58% 0px', threshold:[0, .1, .25, .5]});
+      sections.forEach(section => sectionObserver.observe(section));
+    }
+    navLinks.forEach(link => link.addEventListener('click', () => activateNav(link.dataset.nav)));
+
+    const tableBody = document.getElementById('indicator-table-body');
+    const indicatorSearch = document.getElementById('indicator-search');
+    const indicatorCompany = document.getElementById('indicator-company');
+    const countEl = document.getElementById('indicator-count');
+    const emptyEl = document.getElementById('indicator-empty');
+    function statusTag(status) {
+      if (status === '已公布') return 'tag-known';
+      if (status === '已定價／待交割' || status === '交易待核准') return 'tag-pending';
+      if (status === '公司展望') return 'tag-forward';
+      if (status === '研究推算') return 'tag-math';
+      return 'tag-time';
+    }
+    function appendTextCell(row, value) {
+      const cell = document.createElement('td');
+      cell.textContent = value;
+      row.appendChild(cell);
+      return cell;
+    }
+    function renderTable() {
+      const term = indicatorSearch.value.trim().toLocaleLowerCase('zh-Hant');
+      const company = indicatorCompany.value;
+      const matches = productData.filter(item => {
+        if (company !== 'all' && item.company !== company) return false;
+        const haystack = [item.company,item.indicator,item.value,item.period,item.status,item.note].join(' ').toLocaleLowerCase('zh-Hant');
+        return haystack.includes(term);
+      });
+      const fragment = document.createDocumentFragment();
+      matches.forEach(item => {
+        const tr = document.createElement('tr');
+        appendTextCell(tr,item.company);
+        appendTextCell(tr,item.indicator);
+        appendTextCell(tr,item.value);
+        appendTextCell(tr,item.period);
+        const statusCell = document.createElement('td');
+        const badge = document.createElement('span');
+        badge.className = `tag ${statusTag(item.status)}`;
+        badge.textContent = item.status;
+        statusCell.appendChild(badge);
+        tr.appendChild(statusCell);
+        appendTextCell(tr,item.note);
+        fragment.appendChild(tr);
+      });
+      tableBody.replaceChildren(fragment);
+      countEl.textContent = `顯示 ${matches.length} / ${productData.length} 筆`;
+      emptyEl.classList.toggle('hidden', matches.length !== 0);
+    }
+    indicatorSearch.addEventListener('input',renderTable);
+    indicatorCompany.addEventListener('change',renderTable);
+    renderTable();
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = '"Noto Sans TC", "PingFang TC", system-ui, sans-serif';
+      Chart.defaults.color = '#475569';
+      const commonOptions = {
+        responsive:true, maintainAspectRatio:false,
+        animation: {duration:350},
+        plugins: {legend:{display:false},tooltip:{backgroundColor:'#0c253a',padding:11,cornerRadius:9,titleFont:{weight:'bold'}}}
+      };
+      new Chart(document.getElementById('oracleFundingChart'), {
+        type:'bar',
+        data:{labels:['普通股發行','公司債發行'],datasets:[{label:'擬籌資',data:[100,100],backgroundColor:['#0284c7','#14b8a6'],borderRadius:9,maxBarThickness:76}]},
+        options:{...commonOptions,scales:{x:{grid:{display:false},ticks:{font:{size:12,weight:'bold'}}},y:{beginAtZero:true,suggestedMax:120,title:{display:true,text:'億美元'},ticks:{precision:0},grid:{color:'#e2e8f0'}}},plugins:{...commonOptions.plugins,tooltip:{...commonOptions.plugins.tooltip,callbacks:{label:ctx=>`約 ${ctx.parsed.y} 億美元（待交割）`}}}}
+      });
+      new Chart(document.getElementById('palantirTcvChart'), {
+        type:'bar',
+        data:{labels:['美國商業TCV','全公司TCV'],datasets:[{label:'2026 Q2',data:[21.32,33.73],backgroundColor:'#93c5fd',borderRadius:7,maxBarThickness:60},{label:'2026 Q3',data:[14.63,29.18],backgroundColor:'#0284c7',borderRadius:7,maxBarThickness:60}]},
+        options:{...commonOptions,plugins:{legend:{display:true,position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',boxWidth:8,padding:16}},tooltip:{...commonOptions.plugins.tooltip,callbacks:{label:ctx=>`${ctx.dataset.label}：${ctx.parsed.y.toFixed(2)} 億美元`}}},scales:{x:{grid:{display:false},ticks:{font:{size:12,weight:'bold'}}},y:{beginAtZero:true,suggestedMax:40,title:{display:true,text:'億美元'},grid:{color:'#e2e8f0'}}}}
+      });
+    } else {
+      document.querySelectorAll('.chart-shell').forEach(el => {
+        const alt = document.createElement('p');
+        alt.className = 'text-sm text-slate-600 p-4 rounded-lg bg-slate-50 border border-slate-200';
+        alt.textContent = el.querySelector('canvas')?.getAttribute('aria-label') || '圖表載入失敗，請閱讀圖表下方文字說明。';
+        el.replaceChildren(alt);
+      });
+    }
+  </script>
+</body>
+</html>
