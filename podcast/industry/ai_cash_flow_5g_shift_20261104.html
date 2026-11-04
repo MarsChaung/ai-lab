@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#0c253a">
+  <meta name="description" content="從AMD、Arista、Super Micro的AI需求與現金流，到Meta的150億美元公司債、SpaceX與Qualcomm規劃中的地面5G網路，剖析投資回收、資本成本及執行風險。">
+  <title>巴菲特AI價值投資-AI現金流與5G變局</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme:light; --ink:#233448; --muted:#66768a; --sky:#0284c7; --nav-height:72px; }
+    html { scroll-behavior:smooth; scroll-padding-top:90px; }
+    body { font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; background:#f5f7fa; color:var(--ink); overflow-wrap:anywhere; }
+    main section[id] { scroll-margin-top:92px; }
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .nav-link { display:inline-flex;align-items:center;white-space:nowrap;padding:9px 11px;border-radius:9px;font-weight:600;font-size:13px;transition:background .2s,color .2s; }
+    .active-nav-link { color:#0369a1;background:#e0f2fe; }
+    .inactive-nav-link { color:#576779; }
+    .inactive-nav-link:hover { color:#0369a1;background:#f0f9ff; }
+    .nav-mobile-link { display:block; padding:12px 14px; border-radius:10px; font-weight:600; font-size:15px; }
+    .section-kicker { font-size:12px;letter-spacing:.12em;font-weight:800;color:#0284c7;margin-bottom:12px; }
+    .card-topline { position:relative;overflow:hidden; }
+    .card-topline::before {content:"";position:absolute;inset:0 auto 0 0;width:4px;background:#0ea5e9;}
+    .chart-shell { position:relative;width:100%;height:296px;min-width:0; }
+    .chart-shell.tall { height:326px; }
+    .chart-shell canvas { width:100%!important;height:100%!important; }
+    .table-scroll { max-height:530px;overflow:auto;overscroll-behavior:contain; }
+    .table-scroll thead th {position:sticky;top:0;z-index:2;background:#eaf4fb;box-shadow:0 1px 0 #dbe7ef;}
+    .data-table { min-width:820px; border-collapse:separate; border-spacing:0; }
+    .data-table th,.data-table td {padding:15px 17px;text-align:left;vertical-align:top;line-height:1.65;}
+    .data-table tbody tr:not(:last-child) td {border-bottom:1px solid #edf1f5;}
+    .data-table tbody tr:hover td {background:#f8fbff;}
+    .status-tag {display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-size:11px;line-height:1.6;font-weight:800;white-space:nowrap;}
+    .status-fact {background:#e0f2fe;color:#075985;}
+    .status-outlook {background:#fef3c7;color:#92400e;}
+    .status-plan {background:#ede9fe;color:#5b21b6;}
+    .mini-label {font-size:11px;letter-spacing:.04em;color:#64748b;font-weight:700;}
+    .metric-number {font-feature-settings:"tnum";font-variant-numeric:tabular-nums;letter-spacing:-.03em;}
+    .flow-step:not(:last-child)::after {content:"→";position:absolute;right:-15px;top:50%;transform:translateY(-50%);font-size:23px;font-weight:700;color:#38bdf8;z-index:2;}
+    .small-bullet {width:7px;height:7px;background:#0ea5e9;display:inline-block;flex:0 0 7px;border-radius:50%;margin-top:9px;}
+    .footnote { font-size:12px;line-height:1.85;color:#718096; }
+    .subhead { font-size:20px;font-weight:800;color:#334155;line-height:1.4; }
+    .fade-line {height:1px;background:linear-gradient(90deg,transparent,#cbd5e1,transparent);}
+    @media (max-width:767px) {
+      .chart-shell {height:278px;}
+      .chart-shell.tall {height:294px;}
+      .flow-step:not(:last-child)::after {content:"↓";right:50%;top:auto;bottom:-22px;transform:translateX(50%);font-size:20px;}
+      .data-table th,.data-table td {padding:12px;}
+      .hero-content {padding-top:3.4rem;padding-bottom:3.4rem;}
+    }
+    @media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto;} * {scroll-behavior:auto!important; transition:none!important;}}
+  </style>
+</head>
+<body class="antialiased">
+  <!-- Main navigation -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-slate-200/90 shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="主要章節導航">
+      <div class="flex items-center justify-between gap-4 min-h-[72px]">
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="h-9 w-9 rounded-xl bg-sky-700 text-white inline-flex items-center justify-center font-black tracking-tight shadow-sm" aria-hidden="true">AI</span>
+          <div class="leading-tight">
+            <div class="text-sm font-extrabold text-stone-800 tracking-tight">巴菲特AI價值投資</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">美股投資研究</div>
+          </div>
+        </div>
+        <div id="desktop-nav" class="hidden lg:flex items-center gap-0.5" aria-label="桌面章節連結">
+          <a class="nav-link active-nav-link" href="#overview" data-section="overview" aria-current="location">核心總覽</a>
+          <a class="nav-link inactive-nav-link" href="#supply" data-section="supply">AI供應鏈</a>
+          <a class="nav-link inactive-nav-link" href="#meta" data-section="meta">Meta融資</a>
+          <a class="nav-link inactive-nav-link" href="#spacex" data-section="spacex">5G新戰場</a>
+          <a class="nav-link inactive-nav-link" href="#macro" data-section="macro">跨市場風險</a>
+          <a class="nav-link inactive-nav-link" href="#strategy" data-section="strategy">投資策略</a>
+          <a class="nav-link inactive-nav-link" href="#podcast" data-section="podcast">Podcast提案</a>
+        </div>
+        <button id="menu-toggle" type="button" class="lg:hidden shrink-0 p-2.5 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500" aria-controls="mobile-menu" aria-expanded="false" aria-label="開啟章節選單">
+          <svg id="menu-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg id="menu-icon-close" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 pb-3 pt-2 space-y-0.5" aria-label="手機章節連結">
+        <a class="nav-mobile-link active-nav-link" href="#overview" data-section="overview" aria-current="location">核心總覽</a>
+        <a class="nav-mobile-link inactive-nav-link" href="#supply" data-section="supply">AI供應鏈</a>
+        <a class="nav-mobile-link inactive-nav-link" href="#meta" data-section="meta">Meta融資</a>
+        <a class="nav-mobile-link inactive-nav-link" href="#spacex" data-section="spacex">5G新戰場</a>
+        <a class="nav-mobile-link inactive-nav-link" href="#macro" data-section="macro">跨市場風險</a>
+        <a class="nav-mobile-link inactive-nav-link" href="#strategy" data-section="strategy">投資策略</a>
+        <a class="nav-mobile-link inactive-nav-link" href="#podcast" data-section="podcast">Podcast提案</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+    <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.25] tracking-tight max-w-5xl">
+        訂單狂潮之後，<span class="text-sky-200">誰能留下現金？</span>
+        <span class="block text-2xl sm:text-3xl font-bold text-slate-100 mt-4 leading-snug">AI供應鏈、科技巨頭融資與SpaceX的5G新戰場</span>
+      </h1>
+      <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">AMD、Arista與Super Micro的財報驗證AI設備需求，但營收與收現能力開始分化；Meta再發債150億美元，將焦點拉回投資回收與資本成本；SpaceX與Qualcomm的地面5G合作則開啟尚待落實的新競爭路徑。真正的考題是：龐大資本投入，能否轉化為可持續的自由現金流？</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mt-9 max-w-5xl" aria-label="關鍵資料卡片">
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 md:p-5">
+          <div class="text-sky-100/90 text-xs font-bold">AMD｜2026 Q3資料中心營收</div>
+          <div class="metric-number mt-2 text-3xl font-extrabold">85.46<span class="text-base font-medium ml-1">億美元</span></div>
+          <div class="mt-1 text-sky-100 text-sm">年增97%・已公布財報</div>
+        </div>
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 md:p-5">
+          <div class="text-sky-100/90 text-xs font-bold">Meta｜11月3日公司債</div>
+          <div class="metric-number mt-2 text-3xl font-extrabold">150<span class="text-base font-medium ml-1">億美元</span></div>
+          <div class="mt-1 text-sky-100 text-sm">五批債券・期限至2056年</div>
+        </div>
+        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 md:p-5">
+          <div class="text-sky-100/90 text-xs font-bold">Arista｜2026 Q3營業利益率</div>
+          <div class="metric-number mt-2 text-3xl font-extrabold">49.1<span class="text-base font-medium ml-1">%</span></div>
+          <div class="mt-1 text-sky-100 text-sm">非GAAP・已公布財報</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-16 md:space-y-20">
+    <!-- Overview -->
+    <section id="overview" aria-labelledby="overview-title">
+      <div class="flex flex-wrap gap-2 mb-5 text-xs text-slate-600">
+        <span class="rounded-full bg-sky-100 text-sky-800 font-semibold px-3 py-1.5">報告日期：2026年11月4日</span>
+        <span class="rounded-full bg-white border border-slate-200 px-3 py-1.5">資料截點：台灣時間22:13左右</span>
+        <span class="rounded-full bg-white border border-slate-200 px-3 py-1.5">美東約09:13・正常交易時段尚未開盤</span>
+      </div>
+      <h2 id="overview-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心總覽｜需求旺盛，不等於現金流同步旺盛</h2>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6 card-topline">
+        <div class="pl-2">
+          <p class="text-lg md:text-xl leading-relaxed font-bold text-slate-800">本日市場的核心問題，不是又出現多少AI訂單，而是<strong class="text-sky-700">「新增資本投入，是否創造足以覆蓋成本、且可持續的自由現金流？」</strong></p>
+          <p class="mt-4 leading-8 text-slate-600">AI伺服器需求擴張、科技平台透過債市融資，以及衛星業者進軍地面5G，是三條相互連結的資本投入鏈。設備商能先認列營收，但買方的資本回收、供應商的收現與下一輪擴建，必須持續驗證。</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5" aria-label="三條投資主軸">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0">
+          <div class="flex items-center justify-between"><span class="text-sky-700 text-xs font-extrabold tracking-widest">01 / 供應鏈</span><span class="status-tag status-fact">財報已公布</span></div>
+          <h3 class="text-xl font-bold mt-4 mb-3">訂單變成營收</h3>
+          <p class="text-sm leading-7 text-slate-600">AMD、Arista、Super Micro均呈現需求成長，但現金流、利潤率與營運資金壓力明顯不同。</p>
+          <p class="text-sm font-bold text-sky-700 mt-4">追問：營收能否轉成現金？</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0">
+          <div class="flex items-center justify-between"><span class="text-sky-700 text-xs font-extrabold tracking-widest">02 / 資本市場</span><span class="status-tag status-fact">發債條件</span></div>
+          <h3 class="text-xl font-bold mt-4 mb-3">融資支撐建設</h3>
+          <p class="text-sm leading-7 text-slate-600">Meta以公司債配置長期資金；票息、折舊、持續資本支出，決定未來股東報酬的壓力。</p>
+          <p class="text-sm font-bold text-sky-700 mt-4">追問：AI應用何時回本？</p>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0">
+          <div class="flex items-center justify-between"><span class="text-sky-700 text-xs font-extrabold tracking-widest">03 / 通訊重組</span><span class="status-tag status-plan">2027起規劃部署</span></div>
+          <h3 class="text-xl font-bold mt-4 mb-3">5G合作走向建站</h3>
+          <p class="text-sm leading-7 text-slate-600">SpaceX與Qualcomm公布合作，目標結合衛星覆蓋與地面容量；尚未揭露交易金額或完成建站成果。</p>
+          <p class="text-sm font-bold text-sky-700 mt-4">追問：部署進度與單位經濟？</p>
+        </article>
+      </div>
+      <div class="mt-6 bg-sky-50 border border-sky-100 rounded-xl p-5 md:p-6">
+        <h3 class="font-bold text-sky-900 mb-2">閱讀數據時，先辨識資訊狀態</h3>
+        <div class="flex flex-wrap gap-3 text-sm items-center text-slate-700">
+          <span><span class="status-tag status-fact mr-1">已公布</span>財報、發債條件、合作公告</span>
+          <span><span class="status-tag status-outlook mr-1">管理層展望</span>尚未實現的財測</span>
+          <span><span class="status-tag status-plan mr-1">規劃／情境</span>仍待建設及營運驗證</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supply chain -->
+    <section id="supply" aria-labelledby="supply-title">
+      <div class="section-kicker">主題一・AI SUPPLY CHAIN</div>
+      <h2 id="supply-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">AI供應鏈｜同樣高成長，獲利品質卻不同</h2>
+      <p class="text-slate-600 leading-8 mb-6">晶片、網路設備與整機系統同步擴張，說明AI需求已跨越單一產品；但比較企業時，必須一併檢視毛利、營運資金、現金流與股權誘因，而不能只看營收增速。</p>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-7">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <div class="flex justify-between items-center gap-2"><h3 class="text-xl font-extrabold text-slate-800">AMD <span class="text-sm text-slate-500 font-medium">｜運算平台</span></h3><span class="status-tag status-fact">2026 Q3</span></div>
+          <p class="mini-label mt-4">季度營收</p><p class="metric-number text-3xl font-extrabold mt-1 text-sky-700">133.77 <span class="text-base">億美元</span></p>
+          <div class="flex flex-wrap gap-x-4 gap-y-2 mt-3 text-sm"><span class="font-bold text-emerald-700">年增 +45%</span><span class="text-slate-600">資料中心 85.46億・年增97%</span></div>
+          <div class="mt-5 pt-4 border-t border-slate-100 text-sm leading-7 text-slate-600 space-y-2">
+            <p><strong class="text-slate-800">EPS：</strong>非GAAP 2.09美元；GAAP 1.46美元。</p>
+            <p><strong class="text-slate-800">現金：</strong>營運現金流12.02億、自由現金流5.54億美元，均較去年同期下滑。</p>
+            <p><strong class="text-slate-800">稀釋觀察：</strong>與OpenAI、Meta採購條件連結的權證產生約10.7億美元當季非現金費用；未來行權可能稀釋股份。</p>
+          </div>
+          <div class="mt-4 rounded-lg bg-amber-50 border border-amber-100 p-4 text-sm leading-7"><span class="status-tag status-outlook mb-2">管理層展望</span><br>2026 Q4營收指引中值約170億美元；管理層預期2027年整體營收成長超過80%，<strong>並非已實現</strong>。</div>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <div class="flex justify-between items-center gap-2"><h3 class="text-xl font-extrabold text-slate-800">Arista <span class="text-sm text-slate-500 font-medium">｜網路設備</span></h3><span class="status-tag status-fact">2026 Q3</span></div>
+          <p class="mini-label mt-4">季度營收</p><p class="metric-number text-3xl font-extrabold mt-1 text-sky-700">36.58 <span class="text-base">億美元</span></p>
+          <div class="flex flex-wrap gap-x-4 gap-y-2 mt-3 text-sm"><span class="font-bold text-emerald-700">年增 +58.5%</span><span class="text-slate-600">非GAAP營業利益率 49.1%</span></div>
+          <div class="mt-5 pt-4 border-t border-slate-100 text-sm leading-7 text-slate-600 space-y-2">
+            <p><strong class="text-slate-800">EPS：</strong>非GAAP 1.20美元。</p>
+            <p><strong class="text-slate-800">優勢：</strong>交換器、乙太網路、光互連與網路軟體提升AI叢集利用率。</p>
+            <p><strong class="text-slate-800">風險：</strong>大型雲端客戶集中、開放架構競爭、網路設備定價能力。</p>
+          </div>
+          <div class="mt-4 rounded-lg bg-amber-50 border border-amber-100 p-4 text-sm leading-7"><span class="status-tag status-outlook mb-2">公司指引</span><br>2026 Q4營收預估39億至40億美元；近六成增速<strong>不保證長期持續</strong>。</div>
+        </article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <div class="flex justify-between items-center gap-2"><h3 class="text-xl font-extrabold text-slate-800">Super Micro <span class="text-sm text-slate-500 font-medium">｜系統整合</span></h3><span class="status-tag status-fact">FY2027 Q1</span></div>
+          <p class="mini-label mt-4">季度營收（截至2026年9月底）</p><p class="metric-number text-3xl font-extrabold mt-1 text-sky-700">199.46 <span class="text-base">億美元</span></p>
+          <div class="flex flex-wrap gap-x-4 gap-y-2 mt-3 text-sm"><span class="font-bold text-emerald-700">約為去年同期4倍</span><span class="text-slate-600">毛利率 12.7%</span></div>
+          <div class="mt-5 pt-4 border-t border-slate-100 text-sm leading-7 text-slate-600 space-y-2">
+            <p><strong class="text-slate-800">EPS：</strong>非GAAP 1.81美元；淨利約15.94億美元。</p>
+            <p><strong class="text-slate-800">現金：</strong>營運現金流淨流出4.34億美元；應收帳款96.85億、存貨150.54億美元。</p>
+            <p><strong class="text-slate-800">風險：</strong>資金占用、收現進度、出口合規、財務治理與內控。</p>
+          </div>
+          <div class="mt-4 rounded-lg bg-amber-50 border border-amber-100 p-4 text-sm leading-7"><span class="status-tag status-outlook mb-2">公司展望</span><br>FY2027全年營收720億至820億美元，<strong>不是已完成銷售</strong>。</div>
+        </article>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4"><div><h3 class="subhead">已公布營收年增率</h3><p class="text-sm text-slate-500 mt-1">2026 Q3・百分比（%）</p></div><span class="status-tag status-fact self-start">實績</span></div>
+          <div class="chart-shell"><canvas id="revenueGrowthChart" role="img" aria-label="2026年第三季AMD整體營收年增45%、AMD資料中心營收年增97%、Arista整體營收年增58.5%"></canvas></div>
+          <p class="footnote mt-3">AMD資料中心為其整體營收的一部分；三個增速的統計範圍不同。Super Micro去年同期營收在報告中為約50億美元，故不加入精確年增率圖表。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4"><div><h3 class="subhead">Super Micro應收帳款變化</h3><p class="text-sm text-slate-500 mt-1">前季與FY2027 Q1期末・億美元</p></div><span class="status-tag status-fact self-start">實績</span></div>
+          <div class="chart-shell"><canvas id="receivablesChart" role="img" aria-label="Super Micro應收帳款由前季61.25億美元上升到2027會計年度第一季96.85億美元"></canvas></div>
+          <p class="footnote mt-3">應收增加不等於客戶違約；但若後續收現未改善，成長可能轉化成營運資金壓力。同期存貨約150.54億美元。</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="rounded-xl bg-sky-50 border border-sky-100 p-5 md:p-6"><h3 class="font-bold text-sky-950 text-lg">需求面已獲驗證</h3><p class="text-sm leading-7 text-slate-700 mt-2">大型雲端客戶需要更多運算平台、網路容量及可部署機櫃系統。多供應商採購可與NVIDIA維持主導市占同時成立，不能直接推論其立即失去地位。</p></div>
+        <div class="rounded-xl bg-amber-50 border border-amber-100 p-5 md:p-6"><h3 class="font-bold text-amber-950 text-lg">現金流尚待逐季驗證</h3><p class="text-sm leading-7 text-slate-700 mt-2">觀察AMD自由現金流及權證條件、Arista訂單與利潤率、Super Micro應收與存貨周轉。大型客戶延後建設、封裝瓶頸或股權讓利擴大，皆可能使高營收無法轉為每股價值。</p></div>
+      </div>
+    </section>
+
+    <!-- Meta financing -->
+    <section id="meta" aria-labelledby="meta-title">
+      <div class="section-kicker">主題二・CAPITAL COST</div>
+      <h2 id="meta-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Meta融資｜AI競賽進入資本成本與回收階段</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="mini-label">2026/11/3安排發行・五批公司債</p><p class="metric-number mt-2 text-3xl font-extrabold text-sky-700">150 <span class="text-base">億美元</span></p><p class="text-xs mt-2 text-slate-500">債券期限延伸至2056年</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="mini-label">依面額與票面利率加總</p><p class="metric-number mt-2 text-3xl font-extrabold text-sky-700">9.90 <span class="text-base">億美元／年</span></p><p class="text-xs mt-2 text-slate-500">估算年度票息，非公司總利息財測</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><p class="mini-label">2026年資本支出預估</p><p class="metric-number mt-2 text-3xl font-extrabold text-sky-700">1,350–1,450</p><p class="text-sm text-slate-500 mt-2">億美元・<span class="status-tag status-outlook">管理層預估</span></p></div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-5 mb-6">
+        <div class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6 mb-0">
+          <div class="mb-4"><h3 class="subhead">五批債券票面利率曲線</h3><p class="text-sm text-slate-500 mt-1">橫軸：到期年；縱軸：票面利率（%）</p></div>
+          <div class="chart-shell tall"><canvas id="bondCouponChart" role="img" aria-label="Meta到期年2031、2033、2036、2046、2056年的公司債票息，依序為5.85%、6.25%、6.55%、7.35%和7.50%"></canvas></div>
+          <p class="footnote mt-4">2031年及2033年到期批次各32.5億美元；其餘三批的個別面額未在本報告中列示。債券獲投資等級評等，發債不代表財務危機。</p>
+        </div>
+        <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 mb-0">
+          <h3 class="subhead mb-4">每批票息檢視</h3>
+          <div class="space-y-3" aria-label="債券票息數據">
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50"><div><span class="font-bold">2031年</span><span class="text-slate-500 text-xs ml-2">32.5億美元</span></div><strong class="metric-number text-sky-700">5.85%</strong></div>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50"><div><span class="font-bold">2033年</span><span class="text-slate-500 text-xs ml-2">32.5億美元</span></div><strong class="metric-number text-sky-700">6.25%</strong></div>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50"><div><span class="font-bold">2036年</span><span class="text-slate-500 text-xs ml-2">面額未列示</span></div><strong class="metric-number text-sky-700">6.55%</strong></div>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50"><div><span class="font-bold">2046年</span><span class="text-slate-500 text-xs ml-2">面額未列示</span></div><strong class="metric-number text-sky-700">7.35%</strong></div>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-slate-50"><div><span class="font-bold">2056年</span><span class="text-slate-500 text-xs ml-2">面額未列示</span></div><strong class="metric-number text-sky-700">7.50%</strong></div>
+          </div>
+          <p class="text-sm text-slate-600 leading-7 mt-5">票息只是其中一環；資料中心建設帶來的折舊、維運、能源及下一輪再投資，同樣可能壓縮自由現金流。</p>
+        </div>
+      </div>
+      <div class="bg-slate-900 text-white rounded-xl p-6 md:p-8 shadow-lg mb-6">
+        <h3 class="text-xl font-bold mb-6">AI投資循環：資金沿供應鏈流動，回收必須靠終端需求</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
+          <div class="flow-step relative bg-white/10 border border-white/15 rounded-lg p-4"><span class="text-xs text-sky-200 font-bold">STEP 01</span><p class="font-bold mt-2">科技平台融資</p><p class="text-sm text-slate-300 mt-2">公司債、內部現金與資本配置</p></div>
+          <div class="flow-step relative bg-white/10 border border-white/15 rounded-lg p-4"><span class="text-xs text-sky-200 font-bold">STEP 02</span><p class="font-bold mt-2">購置AI基建</p><p class="text-sm text-slate-300 mt-2">GPU、交換器、伺服器、機房</p></div>
+          <div class="flow-step relative bg-white/10 border border-white/15 rounded-lg p-4"><span class="text-xs text-sky-200 font-bold">STEP 03</span><p class="font-bold mt-2">供應鏈認列營收</p><p class="text-sm text-slate-300 mt-2">同步增加產能及營運資金</p></div>
+          <div class="flow-step relative bg-white/10 border border-white/15 rounded-lg p-4"><span class="text-xs text-sky-200 font-bold">STEP 04</span><p class="font-bold mt-2">服務變現與現金回收</p><p class="text-sm text-slate-300 mt-2">訂閱、API、廣告效益與其他應用</p></div>
+        </div>
+        <p class="text-sm text-sky-100 leading-7 mt-7 border-t border-white/15 pt-5">若AI付費需求不及預期，平台商可能延後下一輪擴建，設備商先遭遇訂單正常化，資金密集型業者則承受利息與資產利用率壓力。這是<strong>需求存在，投資報酬卻可能不足</strong>的情境。</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><h3 class="text-lg font-bold text-slate-800 mb-3">有利於回收的驗證條件</h3><ul class="space-y-2 text-sm text-slate-600 leading-7"><li class="flex gap-3"><span class="small-bullet"></span><span>算力利用率提高、單位推論成本下降。</span></li><li class="flex gap-3"><span class="small-bullet"></span><span>AI經常性收入足以吸收折舊與融資成本。</span></li><li class="flex gap-3"><span class="small-bullet"></span><span>自由現金流回升，支撐下一輪資本投入。</span></li></ul></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><h3 class="text-lg font-bold text-slate-800 mb-3">應提高警覺的訊號</h3><ul class="space-y-2 text-sm text-slate-600 leading-7"><li class="flex gap-3"><span class="small-bullet"></span><span>信用利差擴大、長期資金成本上升。</span></li><li class="flex gap-3"><span class="small-bullet"></span><span>資本支出與付費需求持續脫鉤。</span></li><li class="flex gap-3"><span class="small-bullet"></span><span>重要買方削減設備採購；高階記憶體搶料壓縮消費電子毛利。</span></li></ul></div>
+      </div>
+    </section>
+
+    <!-- SpaceX -->
+    <section id="spacex" aria-labelledby="spacex-title">
+      <div class="section-kicker">主題三・SATELLITE × TERRESTRIAL 5G</div>
+      <h2 id="spacex-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">SpaceX × Qualcomm｜衛星覆蓋與地面5G的新組合</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+        <div class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 mb-0">
+          <div class="flex flex-wrap items-center gap-3 mb-4"><span class="status-tag status-fact">2026/11/4 合作公布</span><span class="status-tag status-plan">2027年起計畫分階段部署</span></div>
+          <h3 class="text-2xl font-extrabold leading-snug text-slate-800">Qualcomm Dragonwing獲選支援Starlink Mobile規劃中的美國地面5G網路</h3>
+          <p class="text-sm text-slate-600 leading-8 mt-4">合作範圍涵蓋無線電設備、基頻處理及相關軟體。長期計畫涉及數萬座大型基地台站點，Qualcomm稱為其迄今規模最大的5G合作案；<strong class="text-slate-800">交易金額尚未公開</strong>，也尚不能把規劃站點視作已完成建站或已認列營收。</p>
+          <div class="mt-5 border-l-4 border-violet-400 bg-violet-50 text-violet-950 rounded-r-lg p-4 text-sm leading-7"><strong>資訊界線：</strong>已確認的是「供應商合作公告」；2027年起部署、數萬座站點及未來商用成果，仍屬計畫與執行驗證事項。</div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0">
+          <p class="mini-label mb-2">SpaceX投資人追蹤資訊</p>
+          <p class="text-2xl font-extrabold text-sky-700 metric-number">SPCX <span class="text-sm font-bold text-slate-500">/ Nasdaq</span></p>
+          <p class="text-sm text-slate-600 mt-3 leading-7">依本次報告記載，SpaceX已於2026年6月12日掛牌；可透過公開財報及股價追蹤。但合作簽署與實際營收認列仍須分開判讀。</p>
+          <div class="fade-line my-5"></div>
+          <p class="mini-label">未揭露數據</p>
+          <p class="mt-1 font-bold text-slate-800">合作金額、已交付設備數、已建站數、用戶貢獻</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+        <div class="rounded-xl border border-sky-100 bg-sky-50 p-6"><p class="section-kicker !mb-2">衛星網路優勢</p><h3 class="text-xl font-bold text-slate-800">廣域覆蓋與備援</h3><p class="text-sm text-slate-600 leading-8 mt-3">偏遠地區、災害備援、跨區域連線的覆蓋彈性。但在高人口密度區域，衛星容量、延遲與頻譜效率可能限制其單獨承擔高流量需求。</p></div>
+        <div class="rounded-xl border border-violet-100 bg-violet-50 p-6"><p class="section-kicker !text-violet-700 !mb-2">地面5G的作用</p><h3 class="text-xl font-bold text-slate-800">容量密度與用戶體驗</h3><p class="text-sm text-slate-600 leading-8 mt-3">基地台承載高流量，與衛星延伸覆蓋互補。真正競爭的是每單位頻譜、每位用戶可創造多少經濟價值，而非宣稱立即取代既有電信商。</p></div>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="subhead mb-6">從合作公布到商業驗證：三階段路徑</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border-l-4 border-sky-500 pl-4 py-1"><p class="text-xs text-slate-500 font-bold mb-1">已公布｜2026/11/4</p><h4 class="font-bold">供應商方案獲採用</h4><p class="text-sm text-slate-600 leading-7 mt-2">Dragonwing支援網路規劃；不能直接推估已實現的設備營收。</p></div>
+          <div class="border-l-4 border-violet-400 pl-4 py-1"><p class="text-xs text-slate-500 font-bold mb-1">規劃｜2027年起</p><h4 class="font-bold">分階段建站與部署</h4><p class="text-sm text-slate-600 leading-7 mt-2">觀察頻譜整合、站點許可、每站成本、設備交付及商用進度。</p></div>
+          <div class="border-l-4 border-amber-400 pl-4 py-1"><p class="text-xs text-slate-500 font-bold mb-1">待驗證｜中長期</p><h4 class="font-bold">經濟模型成立與否</h4><p class="text-sm text-slate-600 leading-7 mt-2">以ARPU、流失率、網路品質、獲客成本與投資資本報酬率驗證。</p></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><h3 class="text-lg font-bold mb-3">潛在產業受益方向</h3><p class="text-sm leading-8 text-slate-600">若網路實際落地，無線電、基頻、光纖回傳、電源、傳輸及網路軟體需求可能增加。Qualcomm藉此延伸至手機晶片之外的基礎設施市場，亦將面對Marvell、Broadcom等競爭。<strong>不能因此推斷所有供應商已取得訂單。</strong></p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><h3 class="text-lg font-bold mb-3">可能使論點失效的條件</h3><p class="text-sm leading-8 text-slate-600">頻譜／站點審批延後、建站成本過高、終端體驗不足、資本支出擠壓其他業務，或AT&amp;T、Verizon、T-Mobile透過合作與降價提前削弱產品吸引力。</p></div>
+      </div>
+    </section>
+
+    <!-- Macro -->
+    <section id="macro" aria-labelledby="macro-title">
+      <div class="section-kicker">跨市場驗證・MACRO CROSS-CHECK</div>
+      <h2 id="macro-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">跨市場風險｜四個不能忽略的變數</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><div class="flex items-center gap-3 mb-3"><span class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-800 font-extrabold">01</span><h3 class="text-xl font-bold">政策與建設許可</h3></div><p class="text-sm leading-8 text-slate-600">報告指出美國11月3日期中選舉後民主黨掌握國會兩院；這不等於AI限制已立法。州與地方的用地、電力、水資源及資料中心許可，可能更直接影響新機房落地。</p><div class="mt-4 text-xs text-slate-500 rounded-lg bg-slate-50 p-3"><strong class="text-slate-700">應追蹤：</strong>建設核准、選址、供電及具體法規進度。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><div class="flex items-center gap-3 mb-3"><span class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-800 font-extrabold">02</span><h3 class="text-xl font-bold">利率與信貸環境</h3></div><p class="text-sm leading-8 text-slate-600">長天期公債殖利率、信用利差及再融資成本，對高資本支出公司估值影響顯著。即使選後殖利率短暫下降，也不能據此預設聯準會一定加速降息。</p><div class="mt-4 text-xs text-slate-500 rounded-lg bg-slate-50 p-3"><strong class="text-slate-700">應追蹤：</strong>美債長端、投資等級信用利差與債市需求。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><div class="flex items-center gap-3 mb-3"><span class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-800 font-extrabold">03</span><h3 class="text-xl font-bold">能源與物價</h3></div><div class="flex flex-wrap items-baseline gap-2 mb-2"><p class="metric-number text-3xl font-extrabold text-sky-700">約103 <span class="text-base">美元／桶</span></p><span class="text-xs text-slate-500">11月4日早間布蘭特原油特定時點</span></div><p class="text-sm leading-8 text-slate-600">中東供給與航運風險可能推升製造、運輸與家庭能源成本，並同時提高成長股的成本與折現率壓力。<strong>103美元並非當日收盤價。</strong></p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><div class="flex items-center gap-3 mb-3"><span class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-800 font-extrabold">04</span><h3 class="text-xl font-bold">非AI獲利與市場輪動</h3></div><p class="text-sm leading-8 text-slate-600">Pfizer、Amgen、AIG、Yum! Brands及Booking Holdings分別反映藥品替代、保險承保與投資收入、餐飲同店銷售、旅遊需求與監管會計問題。AI估值承壓時，資金可能輪動，但這些公司<span class="font-bold text-slate-800">不等於無風險避風港</span>。</p><div class="mt-4 text-xs text-slate-500 rounded-lg bg-slate-50 p-3">補充背景：美國9月職缺約752萬個，報告引述官方描述為變動不大，不能直接解讀為就業再加速。</div></article>
+      </div>
+    </section>
+
+    <!-- Strategy -->
+    <section id="strategy" aria-labelledby="strategy-title">
+      <div class="section-kicker">策略框架・DECISION PLAYBOOK</div>
+      <h2 id="strategy-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">投資策略｜成長率之外的三重檢查</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-7">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><span class="text-xs font-bold text-sky-700 tracking-wider">短期・數日至數週</span><h3 class="font-extrabold text-lg mt-3 mb-2">查價格與資金的確認</h3><p class="text-sm text-slate-600 leading-8">觀察開盤後量能、相對大盤強弱與公債殖利率；避免只以盤前財測利多或單日漲跌追價。設備成長和機房投資報酬不同步，可能造成同日分化。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><span class="text-xs font-bold text-sky-700 tracking-wider">中期・未來一至兩季</span><h3 class="font-extrabold text-lg mt-3 mb-2">查現金流與建設里程碑</h3><p class="text-sm text-slate-600 leading-8">建立需求→營收→毛利→營運資金→現金流追蹤鏈。比較Meta資本支出與現金流，確認SpaceX／Qualcomm設備交付與實際建站進度。</p></div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-0"><span class="text-xs font-bold text-sky-700 tracking-wider">長期・一年以上</span><h3 class="font-extrabold text-lg mt-3 mb-2">查定價能力與股東報酬</h3><p class="text-sm text-slate-600 leading-8">重視經常性付費、合理資本投入、可持續自由現金流與估值安全邊際；多年產業成長趨勢，不代表任何買入價格都有合理報酬。</p></div>
+      </div>
+      <div class="mb-7">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-4"><div><h3 class="text-2xl font-bold text-slate-800">公司與事件追蹤表</h3><p class="text-sm text-slate-500 mt-2">僅使用本次報告中的真實數據與事件；不同公司的指標不可直接當成同一財務比率比較。</p></div><div class="w-full md:w-80"><label for="company-search" class="block text-xs font-bold text-slate-600 mb-2">搜尋公司、指標或風險</label><input id="company-search" type="search" autocomplete="off" placeholder="例如：AMD、現金流、5G、利差" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" aria-controls="company-table-body"></div></div>
+        <div class="rounded-xl border border-slate-200 shadow-lg bg-white overflow-hidden"><div class="table-scroll" tabindex="0" aria-label="可捲動的公司與事件追蹤表"><table class="data-table w-full text-sm" aria-label="公司與事件追蹤"><thead><tr><th scope="col" class="w-[18%]">公司／事件</th><th scope="col" class="w-[19%]">角色／資訊狀態</th><th scope="col" class="w-[29%]">已知數據或公司展望</th><th scope="col" class="w-[34%]">重點追蹤／風險</th></tr></thead><tbody id="company-table-body"></tbody></table></div><div class="px-4 py-3 border-t border-slate-100 flex items-center justify-between gap-3 bg-slate-50"><p id="table-count" class="text-xs text-slate-600" role="status" aria-live="polite"></p><button id="clear-search" type="button" class="text-xs font-semibold text-sky-700 hover:text-sky-900 underline underline-offset-2">清除搜尋</button></div></div>
+      </div>
+      <h3 class="text-2xl font-bold text-slate-800 mb-5">三種情境｜先定義觸發條件，再決定應對</h3>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-7">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-t-4 border-emerald-500"><h4 class="text-lg font-bold text-emerald-800">樂觀情境</h4><p class="text-sm mt-2 text-slate-600 leading-7">AI付費需求加速、算力利用率提升、自由現金流改善；AMD與Arista持續高品質成長，Super Micro收現改善，Meta資本回收受到驗證；SpaceX按2027年規劃部署。</p><div class="mt-4 pt-4 border-t border-slate-100 text-sm leading-7"><strong>策略：</strong>優先研究技術優勢、健康資產負債表與現金流改善的標的，避免只追逐題材。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-t-4 border-sky-500"><h4 class="text-lg font-bold text-sky-800">基本情境</h4><p class="text-sm mt-2 text-slate-600 leading-7">設備仍高速出貨，但訂單品質與利潤分化；科技巨頭維持高資本支出、自由現金流恢復落後；SpaceX建設緩步推動、初期財務貢獻有限。</p><div class="mt-4 pt-4 border-t border-slate-100 text-sm leading-7"><strong>策略：</strong>控制持股集中度、保留安全邊際，以連續財報驗證取代單日價格判斷。</div></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0 border-t-4 border-amber-500"><h4 class="text-lg font-bold text-amber-800">保守情境</h4><p class="text-sm mt-2 text-slate-600 leading-7">能源與融資成本高企、許可延誤、主要AI買方推遲擴建；設備商面對應收、存貨與毛利壓力，資金密集企業利差擴大。</p><div class="mt-4 pt-4 border-t border-slate-100 text-sm leading-7"><strong>策略：</strong>優先檢視槓桿、現金緩衝與流動性；避免把股價下跌等同基本面風險已充分反映。</div></article>
+      </div>
+      <div class="rounded-xl bg-gradient-to-r from-sky-900 to-slate-900 text-white p-7 md:p-9 shadow-lg">
+        <h3 class="text-2xl md:text-3xl font-extrabold leading-snug">結論｜真正的AI贏家，要經得起收現檢驗</h3>
+        <p class="mt-4 text-slate-200 leading-8">2026年11月4日的報告既不支持「AI需求已結束」，也不支持「所有AI供應鏈標的都可以不計價格買進」。供應鏈、資金端與新興5G網路的機會，都必須回到財務與執行品質。</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          <div class="rounded-lg border border-white/20 bg-white/10 px-4 py-4 text-lg font-bold">誰真正收到現金？</div>
+          <div class="rounded-lg border border-white/20 bg-white/10 px-4 py-4 text-lg font-bold">誰承擔資本成本？</div>
+          <div class="rounded-lg border border-white/20 bg-white/10 px-4 py-4 text-lg font-bold">誰能持續創造股東報酬？</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Podcast -->
+    <section id="podcast" aria-labelledby="podcast-title">
+      <div class="section-kicker">內容延伸・PODCAST EDITORIAL</div>
+      <h2 id="podcast-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Podcast編輯提案｜三個可以講清楚的投資問題</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><span class="text-xs font-bold text-sky-700">EPISODE 01</span><h3 class="text-lg font-extrabold leading-snug mt-3">AI訂單大爆發，為何現金流沒有一起衝？</h3><p class="text-sm text-slate-600 mt-3 leading-8">以AMD、Arista、Super Micro為主角，比較晶片、網路、系統整合業者的現金轉換、獲利品質及應收風險。</p><p class="mt-4 text-xs font-bold text-slate-500">核心提問：誰賺得比較扎實？</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><span class="text-xs font-bold text-sky-700">EPISODE 02</span><h3 class="text-lg font-extrabold leading-snug mt-3">Meta再借150億美元：AI巨頭為何要先過債市這關？</h3><p class="text-sm text-slate-600 mt-3 leading-8">從票息、AI資本支出與折舊，講清科技平台如何把設備投資變成可回收的長期現金流。</p><p class="mt-4 text-xs font-bold text-slate-500">核心提問：融資成本何時被AI收入覆蓋？</p></article>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-0"><span class="text-xs font-bold text-sky-700">EPISODE 03</span><h3 class="text-lg font-extrabold leading-snug mt-3">SpaceX聯手Qualcomm：衛星公司為何要蓋5G基地台？</h3><p class="text-sm text-slate-600 mt-3 leading-8">比較衛星覆蓋與地面容量的互補關係，討論建站、監管、用戶經濟與傳統電信商的競爭反應。</p><p class="mt-4 text-xs font-bold text-slate-500">核心提問：規劃如何變成付費用戶與回報？</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI現金流與5G變局。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中AI供應鏈、Meta融資及SpaceX 5G合作相關公開資料 (2026年11月4日)。</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    'use strict';
+    // 原始資料皆摘自 2026-11-04 報告。財報、指引與規劃互不混作實績。
+    const productData = [
+      {
+        company: 'AMD', role: 'AI運算平台', status: '財報已公布', type: 'fact',
+        indicator: '2026 Q3營收133.77億美元（年增45%）；資料中心85.46億（年增97%）；自由現金流5.54億美元。2026 Q4中值約170億、2027成長逾80%為公司展望。',
+        watch: '營運現金流、應收與存貨、採購連結權證的潛在股權稀釋；驗證公司指引是否實現。'
+      },
+      {
+        company: 'Arista Networks', role: 'AI網路交換設備', status: '財報已公布', type: 'fact',
+        indicator: '2026 Q3營收36.58億美元（年增58.5%）；非GAAP營業利益率49.1%；Q4指引39–40億美元。',
+        watch: '大型雲端客戶集中程度、乙太網路與開放架構競爭、利潤率及訂單持續性。'
+      },
+      {
+        company: 'Super Micro', role: 'AI伺服器系統整合', status: '財報已公布', type: 'fact',
+        indicator: 'FY2027 Q1營收199.46億美元；營運現金流淨流出4.34億；應收96.85億、存貨150.54億美元。全年720–820億為展望。',
+        watch: '收款與營運資金占用、毛利率12.7%、出口合規、公司治理與內部控制。'
+      },
+      {
+        company: 'Meta', role: 'AI資本投入買方', status: '融資已公布', type: 'fact',
+        indicator: '2026/11/3安排150億美元五批公司債，票面利率5.85%–7.50%；年票息約9.90億為算術估算。2026資本支出1,350–1,450億美元為預估。',
+        watch: '信用利差、長天期融資成本、折舊、AI經常性收入及自由現金流回收。'
+      },
+      {
+        company: 'SpaceX / Starlink Mobile', role: '衛星＋地面5G網路規劃', status: '合作公告／規劃中', type: 'plan',
+        indicator: '2026/11/4公布與Qualcomm合作；規劃2027年起分階段部署美國地面5G，長期涉及數萬座站點。金額未公布。',
+        watch: '頻譜與站點審查、建站及商用時程、站點成本、ARPU、用戶流失率與投資資本報酬率。'
+      },
+      {
+        company: 'Qualcomm / Dragonwing', role: '5G基礎設施技術供應商', status: '合作公告／規劃中', type: 'plan',
+        indicator: 'Dragonwing獲SpaceX選用，涵蓋無線電、基頻及軟體；交易金額、已交付設備與已認列營收均未於報告揭露。',
+        watch: '實際設備出貨、商用建置、與Marvell及Broadcom等業者的競爭，以及合約營收轉換。'
+      }
+    ];
+
+    const tableBody = document.getElementById('company-table-body');
+    const companySearch = document.getElementById('company-search');
+    const tableCount = document.getElementById('table-count');
+    const clearSearch = document.getElementById('clear-search');
+    function makeCell(value) { const td=document.createElement('td');td.textContent=value;return td; }
+    function renderTable(query='') {
+      const term = query.trim().toLocaleLowerCase('zh-Hant');
+      const rows = productData.filter(item => Object.values(item).some(v => String(v).toLocaleLowerCase('zh-Hant').includes(term)));
+      tableBody.replaceChildren();
+      if (!rows.length) {
+        const tr=document.createElement('tr');
+        const td=document.createElement('td');td.colSpan=4;td.className='text-center text-slate-500 py-8';td.textContent='沒有符合條件的公司或事件。';
+        tr.appendChild(td);tableBody.appendChild(tr);
+      } else {
+        const frag=document.createDocumentFragment();
+        rows.forEach(item => {
+          const tr=document.createElement('tr');
+          const company=makeCell(item.company);company.className='font-extrabold text-slate-800';
+          const role=document.createElement('td');
+          const roleName=document.createElement('div');roleName.textContent=item.role;roleName.className='mb-1.5 text-slate-700';
+          const tag=document.createElement('span');tag.className='status-tag '+(item.type==='plan'?'status-plan':'status-fact');tag.textContent=item.status;
+          role.append(roleName,tag);
+          const indicator=makeCell(item.indicator);indicator.className='text-slate-700';
+          const watch=makeCell(item.watch);watch.className='text-slate-600';
+          tr.append(company,role,indicator,watch);frag.appendChild(tr);
+        });
+        tableBody.appendChild(frag);
+      }
+      tableCount.textContent=`顯示 ${rows.length} / ${productData.length} 筆真實報告資料`;
+    }
+    companySearch.addEventListener('input', () => renderTable(companySearch.value));
+    clearSearch.addEventListener('click', () => {companySearch.value='';renderTable();companySearch.focus();});
+    renderTable();
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOpenIcon = document.getElementById('menu-icon-open');
+    const menuCloseIcon = document.getElementById('menu-icon-close');
+    function setMobileMenu(open) {
+      mobileMenu.classList.toggle('hidden',!open);
+      menuToggle.setAttribute('aria-expanded',String(open));
+      menuToggle.setAttribute('aria-label',open?'關閉章節選單':'開啟章節選單');
+      menuOpenIcon.classList.toggle('hidden',open);
+      menuCloseIcon.classList.toggle('hidden',!open);
+    }
+    menuToggle.addEventListener('click',()=>setMobileMenu(mobileMenu.classList.contains('hidden')));
+    mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMobileMenu(false)));
+    document.addEventListener('keydown',event=>{if(event.key==='Escape')setMobileMenu(false);});
+    window.addEventListener('resize',()=>{if(window.innerWidth>=1024)setMobileMenu(false);});
+
+    const sectionIds=['overview','supply','meta','spacex','macro','strategy','podcast'];
+    const navLinks=Array.from(document.querySelectorAll('a[data-section]'));
+    function activateNav(sectionId) {
+      navLinks.forEach(link=>{
+        const active=link.dataset.section===sectionId;
+        link.classList.toggle('active-nav-link',active);
+        link.classList.toggle('inactive-nav-link',!active);
+        if(active)link.setAttribute('aria-current','location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      const visible = new Map();
+      const observer = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{if(entry.isIntersecting)visible.set(entry.target.id,entry.boundingClientRect.top);else visible.delete(entry.target.id);});
+        if(visible.size) {
+          const selected=Array.from(visible.entries()).sort((a,b)=>Math.abs(a[1]-110)-Math.abs(b[1]-110))[0][0];
+          activateNav(selected);
+        }
+      },{rootMargin:'-100px 0px -62% 0px',threshold:0});
+      sectionIds.forEach(id=>observer.observe(document.getElementById(id)));
+    }
+    navLinks.forEach(link=>link.addEventListener('click',()=>activateNav(link.dataset.section)));
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family='ui-sans-serif, system-ui, "Noto Sans TC", "PingFang TC", sans-serif';
+      Chart.defaults.color='#5b6b7d';
+      const common={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#102d46',padding:12,displayColors:false}},animation:{duration:550}};
+      new Chart(document.getElementById('revenueGrowthChart'),{
+        type:'bar',data:{labels:['AMD整體營收','AMD資料中心','Arista整體營收'],datasets:[{data:[45,97,58.5],backgroundColor:['#38bdf8','#0284c7','#7dd3fc'],borderRadius:7,maxBarThickness:35}]},
+        options:{...common,indexAxis:'y',layout:{padding:{right:22}},scales:{x:{beginAtZero:true,max:110,grid:{color:'#e8edf3'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:12}}}},plugins:{...common.plugins,tooltip:{...common.plugins.tooltip,callbacks:{label:c=>'年增 '+c.parsed.x+'%'}}}}
+      });
+      new Chart(document.getElementById('receivablesChart'),{
+        type:'bar',data:{labels:['前季期末','FY2027 Q1期末'],datasets:[{data:[61.25,96.85],backgroundColor:['#94cbe8','#0284c7'],borderRadius:8,maxBarThickness:90}]},
+        options:{...common,scales:{y:{beginAtZero:true,grid:{color:'#e8edf3'},ticks:{callback:v=>v+' 億'}},x:{grid:{display:false}}},plugins:{...common.plugins,tooltip:{...common.plugins.tooltip,callbacks:{label:c=>c.parsed.y+' 億美元'}}}}
+      });
+      new Chart(document.getElementById('bondCouponChart'),{
+        type:'line',data:{labels:['2031','2033','2036','2046','2056'],datasets:[{data:[5.85,6.25,6.55,7.35,7.5],borderColor:'#0284c7',backgroundColor:'rgba(2,132,199,.12)',pointBackgroundColor:'#0284c7',pointRadius:5,pointHoverRadius:7,fill:true,tension:.22,borderWidth:3}]},
+        options:{...common,layout:{padding:{top:8}},scales:{y:{min:5,max:8,grid:{color:'#e8edf3'},ticks:{stepSize:.5,callback:v=>v.toFixed(1)+'%'}},x:{grid:{display:false},title:{display:true,text:'到期年度'}}},plugins:{...common.plugins,tooltip:{...common.plugins.tooltip,callbacks:{title:it=>it[0].label+'年到期',label:c=>'票面利率 '+c.parsed.y.toFixed(2)+'%'}}}}
+      });
+    } else {
+      document.querySelectorAll('.chart-shell').forEach(shell=>{
+        const info=document.createElement('p');
+        info.className='text-sm text-slate-500 p-4 bg-slate-50 rounded-lg';
+        info.textContent='圖表套件未載入。相關數值已在鄰近文字及資訊卡片完整列示。';
+        shell.replaceChildren(info);
+      });
+    }
+  </script>
+</body>
+</html>
