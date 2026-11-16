@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="2026年11月16日美股投資深度分析：NVIDIA管理層接班與財報、Anthropic IPO與AI融資風險、Starship和Amazon Leo發射競爭。">
+  <meta name="color-scheme" content="light">
+  <title>巴菲特AI價值投資-AI成長與現金流壓力測試</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --ink:#17314a; --sky:#0284c7; --muted:#64748b; --line:#e2e8f0; }
+    html { scroll-behavior:smooth; }
+    body { font-family: ui-sans-serif,system-ui,-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+    .hero-mesh {
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size:36px 36px;
+    }
+    .hero-mesh > .hero-content { position:relative; z-index:1; }
+    .active-nav-link { color:#0369a1; background:#e0f2fe; border-bottom-color:#0284c7; }
+    .inactive-nav-link { color:#475569; background:transparent; border-bottom-color:transparent; }
+    .nav-link { display:inline-flex;align-items:center;justify-content:center; padding:11px 11px 9px; border-bottom:2px solid transparent; font-size:.86rem; font-weight:700; white-space:nowrap; transition:all .18s; border-radius:7px 7px 0 0; }
+    .nav-link:hover { color:#0369a1; background:#f0f9ff; }
+    .nav-link.active-nav-link { border-bottom-color:#0284c7; }
+    .mobile-link { display:block; padding:12px 15px; font-size:.95rem; font-weight:700; border-radius:8px; }
+    .mobile-link.active-nav-link { border-left:3px solid #0284c7; }
+    .report-section { scroll-margin-top:88px; }
+    .chart-shell { position:relative; width:100%; height:310px; }
+    .chart-shell.short { height:270px; }
+    .micro-label { font-size:.69rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:#0284c7; }
+    .soft-chip { display:inline-flex;align-items:center;gap:.4rem; padding:.32rem .66rem; border-radius:999px; font-size:.73rem; font-weight:800; }
+    .chip-fact { background:#dcfce7; color:#166534; }
+    .chip-plan { background:#fef3c7; color:#92400e; }
+    .chip-wait { background:#e0f2fe; color:#075985; }
+    .chip-contract { background:#ede9fe; color:#5b21b6; }
+    .note-bar { border-left:4px solid #0ea5e9; background:#f0f9ff; border-radius:0 12px 12px 0; padding:16px 18px; }
+    .risk-bar { border-left:4px solid #f59e0b; background:#fffbeb; border-radius:0 12px 12px 0; padding:16px 18px; }
+    .info-bar { border-left:4px solid #94a3b8; background:#f8fafc; border-radius:0 12px 12px 0; padding:16px 18px; }
+    .report-copy { color:#475569; line-height:1.93; font-size:.975rem; }
+    .section-intro { max-width:850px; color:#64748b; line-height:1.85; margin:-5px 0 24px; }
+    .compact-heading { color:#1c344b; font-weight:800; font-size:1.07rem; margin-bottom:10px; }
+    .metric-value { font-size:clamp(1.75rem,3vw,2.25rem); font-weight:850; letter-spacing:-.045em; font-variant-numeric:tabular-nums; }
+    .metric-title { font-size:.78rem; color:#64748b; font-weight:700; }
+    .ticker { display:inline-block; border-radius:5px; font-size:.69rem; letter-spacing:.05em; padding:.16rem .42rem; background:#e2e8f0; color:#334155; font-weight:800; }
+    .scenario { position:relative; padding-top:18px; }
+    .scenario::before { content:""; position:absolute; top:0; left:0; right:0; height:4px; border-radius:999px; background:var(--accent); }
+    .table-wrap { overflow:auto; max-width:100%; max-height:560px; border-radius:12px; border:1px solid #e2e8f0; }
+    .data-table { border-collapse:separate; border-spacing:0; min-width:900px; width:100%; text-align:left; }
+    .data-table thead th { position:sticky;top:0;z-index:2;background:#ecf6fd;color:#22435d; padding:14px 16px; font-size:.78rem; letter-spacing:.025em; white-space:nowrap; border-bottom:1px solid #cbd5e1; }
+    .data-table tbody td { padding:16px; font-size:.88rem; color:#475569; border-bottom:1px solid #e8edf3; line-height:1.7; vertical-align:top; }
+    .data-table tbody tr:nth-child(even) { background:#f8fbfd; }
+    .data-table tbody tr:hover { background:#eef7ff; }
+    .data-table tbody tr:last-child td { border-bottom:0; }
+    .focus-list li { position:relative; padding-left:1.2rem; margin-bottom:.68rem; }
+    .focus-list li::before { content:""; width:.42rem;height:.42rem; border-radius:50%; background:#0ea5e9; position:absolute;left:.2rem;top:.66rem; }
+    .timeline-track { border-left:2px solid #cdeaf7; margin-left:12px; padding-left:25px; }
+    .timeline-item { position:relative; padding-bottom:24px; }
+    .timeline-item:last-child { padding-bottom:0; }
+    .timeline-item::before { content:""; position:absolute; left:-33px; top:4px; height:14px;width:14px;background:white;border:4px solid #0ea5e9;border-radius:100%; }
+    .gradient-divider { height:1px; background:linear-gradient(90deg,transparent,#cbd5e1,transparent); }
+    a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid #38bdf8; outline-offset:3px; }
+    @media (max-width:640px) {
+      .chart-shell { height:265px; }
+      .chart-shell.short { height:250px; }
+      .report-section { scroll-margin-top:76px; }
+      .report-copy { font-size:.94rem; }
+    }
+    @media (prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after {transition-duration:.01ms!important;animation-duration:.01ms!important;} }
+  </style>
+</head>
+<body class="bg-slate-50 text-stone-800">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm" id="site-header">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="報告章節導航">
+      <div class="flex items-center justify-between min-h-[64px] gap-4">
+        <a href="#top" class="flex items-center gap-2.5 min-w-0 group" aria-label="回到報告頁首">
+          <span aria-hidden="true" class="w-8 h-8 shrink-0 rounded-lg bg-gradient-to-br from-sky-700 to-cyan-500 flex items-center justify-center text-white font-black text-lg shadow-sm">◆</span>
+          <span class="min-w-0 flex flex-col leading-tight"><span class="font-extrabold text-slate-800 text-[.86rem] sm:text-[.96rem] truncate">巴菲特AI價值投資</span><span class="text-[.68rem] font-bold text-slate-500 tracking-wider">美股深度研究</span></span>
+        </a>
+        <div class="hidden lg:flex items-center gap-0.5" id="desktop-nav">
+          <a data-nav href="#overview" class="nav-link inactive-nav-link">核心總覽</a>
+          <a data-nav href="#nvidia" class="nav-link inactive-nav-link">NVIDIA</a>
+          <a data-nav href="#anthropic" class="nav-link inactive-nav-link">Anthropic</a>
+          <a data-nav href="#space" class="nav-link inactive-nav-link">太空競爭</a>
+          <a data-nav href="#framework" class="nav-link inactive-nav-link">投資情境</a>
+          <a data-nav href="#watchlist" class="nav-link inactive-nav-link">追蹤清單</a>
+        </div>
+        <button id="menu-toggle" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="開啟章節選單" class="lg:hidden p-2.5 inline-flex items-center justify-center rounded-lg text-slate-700 hover:bg-slate-100">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+      <div class="hidden lg:hidden border-t border-slate-200 py-3" id="mobile-nav">
+        <div class="grid grid-cols-2 gap-1">
+          <a data-nav href="#overview" class="mobile-link inactive-nav-link">核心總覽</a>
+          <a data-nav href="#nvidia" class="mobile-link inactive-nav-link">NVIDIA</a>
+          <a data-nav href="#anthropic" class="mobile-link inactive-nav-link">Anthropic</a>
+          <a data-nav href="#space" class="mobile-link inactive-nav-link">太空競爭</a>
+          <a data-nav href="#framework" class="mobile-link inactive-nav-link">投資情境</a>
+          <a data-nav href="#watchlist" class="mobile-link inactive-nav-link">追蹤清單</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-[3.65rem] leading-[1.17] font-extrabold tracking-tight max-w-[1050px]">AI黃金時代的壓力測試：<span class="text-sky-200">從NVIDIA接班、Anthropic上市到太空競爭</span></h1>
+        <p class="mt-6 max-w-3xl text-sky-50/90 leading-[1.95] text-base md:text-lg">NVIDIA創辦人離任與即將揭曉的財報、Anthropic IPO及長期算力承諾、Starship回收突破與Amazon Leo發射事故，看似分散的事件，正共同考驗科技企業的治理、融資與資本回收能力。</p>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="overview" class="report-section pt-12 md:pt-16 pb-10 md:pb-14" aria-labelledby="overview-title">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4"><span class="micro-label">Investment lens / 核心總覽</span><span class="text-xs text-slate-500 font-semibold">資料截點：2026年11月16日美股開盤前</span></div>
+        <h2 id="overview-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三場考試，一道相同的題目</h2>
+        <p class="section-intro">市場不再只問AI與太空技術能擴張多快，而開始檢查：企業能否把產品與資本投入，轉為可持續的客戶收入、現金流及股東回報。</p>
+        <div class="grid md:grid-cols-3 gap-5 mb-7">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0 border-t-4 border-sky-500">
+            <div class="flex items-center justify-between mb-4"><span class="micro-label">01 / Governance</span><span class="ticker">NVDA</span></div>
+            <h3 class="text-xl font-extrabold text-slate-800 mb-3">NVIDIA：組織能否接棒？</h3>
+            <p class="report-copy">11月12日管理層變動已公告；11月17日財報尚未發布。真正的測試是產品執行力、毛利率、客戶需求與組織制度化。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0 border-t-4 border-cyan-500">
+            <div class="flex items-center justify-between mb-4"><span class="micro-label">02 / Funding</span><span class="ticker">ANT（申請代碼）</span></div>
+            <h3 class="text-xl font-extrabold text-slate-800 mb-3">Anthropic：成長能否融資？</h3>
+            <p class="report-copy">IPO仍在路演，260億美元私募尚待條件滿足。高速成長的付費需求，必須對照龐大的長期算力合約與現金成本。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0 border-t-4 border-indigo-500">
+            <div class="flex items-center justify-between mb-4"><span class="micro-label">03 / Execution</span><span class="ticker">AMZN · BA · LMT</span></div>
+            <h3 class="text-xl font-extrabold text-slate-800 mb-3">太空競爭：成本能否降低？</h3>
+            <p class="report-copy">Starship上級回收已成功，但雙級回收未完成；Vulcan事故使40顆衛星損失。關鍵轉向發射可靠度、部署節奏與再飛成本。</p>
+          </article>
+        </div>
+        <div class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 grid md:grid-cols-[1.15fr_1fr] gap-6 items-center shadow-xl">
+          <div><p class="text-sky-300 text-xs tracking-widest font-extrabold mb-2">核心投資命題</p><p class="text-2xl md:text-[1.8rem] font-black leading-relaxed">技術領先只是起點，<br><span class="text-sky-300">資本回收</span>才是估值的終點。</p></div>
+          <div class="grid grid-cols-2 gap-3 text-[.9rem]"><div class="bg-white/10 rounded-xl p-4">管理能力<br><span class="text-sky-200 font-bold">能否延續執行？</span></div><div class="bg-white/10 rounded-xl p-4">資本成本<br><span class="text-sky-200 font-bold">融資是否穩健？</span></div><div class="bg-white/10 rounded-xl p-4">資產利用率<br><span class="text-sky-200 font-bold">設備能否有效使用？</span></div><div class="bg-white/10 rounded-xl p-4">終端付費<br><span class="text-sky-200 font-bold">收入能否變成現金？</span></div></div>
+        </div>
+      </section>
+
+      <div class="gradient-divider"></div>
+      <section id="nvidia" class="report-section py-12 md:py-16" aria-labelledby="nvidia-title">
+        <div class="micro-label mb-4">Focus 01 / GPU & Governance</div>
+        <h2 id="nvidia-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">NVIDIA：接班事件與11月17日財報</h2>
+        <p class="section-intro">短期須分開看待治理變動與基本面。創辦人離任已是報告所載的公告事件；2027會計年度第三季財報仍屬未公布結果，不能以公司上季展望冒充實績。</p>
+        <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-6 mb-7">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4"><h3 class="compact-heading mb-0">上季營收與下一季展望</h3><span class="soft-chip chip-wait">實績 vs. 公司展望</span></div>
+            <p class="text-sm text-slate-500 mb-4">金額單位：億美元。第二季為截至2026/7/26之實績；第三季為公司先前展望，尚非財報結果。</p>
+            <div class="chart-shell"><canvas id="nvidiaRevenueChart" role="img" aria-label="NVIDIA第二季已公布營收962億美元與第三季營收展望1080億美元的長條圖"></canvas></div>
+            <p class="text-xs text-slate-500 leading-relaxed mt-3">註：第三季營收展望約1,080億美元，允許上下浮動2%；兩柱代表不同季度，第二柱不是已實現收入。</p>
+          </article>
+          <div class="grid grid-cols-2 gap-4 content-start">
+            <article class="bg-white rounded-lg shadow-lg p-5"><p class="metric-title mb-2">FY2027 Q2營收｜已公布</p><p class="metric-value text-sky-700">962<span class="text-base ml-1">億美元</span></p><p class="text-xs font-bold text-emerald-700 mt-2">年增106%</p></article>
+            <article class="bg-white rounded-lg shadow-lg p-5"><p class="metric-title mb-2">Q2資料中心營收｜已公布</p><p class="metric-value text-sky-700">890<span class="text-base ml-1">億美元</span></p><p class="text-xs font-bold text-emerald-700 mt-2">年增117%；為總營收子項</p></article>
+            <article class="bg-white rounded-lg shadow-lg p-5"><p class="metric-title mb-2">Q2 GAAP毛利率｜已公布</p><p class="metric-value text-slate-800">75.0<span class="text-lg">%</span></p><p class="text-xs text-slate-500 mt-2">整體獲利品質基準</p></article>
+            <article class="bg-white rounded-lg shadow-lg p-5"><p class="metric-title mb-2">Q3毛利率｜公司展望</p><p class="metric-value text-amber-700">74.0<span class="text-lg">%</span></p><p class="text-xs text-slate-500 mt-2">GAAP／非GAAP，±0.5百分點</p></article>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0">
+            <div class="mb-4"><span class="soft-chip chip-fact">報告所載：已公告</span></div>
+            <h3 class="compact-heading">治理變動的直接衝擊</h3>
+            <p class="report-copy mb-3">依報告，11月12日黃仁勳辭去總裁、執行長與董事職務，Colette Kress代理執行長並暫兼財務長，董事會啟動遴選；Harvey C. Jones出任董事長。</p>
+            <p class="report-copy">核心問題並非單一主管能否維持短期出貨，而是CUDA軟體生態、平台整合、研發人才與大客戶關係，能否以組織化制度延續。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0">
+            <div class="mb-4"><span class="soft-chip chip-wait">待揭曉：11/17美東盤後</span></div>
+            <h3 class="compact-heading">財報要驗證的不只營收</h3>
+            <ul class="focus-list text-slate-600 leading-relaxed text-[.94rem]">
+              <li>下季指引是否顯示需求持續擴大，而非僅提前拉貨或既有訂單交付。</li>
+              <li>新一代整機、機櫃、散熱與整合成本是否侵蝕毛利率。</li>
+              <li>營業現金流與雲端客戶AI服務收入是否跟上資本支出。</li>
+              <li>產品路線、客戶服務、資本配置與人才留任是否出現實質變化。</li>
+            </ul>
+          </article>
+        </div>
+        <div class="note-bar"><p class="font-extrabold text-sky-900 mb-1">傳導至整條AI供應鏈的估值風險</p><p class="report-copy">即使短期營收未變，治理風險也可能提高投資人要求報酬率，影響記憶體、網路設備、伺服器、資料中心電力與算力租賃業者的遠期估值。但若組織證明不依賴單一創辦人，長期關鍵人物風險亦可能下降。</p></div>
+      </section>
+
+      <div class="gradient-divider"></div>
+      <section id="anthropic" class="report-section py-12 md:py-16" aria-labelledby="anthropic-title">
+        <div class="micro-label mb-4">Focus 02 / IPO & AI Capital Structure</div>
+        <h2 id="anthropic-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Anthropic IPO：營收增長遇上資本承諾</h2>
+        <p class="section-intro">公開市場即將同時檢驗模型公司的收入品質、成本結構與融資能力。路演已啟動，但最終價格、正式上市時間、私募交割與掛牌表現均未在報告截點確認。</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-5"><p class="metric-title mb-2">IPO初步每股價格區間</p><p class="metric-value text-sky-700">70–78<span class="text-base ml-1">美元</span></p><p class="text-xs text-amber-700 font-bold mt-2">尚未最終定價</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-5"><p class="metric-title mb-2">擬公開發售A類股數</p><p class="metric-value text-slate-800">8.25<span class="text-base ml-1">億股</span></p><p class="text-xs text-slate-500 mt-2">新股約8.0135億股</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-5"><p class="metric-title mb-2">同步私募｜擬議規模</p><p class="metric-value text-amber-700">260<span class="text-base ml-1">億美元</span></p><p class="text-xs text-slate-500 mt-2">七家科技企業參與；未交割</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-5"><p class="metric-title mb-2">淨資金流入｜招股書估算</p><p class="metric-value text-slate-800">846<span class="text-base ml-1">億美元</span></p><p class="text-xs text-slate-500 mt-2">依74美元中點，含同步私募</p></article>
+        </div>
+        <div class="risk-bar mb-8"><p class="font-extrabold text-amber-900 mb-1">公開發行規模 ≠ 企業估值 ≠ 直接流入公司之資金</p><p class="report-copy">以8.25億股與每股70–78美元估算，公開發售初步總額約577.5億–643.5億美元；其中約2,364.9萬股由既有股東出售。完整估值還需要全稀釋股數及股份權利；擬議私募與預估淨募集額亦非已完成交割。規劃參與私募者包括Google、NVIDIA、AMD、Broadcom、Micron、Microsoft與台積電相關投資實體；市場傳出最快11月19日交易，但截至報告截點仍未確認。</p></div>
+
+        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2"><h3 class="compact-heading mb-0">付費需求：前九個月營收</h3><span class="soft-chip chip-fact">招股書揭露</span></div>
+            <p class="text-sm text-slate-500 mb-4">2025與2026年同期比較；單位為億美元，不是全年營收。</p>
+            <div class="chart-shell"><canvas id="anthropicRevenueChart" role="img" aria-label="Anthropic前九個月營收2025年25.45億美元和2026年332.42億美元比較圖"></canvas></div>
+            <p class="text-xs text-slate-500 mt-3 leading-relaxed">2026年前九個月：用量計價約263億美元；訂閱約69億美元。各項約數與總額可能因四捨五入存在差異。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <h3 class="compact-heading">財務四象限：避免把會計損失當現金燒損</h3>
+            <p class="text-sm text-slate-500 mb-5">2026年前九個月；單位：億美元，全部依報告所載招股書資料。</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="rounded-xl bg-rose-50 p-4"><p class="text-xs font-semibold text-rose-800">GAAP淨損</p><p class="text-2xl font-black tabular-nums text-rose-900 mt-2">−1,040.39</p><p class="text-[.73rem] text-rose-800 mt-1">包含重大非營運評價影響</p></div>
+              <div class="rounded-xl bg-amber-50 p-4"><p class="text-xs font-semibold text-amber-800">金融工具公平價值變動相關</p><p class="text-2xl font-black tabular-nums text-amber-900 mt-2">943.24</p><p class="text-[.73rem] text-amber-800 mt-1">損益影響金額，非同額現金流出</p></div>
+              <div class="rounded-xl bg-slate-100 p-4"><p class="text-xs font-semibold text-slate-700">營業虧損</p><p class="text-2xl font-black tabular-nums text-slate-900 mt-2">−12.60</p><p class="text-[.73rem] text-slate-600 mt-1">衡量本業損益</p></div>
+              <div class="rounded-xl bg-emerald-50 p-4"><p class="text-xs font-semibold text-emerald-800">營業活動現金流</p><p class="text-2xl font-black tabular-nums text-emerald-900 mt-2">+65.69</p><p class="text-[.73rem] text-emerald-800 mt-1">不代表已能完全自我融資</p></div>
+            </div>
+            <p class="report-copy mt-5">現金流還受到預收款、應付帳款與收款時點影響；要再檢查資本性支出、設備預付款、長期租約與新增算力承諾，才能評價自由現金流品質。</p>
+          </article>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-6 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2"><h3 class="compact-heading mb-0">長期算力支出承諾</h3><span class="soft-chip chip-contract">已簽訂的承諾／租賃</span></div>
+            <p class="text-sm text-slate-500 mb-4">單位：億美元；各時間區間互相包含，<strong>不可相加</strong>。</p>
+            <div class="chart-shell"><canvas id="commitmentChart" role="img" aria-label="Anthropic長期承諾總額9009億美元，其中2030年底前4516億美元及未來12個月707億美元，各項不可加總"></canvas></div>
+            <p class="text-xs text-slate-500 mt-3 leading-relaxed">合計承諾約9,009億美元，包含尚未開始的租賃與跨越2030、2040年代的支出；不是一次借入的債務，也不是當期全部到期金額。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <h3 class="compact-heading">聯準會理事所點出的融資鏈脆弱性</h3>
+            <p class="report-copy mb-4">依報告引述Michael Barr於11月16日的風險評估，AI企業的長期設備、採購與資金安排，可能把模型公司、GPU供應商、雲端企業和信用市場連在一起。</p>
+            <div class="space-y-3">
+              <div class="rounded-xl border border-slate-200 p-4 flex justify-between items-center gap-4"><div><p class="text-xs text-slate-500 font-semibold">七家大型AI相關企業｜2026年底帳面負債預估</p><p class="text-xl font-black text-slate-800 mt-1">逾 8,000 億美元</p></div><span class="soft-chip chip-plan shrink-0">預估</span></div>
+              <div class="rounded-xl border border-slate-200 p-4 flex justify-between items-center gap-4"><div><p class="text-xs text-slate-500 font-semibold">特定表外義務｜潛在最大名目金額</p><p class="text-xl font-black text-slate-800 mt-1">逾 3 兆美元</p></div><span class="soft-chip chip-wait shrink-0">或有風險</span></div>
+              <div class="rounded-xl border border-slate-200 p-4 flex justify-between items-center gap-4"><div><p class="text-xs text-slate-500 font-semibold">大型雲端與GPU製造商對AI企業｜累計股權投資</p><p class="text-xl font-black text-slate-800 mt-1">逾 1,000 億美元</p></div><span class="soft-chip chip-fact shrink-0">既有投資</span></div>
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed mt-4">三組數字的計算口徑不同，不能加總為實際損失；表外最大名目金額不等於未來必然現金支出。</p>
+          </article>
+        </div>
+        <div class="rounded-2xl border border-sky-100 bg-gradient-to-r from-sky-50 to-white p-6 md:p-7">
+          <h3 class="compact-heading mb-3">循環融資如何把AI需求與信用市場連在一起？</h3>
+          <div class="grid md:grid-cols-3 gap-3 text-sm font-semibold text-center mb-4"><div class="rounded-lg bg-white border border-sky-100 p-4">雲端／GPU企業<br><span class="text-sky-700">投資模型公司與算力業者</span></div><div class="rounded-lg bg-white border border-sky-100 p-4">模型公司／算力新創<br><span class="text-sky-700">擴張資本開支與租賃</span></div><div class="rounded-lg bg-white border border-sky-100 p-4">GPU與雲端供應商<br><span class="text-sky-700">接收採購與租用需求</span></div></div>
+          <p class="report-copy">產業策略投資本身不等於交易造假。壓力點在於：當外部融資變貴、GPU殘值或設備利用率下跌，循環支持的採購需求能否轉為獨立終端客戶付費？風險會再傳導至租賃價格、設備擔保及信用條件。</p>
+        </div>
+      </section>
+
+      <div class="gradient-divider"></div>
+      <section id="space" class="report-section py-12 md:py-16" aria-labelledby="space-title">
+        <div class="micro-label mb-4">Focus 03 / Space Economy</div>
+        <h2 id="space-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Starship與Amazon Leo：太空競賽進入成本檢驗</h2>
+        <p class="section-intro">一次回收技術成功與一次衛星發射事故，凸顯衛星產業不只比較火箭性能，更比較可靠的發射運力、總部署速度、整備成本及服務商業化進度。</p>
+        <div class="grid lg:grid-cols-[.94fr_1.06fr] gap-6 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <h3 class="compact-heading mb-5">2026年11月13—15日事件序列</h3>
+            <div class="timeline-track">
+              <div class="timeline-item"><p class="text-xs font-black text-sky-700 mb-1">11月13日｜Starship第15次飛行</p><h4 class="font-bold text-slate-800 mb-1">成功部署26顆Starlink衛星</h4><p class="report-copy">由德州發射；上級太空船完成約14圈繞地飛行。</p></div>
+              <div class="timeline-item"><p class="text-xs font-black text-sky-700 mb-1">11月14日｜上級太空船回收</p><h4 class="font-bold text-slate-800 mb-1">首次完成繞地後塔架捕捉</h4><p class="report-copy">上級太空船由塔架機械臂接住；Super Heavy助推器未完成原定捕捉，並非雙級完整回收。</p></div>
+              <div class="timeline-item"><p class="text-xs font-black text-rose-700 mb-1">11月15日｜ULA Vulcan發射事故</p><h4 class="font-bold text-slate-800 mb-1">40顆Amazon Leo衛星未入軌</h4><p class="report-copy">火箭起飛約10分鐘後異常，衛星全數損失；事故根本原因仍待調查。</p></div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2"><h3 class="compact-heading mb-0">Amazon Leo初始星座部署</h3><span class="soft-chip chip-plan">現有規模 vs. 規劃目標</span></div>
+            <p class="text-sm text-slate-500 mb-4">單位：顆；已部署398顆為事故前報導約數，3,236顆為規劃中的初始星座目標。</p>
+            <div class="chart-shell"><canvas id="leoChart" role="img" aria-label="Amazon Leo已部署約398顆衛星，相較規劃初始星座3236顆的比較圖"></canvas></div>
+            <div class="flex flex-wrap gap-3 mt-3"><span class="soft-chip chip-fact">已部署約398顆</span><span class="soft-chip chip-plan">目標3,236顆</span><span class="soft-chip" style="background:#fee2e2;color:#991b1b">本次損失40顆，未計入已部署</span></div>
+          </article>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><h3 class="compact-heading">SpaceX的可能結構性優勢</h3><p class="report-copy">同時掌握發射與Starlink衛星服務，便於協調有效載荷、排程和星座更新。但要證明長期成本優勢，仍需反覆驗證上級太空船再飛、熱防護、翻修成本與發射頻率。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><h3 class="compact-heading">Amazon Leo的部署壓力</h3><p class="report-copy">AWS、資本與客戶通路有優勢，但仍仰賴外部發射服務。事故會影響發射排程及星座部署，實際財務衝擊取決於保險、合約責任、替代發射安排與時間成本。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><h3 class="compact-heading">公開市場關聯標的</h3><p class="report-copy mb-3"><span class="ticker">AMZN</span> Amazon：Leo發展，但AWS與零售等仍是集團主要估值面向。</p><p class="report-copy"><span class="ticker">BA</span> Boeing、<span class="ticker">LMT</span> Lockheed Martin：ULA股東；不可由單一事故直接推算合併獲利。</p></article>
+        </div>
+        <div class="risk-bar"><p class="font-extrabold text-amber-900 mb-1">技術里程碑不是商業回報的完成證明</p><p class="report-copy">一次成功捕捉，不等於Starship已達成快速、可靠且低成本的再次飛行；SpaceX也不是可在公開美股市場直接買賣的普通上市股票。太空投資最終仍須觀察可靠發射、實際部署、付費客戶與現金回收。</p></div>
+      </section>
+
+      <div class="gradient-divider"></div>
+      <section id="framework" class="report-section py-12 md:py-16" aria-labelledby="framework-title">
+        <div class="micro-label mb-4">Cross-sector / 投資判斷</div>
+        <h2 id="framework-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">跨產業評價框架與三種情境</h2>
+        <p class="section-intro">在AI晶片、模型平台與衛星網路三條賽道中，應將「已完成事件」、「已簽約義務」與「尚待實現的成長」分開，並用相同的現金流邏輯比較不同企業的承擔風險。</p>
+        <div class="grid lg:grid-cols-3 gap-5 mb-8">
+          <article class="scenario bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0" style="--accent:#16a34a"><h3 class="text-xl font-black text-emerald-800 mb-4">偏多情境</h3><ul class="focus-list report-copy"><li>NVIDIA財報及後續展望達標或優於預期，管理層清楚說明產品路線。</li><li>Anthropic IPO完成且未出現重大新增融資壓力。</li><li>Starship可靠度繼續提升，Amazon提出具體替代發射方案。</li></ul><p class="text-sm text-emerald-800 font-bold bg-emerald-50 rounded-lg p-3 mt-4">可能支持資本密集產業逐步建立可預期現金流。</p></article>
+          <article class="scenario bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0" style="--accent:#0ea5e9"><h3 class="text-xl font-black text-sky-800 mb-4">中性情境</h3><ul class="focus-list report-copy"><li>NVIDIA高營收延續，但治理不確定性壓抑估值。</li><li>Anthropic取得上市資金，市場仍折價反映長期算力承諾。</li><li>太空產業聚焦試驗與部署進度，短期財報影響有限。</li></ul><p class="text-sm text-sky-800 font-bold bg-sky-50 rounded-lg p-3 mt-4">以公司個別估值、現金流與資本需求為分析核心。</p></article>
+          <article class="scenario bg-white rounded-lg shadow-lg p-6 mb-6 lg:mb-0" style="--accent:#e11d48"><h3 class="text-xl font-black text-rose-800 mb-4">偏空情境</h3><ul class="focus-list report-copy"><li>NVIDIA需求或毛利率指引轉弱，或治理問題干擾合作。</li><li>Anthropic融資條件不佳，推高算力新創資金成本。</li><li>衛星發射延誤擴大，使專案資本回收期拉長。</li></ul><p class="text-sm text-rose-800 font-bold bg-rose-50 rounded-lg p-3 mt-4">優先檢查高槓桿、現金流不穩與客戶高度集中的企業。</p></article>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5 mb-7">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><p class="micro-label mb-3">Short term</p><h3 class="text-lg font-black text-slate-800 mb-3">1–4 週｜事件確認</h3><p class="report-copy">11月17日NVIDIA財報與財測、Anthropic最終招股書及發行資訊、Vulcan事故調查進展。股價波動不等於長期投資價值變動。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><p class="micro-label mb-3">Medium term</p><h3 class="text-lg font-black text-slate-800 mb-3">3–12 個月｜營運驗證</h3><p class="report-copy">AI供應鏈應收帳款、營業現金流、雲端資本支出；Anthropic用量、算力效率與增資；衛星部署、服務覆蓋及獲客成本。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:mb-0"><p class="micro-label mb-3">Long term</p><h3 class="text-lg font-black text-slate-800 mb-3">1–2 年｜自由現金流</h3><p class="report-copy">比較企業維持競爭力的資本需求、現金轉換能力、財務彈性、資產周轉率，以及終端用戶的持續付費意願。</p></article>
+        </div>
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-2xl">
+          <h3 class="font-extrabold text-xl mb-4">長期觀察的完整價值鏈</h3>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center text-sm font-semibold"><div class="bg-slate-800 rounded-lg px-3 py-4">技術優勢</div><div class="bg-slate-800 rounded-lg px-3 py-4">可靠交付</div><div class="bg-slate-800 rounded-lg px-3 py-4">客戶付款</div><div class="bg-slate-800 rounded-lg px-3 py-4">資本回收</div><div class="bg-sky-700 rounded-lg px-3 py-4 col-span-2 md:col-span-1">自由現金流</div></div>
+          <p class="text-slate-300 leading-relaxed mt-5 text-sm">進一步區分終端需求、策略性股權投資、採購承諾和信用擔保，避免把融資規模、訂單量或單次技術事件直接等同於利潤。</p>
+        </div>
+      </section>
+
+      <div class="gradient-divider"></div>
+      <section id="watchlist" class="report-section py-12 md:py-16" aria-labelledby="watchlist-title">
+        <div class="micro-label mb-4">Monitoring / 追蹤清單</div>
+        <h2 id="watchlist-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">事件與後續驗證追蹤表</h2>
+        <p class="section-intro">表格僅整理本次報告提及的真實公告、揭露數據、公司展望與待確認項目。輸入公司、關鍵字或日期可即時搜尋；狀態篩選用於分辨已發生事實與未來事項。</p>
+        <div class="bg-white rounded-lg shadow-lg p-5 md:p-6 mb-6">
+          <div class="flex flex-col md:flex-row gap-3 md:items-end mb-5">
+            <div class="grow"><label for="table-search" class="block text-sm font-bold text-slate-700 mb-2">搜尋報告事件</label><input id="table-search" type="search" autocomplete="off" placeholder="例如 NVIDIA、11/17、IPO、Vulcan、毛利率…" class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-sky-400 focus:border-sky-400"></div>
+            <div class="md:w-[200px] shrink-0"><label for="status-filter" class="block text-sm font-bold text-slate-700 mb-2">事項類型</label><select id="status-filter" class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm bg-white outline-none focus:ring-2 focus:ring-sky-400 focus:border-sky-400"><option value="all">全部事項</option><option value="fact">已發生／已揭露</option><option value="contract">已簽承諾</option><option value="plan">展望／擬議</option><option value="pending">待確認／待公布</option></select></div>
+            <button id="filter-reset" type="button" class="text-sm font-bold px-4 py-3 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">清除篩選</button>
+          </div>
+          <p id="table-count" class="text-xs font-bold text-slate-500 mb-3" aria-live="polite">載入追蹤事項中…</p>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="可橫向捲動的事件追蹤表">
+            <table class="data-table"><thead><tr><th scope="col" style="min-width:142px">公司／主題</th><th scope="col" style="min-width:120px">日期／期間</th><th scope="col" style="min-width:134px">狀態</th><th scope="col" style="min-width:335px">報告數據與事件</th><th scope="col" style="min-width:280px">後續應驗證</th></tr></thead><tbody id="watchlist-body"></tbody></table>
+          </div>
+          <p class="text-xs text-slate-500 mt-3">表格與圖表為本次報告資料截點的靜態整理，不會自動更新財報或上市結果。</p>
+        </div>
+        <div class="bg-sky-50 rounded-xl border border-sky-100 p-6 md:p-7">
+          <h3 class="text-lg font-extrabold text-sky-950 mb-3">結語：真正的分水嶺是自我循環</h3>
+          <p class="report-copy">NVIDIA證明組織與產品平台能否跨越關鍵人物風險；Anthropic證明高速收入成長能否負擔長期算力承諾；SpaceX與Amazon證明基礎建設效率能否變成低成本服務。對長期投資人而言，評價核心將從「誰投資最多」轉向<strong class="text-sky-900">「誰能以合理資本成本持續創造自由現金流」</strong>。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI成長與現金流壓力測試。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中NVIDIA、Anthropic、SpaceX與Amazon相關公開資料 (2026年11月16日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 報告事件追蹤：所有項目均取自2026/11/16使用者提供之報告。
+    const productData = [
+      { company:'NVIDIA（NVDA）', date:'2026/11/12', type:'fact', status:'已公告', detail:'黃仁勳離開總裁、執行長與董事職務；Colette Kress代理CEO並暫兼CFO，董事會啟動遴選；Harvey C. Jones出任董事長。', next:'產品路線、重要客戶關係、研發人才留任與管理團隊執行力。' },
+      { company:'NVIDIA（NVDA）', date:'FY2027 Q2', type:'fact', status:'已公布實績', detail:'截至2026/7/26之Q2營收約962億美元（年增106%）、資料中心營收約890億美元（年增117%）、GAAP毛利率75.0%。', next:'資料中心成長能否延續，以及獲利品質與現金轉換效率。' },
+      { company:'NVIDIA（NVDA）', date:'2026/11/17', type:'pending', status:'財報待公布', detail:'預定美東盤後公布FY2027 Q3財報，下午5時進行電話會議。公司上季給出的Q3營收展望約1,080億美元（±2%）；毛利率約74.0%（±0.5百分點）。', next:'核對Q3實績、Q4指引、GAAP／非GAAP毛利率、現金流與新管理層說明。' },
+      { company:'Anthropic（擬議ANT）', date:'2026/11/10', type:'fact', status:'路演已啟動', detail:'已啟動IPO路演；擬公開發售8.25億股A類股，初步每股70–78美元。路演啟動不等於已定價或掛牌。', next:'最終價格、股數、股權權利、最終招股書與正式掛牌時點。' },
+      { company:'Anthropic（擬議ANT）', date:'IPO計畫', type:'plan', status:'尚未交割', detail:'公開發售初步規模約577.5億–643.5億美元；七家科技企業擬以條件式同步私募260億美元。招股書按每股74美元中點估算淨資金流入約846億美元。', next:'確認公司新股實得資金、既有股東售股部分、私募完成條件及全稀釋估值。' },
+      { company:'Anthropic', date:'2026年1–9月', type:'fact', status:'財務已揭露', detail:'營收332.42億美元（2025年同期25.45億）；GAAP淨損約1,040.39億；營業虧損12.60億；營業活動現金流正65.69億美元。', next:'以算力成本、營運資金、設備預付款與資本支出檢查現金流可持續性。' },
+      { company:'Anthropic', date:'2026/9月底及其後', type:'contract', status:'已簽承諾', detail:'採購承諾及租約合計約9,009億美元；2030年底前預計約4,516億，其中9月底後12個月內約707億美元。數字屬包含關係，不能相加。', next:'現金流是否足以覆蓋未來採購、租賃及融資要求；不得視為已發生損失。' },
+      { company:'聯準會／AI融資鏈', date:'2026/11/16', type:'fact', status:'風險評估', detail:'報告引述Michael Barr：七家AI相關企業2026年底帳面負債估逾8,000億美元；特定表外義務最大名目金額逾3兆美元；相關累計股權投資逾1,000億美元。', next:'區分不同統計口徑，注意GPU殘值、擔保條件與融資成本；警告非危機必然發生。' },
+      { company:'SpaceX／Starship', date:'2026/11/13–14', type:'fact', status:'已發生', detail:'第15次飛行部署26顆Starlink衛星；上級太空船繞地約14圈後成功塔架捕捉，但Super Heavy助推器未完成回收。', next:'上級是否能再次飛行、回收後翻修時間、單次有效載荷與連續成功率。' },
+      { company:'ULA／Amazon Leo', date:'2026/11/15', type:'fact', status:'已發生', detail:'Vulcan火箭發射約10分鐘後異常，搭載的40顆Leo衛星未入軌並全部損失；根本原因仍在調查。', next:'事故調查、Vulcan復飛日期、保險及合約分攤，以及Amazon替代發射排程。' },
+      { company:'Amazon Leo（AMZN）', date:'事故前資料', type:'plan', status:'已部署／規劃', detail:'事故前公開報導已部署約398顆衛星；初始星座規劃3,236顆。損失的40顆未能入軌，不計入已部署數。', next:'星座部署進度、可用運力、實際服務覆蓋、客戶取得與終端營收。' },
+      { company:'SpaceX／ULA／Amazon', date:'未來1–18個月', type:'pending', status:'待後續驗證', detail:'Starship的快速再飛、Vulcan復飛及Amazon Leo的商業部署和服務成本，均為未來評估項目。', next:'確認反覆使用是否降低單位運輸成本，以及衛星網路付費需求與現金回收。' }
+    ];
+
+    const tableBody = document.getElementById('watchlist-body');
+    const searchInput = document.getElementById('table-search');
+    const statusSelect = document.getElementById('status-filter');
+    const countElement = document.getElementById('table-count');
+    const tagClass = { fact:'chip-fact', contract:'chip-contract', plan:'chip-plan', pending:'chip-wait' };
+    const escapeHTML = (value) => String(value).replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+
+    function renderProducts() {
+      const term = searchInput.value.trim().toLocaleLowerCase('zh-Hant');
+      const type = statusSelect.value;
+      const filtered = productData.filter(item => {
+        const text = [item.company,item.date,item.status,item.detail,item.next].join(' ').toLocaleLowerCase('zh-Hant');
+        return (type === 'all' || item.type === type) && text.includes(term);
+      });
+      tableBody.innerHTML = filtered.length ? filtered.map(item => `
+        <tr>
+          <td><strong class="text-slate-800">${escapeHTML(item.company)}</strong></td>
+          <td class="whitespace-nowrap">${escapeHTML(item.date)}</td>
+          <td><span class="soft-chip ${tagClass[item.type]}">${escapeHTML(item.status)}</span></td>
+          <td>${escapeHTML(item.detail)}</td>
+          <td>${escapeHTML(item.next)}</td>
+        </tr>`).join('') : '<tr><td colspan="5" class="text-center text-slate-500 py-10">找不到符合條件的追蹤事項，請調整搜尋字詞或狀態。</td></tr>';
+      countElement.textContent = `顯示 ${filtered.length} / ${productData.length} 筆報告追蹤事項`;
+    }
+    searchInput.addEventListener('input', renderProducts);
+    statusSelect.addEventListener('change', renderProducts);
+    document.getElementById('filter-reset').addEventListener('click', () => { searchInput.value=''; statusSelect.value='all'; renderProducts(); searchInput.focus(); });
+    renderProducts();
+
+    const menuButton = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-nav');
+    function setMobileMenu(isOpen) {
+      mobileMenu.classList.toggle('hidden', !isOpen);
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? '關閉章節選單' : '開啟章節選單');
+      document.getElementById('menu-icon').innerHTML = isOpen ? '<path d="M6 6l12 12M18 6L6 18"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+    menuButton.addEventListener('click', () => setMobileMenu(mobileMenu.classList.contains('hidden')));
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMobileMenu(false)));
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) { setMobileMenu(false); menuButton.focus(); } });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1024 && !mobileMenu.classList.contains('hidden')) setMobileMenu(false); });
+
+    const navLinks = document.querySelectorAll('[data-nav]');
+    const sections = document.querySelectorAll('.report-section');
+    function activateSection(id) {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current');
+      });
+    }
+    activateSection('overview');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length) activateSection(visible[0].target.id);
+      }, { rootMargin:'-14% 0px -67% 0px', threshold:0 });
+      sections.forEach(section => observer.observe(section));
+    }
+    navLinks.forEach(link => link.addEventListener('click', () => activateSection(link.hash.slice(1))));
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = 'system-ui, -apple-system, "Noto Sans TC", sans-serif';
+      Chart.defaults.color = '#64748b';
+      const sharedPlugins = { legend:{display:false}, tooltip:{backgroundColor:'#0f2538',padding:12,titleFont:{weight:'bold'},bodyFont:{size:13}} };
+      const sharedScaleY = { beginAtZero:true, ticks:{color:'#64748b'}, grid:{color:'rgba(148,163,184,.16)'}, border:{display:false} };
+      const sharedScaleX = { ticks:{color:'#475569',font:{weight:'bold'}}, grid:{display:false}, border:{display:false} };
+      const options = (yMax, unit='億美元') => ({responsive:true,maintainAspectRatio:false,animation:{duration:500},plugins:sharedPlugins,scales:{x:sharedScaleX,y:{...sharedScaleY,suggestedMax:yMax,title:{display:true,text:unit,color:'#64748b',font:{size:11}}}}});
+      new Chart(document.getElementById('nvidiaRevenueChart'), {
+        type:'bar',data:{labels:['FY2027 Q2｜實績','FY2027 Q3｜展望'],datasets:[{data:[962,1080],backgroundColor:['#0284c7','#f59e0b'],borderRadius:7,maxBarThickness:100}]},
+        options:{...options(1200),plugins:{...sharedPlugins,tooltip:{...sharedPlugins.tooltip,callbacks:{label:ctx=>`${ctx.parsed.y.toLocaleString('zh-TW')} 億美元（${ctx.dataIndex===0?'已公布實績':'公司展望，±2%'}）`}}}}
+      });
+      new Chart(document.getElementById('anthropicRevenueChart'), {
+        type:'bar',data:{labels:['2025年1–9月','2026年1–9月'],datasets:[{data:[25.45,332.42],backgroundColor:['#94a3b8','#0284c7'],borderRadius:7,maxBarThickness:105}]},
+        options:{...options(360),plugins:{...sharedPlugins,tooltip:{...sharedPlugins.tooltip,callbacks:{label:ctx=>`${ctx.parsed.y.toLocaleString('zh-TW')} 億美元（前九個月）`}}}}
+      });
+      new Chart(document.getElementById('commitmentChart'), {
+        type:'bar',data:{labels:['長期承諾總額','2030年底前','2026/9月底後12個月'],datasets:[{data:[9009,4516,707],backgroundColor:['#0369a1','#0ea5e9','#7dd3fc'],borderRadius:7,maxBarThickness:48}]},
+        options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{...sharedPlugins,tooltip:{...sharedPlugins.tooltip,callbacks:{label:ctx=>`${ctx.parsed.x.toLocaleString('zh-TW')} 億美元；子期間已包含在總額內`}}},scales:{x:{...sharedScaleY,title:{display:true,text:'億美元（不可相加）',color:'#64748b',font:{size:11}}},y:{...sharedScaleX,ticks:{...sharedScaleX.ticks,autoSkip:false,font:{size:11,weight:'bold'}}}}}
+      });
+      new Chart(document.getElementById('leoChart'), {
+        type:'bar',data:{labels:['事故前已部署','初始星座規劃'],datasets:[{data:[398,3236],backgroundColor:['#0284c7','#94a3b8'],borderRadius:7,maxBarThickness:95}]},
+        options:{...options(3500,'衛星數（顆）'),plugins:{...sharedPlugins,tooltip:{...sharedPlugins.tooltip,callbacks:{label:ctx=>`${ctx.parsed.y.toLocaleString('zh-TW')} 顆（${ctx.dataIndex===0?'事故前報導已部署約數':'規劃目標，非已部署'}）`}}}}
+      });
+    } else {
+      document.querySelectorAll('.chart-shell').forEach(shell => { const label=document.createElement('p');label.className='text-sm text-slate-500 py-5';label.textContent='互動圖表需連線載入 Chart.js；相關數字與口徑已於圖表周圍文字列示。';shell.appendChild(label); });
+    }
+  </script>
+</body>
+</html>
