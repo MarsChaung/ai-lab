@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="2026年11月17日美股投資深度分析：AI跨境算力管制、美國消費量價分化、Visa與Mastercard支付費率和解爭議，以及投資追蹤框架。">
+  <title>巴菲特AI價值投資-AI國界、消費與支付重估</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --nav-h: 72px; --ink: #193149; --sky: #0284c7; --page: #f5f8fb; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 20px); }
+    body { background: var(--page); color: #334155; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif; overflow-x: hidden; }
+    button, input, select { font: inherit; }
+    button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid #38bdf8; outline-offset: 3px; }
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+      background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0369a1; font-weight: 750; background: #e0f2fe; box-shadow: inset 0 -2px 0 #0284c7; }
+    .inactive-nav-link { color: #526478; background: transparent; }
+    .inactive-nav-link:hover { color: #075985; background: #f0f9ff; }
+    .nav-link { display: inline-flex; padding: 9px 12px; border-radius: 8px; font-size: 0.91rem; white-space: nowrap; transition: color .18s ease, background .18s ease; }
+    section[id] { scroll-margin-top: calc(var(--nav-h) + 18px); }
+    .metric { font-variant-numeric: tabular-nums; letter-spacing: -.045em; }
+    .eyebrow { display: inline-flex; align-items: center; font-size: .7rem; font-weight: 750; letter-spacing: .10em; text-transform: uppercase; color: #0369a1; }
+    .section-lead { color: #52647a; line-height: 1.9; font-size: 1.02rem; max-width: 72rem; }
+    .small-note { font-size: .8rem; line-height: 1.75; color: #64748b; }
+    .insight-card { border: 1px solid #e2e8f0; border-top: 3px solid #38bdf8; }
+    .chart-shell { position: relative; width: 100%; height: 268px; }
+    .chart-shell-tall { height: 314px; }
+    .chart-shell canvas { display: block; max-width: 100%; }
+    .flow-step { min-width: 0; border: 1px solid #dbe7f0; background: #fff; border-radius: 12px; padding: 15px; }
+    .flow-arrow { color: #0284c7; font-size: 1.35rem; line-height: 1; font-weight: 800; text-align: center; }
+    .pill { display: inline-flex; align-items: center; border-radius: 999px; padding: 5px 11px; font-size: .74rem; font-weight: 650; line-height: 1.4; }
+    .pill-fact { color: #075985; background: #e0f2fe; }
+    .pill-pending { color: #92400e; background: #fef3c7; }
+    .pill-outlook { color: #6d28d9; background: #f3e8ff; }
+    .data-table th, .data-table td { padding: 14px 16px; text-align: left; vertical-align: top; }
+    .data-table th { white-space: nowrap; font-size: .78rem; color: #475569; background: #f1f5f9; font-weight: 750; }
+    .data-table td { font-size: .88rem; color: #334155; line-height: 1.7; }
+    .data-table tbody tr { border-bottom: 1px solid #e8eef5; }
+    .data-table tbody tr:hover { background: #f8fafc; }
+    .data-table tbody tr:last-child { border-bottom: none; }
+    .data-table-container { max-height: 480px; overflow: auto; overscroll-behavior: contain; }
+    .data-table thead th { position: sticky; top: 0; z-index: 2; }
+    .detail-list { list-style: none; padding: 0; margin: 0; }
+    .detail-list li { padding-left: 18px; position: relative; margin-top: 11px; line-height: 1.8; }
+    .detail-list li::before { content: ""; position: absolute; width: 6px; height: 6px; top: .72em; left: 1px; border-radius: 50%; background: #0ea5e9; }
+    .quote-line { border-left: 4px solid #0284c7; background: #f0f9ff; padding: 15px 18px; border-radius: 0 10px 10px 0; color: #0c4a6e; font-weight: 700; line-height: 1.9; }
+    @media (max-width: 767px) {
+      :root { --nav-h: 64px; }
+      .chart-shell { height: 245px; }
+      .chart-shell-tall { height: 290px; }
+      .flow-arrow { transform: rotate(90deg); }
+      .nav-link { padding: 11px 14px; width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="報告章節導航">
+      <div class="flex items-center justify-between gap-4 h-16 md:h-[72px]">
+        <a href="#top" class="font-extrabold text-slate-800 text-sm sm:text-base tracking-tight whitespace-nowrap shrink-0" aria-label="回到報告開頭">巴菲特<span class="text-sky-700">AI價值投資</span></a>
+        <div class="hidden md:flex items-center justify-end gap-1 min-w-0" id="desktopNav">
+          <a class="nav-link inactive-nav-link" href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link" href="#ai">AI國界</a>
+          <a class="nav-link inactive-nav-link" href="#consumer">消費分化</a>
+          <a class="nav-link inactive-nav-link" href="#payments">支付護城河</a>
+          <a class="nav-link inactive-nav-link" href="#framework">投資框架</a>
+          <a class="nav-link inactive-nav-link" href="#watchlist">後續追蹤</a>
+        </div>
+        <button id="menuToggle" type="button" class="md:hidden inline-flex items-center justify-center p-2.5 rounded-lg text-slate-700 hover:bg-sky-50 border border-slate-200" aria-label="開啟章節選單" aria-controls="mobileNav" aria-expanded="false">
+          <svg id="menuIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="mobileNav" class="hidden md:hidden pb-3 border-t border-slate-100" aria-label="手機章節選單">
+        <div class="grid grid-cols-2 gap-1 pt-3">
+          <a class="nav-link inactive-nav-link" href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link" href="#ai">AI國界</a>
+          <a class="nav-link inactive-nav-link" href="#consumer">消費分化</a>
+          <a class="nav-link inactive-nav-link" href="#payments">支付護城河</a>
+          <a class="nav-link inactive-nav-link" href="#framework">投資框架</a>
+          <a class="nav-link inactive-nav-link" href="#watchlist">後續追蹤</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="max-w-5xl text-4xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight leading-[1.25]">繁榮的表面，重估的底層：<span class="text-sky-200">AI國界、消費分化與支付護城河</span>的美股新考驗</h1>
+        <p class="mt-6 max-w-4xl text-sky-50/90 leading-loose text-base sm:text-lg">2026年11月17日盤前，AI算力跨境管制、美國消費量價分化與刷卡費和解爭議，同時提醒投資人：成長不只看營收規模，更要辨認訂單能否實現、獲利是否可比，以及現金流最終流向誰。</p>
+        <div class="mt-9 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 sm:p-5">
+            <p class="text-xs sm:text-sm text-sky-100/85">10月美國零售月增</p>
+            <p class="metric text-3xl sm:text-4xl font-extrabold mt-2">+0.2<span class="text-lg">%</span></p>
+            <p class="mt-2 text-xs text-sky-100/80">9月為 +0.8%；名目數據</p>
+          </div>
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 sm:p-5">
+            <p class="text-xs sm:text-sm text-sky-100/85">Home Depot可比交易次數</p>
+            <p class="metric text-3xl sm:text-4xl font-extrabold mt-2">−0.5<span class="text-lg">%</span></p>
+            <p class="mt-2 text-xs text-sky-100/80">客單價則增加 3.0%</p>
+          </div>
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 sm:p-5">
+            <p class="text-xs sm:text-sm text-sky-100/85">Disney本季串流營業利益</p>
+            <p class="metric text-3xl sm:text-4xl font-extrabold mt-2">8.24<span class="text-lg">億</span></p>
+            <p class="mt-2 text-xs text-sky-100/80">美元；含額外第53週影響</p>
+          </div>
+          <div class="rounded-xl border border-amber-200/35 bg-amber-300/10 backdrop-blur-sm p-4 sm:p-5">
+            <p class="text-xs sm:text-sm text-amber-100">刷卡費爭議估計節省</p>
+            <p class="metric text-3xl sm:text-4xl font-extrabold mt-2">380<span class="text-lg">億</span></p>
+            <p class="mt-2 text-xs text-amber-100/90">美元；非賠償金、尚未核准</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-14 md:space-y-20">
+      <section id="overview" aria-labelledby="overview-title">
+        <h2 id="overview-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心觀點｜重新評價成長的品質</h2>
+        <p class="section-lead mb-7">三條新聞共同指向同一個投資問題：<strong class="text-slate-800">不是只有需求與成長率，更要知道營收能否在合法、可執行、可比較的條件下轉換為自由現金流。</strong> 本報告研究時點為美東時間11月17日上午約9:20，並未涵蓋當日盤後事件。</p>
+        <div class="grid gap-5 md:grid-cols-3">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 insight-card">
+            <div class="flex justify-between items-start gap-2"><span class="eyebrow">01 / AI基礎建設</span><span class="pill pill-fact">政策已發布</span></div>
+            <h3 class="mt-3 text-xl font-bold text-slate-800">需求不等於可交付</h3>
+            <p class="mt-3 leading-loose">先進AI算力的遠端存取、客戶歸屬和第三國許可，增加晶片出貨到雲端變現的合規摩擦。</p>
+            <p class="small-note mt-4">關鍵檢查：許可例外、出貨延遲、客戶預付款與建置回收期。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 insight-card">
+            <div class="flex justify-between items-start gap-2"><span class="eyebrow">02 / 美國消費</span><span class="pill pill-fact">數據已公布</span></div>
+            <h3 class="mt-3 text-xl font-bold text-slate-800">營收增長不等於需求增加</h3>
+            <p class="mt-3 leading-loose">零售月增放緩；Home Depot客單價提高但交易數下降；Disney仍須剔除第53週看獲利。</p>
+            <p class="small-note mt-4">關鍵檢查：來客數、同店銷售、會計期間與自由現金流。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 insight-card">
+            <div class="flex justify-between items-start gap-2"><span class="eyebrow">03 / 金融支付</span><span class="pill pill-pending">方案待核准</span></div>
+            <h3 class="mt-3 text-xl font-bold text-slate-800">產業收費不等於卡網收入</h3>
+            <p class="mt-3 leading-loose">Visa與Mastercard面對的不是已確定的380億美元賠償，而是可能改變商家、銀行與卡網路利益分配的規則。</p>
+            <p class="small-note mt-4">關鍵檢查：法院裁定、交換費與網路服務收入的區別。</p>
+          </article>
+        </div>
+        <div class="quote-line">共同因果鏈：制度／總經環境 → 客戶行為與交易條件 → 營收實現與成本結構 → 自由現金流 → 估值</div>
+      </section>
+
+      <section id="ai" aria-labelledby="ai-title">
+        <h2 id="ai-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">專題一｜AI算力的國界正在重畫</h2>
+        <p class="section-lead mb-6">從「晶片運到哪裡」延伸至「誰真正控制、租用並使用算力」，美國的監管理念正影響跨境資料中心的訂單履行和投資回收。<strong>新許可規範不等於對相關國家全部晶片的全面禁售。</strong></p>
+        <div class="grid lg:grid-cols-5 gap-6 items-start">
+          <div class="lg:col-span-3">
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+              <div class="flex items-center gap-2 flex-wrap"><h3 class="text-xl font-bold text-slate-800">監管事件與狀態</h3><span class="pill pill-fact">11/16 正式發布</span></div>
+              <p class="mt-3 leading-loose">美國商務部產業安全局（BIS）公布針對先進運算能力「遠端存取」的臨時最終規則，重點是防止受限制實體透過第三國資料中心使用受控的美國先進AI技術。對輸往新加坡、馬來西亞、泰國、印尼與巴西等目的地的部分先進半導體，亦新增許可要求；仍應依客戶身分、申報要求與例外判斷適用性。</p>
+              <div class="mt-4 rounded-lg bg-amber-50 border border-amber-200 p-4">
+                <div class="flex gap-2 flex-wrap items-center"><span class="pill pill-pending">政策推進中</span><strong class="text-amber-900 text-sm">中國製資料中心光通訊設備可能受進口限制</strong></div>
+                <p class="mt-2 text-sm leading-loose text-amber-950">11/17 媒體引述知情人士稱美國仍在推進相關措施；<strong>並非已全面生效的禁令</strong>，不能把替代供應需求視為已落袋訂單。</p>
+              </div>
+            </article>
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+              <h3 class="text-xl font-bold text-slate-800 mb-4">三層產業傳導</h3>
+              <div class="space-y-4">
+                <div class="pl-4 border-l-4 border-sky-500"><h4 class="font-bold text-slate-800">① 訂單合規折扣</h4><p class="text-sm mt-1 leading-loose">NVDA、AMD與伺服器供應鏈需追蹤最終使用者審查、出口許可、出貨排程、存貨、預付款與應收帳款；有需求不保證準時認列營收。</p></div>
+                <div class="pl-4 border-l-4 border-cyan-500"><h4 class="font-bold text-slate-800">② 光通訊替代與建置成本</h4><p class="text-sm mt-1 leading-loose">Coherent、Lumentum可能迎來詢價與中期採購機會，但是否轉化成獲利仍取決於產能、良率、認證、議價及交期。零件成本上升或資料中心啟用延後，均會拉長回收時間。</p></div>
+                <div class="pl-4 border-l-4 border-indigo-500"><h4 class="font-bold text-slate-800">③ 多套區域化規格</h4><p class="text-sm mt-1 leading-loose">產業布局可能同時考慮設備來源、算力存取、服務對象與司法管轄；合規、稽核及網安需求的擴大仍屬產業推演，不是已確認的新合約。</p></div>
+              </div>
+            </article>
+          </div>
+          <div class="lg:col-span-2">
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+              <h3 class="text-xl font-bold text-slate-800">從設備到現金的檢核鏈</h3>
+              <p class="small-note mt-2 mb-4">以下是營運流程示意，非已完成交易紀錄。</p>
+              <div class="grid gap-2">
+                <div class="flow-step"><p class="font-bold text-slate-800">客戶訂單與部署地</p><p class="text-sm mt-1">訂單是否對應合規的客戶與用途</p></div>
+                <div class="flow-arrow" aria-hidden="true">↓</div>
+                <div class="flow-step"><p class="font-bold text-slate-800">許可與最終使用者審核</p><p class="text-sm mt-1">實質控制、遠端存取、申報與例外</p></div>
+                <div class="flow-arrow" aria-hidden="true">↓</div>
+                <div class="flow-step"><p class="font-bold text-slate-800">設備交付與資料中心啟用</p><p class="text-sm mt-1">網通零件、供電、散熱與系統整合</p></div>
+                <div class="flow-arrow" aria-hidden="true">↓</div>
+                <div class="flow-step border-sky-300 bg-sky-50"><p class="font-bold text-sky-900">營收認列 → 現金回收</p><p class="text-sm mt-1">回收期可能不同於CapEx投入時點</p></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 mt-1">
+          <div class="rounded-lg bg-sky-50 border border-sky-100 p-5"><p class="font-bold text-sky-900">短期｜數週～3個月</p><p class="mt-2 text-sm leading-loose">追蹤BIS許可與豁免、出貨是否延後、光通訊供應能否承接需求。</p></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-5"><p class="font-bold text-slate-800">中期｜3～12個月</p><p class="mt-2 text-sm leading-loose">比對雲端CapEx、設備交期、上線進度及現金回收是否出現落差。</p></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-5"><p class="font-bold text-slate-800">長期｜1～2年</p><p class="mt-2 text-sm leading-loose">尋找合規優勢、技術不可替代性與穩定自由現金流；檢驗政策衝擊是否低於預期。</p></div>
+        </div>
+        <div class="mt-5 quote-line">Podcast核心問題：當AI晶片可以賣、算力卻不能隨便租，誰真正握有AI基礎建設的定價權？</div>
+      </section>
+
+      <section id="consumer" aria-labelledby="consumer-title">
+        <h2 id="consumer-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">專題二｜美國消費的「量」與「價」分化</h2>
+        <p class="section-lead mb-7">10月美國零售與餐飲服務銷售約<strong class="text-slate-800">7,482億美元</strong>，月增0.2%、年增6.8%，但屬未扣物價的名目銷售，且0.2%的月增落於統計誤差範圍內。這意味著動能降溫，<strong>不是實質消費已陷入衰退的證據</strong>。</p>
+        <div class="grid gap-6 lg:grid-cols-2 mb-4">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-start justify-between gap-2 flex-wrap"><h3 class="text-xl font-bold text-slate-800">美國零售：名目月增率</h3><span class="pill pill-fact">已公布數據</span></div>
+            <p class="small-note mt-2">比較2026年9月與10月；單位：%</p>
+            <div class="chart-shell mt-3"><canvas id="retailChart" role="img" aria-label="美國名目零售與餐飲服務銷售月增率：2026年9月0.8%，10月0.2%">9月 +0.8%；10月 +0.2%。</canvas></div>
+            <p class="small-note mt-2">10月名目年增6.8%。月增率不能直接反映實質購買量，單月變化不宜視為確定景氣拐點。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex items-start justify-between gap-2 flex-wrap"><h3 class="text-xl font-bold text-slate-800">Home Depot：客單價與交易量</h3><span class="pill pill-fact">FY2026 Q3</span></div>
+            <p class="small-note mt-2">同店相關指標年增減；單位：%</p>
+            <div class="chart-shell mt-3"><canvas id="hdChart" role="img" aria-label="Home Depot同店銷售加2.2%，可比客戶交易次數減0.5%，同店平均客單價加3.0%">同店銷售 +2.2%；交易次數 −0.5%；客單價 +3.0%。</canvas></div>
+            <p class="small-note mt-2">各指標統計口徑不同，不應直接加總；整體營收另含門市、收購等影響。</p>
+          </article>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6 items-start">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex flex-wrap items-center gap-3 mb-3"><h3 class="text-xl font-bold text-slate-800">Home Depot（HD）</h3><span class="pill pill-fact">已公布財報</span></div>
+            <div class="grid grid-cols-3 gap-3 my-5">
+              <div class="rounded-lg bg-slate-50 p-3 min-w-0"><p class="text-xs text-slate-500">單季營收</p><p class="metric font-extrabold text-xl sm:text-2xl text-slate-800 mt-1">434<span class="text-sm">億</span></p><p class="text-xs text-slate-500">美元</p></div>
+              <div class="rounded-lg bg-slate-50 p-3 min-w-0"><p class="text-xs text-slate-500">營收年增</p><p class="metric font-extrabold text-xl sm:text-2xl text-sky-700 mt-1">4.9%</p></div>
+              <div class="rounded-lg bg-slate-50 p-3 min-w-0"><p class="text-xs text-slate-500">調整後EPS</p><p class="metric font-extrabold text-xl sm:text-2xl text-slate-800 mt-1">3.86</p><p class="text-xs text-slate-500">美元</p></div>
+            </div>
+            <p class="leading-loose">公司全年營收成長指引更新至約<strong>4.5%</strong>（管理層指引），並確定由原財務長Richard McPhail接任CEO。營收與獲利表現不弱，但<strong>同店交易次數仍下滑0.5%</strong>，未必表示家戶大規模裝修需求已恢復。</p>
+            <ul class="detail-list text-sm mt-3"><li><strong>待驗證：</strong>專業承包商與一般消費者的需求是否同步改善。</li><li><strong>失效條件：</strong>後續數據若顯示客流與高品質新增需求快速恢復，弱量假設需要調整。</li></ul>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex flex-wrap items-center gap-3 mb-3"><h3 class="text-xl font-bold text-slate-800">Disney（DIS）</h3><span class="pill pill-fact">FY2026 Q4</span></div>
+            <div class="grid grid-cols-3 gap-3 my-5">
+              <div class="rounded-lg bg-slate-50 p-3 min-w-0"><p class="text-xs text-slate-500">單季營收</p><p class="metric font-extrabold text-xl sm:text-2xl text-slate-800 mt-1">259<span class="text-sm">億</span></p><p class="text-xs text-slate-500">美元</p></div>
+              <div class="rounded-lg bg-slate-50 p-3 min-w-0"><p class="text-xs text-slate-500">營收年增</p><p class="metric font-extrabold text-xl sm:text-2xl text-sky-700 mt-1">16%</p></div>
+              <div class="rounded-lg bg-slate-50 p-3 min-w-0"><p class="text-xs text-slate-500">串流營收</p><p class="metric font-extrabold text-xl sm:text-2xl text-slate-800 mt-1">61<span class="text-sm">億</span></p><p class="text-xs text-slate-500">美元，年增19%</p></div>
+            </div>
+            <p class="leading-loose">Disney串流營業利益提升，樂園與遊輪等體驗事業表現強勁；但財報包含額外的第53週。<strong>調整後單季EPS 1.77美元，估計扣除額外一週後約1.59美元</strong>，仍高於去年同季1.11美元。</p>
+            <ul class="detail-list text-sm mt-3"><li><strong>可比性：</strong>額外一週對單季調整後EPS約貢獻0.18美元；全年估計影響0.17美元，期間不可混用。</li><li><strong>待驗證：</strong>串流續訂、體驗人流與內容投資的現金回報。</li></ul>
+          </article>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-6 mt-1">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3">
+            <div class="flex flex-wrap gap-2 items-center justify-between"><h3 class="text-xl font-bold text-slate-800">Disney串流營業利益：剔除第53週比較</h3><span class="pill pill-fact">單季資料</span></div>
+            <p class="small-note mt-2">營業利益；單位：億美元。「扣除額外一週」為依公司估計調整的約數。</p>
+            <div class="chart-shell chart-shell-tall mt-2"><canvas id="disneyChart" role="img" aria-label="Disney串流營業利益，去年同季4.02億美元，本季扣除第53週約6.64億美元，本季帳面8.24億美元">去年同季4.02億、本季扣除額外一週約6.64億、本季帳面8.24億美元。</canvas></div>
+            <p class="small-note mt-2">本季帳面8.24億美元，當中估計約1.60億美元來自第53週；扣除後仍較去年同期4.02億美元增加，不能將帳面成長全歸因於營運效率。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+            <h3 class="text-xl font-bold text-slate-800">Disney：2027會計年度投入與展望</h3>
+            <p class="small-note mt-2">以下為公司未來計畫或預估，非已發生支出與已實現現金流。</p>
+            <div class="mt-5 space-y-4">
+              <div class="rounded-lg bg-purple-50 border border-purple-100 p-4"><span class="pill pill-outlook">支出計畫</span><p class="metric mt-2 text-3xl font-bold text-purple-950">260億美元</p><p class="text-sm mt-1 text-purple-900">內容現金支出，計畫增約9%</p></div>
+              <div class="rounded-lg bg-slate-50 border border-slate-200 p-4"><span class="pill pill-outlook">資本支出預估</span><p class="metric mt-2 text-3xl font-bold text-slate-900">90億美元</p></div>
+              <div class="rounded-lg bg-sky-50 border border-sky-100 p-4"><span class="pill pill-outlook">自由現金流展望</span><p class="metric mt-2 text-3xl font-bold text-sky-950">110億美元</p></div>
+            </div>
+            <p class="small-note mt-4">內容現金支出已是相關現金流計算的構成因素，<strong>不可從公司預估自由現金流再重複扣除</strong>。</p>
+          </article>
+        </div>
+        <article class="rounded-lg border border-slate-200 bg-white p-5 sm:p-6">
+          <h3 class="text-lg font-bold text-slate-800 mb-3">消費股評價的三道檢查</h3>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div><p class="font-bold text-sky-800">支付能力</p><p class="text-sm mt-1 leading-loose">房貸與信用成本如何影響大額支出，是否轉往服務與體驗消費。</p></div>
+            <div><p class="font-bold text-sky-800">消費意願</p><p class="text-sm mt-1 leading-loose">交易次數、訂閱續約與樂園人流，是否有量的實質改善。</p></div>
+            <div><p class="font-bold text-sky-800">企業定價能力</p><p class="text-sm mt-1 leading-loose">品牌與內容帶來的價格韌性，能否抵銷人力、版權與建置成本。</p></div>
+          </div>
+        </article>
+        <div class="mt-5 quote-line">Podcast核心問題：營收和獲利都變漂亮時，消費者究竟買得更多，還是每次花得更多？</div>
+      </section>
+
+      <section id="payments" aria-labelledby="payments-title">
+        <h2 id="payments-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">專題三｜380億美元刷卡費爭議與支付護城河</h2>
+        <p class="section-lead mb-6">Visa（V）與Mastercard（MA）11月16日向法院爭取修訂後和解方案的核准，核心是收費規則與卡種接受方式的潛在變動。<strong>「380億美元」指原告方專家估計商家至2031年前可能節省的費用，並非兩家公司須一次支付的賠償金。</strong></p>
+        <div class="grid lg:grid-cols-3 gap-5 mb-1">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex flex-wrap items-center gap-2"><span class="pill pill-pending">估計值</span><span class="text-xs text-slate-500">仍待司法程序</span></div>
+            <p class="metric text-4xl font-extrabold text-slate-900 mt-3">380億美元</p><h3 class="mt-2 font-bold text-slate-800">商家至2031年前「可能節省」</h3><p class="small-note mt-3">原告方經濟專家推估，非確定損失，也非Visa與Mastercard的直接現金賠償。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex flex-wrap items-center gap-2"><span class="pill pill-pending">和解條款提案</span></div>
+            <p class="metric text-4xl font-extrabold text-slate-900 mt-3">0.1<span class="text-xl">個百分點</span></p><h3 class="mt-2 font-bold text-slate-800">特定交換費擬降低</h3><p class="small-note mt-3">涉及五年安排；適用費率、卡種與其他細則需依最終核准內容確認。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex flex-wrap items-center gap-2"><span class="pill pill-pending">和解條款提案</span></div>
+            <p class="metric text-4xl font-extrabold text-slate-900 mt-3">1.25%</p><h3 class="mt-2 font-bold text-slate-800">部分一般消費信用卡費率上限</h3><p class="small-note mt-3">擬設八年上限，並調整部分卡別接受規則；截至11/16聽證會結束尚未獲最終核准。</p>
+          </article>
+        </div>
+        <div class="rounded-lg border border-amber-200 bg-amber-50 p-5 mb-7">
+          <div class="flex items-center flex-wrap gap-2"><span class="pill pill-pending">司法狀態</span><strong class="text-amber-950">11月16日聽證結束，法院尚未立即作出最終核准決定</strong></div>
+          <p class="mt-2 text-sm leading-loose text-amber-900">超過千名商家與團體提出反對。方案與宣稱節省額均不代表已生效制度或商家已實現收益。</p>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-6 items-start">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3">
+            <h3 class="text-xl font-bold text-slate-800">誰支付費用，誰認列收入？</h3>
+            <p class="small-note mt-2">下圖為支付價值鏈的概念性分工，非資金數額或已核准和解的實際分配圖。</p>
+            <div class="mt-5 grid gap-3 sm:grid-cols-2">
+              <div class="rounded-xl bg-slate-50 p-4 border border-slate-200"><p class="text-xs text-slate-500 font-semibold">消費者／持卡人</p><p class="font-bold text-slate-800 mt-1">刷卡與獎勵使用</p><p class="text-xs leading-loose mt-2">發卡行可能調整回饋設計，但目前不能推定全面減少。</p></div>
+              <div class="rounded-xl bg-slate-50 p-4 border border-slate-200"><p class="text-xs text-slate-500 font-semibold">商家／收單端</p><p class="font-bold text-slate-800 mt-1">負擔支付接受成本</p><p class="text-xs leading-loose mt-2">費用節省取決於卡種、議價和交易量，不必然全額轉成售價下降。</p></div>
+              <div class="rounded-xl bg-sky-50 p-4 border border-sky-200"><p class="text-xs text-sky-700 font-semibold">發卡銀行</p><p class="font-bold text-sky-950 mt-1">通常主要取得交換費</p><p class="text-xs leading-loose mt-2">是特定交換費調整較直接的經濟利益承擔方。</p></div>
+              <div class="rounded-xl bg-indigo-50 p-4 border border-indigo-200"><p class="text-xs text-indigo-700 font-semibold">Visa／Mastercard網路</p><p class="font-bold text-indigo-950 mt-1">網路服務／處理／跨境等收入</p><p class="text-xs leading-loose mt-2">商家刷卡成本總額與卡網公司財報營收並不相等。</p></div>
+            </div>
+            <p class="mt-5 text-sm leading-loose text-slate-700"><strong>關鍵避免誤算：</strong>不能把0.1個百分點直接乘全部信用卡交易額，當作V與MA的EPS損失。先看交換費對發卡端的衝擊，再看獎勵、交易量、商家接受度與網路收入的間接傳導。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2">
+            <h3 class="text-xl font-bold text-slate-800">支付網路護城河測試</h3>
+            <div class="mt-4 space-y-4">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-slate-50 p-4"><p class="font-bold text-slate-800">既有優勢</p><p class="text-sm leading-loose mt-1">全球接受網路、持卡人習慣、授權處理與風控基礎設施帶來的雙邊網路效應。</p></div>
+              <div class="rounded-lg border-l-4 border-amber-500 bg-slate-50 p-4"><p class="font-bold text-slate-800">制度可能改變</p><p class="text-sm leading-loose mt-1">商家對部分卡種取得更高選擇權，可能改變議價方式與參與誘因，並非保證網路效應失效。</p></div>
+              <div class="rounded-lg border-l-4 border-indigo-500 bg-slate-50 p-4"><p class="font-bold text-slate-800">投資驗證</p><p class="text-sm leading-loose mt-1">支付量、處理筆數、跨境交易、服務收入與營業利益率，是否在規則變化下保持韌性。</p></div>
+            </div>
+          </article>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 mt-1">
+          <div class="rounded-lg bg-sky-50 border border-sky-100 p-5"><p class="font-bold text-sky-900">短期｜法院程序</p><p class="mt-2 text-sm leading-loose">確認是否核准、反對方救濟及卡網公司財務風險揭露。</p></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-5"><p class="font-bold text-slate-800">中期｜經濟影響</p><p class="mt-2 text-sm leading-loose">分別檢查銀行交換費、商家實際節省與卡網服務成長。</p></div>
+          <div class="rounded-lg bg-white border border-slate-200 p-5"><p class="font-bold text-slate-800">長期｜結構性議價</p><p class="mt-2 text-sm leading-loose">追蹤商家集體議價、支付方式替代與網路可靠性及防詐優勢。</p></div>
+        </div>
+        <div class="mt-5 quote-line">Podcast核心問題：380億美元不是賠償金，真正可能被重新分配的是支付產業的哪種收費權力？</div>
+      </section>
+
+      <section id="framework" aria-labelledby="framework-title">
+        <h2 id="framework-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">跨主題投資框架｜先看現金流，再談估值</h2>
+        <p class="section-lead mb-7">三種表面繁榮，都需要拆解一次：<strong class="text-slate-800">AI有訂單不代表已部署，消費有營收不代表交易數上升，支付產業收費龐大不代表網路公司全部取得。</strong> 將可驗證的證據放在敘事之前，有助降低錯估獲利品質的風險。</p>
+        <div class="grid md:grid-cols-3 gap-5 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow">第一道篩選</span><h3 class="mt-2 text-xl font-bold text-slate-800">需求 → 變現</h3><p class="mt-3 leading-loose">訂單簽署、合規審查、交付、啟用、營收認列和收現，是不同階段。留意高CapEx但回收延後的業者。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow">第二道篩選</span><h3 class="mt-2 text-xl font-bold text-slate-800">收入 → 量價品質</h3><p class="mt-3 leading-loose">同店交易次數、客單價、訂閱續約率、會計週數及價格／收購因素要分開看。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><span class="eyebrow">第三道篩選</span><h3 class="mt-2 text-xl font-bold text-slate-800">收費 → 權益分配</h3><p class="mt-3 leading-loose">辨認誰實際認列收入、誰承擔費用，以及規則改變後的議價與現金流歸屬。</p></article>
+        </div>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-xl font-bold text-slate-800 mb-5">未來市場的三種條件情境</h3>
+          <div class="grid md:grid-cols-3 gap-5">
+            <div class="rounded-lg border border-sky-200 bg-sky-50 p-5"><span class="pill pill-outlook">條件推演 A</span><h4 class="font-bold text-slate-800 mt-3">溫和降溫、效率優先</h4><p class="text-sm leading-loose mt-2">若監管例外流程可執行、AI建置延續且消費未急劇惡化，市場可能偏好現金流穩健、能轉嫁成本的公司。</p><p class="text-xs text-sky-800 mt-3">驗證：CapEx、交期、自由現金流</p></div>
+            <div class="rounded-lg border border-amber-200 bg-amber-50 p-5"><span class="pill pill-outlook">條件推演 B</span><h4 class="font-bold text-slate-800 mt-3">融資與地緣雙重壓力</h4><p class="text-sm leading-loose mt-2">若成本偏高、AI上線延遲與消費交易疲弱同時發生，盈餘預期及本益比可能同步承壓。</p><p class="text-xs text-amber-900 mt-3">驗證：資產負債表、量能、啟用進度</p></div>
+            <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-5"><span class="pill pill-outlook">條件推演 C</span><h4 class="font-bold text-slate-800 mt-3">政策影響較窄、量能回升</h4><p class="text-sm leading-loose mt-2">若許可通過順暢、替代供應如期交付、零售交易數恢復，部分受壓企業可能出現預期修正。</p><p class="text-xs text-emerald-900 mt-3">驗證：實際訂單、交易次數、收現</p></div>
+          </div>
+          <p class="small-note mt-4">情境為條件式推演，非機率預測或已發生結果；確認後續營運與現金流證據前，不應直接換算為獲利預估。</p>
+        </article>
+        <div class="quote-line">研究順序：商業模式與財務韌性 → 獲利及現金流可持續性 → 估值與預期差 → 部位節奏。</div>
+      </section>
+
+      <section id="watchlist" aria-labelledby="watchlist-title">
+        <h2 id="watchlist-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">未來一至四週｜關鍵追蹤清單</h2>
+        <p class="section-lead mb-6">以研究報告點名的企業和事件建立對照。表格為<strong class="text-slate-800">待觀察清單，不是已確認新訂單、確定法規影響或股票推薦名單</strong>；可依公司、代號或追蹤指標即時搜尋。</p>
+        <div class="grid md:grid-cols-3 gap-4 mb-7">
+          <article class="rounded-xl border border-slate-200 bg-white p-5"><div class="flex gap-2 items-center"><span class="h-2.5 w-2.5 bg-sky-500 rounded-full" aria-hidden="true"></span><h3 class="font-bold text-slate-800">AI供應鏈</h3></div><p class="text-sm mt-2 leading-loose">BIS適用對象及例外、光通訊政策程序、出貨時間與資料中心上線差異。</p></article>
+          <article class="rounded-xl border border-slate-200 bg-white p-5"><div class="flex gap-2 items-center"><span class="h-2.5 w-2.5 bg-cyan-500 rounded-full" aria-hidden="true"></span><h3 class="font-bold text-slate-800">美國消費</h3></div><p class="text-sm mt-2 leading-loose">零售修正值、節慶促銷、HD交易頻率、DIS會計週數可比性與現金流。</p></article>
+          <article class="rounded-xl border border-slate-200 bg-white p-5"><div class="flex gap-2 items-center"><span class="h-2.5 w-2.5 bg-indigo-500 rounded-full" aria-hidden="true"></span><h3 class="font-bold text-slate-800">支付產業</h3></div><p class="text-sm mt-2 leading-loose">法院是否核准、交換費與卡網收入區別、發卡端及商家的實際費用變化。</p></article>
+        </div>
+        <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex flex-col sm:flex-row gap-4 sm:items-end sm:justify-between mb-4">
+            <div><h3 class="text-xl font-bold text-slate-800">企業及指標追蹤表</h3><p id="resultCount" class="small-note mt-1" aria-live="polite">共 8 家企業</p></div>
+            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <label class="flex flex-col gap-1 text-xs font-semibold text-slate-600 grow"><span>關鍵字搜尋</span><input id="tableSearch" type="search" class="w-full sm:w-64 rounded-lg border border-slate-300 px-3 py-2.5 text-sm bg-white text-slate-900" placeholder="公司、代碼、追蹤主題..." autocomplete="off" aria-label="搜尋追蹤公司"></label>
+              <label class="flex flex-col gap-1 text-xs font-semibold text-slate-600"><span>產業篩選</span><select id="sectorFilter" class="rounded-lg border border-slate-300 px-3 py-2.5 text-sm bg-white text-slate-900"><option value="全部">全部產業</option><option value="AI算力">AI算力</option><option value="光通訊">光通訊</option><option value="美國消費">美國消費</option><option value="支付網路">支付網路</option></select></label>
+            </div>
+          </div>
+          <div class="data-table-container rounded-lg border border-slate-200" tabindex="0" role="region" aria-label="可橫向及垂直捲動的企業追蹤資料表">
+            <table class="data-table w-full min-w-[760px] border-collapse">
+              <thead><tr><th scope="col">公司／代碼</th><th scope="col">研究領域</th><th scope="col">報告中的定位與已知資訊</th><th scope="col">後續驗證指標</th><th scope="col">資訊屬性</th></tr></thead>
+              <tbody id="companyTableBody"></tbody>
+            </table>
+          </div>
+          <p id="emptyTable" class="hidden text-center text-sm text-slate-500 py-7" role="status">沒有符合搜尋條件的企業，請調整關鍵字或分類。</p>
+          <p class="small-note mt-4">資料皆取自本次報告的公司討論；未提供股價、估值或報告之外的預測。表格中「潛在機會」與「待觀察」不代表已取得訂單、已完成交貨或已實現財務影響。</p>
+        </article>
+        <article class="rounded-xl bg-slate-900 p-6 sm:p-8 text-white">
+          <h3 class="text-xl font-bold">結語｜可持續的獲利，比漂亮的數字更重要</h3>
+          <p class="mt-3 leading-loose text-slate-200">AI投資要看合規交付與啟用後的收現；消費股要拆解客流、客單價和會計週數；支付網路要辨認收費權力與獲利歸屬。對未來一至兩年以成長股為核心的研究，先驗證商業模式及現金流韌性，再判斷估值是否已反映過多樂觀條件。</p>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-AI國界、消費與支付重估。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中AI算力監管、美國消費與支付產業相關公開資料 (2026年11月17日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 報告原文提及的企業與觀察項目。未列出的數據不自行推估。
+    const productData = [
+      { name: 'NVIDIA', ticker: 'NVDA', sector: 'AI算力', detail: '先進AI晶片供應商；跨境部署可能面臨合規與交付時點的不確定性。', focus: '受影響出貨比重、許可例外、訂單履行、應收帳款與存貨', status: '政策影響待觀察' },
+      { name: 'AMD', ticker: 'AMD', sector: 'AI算力', detail: '先進運算供應鏈；客戶需求與合規變現須分開評估。', focus: '跨境客戶分布、交貨排程、合規支出與出貨時點', status: '政策影響待觀察' },
+      { name: 'Coherent', ticker: 'COHR', sector: '光通訊', detail: '若中國製設備受到進口限制，可能出現替代詢價機會；非確認新增訂單。', focus: '實際訂單、產能、認證、良率、交期與毛利率', status: '潛在機會／推演' },
+      { name: 'Lumentum', ticker: 'LITE', sector: '光通訊', detail: '可能承接光收發器替代需求；相關進口限制仍在政策推進中。', focus: '客戶承諾、產能擴張、交貨與獲利轉化', status: '潛在機會／推演' },
+      { name: 'Home Depot', ticker: 'HD', sector: '美國消費', detail: 'FY2026 Q3營收約434億美元；同店銷售+2.2%，可比交易次數−0.5%，同店客單價+3.0%。', focus: '可比交易次數、專業客戶需求、促銷、同店銷售', status: '已公布財報' },
+      { name: 'Disney', ticker: 'DIS', sector: '美國消費', detail: 'FY2026 Q4串流營業利益8.24億美元；粗扣額外第53週約6.64億美元。', focus: '第53週可比調整、串流訂閱、體驗人流、自由現金流', status: '財報已公布／展望待實現' },
+      { name: 'Visa', ticker: 'V', sector: '支付網路', detail: '刷卡費修訂和解方案仍待法院核准；380億美元並非公司現金賠償。', focus: '法院裁定、支付量、處理筆數、跨境及網路服務收入', status: '司法方案待核准' },
+      { name: 'Mastercard', ticker: 'MA', sector: '支付網路', detail: '刷卡費修訂和解方案仍待法院核准；交換費通常主要流向發卡行。', focus: '法院裁定、卡別接受規則、處理交易及營業利益率', status: '司法方案待核准' }
+    ];
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const menuIconOpen = document.getElementById('menuIconOpen');
+    const menuIconClose = document.getElementById('menuIconClose');
+    function setMenu(isOpen) {
+      mobileNav.classList.toggle('hidden', !isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? '關閉章節選單' : '開啟章節選單');
+      menuIconOpen.classList.toggle('hidden', isOpen);
+      menuIconClose.classList.toggle('hidden', !isOpen);
+    }
+    menuToggle.addEventListener('click', () => setMenu(mobileNav.classList.contains('hidden')));
+    mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+    const desktopMedia = window.matchMedia('(min-width: 768px)');
+    if (desktopMedia.addEventListener) desktopMedia.addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    const sections = [...document.querySelectorAll('section[id]')];
+    function setActiveNav(id) {
+      navLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === '#' + id;
+        link.classList.toggle('active-nav-link', isActive);
+        link.classList.toggle('inactive-nav-link', !isActive);
+        if (isActive) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      let visibleIds = new Map();
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) visibleIds.set(e.target.id, e.boundingClientRect.top); else visibleIds.delete(e.target.id); });
+        if (visibleIds.size) {
+          const closest = [...visibleIds].sort((a, b) => Math.abs(a[1] - 110) - Math.abs(b[1] - 110))[0];
+          setActiveNav(closest[0]);
+        }
+      }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
+      sections.forEach(section => observer.observe(section));
+    }
+    function handleHashChange() {
+      const id = decodeURIComponent(location.hash.replace(/^#/, ''));
+      if (sections.some(section => section.id === id)) setActiveNav(id);
+    }
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
+    if (!location.hash) setActiveNav('overview');
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+    }
+    const searchField = document.getElementById('tableSearch');
+    const sectorFilter = document.getElementById('sectorFilter');
+    const tableBody = document.getElementById('companyTableBody');
+    const emptyTable = document.getElementById('emptyTable');
+    const resultCount = document.getElementById('resultCount');
+    function renderTable() {
+      const term = searchField.value.trim().toLocaleLowerCase('zh-Hant');
+      const sector = sectorFilter.value;
+      const items = productData.filter(item => {
+        const matchSector = sector === '全部' || item.sector === sector;
+        const matchTerm = [item.name, item.ticker, item.sector, item.detail, item.focus, item.status].join(' ').toLocaleLowerCase('zh-Hant').includes(term);
+        return matchSector && matchTerm;
+      });
+      tableBody.innerHTML = items.map(item => `
+        <tr>
+          <td><strong class="font-bold text-slate-800">${escapeHTML(item.name)}</strong><span class="block text-sky-800 font-semibold text-xs mt-1">${escapeHTML(item.ticker)}</span></td>
+          <td>${escapeHTML(item.sector)}</td>
+          <td>${escapeHTML(item.detail)}</td>
+          <td>${escapeHTML(item.focus)}</td>
+          <td><span class="text-xs font-semibold text-slate-700">${escapeHTML(item.status)}</span></td>
+        </tr>`).join('');
+      resultCount.textContent = `顯示 ${items.length} 家／共 ${productData.length} 家企業`;
+      emptyTable.classList.toggle('hidden', items.length !== 0);
+    }
+    searchField.addEventListener('input', renderTable);
+    sectorFilter.addEventListener('change', renderTable);
+    renderTable();
+
+    // 僅依本報告載明數據製圖；若CDN未載入，文字與表格仍可正常閱讀。
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = 'ui-sans-serif, system-ui, "Noto Sans TC", sans-serif';
+      Chart.defaults.color = '#475569';
+      Chart.defaults.font.size = 12;
+      const base = { responsive: true, maintainAspectRatio: false, animation: { duration: 500 }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y ?? ctx.parsed.x}${ctx.dataset.unit || ''}` } } } };
+      new Chart(document.getElementById('retailChart'), {
+        type: 'bar',
+        data: { labels: ['2026年9月', '2026年10月'], datasets: [{ label: '月增率', data: [0.8, 0.2], unit: '%', backgroundColor: ['#0284c7', '#7dd3fc'], borderRadius: 7, maxBarThickness: 92 }] },
+        options: { ...base, scales: { x: { grid: { display: false }, ticks: { font: { size: 12 } } }, y: { min: 0, max: 1, ticks: { callback: v => v.toFixed(1) + '%' }, title: { display: true, text: '月增率 (%)' } } } }
+      });
+      new Chart(document.getElementById('hdChart'), {
+        type: 'bar',
+        data: { labels: [['同店平均', '客單價'], ['可比客戶', '交易次數'], '同店銷售'], datasets: [{ label: '年變動', data: [3.0, -0.5, 2.2], unit: '%', backgroundColor: ['#0284c7', '#f59e0b', '#38bdf8'], borderRadius: 6, maxBarThickness: 74 }] },
+        options: { ...base, scales: { x: { grid: { display: false } }, y: { min: -1, max: 4, ticks: { callback: v => v + '%' }, title: { display: true, text: '年增減 (%)' } } } }
+      });
+      new Chart(document.getElementById('disneyChart'), {
+        type: 'bar',
+        data: { labels: [['去年', '同季'], ['本季扣除', '第53週（約）'], ['本季', '帳面']], datasets: [{ label: '串流營業利益', data: [4.02, 6.64, 8.24], unit: '億美元', backgroundColor: ['#94a3b8', '#0284c7', '#38bdf8'], borderRadius: 7, maxBarThickness: 92 }] },
+        options: { ...base, scales: { x: { grid: { display: false } }, y: { min: 0, max: 10, ticks: { callback: v => v }, title: { display: true, text: '億美元' } } } }
+      });
+    } else {
+      document.querySelectorAll('.chart-shell').forEach(shell => {
+        const note = document.createElement('p');
+        note.className = 'small-note rounded-lg bg-slate-50 p-4';
+        note.textContent = '圖表未載入；對應的數據已列於圖表說明與文字摘要。';
+        shell.appendChild(note);
+      });
+    }
+  </script>
+</body>
+</html>
