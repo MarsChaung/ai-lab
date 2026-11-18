@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="2026年11月18日美股投資深度報告：分析Anthropic IPO與附條件股權投資、Microsoft企業AI變現，以及Merck血癌候選藥物研發終止，聚焦現金流、資本承諾與研發成功機率。">
+  <title>巴菲特AI價值投資-成長進入驗證時代</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root{--ink:#24364a;--muted:#596a79;--sky:#0284c7;--light:#f5f8fb;--line:#dce6ee;--paper:#ffffff;}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    body{margin:0;background:var(--light);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #0ea5e9;outline-offset:3px}
+    .site-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid #e2e8f0;backdrop-filter:blur(18px)}
+    .page-width{max-width:1280px;margin-inline:auto;padding-inline:20px}
+    .nav-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-mark{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:12px;color:white;background:linear-gradient(135deg,#0369a1,#082f49);font-weight:850;letter-spacing:-.045em;font-size:16px}
+    .brand-name{font-weight:800;font-size:15px;color:#0f2536;line-height:1.25}
+    .brand-desc{font-size:11px;color:#667c8b;margin-top:3px;letter-spacing:.08em}
+    .desktop-nav{display:flex;gap:4px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+    .nav-link{display:inline-flex;align-items:center;justify-content:center;padding:9px 10px;border-radius:10px;font-size:13px;font-weight:700;transition:color .2s,background-color .2s;white-space:nowrap}
+    .active-nav-link{background:#e0f2fe;color:#075985}
+    .inactive-nav-link{color:#52687b}
+    .inactive-nav-link:hover{background:#f1f5f9;color:#0f4e70}
+    .mobile-toggle{display:none;align-items:center;justify-content:center;gap:10px;padding:9px 12px;border:1px solid #dbe5ee;border-radius:10px;background:#fff;color:#153a54;font-weight:700;font-size:13px}
+    .mobile-panel{display:none;border-top:1px solid #e8edf2;padding:10px 20px 16px;background:white}
+    .mobile-panel:not([hidden]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+    .mobile-panel .nav-link{justify-content:flex-start;padding:12px 10px}
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content {position: relative;z-index: 1;}
+    .hero-content{padding-block:66px 62px;color:#fff}
+    .hero-title{max-width:1060px;margin:0;font-size:clamp(30px,4.1vw,53px);font-weight:850;letter-spacing:-.04em;line-height:1.33;text-wrap:balance}
+    .hero-summary{max-width:890px;margin:22px 0 0;font-size:clamp(15px,1.42vw,18px);color:#e0f2fe;line-height:1.9}
+    .hero-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:920px;margin-top:30px}
+    .hero-kpi{min-width:0;padding:17px 19px;border:1px solid rgba(255,255,255,.17);border-radius:14px;background:rgba(255,255,255,.075);backdrop-filter:blur(6px)}
+    .hero-kpi-num{font-size:clamp(22px,2.3vw,29px);line-height:1.2;font-weight:850;letter-spacing:-.025em;color:#fff}
+    .hero-kpi-label{font-size:12px;line-height:1.65;color:#cce9fa;margin-top:7px}
+    .context-strip{background:white;border-bottom:1px solid #e5eaf0}
+    .context-inner{display:flex;gap:12px 28px;align-items:center;flex-wrap:wrap;padding-block:17px;font-size:12px;color:#64748b}
+    .context-inner strong{color:#334155}
+    .main-content{padding-block:44px 25px}
+    section[id]{scroll-margin-top:90px;margin-bottom:64px}
+    .section-heading{font-size:30px;font-weight:800;color:#292524;margin:0 0 24px;border-bottom:2px solid #0ea5e9;padding-bottom:11px;letter-spacing:-.024em;line-height:1.45}
+    .section-intro{max-width:980px;color:#586978;margin:-8px 0 26px;font-size:15px;line-height:1.92}
+    .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:#0369a1}
+    .card{background:#fff;border-radius:12px;box-shadow:0 9px 25px rgba(27,60,88,.065);padding:24px;margin-bottom:22px;min-width:0}
+    .card-outline{border:1px solid #e5eefa;box-shadow:0 5px 14px rgba(27,60,88,.035)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .grid-3 >*,.grid-2 >*,.grid-4 >*{min-width:0}
+    .grid-3 .card,.grid-2 .card,.grid-4 .card{margin-bottom:0}
+    .card h3{font-size:19px;line-height:1.5;font-weight:800;color:#193149;margin:0 0 12px}
+    .card h4{font-size:15px;line-height:1.5;font-weight:800;color:#193149;margin:0 0 8px}
+    .card p{margin:0;color:#536477;font-size:14px;line-height:1.9}
+    .card p+p{margin-top:10px}
+    .soft-card{border:1px solid #e1ebf3;border-radius:13px;background:#f7fafc;padding:20px;min-width:0}
+    .tone-blue{background:#eef8ff;border-color:#d4eafa}
+    .tone-amber{background:#fffbeb;border-color:#f7e8b6}
+    .tone-green{background:#effaf7;border-color:#cfe9df}
+    .tone-red{background:#fff5f4;border-color:#f1d8d6}
+    .pill{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:4px 9px;border-radius:999px;font-size:11px;line-height:1.4;font-weight:800;background:#e0f2fe;color:#03638f}
+    .pill.amber{color:#885600;background:#fef3c7}
+    .pill.rose{color:#a13636;background:#ffe9e5}
+    .pill.slate{color:#405567;background:#e9eef3}
+    .pill.green{color:#16634d;background:#ddf7ec}
+    .topic-title{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:10px}
+    .topic-title h3{margin:0}
+    .story-marker{height:35px;width:35px;display:grid;place-items:center;flex:none;border-radius:11px;background:#e0f2fe;color:#0369a1;font-weight:900;font-size:16px}
+    .topic-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .topic-top h3{margin:0}
+    .mini-label{font-size:11px;font-weight:800;letter-spacing:.04em;color:#64748b;line-height:1.6}
+    .stat-num{font-size:clamp(23px,2.5vw,30px);font-weight:850;line-height:1.32;color:#073956;letter-spacing:-.035em;margin:6px 0}
+    .stat-desc{font-size:12px;color:#61758a;line-height:1.7}
+    .stat-card{padding:18px 20px;border:1px solid #e1ebf3;border-radius:13px;background:#fff;min-width:0}
+    .subheading{font-size:21px;font-weight:800;color:#1e4058;letter-spacing:-.02em;margin:30px 0 16px;line-height:1.5}
+    .muted{color:#5f7284}
+    .small{font-size:12px;line-height:1.8}
+    .lead-quote{font-size:16px;line-height:1.9;font-weight:700;color:#104667;border-left:4px solid #38bdf8;padding:8px 0 8px 18px;margin:17px 0 7px;background:linear-gradient(90deg,#eff9ff,transparent)}
+    .list-clean{margin:13px 0 0;padding-left:20px;font-size:14px;line-height:1.85;color:#526678}
+    .list-clean li{margin:7px 0}
+    .chart-shell{position:relative;height:300px;max-width:100%;width:100%;margin:14px auto 10px}
+    .chart-shell.tall{height:345px}
+    .chart-shell canvas{display:block;max-width:100%;width:100%!important;height:100%!important}
+    .chart-caption{font-size:12px;color:#64748b;line-height:1.8;margin:10px 0 0}
+    .chart-fallback{display:none;margin-top:15px;padding:12px;border:1px solid #e2e8f0;border-radius:8px;color:#64748b;font-size:13px}
+    .section-label{display:inline-block;font-size:12px;font-weight:800;color:#03638f;background:#e0f2fe;border-radius:7px;padding:5px 9px;margin-bottom:12px}
+    .flow-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}
+    .flow-step{position:relative;padding:17px;background:#f1f8fd;border:1px solid #d9e9f4;border-radius:12px;min-width:0}
+    .flow-step:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:36%;color:#0284c7;font-size:21px;font-weight:900;z-index:1}
+    .flow-step strong{display:block;color:#184562;font-size:15px;margin-bottom:8px}
+    .flow-step span{display:block;color:#5b6c7d;font-size:12px;line-height:1.8}
+    .focus-panel{border-left:4px solid #0284c7;background:#eef8fd;border-radius:0 11px 11px 0;padding:15px 18px;color:#24536e;font-size:14px;line-height:1.85;margin-top:18px}
+    .focus-panel.warning{background:#fffbeb;border-color:#f59e0b;color:#85591b}
+    .focus-panel.danger{background:#fff4f2;border-color:#e47870;color:#884642}
+    .focus-panel strong{display:block;font-size:14px;margin-bottom:3px}
+    .table-scroll{max-width:100%;overflow-x:auto;border:1px solid #e2e8f0;border-radius:11px;overscroll-behavior-x:contain}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    th,td{text-align:left;vertical-align:top;padding:13px 15px;font-size:13px;line-height:1.65}
+    thead th{position:sticky;top:0;background:#edf6fc;color:#21445d;font-weight:850;white-space:nowrap;z-index:1;border-bottom:1px solid #d8e7f0}
+    tbody td{color:#536678;border-bottom:1px solid #edf2f7}
+    tbody tr:last-child td{border-bottom:0}
+    tbody tr:nth-child(even){background:#fafcff}
+    tbody tr:hover{background:#f0f8fd}
+    .col-money{white-space:nowrap;font-weight:800;color:#12496b;text-align:right}
+    .t-right{text-align:right}
+    .search-wrap{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:15px 0 14px}
+    .search-input{min-height:42px;width:min(100%,370px);border:1px solid #cbdde8;border-radius:9px;padding:10px 13px;background:white;color:#1e4058;font-size:14px}
+    .search-hint{font-size:12px;color:#66788a}
+    .horizon{border-top:3px solid #7dd3fc;background:#fff;padding:18px 19px;border-radius:10px;box-shadow:0 6px 18px rgba(23,67,97,.04)}
+    .horizon:nth-child(2){border-top-color:#38bdf8}
+    .horizon:nth-child(3){border-top-color:#0369a1}
+    .horizon .time{font-size:11px;font-weight:800;color:#0270a4;margin-bottom:8px}
+    .horizon h4{font-size:15px;color:#173d55;margin:0 0 7px;font-weight:850}
+    .horizon p{font-size:13px;color:#5b6e7f;line-height:1.85;margin:0}
+    .stat-note{font-size:12px;color:#6a7888;line-height:1.75}
+    .product-bar{height:10px;width:100%;background:#dbe8f2;border-radius:999px;overflow:hidden}
+    .product-bar > span{display:block;width:47.5%;height:100%;background:linear-gradient(90deg,#0369a1,#38bdf8);border-radius:999px}
+    .matrix th:first-child{min-width:136px}
+    .matrix td{min-width:180px}
+    .matrix tbody td:first-child{font-weight:850;color:#1b425e;min-width:132px}
+    .scenario-num{display:inline-grid;place-items:center;width:27px;height:27px;background:#c8e8fa;color:#075985;border-radius:50%;font-size:13px;font-weight:850;margin-bottom:10px}
+    .tracking{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .tracking .card{margin:0}
+    .tracking-index{font-size:11px;color:#0284c7;letter-spacing:.09em;font-weight:850;margin-bottom:8px}
+    .conclusion{margin-top:14px;background:linear-gradient(135deg,#f1f9fe,#fff);border:1px solid #d5e9f5;border-radius:15px;padding:28px}
+    .conclusion p{color:#4c6476;font-size:15px;line-height:1.95;margin:0}
+    .conclusion p+p{margin-top:12px}
+    .conclusion strong{color:#075985}
+    footer{background:#292524;color:#d6d3d1;margin-top:48px;padding:31px 0;text-align:center}
+    footer p{margin:0;font-size:13px;line-height:1.8}
+    footer p+p{font-size:12px;margin-top:4px;color:#c3bfbd}
+    @media (max-width:1023px){.desktop-nav{display:none}.mobile-toggle{display:inline-flex}.page-width{padding-inline:18px}.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (min-width:1024px){.mobile-panel{display:none!important}}
+    @media (max-width:760px){.grid-3,.grid-2,.tracking{grid-template-columns:minmax(0,1fr)}.hero-kpis{grid-template-columns:minmax(0,1fr);gap:9px}.hero-kpi{padding:13px 16px}.hero-content{padding-block:46px 44px}.section-heading{font-size:25px}.main-content{padding-block:32px 12px}.card{padding:20px}.flow-row{grid-template-columns:minmax(0,1fr);gap:11px}.flow-step:not(:last-child)::after{content:'↓';right:auto;left:50%;bottom:-20px;top:auto;transform:translateX(-50%)}.context-inner{gap:4px 16px}.chart-shell{height:270px}.chart-shell.tall{height:320px}section[id]{margin-bottom:50px}}
+    @media (max-width:420px){.brand-name{font-size:13px}.brand-desc{font-size:10px}.brand-mark{width:31px;height:31px;border-radius:9px}.mobile-toggle{padding:8px}.grid-4{grid-template-columns:minmax(0,1fr)}.hero-title{font-size:29px}.mobile-panel:not([hidden]){grid-template-columns:1fr 1fr}.stat-num{font-size:25px}.page-width{padding-inline:15px}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="site-nav sticky top-0 z-50">
+    <div class="page-width nav-inner">
+      <div class="brand" aria-label="網站品牌">
+        <div class="brand-mark" aria-hidden="true">AI</div>
+        <div><div class="brand-name">巴菲特AI價值投資</div><div class="brand-desc">美股投資深度報告</div></div>
+      </div>
+      <nav class="desktop-nav" aria-label="主要章節導覽">
+        <a href="#overview" data-nav="overview" class="nav-link active-nav-link" aria-current="location">重點摘要</a>
+        <a href="#anthropic" data-nav="anthropic" class="nav-link inactive-nav-link">Anthropic</a>
+        <a href="#microsoft" data-nav="microsoft" class="nav-link inactive-nav-link">Microsoft</a>
+        <a href="#merck" data-nav="merck" class="nav-link inactive-nav-link">Merck</a>
+        <a href="#comparison" data-nav="comparison" class="nav-link inactive-nav-link">跨產業比較</a>
+        <a href="#scenarios" data-nav="scenarios" class="nav-link inactive-nav-link">情境分析</a>
+        <a href="#watchlist" data-nav="watchlist" class="nav-link inactive-nav-link">追蹤指標</a>
+      </nav>
+      <button id="menuToggle" class="mobile-toggle" type="button" aria-label="開啟章節選單" aria-controls="mobileNav" aria-expanded="false"><span id="menuIcon" aria-hidden="true">☰</span><span>選單</span></button>
+    </div>
+    <nav id="mobileNav" class="mobile-panel" aria-label="手機章節導覽" hidden>
+      <a href="#overview" data-nav="overview" class="nav-link active-nav-link" aria-current="location">重點摘要</a>
+      <a href="#anthropic" data-nav="anthropic" class="nav-link inactive-nav-link">Anthropic</a>
+      <a href="#microsoft" data-nav="microsoft" class="nav-link inactive-nav-link">Microsoft</a>
+      <a href="#merck" data-nav="merck" class="nav-link inactive-nav-link">Merck</a>
+      <a href="#comparison" data-nav="comparison" class="nav-link inactive-nav-link">跨產業比較</a>
+      <a href="#scenarios" data-nav="scenarios" class="nav-link inactive-nav-link">情境分析</a>
+      <a href="#watchlist" data-nav="watchlist" class="nav-link inactive-nav-link">追蹤指標</a>
+    </nav>
+  </header>
+
+  <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+    <div class="hero-content page-width max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 id="hero-heading" class="hero-title">成長進入驗證時代：Anthropic的資本循環、Microsoft的AI變現戰與Merck的研發風險</h1>
+      <p class="hero-summary">從IPO募資、企業AI代理到血癌新藥臨床終止，市場正在重新衡量成長的真正價值。三大投資題材的共同問題是：誰提供資本、誰創造現金流，以及預期收益有多大機率實現？</p>
+      <div class="hero-kpis" aria-label="本期關鍵數字">
+        <div class="hero-kpi"><div class="hero-kpi-num">332 億美元</div><div class="hero-kpi-label">Anthropic 2026 年前九個月營收（報告所載）</div></div>
+        <div class="hero-kpi"><div class="hero-kpi-num">+65.7 億美元</div><div class="hero-kpi-label">Anthropic 同期營業活動現金流</div></div>
+        <div class="hero-kpi"><div class="hero-kpi-num">260 億美元</div><div class="hero-kpi-label">IPO 後附條件股權認購安排，並非已入帳營收</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="context-strip"><div class="page-width context-inner">
+    <span><strong>報告日期</strong> 2026 年 11 月 18 日</span>
+    <span><strong>研究期間</strong> 11 月 17–18 日（美東時間）</span>
+    <span><strong>資訊截點</strong> 11 月 18 日美東上午約 9:30</span>
+    <span><strong>研究範圍</strong> 15 則重要新聞精選 3 項</span>
+    <span><strong>金額單位</strong> 除特別註明外均為美元</span>
+  </div></div>
+
+  <main class="page-width main-content">
+    <section id="overview" aria-labelledby="overview-heading">
+      <h2 id="overview-heading" class="section-heading text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">核心摘要｜高成長之後，市場重新定價</h2>
+      <p class="section-intro">AI產業不只需要證明模型能力與設備投資，更需要回答付費需求能否覆蓋持續增加的算力承諾；成熟藥廠則提醒投資人，穩定營收無法消除尚未獲批產品的研發失敗風險。</p>
+      <div class="grid-3">
+        <article class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="topic-top"><span class="story-marker" aria-hidden="true">A</span><div><div class="mini-label">AI 資本市場</div><h3>Anthropic｜融資與資本承諾</h3></div></div>
+          <span class="pill amber">IPO 申報與附條件安排</span>
+          <p style="margin-top:12px">IPO初步價格區間每股70–78美元；七家企業提出總額約260億美元的IPO後非投票權股權投資安排，尚非完成交易。</p>
+          <div class="focus-panel"><strong>投資問題</strong>收入高速成長與正向營業現金流，能否持續負擔未來的算力與租賃承諾？</div>
+        </article>
+        <article class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="topic-top"><span class="story-marker" aria-hidden="true">M</span><div><div class="mini-label">企業軟體與 AI</div><h3>Microsoft｜工作流程變現</h3></div></div>
+          <span class="pill">產品已發表，收益待驗證</span>
+          <p style="margin-top:12px">Ignite 2026介紹Code 2、Code 2 Flash、Cyber 2 Flash及多項代理治理功能；商業成效取決於付費席次、使用強度與續約。</p>
+          <div class="focus-panel"><strong>投資問題</strong>較低推論成本是否轉化為企業軟體的增量獲利，而不只是低價競爭？</div>
+        </article>
+        <article class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="topic-top"><span class="story-marker" aria-hidden="true">M</span><div><div class="mini-label">醫藥研發</div><h3>Merck｜管線價值重估</h3></div></div>
+          <span class="pill rose">候選藥物研發終止</span>
+          <p style="margin-top:12px">Merck停止nemtabrutinib的BELLWAVE研發計畫。這是試驗性藥物停止開發，不是已上市產品下架。</p>
+          <div class="focus-panel"><strong>投資問題</strong>如何在單項研發挫折之後，重新評估成功機率與整體產品組合？</div>
+        </article>
+      </div>
+      <p class="lead-quote">投資主軸：以現金流檢驗營收，以資本承諾檢驗成長，以成果機率檢驗估值。</p>
+    </section>
+
+    <section id="anthropic" aria-labelledby="anthropic-heading">
+      <h2 id="anthropic-heading" class="section-heading text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、Anthropic｜IPO揭露AI資本循環</h2>
+      <p class="section-intro">11月17日更新S-1/A申報，擬以<strong>ANT</strong>為Nasdaq上市代號；公開發售與IPO後附條件股權認購，是兩種不同的資本安排。初步申報不等於正式定價、掛牌或資金已入帳。</p>
+      <div class="grid-4">
+        <div class="stat-card"><div class="mini-label">每股初步價格區間</div><div class="stat-num">70–78 美元</div><div class="stat-desc">尚未正式定價</div></div>
+        <div class="stat-card"><div class="mini-label">A 類普通股公開發售總數</div><div class="stat-num">8.25 億股</div><div class="stat-desc">公司發新股＋現有股東售股</div></div>
+        <div class="stat-card"><div class="mini-label">按區間推算公開發售總額</div><div class="stat-num">577.5–643.5 億</div><div class="stat-desc">美元；非公司實際淨募資額</div></div>
+        <div class="stat-card"><div class="mini-label">IPO後股權認購安排合計</div><div class="stat-num">260 億美元</div><div class="stat-desc">須IPO完成等條件，非已到位</div></div>
+      </div>
+      <div class="card card-outline" style="margin-top:18px">
+        <div class="grid-2" style="align-items:center">
+          <div>
+            <h3>公開發售拆分</h3>
+            <p>依申報資訊，約 <strong>8.0135億股</strong> 由Anthropic公司新發行；約 <strong>2,364.9萬股</strong> 由現有股東出售。後者出售所得不屬公司募資，且發行費用還會影響淨募資。</p>
+          </div>
+          <div class="soft-card tone-amber"><div class="mini-label">交易性質判別</div><p style="margin:8px 0 0;color:#75551f">IPO公開發售的總額、Anthropic可獲得的淨募資、七家企業的附條件股權認購，以及Anthropic提供模型服務所創造的營收，必須分開理解，不能互相等同或直接相加。</p></div>
+        </div>
+      </div>
+
+      <h3 class="subheading">營收成長很快，但現金流與會計虧損必須分開看</h3>
+      <div class="grid-2">
+        <article class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3>前九個月營收比較</h3>
+          <p>2025與2026年前九個月，統一口徑比較；單位為<strong>億美元</strong>。</p>
+          <div class="chart-shell"><canvas id="revenueChart" role="img" aria-label="Anthropic 2025年前九個月營收約25億美元，2026年前九個月約332億美元之長條圖"></canvas></div>
+          <div class="chart-fallback" id="revenueFallback">2025年前九個月：約25億美元；2026年前九個月：約332億美元。</div>
+          <p class="chart-caption">2026年第三季單季營收約170億美元；此數已包含在2026年前九個月332億美元中，不可重複累加。</p>
+        </article>
+        <article class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3>財務品質的三個維度</h3>
+          <div class="grid-2" style="gap:12px;margin-top:15px">
+            <div class="soft-card tone-blue"><div class="mini-label">2026年1–9月營業活動現金流</div><div class="stat-num">+65.7 億</div><div class="stat-desc">美元，報告記載已轉正</div></div>
+            <div class="soft-card"><div class="mini-label">同期營業虧損</div><div class="stat-num">12.6 億</div><div class="stat-desc">美元，前一年同期約52.2億</div></div>
+          </div>
+          <div class="soft-card tone-amber" style="margin-top:13px"><div class="mini-label">同期 GAAP 淨虧損</div><div class="stat-num">超過 1,000 億</div><p style="margin-top:5px">美元；其中涉及可轉換票據等金融工具的重大非現金公平價值重估。<strong>不能直接當作同期間的現金燒損。</strong></p></div>
+        </article>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="soft-card tone-blue"><div class="mini-label">2026年前九個月</div><div class="stat-num">188 億美元</div><h4 style="font-size:15px;margin:6px 0">算力及基礎設施費用</h4><p class="small muted">應與營收、推論效率及算力利用率一起觀察，不可只用收入成長判斷增量獲利。</p></div>
+        <div class="soft-card tone-amber"><div class="mini-label">依2026年9月底合約，未來12個月預期支付</div><div class="stat-num">707 億美元</div><h4 style="font-size:15px;margin:6px 0">合約義務</h4><p class="small muted">另有尚未開始履行的長期租賃安排。義務種類及付款時間各異，不可視為同日到期債務或任意相加。</p></div>
+      </div>
+
+      <h3 class="subheading">七家企業的附條件股權認購安排</h3>
+      <div class="grid-2">
+        <article class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3>規劃認購金額分布</h3>
+          <p>單位：億美元。僅反映招股文件披露的規劃金額，<strong>不表示已完成入股或實際營收</strong>。</p>
+          <div class="chart-shell tall"><canvas id="investorChart" role="img" aria-label="七家企業規劃在Anthropic IPO完成後按條件認購的股權投資金額比較圖"></canvas></div>
+          <div class="chart-fallback" id="investorFallback">Google 100、NVIDIA 100、AMD 25、Broadcom 10、Micron 10、Microsoft 10、TSMC相關投資方 5，合計260億美元。</div>
+        </article>
+        <article class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="topic-title"><h3>投資方查詢表</h3><span class="pill amber">全數為附條件安排</span></div>
+          <p>輸入公司名稱可即時篩選，表內金額是規劃的IPO後非投票權N類普通股認購額。</p>
+          <div class="search-wrap"><input id="investorSearch" class="search-input" type="search" placeholder="搜尋 Google、NVIDIA、AMD…" aria-label="搜尋規劃投資企業" autocomplete="off"><span id="tableCount" class="search-hint" aria-live="polite"></span></div>
+          <div class="table-scroll" style="max-height:376px;overflow-y:auto">
+            <table aria-label="Anthropic附條件股權投資方查詢表"><thead><tr><th scope="col">投資企業</th><th scope="col" class="t-right">規劃金額（億美元）</th><th scope="col">狀態</th></tr></thead><tbody id="investorTableBody"></tbody></table>
+          </div>
+          <p id="emptySearch" class="small muted" style="display:none;margin-top:10px">沒有符合搜尋條件的企業。</p>
+          <p class="chart-caption">本表數值加總為260億美元。資料性質：附條件的股權認購安排，非模型服務收入、非已實現投資。</p>
+        </article>
+      </div>
+      <h3 class="subheading">資本與商業的二階效應</h3>
+      <div class="card card-outline">
+        <div class="flow-row" aria-label="資本循環可能的傳導機制">
+          <div class="flow-step"><strong>① 附條件股權資金</strong><span>若IPO及相關條件完成，模型業者的融資能力可能增加。</span></div>
+          <div class="flow-step"><strong>② 算力與設備採購</strong><span>部署擴張可支持雲端、晶片與設備需求；部分供應商同時是投資方。</span></div>
+          <div class="flow-step"><strong>③ 終端付費與現金流</strong><span>真正驗證循環能否持續的是客戶付費、毛利與現金創造能力。</span></div>
+        </div>
+        <p>供應商同時作為投資人，並不意味交易虛假或企業重複認列收入；但投資人必須追蹤終端需求是否獨立、供應商應收帳款、資本承諾以及關係人利益。若最終付費需求不及預期，前期固定支出會放大波動。</p>
+        <div class="focus-panel warning"><strong>估值與治理提醒</strong>比較媒體推估的公司市值時，先確認使用的股份分母（發行後股份或完全稀釋股數等）；特殊投票權與公益公司治理也使經濟權益和控制權不完全對稱。</div>
+      </div>
+      <h3 class="subheading">投資期間與論點失效條件</h3>
+      <div class="grid-3">
+        <div class="horizon"><div class="time">短期｜數日至 3 個月</div><h4>定價與交易結構</h4><p>確認最終IPO價格、實際配售、上市交易及流通籌碼。70–78美元仍是初步區間，不代表已實現報酬。</p></div>
+        <div class="horizon"><div class="time">中期｜3–12 個月</div><h4>資本支出與現金回收</h4><p>觀察持續營業現金流、算力費用占比、終端客戶付費，以及硬體供應商的應收帳款與自由現金流。</p></div>
+        <div class="horizon"><div class="time">長期｜1–2 年</div><h4>單位經濟與護城河</h4><p>比較客戶留存、模型差異化、推論成本與定價權，判斷高速成長能否支撐估值。</p></div>
+      </div>
+      <div class="focus-panel danger"><strong>論點失效觀察</strong>若模型使用放緩、續約惡化、營業現金流轉弱，且不可取消支出快速增加，應降低對IPO帶動產業需求的樂觀推論。</div>
+    </section>
+
+    <section id="microsoft" aria-labelledby="microsoft-heading">
+      <h2 id="microsoft-heading" class="section-heading text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、Microsoft｜AI從模型競賽轉向工作流程</h2>
+      <p class="section-intro">Ignite 2026於11月17日介紹自研程式與資安模型，並推出企業脈絡與代理治理相關能力。技術發布並不等於全部企業用戶已採用或產品收益已實現，投資價值仍需由企業付費與經常性收入檢驗。</p>
+      <div class="grid-2">
+        <div class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="topic-title"><h3>任務導向的自研模型</h3><span class="pill">已發表</span></div>
+          <div class="soft-card tone-blue" style="margin-top:12px"><h4>Code 2 / Code 2 Flash</h4><p class="small muted">面向程式開發；依公司說法，程式模型可透過GitHub Copilot及Foundry使用。</p></div>
+          <div class="soft-card" style="margin-top:11px"><h4>Cyber 2 Flash</h4><p class="small muted">面向資訊安全任務；實際效果仍需檢查安全準確度、稽核能力及實務返工成本。</p></div>
+          <div class="focus-panel warning"><strong>性能數字的邊界</strong>公司宣稱具有較低成本及競爭力的效能；這不是所有客戶使用情境經第三方完成驗證的結論。</div>
+        </div>
+        <div class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="topic-title"><h3>企業脈絡與AI代理治理</h3><span class="pill slate">商業成效待驗證</span></div>
+          <div class="soft-card tone-blue" style="margin-top:12px"><h4>Microsoft IQ</h4><p class="small muted">企業脈絡相關布局，強調讓模型理解企業資料與工作環境。</p></div>
+          <div class="soft-card" style="margin-top:11px"><h4>Copilot Workspaces / Agent 365</h4><p class="small muted">企業AI代理、協作與治理相關功能；關鍵是權限、資安、稽核及跨系統管理。</p></div>
+          <div class="focus-panel"><strong>競爭邏輯</strong>自研、合作夥伴及任務調度模型可以並存；真正的商業差異化可能來自企業資料、身分系統與工作流程。</div>
+        </div>
+      </div>
+      <h3 class="subheading">三種AI收入，對應不同獲利品質</h3>
+      <div class="grid-3">
+        <div class="card card-outline"><div class="mini-label">01 / 基礎設施</div><h3 style="margin-top:7px">Azure算力與雲端資源</h3><p>客戶租用運算、儲存與部署能力帶來使用收入；成長可能伴隨資料中心及設備資本支出，不等於自由現金流等比例改善。</p></div>
+        <div class="card card-outline"><div class="mini-label">02 / 模型與平台</div><h3 style="margin-top:7px">API、Foundry、模型路由</h3><p>較小或專用模型可降低每任務成本；但如果價格競爭加劇，部分成本節省可能轉移給企業客戶。</p></div>
+        <div class="card card-outline"><div class="mini-label">03 / 企業工作流程</div><h3 style="margin-top:7px">授權、代理與管理服務</h3><p>將AI嵌入程式開發、資安與跨系統協作，才可能形成續約、加購及高黏著度的持續收入。</p></div>
+      </div>
+      <div class="card card-outline" style="margin-top:20px">
+        <h3>第二層產業影響：使用量成長，不一定代表單價提高</h3>
+        <div class="grid-2" style="margin-top:12px">
+          <div class="soft-card tone-green"><h4>潛在受益</h4><p class="small muted">若推論成本下降刺激使用量，平台整體收入仍有機會擴大；具資料、身分、日誌及操作入口的企業軟體，較容易把AI整合為付費工作流程。</p></div>
+          <div class="soft-card tone-amber"><h4>潛在壓力</h4><p class="small muted">差異化不足的模型業者和單點軟體工具可能面臨價格壓力；安全敏感領域仍須依可稽核性、準確率和責任歸屬評估，不能推論所有專業軟體都將被取代。</p></div>
+        </div>
+        <p class="lead-quote">降低推論單價是成本端；提高付費席次、續約和工作流程價值，才是收入端。</p>
+      </div>
+      <h3 class="subheading">Ignite之後的商業KPI</h3>
+      <div class="grid-3">
+        <div class="horizon"><div class="time">短期｜數週至 3 個月</div><h4>真實任務可用性</h4><p>Copilot與Foundry採用反饋、自研模型的任務完成率、返工率、資安與部署障礙。</p></div>
+        <div class="horizon"><div class="time">中期｜3–12 個月</div><h4>付費轉換與成本</h4><p>AI付費席次、使用強度、續約與加購；同時比對Azure相關資本支出及現金流。</p></div>
+        <div class="horizon"><div class="time">長期｜1–2 年</div><h4>入口與代理治理</h4><p>AI代理是否能安全規模化部署，並在多模型競爭下維持企業工作入口與定價權。</p></div>
+      </div>
+      <div class="focus-panel danger"><strong>論點失效觀察</strong>若實務品質不足、客戶不願為代理功能付費，或AI資本支出長期快於可歸屬的經常性收入與自由現金流改善，就不能從產品發布推論投資報酬率已上升。</div>
+    </section>
+
+    <section id="merck" aria-labelledby="merck-heading">
+      <h2 id="merck-heading" class="section-heading text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三、Merck｜研發風險必須納入估值</h2>
+      <p class="section-intro">11月17日盤後，Merck宣布終止試驗性口服BTK抑制劑nemtabrutinib（MK-1026）的BELLWAVE臨床開發計畫。這是<strong>候選藥物停止開發</strong>，不是已上市產品遭下架。</p>
+      <div class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="topic-title"><h3>BELLWAVE計畫終止的範圍</h3><span class="pill rose">已宣布停止開發</span></div>
+        <div class="grid-3" style="margin-top:12px">
+          <div class="soft-card tone-red"><h4>BELLWAVE-011</h4><p class="small muted">第三期試驗經外部資料監測委員會審視，認為在該研究中治療效益可能不足以抵銷風險。</p></div>
+          <div class="soft-card"><h4>BELLWAVE-008</h4><p class="small muted">Merck進一步檢視後，決定停止包括此第三期研究在內的更廣泛開發計畫。</p></div>
+          <div class="soft-card"><h4>BELLWAVE-010</h4><p class="small muted">同屬停止的第三期開發研究；候選藥物曾研究用於慢性淋巴性白血病等血液腫瘤。</p></div>
+        </div>
+        <div class="focus-panel warning"><strong>研究判讀界線</strong>公司尚未公布足以全面量化療效及安全風險的最終分析。不能擅自推斷特定不良事件已獲證實，後續仍需觀察完整數據。</div>
+      </div>
+      <h3 class="subheading">現有營收與未來研發，是兩種不同資產</h3>
+      <div class="grid-3">
+        <div class="stat-card"><div class="mini-label">2026年第三季全球銷售額</div><div class="stat-num">180.9 億美元</div><div class="stat-desc">已上市業務的當季銷售規模</div></div>
+        <div class="stat-card"><div class="mini-label">KEYTRUDA + KEYTRUDA QLEX</div><div class="stat-num">86 億美元</div><div class="stat-desc">約占當季總銷售接近一半</div></div>
+        <div class="stat-card"><div class="mini-label">WINREVAIR 第三季銷售</div><div class="stat-num">6.94 億美元</div><div class="stat-desc">年增約 93%</div></div>
+      </div>
+      <div class="card card-outline" style="margin-top:19px">
+        <h3>產品集中度與新管線補位需求</h3>
+        <div class="grid-2" style="align-items:center;margin-top:12px">
+          <div><div class="mini-label">KEYTRUDA及KEYTRUDA QLEX／第三季全球銷售</div><div class="product-bar" role="img" aria-label="KEYTRUDA及KEYTRUDA QLEX合計約占Merck 2026年第三季全球銷售額的47.5%，接近一半" style="margin:11px 0"><span></span></div><p class="small muted">按報告約數86 ÷ 180.9計算，約為47.5%；圖示為產品組合中的大致比重。</p></div>
+          <div class="soft-card tone-amber"><h4>臨床失敗的經濟意涵</h4><p class="small muted">現有銷售不會因單一候選藥物停止研發而自動消失；但該研發項目的未來銷售機率與選擇權價值應相應調整，並重新評估後期管線接棒能力。</p></div>
+        </div>
+      </div>
+      <h3 class="subheading">藥物價值不是把潛在市場直接當成營收</h3>
+      <div class="grid-3">
+        <div class="card card-outline"><div class="mini-label">STEP 01</div><h3 style="margin-top:8px">成功機率</h3><p>臨床療效與安全性、監管審查與上市機率都影響收入實現的可能性。</p></div>
+        <div class="card card-outline"><div class="mini-label">STEP 02</div><h3 style="margin-top:8px">商業條件</h3><p>上市時點、可能市占率、定價、醫療支付條件及其他治療選項的競爭。</p></div>
+        <div class="card card-outline"><div class="mini-label">STEP 03</div><h3 style="margin-top:8px">折現與組合</h3><p>納入研發及商業化成本、法規風險，再評估該候選藥物對整體企業價值的權重。</p></div>
+      </div>
+      <div class="card card-outline" style="margin-top:20px"><h3>第二層影響：競爭對手與研發資本配置</h3><p>少一個潛在BTK治療競爭者，可能影響其他藥物的長期競爭假設，卻不保證相關公司股價上漲。對Merck而言，研發資源可能轉向其他後期腫瘤、免疫治療或授權機會，但結果仍依後續試驗與商業進展而定。</p></div>
+      <h3 class="subheading">投資期間與論點失效條件</h3>
+      <div class="grid-3">
+        <div class="horizon"><div class="time">短期｜數週至 3 個月</div><h4>數據與成本變化</h4><p>追蹤完整療效、安全性資料、試驗終止對研發費用及其他管線時程的影響。</p></div>
+        <div class="horizon"><div class="time">中期｜3–12 個月</div><h4>新產品與後期試驗</h4><p>比較KEYTRUDA、新產品放量、其他第三期試驗及授權合作的進度。</p></div>
+        <div class="horizon"><div class="time">長期｜1–2 年</div><h4>專利與管線接續</h4><p>檢視核心產品集中度、專利競爭及研發組合的持續補充能力。</p></div>
+      </div>
+      <div class="focus-panel danger"><strong>論點失效觀察</strong>若多項重要後期試驗連續不利、成熟產品收入下滑加快，或新藥管線無法補位，則須重新檢討以多元管線吸收單項研發損失的假設。</div>
+    </section>
+
+    <section id="comparison" aria-labelledby="comparison-heading">
+      <h2 id="comparison-heading" class="section-heading text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、跨產業比較｜三種成長，三套估值紀律</h2>
+      <p class="section-intro">三個事件背後其實是同一個財務問題：<strong>今天投入的資本，能否換來足夠而可預期的未來現金報酬？</strong> 但三家企業的資金結構與失敗機制不同，不能套用單一倍數或風險指標。</p>
+      <div class="card bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="table-scroll">
+          <table class="matrix" aria-label="Anthropic Microsoft Merck跨產業投資比較">
+            <thead><tr><th scope="col">比較維度</th><th scope="col">Anthropic</th><th scope="col">Microsoft</th><th scope="col">Merck</th></tr></thead>
+            <tbody>
+              <tr><td>核心成長引擎</td><td>AI模型付費需求與雲端部署規模</td><td>多模型調度、企業代理與工作流程授權</td><td>已上市產品現金流與後期研發管線</td></tr>
+              <tr><td>目前主要訊號</td><td>營收高速增加、營業現金流轉正；IPO及附條件認購仍待完成</td><td>新模型及代理功能發布；付費使用與ROI待驗證</td><td>nemtabrutinib臨床開發終止；既有產品仍銷售</td></tr>
+              <tr><td>關鍵成本／風險</td><td>算力費用、租賃義務、資本稀釋、治理</td><td>資料中心資本支出、推論單價下滑、代理治理</td><td>試驗成功率、產品集中、專利與法規</td></tr>
+              <tr><td>主要追蹤KPI</td><td>終端付費、OCF、算力利用率、固定承諾</td><td>付費席次、續約、加購、每任務成本、FCF</td><td>核准與試驗結果、新品銷售、管線補位率</td></tr>
+              <tr><td>投資紀律</td><td>股權融資不等於收入；會計重估不等於燒錢</td><td>模型可用不等於付費；使用量不等於獲利</td><td>第三期試驗不等於上市；單項失敗不等於全公司失值</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="chart-caption">利率與折現率變化也可能改變估值：高成長、長天期與資本密集型資產通常更敏感；成熟現金流企業仍會受到專利、競爭及研發事件風險影響。</p>
+      </div>
+    </section>
+
+    <section id="scenarios" aria-labelledby="scenarios-heading">
+      <h2 id="scenarios-heading" class="section-heading text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">五、情境分析｜用條件而非預言做投資判斷</h2>
+      <p class="section-intro">下列是報告的條件式研究情境，不是確定會發生的市場結果，也不代表特定標的未來價格預測。</p>
+      <div class="grid-3">
+        <article class="card card-outline"><span class="scenario-num">1</span><h3>AI需求與軟體採用同步加速</h3><span class="pill green">成長驗證情境</span><p style="margin-top:14px">企業付費提升、模型利用率改善，雲端與設備需求得到支撐；若Microsoft把成本優勢轉成續約及加購，AI價值鏈的獲利基礎更完整。</p><div class="focus-panel"><strong>觀察紀律</strong>優先研究現金流、資本效率與付費轉換，而非只追逐營收增速。</div></article>
+        <article class="card card-outline"><span class="scenario-num">2</span><h3>使用量增長，但單價或現金報酬承壓</h3><span class="pill amber">利潤壓力情境</span><p style="margin-top:14px">模型單位價格下滑，或算力固定負擔增加得更快，可能導致營收強勁而利潤不穩；供應商亦可能因客戶重排投資而重新定價。</p><div class="focus-panel warning"><strong>觀察紀律</strong>比較設備利用率、合約承諾、應收帳款與營運現金流。</div></article>
+        <article class="card card-outline"><span class="scenario-num">3</span><h3>市場風險偏好下降、醫藥研發再受挫</h3><span class="pill rose">多重風險情境</span><p style="margin-top:14px">科技股可能承受折現率壓力，藥廠則因個別臨床失敗出現公司特有波動；跨產業持股也可能共同承受高成長預期的修正。</p><div class="focus-panel danger"><strong>觀察紀律</strong>檢查風險因子與關鍵事件是否集中，而非只看名目上的產業分散。</div></article>
+      </div>
+    </section>
+
+    <section id="watchlist" aria-labelledby="watchlist-heading">
+      <h2 id="watchlist-heading" class="section-heading text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">六、後續追蹤｜讓投資論點可被驗證</h2>
+      <p class="section-intro">把短期消息轉換成可持續檢驗的指標，並分別判斷已發生事件、待完成安排，以及未來營收的實現機率。</p>
+      <div class="tracking">
+        <article class="card card-outline"><div class="tracking-index">TRACK 01 / ANTHROPIC</div><h3>IPO條件與實際資本流入</h3><ul class="list-clean"><li>最終發行價格、實際淨募資及公開交易籌碼。</li><li>260億美元附條件股權認購是否完成。</li><li>後續營收、營業現金流、算力成本與新增合約承諾。</li></ul></article>
+        <article class="card card-outline"><div class="tracking-index">TRACK 02 / MICROSOFT</div><h3>企業AI商業轉換率</h3><ul class="list-clean"><li>Code 2等自研模型於Copilot、Foundry的實際使用。</li><li>企業付費席次、AI代理訂閱、續約及加購。</li><li>Azure資本投入、營運成本與自由現金流的相對變化。</li></ul></article>
+        <article class="card card-outline"><div class="tracking-index">TRACK 03 / MERCK</div><h3>後期管線與產品接續</h3><ul class="list-clean"><li>BELLWAVE後續完整療效與安全資料。</li><li>其他第三期試驗、合作與研發組合補位。</li><li>KEYTRUDA及其他已上市新產品的銷售表現。</li></ul></article>
+        <article class="card card-outline"><div class="tracking-index">TRACK 04 / 市場風險</div><h3>折現率與估值傳導</h3><ul class="list-clean"><li>美國公債殖利率及企業信用利差變化。</li><li>成長股估值是否跟隨基本面與現金流改善。</li><li>區分利率、稀釋、獲利品質與治理因素，避免只以情緒解釋波動。</li></ul></article>
+      </div>
+      <div class="conclusion">
+        <h3 style="font-size:21px;font-weight:850;color:#16415b;margin:0 0 13px">結語｜把承諾轉成可驗證的現金回報</h3>
+        <p>Anthropic將模型產業的資本關係帶往公開定價；Microsoft競逐企業工作流程與低成本推論的結合；Merck則提醒市場，在藥物真正核准並形成銷售前，研發成果仍帶有不確定性。</p>
+        <p><strong>對中長期投資人而言，下一階段的重要能力，是辨識哪些成長已由現金流支持、哪些仍倚賴資本承諾，以及哪些未來收益必須先經成功機率折現。</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="page-width max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-成長進入驗證時代。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中Anthropic、Microsoft及Merck相關公開資料 (2026年11月18日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    // 投資方資料皆來自本期上傳報告；單位為億美元。
+    // 「規劃」是附帶IPO完成等條件的股權投資安排，並非已到帳或服務營收。
+    const productData = [
+      { name: 'Google', amount: 100, status: 'IPO後附條件認購' },
+      { name: 'NVIDIA', amount: 100, status: 'IPO後附條件認購' },
+      { name: 'AMD', amount: 25, status: 'IPO後附條件認購' },
+      { name: 'Broadcom', amount: 10, status: 'IPO後附條件認購' },
+      { name: 'Micron', amount: 10, status: 'IPO後附條件認購' },
+      { name: 'Microsoft', amount: 10, status: 'IPO後附條件認購' },
+      { name: 'TSMC Partners（相關投資方）', amount: 5, status: 'IPO後附條件認購' }
+    ];
+
+    const searchInput = document.getElementById('investorSearch');
+    const body = document.getElementById('investorTableBody');
+    const tableCount = document.getElementById('tableCount');
+    const emptySearch = document.getElementById('emptySearch');
+
+    function renderInvestorTable(searchTerm = '') {
+      const q = searchTerm.trim().toLocaleLowerCase();
+      const rows = productData.filter(item => `${item.name} ${item.status} ${item.amount}`.toLocaleLowerCase().includes(q));
+      body.replaceChildren();
+      for (const item of rows) {
+        const tr = document.createElement('tr');
+        const name = document.createElement('td');
+        name.textContent = item.name;
+        name.style.fontWeight = '750';
+        name.style.color = '#1d4b66';
+        const amount = document.createElement('td');
+        amount.textContent = String(item.amount);
+        amount.className = 'col-money';
+        const status = document.createElement('td');
+        status.textContent = item.status;
+        tr.append(name, amount, status);
+        body.appendChild(tr);
+      }
+      tableCount.textContent = `顯示 ${rows.length} / ${productData.length} 家企業`;
+      emptySearch.style.display = rows.length === 0 ? 'block' : 'none';
+    }
+    renderInvestorTable();
+    searchInput.addEventListener('input', event => renderInvestorTable(event.target.value));
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const menuIcon = document.getElementById('menuIcon');
+    const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+    function setMenu(open) {
+      mobileNav.hidden = !open;
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      menuIcon.textContent = open ? '✕' : '☰';
+    }
+    menuToggle.addEventListener('click', () => setMenu(mobileNav.hidden));
+    document.addEventListener('keydown', event => {if (event.key === 'Escape' && !mobileNav.hidden) {setMenu(false);menuToggle.focus();}});
+    window.addEventListener('resize', () => {if (window.innerWidth >= 1024 && !mobileNav.hidden) setMenu(false);});
+    function activateNav(id) {
+      for (const link of navLinks) {
+        const active = link.dataset.nav === id;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    }
+    for (const link of navLinks) {
+      link.addEventListener('click', () => {activateNav(link.dataset.nav);if (!mobileNav.hidden) setMenu(false);});
+    }
+    if ('IntersectionObserver' in window) {
+      const sectionElements = Array.from(document.querySelectorAll('main section[id]'));
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length) activateNav(visible[0].target.id);
+      }, {rootMargin:'-19% 0px -62% 0px',threshold:[0,0.02,0.15,0.35,0.6]});
+      sectionElements.forEach(section => observer.observe(section));
+    }
+
+    const chartText = '#526a7e';
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = 'ui-sans-serif, system-ui, "Noto Sans TC", sans-serif';
+      Chart.defaults.color = chartText;
+      Chart.defaults.plugins.legend.display = false;
+      const commonTooltip = {callbacks:{label(context){return `${context.parsed.y ?? context.parsed.x} 億美元`;}}};
+      new Chart(document.getElementById('revenueChart'), {
+        type: 'bar',
+        data: {
+          labels:['2025 年前 9 個月','2026 年前 9 個月'],
+          datasets:[{label:'營收（億美元）',data:[25,332],backgroundColor:['#95c7df','#0284c7'],borderRadius:7,maxBarThickness:90}]
+        },
+        options:{responsive:true,maintainAspectRatio:false,animation:{duration:400},
+          plugins:{tooltip:{callbacks:{label(c){return `${c.parsed.y} 億美元`;}}}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:12},maxRotation:0}},y:{beginAtZero:true,grid:{color:'#e9f1f6'},title:{display:true,text:'億美元',color:chartText},ticks:{precision:0}}}}
+      });
+      new Chart(document.getElementById('investorChart'),{
+        type:'bar',
+        data:{labels:productData.map(d => d.name.replace('（相關投資方）','')),datasets:[{label:'規劃認購金額（億美元）',data:productData.map(d=>d.amount),backgroundColor:productData.map((d,i)=>i<2?'#0284c7':'#7bbddd'),borderRadius:5,maxBarThickness:25}]},
+        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:400},
+          plugins:{tooltip:{callbacks:{label(c){return `附條件規劃：${c.parsed.x} 億美元`;}}}},
+          scales:{y:{grid:{display:false},ticks:{font:{size:11},autoSkip:false}},x:{beginAtZero:true,max:110,grid:{color:'#e9f1f6'},title:{display:true,text:'億美元',color:chartText},ticks:{precision:0}}}}
+      });
+    } else {
+      document.getElementById('revenueFallback').style.display = 'block';
+      document.getElementById('investorFallback').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
