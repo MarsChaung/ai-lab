@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2026年11月20日美股投資深度報告視覺化：Google Gemini Mac AI代理、Intuit出售Mailchimp，以及Keysight訂單與自由現金流的投資驗證框架。">
+  <meta name="theme-color" content="#0c253a">
+  <title>巴菲特AI價值投資-AI投資的價值驗收</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; --ink: #193349; --muted: #587083; --sky: #0284c7; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; background: #f8fafc; color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; -webkit-font-smoothing: antialiased; }
+    * { box-sizing: border-box; }
+    section[id] { scroll-margin-top: 94px; }
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image: linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color: #0369a1 !important; background: #e0f2fe; font-weight: 750; }
+    .inactive-nav-link { color: #475569; background: transparent; font-weight: 550; }
+    .inactive-nav-link:hover { color: #0369a1; background: #f0f9ff; }
+    .nav-link { display: inline-flex; align-items: center; padding: .48rem .66rem; border-radius: .6rem; font-size: .86rem; text-decoration: none; transition: background .16s ease, color .16s ease; white-space: nowrap; }
+    .mobile-nav-link { display: block; padding: .84rem 1rem; border-radius: .65rem; margin: .12rem 0; font-size: .96rem; text-decoration: none; }
+    .chapter-kicker { color: #0284c7; font-size: .75rem; letter-spacing: .16em; font-weight: 800; }
+    .big-number { font-variant-numeric: tabular-nums; letter-spacing: -.035em; }
+    .stat-card { background: #fff; border: 1px solid #e2e8f0; border-radius: .95rem; padding: 1.25rem; box-shadow: 0 8px 26px -20px rgba(15, 48, 71, .4); min-width: 0; }
+    .tag { display: inline-block; font-weight: 700; font-size: .71rem; padding: .26rem .58rem; border-radius: 999px; letter-spacing: .01em; }
+    .tag-observed { background: #e0f2fe; color: #075985; }
+    .tag-signed { background: #fef3c7; color: #92400e; }
+    .tag-forecast { background: #ede9fe; color: #5b21b6; }
+    .tag-historical { background: #f1f5f9; color: #475569; }
+    .card-topline { height: 4px; border-radius: 999px; background: linear-gradient(90deg, #0284c7, #38bdf8); }
+    .chart-shell { position: relative; width: 100%; height: 320px; min-width: 0; }
+    .chart-shell canvas { width: 100% !important; height: 100% !important; }
+    .chart-fallback { display: none; padding: 1rem; border-radius: .75rem; color: #334155; background: #f1f5f9; line-height: 1.8; }
+    .flow-line { width: 2px; height: 30px; margin: 0 auto; background: linear-gradient(#38bdf8, #bae6fd); }
+    .table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; border: 1px solid #e2e8f0; border-radius: .8rem; }
+    .data-table { min-width: 850px; width: 100%; border-collapse: separate; border-spacing: 0; font-size: .88rem; }
+    .data-table th { position: sticky; top: 0; z-index: 2; background: #eaf4fa; font-size: .79rem; font-weight: 800; color: #244b63; letter-spacing: .015em; }
+    .data-table td, .data-table th { padding: .85rem .95rem; border-bottom: 1px solid #e8eef4; text-align: left; vertical-align: top; }
+    .data-table tbody tr:last-child td { border-bottom: 0; }
+    .data-table tbody tr:nth-child(even) { background: #f8fbfd; }
+    .data-table tbody tr:hover { background: #f0f9ff; }
+    .data-table td.metric-value { color: #075985; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .field { width: 100%; border-radius: .7rem; border: 1px solid #cbd5e1; background: white; padding: .74rem .92rem; color: #0f172a; outline: none; }
+    .field:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2,132,199,.13); }
+    .scenario { border: 1px solid #e2e8f0; border-radius: .9rem; overflow: hidden; background: #fff; }
+    .scenario > h3 { padding: 1rem 1.25rem; margin: 0; font-size: 1.05rem; font-weight: 800; }
+    .scenario > div { padding: 1.2rem 1.25rem; line-height: 1.83; color: #475569; }
+    .rule-list { margin: 0; padding-left: 1.2rem; }
+    .rule-list li { padding: .28rem 0; }
+    .section-lede { max-width: 60rem; font-size: 1rem; color: #52677a; line-height: 1.95; }
+    .soft-divider { height: 1px; background: linear-gradient(90deg,transparent,#cbd5e1,transparent); }
+    .sr-only-focusable:not(:focus) { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+    @media (max-width: 640px) {
+      .chart-shell { height: 280px; }
+      .data-table { min-width: 760px; }
+      .hero-stat { padding: 1.05rem !important; }
+      .data-table td, .data-table th { padding: .68rem .72rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .nav-link { transition: none; } }
+    @media print { header { position: relative !important; } .hero-mesh { -webkit-print-color-adjust: exact; print-color-adjust: exact; } #mobileMenuToggle, .filter-controls { display: none !important; } section { break-inside: avoid-page; } }
+  </style>
+</head>
+<body>
+<a href="#overview" class="sr-only-focusable fixed top-2 left-2 z-[100] bg-white text-sky-800 p-3 rounded-lg shadow-lg">跳至報告正文</a>
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm" aria-label="網站導覽">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[70px] flex items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="w-9 h-9 shrink-0 rounded-xl bg-sky-800 text-white flex items-center justify-center shadow-sm" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="21" height="21"><path d="M4 18V7m5 11v-6m5 6V4m5 14v-9" stroke-linecap="round"/><path d="m3 12 6-3 5 3 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="min-w-0"><p class="font-extrabold tracking-tight text-slate-900 text-sm sm:text-base truncate">巴菲特AI價值投資</p><p class="text-[10px] sm:text-xs text-slate-500 truncate">美股深度投資分析 · 2026.11.20</p></div>
+    </div>
+    <nav class="hidden lg:flex items-center gap-0.5" aria-label="報告章節">
+      <a href="#overview" class="nav-link inactive-nav-link" data-nav="overview">核心觀點</a>
+      <a href="#agent" class="nav-link inactive-nav-link" data-nav="agent">Google AI代理</a>
+      <a href="#intuit" class="nav-link inactive-nav-link" data-nav="intuit">Intuit資本配置</a>
+      <a href="#keysight" class="nav-link inactive-nav-link" data-nav="keysight">Keysight訂單</a>
+      <a href="#metrics" class="nav-link inactive-nav-link" data-nav="metrics">數據圖表</a>
+      <a href="#framework" class="nav-link inactive-nav-link" data-nav="framework">投資框架</a>
+      <a href="#risks" class="nav-link inactive-nav-link" data-nav="risks">風險與追蹤</a>
+    </nav>
+    <button id="mobileMenuToggle" type="button" aria-label="開啟章節選單" aria-controls="mobileMenu" aria-expanded="false" class="lg:hidden shrink-0 p-2.5 rounded-lg text-slate-700 hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-sky-500">
+      <svg id="menuIcon" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <nav id="mobileMenu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 py-3 shadow-lg" aria-label="手機版報告章節">
+    <div class="max-w-7xl mx-auto">
+      <a href="#overview" class="mobile-nav-link inactive-nav-link" data-nav="overview">核心觀點</a>
+      <a href="#agent" class="mobile-nav-link inactive-nav-link" data-nav="agent">Google AI代理</a>
+      <a href="#intuit" class="mobile-nav-link inactive-nav-link" data-nav="intuit">Intuit資本配置</a>
+      <a href="#keysight" class="mobile-nav-link inactive-nav-link" data-nav="keysight">Keysight訂單</a>
+      <a href="#metrics" class="mobile-nav-link inactive-nav-link" data-nav="metrics">數據圖表</a>
+      <a href="#framework" class="mobile-nav-link inactive-nav-link" data-nav="framework">投資框架</a>
+      <a href="#risks" class="mobile-nav-link inactive-nav-link" data-nav="risks">風險與追蹤</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero-mesh text-white" aria-labelledby="hero-heading">
+  <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+    <h1 id="hero-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight max-w-5xl">從會回答到能執行：<br class="hidden sm:block">AI投資進入「驗收價值」時代</h1>
+    <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-loose">Google讓Gemini跨入Mac的真實工作流程、Intuit簽約出售Mailchimp重整資本配置、Keysight以訂單與自由現金流呈現設備需求。三條主線共同指向：AI的長期投資價值，必須通過<strong class="text-white">產品付費、資本效率與現金回收</strong>的檢驗。</p>
+    <div class="grid sm:grid-cols-3 gap-3 sm:gap-4 mt-9 max-w-5xl" aria-label="報告核心數據">
+      <div class="hero-stat rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-5">
+        <p class="text-xs font-bold tracking-wide text-sky-100">Keysight 訂單出貨比</p>
+        <p class="text-3xl font-extrabold mt-2 big-number text-white">1.17<span class="text-lg ml-1">倍</span></p>
+        <p class="text-xs text-sky-100/80 mt-1">2026財年Q4 · 依財報數字計算</p>
+      </div>
+      <div class="hero-stat rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-5">
+        <p class="text-xs font-bold tracking-wide text-sky-100">Mailchimp 擬出售對價</p>
+        <p class="text-3xl font-extrabold mt-2 big-number text-white">36.8<span class="text-lg ml-1">億美元</span></p>
+        <p class="text-xs text-amber-100 mt-1">已簽約 · 尚未完成交割</p>
+      </div>
+      <div class="hero-stat rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-5">
+        <p class="text-xs font-bold tracking-wide text-sky-100">Keysight 單季自由現金流</p>
+        <p class="text-3xl font-extrabold mt-2 big-number text-white">4.65<span class="text-lg ml-1">億美元</span></p>
+        <p class="text-xs text-sky-100/80 mt-1">2026財年Q4 · 已公布財報</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-8">
+  <section id="overview" class="mb-16" aria-labelledby="overview-heading">
+    <div class="flex flex-wrap items-center gap-3 mb-4"><span class="chapter-kicker">核心論點</span><span class="text-xs text-slate-500">報告日期：2026/11/20｜研究截止：美股當日開盤前公開資訊</span></div>
+    <h2 id="overview-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">市場進入AI經濟價值驗收階段</h2>
+    <p class="section-lede mb-7">評價焦點正從「AI能展示多少功能」轉向「功能能否產生可重複、可保護、可兌現的商業回報」。這份報告以一至兩年的投資視角，對照三種不同商業模式的證據強度與論點失效條件。</p>
+    <div class="grid md:grid-cols-3 gap-5">
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="card-topline mb-5"></div>
+        <p class="text-xs font-extrabold tracking-widest text-sky-700">01 / 產品採用</p>
+        <h3 class="font-extrabold text-xl text-slate-900 mt-2 mb-3">AI能否真正完成工作？</h3>
+        <p class="text-slate-600 leading-relaxed">Google Gemini跨入電腦操作；投資價值要由任務成功率、人工覆核成本、付費轉換及企業安全治理驗證。</p>
+        <p class="mt-4 text-sm font-semibold text-sky-800">對應公司：Alphabet（GOOGL／GOOG）</p>
+      </article>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="card-topline mb-5"></div>
+        <p class="text-xs font-extrabold tracking-widest text-sky-700">02 / 資本效率</p>
+        <h3 class="font-extrabold text-xl text-slate-900 mt-2 mb-3">成長是否換來更高報酬？</h3>
+        <p class="text-slate-600 leading-relaxed">Intuit擬出售Mailchimp，測試回歸核心會計、稅務與AI工作流程後，能否改善有機成長與每股現金流。</p>
+        <p class="mt-4 text-sm font-semibold text-sky-800">對應公司：Intuit（INTU）</p>
+      </article>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="card-topline mb-5"></div>
+        <p class="text-xs font-extrabold tracking-widest text-sky-700">03 / 實體需求</p>
+        <h3 class="font-extrabold text-xl text-slate-900 mt-2 mb-3">訂單能否轉成現金？</h3>
+        <p class="text-slate-600 leading-relaxed">Keysight的訂單、營收及自由現金流同步成長，提供高階通訊與半導體測試投資需求的可量化驗證。</p>
+        <p class="mt-4 text-sm font-semibold text-sky-800">對應公司：Keysight（KEYS）</p>
+      </article>
+    </div>
+    <div class="rounded-xl bg-sky-50 border-l-4 border-sky-500 px-5 py-4 text-slate-700 leading-relaxed"><strong class="text-sky-900">研究主軸：</strong>使用者願不願意持續付費 → 企業能不能配置好資本 → 供應鏈訂單能不能轉成現金。三者是同一條AI價值鏈的不同驗收關卡，<strong>不能套用同一種估值邏輯</strong>。</div>
+  </section>
+
+  <section id="agent" class="mb-16" aria-labelledby="agent-heading">
+    <p class="chapter-kicker mb-2">第一章 / GOOGLE</p>
+    <h2 id="agent-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Gemini操作Mac：下一代入口與單位經濟</h2>
+    <div class="flex flex-wrap gap-2 mb-5"><span class="tag tag-observed">11/19 已正式宣布</span><span class="tag tag-historical">初期推出範圍有限</span></div>
+    <p class="section-lede mb-7">Google宣布Gemini Mac應用程式新增電腦操作功能：透過自然語言交辦多步驟任務，在獨立背景視窗操作本機檔案、桌面應用與網站，執行點擊、輸入、選單操作及填表。使用者可設定存取範圍、預覽與暫停，並在關鍵操作前確認。</p>
+    <div class="grid lg:grid-cols-3 gap-5 mb-6">
+      <article class="stat-card"><p class="text-sm font-bold text-sky-700 mb-3">首波可用條件</p><h3 class="font-extrabold text-lg text-slate-900">美國／英語環境</h3><p class="text-sm text-slate-600 leading-relaxed mt-2">Apple Silicon Mac、macOS Sequoia 15.0以上；適用個人帳戶的Google AI Plus、Pro或Ultra付費用戶。</p></article>
+      <article class="stat-card"><p class="text-sm font-bold text-sky-700 mb-3">真正的產品指標</p><h3 class="font-extrabold text-lg text-slate-900">成功率 × 成本 × 使用率</h3><p class="text-sm text-slate-600 leading-relaxed mt-2">任務完成率、每次成功任務的推論成本、人工覆核時間、付費使用頻率，而非僅看模型排名。</p></article>
+      <article class="stat-card"><p class="text-sm font-bold text-sky-700 mb-3">尚待解決的障礙</p><h3 class="font-extrabold text-lg text-slate-900">權限、隱私與審計</h3><p class="text-sm text-slate-600 leading-relaxed mt-2">Signal 11/20宣布在支援的行動系統限制AI代理螢幕擷取；這顯示治理挑戰，並非證明Gemini曾造成資料外洩。</p></article>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-5">
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-extrabold text-slate-800 mb-4">正向傳導：從操作能力走向營收</h3>
+        <ol class="space-y-3 text-slate-600 leading-relaxed list-decimal pl-5">
+          <li>跨應用任務完成率提高，帶來可量測的時間節省。</li>
+          <li>增加Google付費訂閱的使用價值、升級意願與留存。</li>
+          <li>企業部署擴展後，可能延伸Workspace與Cloud商機。</li>
+          <li>須由訂閱、企業採用及利潤率數字確認，不能直接認列為既有營收。</li>
+        </ol>
+      </article>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-extrabold text-slate-800 mb-4">競爭與治理：入口重分配</h3>
+        <ul class="rule-list text-slate-600 leading-relaxed">
+          <li><strong class="text-slate-800">Alphabet：</strong>使用量擴張不保證獲利增加，推論、客服與合規成本亦可能上升。</li>
+          <li><strong class="text-slate-800">Apple（AAPL）：</strong>需平衡第三方代理創新、OS權限控制、平台信任與原有互動入口。</li>
+          <li><strong class="text-slate-800">應用軟體商：</strong>席次與介面價值可能受壓；獨家數據、交易與審批流程更可能形成壁壘。</li>
+          <li><strong class="text-slate-800">企業採購：</strong>權限隔離、關鍵操作確認、存取日誌及審計能力將成為部署條件。</li>
+        </ul>
+      </article>
+    </div>
+    <div class="rounded-xl border border-slate-200 bg-white p-5 md:p-6">
+      <h3 class="font-extrabold text-slate-900 mb-3">一至兩年的驗證關卡</h3>
+      <div class="grid md:grid-cols-3 gap-4 text-sm leading-relaxed"><p><strong class="text-sky-800">普及：</strong>是否擴及美國英語以外市場與更多訂閱層級？</p><p><strong class="text-sky-800">變現：</strong>是否披露可比的付費轉換、留存或企業採用指標？</p><p><strong class="text-sky-800">失效條件：</strong>若用量成長但付費及利潤率無改善，技術進展不足以支持估值上修。</p></div>
+    </div>
+  </section>
+
+  <section id="intuit" class="mb-16" aria-labelledby="intuit-heading">
+    <p class="chapter-kicker mb-2">第二章 / INTUIT</p>
+    <h2 id="intuit-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">出售Mailchimp：高價併購後的資本紀律</h2>
+    <div class="flex flex-wrap gap-2 mb-5"><span class="tag tag-signed">11/19 已簽署最終協議</span><span class="tag tag-forecast">預計2027年初交割</span><span class="tag tag-historical">非已完成交易</span></div>
+    <p class="section-lede mb-7">Intuit與Bending Spoons簽署出售Mailchimp的最終協議，擬以約36.8億美元總對價處分業務。對照2021年約120億美元的收購對價，約為原交易對價的三成；但兩者差額<strong>不是</strong>可直接認列的當季會計虧損或現金損失。</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="stat-card"><p class="text-xs font-bold text-slate-500">2021年收購對價</p><p class="text-3xl font-extrabold big-number mt-2 text-slate-900">120 <span class="text-base">億美元</span></p><p class="text-xs mt-2 text-slate-500">歷史交易規模</p></div>
+      <div class="stat-card"><p class="text-xs font-bold text-slate-500">本次擬出售總對價</p><p class="text-3xl font-extrabold big-number mt-2 text-sky-800">36.8 <span class="text-base">億美元</span></p><p class="text-xs mt-2 text-amber-700">預計交易對價，未交割</p></div>
+      <div class="stat-card"><p class="text-xs font-bold text-slate-500">預計現金對價</p><p class="text-3xl font-extrabold big-number mt-2 text-slate-900">33.1 <span class="text-base">億美元</span></p><p class="text-xs mt-2 text-slate-500">不是簽約當下已收款</p></div>
+      <div class="stat-card"><p class="text-xs font-bold text-slate-500">預計股票對價</p><p class="text-3xl font-extrabold big-number mt-2 text-slate-900">3.68 <span class="text-base">億美元</span></p><p class="text-xs mt-2 text-slate-500">交割後有六個月出售限制</p></div>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-5 mb-1">
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex flex-wrap justify-between items-center gap-2 mb-3"><h3 class="font-extrabold text-xl text-slate-900">2027財年Q1：核心與非核心分化</h3><span class="tag tag-observed">已公布財報</span></div>
+        <div class="space-y-4 mt-5">
+          <div class="flex items-end justify-between border-b border-slate-100 pb-3 gap-3"><div><p class="text-sm text-slate-500">整體營收</p><p class="text-2xl font-extrabold text-slate-800 big-number">44 億美元</p></div><span class="font-bold text-sky-800">年增 12%</span></div>
+          <div class="flex items-end justify-between border-b border-slate-100 pb-3 gap-3"><div><p class="text-sm text-slate-500">QuickBooks Online Accounting</p><p class="text-2xl font-extrabold text-slate-800 big-number">14 億美元</p></div><span class="font-bold text-sky-800">年增 19%</span></div>
+          <div class="flex items-end justify-between border-b border-slate-100 pb-3 gap-3"><div><p class="text-sm text-slate-500">線上生態系</p><p class="text-2xl font-extrabold text-slate-800 big-number">24 億美元</p></div><span class="font-bold text-sky-800">年增 20%</span></div>
+          <div class="flex items-end justify-between gap-3"><div><p class="text-sm text-slate-500">Mailchimp</p><p class="text-2xl font-extrabold text-slate-800 big-number">3.13 億美元</p></div><span class="font-bold text-rose-700">年減 1%</span></div>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed mt-5">以上為不同口徑的業務／合併數字，不應將QuickBooks Online與線上生態系重複加總。</p>
+      </article>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div class="flex flex-wrap justify-between items-center gap-2 mb-3"><h3 class="font-extrabold text-xl text-slate-900">成長指引與資本配置</h3><span class="tag tag-forecast">公司預測</span></div>
+        <p class="text-sm text-slate-500 mt-4">2027財年全年營收成長預測</p>
+        <p class="text-4xl font-extrabold text-sky-800 mt-2 big-number">8%–9%</p>
+        <p class="text-sm text-slate-600 mt-2">由先前9%–10%下修，與<strong>Credit Karma業務假設調整</strong>有關；當前指引<strong>尚未計入未交割的Mailchimp出售案</strong>，公司預計交割時更新。</p>
+        <div class="soft-divider my-6"></div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-xs text-slate-500">現金與投資</p><p class="text-xl font-extrabold mt-1 text-slate-900">53 億美元</p></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-xs text-slate-500">總負債</p><p class="text-xl font-extrabold mt-1 text-slate-900">69 億美元</p></div>
+        </div>
+        <p class="text-xs text-slate-500 mt-2">兩項資產負債表數字截至2026/10/31。</p>
+        <p class="text-sm text-slate-600 leading-relaxed mt-4">2027財年Q1已回購約15億美元股票；公司計畫在出售案完成後於2027財年運用交易現金回購，<strong>仍屬未來安排</strong>。</p>
+      </article>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5">
+      <article class="rounded-xl bg-sky-50 border border-sky-100 p-6"><h3 class="text-lg font-extrabold text-sky-900 mb-3">可能改善的商業品質</h3><p class="text-sm leading-loose text-slate-700">資源集中QuickBooks、TurboTax、稅務、支付與AI財務流程；這些產品的客戶資料、專業合規及既有工作流程，可能擁有更高的差異化與客戶留存價值。仍須財報驗證，而不是既成AI獲利。</p></article>
+      <article class="rounded-xl bg-amber-50 border border-amber-100 p-6"><h3 class="text-lg font-extrabold text-amber-900 mb-3">必須避免的錯誤推論</h3><p class="text-sm leading-loose text-slate-700">36.8億美元不是已入帳現金；股票對價不等於即時變現；收購價與出售價之差不是本季會計損失。11/19財報後盤後股價約跌10%屬當時媒體報導，並非11/20正式收盤價，也無法單一歸因於出售案。</p></article>
+    </div>
+    <div class="mt-5 bg-white border border-slate-200 rounded-xl p-5 md:p-6"><h3 class="font-extrabold text-slate-900 mb-2">一至兩年：論點驗證與失效條件</h3><p class="text-sm text-slate-600 leading-loose">觀察實際交割條件、會計處理、更新後全年指引、QuickBooks核心有機成長、Credit Karma與出售後利潤率；以排除出售及回購影響的每股自由現金流檢驗經營品質。<strong>若成長只靠出售資產或縮減股數支撐，而核心現金流無法改善，應下修投資論點。</strong></p></div>
+  </section>
+
+  <section id="keysight" class="mb-16" aria-labelledby="keysight-heading">
+    <p class="chapter-kicker mb-2">第三章 / KEYSIGHT</p>
+    <h2 id="keysight-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">Keysight：需求寫在訂單，也寫在現金流</h2>
+    <div class="flex flex-wrap gap-2 mb-5"><span class="tag tag-observed">11/19 已公布2026財年Q4</span><span class="tag tag-forecast">2027財年Q1指引另列</span></div>
+    <p class="section-lede mb-7">高階通訊與半導體測試設備需求改善：2026財年Q4訂單達23.39億美元，高於19.94億美元營收，訂單出貨比約1.17倍；營業現金流與自由現金流亦較去年同期顯著提升。這能驗證實體需求，卻不能把全部成長歸因於AI，也不能把訂單視為已實現獲利。</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="stat-card"><p class="text-sm font-bold text-slate-500">季度營收</p><p class="text-3xl text-slate-900 font-extrabold mt-2 big-number">19.94 <span class="text-base">億美元</span></p><p class="text-sm mt-2 font-bold text-sky-700">年增約40%</p><p class="text-xs text-slate-500 mt-1">去年同期14.19億</p></div>
+      <div class="stat-card"><p class="text-sm font-bold text-slate-500">季度訂單</p><p class="text-3xl text-slate-900 font-extrabold mt-2 big-number">23.39 <span class="text-base">億美元</span></p><p class="text-sm mt-2 font-bold text-sky-700">年增約53%</p><p class="text-xs text-slate-500 mt-1">去年同期15.33億</p></div>
+      <div class="stat-card"><p class="text-sm font-bold text-slate-500">營業現金流</p><p class="text-3xl text-slate-900 font-extrabold mt-2 big-number">5.07 <span class="text-base">億美元</span></p><p class="text-sm mt-2 text-slate-600">去年同期2.25億</p><p class="text-xs text-slate-500 mt-1">實際現金流入</p></div>
+      <div class="stat-card"><p class="text-sm font-bold text-slate-500">自由現金流</p><p class="text-3xl text-slate-900 font-extrabold mt-2 big-number">4.65 <span class="text-base">億美元</span></p><p class="text-sm mt-2 text-slate-600">去年同期1.88億</p><p class="text-xs text-slate-500 mt-1">營收與現金同步改善</p></div>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <div class="grid md:grid-cols-3 gap-5 items-center">
+        <div><p class="text-xs tracking-widest font-extrabold text-slate-500">BOOK-TO-BILL</p><p class="text-5xl font-extrabold big-number text-sky-800 mt-2">1.17<span class="text-2xl">×</span></p><p class="text-xs mt-2 text-slate-500">23.39 ÷ 19.94，按當季訂單／營收計算</p></div>
+        <div class="md:col-span-2"><h3 class="text-lg font-extrabold text-slate-900 mb-2">前瞻訊號，而不是保證收入</h3><p class="text-sm text-slate-600 leading-loose">新接訂單高於當季認列營收，對後續需求具正面參考價值；仍受交貨排程、取消條款、專案集中下單與客戶資本支出週期影響，不能將單季比率永久外推，更不能把差額直接視為利潤。</p></div>
+      </div>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-5 mb-5">
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="font-extrabold text-lg mb-4">分部表現與每股盈餘</h3><div class="space-y-3 text-sm">
+        <div class="flex items-start justify-between gap-4 border-b border-slate-100 pb-3"><span class="text-slate-600">通訊解決方案（CSG）</span><span class="text-right font-bold text-slate-900">14.96 億美元<br><small class="text-sky-700 font-semibold">年增51%</small></span></div>
+        <div class="flex items-start justify-between gap-4 border-b border-slate-100 pb-3"><span class="text-slate-600">電子工業解決方案（EISG）</span><span class="text-right font-bold text-slate-900">4.98 億美元<br><small class="text-sky-700 font-semibold">年增16%</small></span></div>
+        <div class="flex items-start justify-between gap-4 border-b border-slate-100 pb-3"><span class="text-slate-600">非GAAP EPS</span><span class="text-right font-bold text-slate-900">3.61 美元<br><small class="text-slate-500 font-semibold">去年同期1.91美元</small></span></div>
+        <div class="flex items-start justify-between gap-4"><span class="text-slate-600">GAAP EPS</span><span class="text-right font-bold text-slate-900">2.82 美元</span></div>
+      </div></article>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><div class="flex flex-wrap items-center justify-between gap-2 mb-4"><h3 class="font-extrabold text-lg">2027財年Q1公司預測</h3><span class="tag tag-forecast">尚未實現</span></div>
+        <p class="text-sm text-slate-500 mt-4">營收指引</p><p class="text-3xl font-extrabold text-sky-800 mt-1 big-number">20.40–20.60 <span class="text-base">億美元</span></p>
+        <p class="text-sm text-slate-500 mt-6">非GAAP EPS指引</p><p class="text-3xl font-extrabold text-sky-800 mt-1 big-number">3.63–3.69 <span class="text-base">美元</span></p>
+        <p class="text-xs text-slate-500 leading-relaxed mt-6">以上為公司對下一季的預估區間，不應混入2026財年Q4已實現數據。</p>
+      </article>
+    </div>
+    <div class="rounded-xl border border-sky-200 bg-sky-50 p-5 md:p-6"><h3 class="font-extrabold text-sky-950 mb-2">產業傳導與限制</h3><p class="text-sm text-slate-700 leading-loose">高速互連、光學元件、資料中心網路與半導體系統驗證，提高測試與量測的重要性；然而商用通訊、航太國防、半導體、汽車及能源等市場均有貢獻，不能將Keysight約40%的本季營收成長全數歸屬AI。後續須排除併購、基期及集中採購影響，並檢查毛利率、應收帳款與訂單持續性。</p></div>
+  </section>
+
+  <section id="metrics" class="mb-16" aria-labelledby="metrics-heading">
+    <p class="chapter-kicker mb-2">數據實證 / 財報與協議</p>
+    <h2 id="metrics-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">可量化的證據：成長率、訂單與現金</h2>
+    <p class="section-lede mb-6">以下圖表僅以報告列明的數字繪製。Keysight採2025及2026財年第四季同期比較；Intuit採2027財年第一季年增率，兩家公司的財年及統計口徑<strong>不可互換</strong>。</p>
+    <div class="grid lg:grid-cols-2 gap-5">
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0"><h3 class="font-extrabold text-lg text-slate-900">Intuit不同業務營收年增率</h3><p class="text-xs text-slate-500 mt-1 mb-4">2027財年Q1 · 單位：%（同年同期比較）</p><div class="chart-shell"><canvas id="intuitGrowthChart" role="img" aria-label="Intuit整體營收年增12%、QuickBooks Online年增19%、線上生態系年增20%、Mailchimp年減1%"></canvas></div><div id="intuitChartFallback" class="chart-fallback">整體 +12%；QuickBooks Online Accounting +19%；線上生態系 +20%；Mailchimp −1%。</div><p class="text-xs text-slate-500 mt-4 leading-relaxed">QuickBooks Online Accounting屬於線上生態系相關業務，不可將此圖中不同範圍重複相加。</p></article>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0"><h3 class="font-extrabold text-lg text-slate-900">Keysight營收與訂單同期對照</h3><p class="text-xs text-slate-500 mt-1 mb-4">財年Q4 · 單位：億美元</p><div class="chart-shell"><canvas id="keysightOrdersChart" role="img" aria-label="Keysight 2025及2026財年第四季營收為14.19與19.94億美元，訂單為15.33與23.39億美元"></canvas></div><div id="ordersChartFallback" class="chart-fallback">營收：2025財年Q4 14.19億、2026財年Q4 19.94億；訂單：15.33億與23.39億。</div><p class="text-xs text-slate-500 mt-4 leading-relaxed">訂單較同期增約53%、營收增約40%；訂單高於當季營收並非即時現金收益。</p></article>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0 lg:col-span-2"><div class="grid lg:grid-cols-[1fr_1.5fr] gap-6 items-center"><div><h3 class="font-extrabold text-xl text-slate-900">Keysight現金流同步改善</h3><p class="text-sm text-slate-600 mt-3 leading-loose">相較單看調整後EPS，營業現金流及自由現金流與營收、訂單同步改善，更能反映報告所重視的需求品質。不過，單季強勁表現尚不足以證明可持續多年。</p><div class="mt-4 rounded-xl bg-sky-50 p-4"><p class="text-xs font-bold text-sky-700">自由現金流</p><p class="text-3xl font-extrabold mt-1 text-sky-900">4.65 億美元</p><p class="text-xs text-slate-600 mt-1">去年同期1.88億美元</p></div></div><div class="min-w-0"><p class="text-xs text-slate-500 mb-3">2025／2026財年Q4 · 單位：億美元</p><div class="chart-shell"><canvas id="keysightCashChart" role="img" aria-label="Keysight營業現金流2025與2026財年第四季為2.25與5.07億美元，自由現金流為1.88與4.65億美元"></canvas></div><div id="cashChartFallback" class="chart-fallback">營業現金流：2.25億 → 5.07億美元；自由現金流：1.88億 → 4.65億美元。</div></div></div></article>
+    </div>
+    <article class="bg-white rounded-lg shadow-lg p-5 sm:p-6 mb-6" aria-labelledby="data-heading">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-5"><div><h3 id="data-heading" class="font-extrabold text-xl text-slate-900">報告數據與事件查詢表</h3><p class="text-sm text-slate-500 mt-1">可依公司／主題搜尋或篩選。數字、觀察日期及狀態均依本報告整理。</p></div><span id="resultCount" class="text-sm font-semibold text-sky-800" aria-live="polite">載入中</span></div>
+      <div class="filter-controls grid sm:grid-cols-[1fr_230px] gap-3 mb-4"><label class="block"><span class="sr-only">搜尋表格</span><input id="metricSearch" type="search" class="field" placeholder="搜尋公司、指標、數值或關鍵字…" autocomplete="off" aria-label="搜尋報告數據"></label><label class="block"><span class="sr-only">選擇公司</span><select id="companyFilter" class="field" aria-label="依公司篩選"><option value="all">全部公司／事件</option><option value="Alphabet">Alphabet / Google</option><option value="Intuit">Intuit</option><option value="Keysight">Keysight</option></select></label></div>
+      <div class="table-scroll" tabindex="0" aria-label="可水平捲動的報告數據表格"><table class="data-table"><thead><tr><th scope="col">公司</th><th scope="col">指標或事件</th><th scope="col">數值／狀況</th><th scope="col">口徑／期間</th><th scope="col">資訊狀態</th></tr></thead><tbody id="metricsTableBody"></tbody></table></div>
+      <p class="text-xs text-slate-500 leading-relaxed mt-4">表格不提供目標價或買進區間；交易公告、公司預測與已實現財務數字保留不同的標籤，以防混淆。</p>
+    </article>
+  </section>
+
+  <section id="framework" class="mb-16" aria-labelledby="framework-heading">
+    <p class="chapter-kicker mb-2">比較與配置 / 一至兩年</p>
+    <h2 id="framework-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">三家公司，不同的驗收時間軸</h2>
+    <p class="section-lede mb-7">Google的付費滲透可能落後於功能發布；Intuit的資本配置成果要在交割、成本調整與財測更新後觀察；Keysight的訂單相對前瞻，卻也可能較早反映景氣轉折。投資上不宜僅憑「AI受益」將三者置於同一估值籃子。</p>
+    <div class="grid md:grid-cols-3 gap-5 mb-8">
+      <article class="stat-card"><p class="chapter-kicker">ALPHABET / GOOGL、GOOG</p><h3 class="text-lg font-extrabold text-slate-900 mt-3">技術 → 付費 → 利潤</h3><p class="text-sm text-slate-600 leading-loose mt-3">關鍵變數是代理使用頻率、付費轉換、訂閱留存、推論成本及企業安全接受度。</p><div class="mt-4 pt-4 border-t border-slate-100 text-sm"><strong class="text-sky-800">尚未驗收：</strong><span class="text-slate-600">代理對獨立營收與利潤的貢獻。</span></div></article>
+      <article class="stat-card"><p class="chapter-kicker">INTUIT / INTU</p><h3 class="text-lg font-extrabold text-slate-900 mt-3">資產重整 → 有機成長</h3><p class="text-sm text-slate-600 leading-loose mt-3">追蹤出售後的核心成長、營業利潤率、費用控制及排除回購後的每股自由現金流品質。</p><div class="mt-4 pt-4 border-t border-slate-100 text-sm"><strong class="text-sky-800">尚未驗收：</strong><span class="text-slate-600">Mailchimp交割與重整後的營運改善。</span></div></article>
+      <article class="stat-card"><p class="chapter-kicker">KEYSIGHT / KEYS</p><h3 class="text-lg font-extrabold text-slate-900 mt-3">訂單 → 收入 → 現金</h3><p class="text-sm text-slate-600 leading-loose mt-3">優先檢查連續2至3季訂單出貨比、分部需求、應收帳款、毛利率及自由現金流。</p><div class="mt-4 pt-4 border-t border-slate-100 text-sm"><strong class="text-sky-800">尚未驗收：</strong><span class="text-slate-600">強勁訂單是否跨越單一採購週期。</span></div></article>
+    </div>
+    <h3 class="text-xl font-extrabold text-slate-900 mb-4">三種投資情境</h3>
+    <div class="grid lg:grid-cols-3 gap-4">
+      <article class="scenario"><h3 class="bg-sky-100 text-sky-900">基本情境</h3><div>AI持續發展，市場提高對成長品質的要求。代理逐步增加付費價值，Intuit依預期重整核心業務，Keysight接單轉收入但年成長率可能從高基期回落。<strong>依實際財報驗證逐步調整配置。</strong></div></article>
+      <article class="scenario"><h3 class="bg-emerald-100 text-emerald-900">樂觀情境</h3><div>AI代理穩定進入企業工作流程、付費擴展；Intuit出售後核心成長及利潤率改善；Keysight連續數季保持健康的訂單與現金回收。三者共振時，代表AI收益可能向更多產業擴散。</div></article>
+      <article class="scenario"><h3 class="bg-rose-100 text-rose-900">悲觀情境</h3><div>代理因權限、可靠度及成本而難普及，軟體商面對既有功能被取代與資本效率壓力，設備採購因企業IT或資料中心支出收縮而延後。應重新檢驗估值、負債及現金流。</div></article>
+    </div>
+  </section>
+
+  <section id="risks" class="mb-10" aria-labelledby="risks-heading">
+    <p class="chapter-kicker mb-2">持續追蹤 / 投資紀律</p>
+    <h2 id="risks-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">從論點到失效條件的追蹤清單</h2>
+    <div class="grid lg:grid-cols-2 gap-5 mb-6">
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-extrabold text-slate-900 mb-4">驗收節奏</h3>
+        <div class="space-y-4">
+          <div class="flex gap-3"><div class="flex-none w-8 h-8 bg-sky-100 text-sky-800 rounded-full flex items-center justify-center font-extrabold text-sm">1</div><p class="text-sm text-slate-600 leading-loose"><strong class="text-slate-900">建立假設：</strong>分清產品發布、已簽約交易、公司財測與財報實現值；寫下最重要的變現因果鏈。</p></div>
+          <div class="flex gap-3"><div class="flex-none w-8 h-8 bg-sky-100 text-sky-800 rounded-full flex items-center justify-center font-extrabold text-sm">2</div><p class="text-sm text-slate-600 leading-loose"><strong class="text-slate-900">按季檢視：</strong>用可比較的付費、核心成長、訂單、毛利與自由現金流確認方向，不因單次新聞加碼。</p></div>
+          <div class="flex gap-3"><div class="flex-none w-8 h-8 bg-sky-100 text-sky-800 rounded-full flex items-center justify-center font-extrabold text-sm">3</div><p class="text-sm text-slate-600 leading-loose"><strong class="text-slate-900">檢討失效：</strong>連續數季偏離原假設，重新評估而非無條件攤平；估值應另以同時點報價與預估驗證。</p></div>
+        </div>
+      </article>
+      <article class="bg-white rounded-lg shadow-lg p-6 mb-6"><h3 class="text-xl font-extrabold text-slate-900 mb-4">跨產業共同風險</h3><ul class="rule-list text-sm text-slate-600 leading-loose"><li><strong class="text-slate-900">高利率：</strong>壓縮成長股較遠期現金流的折現價值。</li><li><strong class="text-slate-900">預算收緊：</strong>企業IT、資料中心支出減速，可能同步拖慢代理部署及設備訂單。</li><li><strong class="text-slate-900">成本錯配：</strong>推論、合規及研發投入先升，付費與獲利未及時跟上。</li><li><strong class="text-slate-900">週期與估值：</strong>強勁單季財報不代表連續高成長或股價仍便宜。</li></ul></article>
+    </div>
+    <div class="border border-sky-200 bg-sky-50 rounded-xl p-6 md:p-8">
+      <h3 class="text-lg md:text-xl font-extrabold text-sky-950 mb-4">最終判斷：三個必答問題</h3>
+      <div class="grid md:grid-cols-3 gap-4"><p class="font-semibold text-slate-800 leading-relaxed"><span class="text-sky-700 mr-2">01.</span>AI真的幫使用者完成工作，且值得持續付費嗎？</p><p class="font-semibold text-slate-800 leading-relaxed"><span class="text-sky-700 mr-2">02.</span>管理團隊真的把資本投向更高報酬的業務嗎？</p><p class="font-semibold text-slate-800 leading-relaxed"><span class="text-sky-700 mr-2">03.</span>成長真的進入訂單、營業現金流與自由現金流嗎？</p></div>
+      <p class="text-sm text-slate-600 mt-5 leading-loose">能持續以可驗證數字回答這三題的公司，更有機會面對AI產業接下來的估值波動。本報告缺乏同一時點可比報價與合理價值估算，故不提供目標價或買進區間。</p>
+    </div>
+  </section>
+</main>
+<footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p>&copy; 巴菲特AI價值投資-AI投資的價值驗收。僅供參考，不構成投資建議。</p>
+    <p class="text-xs mt-1">資料來源：基於網路中Google AI代理、Intuit與Keysight相關公開資料 (2026年11月21日)。</p>
+  </div>
+</footer>
+<script>
+  'use strict';
+  const productData = [
+    { company: 'Alphabet', metric: 'Gemini Mac 電腦操作功能', value: '2026/11/19 正式宣布', period: '美國／英語；Apple Silicon、macOS 15.0以上；AI Plus／Pro／Ultra個人付費帳戶', status: '已公告' },
+    { company: 'Intuit', metric: 'Mailchimp 2021年收購對價', value: '約120億美元', period: '2021年／歷史交易', status: '歷史事實' },
+    { company: 'Intuit', metric: 'Mailchimp 本次擬出售總對價', value: '約36.8億美元', period: '2026/11/19最終協議；預計2027年初交割', status: '已簽約未交割' },
+    { company: 'Intuit', metric: 'Mailchimp 擬收現金對價', value: '約33.1億美元', period: '待交割後取得', status: '已簽約未交割' },
+    { company: 'Intuit', metric: 'Mailchimp 股票對價', value: '約3.68億美元', period: '交割時公允價值可變；交割後六個月限制出售', status: '已簽約未交割' },
+    { company: 'Intuit', metric: '合併營收', value: '約44億美元；年增12%', period: '2027財年Q1', status: '已公布財報' },
+    { company: 'Intuit', metric: 'QuickBooks Online Accounting營收', value: '約14億美元；年增19%', period: '2027財年Q1', status: '已公布財報' },
+    { company: 'Intuit', metric: '線上生態系營收', value: '約24億美元；年增20%', period: '2027財年Q1', status: '已公布財報' },
+    { company: 'Intuit', metric: 'Mailchimp營收', value: '約3.13億美元；年減1%', period: '2027財年Q1', status: '已公布財報' },
+    { company: 'Intuit', metric: '全年營收成長指引', value: '8%–9%（原9%–10%）', period: '2027財年；Credit Karma假設調整，未計入出售影響', status: '公司預測' },
+    { company: 'Intuit', metric: '現金與投資／總負債', value: '約53億／69億美元', period: '截至2026/10/31', status: '已公布財報' },
+    { company: 'Intuit', metric: '單季股票回購', value: '約15億美元', period: '2027財年Q1；不含未來出售所得擬回購', status: '已公布財報' },
+    { company: 'Keysight', metric: '季度營收', value: '19.94億美元；年增約40%', period: '2026財年Q4；去年同期14.19億美元', status: '已公布財報' },
+    { company: 'Keysight', metric: '季度訂單', value: '23.39億美元；年增約53%', period: '2026財年Q4；去年同期15.33億美元', status: '已公布財報' },
+    { company: 'Keysight', metric: '訂單出貨比', value: '約1.17倍', period: '2026財年Q4；23.39 ÷ 19.94計算', status: '依財報計算' },
+    { company: 'Keysight', metric: '營業現金流', value: '5.07億美元', period: '2026財年Q4；去年同期2.25億美元', status: '已公布財報' },
+    { company: 'Keysight', metric: '自由現金流', value: '4.65億美元', period: '2026財年Q4；去年同期1.88億美元', status: '已公布財報' },
+    { company: 'Keysight', metric: '非GAAP／GAAP EPS', value: '3.61／2.82美元', period: '2026財年Q4；非GAAP去年同期1.91美元', status: '已公布財報' },
+    { company: 'Keysight', metric: '通訊解決方案（CSG）營收', value: '14.96億美元；年增51%', period: '2026財年Q4', status: '已公布財報' },
+    { company: 'Keysight', metric: '電子工業解決方案（EISG）營收', value: '4.98億美元；年增16%', period: '2026財年Q4', status: '已公布財報' },
+    { company: 'Keysight', metric: '下一季營收指引', value: '20.40–20.60億美元', period: '2027財年Q1', status: '公司預測' },
+    { company: 'Keysight', metric: '下一季非GAAP EPS指引', value: '3.63–3.69美元', period: '2027財年Q1', status: '公司預測' }
+  ];
+  const statusTagClass = {
+    '已公告': 'tag-observed',
+    '歷史事實': 'tag-historical',
+    '已簽約未交割': 'tag-signed',
+    '已公布財報': 'tag-observed',
+    '依財報計算': 'tag-observed',
+    '公司預測': 'tag-forecast'
+  };
+  const metricSearch = document.getElementById('metricSearch');
+  const companyFilter = document.getElementById('companyFilter');
+  const metricsTableBody = document.getElementById('metricsTableBody');
+  const resultCount = document.getElementById('resultCount');
+  const normalize = (input) => String(input).normalize('NFKC').toLocaleLowerCase('zh-Hant');
+  function renderMetricsTable() {
+    const keyword = normalize(metricSearch.value.trim());
+    const company = companyFilter.value;
+    const items = productData.filter(row => (company === 'all' || row.company === company) && (!keyword || normalize(Object.values(row).join(' ')).includes(keyword)));
+    const fragment = document.createDocumentFragment();
+    items.forEach(row => {
+      const tr = document.createElement('tr');
+      [row.company === 'Alphabet' ? 'Alphabet / Google' : row.company, row.metric, row.value, row.period].forEach((text, index) => {
+        const td = document.createElement('td');
+        td.textContent = text;
+        if (index === 2) td.className = 'metric-value';
+        if (index === 0) td.className = 'font-semibold text-slate-800';
+        tr.appendChild(td);
+      });
+      const statusTD = document.createElement('td');
+      const badge = document.createElement('span');
+      badge.className = 'tag ' + (statusTagClass[row.status] || 'tag-historical');
+      badge.textContent = row.status;
+      statusTD.appendChild(badge);
+      tr.appendChild(statusTD);
+      fragment.appendChild(tr);
+    });
+    if (items.length === 0) {
+      const tr = document.createElement('tr');
+      const td = document.createElement('td');
+      td.colSpan = 5;
+      td.className = 'text-center text-slate-500 py-7';
+      td.textContent = '找不到符合條件的資料，請調整搜尋文字或公司篩選。';
+      tr.appendChild(td);
+      fragment.appendChild(tr);
+    }
+    metricsTableBody.replaceChildren(fragment);
+    resultCount.textContent = '顯示 ' + items.length + '／' + productData.length + ' 筆資料';
+  }
+  metricSearch.addEventListener('input', renderMetricsTable);
+  companyFilter.addEventListener('change', renderMetricsTable);
+  renderMetricsTable();
+
+  const toggle = document.getElementById('mobileMenuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function setMenuOpen(open) {
+    mobileMenu.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+    document.getElementById('menuIcon').innerHTML = open ? '<path d="M6 6l12 12M18 6 6 18"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+  }
+  toggle.addEventListener('click', () => setMenuOpen(mobileMenu.classList.contains('hidden')));
+  document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenuOpen(false); });
+  document.addEventListener('click', e => { if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !toggle.contains(e.target)) setMenuOpen(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth >= 1024) setMenuOpen(false); });
+
+  const sectionIds = ['overview','agent','intuit','keysight','metrics','framework','risks'];
+  const navLinks = [...document.querySelectorAll('[data-nav]')];
+  function setActiveNav(id) {
+    navLinks.forEach(link => {
+      const selected = link.dataset.nav === id;
+      link.classList.toggle('active-nav-link', selected);
+      link.classList.toggle('inactive-nav-link', !selected);
+      if (selected) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  const sections = sectionIds.map(id => document.getElementById(id));
+  if ('IntersectionObserver' in window) {
+    const inView = new Map();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) inView.set(entry.target.id, entry.boundingClientRect.top); else inView.delete(entry.target.id); });
+      if (inView.size) {
+        const candidate = [...inView.entries()].sort((a, b) => Math.abs(a[1]) - Math.abs(b[1]))[0][0];
+        setActiveNav(candidate);
+      }
+    }, { rootMargin: '-80px 0px -66% 0px', threshold: 0 });
+    sections.forEach(section => observer.observe(section));
+  }
+  navLinks.forEach(link => link.addEventListener('click', () => setActiveNav(link.dataset.nav)));
+  setActiveNav('overview');
+
+  function showFallback(canvasId, fallbackId) {
+    const canvas = document.getElementById(canvasId);
+    if (canvas) canvas.parentElement.style.display = 'none';
+    document.getElementById(fallbackId).style.display = 'block';
+  }
+  function initCharts() {
+    if (typeof Chart === 'undefined') {
+      [['intuitGrowthChart','intuitChartFallback'],['keysightOrdersChart','ordersChartFallback'],['keysightCashChart','cashChartFallback']].forEach(pair => showFallback(...pair));
+      return;
+    }
+    Chart.defaults.font.family = 'ui-sans-serif,system-ui,"Noto Sans TC","PingFang TC",sans-serif';
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = '#52677a';
+    const grid = 'rgba(148, 163, 184, .18)';
+    const common = {
+      responsive: true, maintainAspectRatio: false,
+      animation: { duration: 650 },
+      plugins: { legend: { labels: { usePointStyle: true, boxWidth: 9, padding: 17 } }, tooltip: { backgroundColor: '#0f2e43', padding: 11 } },
+      scales: { x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: false } }, y: { grid: { color: grid }, beginAtZero: true, ticks: { maxTicksLimit: 6 } } }
+    };
+    const formatAxis = (suffix) => ({ callback: value => value + suffix });
+    try {
+      new Chart(document.getElementById('intuitGrowthChart'), {
+        type: 'bar',
+        data: { labels: [['Intuit','整體'], ['QuickBooks','Online'], ['線上','生態系'], 'Mailchimp'], datasets: [{ label: '營收年增率（%）', data: [12,19,20,-1], backgroundColor: ['#0284c7','#0369a1','#38bdf8','#f43f5e'], borderRadius: 5, maxBarThickness: 55 }] },
+        options: { ...common, plugins: { ...common.plugins, legend: { display: false }, tooltip: { callbacks: { label: context => '年增率：' + context.parsed.y + '%' } } }, scales: { x: common.scales.x, y: { ...common.scales.y, beginAtZero: false, suggestedMin: -5, suggestedMax: 25, ticks: { ...formatAxis('%'), maxTicksLimit: 7 } } } }
+      });
+    } catch (error) { console.warn('Intuit chart unavailable:', error); showFallback('intuitGrowthChart','intuitChartFallback'); }
+    try {
+      new Chart(document.getElementById('keysightOrdersChart'), {
+        type: 'bar',
+        data: { labels: ['營收','訂單'], datasets: [ { label: '2025財年Q4', data: [14.19,15.33], backgroundColor: '#94a3b8', borderRadius: 5, maxBarThickness: 70 }, { label: '2026財年Q4', data: [19.94,23.39], backgroundColor: '#0284c7', borderRadius: 5, maxBarThickness: 70 } ] },
+        options: { ...common, plugins: { ...common.plugins, tooltip: { callbacks: { label: context => context.dataset.label + '：' + context.parsed.y.toFixed(2) + ' 億美元' } } }, scales: { x: common.scales.x, y: { ...common.scales.y, ticks: { ...formatAxis(''), maxTicksLimit: 6 }, title: { display: true, text: '億美元' } } } }
+      });
+    } catch (error) { console.warn('Orders chart unavailable:', error); showFallback('keysightOrdersChart','ordersChartFallback'); }
+    try {
+      new Chart(document.getElementById('keysightCashChart'), {
+        type: 'bar',
+        data: { labels: ['營業現金流','自由現金流'], datasets: [ { label: '2025財年Q4', data: [2.25,1.88], backgroundColor: '#94a3b8', borderRadius: 5, maxBarThickness: 70 }, { label: '2026財年Q4', data: [5.07,4.65], backgroundColor: '#0284c7', borderRadius: 5, maxBarThickness: 70 } ] },
+        options: { ...common, plugins: { ...common.plugins, tooltip: { callbacks: { label: context => context.dataset.label + '：' + context.parsed.y.toFixed(2) + ' 億美元' } } }, scales: { x: common.scales.x, y: { ...common.scales.y, title: { display: true, text: '億美元' } } } }
+      });
+    } catch (error) { console.warn('Cashflow chart unavailable:', error); showFallback('keysightCashChart','cashChartFallback'); }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initCharts);
+  else initCharts();
+</script>
+</body>
+</html>
