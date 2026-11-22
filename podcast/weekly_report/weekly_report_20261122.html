@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="2026年11月16日至20日美股市場回顧：指數修正、輝達財報與監管、Anthropic IPO、AI資本支出、消費及醫療股。搭配圖表與可搜尋事件表。">
+  <title>巴菲特AI價值投資-美股市場週報 (2026/11/16~11/20)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 86px;
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: #fafaf9;
+      overflow-x: hidden;
+    }
+
+    .hero-mesh {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: radial-gradient(circle at 76% 16%, rgba(14, 165, 233, .25), transparent 35%), radial-gradient(circle at 5% 85%, rgba(56, 189, 248, .19), transparent 40%), linear-gradient(130deg, #0c253a, #0f3852 53%, #075985);
+    }
+
+    .hero-mesh::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    .hero-mesh>.hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .chart-shell {
+      position: relative;
+      height: 295px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .chart-shell-tall {
+      height: 320px;
+    }
+
+    @media (max-width: 640px) {
+      .chart-shell {
+        height: 255px;
+      }
+
+      .chart-shell-tall {
+        height: 285px;
+      }
+    }
+
+    .active-nav-link {
+      color: #0369a1;
+      font-weight: 700;
+      background: #e0f2fe;
+    }
+
+    .inactive-nav-link {
+      color: #475569;
+      font-weight: 500;
+    }
+
+    .inactive-nav-link:hover {
+      color: #0369a1;
+      background: #f0f9ff;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 11px;
+      border-radius: 8px;
+      transition: background .15s, color .15s;
+      white-space: nowrap;
+    }
+
+    .number-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #e0f2fe;
+      color: #075985;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .metric-hero {
+      border: 1px solid rgba(255, 255, 255, .22);
+      background: rgba(255, 255, 255, .08);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+
+    .data-table {
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 850px;
+      width: 100%;
+    }
+
+    .data-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #e0f2fe;
+      color: #164e63;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 14px 16px;
+      border-bottom: 1px solid #bae6fd;
+    }
+
+    .data-table td {
+      border-bottom: 1px solid #e7e5e4;
+      padding: 15px 16px;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .data-table tbody tr:hover {
+      background: #f0f9ff;
+    }
+
+    .data-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .report-section {
+      scroll-margin-top: 88px;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid #0284c7;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+
+<body class="text-stone-800 antialiased">
+  <header id="top" class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-[68px] flex items-center justify-between gap-4">
+        <a href="#top" class="shrink-0 flex items-center gap-3 text-stone-800" aria-label="返回頁首">
+          <span
+            class="flex items-center justify-center w-9 h-9 rounded-xl bg-sky-800 text-white font-extrabold text-lg">AI</span>
+          <span class="min-w-0"><span
+              class="block font-extrabold text-sm sm:text-base leading-tight">巴菲特AI價值投資</span><span
+              class="block text-[11px] text-slate-500 tracking-wide">Podcast · 美股市場週報</span></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-1" aria-label="頁面章節導覽">
+          <a class="nav-link inactive-nav-link" href="#market" data-nav="market">市場總覽</a>
+          <a class="nav-link inactive-nav-link" href="#macro" data-nav="macro">總經與風險</a>
+          <a class="nav-link inactive-nav-link" href="#themes" data-nav="themes">十大焦點</a>
+          <a class="nav-link inactive-nav-link" href="#data" data-nav="data">數據與事件</a>
+          <a class="nav-link inactive-nav-link" href="#outlook" data-nav="outlook">投資觀察</a>
+        </nav>
+        <button id="mobile-menu-button" type="button"
+          class="lg:hidden inline-flex p-2 rounded-lg text-slate-700 border border-stone-200 bg-white"
+          aria-controls="mobile-menu" aria-expanded="false" aria-label="開啟章節選單">
+          <svg id="menu-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+      <nav id="mobile-menu" class="hidden lg:hidden border-t border-stone-100 pb-3 pt-2" aria-label="手機版章節導覽">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-1">
+          <a class="nav-link inactive-nav-link" href="#market" data-nav="market">市場總覽</a>
+          <a class="nav-link inactive-nav-link" href="#macro" data-nav="macro">總經與風險</a>
+          <a class="nav-link inactive-nav-link" href="#themes" data-nav="themes">十大焦點</a>
+          <a class="nav-link inactive-nav-link" href="#data" data-nav="data">數據與事件</a>
+          <a class="nav-link inactive-nav-link" href="#outlook" data-nav="outlook">投資觀察</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading"
+          class="text-3xl sm:text-4xl md:text-5xl font-extrabold max-w-5xl leading-tight tracking-tight">
+          AI信仰遭遇考驗：輝達財報亮眼卻重挫，科技股進入估值修正</h1>
+        <p class="mt-6 max-w-4xl text-sky-50/90 text-base sm:text-lg leading-8">回顧 <strong
+            class="text-white">2026/11/16～11/20</strong>：美股三大指數同步大跌，輝達營收成長與股價走勢呈現強烈反差。聯準會利率展望、AI資本支出回收期與企業治理，正重新決定市場願意支付的估值。本頁亦整理
+          <strong class="text-white">11/23～11/27</strong> 交易週值得追蹤的訊號。
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-8 max-w-4xl" aria-label="觀察期間三大指數週跌幅">
+          <div class="metric-hero">
+            <p class="text-sm text-sky-100 mb-1">標普500｜週變動</p>
+            <p class="text-3xl sm:text-4xl font-bold tabular-nums">−8.6%</p>
+            <p class="mt-2 text-xs text-sky-100/80">11/20 收盤 6,910.39 點</p>
+          </div>
+          <div class="metric-hero">
+            <p class="text-sm text-sky-100 mb-1">道瓊工業｜週變動</p>
+            <p class="text-3xl sm:text-4xl font-bold tabular-nums">−8.0%</p>
+            <p class="mt-2 text-xs text-sky-100/80">11/20 收盤 48,147.33 點</p>
+          </div>
+          <div class="metric-hero">
+            <p class="text-sm text-sky-100 mb-1">那斯達克｜週變動</p>
+            <p class="text-3xl sm:text-4xl font-bold tabular-nums">−10.0%</p>
+            <p class="mt-2 text-xs text-sky-100/80">11/20 收盤 22,617.73 點</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="market" class="report-section pt-12 md:pt-16" aria-labelledby="market-title">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-5">
+          <h2 id="market-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">一、上週市場總覽
+          </h2><span class="text-sm text-slate-500 mb-6">數據觀察期間：2026/11/16～11/20</span>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3 min-w-0">
+            <div class="flex items-baseline justify-between flex-wrap gap-2 mb-4">
+              <h3 class="font-bold text-lg">三大指數單週漲跌幅</h3><span class="text-xs text-rose-700 font-semibold">單位：%</span>
+            </div>
+            <div class="chart-shell chart-shell-tall"><canvas id="indicesChart" aria-label="標普500、道瓊工業與那斯達克指數單週下跌幅度的長條圖"
+                role="img"></canvas></div>
+            <p class="text-xs text-slate-500 mt-2 leading-6">圖表僅呈現原報告載列的週跌幅。負數代表下跌；不代表未來報酬。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2 min-w-0">
+            <h3 class="font-bold text-lg mb-4">11月20日收盤快照</h3>
+            <div class="space-y-1">
+              <div class="flex items-center justify-between gap-3 py-3 border-b border-stone-100"><span
+                  class="text-slate-600">標普500</span><strong class="text-lg tabular-nums">6,910.39 <span
+                    class="text-xs font-normal">點</span></strong></div>
+              <div class="flex items-center justify-between gap-3 py-3 border-b border-stone-100"><span
+                  class="text-slate-600">道瓊工業</span><strong class="text-lg tabular-nums">48,147.33 <span
+                    class="text-xs font-normal">點</span></strong></div>
+              <div class="flex items-center justify-between gap-3 py-3 border-b border-stone-100"><span
+                  class="text-slate-600">那斯達克</span><strong class="text-lg tabular-nums">22,617.73 <span
+                    class="text-xs font-normal">點</span></strong></div>
+            </div>
+            <div class="bg-rose-50 border-l-4 border-rose-400 rounded-r-lg p-4 mt-6">
+              <p class="font-bold text-rose-800 mb-2">市場進入估值壓力期</p>
+              <p class="text-sm leading-7 text-slate-700">報告指出，標普500與道瓊進入距前高逾10%的修正區間；那斯達克該週表現為2020年3月以來最差，年初至今報酬轉負。</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 border-l-4 border-sky-600">
+          <p class="text-xl sm:text-2xl font-bold text-stone-800 leading-snug">財報優於預期，不保證股價上漲。</p>
+          <p class="text-slate-700 mt-3 leading-7">
+            報告的核心論點是：企業能創造多少未來現金，與投資人願意付出多少價格，必須分開評估。利率、信心與治理風險同時變動時，股價波動可能超越基本面變化。</p>
+        </div>
+      </section>
+
+      <section id="macro" class="report-section pt-10 md:pt-12" aria-labelledby="macro-title">
+        <h2 id="macro-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">二、總體經濟與地緣政治
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-xs font-bold text-sky-700 mb-2">利率與通膨</p>
+            <h3 class="text-xl font-bold mb-3">升息預期重新壓抑估值</h3>
+            <p class="text-3xl font-extrabold text-sky-800 tabular-nums">3.75%～4.00%</p>
+            <p class="text-xs text-slate-500 mt-1">10月會議紀錄所載當時利率區間</p>
+            <p class="leading-7 text-slate-700 mt-4 text-sm">
+              11月18日公布的會議紀錄顯示，官員討論後續升息可能性；這是政策訊號，<strong>不是本週已升息的事實</strong>。長期成長類股對折現率變化特別敏感。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <p class="text-xs font-bold text-sky-700 mb-2">美國消費</p>
+            <h3 class="text-xl font-bold mb-3">零售成長放慢，但尚未失速</h3>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="rounded-lg bg-sky-50 p-3">
+                <p class="text-xs text-slate-600">10月月增</p>
+                <p class="text-2xl font-bold text-sky-800">+0.2%</p>
+              </div>
+              <div class="rounded-lg bg-stone-100 p-3">
+                <p class="text-xs text-slate-600">9月月增</p>
+                <p class="text-2xl font-bold text-stone-700">+0.8%</p>
+              </div>
+            </div>
+            <p class="leading-7 text-slate-700 mt-4 text-sm">11月17日公布的美國10月零售與餐飲銷售顯示消費仍有增長，但速度放緩。追蹤節慶檔期實際消費與零售業利潤。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 md:col-span-2 lg:col-span-1">
+            <p class="text-xs font-bold text-sky-700 mb-2">國際局勢與能源</p>
+            <h3 class="text-xl font-bold mb-3">外交宣言無法消除安全風險</h3>
+            <p class="leading-7 text-slate-700 text-sm">
+              報告提到，美中俄11月19日公布象徵性和平宣言，但缺乏具體裁軍安排；11月20日波蘭通報飛彈及疑似無人機事件。中東戰事與荷姆茲海峽、紅海航運威脅，持續構成能源與運輸成本風險。</p>
+            <p class="text-xs text-amber-800 font-semibold mt-4 rounded-lg bg-amber-50 p-3">傳導路徑：能源與運費波動 → 通膨 →
+              零售利潤與利率預期</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="themes" class="report-section pt-10 md:pt-12" aria-labelledby="themes-title">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-1">
+          <h2 id="themes-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+            三、投資人最關注的十大焦點</h2>
+          <p class="text-sm text-slate-500 mb-6">依原報告順序整理，狀態區分已發生、規劃及待查證</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-x-5" id="focus-cards">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-01">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">01</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">貨幣政策</p>
+                <h3 id="theme-01" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">聯準會升息壓力未退：估值定價基準改變
+                </h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">會議紀錄｜非升息決議</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">
+              11月18日公布的10月會議紀錄顯示，當時利率維持在3.75%～4.00%；多數官員認為若經濟按預期發展，仍可能需要進一步升息。部分官員亦討論通膨惡化時更大幅度升息的可能性。這並不是已宣布升息。</p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">
+                  長期獲利折現率上升，特別壓抑估值仰賴遠期成長的科技股。追蹤通膨、實際利率決議及企業獲利韌性，不把股價下跌自動視為買進理由。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-02">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">02</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">AI 晶片</p>
+                <h3 id="theme-02" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">輝達營收年增103%，股價仍遭大幅重估
+                </h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">已公布財報｜下一季為預測</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">
+              輝達11月17日公布2027會計年度第3季營收1,158億美元、年增103%；資料中心營收1,076億美元、年增110%。公司對下一季營收的預估約為1,300億美元（±3%），Vera
+              Rubin平台據報告已開始出貨。上週股價累計下跌約23%，11月20日單日跌約14%。</p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">強勁需求不等於股價合理。除成長率外，應檢視毛利率、現金流、客戶付款能力、AI投資回報與管理層穩定性。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-03">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">03</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">監管治理</p>
+                <h3 id="theme-03" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">輝達會計調查疑慮：仍屬初步報導</h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">媒體報導｜調查未定案</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">
+              11月20日媒體引述消息人士，稱美國SEC正在檢視輝達可能涉及的會計問題，市場亦關注地區營收分類、海外銷售、投融資結構，以及管理層交接帶來的治理不確定性。調查範圍與結果均未確定。</p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">調查不等於已違法，也不代表會計不實獲得證實。追蹤公司法定公告、監管說明及財務數據是否實際修正。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-04">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">04</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">AI 模型</p>
+                <h3 id="theme-04" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">Anthropic
+                  IPO首日走強，隔日回跌約9%</h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">報告記載已上市｜市場價格</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">
+              報告指出，Anthropic於11月19日以每股83美元發行、募資約810億美元；首日開盤111.50美元，收盤97.17美元，較發行價約漲17%，11月20日再跌約9%。上市期間估值一度約2兆美元（包含未歸屬員工股權口徑）。
+            </p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">IPO價格、首日交易價與長期企業價值不能混為一談。關注算力租賃成本、現金消耗、企業續約率及後續資金需求。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-05">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">05</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">雲端軟體</p>
+                <h3 id="theme-05" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">微軟推出6款AI模型，科技巨頭比拚效率
+                </h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">已發布產品｜成效為公司測試</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">
+              微軟11月17日在Ignite大會推出6款針對程式開發、資安、影像與語音等用途的AI模型；成本與效能優勢主要來自公司自身測試，不一定適用所有情境。報告並比較Alphabet、蘋果、亞馬遜、Meta及特斯拉的不同現金流和資本支出特性。
+            </p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">區別自有現金流、雲端變現能力與AI基建資本支出回收率。科技七巨頭的商業模式和風險並不相同。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-06">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">06</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">算力融資</p>
+                <h3 id="theme-06" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">SpaceX相關GPU融資工具完成定價
+                </h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">已完成定價｜設備預計交付</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">
+              Apollo與高盛11月20日宣布完成約440億美元優先及次順位債務工具定價，用於購置供SpaceX使用的GPU與設備，包括Vera
+              Rubin晶片。設備預計2027年上半年交付後再依租賃安排計費；這是設備資產融資及租賃架構，不能等同SpaceX新增440億美元普通公司債。</p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">已定價的融資不是已確認的設備服務收入。追蹤實際交付、設備折舊、使用率、租金、融資成本及服務現金流。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-07">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">07</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">自駕車</p>
+                <h3 id="theme-07" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">
+                  特斯拉德國Cybercab擴產仍是中長期計畫</h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">投資與產能目標｜未投產</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">
+              特斯拉11月16日宣布計畫於德國格林海德工廠再投入約30億歐元，長期規劃Cybercab年產能最高100萬輛；預計2027年上半年啟動建設、2029年開始生產。土地、工程、法規與自駕技術仍須驗證，尚無一般市場大規模商業銷售。
+            </p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">不能將規劃產能視為已完成交付或收入。汽車本業獲利與Cybercab選擇權價值應分開評估。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-08">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">08</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">美國消費</p>
+                <h3 id="theme-08" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">
+                  沃爾瑪、Target與TJX：銷售成長但成本仍高</h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">已公布財報｜交易傳聞未定</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">
+              沃爾瑪季度營收1,888.4億美元、年增5.2%，美國電商銷售成長23%，但燃油與運輸全年額外成本估計約20億美元；Target季度淨銷售270.7億美元、年增7.1%，EPS含約0.50美元關稅退稅一次性好處。TJX受銷售與展望支持；Wonder探索出售Grubhub仍為未確定消息。
+            </p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">檢視折扣、物流與燃油成本、會員黏著度、毛利率及扣除一次性收益後的獲利，而非只看營收成長。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-09">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">09</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">企業資安</p>
+                <h3 id="theme-09" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">Palo Alto
+                  Networks成長快速，擬拓展AI安全</h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">已公布財報｜收購意向</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">Palo Alto Networks
+              11月18日公布2027會計年度第1季營收34.45億美元、年增39%；下一代安全產品年度經常性收入97.3億美元、年增66%，並上調年度營運展望。公司另宣布有意收購Applied
+              Compute，尚不能當成已完成交易。</p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">資安需求有持續性，仍須評估估值、收購成本、GAAP獲利與實際自由現金流。</p>
+              </div>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 border border-stone-100 flex flex-col min-w-0"
+            aria-labelledby="theme-10">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="number-pill" aria-hidden="true">10</span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold text-sky-700 tracking-wide mb-1">醫療保健</p>
+                <h3 id="theme-10" class="text-lg sm:text-xl font-bold text-stone-800 leading-snug">禮來規劃收購與聯合健康訴訟：風險各異
+                </h3>
+              </div>
+            </div>
+            <p class="text-xs font-semibold text-slate-600 mb-3"><span
+                class="inline-block rounded-full bg-slate-100 px-3 py-1">擬議收購｜訴訟未定</span></p>
+            <p class="text-slate-700 leading-7 text-sm sm:text-base">禮來11月16日宣布擬以最高15億美元（含研發里程碑條件）收購Calytrix
+              Bio，其候選藥物尚未進入人體試驗；聯合健康11月20日傳出就2027年Medicare Advantage星級評等提告，結果仍未定。</p>
+            <div class="mt-auto pt-5">
+              <div class="rounded-lg border-l-4 border-sky-500 bg-sky-50/90 px-4 py-3">
+                <p class="text-xs font-bold text-sky-800 mb-1">投資觀察</p>
+                <p class="text-sm leading-6 text-slate-700">藥物研發失敗、專利與交易估值風險，和醫療保險的政策、支付與醫療費用風險不同；潛在交易金額不可直接計入已實現藥品收入。
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="data" class="report-section pt-10 md:pt-12" aria-labelledby="data-title">
+        <h2 id="data-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">四、企業數據與事件檢索
+        </h2>
+        <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-xs font-bold text-sky-700 mb-2">輝達 FY2027 Q3</p>
+            <p class="text-3xl font-extrabold text-stone-800 tabular-nums">1,158 <span class="text-base">億美元</span></p>
+            <p class="text-sm text-slate-600 mt-2">營收年增 <strong class="text-sky-700">103%</strong></p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-xs font-bold text-sky-700 mb-2">輝達 FY2027 Q3 資料中心</p>
+            <p class="text-3xl font-extrabold text-stone-800 tabular-nums">1,076 <span class="text-base">億美元</span></p>
+            <p class="text-sm text-slate-600 mt-2">營收年增 <strong class="text-sky-700">110%</strong>（為整體營收一部分）</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-xs font-bold text-sky-700 mb-2">SpaceX相關設備融資</p>
+            <p class="text-3xl font-extrabold text-stone-800 tabular-nums">440 <span class="text-base">億美元</span></p>
+            <p class="text-sm text-slate-600 mt-2">債務工具<strong>已定價</strong>，非設備已交付</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <p class="text-xs font-bold text-sky-700 mb-2">特斯拉德國投資規劃</p>
+            <p class="text-3xl font-extrabold text-stone-800 tabular-nums">30 <span class="text-base">億歐元</span></p>
+            <p class="text-sm text-slate-600 mt-2">屬<strong>未來投資計畫</strong>，非已實現收入</p>
+          </div>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-6 mb-4">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-3 min-w-0">
+            <h3 class="text-lg font-bold mb-2">輝達：已公布營收與下一季展望</h3>
+            <p class="text-sm text-slate-600 leading-6 mb-4">單位：億美元。下一季為公司指引，並非已實現營收；兩根長條代表不同會計季度。</p>
+            <div class="chart-shell"><canvas id="nvidiaChart" role="img"
+                aria-label="輝達FY2027第三季實際營收1158億美元及下一季營收指引1300億美元長條圖"></canvas></div>
+            <p class="text-xs text-slate-500 leading-6 mt-2">下一季指引：1,300億美元，允許上下浮動3%。圖中不將預測當作已交付或已認列的營收。</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 lg:col-span-2 min-w-0">
+            <h3 class="text-lg font-bold mb-4">美國消費與資安：業績判讀</h3>
+            <div class="space-y-4">
+              <div class="rounded-lg border border-stone-200 p-4">
+                <div class="flex justify-between gap-3"><span class="font-bold">Walmart</span><span
+                    class="text-sky-800 font-bold">+5.2% <span
+                      class="text-xs text-slate-600 font-normal">年增</span></span></div>
+                <p class="text-sm text-slate-600 mt-1">季度營收1,888.4億美元；美國電商成長23%，但全年額外運輸與燃油成本約20億美元。</p>
+              </div>
+              <div class="rounded-lg border border-stone-200 p-4">
+                <div class="flex justify-between gap-3"><span class="font-bold">Target</span><span
+                    class="text-sky-800 font-bold">+7.1% <span
+                      class="text-xs text-slate-600 font-normal">年增</span></span></div>
+                <p class="text-sm text-slate-600 mt-1">季度淨銷售270.7億美元；EPS含約0.50美元一次性關稅退稅。</p>
+              </div>
+              <div class="rounded-lg border border-stone-200 p-4">
+                <div class="flex justify-between gap-3"><span class="font-bold">Palo Alto Networks</span><span
+                    class="text-sky-800 font-bold">+39% <span
+                      class="text-xs text-slate-600 font-normal">年增</span></span></div>
+                <p class="text-sm text-slate-600 mt-1">FY2027 Q1營收34.45億美元；下一代安全ARR達97.3億美元、年增66%。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 min-w-0">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
+            <div>
+              <h3 class="text-xl font-bold">事件資料表</h3>
+              <p class="text-sm text-slate-600 mt-2">搜尋公司、事件、數字或狀態；可依事件領域篩選。日期均屬2026年11月。</p>
+            </div>
+            <p id="result-count" class="text-sm font-semibold text-sky-800" aria-live="polite">載入事件資料中…</p>
+          </div>
+          <div class="grid sm:grid-cols-3 gap-3 mb-4">
+            <div class="sm:col-span-2"><label for="event-search"
+                class="block text-sm font-semibold text-stone-700 mb-2">即時搜尋</label><input id="event-search"
+                type="search"
+                class="w-full rounded-lg border border-stone-300 bg-white px-4 py-3 text-sm focus:border-sky-600"
+                placeholder="例如 NVIDIA、440億、財報、收購…" autocomplete="off"></div>
+            <div><label for="event-filter" class="block text-sm font-semibold text-stone-700 mb-2">依領域篩選</label><select
+                id="event-filter"
+                class="w-full rounded-lg border border-stone-300 bg-white px-4 py-3 text-sm focus:border-sky-600">
+                <option value="all">全部領域</option>
+                <option value="總體政策">總體政策</option>
+                <option value="科技與AI">科技與AI</option>
+                <option value="消費與零售">消費與零售</option>
+                <option value="醫療">醫療</option>
+              </select></div>
+          </div>
+          <div class="overflow-x-auto max-w-full rounded-lg border border-stone-200" tabindex="0"
+            aria-label="可左右捲動的事件資料表">
+            <table class="data-table">
+              <caption class="sr-only">依日期排序的美股週報事件、重要數據與進度狀態</caption>
+              <thead>
+                <tr>
+                  <th scope="col" style="width:80px">日期</th>
+                  <th scope="col" style="width:205px">公司／主題</th>
+                  <th scope="col" style="width:120px">領域</th>
+                  <th scope="col">事件與數字</th>
+                  <th scope="col" style="width:175px">性質／進度</th>
+                </tr>
+              </thead>
+              <tbody id="events-body"></tbody>
+            </table>
+          </div>
+          <p class="text-xs text-slate-500 mt-3 leading-6">資料表呈現原報告的公告、媒體訊息、公司預測與投資計畫，不代表所有事項均已完成或經獨立查證。</p>
+        </div>
+      </section>
+
+      <section id="outlook" class="report-section pt-10 md:pt-12" aria-labelledby="outlook-title">
+        <h2 id="outlook-title" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">
+          五、下週觀察與長期投資紀律</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 class="text-lg font-bold text-stone-800 mb-5">值得追蹤的四條主線</h3>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="flex gap-3"><span class="number-pill" aria-hidden="true">01</span>
+              <div>
+                <h4 class="font-bold">11/23～11/27：節慶消費</h4>
+                <p class="mt-2 text-sm leading-7 text-slate-700">關注感恩節、黑色星期五的實際銷售、折扣與物流成本；營收成長是否能轉化為可持續的利潤。</p>
+              </div>
+            </div>
+            <div class="flex gap-3"><span class="number-pill" aria-hidden="true">02</span>
+              <div>
+                <h4 class="font-bold">12/8～12/9：聯準會利率會議</h4>
+                <p class="mt-2 text-sm leading-7 text-slate-700">對照通膨與官員政策立場，觀察升息預期有無落實，以及利率折現如何影響成長股估值。</p>
+              </div>
+            </div>
+            <div class="flex gap-3"><span class="number-pill" aria-hidden="true">03</span>
+              <div>
+                <h4 class="font-bold">輝達治理與監管消息</h4>
+                <p class="mt-2 text-sm leading-7 text-slate-700">優先閱讀正式公告和監管文件，區分新聞報導、調查過程與已獲證實的結論。</p>
+              </div>
+            </div>
+            <div class="flex gap-3"><span class="number-pill" aria-hidden="true">04</span>
+              <div>
+                <h4 class="font-bold">AI設備投入能否產生現金流</h4>
+                <p class="mt-2 text-sm leading-7 text-slate-700">追蹤設備交付、租賃開始計費、客戶續約、資金成本與自由現金流，避免以融資規模代替實際回報。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="rounded-lg bg-sky-50 border border-sky-100 p-6">
+            <p class="text-sm font-bold text-sky-800 mb-2">技術前景</p>
+            <p class="text-slate-700 leading-7">AI能力與需求可以持續進步；這本身不能證明任何股價已經合理。</p>
+          </div>
+          <div class="rounded-lg bg-stone-100 border border-stone-200 p-6">
+            <p class="text-sm font-bold text-stone-700 mb-2">企業獲利</p>
+            <p class="text-slate-700 leading-7">營收、毛利、投資回報、現金流與資本支出的關係，決定成長是否能累積股東價值。</p>
+          </div>
+          <div class="rounded-lg bg-amber-50 border border-amber-100 p-6">
+            <p class="text-sm font-bold text-amber-800 mb-2">股票價格</p>
+            <p class="text-slate-700 leading-7">即使企業表現良好，若買入估值過高，股東仍可能承受長期虧損。</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 mt-6 border-l-4 border-sky-600">
+          <h3 class="text-lg font-bold mb-2">週報結論</h3>
+          <p class="text-xl sm:text-2xl font-bold leading-snug text-sky-950">AI的成長故事還在，但市場開始要求每一筆投資，都拿出可以驗證的回報。</p>
+          <p class="text-sm leading-7 mt-3 text-slate-700">面對劇烈波動，報告主張分散投資、保留現金、避免過高槓桿，並持續檢驗企業獲利品質，而不是以猜測市場最低點為核心策略。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-美股市場週報 (2026/11/16~11/20)。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中美股市場及相關公司公開資料 (2026年11月22日)。</p>
+    </div>
+  </footer>
+
+  <script>
+    const productData = [{ "date": "11/16", "subject": "Tesla／Cybercab", "group": "科技與AI", "event": "規劃德國工廠再投資約30億歐元；目標2027年上半年動工、2029年投產，長期年產能最高100萬輛。", "status": "規劃／目標" }, { "date": "11/16", "subject": "Eli Lilly／Calytrix Bio", "group": "醫療", "event": "公布計畫最高15億美元的有條件收購；相關候選藥物尚未進入人體臨床試驗。", "status": "擬議交易" }, { "date": "11/17", "subject": "NVIDIA（NVDA）", "group": "科技與AI", "event": "FY2027 Q3營收1,158億美元、年增103%；資料中心1,076億美元、年增110%。下季1,300億美元±3%為公司預測。", "status": "已公布財報／預測" }, { "date": "11/17", "subject": "Microsoft（MSFT）", "group": "科技與AI", "event": "Ignite大會推出6款AI模型；成本與效能比較主要來自公司測試。", "status": "已發布產品" }, { "date": "11/18", "subject": "聯準會（Fed）", "group": "總體政策", "event": "公布10月會議紀錄；當時政策利率3.75%～4.00%，討論可能的後續升息，並非已宣布升息。", "status": "已公布會議紀錄" }, { "date": "11/18", "subject": "Target（TGT）", "group": "消費與零售", "event": "季度淨銷售額270.7億美元、年增7.1%；單季EPS含約0.50美元一次性關稅退稅。", "status": "已公布財報" }, { "date": "11/18", "subject": "Palo Alto Networks（PANW）", "group": "科技與AI", "event": "FY2027 Q1營收34.45億美元、年增39%；下一代安全ARR 97.3億美元、年增66%；擬收購Applied Compute。", "status": "已公布財報／收購意向" }, { "date": "11/19", "subject": "Anthropic（ANT）", "group": "科技與AI", "event": "報告記載IPO每股83美元，首日收97.17美元、較發行價約漲17%；11/20股價約跌9%。", "status": "已上市／價格變動" }, { "date": "11/19", "subject": "Walmart（WMT）", "group": "消費與零售", "event": "季度營收1,888.4億美元、年增5.2%；美國電商成長23%；額外燃油與運輸成本約20億美元（全年）。", "status": "已公布財報" }, { "date": "11/20", "subject": "NVIDIA／SEC", "group": "科技與AI", "event": "媒體稱SEC檢視可能的會計議題；調查範圍、結論未定，並無已證實違法結論。", "status": "媒體報導／未定案" }, { "date": "11/20", "subject": "SpaceX／Apollo／Goldman Sachs", "group": "科技與AI", "event": "完成約440億美元GPU設備相關優先及次順位債務工具定價；設備預計2027年上半年交付後租賃計費。", "status": "已定價／待交付" }, { "date": "11/20", "subject": "UnitedHealth（UNH）", "group": "醫療", "event": "報告稱公司就2027年Medicare Advantage星級評等向政府提告，訴訟尚未有結論。", "status": "媒體報導／訴訟未定" }, { "date": "11/20", "subject": "Wonder／Grubhub", "group": "消費與零售", "event": "媒體報導Wonder探索出售Grubhub，潛在買方與交易條件均未確定。", "status": "媒體報導／交易未定" }];
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function setMenu(open) {
+      mobileMenu.classList.toggle('hidden', !open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? '關閉章節選單' : '開啟章節選單');
+      document.getElementById('menu-icon').innerHTML = open ? '<path d="M6 6l12 12M18 6L6 18"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+    menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+    mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1024) setMenu(false); });
+
+    const navLinks = [...document.querySelectorAll('a[data-nav]')];
+    const sectionIds = ['market', 'macro', 'themes', 'data', 'outlook'];
+    const sections = sectionIds.map(id => document.getElementById(id));
+    function updateActiveNav(sectionId) {
+      navLinks.forEach(link => {
+        const active = link.dataset.nav === sectionId;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    updateActiveNav('market');
+    if ('IntersectionObserver' in window) {
+      const visibleSections = new Map();
+      const observer = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visibleSections.set(entry.target.id, entry.boundingClientRect.top);
+          else visibleSections.delete(entry.target.id);
+        }
+        if (visibleSections.size) {
+          const id = [...visibleSections.entries()].sort((a, b) => Math.abs(a[1] - 90) - Math.abs(b[1] - 90))[0][0];
+          updateActiveNav(id);
+        }
+      }, { rootMargin: '-82px 0px -55% 0px', threshold: 0 });
+      sections.forEach(section => observer.observe(section));
+    }
+    navLinks.forEach(link => link.addEventListener('click', () => updateActiveNav(link.dataset.nav)));
+
+    const eventsBody = document.getElementById('events-body');
+    const eventSearch = document.getElementById('event-search');
+    const eventFilter = document.getElementById('event-filter');
+    const resultCount = document.getElementById('result-count');
+    function renderEvents() {
+      const query = eventSearch.value.trim().toLocaleLowerCase('zh-Hant');
+      const filter = eventFilter.value;
+      const records = productData.filter(item => (filter === 'all' || item.group === filter) && Object.values(item).some(value => String(value).toLocaleLowerCase('zh-Hant').includes(query)));
+      eventsBody.replaceChildren();
+      if (!records.length) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 5; cell.className = 'text-center'; cell.textContent = '找不到符合條件的事件。請調整關鍵字或領域。';
+        row.appendChild(cell); eventsBody.appendChild(row);
+      } else {
+        const fragment = document.createDocumentFragment();
+        records.forEach(item => {
+          const tr = document.createElement('tr');
+          ['date', 'subject', 'group', 'event', 'status'].forEach((key, index) => {
+            const td = document.createElement('td');
+            td.textContent = item[key];
+            if (index === 0) td.className = 'whitespace-nowrap tabular-nums font-semibold';
+            if (index === 1) td.className = 'font-semibold text-stone-800';
+            if (index === 4) td.className = 'font-semibold text-sky-800';
+            tr.appendChild(td);
+          });
+          fragment.appendChild(tr);
+        });
+        eventsBody.appendChild(fragment);
+      }
+      resultCount.textContent = `顯示 ${records.length} / ${productData.length} 筆事件`;
+    }
+    eventSearch.addEventListener('input', renderEvents);
+    eventFilter.addEventListener('change', renderEvents);
+    renderEvents();
+
+    function drawCharts() {
+      if (typeof Chart === 'undefined') {
+        document.querySelectorAll('.chart-shell').forEach(el => {
+          const note = document.createElement('p'); note.className = 'text-sm text-slate-600 mt-6';
+          note.textContent = '圖表程式庫未載入；本頁的數據卡片與文字仍完整列出數值。';
+          el.appendChild(note);
+        });
+        return;
+      }
+      Chart.defaults.font.family = 'ui-sans-serif, system-ui, "Noto Sans TC", sans-serif';
+      Chart.defaults.color = '#475569';
+      const common = { responsive: true, maintainAspectRatio: false, animation: { duration: 600 }, plugins: { legend: { display: false }, tooltip: { padding: 12 } } };
+      new Chart(document.getElementById('indicesChart'), {
+        type: 'bar',
+        data: { labels: ['標普500', '道瓊工業', '那斯達克'], datasets: [{ label: '單週變動（%）', data: [-8.6, -8.0, -10.0], backgroundColor: ['#be4563', '#c65a6b', '#a7284e'], borderRadius: 5, barThickness: 30 }] },
+        options: { ...common, indexAxis: 'y', scales: { x: { min: -12, max: 0, grid: { color: '#f1f5f9' }, ticks: { callback: v => v + '%' } }, y: { grid: { display: false }, ticks: { font: { size: 13, weight: 'bold' } } } }, plugins: { ...common.plugins, tooltip: { callbacks: { label: ctx => ' 週跌幅 ' + ctx.parsed.x.toFixed(1) + '%' } } } }
+      });
+      new Chart(document.getElementById('nvidiaChart'), {
+        type: 'bar',
+        data: { labels: ['FY2027 Q3\n已公布營收', 'FY2027 Q4\n公司營收指引'], datasets: [{ label: '營收（億美元）', data: [1158, 1300], backgroundColor: ['#0284c7', '#d49a38'], borderRadius: 7, maxBarThickness: 105 }] },
+        options: { ...common, scales: { x: { grid: { display: false }, ticks: { callback: function (value) { return this.getLabelForValue(value).replace('\n', ' · '); }, maxRotation: 0, minRotation: 0 } }, y: { beginAtZero: true, suggestedMax: 1450, grid: { color: '#f1f5f9' }, ticks: { callback: v => v.toLocaleString() } } }, plugins: { ...common.plugins, tooltip: { callbacks: { label: ctx => ctx.dataIndex === 0 ? ' 已公布營收：1,158 億美元' : ' 公司預測：約1,300 億美元（±3%）' } } } }
+      });
+    }
+    drawCharts();
+  </script>
+</body>
+
+</html>
