@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NVIDIA 黃仁勳回任事件深度解讀：治理危機、盤中股價與估值修復、FY2027 財報、AI 供應鏈及投資人五大追蹤指標。依 2026 年 11 月 23 日投資報告整理。">
+  <meta name="theme-color" content="#0c253a">
+  <title>巴菲特AI價值投資-NVIDIA回任與估值重估</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", "Segoe UI", sans-serif; background:#f8fafc; color:#292524; }
+    .hero-mesh {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: radial-gradient(circle at 76% 16%,rgba(14,165,233,.25),transparent 35%),radial-gradient(circle at 5% 85%,rgba(56,189,248,.19),transparent 40%),linear-gradient(130deg,#0c253a,#0f3852 53%,#075985);
+    }
+    .hero-mesh::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        background-size: 36px 36px;
+    }
+    .hero-mesh > .hero-content { position: relative; z-index: 1; }
+    .active-nav-link { color:#0284c7 !important; background:#e0f2fe; font-weight:700; }
+    .inactive-nav-link { color:#57534e; background:transparent; font-weight:500; }
+    .inactive-nav-link:hover { color:#0369a1; background:#f0f9ff; }
+    .nav-link { display:inline-flex; align-items:center; min-height:40px; padding:8px 11px; border-radius:9px; transition: background-color .16s, color .16s; white-space:nowrap; }
+    .section-heading { font-size:1.875rem; line-height:2.25rem; font-weight:700; color:#292524; margin-bottom:1.5rem; border-bottom:2px solid #0ea5e9; padding-bottom:.5rem; letter-spacing:-.025em; }
+    .chart-shell { position:relative; width:100%; height:285px; min-width:0; }
+    .chart-shell.tall { height:300px; }
+    .report-section { scroll-margin-top:88px; }
+    .metric-label { font-size:.8rem; color:#64748b; font-weight:600; }
+    .metric-value { font-weight:800; letter-spacing:-.035em; line-height:1.14; font-variant-numeric:tabular-nums; }
+    .eyebrow { letter-spacing:.16em; font-size:.7rem; text-transform:uppercase; font-weight:700; color:#64748b; }
+    .timeline-item { position:relative; padding-left:2rem; padding-bottom:1.55rem; border-left:2px solid #bae6fd; margin-left:7px; }
+    .timeline-item::before { content:""; position:absolute; left:-8px; top:2px; width:14px; height:14px; border:3px solid #0284c7; border-radius:50%; background:#fff; }
+    .timeline-item:last-child { border-left-color:transparent; padding-bottom:0; }
+    .soft-chip { display:inline-flex; align-items:center; border-radius:999px; padding:4px 10px; font-weight:700; font-size:.7rem; }
+    .fact-chip { background:#e0f2fe; color:#075985; }
+    .pending-chip { background:#fef3c7; color:#92400e; }
+    .forecast-chip { background:#ede9fe; color:#5b21b6; }
+    .label-dot { display:inline-block; width:8px; height:8px; border-radius:50%; flex:none; }
+    .card-accent { border-top:4px solid #0284c7; }
+    th { white-space:nowrap; }
+    :focus-visible { outline:3px solid #38bdf8; outline-offset:3px; }
+    @media (max-width:640px) {
+       .section-heading { font-size:1.55rem; line-height:2rem; }
+       .chart-shell { height:280px; }
+       .chart-shell.tall { height:265px; }
+       html { scroll-padding-top:76px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="min-h-[68px] flex items-center justify-between gap-3">
+        <a href="#top" class="flex items-center gap-3 min-w-0" aria-label="回到報告頁首">
+          <span aria-hidden="true" class="h-10 w-10 bg-sky-900 text-white rounded-xl flex items-center justify-center font-extrabold text-lg">AI</span>
+          <span class="min-w-0"><span class="block text-sm sm:text-base font-extrabold text-stone-800 leading-tight">巴菲特AI價值投資</span><span class="block text-xs text-stone-500 mt-1">NVIDIA 深度投資報告</span></span>
+        </a>
+        <nav class="hidden xl:flex items-center gap-0.5" aria-label="章節導覽">
+          <a class="nav-link inactive-nav-link" href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link" href="#timeline">事件時間軸</a>
+          <a class="nav-link inactive-nav-link" href="#market">股價與估值</a>
+          <a class="nav-link inactive-nav-link" href="#finance">財報與現金流</a>
+          <a class="nav-link inactive-nav-link" href="#governance">治理議題</a>
+          <a class="nav-link inactive-nav-link" href="#ecosystem">產業鏈</a>
+          <a class="nav-link inactive-nav-link" href="#scenarios">情境分析</a>
+          <a class="nav-link inactive-nav-link" href="#strategy">投資策略</a>
+          <a class="nav-link inactive-nav-link" href="#signals">追蹤訊號</a>
+        </nav>
+        <button id="menuToggle" type="button" class="xl:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border border-stone-200 text-stone-700 hover:bg-sky-50" aria-controls="mobileMenu" aria-expanded="false" aria-label="展開章節選單">
+          <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+      </div>
+      <nav id="mobileMenu" class="hidden xl:hidden border-t border-stone-200 py-3" aria-label="行動版章節導覽">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-1 pb-2">
+          <a class="nav-link inactive-nav-link" href="#overview">核心觀點</a>
+          <a class="nav-link inactive-nav-link" href="#timeline">事件時間軸</a>
+          <a class="nav-link inactive-nav-link" href="#market">股價與估值</a>
+          <a class="nav-link inactive-nav-link" href="#finance">財報與現金流</a>
+          <a class="nav-link inactive-nav-link" href="#governance">治理議題</a>
+          <a class="nav-link inactive-nav-link" href="#ecosystem">產業鏈</a>
+          <a class="nav-link inactive-nav-link" href="#scenarios">情境分析</a>
+          <a class="nav-link inactive-nav-link" href="#strategy">投資策略</a>
+          <a class="nav-link inactive-nav-link" href="#signals">追蹤訊號</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero-mesh text-white" aria-labelledby="hero-heading">
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-[3.45rem] font-extrabold leading-tight tracking-tight max-w-5xl">黃仁勳回任，NVIDIA 的估值重估與治理考驗</h1>
+        <p class="mt-6 max-w-4xl text-base sm:text-lg text-sky-50/90 leading-relaxed">依據 2026 年 11 月 23 日深度報告，NVIDIA 創辦人回任帶動市場迅速回補「關鍵人物折價」；但領導層恢復穩定，不代表調查結案，也不代表盈餘同步增加。真正決定下一階段估值的，仍是 AI 需求、毛利率、現金流及公司治理制度。</p>
+        <div class="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-5xl">
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-5">
+            <p class="text-sm text-sky-100">11/23 盤中 NVDA 反彈</p>
+            <p class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-2">約 +31%</p>
+            <p class="text-xs text-sky-100/80 mt-2">約 9:49 美東時間；非收盤價</p>
+          </div>
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-5">
+            <p class="text-sm text-sky-100">FY2027 Q3 總營收</p>
+            <p class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-2">1,158 <span class="text-lg">億美元</span></p>
+            <p class="text-xs text-sky-100/80 mt-2">已公布財報；年增 103%</p>
+          </div>
+          <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-5">
+            <p class="text-sm text-sky-100">FY2027 Q4 營收展望</p>
+            <p class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-2">1,300 <span class="text-lg">億美元</span></p>
+            <p class="text-xs text-sky-100/80 mt-2">公司指引 ±3%；尚非實績</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-14 md:space-y-16">
+      <section id="overview" class="report-section" aria-labelledby="overview-heading">
+        <h2 id="overview-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">核心判斷：信心先修復，獲利仍待驗證</h2>
+        <div class="grid md:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 card-accent !mb-0">
+            <span class="soft-chip fact-chip">報告記載的事件</span>
+            <h3 class="text-xl font-bold text-stone-800 mt-4">領導權不確定性下降</h3>
+            <p class="text-stone-600 leading-relaxed mt-3">董事會於 11/22 決議讓黃仁勳恢復總裁、執行長及董事職務，11/23 公布。Harvey C. Jones 續任董事長，Colette Kress 回歸財務長。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 border-t-4 border-amber-400">
+            <span class="soft-chip pending-chip">仍在進行</span>
+            <h3 class="text-xl font-bold text-stone-800 mt-4">調查與監管並未歸零</h3>
+            <p class="text-stone-600 leading-relaxed mt-3">獨立董事調查仍將完成；公司繼續配合政府調查與詢問。董事會對回任國安風險的信心，不等同法律或監管程序結案。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 border-t-4 border-violet-400">
+            <span class="soft-chip forecast-chip">未來待驗證</span>
+            <h3 class="text-xl font-bold text-stone-800 mt-4">估值必須有財務支撐</h3>
+            <p class="text-stone-600 leading-relaxed mt-3">報告聚焦 Q4 約 1,300 億美元營收指引、71%–72% 毛利率展望，以及 AI 客戶是否能把資本支出轉化為實際回報。</p>
+          </article>
+        </div>
+        <div class="mt-5 bg-sky-50 border-l-4 border-sky-600 rounded-r-lg px-5 py-4 text-stone-700 leading-relaxed">
+          <strong class="text-sky-900">一句話總結：</strong> 本次反彈主要是公司治理風險折價收斂，不是一天之內新增等量營收或現金。<span class="font-semibold">市場修復的程度，仍須由後續獲利與治理證據檢驗。</span>
+        </div>
+        <p class="text-xs text-stone-500 mt-3">資料截點：2026/11/23 美東時間約 09:50–10:15。文中當日行情均屬盤中觀察，非收盤結果。內容按上傳研究報告整理。</p>
+      </section>
+
+      <section id="timeline" class="report-section" aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">01｜十一天內的事件逆轉</h2>
+        <div class="grid lg:grid-cols-[1.25fr_.75fr] gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0">
+            <div class="timeline-item"><time class="text-sm font-extrabold text-sky-800" datetime="2026-11-08">11 月 8 日</time><h3 class="text-lg font-bold mt-1">董事會宣布啟動調查</h3><p class="text-stone-600 text-sm leading-relaxed mt-2">因媒體報導涉及潛在境外情報接近事件，由獨立董事及外部法律顧問調查。相關指控仍應區分報導與已證實事實。</p></div>
+            <div class="timeline-item"><time class="text-sm font-extrabold text-sky-800" datetime="2026-11-11">11 月 11 日</time><h3 class="text-lg font-bold mt-1">董事會接受黃仁勳辭任</h3><p class="text-stone-600 text-sm leading-relaxed mt-2">報告所述 SEC 申報文件記載：辭去總裁、執行長及董事職務。</p></div>
+            <div class="timeline-item"><time class="text-sm font-extrabold text-sky-800" datetime="2026-11-12">11 月 12 日</time><h3 class="text-lg font-bold mt-1">公告過渡人事</h3><p class="text-stone-600 text-sm leading-relaxed mt-2">Colette Kress 代理執行長，Harvey C. Jones 任董事會主席。</p></div>
+            <div class="timeline-item"><time class="text-sm font-extrabold text-sky-800" datetime="2026-11-17">11 月 17 日</time><h3 class="text-lg font-bold mt-1">董事會領導層仍表態不考慮回任</h3><p class="text-stone-600 text-sm leading-relaxed mt-2">當時接班方向相對明確，也使後續逆轉成為治理程序的觀察重點。</p></div>
+            <div class="timeline-item"><time class="text-sm font-extrabold text-sky-800" datetime="2026-11-22">11 月 22 日</time><h3 class="text-lg font-bold mt-1">董事會一致決議回任</h3><p class="text-stone-600 text-sm leading-relaxed mt-2">報告引述 8-K：經多輪溝通並取得政府高層意見後，董事會決議恢復三項職務。</p></div>
+            <div class="timeline-item"><time class="text-sm font-extrabold text-sky-800" datetime="2026-11-23">11 月 23 日</time><h3 class="text-lg font-bold mt-1">正式公告，人事風險折價迅速收斂</h3><p class="text-stone-600 text-sm leading-relaxed mt-2">Jones 續任董事長、Kress 回歸財務長；獨立調查及政府詢問仍未宣告終結。</p></div>
+          </div>
+          <aside class="space-y-5">
+            <div class="bg-slate-900 text-white rounded-lg shadow-lg p-6">
+              <p class="text-xs font-bold tracking-wider text-sky-300">治理轉折的核心矛盾</p>
+              <p class="text-2xl font-extrabold mt-3 leading-snug">11/17 不考慮回任<br><span class="text-sky-300">→ 11/22 一致決議回任</span></p>
+              <p class="text-slate-300 text-sm leading-relaxed mt-4">投資人需要理解評估依據、政府意見的範圍、程序透明度，以及未來接班與風險控制制度。</p>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-5">
+              <h3 class="font-bold text-amber-900">不可混為一談</h3>
+              <p class="text-sm text-amber-950 leading-relaxed mt-2">「董事會認為回任不構成國安風險」≠「所有調查已結束」；媒體所述個人關係或涉嫌行為，也不能直接視為已遭證實。</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="market" class="report-section" aria-labelledby="market-heading">
+        <h2 id="market-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">02｜股價暴漲：風險折價的回補</h2>
+        <div class="grid lg:grid-cols-[1.25fr_.75fr] gap-6">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 min-w-0">
+            <div class="flex flex-wrap gap-2 items-start justify-between mb-3"><div><h3 class="text-lg font-bold">NVDA 股價觀察點</h3><p class="text-xs text-stone-500 mt-1">美元／股；各欄位為不同日期、不同時間口徑</p></div><span class="soft-chip pending-chip">盤中 ≠ 收盤</span></div>
+            <div class="chart-shell tall"><canvas id="priceChart" role="img" aria-label="NVIDIA 三個不同時間的價格：10月6日收盤高點239.24美元，11月20日收盤125.53美元，11月23日上午盤中164.42美元"></canvas></div>
+            <p class="text-xs text-stone-500 leading-relaxed mt-3">11/20 收盤約 125.53 美元；11/23 美東約 9:49 盤中約 164.42 美元（約 +31%）；10/6 曾創約 239.24 美元收盤高點。圖表僅比較三個觀察點，非連續走勢或當日收盤結果。</p>
+          </div>
+          <div class="grid grid-cols-2 lg:grid-cols-1 gap-4">
+            <div class="bg-white rounded-lg shadow-lg p-5"><p class="metric-label">報告提及盤前／盤中漲幅範圍</p><p class="metric-value text-3xl text-sky-800 mt-2">約 27%–33%</p><p class="text-xs text-stone-500 mt-2">依不同取樣時點；不應當作同時精確行情</p></div>
+            <div class="bg-white rounded-lg shadow-lg p-5"><p class="metric-label">估計市值增量</p><p class="metric-value text-3xl text-sky-800 mt-2">約 9,000 億<span class="text-base">美元</span></p><p class="text-xs text-stone-500 mt-2">市值變化估算，並非新增現金或實現利潤</p></div>
+            <div class="bg-white rounded-lg shadow-lg p-5"><p class="metric-label">Nasdaq 當日一度漲幅</p><p class="metric-value text-3xl text-sky-800 mt-2">約 6%</p><p class="text-xs text-stone-500 mt-2">Nasdaq-100 美東上午一度約 +6.6%；均為盤中</p></div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-5 mt-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><span class="eyebrow">01｜創辦人折價</span><h3 class="text-lg font-bold mt-2">技術與客戶關係的信任回補</h3><p class="text-sm text-stone-600 leading-relaxed mt-3">回任降低市場對 GPU、CUDA、系統平台、產品節奏及大型客戶協調中斷的擔憂。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><span class="eyebrow">02｜AI 資金鏈</span><h3 class="text-lg font-bold mt-2">融資信心可能改善</h3><p class="text-sm text-stone-600 leading-relaxed mt-3">供貨與合作預期轉穩，有利 AI 雲端公司估值修復；但不能自動解決債務、利用率或自由現金流問題。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><span class="eyebrow">03｜市場風險偏好</span><h3 class="text-lg font-bold mt-2">部位回補與板塊聯動</h3><p class="text-sm text-stone-600 leading-relaxed mt-3">高權重科技與 AI 交易同步反彈；不能把整個科技市場的漲幅全部歸於單一公司人事。</p></article>
+        </div>
+        <p class="mt-5 text-sm bg-sky-50 px-5 py-4 rounded-lg border border-sky-100 text-sky-950 leading-relaxed"><strong>估值觀察：</strong> 股價上漲而獲利預測沒有同步上修，即代表市場願付估值倍數提高。反彈三成也不等於已收復此前的歷史高點。</p>
+      </section>
+
+      <section id="finance" class="report-section" aria-labelledby="finance-heading">
+        <h2 id="finance-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">03｜財報質量：營收強勁，毛利率面臨考驗</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><p class="metric-label">FY2027 Q3 總營收</p><p class="metric-value text-3xl text-stone-800 mt-2">1,158 億美元</p><p class="mt-2 text-sm font-semibold text-sky-700">年增 103%｜季增 20%</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><p class="metric-label">FY2027 Q3 資料中心營收</p><p class="metric-value text-3xl text-stone-800 mt-2">1,076 億美元</p><p class="mt-2 text-sm font-semibold text-sky-700">年增 110%｜約占總營收 93%</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><p class="metric-label">FY2027 Q3 GAAP 毛利率</p><p class="metric-value text-3xl text-stone-800 mt-2">74.8%</p><p class="mt-2 text-sm text-stone-500">Q4 展望降至 71%–72%</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><p class="metric-label">FY2027 Q3 GAAP 淨利</p><p class="metric-value text-3xl text-stone-800 mt-2">653 億美元</p><p class="mt-2 text-sm text-stone-500">已公布實績</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><p class="metric-label">FY2027 Q3 稀釋每股盈餘</p><p class="metric-value text-3xl text-stone-800 mt-2">2.70 美元</p><p class="mt-2 text-sm text-stone-500">GAAP 口徑</p></div>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><p class="metric-label">FY2027 Q4 毛利率展望</p><p class="metric-value text-3xl text-violet-800 mt-2">71%–72%</p><p class="mt-2 text-sm text-stone-500">GAAP 及非 GAAP；公司指引，尚非實績</p></div>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6 mt-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 min-w-0">
+            <div class="flex gap-2 items-center justify-between flex-wrap"><h3 class="text-lg font-bold">營收：已實現與公司展望</h3><span class="soft-chip forecast-chip">含指引</span></div>
+            <p class="text-xs text-stone-500 mt-1">單位：億美元（US$100 million）</p>
+            <div class="chart-shell mt-3"><canvas id="revenueChart" role="img" aria-label="FY2027第三季實際營收1158億美元，FY2027第四季公司營收指引中心值1300億美元，上下3%"></canvas></div>
+            <p class="text-xs text-stone-500 leading-relaxed mt-3">Q3 截至 2026/10/25；Q4 為公司預測 1,300 億美元 ±3%（約 1,261–1,339 億美元），且 Q4 比 Q3 多一個會計週，不能直接把兩季差額全視為同口徑營運成長。</p>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 min-w-0">
+            <h3 class="text-lg font-bold">獲利與現金流：同期品質檢視</h3>
+            <p class="text-xs text-stone-500 mt-1">FY2027 Q3；單位：億美元；不同財務指標不可相加</p>
+            <div class="chart-shell mt-3"><canvas id="cashChart" role="img" aria-label="FY2027第三季GAAP淨利653億美元，營業活動現金流482.5億美元，自由現金流437.8億美元"></canvas></div>
+            <p class="text-xs text-stone-500 leading-relaxed mt-3">營業活動現金流 482.5 億美元，自由現金流 437.8 億美元，低於淨利 653 億美元。單季差距不代表已發生財務惡化，但值得追蹤營運資金、應收款與資本承諾。</p>
+          </article>
+        </div>
+        <div class="mt-5 grid md:grid-cols-2 gap-4">
+          <div class="bg-sky-50 rounded-lg p-5 border border-sky-100"><h3 class="font-bold text-sky-950">競爭優勢仍在</h3><p class="text-sm text-stone-700 mt-2 leading-relaxed">報告指出 Vera Rubin 平台進入出貨與部署階段；NVIDIA 競爭力不只 GPU，還有網路、軟體、開發工具與系統架構。</p></div>
+          <div class="bg-amber-50 rounded-lg p-5 border border-amber-100"><h3 class="font-bold text-amber-950">真正需要證實的成長品質</h3><p class="text-sm text-stone-700 mt-2 leading-relaxed">新平台產品組合、整機交付與產能爬坡是否造成較低毛利率；Q4 展望能否達成；客戶資本支出能否產生可持續回報。</p></div>
+        </div>
+      </section>
+
+      <section id="governance" class="report-section" aria-labelledby="governance-heading">
+        <h2 id="governance-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">04｜公司治理：關鍵人物價值，也是風險</h2>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0">
+            <h3 class="text-xl font-bold">報告記載的治理改善方向</h3>
+            <ul class="mt-4 space-y-4 text-sm text-stone-700 leading-relaxed">
+              <li class="flex gap-3"><span class="label-dot bg-sky-600 mt-2"></span><span><strong>新設獨立董事監督委員會：</strong>聚焦國家安全與出口管制，實際監督權限仍待檢視。</span></li>
+              <li class="flex gap-3"><span class="label-dot bg-sky-600 mt-2"></span><span><strong>尋找首席法遵長：</strong>擬向董事會提名及公司治理委員會報告；正在尋找不等於已完成任命。</span></li>
+              <li class="flex gap-3"><span class="label-dot bg-sky-600 mt-2"></span><span><strong>延續獨立調查：</strong>回任不代表調查結束；獨立董事調查與政府相關調查是不同程序。</span></li>
+              <li class="flex gap-3"><span class="label-dot bg-sky-600 mt-2"></span><span><strong>治理與接班制度：</strong>投資人仍需檢視內控、權責分工及管理權高度集中的估值影響。</span></li>
+            </ul>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0">
+            <h3 class="text-xl font-bold">董事會需要回答的四個問題</h3>
+            <div class="mt-4 space-y-3">
+              <div class="flex gap-3 items-start p-3 rounded-lg bg-slate-50"><span class="text-sky-800 font-extrabold">01</span><p class="text-sm text-stone-700 leading-relaxed">11/17 與 11/22 立場逆轉，評估標準與決策理由為何？</p></div>
+              <div class="flex gap-3 items-start p-3 rounded-lg bg-slate-50"><span class="text-sky-800 font-extrabold">02</span><p class="text-sm text-stone-700 leading-relaxed">美國政府意見的具體性質、範圍與效力為何？</p></div>
+              <div class="flex gap-3 items-start p-3 rounded-lg bg-slate-50"><span class="text-sky-800 font-extrabold">03</span><p class="text-sm text-stone-700 leading-relaxed">獨立調查是否會揭露足以讓股東判斷的新事實與處置？</p></div>
+              <div class="flex gap-3 items-start p-3 rounded-lg bg-slate-50"><span class="text-sky-800 font-extrabold">04</span><p class="text-sm text-stone-700 leading-relaxed">監督、法遵與接班制度如何降低對單一領導者的依賴？</p></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="ecosystem" class="report-section" aria-labelledby="ecosystem-heading">
+        <h2 id="ecosystem-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">05｜AI 產業鏈：從 GPU 到雲端融資</h2>
+        <div class="grid md:grid-cols-3 gap-5 mb-6">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 border-l-4 border-sky-600"><span class="eyebrow">第一層</span><h3 class="text-lg font-bold mt-2">NVIDIA 核心平台</h3><p class="text-sm text-stone-600 leading-relaxed mt-3">短期最直接反映領導權風險折價下降，也承受高波動；最終仍須以 GPU 需求、平台部署與獲利預期佐證估值。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 border-l-4 border-teal-600"><span class="eyebrow">第二層</span><h3 class="text-lg font-bold mt-2">製造、封裝與系統供應鏈</h3><p class="text-sm text-stone-600 leading-relaxed mt-3">11/17 公告擴大與多家供應商合作及產能規劃；產能計畫不等於已形成銷售、毛利或最終交付。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 border-l-4 border-violet-600"><span class="eyebrow">第三層</span><h3 class="text-lg font-bold mt-2">AI 雲端租賃與融資</h3><p class="text-sm text-stone-600 leading-relaxed mt-3">CoreWeave、Nebius 等受市場信心影響，但價值仍須看利用率、履約、負債、折舊、殘值與自由現金流。</p></article>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+            <div><h3 class="text-xl font-bold">產業鏈追蹤矩陣</h3><p class="text-sm text-stone-500 mt-2">表內僅列原報告提及的公司與觀察事項；可依名稱或關鍵字搜尋，資料性質不代表已確認新增營收。</p></div>
+            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+              <label class="sr-only" for="companySearch">搜尋公司或觀察重點</label>
+              <input id="companySearch" type="search" autocomplete="off" class="w-full sm:w-64 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200" placeholder="搜尋公司、風險或關鍵字…">
+              <label class="sr-only" for="companyFilter">選擇產業層級</label>
+              <select id="companyFilter" class="w-full sm:w-40 rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200">
+                <option value="all">全部層級</option><option value="核心平台">核心平台</option><option value="供應鏈">供應鏈</option><option value="AI 雲端">AI 雲端</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-5 overflow-x-auto max-w-full rounded-lg border border-stone-200" role="region" tabindex="0" aria-label="可水平捲動的產業鏈資料表">
+            <table class="w-full min-w-[820px] text-sm text-left border-collapse">
+              <thead class="sticky top-0 z-10 bg-slate-100 text-stone-700"><tr><th scope="col" class="px-4 py-3 border-b border-slate-200">公司／標的</th><th scope="col" class="px-4 py-3 border-b border-slate-200">產業層級</th><th scope="col" class="px-4 py-3 border-b border-slate-200">報告描述的資料性質</th><th scope="col" class="px-4 py-3 border-b border-slate-200">後續驗證重點</th></tr></thead>
+              <tbody id="companyTableBody" class="divide-y divide-stone-100 bg-white"></tbody>
+            </table>
+          </div>
+          <p id="companyCount" class="mt-3 text-xs text-stone-500" role="status" aria-live="polite"></p>
+        </div>
+        <div class="bg-slate-900 rounded-lg p-6 mt-5 text-white"><h3 class="text-lg font-bold">產業鏈最重要的二階傳導</h3><p class="mt-3 leading-relaxed text-slate-200">上游 GPU 供應商的高毛利與下游 GPU 使用者的投資報酬率，必須分別檢驗。若下游算力支出無法轉化為足夠的收入和現金流，將反過來影響上游訂單及供應鏈資本回收。</p></div>
+      </section>
+
+      <section id="scenarios" class="report-section" aria-labelledby="scenarios-heading">
+        <h2 id="scenarios-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">06｜三種情境：轉折或技術性反彈？</h2>
+        <p class="text-sm text-stone-600 mb-5">以下是原報告提出的條件式分析框架，不是已發生的事實，也沒有客觀機率或目標價設定。</p>
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 border-t-4 border-emerald-500"><span class="text-xs font-bold tracking-widest text-emerald-700">樂觀情境</span><h3 class="text-xl font-bold mt-2">需求重新主導定價</h3><p class="text-sm text-stone-600 mt-3 leading-relaxed">獨立調查未揭露重大新增問題、監管未限制重要合作，且 Q4 營收接近或超越 1,300 億美元指引，Vera Rubin 出貨與推論成長獲財報支持。</p><p class="mt-4 pt-4 border-t text-sm text-emerald-800"><strong>判斷關鍵：</strong> 訂單、交付、毛利率與調查結果共同改善。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 border-t-4 border-sky-500"><span class="text-xs font-bold tracking-widest text-sky-700">基準情境</span><h3 class="text-xl font-bold mt-2">高波動的估值整理</h3><p class="text-sm text-stone-600 mt-3 leading-relaxed">基本面延續成長、治理程序推進，但尚無足以提高長期獲利預測的新證據。急漲後可能出現獲利了結與估值平衡。</p><p class="mt-4 pt-4 border-t text-sm text-sky-800"><strong>判斷關鍵：</strong> 分批配置紀律，與財報、治理進度的持續核對。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0 border-t-4 border-rose-500"><span class="text-xs font-bold tracking-widest text-rose-700">悲觀情境</span><h3 class="text-xl font-bold mt-2">治理與資本風險重疊</h3><p class="text-sm text-stone-600 mt-3 leading-relaxed">獨立調查出現重大不利結論、出口管制趨嚴、雲端客戶削減採購，且 NVIDIA 毛利率低於展望區間，使市場重新提高風險折價。</p><p class="mt-4 pt-4 border-t text-sm text-rose-800"><strong>判斷關鍵：</strong> 監管處置、採購轉弱及毛利率偏離指引。</p></article>
+        </div>
+      </section>
+
+      <section id="strategy" class="report-section" aria-labelledby="strategy-heading">
+        <h2 id="strategy-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">07｜投資策略：依持有期限分辨變數</h2>
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><div class="flex items-center justify-between gap-2"><h3 class="text-xl font-bold">短期｜1–5 個交易日</h3><span class="soft-chip fact-chip">交易面</span></div><p class="mt-4 text-stone-700 text-sm leading-relaxed">避免只因「開盤暴漲三成」追價。觀察漲幅能否留存、成交量承接、費城半導體指數與 AI 雲端類股的共振，以及調查新聞是否導致回吐。</p><p class="text-sm mt-4 font-bold text-sky-900">重點：反彈廣度、量價與消息風險。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><div class="flex items-center justify-between gap-2"><h3 class="text-xl font-bold">中期｜1–3 個月</h3><span class="soft-chip pending-chip">驗證期</span></div><p class="mt-4 text-stone-700 text-sm leading-relaxed">追蹤獨立調查、首席法遵長聘任、出口監督機制及政府詢問；比對 Q4 營收、毛利率、現金流與指引，防範利多已先反映在股價。</p><p class="text-sm mt-4 font-bold text-sky-900">重點：治理落地與財報兌現。</p></article>
+          <article class="bg-white rounded-lg shadow-lg p-6 mb-6 !mb-0"><div class="flex items-center justify-between gap-2"><h3 class="text-xl font-bold">長期｜6–24 個月</h3><span class="soft-chip forecast-chip">競爭力</span></div><p class="mt-4 text-stone-700 text-sm leading-relaxed">驗證 Vera Rubin 性能與總持有成本優勢、CUDA 與整機系統的客戶轉換成本，以及雲端客戶的資本回報是否足以支持後續 GPU 採購。</p><p class="text-sm mt-4 font-bold text-sky-900">重點：護城河、需求與 AI 投資報酬。</p></article>
+        </div>
+        <div class="bg-sky-50 rounded-lg border border-sky-100 p-5 mt-5 text-sm text-stone-700 leading-relaxed"><strong>持倉原則：</strong> 已持有者應衡量投資論點、集中度與風險承受能力；尚未持有者宜先建立估值區間與分批計畫。投資理由成立，不代表任何股價都適合進場。</div>
+      </section>
+
+      <section id="signals" class="report-section" aria-labelledby="signals-heading">
+        <h2 id="signals-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">08｜未來必須追蹤的五個訊號</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <article class="bg-white rounded-lg shadow-lg p-5 mb-6 !mb-0 flex gap-4"><span class="shrink-0 flex items-center justify-center h-11 w-11 rounded-xl bg-sky-100 text-sky-900 font-extrabold">01</span><div><h3 class="font-bold text-stone-800">獨立調查與政府監管</h3><p class="text-sm text-stone-600 leading-relaxed mt-2">追蹤新的結論、處置、合規補強與資訊透明度，而非只看重複的信心表態。</p></div></article>
+          <article class="bg-white rounded-lg shadow-lg p-5 mb-6 !mb-0 flex gap-4"><span class="shrink-0 flex items-center justify-center h-11 w-11 rounded-xl bg-sky-100 text-sky-900 font-extrabold">02</span><div><h3 class="font-bold text-stone-800">Q4 營收指引達成率</h3><p class="text-sm text-stone-600 leading-relaxed mt-2">檢視 1,300 億美元 ±3% 能否兌現，並扣除本季多一會計週的比較差異。</p></div></article>
+          <article class="bg-white rounded-lg shadow-lg p-5 mb-6 !mb-0 flex gap-4"><span class="shrink-0 flex items-center justify-center h-11 w-11 rounded-xl bg-sky-100 text-sky-900 font-extrabold">03</span><div><h3 class="font-bold text-stone-800">71%–72% 毛利率展望</h3><p class="text-sm text-stone-600 leading-relaxed mt-2">確認新平台組合與擴產成本，觀察後續能否回升，而非只看營收規模擴張。</p></div></article>
+          <article class="bg-white rounded-lg shadow-lg p-5 mb-6 !mb-0 flex gap-4"><span class="shrink-0 flex items-center justify-center h-11 w-11 rounded-xl bg-sky-100 text-sky-900 font-extrabold">04</span><div><h3 class="font-bold text-stone-800">現金流與客戶融資品質</h3><p class="text-sm text-stone-600 leading-relaxed mt-2">追蹤應收款、營運資金與資本承諾，連同雲端租賃商利用率、槓桿與設備殘值。</p></div></article>
+          <article class="bg-white rounded-lg shadow-lg p-5 mb-6 !mb-0 flex gap-4 md:col-span-2"><span class="shrink-0 flex items-center justify-center h-11 w-11 rounded-xl bg-sky-100 text-sky-900 font-extrabold">05</span><div><h3 class="font-bold text-stone-800">反彈是否擴散為產業獲利成長</h3><p class="text-sm text-stone-600 leading-relaxed mt-2">檢視半導體、HBM 記憶體、雲端算力與電力基礎設施的相對表現，確認 AI 資本支出是否形成可持續的回報鏈條。</p></div></article>
+        </div>
+      </section>
+
+      <section id="conclusion" class="report-section" aria-labelledby="conclusion-heading">
+        <h2 id="conclusion-heading" class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2 section-heading">結論｜黃仁勳能帶回信心，只有獲利能留下估值</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-6 !mb-0">
+          <p class="text-stone-700 leading-loose">依據本次報告，11/23 的急漲清楚呈現 NVIDIA 的關鍵人物價值，也暴露管理權集中與治理程序的估值風險。回任可緩解近期領導權不確定性，但股價能否持續走高，必須回到需求、交付、毛利率、現金流及調查結果。</p>
+          <div class="mt-6 rounded-lg bg-slate-900 text-white p-6"><p class="text-lg sm:text-xl font-bold leading-relaxed">「今天的漲幅回答了市場多麼需要黃仁勳，尚未回答 NVIDIA 在下一輪 AI 資本支出週期中究竟值多少。」</p><p class="text-sm text-slate-300 mt-3">短線看風險折價修復；中期看監管與毛利率；長期看 AI 基礎設施需求及資本報酬。</p></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 巴菲特AI價值投資-NVIDIA回任與估值重估。僅供參考，不構成投資建議。</p>
+      <p class="text-xs mt-1">資料來源：基於網路中NVIDIA與AI產業鏈相關公開資料 (2026年11月23日)。</p>
+    </div>
+  </footer>
+  <script>
+    'use strict';
+    // 使用報告中實際提及的公司與資訊，不包含推估財務數字或虛構營收。
+    const productData = [
+      { company: 'NVIDIA（NVDA）', layer: '核心平台', nature: '11/23 回任公告；FY2027 Q3 已公布財報', watch: 'Q4 指引、毛利率、獨立調查與法遵制度' },
+      { company: 'TSMC', layer: '供應鏈', nature: '11/17 擴大合作與產能規劃公告', watch: '產能部署、實際交付、擴產成本與客戶集中風險' },
+      { company: 'Amkor', layer: '供應鏈', nature: '11/17 擴大合作與產能規劃公告', watch: '先進封裝相關需求、良率及獲利轉化' },
+      { company: 'SPIL', layer: '供應鏈', nature: '11/17 擴大合作與產能規劃公告', watch: '封裝產能、良率及資本支出回報' },
+      { company: 'Kinsus', layer: '供應鏈', nature: '11/17 擴大合作與產能規劃公告', watch: '基板相關需求、擴產風險與客戶集中度' },
+      { company: '鴻海', layer: '供應鏈', nature: '11/17 擴大合作與產能規劃公告', watch: '系統供應鏈產能與實際訂單轉化' },
+      { company: 'CoreWeave', layer: 'AI 雲端', nature: '報告列為可能受信心修復影響的算力租賃商', watch: 'GPU 利用率、長約履約、融資成本與自由現金流' },
+      { company: 'Nebius', layer: 'AI 雲端', nature: '報告列為可能受信心修復影響的算力租賃商', watch: 'GPU 利用率、貸款利率、折舊與設備殘值' }
+    ];
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function setMenuOpen(open) {
+      mobileMenu.classList.toggle('hidden', !open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? '收合章節選單' : '展開章節選單');
+    }
+    menuToggle.addEventListener('click', () => setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true'));
+    mobileMenu.addEventListener('click', (event) => { if (event.target.closest('a[href^="#"]')) setMenuOpen(false); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenuOpen(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 1280) setMenuOpen(false); });
+
+    const navLinks = [...document.querySelectorAll('a.nav-link[href^="#"]')];
+    const sectionIds = ['overview','timeline','market','finance','governance','ecosystem','scenarios','strategy','signals'];
+    function setActiveNav(id) {
+      navLinks.forEach((link) => {
+        const active = link.getAttribute('href') === '#' + id;
+        link.classList.toggle('active-nav-link', active);
+        link.classList.toggle('inactive-nav-link', !active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    setActiveNav('overview');
+    const activeSections = new Map();
+    if ('IntersectionObserver' in window) {
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) activeSections.set(entry.target.id, entry.boundingClientRect.top); else activeSections.delete(entry.target.id); });
+        if (activeSections.size) {
+          const first = [...activeSections.entries()].sort((a,b)=> Math.abs(a[1]-92) - Math.abs(b[1]-92))[0];
+          setActiveNav(first[0]);
+        }
+      }, { rootMargin: '-12% 0px -65% 0px', threshold: 0 });
+      sectionIds.forEach(id => { const section = document.getElementById(id); if (section) navObserver.observe(section); });
+    }
+    navLinks.forEach(link => link.addEventListener('click', () => setActiveNav(link.getAttribute('href').slice(1))));
+
+    const searchInput = document.getElementById('companySearch');
+    const companyFilter = document.getElementById('companyFilter');
+    const tableBody = document.getElementById('companyTableBody');
+    const companyCount = document.getElementById('companyCount');
+    function renderCompanies() {
+      const search = searchInput.value.normalize('NFKC').toLocaleLowerCase('zh-Hant').trim();
+      const layer = companyFilter.value;
+      const filtered = productData.filter(item => {
+        const matchesLayer = layer === 'all' || item.layer === layer;
+        const text = [item.company, item.layer, item.nature, item.watch].join(' ').normalize('NFKC').toLocaleLowerCase('zh-Hant');
+        return matchesLayer && text.includes(search);
+      });
+      const rows = document.createDocumentFragment();
+      filtered.forEach(item => {
+        const row = document.createElement('tr');
+        row.className = 'hover:bg-sky-50/50';
+        [item.company, item.layer, item.nature, item.watch].forEach((value, index) => {
+          const cell = document.createElement('td');
+          cell.className = 'px-4 py-3.5 text-stone-700 leading-relaxed align-top' + (index === 0 ? ' font-bold text-stone-800' : '');
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        rows.appendChild(row);
+      });
+      if (filtered.length === 0) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 4;
+        cell.className = 'px-4 py-10 text-center text-stone-500';
+        cell.textContent = '沒有符合條件的公司，請調整搜尋字詞或產業層級。';
+        row.appendChild(cell); rows.appendChild(row);
+      }
+      tableBody.replaceChildren(rows);
+      companyCount.textContent = `顯示 ${filtered.length} / ${productData.length} 筆報告提及的公司`; 
+    }
+    searchInput.addEventListener('input', renderCompanies);
+    companyFilter.addEventListener('change', renderCompanies);
+    renderCompanies();
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+      Chart.defaults.color = '#57534e';
+      const commonPlugins = { legend: { display: false }, tooltip: { backgroundColor:'#0f172a', padding:12, titleFont:{weight:'bold'}, displayColors:false } };
+      const gridColor = 'rgba(148,163,184,0.16)';
+      new Chart(document.getElementById('priceChart'), {
+        type:'bar',
+        data:{ labels:[['11/20','收盤'], ['11/23 9:49','盤中'], ['10/06','收盤高點']], datasets:[{ data:[125.53,164.42,239.24], backgroundColor:['#94a3b8','#0284c7','#0f3852'], borderRadius:6, maxBarThickness:84 }] },
+        options:{ maintainAspectRatio:false, responsive:true, plugins:{ ...commonPlugins, tooltip:{ ...commonPlugins.tooltip, callbacks:{label: c => `約 ${c.parsed.y.toFixed(2)} 美元／股`} } }, scales:{ y:{beginAtZero:true, grid:{color:gridColor}, ticks:{callback:v=>'$'+v}}, x:{grid:{display:false}, ticks:{maxRotation:0,minRotation:0,font:{size:11}}} } }
+      });
+      new Chart(document.getElementById('revenueChart'), {
+        type:'bar',
+        data:{labels:[['FY2027 Q3','已公布實績'], ['FY2027 Q4','公司指引']],datasets:[{data:[1158,1300],backgroundColor:['#0284c7','#8b5cf6'],borderRadius:7,maxBarThickness:110}]},
+        options:{maintainAspectRatio:false,responsive:true, plugins:{...commonPlugins, tooltip:{...commonPlugins.tooltip,callbacks:{label:c=>`${c.parsed.y.toLocaleString('zh-TW')} 億美元${c.dataIndex===1?'（預測中心值，±3%）':'（已公布實績）'}`}}},scales:{y:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>v.toLocaleString('zh-TW')}},x:{grid:{display:false},ticks:{maxRotation:0,minRotation:0}}}}
+      });
+      new Chart(document.getElementById('cashChart'), {
+        type:'bar',
+        data:{labels:['GAAP 淨利','營業活動現金流','自由現金流'],datasets:[{data:[653,482.5,437.8],backgroundColor:['#0f3852','#0284c7','#38bdf8'],borderRadius:6,maxBarThickness:50}]},
+        options:{indexAxis:'y',maintainAspectRatio:false,responsive:true,plugins:{...commonPlugins,tooltip:{...commonPlugins.tooltip,callbacks:{label:c=>`${c.parsed.x.toLocaleString('zh-TW')} 億美元`}}},scales:{x:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>v.toLocaleString('zh-TW')}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
+      });
+    } else {
+      ['priceChart','revenueChart','cashChart'].forEach(id => {
+        const canvas = document.getElementById(id);
+        canvas.setAttribute('aria-label', canvas.getAttribute('aria-label') + '；圖表程式庫未載入，請參考下方文字數據');
+      });
+    }
+  </script>
+</body>
+</html>
