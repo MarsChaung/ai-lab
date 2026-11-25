@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>巴菲特AI價值投資-AI繁榮下的通膨、訂單與估值</title>
+    <meta name="description" content="2026年11月25日美股投資深度分析：通膨、Dell AI伺服器訂單與Anthropic估值。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #292524;
+            --muted: #57534e;
+            --sky: #0284c7
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px
+        }
+
+        body {
+            margin: 0;
+            background: #f5f5f4;
+            color: var(--ink);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            line-height: 1.7
+        }
+
+        button,
+        input {
+            font: inherit
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0
+        }
+
+        p+p {
+            margin-top: 12px
+        }
+
+        p {
+            overflow-wrap: anywhere
+        }
+
+        h3 {
+            font-size: 1.12rem;
+            font-weight: 750;
+            margin: 0 0 10px;
+            line-height: 1.45;
+            color: #0c3854
+        }
+
+        .wrap,
+        .hero-content {
+            max-width: 1280px;
+            margin: auto;
+            padding-left: 24px;
+            padding-right: 24px
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, .97);
+            border-bottom: 1px solid #e7e5e4;
+            box-shadow: 0 2px 12px #0f172a09
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            min-height: 65px
+        }
+
+        .brand {
+            font-weight: 800;
+            color: #0c4a6e;
+            font-size: 1.02rem;
+            white-space: nowrap
+        }
+
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            flex-wrap: wrap
+        }
+
+        .nav-link {
+            font-size: .88rem;
+            padding: 9px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            display: block
+        }
+
+        .active-nav-link {
+            background: #e0f2fe;
+            color: #075985;
+            font-weight: 750
+        }
+
+        .inactive-nav-link {
+            color: #57534e
+        }
+
+        .nav-link:hover {
+            background: #f0f9ff;
+            color: #075985
+        }
+
+        .menu-button {
+            display: none;
+            background: white;
+            border: 1px solid #d6d3d1;
+            border-radius: 7px;
+            padding: 5px 11px;
+            color: #0c4a6e;
+            cursor: pointer
+        }
+
+        .mobile-nav {
+            padding: 8px 24px 16px;
+            border-top: 1px solid #e7e5e4
+        }
+
+        .mobile-nav[hidden],
+        [hidden] {
+            display: none !important
+        }
+
+        .hero-mesh {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background: radial-gradient(circle at 76% 16%, rgba(14, 165, 233, .25), transparent 35%), radial-gradient(circle at 5% 85%, rgba(56, 189, 248, .19), transparent 40%), linear-gradient(130deg, #0c253a, #0f3852 53%, #075985);
+        }
+
+        .hero-mesh::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+            background-size: 36px 36px;
+        }
+
+        .hero-mesh>.hero-content {
+            position: relative;
+            z-index: 1
+        }
+
+        .hero-content {
+            padding-top: 58px;
+            padding-bottom: 58px;
+            color: #fff
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 4.2vw, 3.2rem);
+            line-height: 1.25;
+            font-weight: 850;
+            letter-spacing: -.025em;
+            max-width: 1200px;
+            text-wrap: balance
+        }
+
+        .hero-content p {
+            margin-top: 20px;
+            font-size: 1.12rem;
+            max-width: 900px;
+            color: #e0f2fe;
+            line-height: 1.85
+        }
+
+        .report-meta {
+            font-size: .85rem;
+            color: #57534e;
+            padding: 18px 0;
+            border-bottom: 1px solid #d6d3d1;
+            display: flex;
+            gap: 8px 24px;
+            flex-wrap: wrap
+        }
+
+        .report-section {
+            padding-top: 36px;
+            scroll-margin-top: 10px
+        }
+
+        .report-section>h2 {
+            font-size: clamp(1.55rem, 2.8vw, 1.875rem);
+            font-weight: 800;
+            color: #292524;
+            border-bottom: 2px solid #0ea5e9;
+            padding-bottom: 9px;
+            margin: 0 0 22px;
+            line-height: 1.4
+        }
+
+        .report-section>p {
+            margin-bottom: 20px;
+            color: #44403c
+        }
+
+        .grid-2,
+        .grid-3 {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 16px;
+            margin-bottom: 16px
+        }
+
+        .grid-2>*,
+        .grid-3>* {
+            min-width: 0;
+            margin-bottom: 0
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #e7e5e4;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(28, 25, 23, .06);
+            padding: 24px;
+            margin-bottom: 16px;
+            min-width: 0
+        }
+
+        .metric {
+            background: #fff;
+            border: 1px solid #e7e5e4;
+            border-top: 3px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 17px 19px;
+            min-width: 0
+        }
+
+        .metric-label {
+            font-size: .88rem;
+            font-weight: 700;
+            color: #57534e
+        }
+
+        .metric-value {
+            font-size: clamp(1.45rem, 2.6vw, 2rem);
+            color: #075985;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            line-height: 1.4;
+            margin: 6px 0
+        }
+
+        .metric p {
+            color: #57534e;
+            font-size: .87rem;
+            line-height: 1.6
+        }
+
+        .metric.down {
+            border-top-color: #e11d48
+        }
+
+        .metric.down .metric-value {
+            color: #be123c
+        }
+
+        .panel>.metric {
+            padding: 12px 14px;
+            margin: 10px 0;
+            background: #f8fafc;
+            box-shadow: none
+        }
+
+        .note {
+            border-left: 4px solid #0284c7;
+            background: #eaf6fc;
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 0 0 18px;
+            color: #164e63
+        }
+
+        .note strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #075985
+        }
+
+        .chart-caption {
+            font-size: .86rem;
+            color: #57534e;
+            margin-bottom: 12px
+        }
+
+        .chart-shell {
+            position: relative;
+            height: 230px;
+            min-width: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .chart-shell canvas {
+            max-width: 100%;
+            max-height: 100%
+        }
+
+        .chart-fallback {
+            width: 100%;
+            display: grid;
+            gap: 18px
+        }
+
+        .fallback-row {
+            display: grid;
+            grid-template-columns: minmax(84px, 1.2fr) minmax(45px, 2fr) minmax(70px, auto);
+            gap: 9px;
+            align-items: center;
+            font-size: .78rem;
+            color: #44403c
+        }
+
+        .fallback-row strong {
+            text-align: right;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums
+        }
+
+        .fallback-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+            height: 19px;
+            overflow: hidden
+        }
+
+        .fallback-bar {
+            height: 100%;
+            border-radius: 3px
+        }
+
+        .fallback-bar.negative {
+            margin-left: auto
+        }
+
+        .flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+            gap: 12px;
+            margin: 14px 0
+        }
+
+        .flow-step {
+            padding: 15px;
+            background: #f0f9ff;
+            border: 1px solid #dbeafe;
+            border-radius: 7px;
+            min-width: 0
+        }
+
+        .flow-step span {
+            font-size: .78rem;
+            font-weight: 800;
+            display: block;
+            color: #0284c7;
+            margin-bottom: 5px
+        }
+
+        .flow-step strong {
+            display: block;
+            color: #0c4a6e
+        }
+
+        .flow-step p {
+            font-size: .86rem;
+            color: #57534e;
+            margin-top: 5px
+        }
+
+        .scenario {
+            border-top: 4px solid #0284c7
+        }
+
+        .scenario.good {
+            border-top-color: #0d9488
+        }
+
+        .scenario.neutral {
+            border-top-color: #d97706
+        }
+
+        .scenario.risk {
+            border-top-color: #be123c
+        }
+
+        .search-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 6px 0 14px
+        }
+
+        label {
+            display: block;
+            font-size: .88rem;
+            font-weight: 700;
+            margin-top: 14px
+        }
+
+        .search-line input {
+            flex: 1 1 190px;
+            min-width: 0;
+            border: 1px solid #a8a29e;
+            border-radius: 7px;
+            padding: 10px 12px;
+            background: #fff;
+            color: #292524
+        }
+
+        .search-line input:focus {
+            outline: 2px solid #0ea5e9;
+            outline-offset: 2px
+        }
+
+        #resultCount {
+            font-size: .85rem;
+            color: #57534e
+        }
+
+        .table-shell {
+            max-width: 100%;
+            overflow: auto;
+            max-height: 510px;
+            border: 1px solid #e7e5e4;
+            border-radius: 7px
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            min-width: 720px;
+            font-size: .9rem;
+            text-align: left
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background: #0c4a6e;
+            color: #fff;
+            z-index: 1;
+            padding: 12px;
+            white-space: nowrap
+        }
+
+        td {
+            border-bottom: 1px solid #e7e5e4;
+            padding: 13px 12px;
+            vertical-align: top
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f5f9fc
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0
+        }
+
+        td:nth-child(2) {
+            font-weight: 700;
+            color: #075985
+        }
+
+        #empty {
+            margin: 12px 0;
+            color: #57534e
+        }
+
+        footer {
+            background: #292524;
+            color: #d6d3d1;
+            padding: 32px 24px;
+            margin-top: 48px;
+            text-align: center;
+            font-size: .88rem
+        }
+
+        footer .text-xs {
+            font-size: .75rem;
+            margin-top: 4px
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #0284c7;
+            outline-offset: 3px
+        }
+
+        @media(min-width:768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+        }
+
+        @media(min-width:1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr))
+            }
+        }
+
+        @media(max-width:1000px) {
+            .nav-desktop {
+                display: none
+            }
+
+            .menu-button {
+                display: block
+            }
+        }
+
+        @media(min-width:1001px) {
+            .mobile-nav {
+                display: none !important
+            }
+        }
+
+        @media(max-width:600px) {
+
+            .wrap,
+            .hero-content {
+                padding-left: 16px;
+                padding-right: 16px
+            }
+
+            .hero-content {
+                padding-top: 36px;
+                padding-bottom: 38px
+            }
+
+            .hero-content p {
+                font-size: 1rem
+            }
+
+            .header-inner {
+                min-height: 58px
+            }
+
+            .report-section {
+                padding-top: 27px
+            }
+
+            .panel {
+                padding: 17px
+            }
+
+            .chart-shell {
+                height: 215px
+            }
+
+            .fallback-row {
+                gap: 6px;
+                font-size: .73rem;
+                grid-template-columns: minmax(76px, 1.2fr) minmax(40px, 1.6fr) minmax(65px, auto)
+            }
+
+            .mobile-nav {
+                padding-left: 16px;
+                padding-right: 16px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto
+            }
+
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky top-0 z-50">
+        <div class="wrap header-inner"><a class="brand" href="#top">巴菲特AI價值投資</a>
+            <nav class="nav-desktop" aria-label="章節導覽"><a class="nav-link inactive-nav-link" href="#market">盤前市場</a><a
+                    class="nav-link inactive-nav-link" href="#macro">總體經濟</a><a class="nav-link inactive-nav-link"
+                    href="#dell">Dell 財報</a><a class="nav-link inactive-nav-link" href="#anthropic">Anthropic</a><a
+                    class="nav-link inactive-nav-link" href="#scenarios">2027 情境</a><a
+                    class="nav-link inactive-nav-link" href="#watch">追蹤指標</a><a class="nav-link inactive-nav-link"
+                    href="#conclusion">結論</a></nav><button class="menu-button" id="menuButton" aria-expanded="false"
+                aria-controls="mobileMenu" aria-label="切換章節選單"><svg width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg></button>
+        </div>
+        <nav class="mobile-nav" id="mobileMenu" aria-label="手機章節導覽" hidden><a class="nav-link inactive-nav-link"
+                href="#market">盤前市場</a><a class="nav-link inactive-nav-link" href="#macro">總體經濟</a><a
+                class="nav-link inactive-nav-link" href="#dell">Dell 財報</a><a class="nav-link inactive-nav-link"
+                href="#anthropic">Anthropic</a><a class="nav-link inactive-nav-link" href="#scenarios">2027 情境</a><a
+                class="nav-link inactive-nav-link" href="#watch">追蹤指標</a><a class="nav-link inactive-nav-link"
+                href="#conclusion">結論</a></nav>
+    </header>
+    <section id="top" class="hero-mesh text-white" aria-labelledby="hero-heading">
+        <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 id="hero-heading">AI繁榮下的三重考驗：通膨、訂單與估值的重新定價</h1>
+            <p>美國經濟強勁卻伴隨通膨壓力，Dell AI 伺服器訂單創高仍遇股價下跌，Anthropic 上市後跌破發行價。三項事件共同揭示：市場正從追逐 AI 成長，轉向驗證交付能力、獲利品質、自由現金流與估值是否合理。
+            </p>
+        </div>
+    </section>
+    <main class="wrap max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="report-meta">
+            <span><strong>報告日期：</strong>2026/11/25（三）</span><span><strong>研究區間：</strong>11/24–11/25（美東）</span><span><strong>行情截點：</strong>11/25
+                美東約 09:22 開盤前</span>
+        </div>
+        <section id="market" class="report-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">前言｜好消息不再足以支撐股價</h2>
+            <p>感恩節假期前夕，強勁經濟成長與通膨升溫、AI 硬體需求創高、模型公司估值修正三股力量同時浮現。市場開始檢視成長能否支撐過去兩年的高估值。</p>
+            <div class="grid md:grid-cols-2 gap-4 grid-2">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel chart-panel">
+                    <h3>美股主要指數期貨盤前變動</h3>
+                    <p class="chart-caption">2026/11/25 美東約 08:49，非正式收盤。</p>
+                    <div class="chart-shell" id="marketChart-shell">
+                        <div class="chart-fallback" id="marketChart-fallback">
+                            <div class="fallback-row"><span>道瓊工業</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar negative" style="width:41.56%;background:#e11d48"></div>
+                                </div><strong>-1.28%</strong>
+                            </div>
+                            <div class="fallback-row"><span>標普500</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar negative" style="width:65.58%;background:#e11d48"></div>
+                                </div><strong>-2.02%</strong>
+                            </div>
+                            <div class="fallback-row"><span>那斯達克100</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar negative" style="width:100.00%;background:#e11d48"></div>
+                                </div><strong>-3.08%</strong>
+                            </div>
+                        </div><canvas id="marketChart" role="img" aria-label="美股主要指數期貨盤前變動" hidden></canvas>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>個股與市場訊號</h3>
+                    <article class="metric down">
+                        <div class="metric-label">Dell 盤前股價</div>
+                        <div class="metric-value">約 −7%</div>
+                        <p>財報優於預期仍下跌；單日股價不能證明財報品質惡化。</p>
+                    </article>
+                    <article class="metric down">
+                        <div class="metric-label">Anthropic 11/24 收盤</div>
+                        <div class="metric-value">81.90 美元</div>
+                        <p>跌破 83 美元 IPO 發行價；11/25 盤前仍承壓。</p>
+                    </article>
+                </article>
+            </div>
+            <aside class="note"><strong>核心問題</strong>
+                <p>即使 AI 需求與營收持續成長，投資人是否仍願意支付原先的高估值？</p>
+            </aside>
+        </section>
+        <section id="macro" class="report-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第一章｜經濟成長與通膨的雙重壓力</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 grid-3">
+                <article class="metric ">
+                    <div class="metric-label">第三季實質 GDP</div>
+                    <div class="metric-value">4.3%</div>
+                    <p>季增年率，上修自 3.4%；市場預期約 3.5%。</p>
+                </article>
+                <article class="metric ">
+                    <div class="metric-label">10 月整體 PCE</div>
+                    <div class="metric-value">3.8%</div>
+                    <p>年增率；核心 PCE 年增 3.3%。</p>
+                </article>
+                <article class="metric ">
+                    <div class="metric-label">私人最終銷售</div>
+                    <div class="metric-value">5.8%</div>
+                    <p>第三季實質國內私人最終銷售年化成長率。</p>
+                </article>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4 grid-2">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel chart-panel">
+                    <h3>第三季實質 GDP：初估、預期與修正</h3>
+                    <p class="chart-caption">季增年率，非年增率；預期值為約數。</p>
+                    <div class="chart-shell" id="gdpChart-shell">
+                        <div class="chart-fallback" id="gdpChart-fallback">
+                            <div class="fallback-row"><span>初估</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:79.07%;background:#94a3b8"></div>
+                                </div><strong>3.4%</strong>
+                            </div>
+                            <div class="fallback-row"><span>市場預期</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:81.40%;background:#7dd3fc"></div>
+                                </div><strong>3.5%</strong>
+                            </div>
+                            <div class="fallback-row"><span>修正值</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:100.00%;background:#0369a1"></div>
+                                </div><strong>4.3%</strong>
+                            </div>
+                        </div><canvas id="gdpChart" role="img" aria-label="第三季實質 GDP：初估、預期與修正" hidden></canvas>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel chart-panel">
+                    <h3>10 月 PCE 通膨</h3>
+                    <p class="chart-caption">年增率；兩項指標月增率均為 0.3%。</p>
+                    <div class="chart-shell" id="pceChart-shell">
+                        <div class="chart-fallback" id="pceChart-fallback">
+                            <div class="fallback-row"><span>整體 PCE</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:100.00%;background:#d97706"></div>
+                                </div><strong>3.8%</strong>
+                            </div>
+                            <div class="fallback-row"><span>核心 PCE</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:86.84%;background:#0284c7"></div>
+                                </div><strong>3.3%</strong>
+                            </div>
+                        </div><canvas id="pceChart" role="img" aria-label="10 月 PCE 通膨" hidden></canvas>
+                    </div>
+                </article>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4 grid-2">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>需求韌性與時間差</h3>
+                    <p>第三季 GDP 反映 7–9 月，私人最終銷售年化成長 5.8%，顯示成長並非完全由存貨支撐。10 月名目消費月增 0.3%，實質消費卻大致持平，價格上漲支撐部分名目消費。不能直接用第三季
+                        GDP 推論未來消費加速。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>新關稅：仍為政策提案</h3>
+                    <p>美國政府提出針對 14 個主要貿易夥伴的新關稅方案，涉及中國、歐盟及多個亞洲經濟體；部分中國商品可能面臨額外 20% 關稅。適用商品、時程、豁免及稅率仍待確認，並非已生效。</p>
+                    <p>可能傳導：進口與製造成本提高 → 企業轉嫁價格、通膨延續 → 若需求放緩且成本難以轉嫁，利潤率承壓。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>聯準會與估值</h3>
+                    <p>經濟強勁與核心通膨高於目標，使快速降息缺乏充分理由；12 月升息預期升溫不代表已決策。高無風險利率壓低未來獲利折現值，高估值成長股及仰賴融資的資料中心業者較敏感。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>投資觀察｜短期至 18 個月</h3>
+                    <p>短期關注通膨、政策與關稅；未來 3–18
+                        個月檢視企業能否維持營收及利潤率。通膨回落與實質消費復甦可能緩解估值壓力；反之可能出現獲利與估值倍數同步下修。現金流穩定、資產負債表強健者較能承受高利率。</p>
+                </article>
+            </div>
+        </section>
+        <section id="dell" class="report-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第二章｜Dell：從訂單繁榮到交付與現金流</h2>
+            <p>11 月 24 日公布 FY2027 第三季財報。AI 基礎設施需求依然強勁，市場卻開始重新衡量未來成長持續性與估值。</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 grid-3">
+                <article class="metric ">
+                    <div class="metric-label">季度總營收</div>
+                    <div class="metric-value">549 億美元</div>
+                    <p>年增 103%，已認列營收。</p>
+                </article>
+                <article class="metric ">
+                    <div class="metric-label">AI 最佳化伺服器營收</div>
+                    <div class="metric-value">220 億美元</div>
+                    <p>約數，年增 291%，已認列營收。</p>
+                </article>
+                <article class="metric ">
+                    <div class="metric-label">期末 AI 待交付訂單</div>
+                    <div class="metric-value">1,323 億美元</div>
+                    <p>尚未完成全部交付及營收認列。</p>
+                </article>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4 grid-2">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel chart-panel">
+                    <h3>AI 伺服器：營收、訂單與期末待交付</h3>
+                    <p class="chart-caption">不同統計口徑：已認列收入、單季流量、期末存量；不可相加。</p>
+                    <div class="chart-shell" id="dellChart-shell">
+                        <div class="chart-fallback" id="dellChart-fallback">
+                            <div class="fallback-row"><span>季度營收</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:16.63%;background:#0284c7"></div>
+                                </div><strong>220 億美元</strong>
+                            </div>
+                            <div class="fallback-row"><span>季度新增訂單</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:45.50%;background:#0d9488"></div>
+                                </div><strong>602 億美元</strong>
+                            </div>
+                            <div class="fallback-row"><span>期末待交付</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:100.00%;background:#d97706"></div>
+                                </div><strong>1,323 億美元</strong>
+                            </div>
+                        </div><canvas id="dellChart" role="img" aria-label="AI 伺服器：營收、訂單與期末待交付" hidden></canvas>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel chart-panel">
+                    <h3>全年 AI 伺服器營收預估</h3>
+                    <p class="chart-caption">公司全年預估，並非已實現營收。</p>
+                    <div class="chart-shell" id="dellGuideChart-shell">
+                        <div class="chart-fallback" id="dellGuideChart-fallback">
+                            <div class="fallback-row"><span>原預估</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:94.87%;background:#94a3b8"></div>
+                                </div><strong>740 億美元</strong>
+                            </div>
+                            <div class="fallback-row"><span>上修後預估</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:100.00%;background:#0d9488"></div>
+                                </div><strong>780 億美元</strong>
+                            </div>
+                        </div><canvas id="dellGuideChart" role="img" aria-label="全年 AI 伺服器營收預估" hidden></canvas>
+                    </div>
+                </article>
+            </div>
+            <aside class="note"><strong>公司展望</strong>
+                <p>全年總營收預估提高至 2,020 億美元，AI 最佳化伺服器全年營收預估由 740 億美元上調至 780 億美元。</p>
+            </aside>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 grid-3">
+                <article class="metric ">
+                    <div class="metric-label">營業活動現金流</div>
+                    <div class="metric-value">44.59 億美元</div>
+                    <p>FY2027 Q3，約數。</p>
+                </article>
+                <article class="metric ">
+                    <div class="metric-label">自由現金流</div>
+                    <div class="metric-value">34.74 億美元</div>
+                    <p>FY2027 Q3，約數。</p>
+                </article>
+                <article class="metric ">
+                    <div class="metric-label">ISG 營業利益</div>
+                    <div class="metric-value">71.18 億美元</div>
+                    <p>營業利益率約 17%，去年同期 12.4%。</p>
+                </article>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4 grid-2">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel chart-panel">
+                    <h3>ISG 營業利益率</h3>
+                    <p class="chart-caption">本季為約數；營業獲利能力改善。</p>
+                    <div class="chart-shell" id="marginChart-shell">
+                        <div class="chart-fallback" id="marginChart-fallback">
+                            <div class="fallback-row"><span>去年同期</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:72.94%;background:#94a3b8"></div>
+                                </div><strong>12.4%</strong>
+                            </div>
+                            <div class="fallback-row"><span>本季</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:100.00%;background:#0d9488"></div>
+                                </div><strong>17%</strong>
+                            </div>
+                        </div><canvas id="marginChart" role="img" aria-label="ISG 營業利益率" hidden></canvas>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>現金流品質與履約風險</h3>
+                    <p>管理層已審核 AI 訂單客戶品質、資金、土地與電力條件，有助降低部分履約風險，但仍可能取消、延期或付款不確定。後續應觀察營運資金、存貨、客戶融資與採購成本。</p>
+                </article>
+            </div>
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                <h3>從訂單到自由現金流</h3>
+                <div class="flow">
+                    <div class="flow-step"><span>01</span><strong>客戶支付能力</strong>
+                        <p>客戶融資及持續支付設備款</p>
+                    </div>
+                    <div class="flow-step"><span>02</span><strong>設備供應</strong>
+                        <p>晶片、記憶體、網路設備及零組件</p>
+                    </div>
+                    <div class="flow-step"><span>03</span><strong>資料中心部署</strong>
+                        <p>場地、電力及冷卻條件</p>
+                    </div>
+                    <div class="flow-step"><span>04</span><strong>營收與現金流</strong>
+                        <p>完成交付後仍須轉化為利潤與現金</p>
+                    </div>
+                </div>
+            </article>
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                <h3>產業交接：建設走向變現</h3>
+                <p>AI 應用需求 → 算力採購 → 伺服器及晶片銷售 → 資料中心運作 → AI
+                    服務收入支付設備、電費、折舊及融資費用。終端需求不如預期時，融資依賴較高的算力營運商可能先受壓，之後才傳導至硬體訂單；存在時間差。</p>
+                <p>短期仍受利率與風險偏好影響；3–18 個月重點是交付效率、訂單轉換與自由現金流；長期競爭優勢來自運算與能源效率、維護服務及整合能力。</p>
+            </article>
+        </section>
+        <section id="anthropic" class="report-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第三章｜Anthropic：上市後的財務檢驗
+            </h2>
+            <p>依原報告，Anthropic（ANT）於 11 月 19 日在那斯達克掛牌。數個交易日後股價跌破發行價，不等於模型能力下降或已能判定企業價值，但反映市場更直接檢驗純 AI 模型公司的財務結構。</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 grid-3">
+                <article class="metric ">
+                    <div class="metric-label">IPO 發行價</div>
+                    <div class="metric-value">83 美元</div>
+                    <p>11/19 發行價。</p>
+                </article>
+                <article class="metric down">
+                    <div class="metric-label">11/24 盤中最低</div>
+                    <div class="metric-value">75.61 美元</div>
+                    <p>交易日盤中低點。</p>
+                </article>
+                <article class="metric down">
+                    <div class="metric-label">11/24 收盤</div>
+                    <div class="metric-value">81.90 美元</div>
+                    <p>低於 IPO 發行價，11/25 盤前仍承壓。</p>
+                </article>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4 grid-2">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel chart-panel">
+                    <h3>2026 年前九個月營運數據</h3>
+                    <p class="chart-caption">約數；虧損以正值表示規模，不等於現金流出。</p>
+                    <div class="chart-shell" id="antOperatingChart-shell">
+                        <div class="chart-fallback" id="antOperatingChart-fallback">
+                            <div class="fallback-row"><span>營收</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:100.00%;background:#0284c7"></div>
+                                </div><strong>332.42 億美元</strong>
+                            </div>
+                            <div class="fallback-row"><span>算力及基礎設施費用</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:56.58%;background:#d97706"></div>
+                                </div><strong>188.08 億美元</strong>
+                            </div>
+                            <div class="fallback-row"><span>營業虧損（絕對值）</span>
+                                <div class="fallback-track">
+                                    <div class="fallback-bar " style="width:3.79%;background:#e11d48"></div>
+                                </div><strong>12.6 億美元</strong>
+                            </div>
+                        </div><canvas id="antOperatingChart" role="img" aria-label="2026 年前九個月營運數據" hidden></canvas>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>會計虧損不等於現金消耗</h3>
+                    <article class="metric down">
+                        <div class="metric-label">會計淨虧損</div>
+                        <div class="metric-value">1,040.39 億美元</div>
+                        <p>2026 年前九個月，約數。</p>
+                    </article>
+                    <article class="metric ">
+                        <div class="metric-label">公允價值變動損失</div>
+                        <div class="metric-value">943.24 億美元</div>
+                        <p>可轉換票據、衍生金融負債與相關工具，主要受估值上升影響。</p>
+                    </article>
+                    <p>不可將千億美元級會計虧損直接推論為實際現金消耗；需分開檢視營業獲利與營運現金流。</p>
+                </article>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4 grid-2">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>長期採購與租賃承諾</h3>
+                    <article class="metric ">
+                        <div class="metric-label">未來承諾支出</div>
+                        <div class="metric-value">約 9,009 億美元</div>
+                        <p>截至 2026 年 9 月底及其後已簽訂的採購承諾與租賃協議。</p>
+                    </article>
+                    <article class="metric ">
+                        <div class="metric-label">2030 年底前預計發生</div>
+                        <div class="metric-value">約 4,516 億美元</div>
+                        <p>其餘大部分分布於 2031–2045 年。</p>
+                    </article>
+                    <p>這是跨多年、不同合約條款的未來承諾支出，不是同額立即到期的金融債務。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>收入與成本不對稱</h3>
+                    <p>營收有相當大比例按使用量計費，部分算力合約可能設有最低採購或不論使用量均須支付的條款。需求快速成長時，提前鎖定算力有利擴張；若需求放緩、推論價格下降或客戶延後部署，固定承諾可能形成壓力。</p>
+                    <p>不同於一般軟體的低邊際成本模式，大型模型業者擴張仍可能需要大量算力及基礎設施。</p>
+                </article>
+            </div>
+            <aside class="note"><strong>不可直接等同</strong>
+                <p>Anthropic 的算力承諾與 Dell 的待交付訂單涉及的客戶、交易結構及合約不一定相同，不能視為同一筆需求或直接相加。</p>
+            </aside>
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                <h3>供應鏈傳導與投資觀察</h3>
+                <div class="flow">
+                    <div class="flow-step"><span>01</span><strong>模型公司</strong>
+                        <p>付費使用量、客戶留存與服務收入</p>
+                    </div>
+                    <div class="flow-step"><span>02</span><strong>雲端與資料中心</strong>
+                        <p>算力利用率、部署與融資能力</p>
+                    </div>
+                    <div class="flow-step"><span>03</span><strong>半導體與硬體</strong>
+                        <p>伺服器、晶片及網路設備訂單</p>
+                    </div>
+                </div>
+                <p>若收入高速成長、推論成本下降且現金流改善，估值可能修復；反之，收入放緩而固定支出增加，估值壓力可能延續。AI 技術進步不等於 AI 股票必然上漲。</p>
+            </article>
+        </section>
+        <section id="scenarios" class="report-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第四章｜2027 年美股的三種情境</h2>
+            <p>以下是原報告的條件式研究推論，不是已發生結果或機率預測。</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 grid-3">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel scenario good">
+                    <h3>情境一｜通膨回落、AI 需求強勁</h3>
+                    <p><strong>條件：</strong>核心通膨下降、關稅衝擊低於擔憂，AI 訂單與自由現金流穩健。</p>
+                    <p><strong>可能結果：</strong>科技股估值壓力緩解，競爭優勢、現金流及資本紀律良好者可能受青睞。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel scenario neutral">
+                    <h3>情境二｜需求仍強、融資壓力持續</h3>
+                    <p><strong>條件：</strong>AI 持續成長，但高利率促使企業更嚴格審查投資。</p>
+                    <p><strong>可能結果：</strong>市場轉向營業利益率、自由現金流及資產負債表，同產業公司股價分化。原報告視為值得持續觀察的中性情境。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel scenario risk">
+                    <h3>情境三｜通膨升高、回收不如預期</h3>
+                    <p><strong>條件：</strong>關稅與能源成本上升、政策更緊縮、部分算力業者現金流或再融資承壓。</p>
+                    <p><strong>可能結果：</strong>估值修正可能由高估值軟體擴至硬體、資料中心及信用市場；流動性更關鍵。</p>
+                </article>
+            </div>
+        </section>
+        <section id="watch" class="report-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">第五章｜六項後續追蹤指標</h2>
+            <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                <h3>投資研究追蹤表</h3>
+                <p>未來數週至數月持續觀察以下六項指標；可按公司、指標或關鍵字即時篩選。</p><label for="search">搜尋追蹤指標</label>
+                <div class="search-line"><input id="search" type="search" placeholder="例如：Dell、通膨、現金流"
+                        autocomplete="off"><span id="resultCount" role="status">共 6 筆</span></div>
+                <div class="table-shell" tabindex="0" aria-label="可橫向捲動的追蹤表">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序號</th>
+                                <th>研究方向</th>
+                                <th>觀察項目</th>
+                                <th>投資意義</th>
+                            </tr>
+                        </thead>
+                        <tbody id="watchBody">
+                            <tr>
+                                <td>01</td>
+                                <td>核心 PCE 通膨</td>
+                                <td>月增率連續變化</td>
+                                <td>判斷通膨是否持續降溫，不只看單月年增率。</td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td>聯準會利率與公債殖利率</td>
+                                <td>政策路徑、長短期利率、信用利差</td>
+                                <td>檢驗折現率與融資成本。</td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+                                <td>新關稅正式內容</td>
+                                <td>適用商品、稅率、豁免、成本轉嫁</td>
+                                <td>區分提案與正式生效。</td>
+                            </tr>
+                            <tr>
+                                <td>04</td>
+                                <td>Dell AI 訂單與現金流</td>
+                                <td>新增訂單、已認列營收、待交付、自由現金流</td>
+                                <td>比較交付與現金流是否同步改善。</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Anthropic 營運與算力承諾</td>
+                                <td>會計評價損失、營運現金流、採購租賃支出</td>
+                                <td>檢查長期承諾執行與營運獲利。</td>
+                            </tr>
+                            <tr>
+                                <td>06</td>
+                                <td>AI 基礎設施實際使用率</td>
+                                <td>雲端付費需求、部署進度、推論成本</td>
+                                <td>判斷建設產能能否變現。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p id="empty" hidden>沒有符合的指標，請更換關鍵字。</p>
+            </article>
+        </section>
+        <section id="conclusion" class="report-section">
+            <h2 class="text-3xl font-bold text-stone-800 mb-6 border-b-2 border-sky-500 pb-2">結論｜從相信成長到驗證投資報酬</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 grid-3">
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>總體經濟</h3>
+                    <p>經濟仍成長，通膨與關稅壓力限制貨幣政策彈性。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>AI 硬體</h3>
+                    <p>Dell 訂單強勁、獲利與現金流已有改善，後續需驗證交付與轉換。</p>
+                </article>
+                <article class="bg-white rounded-lg shadow-lg p-6 mb-6 panel ">
+                    <h3>AI 模型</h3>
+                    <p>Anthropic 營收顯示商業潛力，長期算力承諾要求檢視收入與固定支出風險。</p>
+                </article>
+            </div>
+            <aside class="note"><strong>2027 年投資核心</strong>
+                <p>產業趨勢正確不代表任何買入價格都能獲得合理報酬。重點可能不是判斷 AI 是否成功，而是辨識哪些企業能在高資本投入的競爭中，真正留住獲利與可持續的自由現金流。</p>
+            </aside>
+        </section>
+    </main>
+    <footer class="bg-stone-800 text-stone-300 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 巴菲特AI價值投資-AI繁榮下的通膨、訂單與估值。僅供參考，不構成投資建議。</p>
+            <p class="text-xs mt-1">資料來源：基於網路中美國總體經濟、Dell與Anthropic相關公開資料 (2026年11月26日)。</p>
+        </div>
+    </footer>
+    <script>
+        const menuButton = document.getElementById('menuButton'), mobileMenu = document.getElementById('mobileMenu');
+        function closeMenu() { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); }
+        menuButton.addEventListener('click', () => { const open = mobileMenu.hidden; mobileMenu.hidden = !open; menuButton.setAttribute('aria-expanded', String(open)); });
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const target = document.getElementById(a.hash.slice(1)); closeMenu(); try { history.pushState(null, '', a.hash); } catch (err) { } requestAnimationFrame(() => { target.scrollIntoView({ block: 'start' }); }); })); document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); } }); window.addEventListener('resize', () => { if (innerWidth > 1000) closeMenu(); });
+        const links = [...document.querySelectorAll('.nav-link')], sections = [...document.querySelectorAll('.report-section')];
+        function activate(id) { links.forEach(a => { const selected = a.hash === '#' + id; a.classList.toggle('active-nav-link', selected); a.classList.toggle('inactive-nav-link', !selected); if (selected) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); }); }
+        function syncNav() { let current = sections[0]; for (const s of sections) { if (s.getBoundingClientRect().top <= 125) current = s; } if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = sections[sections.length - 1]; activate(current.id); }
+        if ('IntersectionObserver' in window) { const observer = new IntersectionObserver(syncNav, { rootMargin: '-85px 0px -55% 0px', threshold: 0 }); sections.forEach(s => observer.observe(s)); }
+        let queued = false; window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(() => { syncNav(); queued = false; }); } }, { passive: true }); window.addEventListener('resize', syncNav); syncNav();
+        const productData = [["01", "核心 PCE 通膨", "月增率連續變化", "判斷通膨是否持續降溫，不只看單月年增率。"], ["02", "聯準會利率與公債殖利率", "政策路徑、長短期利率、信用利差", "檢驗折現率與融資成本。"], ["03", "新關稅正式內容", "適用商品、稅率、豁免、成本轉嫁", "區分提案與正式生效。"], ["04", "Dell AI 訂單與現金流", "新增訂單、已認列營收、待交付、自由現金流", "比較交付與現金流是否同步改善。"], ["05", "Anthropic 營運與算力承諾", "會計評價損失、營運現金流、採購租賃支出", "檢查長期承諾執行與營運獲利。"], ["06", "AI 基礎設施實際使用率", "雲端付費需求、部署進度、推論成本", "判斷建設產能能否變現。"]];
+        const search = document.getElementById('search'), body = document.getElementById('watchBody'), count = document.getElementById('resultCount'), empty = document.getElementById('empty');
+        function renderRows() { const terms = search.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean); const rows = productData.filter(r => terms.every(term => r.join(' ').toLocaleLowerCase().includes(term))); body.replaceChildren(...rows.map(r => { const tr = document.createElement('tr'); r.forEach(v => { const td = document.createElement('td'); td.textContent = v; tr.append(td); }); return tr; })); count.textContent = '共 ' + rows.length + ' 筆'; empty.hidden = rows.length !== 0; }
+        search.addEventListener('input', renderRows); renderRows();
+        const chartData = [{ "id": "marketChart", "labels": ["道瓊工業", "標普500", "那斯達克100"], "values": [-1.28, -2.02, -3.08], "unit": "%", "colors": ["#e11d48", "#e11d48", "#e11d48"], "negative": true }, { "id": "gdpChart", "labels": ["初估", "市場預期", "修正值"], "values": [3.4, 3.5, 4.3], "unit": "%", "colors": ["#94a3b8", "#7dd3fc", "#0369a1"], "negative": false }, { "id": "pceChart", "labels": ["整體 PCE", "核心 PCE"], "values": [3.8, 3.3], "unit": "%", "colors": ["#d97706", "#0284c7"], "negative": false }, { "id": "dellChart", "labels": ["季度營收", "季度新增訂單", "期末待交付"], "values": [220, 602, 1323], "unit": " 億美元", "colors": ["#0284c7", "#0d9488", "#d97706"], "negative": false }, { "id": "dellGuideChart", "labels": ["原預估", "上修後預估"], "values": [740, 780], "unit": " 億美元", "colors": ["#94a3b8", "#0d9488"], "negative": false }, { "id": "marginChart", "labels": ["去年同期", "本季"], "values": [12.4, 17], "unit": "%", "colors": ["#94a3b8", "#0d9488"], "negative": false }, { "id": "antOperatingChart", "labels": ["營收", "算力及基礎設施費用", "營業虧損（絕對值）"], "values": [332.42, 188.08, 12.6], "unit": " 億美元", "colors": ["#0284c7", "#d97706", "#e11d48"], "negative": false }];
+        function initCharts() { if (typeof Chart === 'undefined') return; chartData.forEach(c => { const canvas = document.getElementById(c.id), fallback = document.getElementById(c.id + '-fallback'); try { canvas.hidden = false; fallback.hidden = true; new Chart(canvas, { type: 'bar', data: { labels: c.labels, datasets: [{ data: c.values, backgroundColor: c.colors, borderRadius: 5, maxBarThickness: 32 }] }, options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', animation: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw.toLocaleString('en-US', { maximumFractionDigits: 2 }) + c.unit } } }, scales: { x: { beginAtZero: true, ticks: { callback: v => v.toLocaleString('en-US') + c.unit, font: { size: 10 }, maxTicksLimit: 5 }, grid: { color: '#e7e5e4' } }, y: { ticks: { color: '#44403c', font: { size: 11 } }, grid: { display: false } } } } }); } catch (e) { canvas.hidden = true; fallback.hidden = false; console.warn('Chart fallback', c.id, e); } }); }
+        if (document.readyState === 'complete') initCharts(); else window.addEventListener('load', initCharts, { once: true });
+    </script>
+</body>
+
+</html>
